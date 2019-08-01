@@ -8,46 +8,57 @@ use_dark_highlighting: true
   <section class="content">
     <div class="pure-g">
       <div class="pure-u-1 main-block">
-        <h1>Efficient, expressive, elegant</h1>
+        <h1>高效，优雅，富于表现</h1>
       </div>
       <div class="pure-u-1 pure-u-md-3-5 main-block">
         <h2>
-          Nim is a statically typed compiled systems programming language.
-          It combines successful concepts from mature languages like Python,
-          Ada and Modula.
+          NIM是一种静态类型的编译系统编程语言。<br>
+          它结合了来自其他成熟语言的成功概念。<br>
+          （如python、ADA和Modula）
         </h2>
-        <h3>Efficient</h3>
+        <h3>高效</h3>
         <ul>
-          <li>Nim generates native dependency-free executables, not dependent on a virtual machine,
-              which are small and allow easy redistribution.</li>
-          <li>The Nim compiler and the generated executables support all major platforms like
-              Windows, Linux, BSD and macOS.</li>
-          <li>Nim's memory management is deterministic and customizable with destructors and move
-              semantics, inspired by C++ and Rust.
-              It is well-suited for embedded, hard-realtime systems.</li>
-          <li>Modern concepts like zero-overhead iterators and compile-time evaluation
-              of user-defined functions, in combination with the preference of value-based
-              datatypes allocated on the stack, lead to extremely performant code.</li>
-          <li>Support for various backends: it compiles to C, C++ or JavaScript so that Nim
-              can be used for all backend and frontend needs.</li>
+          <li>
+            Nim生成原生且无依赖的可执行文件,不依赖于虚拟机，
+            <br>
+            所以它们又小又容易分发。
+          </li>
+          <li>
+            Nim编译器和生成出来的可执行文件，对目前的任何主流平台都提供了支持，
+            <br>
+            包括Windows、Linux、BSD和macOS。
+          </li>
+          <li>
+            支持实时系统的快速延迟引用计数内存管理。
+          </li>
+          <li>
+            通过引入零开销的迭代器和编译期评估用户自定义的方法等现代概念，
+            <br>
+            结合堆栈上分配的基于值的数据类型的偏好，可以产生性能极高的代码。
+          </li>
+          <li>
+            支持各种后端：可以被编译为C、C++甚至JavaScript，
+            所以Nim可以包揽前后端的需求。
+          </li>
         </ul>
-        <h3>Expressive</h3>
+        <h3>富有展现力</h3>
         <ul>
-          <li>Nim is self-contained: the compiler and the standard library are implemented in Nim.</li>
-          <li>Nim has a powerful macro system which allows direct manipulation of the AST,
-              offering nearly unlimited opportunities.</li>
+          <li>Nim实现了自给自足：编译器和标准库都是用Nim本身来实现的。</li>
+          <li>Nim拥有强大的宏系统，允许直接操纵AST，提供几乎无限的机会。</li>
         </ul>
-        <h3>Elegant</h3>
+        <h3>优雅</h3>
         <ul>
-          <li>Macros cannot change Nim's syntax because there is no need for it —
-              the syntax is flexible enough.</li>
-          <li>Modern type system with local type inference, tuples, generics and sum types.</li>
-          <li>Statements are grouped by indentation but can span multiple lines.</li>
+          <li>
+            宏不能改变Nim的语法，因为不需要它 <br>
+            —— 我们的语法本身已经足够灵活了。
+          </li>
+          <li>具有局部类型推断，元组，泛型和和类型的现代类型系统。</li>
+          <li>语句按缩进分组，但也可以跨越多行。</li>
         </ul>
 
         <div class="text-centered">
-          <a class="pure-button pure-button-primary" href="{{ site.baseurl }}/install.html">Install</a>
-          <a class="pure-button" href="{{ site.baseurl }}/learn.html">Learn Nim</a>
+          <a class="pure-button pure-button-primary" href="{{ site.baseurl }}/install.html">安装</a>
+          <a class="pure-button" href="{{ site.baseurl }}/learn.html">开始学习Nim</a>
         </div>
       </div>
 
@@ -58,7 +69,7 @@ import strformat
 type
   Person = object
     name: string
-    age: Natural # Ensures the age is positive
+    age: Natural # 确保年龄是正确的
 
 let people = [
   Person(name: "John", age: 45),
@@ -66,19 +77,20 @@ let people = [
 ]
 
 for person in people:
-  # Type-safe string interpolation,
-  # evaluated at compile time.
+  # 类型安全的字符串插值,
+  # 会在编译时检查。
   echo(fmt"{person.name} is {person.age} years old")
 {% endhighlight %}
 
         {% highlight nim %}
-# Thanks to Nim's 'iterator' and 'yield' constructs,
-# iterators are as easy to write as ordinary
-# functions. They are compiled to inline loops.
-iterator oddNumbers[Idx, T](a: array[Idx, T]): T =
-  for x in a:
-    if x mod 2 == 1:
-      yield x
+# 感谢Nim的 'iterator' 和 'yield' 构造，
+# 迭代器和常规方法一样容易编写。
+# 它们被编译为了内联循环。
+iterator oddElements[Idx, T](a: array[Idx, T]): T =
+  var i = 1
+  while i < a.len:
+    yield a[i]
+    i += 2
 
 for odd in oddNumbers([3, 6, 9, 12, 15, 18]):
   echo odd
@@ -86,10 +98,9 @@ for odd in oddNumbers([3, 6, 9, 12, 15, 18]):
 
 
           {% highlight nim %}
-# Use Nim's macro system to transform a dense
-# data-centric description of x86 instructions
-# into lookup tables that are used by
-# assemblers and JITs.
+# 使用NIM的宏系统
+# 将x86指令的以数据为中心的密集描述
+# 转换为汇编程序和JIT所使用的查找表。
 import macros, strutils
 
 macro toLookupTable(data: static[string]): untyped =
@@ -106,7 +117,7 @@ for o in opcodes:
 {% endhighlight %}
 
         <div class="text-centered">
-          <a href="http://rosettacode.org/wiki/Category:Nim">More examples at RosettaCode…</a>
+          <a href="http://rosettacode.org/wiki/Category:Nim">更多的示例可访问RosettaCode……</a>
         </div>
 
       </div>
@@ -115,7 +126,7 @@ for o in opcodes:
 </section>
 
 <section class="content">
-  <h1 class="section-heading">Recent articles</h1>
+  <h1 class="section-heading">最新文章</h1>
   <div class="pure-g">
     {% for post in site.posts limit: 2 %}
     <div class="news-item pure-u-1 pure-u-md-1-2">
@@ -133,7 +144,7 @@ for o in opcodes:
     {% endfor %}
   </div>
   <div class="text-centered">
-  <a class="pure-button" href="{{ "/blog.html" | prepend: site.baseurl }}">All articles</a>
+  <a class="pure-button" href="{{ "/blog.html" | prepend: site.baseurl }}">所有文章</a>
   </div>
 </section>
 
@@ -146,25 +157,20 @@ for o in opcodes:
       <div class="pure-u-1 pure-u-md-3-5 main-block">
         <h1>Nim in Action</h1>
         <h3>
-          The first Nim book, Nim in Action, is now available for purchase as
-          an eBook or printed soft cover book.
-          Learn the basics such as Nim's
-          syntax and advanced features including macros, and gain practical
-          experience with the language by being led through multiple
-          application development examples.
+          第一本Nim图书，《Nim in Action》, 现已提供电子书或纸质书购买。
+          学习Nim的语法和高级功能（包括宏）等基础知识，
+          并通过多个应用程序开发示例获得该语言的实践经验。
         </h3>
         <ul>
-          <li>Teaches the basics including the syntax of Nim.</li>
-          <li>Explains how to use the Nimble package manager.</li>
+          <li>讲解基础知识，包括Nim的语法。</li>
+          <li>说明如何使用Nimble包管理器。</li>
           <li>
-            Includes step-by-step instructions and explanations of
-            how to develop various applications, including a chat program,
-            a Twitter clone and more.
+            包括如何开发各种应用程序的分步说明和解释，涵盖了聊天程序，Twitter克隆等。
           </li>
         </ul>
       </div>
       <div class="pure-u-1 center">
-        <a class="pure-button pure-button-primary" href="https://book.picheta.me/">Learn more</a>
+        <a class="pure-button pure-button-primary" href="https://book.picheta.me/">了解更多</a>
       </div>
     </div>
   </section>
@@ -173,29 +179,29 @@ for o in opcodes:
 <section class="content center-banner">
   <h1 class="section-heading">
     <img height="100px" src="{{ site.baseurl }}/assets/img/piggy.svg"/>
-    Support Nim
+    支持Nim
   </h1>
   <div class="pure-g center">
     <div class="pure-u-1-2">
-      <h2>Join the 100+ companies and individuals that support Nim</h2>
+      <h2>加入支持Nim的100多家公司和个人</h2>
       <h3>
-        The Nim project is developed globally by a group of
-        volunteers. We welcome recurring donations, which enable us to spend more
-        time working on Nim.
+          Nim项目由一群分布在全球的志愿者开发。
+          我们欢迎经常性的捐款，这使我们能够花更多的时间工作在Nim上。
       </h3>
     </div>
     <div class="pure-u-1 center">
-      <a class="pure-button pure-button-primary" href="{{ site.baseurl }}/donate.html">Donate</a>
+      <a class="pure-button pure-button-primary" href="{{ site.baseurl }}/donate.html">捐赠</a>
     </div>
   </div>
 </section>
 
 <section class="jumbotron" id="community">
   <section class="content">
-    <h1>Community</h1>
+    <h1>社区</h1>
     <div class="pure-g">
       <div class="pure-u-1 pure-u-md-1-4">
-        <h2>Real-time chat</h2>
+        <h2>实时聊天</h2>
+        <p><a href="https://jq.qq.com/?_wv=1027&k=50EQ6eZ"><i class="fab fa-qq"></i>QQ/Nim开发集中营</a></p>
         <p><a href="irc://freenode.net/nim"><i class="fc fa-irc">#</i>FreeNode#nim</a></p>
         <p><a href="https://gitter.im/nim-lang/Nim"><i class="fab fa-gitter"></i>Gitter/Nim</a></p>
         <p><a href="https://discord.gg/ezDFDw2"><i class="fab fa-discord"></i>Discord/Nim</a></p>
@@ -205,7 +211,7 @@ for o in opcodes:
       </div>
 
       <div class="pure-u-1 pure-u-md-1-4">
-        <h2>Forum</h2>
+        <h2>论坛</h2>
         <p><a href="https://forum.nim-lang.org">
           <i class="fa fa-comments" aria-hidden="true"></i>forum.nim-lang.org</a></p>
         <p><a href="https://reddit.com/r/nim">
@@ -215,7 +221,7 @@ for o in opcodes:
       </div>
 
       <div class="pure-u-1 pure-u-md-1-4">
-        <h2>Bug reports</h2>
+        <h2>Bug报告</h2>
         <p><a href="https://github.com/nim-lang/Nim/issues">
           <i class="fab fa-github" aria-hidden="true"></i>nim-lang/Nim</a></p>
       </div>
@@ -228,7 +234,7 @@ for o in opcodes:
       </div>
 
       <div class="pure-u-1 center">
-        <p><a class="pure-button" href="{{ site.baseurl }}/community.html">Join the community</a></p>
+        <p><a class="pure-button" href="{{ site.baseurl }}/community.html">加入社区</a></p>
       </div>
     </div>
 
@@ -238,19 +244,17 @@ for o in opcodes:
 <section class="content center-banner">
   <h1 class="section-heading">
     <i class="fab fa-github fa-2x" aria-hidden="true"></i>
-    Looking for the GitHub repository?
+    在寻找GitHub仓库吗？
   </h1>
   <div class="pure-g center">
     <div class="pure-u-1-2">
       <h3>
-        The Nim compiler and tools are all written in Nim and licensed under the
-        MIT license, with most development taking place on GitHub.
-        Be sure to watch the repository to get updates on Nim's
-        development, or star it to give us some brownie points.
+        Nim编译器和工具全部由Nim编写，并遵从MIT开源许可，
+        烦请务必watch存储库以获取有关Nim开发的更新，或者点个Star来给它们一些Brownie点。 
       </h3>
     </div>
     <div class="pure-u-1 center">
-      <a class="pure-button" href="https://github.com/nim-lang/Nim">Source code</a>
+      <a class="pure-button" href="https://github.com/nim-lang/Nim">源代码</a>
     </div>
   </div>
 </section>
