@@ -1,8 +1,8 @@
 # Site settings
-title: "Nim Programming Language"
+title: "Nim编程语言"
 description: >
-  The Nim programming language is a concise, fast programming language that
-  compiles to C, C++ and JavaScript.
+  NIM编程语言是一种简洁、快速的编程语言，
+  编译成C、C++和JavaScript。
 baseurl: ""
 
 nim_version: 1.2.6
@@ -21,22 +21,22 @@ defaults:
     values:
       layout: post
       is_post: true
-      title: "Nim Blog"
+      title: "Nim博客"
 
 navigation:
-  - title: Blog
+  - title: 博客
     url: /blog.html
-  - title: Features
+  - title: 特点
     url: /features.html
-  - title: Download
+  - title: 下载
     url: /install.html
-  - title: Learn
+  - title: 学习
     url: /learn.html
-  - title: Documentation
+  - title: 文档
     url: /documentation.html
-  - title: Forum
+  - title: 论坛
     url: https://forum.nim-lang.org
-  - title: Donate
+  - title: 捐赠
     url: /donate.html
 
 # Build settings
