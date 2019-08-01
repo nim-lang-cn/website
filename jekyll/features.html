@@ -4,24 +4,24 @@ title: Features
 css_class: features
 ---
 
-  <h1 class="text-centered page-title main-heading">Features</h1>
+  <h1 class="text-centered page-title main-heading">特点</h1>
 
   <section class="content">
     <div class="pure-g">
       <div class="pure-u-1">
-        <h1>Intuitive and clean syntax</h1>
+        <h1>直观、清洁的语法</h1>
       </div>
       <div class="pure-u-1 pure-u-md-1-2 code-align">
         <h2>
-          Taking inspiration from multiple languages, the Nim syntax is
-          easily understood and results in code that can be modified very
-          effectively.
+            从多种语言中汲取灵感，NIM语法很容易被理解，
+            从而产生可以非常有效地修改的代码。
         </h2>
         <ul>
-          <li>Indentation significant syntax</li>
-          <li>Multiple constructs inspired by Python</li>
-          <li>Multi-line lambdas</li>
-          <li>It combines successful concepts from Ada and Modula.</li>
+          <li>显著语法</li>
+          <li>以Python为灵感的多重结构</li>
+          <li>多行的lambda表达式</li>
+          <li>源于Oberon的可视化标记</li>
+          <li>用于精简声明的类型节则来自Pascal</li>
         </ul>
       </div>
       <div class="pure-u-1 pure-u-md-1-2 center">
@@ -29,8 +29,8 @@ css_class: features
 import strformat
 type
   Person = object
-    name*: string # Field is exported using `*`.
-    age: Natural  # Natural type ensures the age is positive.
+    name*: string # 字段通过`*`导出。
+    age: Natural  # 自然数类型确保年龄是正确的。
 
 var people = [
   Person(name: "John", age: 45),
@@ -38,7 +38,7 @@ var people = [
 ]
 
 for person in people:
-  # Type-safe string interpolation.
+  # 类型安全的字符串插值。
   echo(fmt"{person.name} is {person.age} years old"){% endhighlight %}
       </div>
     </div>
@@ -47,7 +47,7 @@ for person in people:
 
   <section class="background-faded call-to-action">
     <section class="content text-centered">
-      <h2>Support for multiple operating systems</h2>
+      <h2>多操作系统支持</h2>
       <div class="pure-g center">
         <div class="pure-u-1">
           <i class="fab fa-windows fa-5x" aria-hidden="true"></i>
@@ -56,9 +56,9 @@ for person in people:
         </div>
         <div class="pure-u-1-2">
           <p>
-            Nim supports every mainstream operating system and platform as
-            well as multiple niche platforms. We take pride in supporting all
-            three major operating systems fully.
+            Nim支持所有主流操作系统和平台以及多个niche平台。 
+            <br>
+            我们为完美支持这三个主流操作系统而感到自豪。
           </p>
         </div>
       </div>
