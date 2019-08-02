@@ -8,12 +8,12 @@ use_dark_highlighting: true
   <section class="content">
     <div class="pure-g">
       <div class="pure-u-1 main-block">
-        <h1>高效，优雅，富于表现</h1>
+        <h1>高效、凝练、优雅</h1>
       </div>
       <div class="pure-u-1 pure-u-md-3-5 main-block">
         <h2>
-          NIM是一种静态类型的编译系统编程语言。<br>
-          它结合了来自其他成熟语言的成功概念。<br>
+          Nim是一种静态类型编译的系统编程语言。<br>
+          它结合了其他成熟语言的成功概念。<br>
           （如python、ADA和Modula）
         </h2>
         <h3>高效</h3>
@@ -21,10 +21,10 @@ use_dark_highlighting: true
           <li>
             Nim生成原生且无依赖的可执行文件,不依赖于虚拟机，
             <br>
-            所以它们又小又容易分发。
+            所以它们小而便于分发。
           </li>
           <li>
-            Nim编译器和生成出来的可执行文件，对目前的任何主流平台都提供了支持，
+            Nim编译器和生成的可执行文件，对目前的任何主流平台都提供了支持，
             <br>
             包括Windows、Linux、BSD和macOS。
           </li>
@@ -32,28 +32,28 @@ use_dark_highlighting: true
             支持实时系统的快速延迟引用计数内存管理。
           </li>
           <li>
-            通过引入零开销的迭代器和编译期评估用户自定义的方法等现代概念，
+            零开销迭代器和用户自定义的方法的编译期预估等现代概念，
             <br>
-            结合优先使用分配在栈上的值类型数据，可以产生性能极高的代码。
+            结合优先使用分配在栈上的值类型数据，生成高性能代码。
           </li>
           <li>
-            支持各种后端：可以被编译为C、C++甚至JavaScript，
-            所以Nim可以包揽前后端的需求。
+            支持各种后端：可以被编译为C、C++或JavaScript，
+            所以Nim可以满足所有前后端的需求。
           </li>
         </ul>
-        <h3>富有展现力</h3>
+        <h3>凝练</h3>
         <ul>
-          <li>Nim实现了自举：编译器和标准库都是用Nim本身来实现的。</li>
-          <li>Nim拥有强大的宏系统，允许直接操纵AST，提供几乎无限的机会。</li>
+          <li>Nim实现了自包含：编译器和标准库都是用Nim本身来实现的。</li>
+          <li>Nim拥有强大的宏系统，允许直接操纵AST，提供无限的可能性。</li>
         </ul>
         <h3>优雅</h3>
         <ul>
           <li>
-            宏不能改变Nim的语法，因为不需要它 <br>
-            —— 我们的语法本身已经足够灵活了。
+            不需要宏去改变Nim的语法 <br>
+            —— Nim语法本身已经足够灵活。
           </li>
-          <li>具有局部类型推断，元组，泛型和和类型的现代类型系统。</li>
-          <li>语句按缩进分组，但也可以跨越多行。</li>
+          <li>具有局部类型推断、元组、泛型和sum类型的现代类型系统。</li>
+          <li>语句按缩进分组，也可以跨行。</li>
         </ul>
 
         <div class="text-centered">
@@ -83,7 +83,7 @@ for person in people:
 {% endhighlight %}
 
         {% highlight nim %}
-# 感谢Nim的 'iterator' 和 'yield' 构造，
+# 感谢 Nim 的 'iterator' 和 'yield' 构造，
 # 迭代器和常规方法一样容易编写。
 # 它们被编译为了内联循环。
 iterator oddElements[Idx, T](a: array[Idx, T]): T =
@@ -98,8 +98,8 @@ for odd in oddNumbers([3, 6, 9, 12, 15, 18]):
 
 
           {% highlight nim %}
-# 使用NIM的宏系统
-# 将x86指令的以数据为中心的密集描述
+# 使用Nim的宏系统
+# 将密集的以数据为中心的x86指令描述
 # 转换为汇编程序和JIT所使用的查找表。
 import macros, strutils
 
@@ -186,7 +186,7 @@ for o in opcodes:
       <h2>加入支持Nim的100多家公司和个人</h2>
       <h3>
           Nim项目由一群分布在全球的志愿者开发。
-          我们欢迎经常性的捐款，这使我们能够花更多的时间工作在Nim上。
+          我们欢迎捐款，这使我们能够花更多的时间工作在Nim上。
       </h3>
     </div>
     <div class="pure-u-1 center">
