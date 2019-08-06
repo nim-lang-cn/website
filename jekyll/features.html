@@ -1,312 +1,349 @@
 ---
 layout: default
-title: 特色
+title: 特性
 css_class: features
 ---
 
-  <h1 class="text-centered page-title main-heading">特点</h1>
+<h1 class="text-centered page-title main-heading">特点</h1>
 
-  <section class="content">
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <h1>直观、清洁的语法</h1>
-      </div>
-      <div class="pure-u-1 pure-u-md-1-2 code-align">
-        <h2>
-            从多种语言中汲取灵感，Nim语法很容易被理解，
-            从而产生可以非常有效地修改的代码。
-        </h2>
-        <ul>
-          <li>显著语法</li>
-          <li>以Python为灵感的多重结构</li>
-          <li>多行的lambda表达式</li>
-          <li>源于Oberon的可视化标记</li>
-          <li>用于精简声明的类型节则来自Pascal</li>
-        </ul>
-      </div>
-      <div class="pure-u-1 pure-u-md-1-2 center">
-        {% highlight nim %}
-import strformat
-type
-  Person = object
-    name*: string # 字段通过`*`导出。
-    age: Natural  # 自然数类型确保年龄是正确的。
-
-var people = [
-  Person(name: "John", age: 45),
-  Person(name: "Kate", age: 30)
-]
-
-for person in people:
-  # 类型安全的字符串插值。
-  echo(fmt"{person.name} is {person.age} years old"){% endhighlight %}
-      </div>
+<section class="content">
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <h1>直观、干净的语法</h1>
     </div>
-  </section>
-
-
-  <section class="background-faded call-to-action">
-    <section class="content text-centered">
-      <h2>多操作系统支持</h2>
-      <div class="pure-g center">
-        <div class="pure-u-1">
-          <i class="fab fa-windows fa-5x" aria-hidden="true"></i>
-          <i class="fab fa-apple fa-5x" aria-hidden="true"></i>
-          <i class="fab fa-linux fa-5x" aria-hidden="true"></i>
-        </div>
-        <div class="pure-u-1-2">
-          <p>
-            Nim支持所有主流操作系统和平台以及多个niche平台。 
-            <br>
-            我们为完美支持这三个主流操作系统而感到自豪。
-          </p>
-        </div>
-      </div>
-    </section>
-  </section>
-
-  <section class="content">
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <h1 id="javascript-compilation">JavaScript compilation</h1>
-      </div>
-      <div class="pure-u-1 pure-u-md-1-2 code-align">
-        <h2>
-          Nim includes a first-class JavaScript backend so you can target the
-          client and server effortlessly at the same time.
-        </h2>
-        <div class="center">
-          <script type="text/javascript" src="https://picheta.me/snake/snake.js"></script>
-
-          <link rel="stylesheet" type="text/css" href="https://picheta.me/snake/snake.css">
-          <style>
-            #snake_center {
-              width: 402px;
-              margin-top: 30pt;
-              height: 400px;
-            }
-
-            #snake_center > p {
-              width: 100%;
-              margin-bottom: 0;
-            }
-          </style>
-          <div id="snake_center">
-            <div id="snake">
-              <canvas id="snake_canvas"></canvas>
-              <div id="snake_controls">
-                <span><b>New Game:</b> N</span>
-                <span><b>Play/Pause: </b> P</span>
-                <span><b>Controls: </b> ← → ↑ ↓</span>
-              </div>
-            </div>
-            <p>
-              The above game is written in Nim, compiled using the JavaScript
-              backend and drawn using the canvas API.
-            </p>
-            <p>
-              <b>Source code: </b>
-              <a href="https://github.com/dom96/snake">https://github.com/dom96/snake</a>
-            </p>
-            <p>
-              <b>Game website: </b>
-              <a href="http://picheta.me/snake">http://picheta.me/snake</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="pure-u-1 pure-u-md-1-2 center">
-          {% highlight nim %}
-import dom
-
-proc onLoad(event: Event) =
-  let p = document.createElement("p")
-  p.innerHTML = "Click me!"
-  p.style.fontFamily = "Helvetica"
-  p.style.color = "red"
-
-  p.addEventListener("click",
-    proc (event: Event) =
-      window.alert("Hello World!")
-  )
-
-  document.body.appendChild(p)
-
-window.onload = onLoad{% endhighlight %}
-      </div>
-    </div>
-  </section>
-
-  <section class="background-faded call-to-action">
-    <section class="content metaprogramming">
-      <div class="pure-g">
-        <div class="pure-u-1">
-          <h2 id="small-core-with-extensibility">Small core with a rich prospect for extensibility</h2>
-        </div>
-        <div class="pure-u-1 pure-u-md-1-2">
-          <p>
-          Nim implements a small core language with a powerful
-          set of metaprogramming features.
-          </p>
-          <p>
-          The metaprogramming features in Nim include support for generics,
-          templates, and macros. This allows Nim to be extended with support
-          for various programming paradigms and allows developers to avoid
-          boilerplate. The standard library
-          implements async await using these metaprogramming features and
-          the Nim community has developed various packages implementing
-          different programming paradigms.
-          </p>
-        </div>
-        <div class="pure-u-1 pure-u-md-1-2 center">
-          {% highlight nim %}
-import macros, strutils
-
-macro toEnum(words: static[string]): untyped =
-  result = newTree(nnkEnumTy, newEmptyNode())
-
-  for w in splitWhitespace(words):
-    result.add ident(w)
-
-type
-  Color = toEnum"Red Green Blue Indigo"
-
-var color = Indigo{% endhighlight %}
-        </div>
-      </div>
-    </section>
-  </section>
-
-  <section class="content nimble">
-    <div class="pure-g">
-      <div class="pure-u-1 center">
-        <h1 id="decentralised-package-management">Decentralised package management</h1>
-      </div>
-      <div class="pure-u-1 center">
-        <img height="150px" src="{{ site.baseurl }}/assets/img/nimble.svg"/>
-      </div>
-      <div class="pure-u-1 pure-u-md-1-2 code-align">
-        <h2>
-          The Nim package manager is called Nimble. Packages
-          are distributed via Git and Mercurial repositories, and tags are
-          queried remotely to determine version information.
-        </h2>
-        <p>
-        A mapping between package names and repository URLs is defined in a
-        <code>packages.json</code> file that is stored on
-        <a href="https://github.com/nim-lang/packages">GitHub</a>.
-        </p>
-        <p>
-        Packages are defined using a
-        specially formatted <code>.nimble</code> file that is evaluated by the
-        Nim compiler. This means that it supports a large subset of the
-        Nim programming language, allowing various powerful features including
-        the ability to determine the OS and specify external dependencies.
-        </p>
-      </div>
-      <div class="pure-u-1 pure-u-md-1-2 center">
-        {% highlight nim %}
-# Package
-
-version       = "v0.1.0"
-author        = "Benedict Cumberbatch"
-description   = "Sample package."
-license       = "MIT"
-
-# Dependencies
-requires "nim >= 0.13.0", "jester >= 0.1.0"
-
-import distros
-if detectOs(Ubuntu):
-  foreignDep "libssl-dev"
-else:
-  foreignDep "openssl"
-
-task test, "Run the tester!":
-  withDir "tests":
-    exec "nim c -r tester"{% endhighlight %}
-      </div>
-      <div class="pure-u-1 center">
-        <a class="pure-button pure-button-primary" href="https://github.com/nim-lang/nimble#readme">Learn more</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="background-faded call-to-action">
-    <section class="content ffi">
-      <div class="pure-g center">
-        <div class="pure-u-1 center">
-          <h2 id="easy-c-obj-c-wrapping">Easy C, C++ <b>and</b> Objective C wrapping</h2>
-        </div>
-        <div class="pure-u-1 center">
-          {% highlight nim %}
-{.passL: "-lsfml-graphics -lsfml-system -lsfml-window".}
-
-type
-  VideoMode* {.importcpp: "sf::VideoMode".} = object
-  RenderWindowObj {.importcpp: "sf::RenderWindow".} = object
-  RenderWindow* = ptr RenderWindowObj
-  Color* {.importcpp: "sf::Color".} = object
-  Event* {.importcpp: "sf::Event".} = object
-
-{.push cdecl, header: "<SFML/Graphics.hpp>".}
-{.push importcpp.}
-
-proc videoMode*(modeWidth, modeHeight: cuint,
-                modeBitsPerPixel: cuint = 32): VideoMode
-proc newRenderWindow*(mode: VideoMode, title: cstring): RenderWindow
-proc pollEvent*(window: RenderWindow, event: var Event): bool
-proc newColor*(red, green, blue, alpha: uint8): Color
-proc clear*(window: RenderWindow, color: Color)
-proc display*(window: RenderWindow)
-{% endhighlight %}
-        </div>
-        <div class="pure-u-1 pure-u-md-1-2 center">
-          <p>
-          Nim makes it easy to bind to C, C++ and Objective C libraries.
-          This allows developers to easily access a large ecosystem of
-          mature and powerful libraries.
-          </p>
-        </div>
-        <div class="pure-u-1 center">
-          <a class="pure-button pure-button-primary" href="https://nim-lang.org/docs/manual.html#implementation-specific-pragmas-importcpp-pragma">Learn more</a>
-        </div>
-      </div>
-    </section>
-  </section>
-
-  <section class="content">
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <h1 id="helpful-tracebacks">Helpful tracebacks</h1>
-      </div>
-      <div class="pure-u-1 pure-u-md-1-2 code-align">
-        <h2>
-          Inspired by Python.
-        </h2>
-        <p>
-        When a Nim application crashes with an exception,
-        it will output a stack trace before terminating. The format of this
-        stack trace is very easy to grasp and contains all the required
-        information to debug the exception.
-        </p>
-      </div>
-      <div class="pure-u-1 pure-u-md-1-2 center">
-        {% highlight plain %}
-Traceback (most recent call last)
-module.nim(10)           module
-module.nim(8)            readData
-strutils.nim             parseInt
-Error: unhandled exception:
-       invalid integer: Hello World [ValueError]{% endhighlight %}
-      </div>
-    </div>
-  </section>
-
-  <section class="background-faded call-to-action">
-    <section class="content text-centered">
-      <h2>More questions? See the
-        <a href="{{ site.baseurl }}/faq.html">FAQ</a>
+    <div class="pure-u-1 pure-u-md-1-2 code-align">
+      <h2>
+        NIM从多种语言中汲取了灵感，所以语法很容易被理解，
+        你可以轻易写出可读性和可维护性很高的代码。
       </h2>
-    </section>
+      <ul>
+        <li>缩进优先的语法</li>
+        <li>以Python为灵感的多重结构</li>
+        <li>多行的lambda表达式</li>
+        <li>源于Oberon的可视化标记</li>
+        <li>用于精简声明的类型节则来自Pascal</li>
+      </ul>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 center">
+      {% highlight nim %}
+      import strformat
+      type
+      Person = object
+      name*: string # 字段通过`*`导出。
+      age: Natural # 自然数类型确保年龄是正确的。
+
+      var people = [
+      Person(name: "John", age: 45),
+      Person(name: "Kate", age: 30)
+      ]
+
+      for person in people:
+      # 类型安全的字符串插值。
+      echo(fmt"{person.name} is {person.age} years old"){% endhighlight %}
+    </div>
+  </div>
+</section>
+
+
+<section class="background-faded call-to-action">
+  <section class="content text-centered">
+    <h2>多操作系统支持</h2>
+    <div class="pure-g center">
+      <div class="pure-u-1">
+        <i class="fab fa-windows fa-5x" aria-hidden="true"></i>
+        <i class="fab fa-apple fa-5x" aria-hidden="true"></i>
+        <i class="fab fa-linux fa-5x" aria-hidden="true"></i>
+      </div>
+      <div class="pure-u-1-2">
+        <p>
+          Nim支持所有主流操作系统和平台以及多个niche平台。
+          <br>
+          我们为完美支持这三个主流操作系统而感到自豪。
+        </p>
+      </div>
+    </div>
   </section>
+</section>
+
+<section class="content">
+  <div class="pure-g">
+    <div class="pure-u-1 pure-u-md-1-2">
+      <h1 id="many-garbage-collector-options">选择性更多的垃圾收集器</h1>
+      <p>
+        选择延时垃圾收集器，快速，增量和无间断;
+        <br>
+        或者是一个确定性的软实时垃圾收集器，支持您指定其最大暂停时间;
+        <br>
+        还有很多其他方式供你选择。
+      </p>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2">
+      <div class="image right">
+        <img src="{{ site.baseurl }}/assets/img/features/gc_latency.png" />
+        <p>
+          <b>来源: </b>
+          <a href="https://forum.nim-lang.org/t/2646/3#18263">https://forum.nim-lang.org/t/2646/3#18263</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="background-faded call-to-action">
+  <section class="content">
+    <div class="pure-g">
+      <div class="pure-u-1 pure-u-md-1-2">
+        <div class="image">
+          <img src="{{ site.baseurl }}/assets/img/features/binary_size.png" />
+          <p>
+            <b>来源: </b>
+            <a href="https://github.com/dom96/binary_size">https://github.com/dom96/binary_size</a>
+          </p>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2">
+        <h2 id="native-performance-with-optimisations">最先进优化的原生性能</h2>
+        <p>
+          通过编译为C，Nim可以使用由现代C编译器提供的很多新特性。
+          这个编译模型获得了已经由不同的个人和有影响力的大公司实施了40多年的高可移植性和优化。
+        </p>
+        <p>
+          Nim产出小巧、零依赖的二进制文件，
+          不仅能让你分发更加简便，
+          还能让你的客户更加满意。
+        </p>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="content">
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <h1 id="javascript-compilation">编译为JavaScript</h1>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 code-align">
+      <h2>
+        Nim包含了一个一流的JavaScript后端，
+        这样您就可以毫不费力地同时开发客户端和服务器。
+      </h2>
+      <div class="center">
+        <script type="text/javascript" src="https://picheta.me/snake/snake.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="https://picheta.me/snake/snake.css">
+        <style>
+          #snake_center {
+            width: 402px;
+            margin-top: 30pt;
+            height: 400px;
+          }
+
+          #snake_center>p {
+            width: 100%;
+            margin-bottom: 0;
+          }
+        </style>
+        <div id="snake_center">
+          <div id="snake">
+            <canvas id="snake_canvas"></canvas>
+            <div id="snake_controls">
+              <span><b>New Game:</b> N</span>
+              <span><b>Play/Pause: </b> P</span>
+              <span><b>Controls: </b> ← → ↑ ↓</span>
+            </div>
+          </div>
+          <p>
+            上面的游戏就是用Nim写成的，
+            使用JavaScript后端编译，
+            使用canvas API进行绘制。
+          </p>
+          <p>
+            <b>源码: </b>
+            <a href="https://github.com/dom96/snake">https://github.com/dom96/snake</a>
+          </p>
+          <p>
+            <b>体验网站: </b>
+            <a href="http://picheta.me/snake">http://picheta.me/snake</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 center">
+      {% highlight nim %}
+      import dom
+
+      proc onLoad(event: Event) =
+      let p = document.createElement("p")
+      p.innerHTML = "Click me!"
+      p.style.fontFamily = "Helvetica"
+      p.style.color = "red"
+
+      p.addEventListener("click",
+      proc (event: Event) =
+      window.alert("Hello World!")
+      )
+
+      document.body.appendChild(p)
+
+      window.onload = onLoad{% endhighlight %}
+    </div>
+  </div>
+</section>
+
+<section class="background-faded call-to-action">
+  <section class="content metaprogramming">
+    <div class="pure-g">
+      <div class="pure-u-1">
+        <h2 id="small-core-with-extensibility">核心更小，可扩展性更高</h2>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2">
+        <p>
+          通过提供强大的元编程功能，Nim语言实现了更小的核心。
+        </p>
+        <p>
+          Nim中的元编程功能包括了对泛型、模板和宏的支持。
+          这使得Nim可以扩展和支持各种编程范例，并避免了开发人员使用样板。
+          通过使用这些元编程功能，标准库实现异步等待。
+          Nim社区还开发了各种实现不同编程范式的包。
+        </p>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2 center">
+        {% highlight nim %}
+        import macros, strutils
+
+        macro toEnum(words: static[string]): untyped =
+        result = newTree(nnkEnumTy, newEmptyNode())
+
+        for w in splitWhitespace(words):
+        result.add ident(w)
+
+        type
+        Color = toEnum"Red Green Blue Indigo"
+
+        var color = Indigo{% endhighlight %}
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="content nimble">
+  <div class="pure-g">
+    <div class="pure-u-1 center">
+      <h1 id="decentralised-package-management">提供对零散的包进行管理</h1>
+    </div>
+    <div class="pure-u-1 center">
+      <img height="150px" src="{{ site.baseurl }}/assets/img/nimble.svg" />
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 code-align">
+      <h2>
+        Nim的包管理器叫做Nimble。
+        通过Git和Mercurial存储库来分发软件包，
+        通过远程查询标签来确定版本信息。
+      </h2>
+      <p>
+        包名和仓库URL在<code>packages.json</code>中声明，并存储于GitHub中。
+      </p>
+      <p>
+        软件包使用特殊的<code>.nimble</code>文件格式进行定义，.nimble格式会被Nim编译器评估。
+        这意味着它支持Nim编程语言的大部分子集，
+        支持各种强大的功能，包括能够指定操作系统和外部依赖项。 
+      </p>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 center">
+      {% highlight nim %}
+      # 包
+
+      version = "v0.1.0"
+      author = "Benedict Cumberbatch"
+      description = "Sample package."
+      license = "MIT"
+
+      # 依赖
+      requires "nim >= 0.13.0", "jester >= 0.1.0"
+
+      import distros
+      if detectOs(Ubuntu):
+      foreignDep "libssl-dev"
+      else:
+      foreignDep "openssl"
+
+      task test, "Run the tester!":
+      withDir "tests":
+      exec "nim c -r tester"{% endhighlight %}
+    </div>
+    <div class="pure-u-1 center">
+      <a class="pure-button pure-button-primary" href="https://github.com/nim-lang/nimble#readme">了解更多</a>
+    </div>
+  </div>
+</section>
+
+<section class="background-faded call-to-action">
+  <section class="content ffi">
+    <div class="pure-g center">
+      <div class="pure-u-1 center">
+        <h2 id="easy-c-obj-c-wrapping">简便地对C、C++<b>和</b>Objective C进行互动</h2>
+      </div>
+      <div class="pure-u-1 center">
+        {% highlight nim %}
+        {.passL: "-lsfml-graphics -lsfml-system -lsfml-window".}
+
+        type
+        VideoMode* {.importcpp: "sf::VideoMode".} = object
+        RenderWindowObj {.importcpp: "sf::RenderWindow".} = object
+        RenderWindow* = ptr RenderWindowObj
+        Color* {.importcpp: "sf::Color".} = object
+        Event* {.importcpp: "sf::Event".} = object
+
+        {.push cdecl, header: "<SFML/Graphics.hpp>".} {.push importcpp.} proc videoMode*(modeWidth, modeHeight: cuint,
+          modeBitsPerPixel: cuint=32): VideoMode proc newRenderWindow*(mode: VideoMode, title: cstring): RenderWindow
+          proc pollEvent*(window: RenderWindow, event: var Event): bool proc newColor*(red, green, blue, alpha: uint8):
+          Color proc clear*(window: RenderWindow, color: Color) proc display*(window: RenderWindow) {% endhighlight %}
+          </div> <div class="pure-u-1 pure-u-md-1-2 center">
+          <p>
+            Nim可以轻松绑定到C、C++和Objective C库。
+            开发者可以轻松访问由成熟且功能强大的库组成的大型生态系统。
+          </p>
+      </div>
+      <div class="pure-u-1 center">
+        <a class="pure-button pure-button-primary"
+          href="https://nim-lang.org/docs/manual.html#implementation-specific-pragmas-importcpp-pragma">了解更多</a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="content">
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <h1 id="helpful-tracebacks">实用的报错信息</h1>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 code-align">
+      <h2>
+        灵感来源于Python。
+      </h2>
+      <p>
+        当Nim应用程序因异常而崩溃时
+        它会在终止之前输出堆栈跟踪。
+        Nim的堆栈跟踪格式非常易于掌握，
+        因为它包含了调试异常所需的所有信息。
+      </p>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 center">
+      {% highlight plain %}
+      Traceback (most recent call last)
+      module.nim(10) module
+      module.nim(8) readData
+      strutils.nim parseInt
+      Error: unhandled exception:
+      invalid integer: Hello World [ValueError]{% endhighlight %}
+    </div>
+  </div>
+</section>
+
+<section class="background-faded call-to-action">
+  <section class="content text-centered">
+    <h2>更多问题，请参阅
+      <a href="{{ site.baseurl }}/faq.html">常见问题</a>
+    </h2>
+  </section>
+</section>
