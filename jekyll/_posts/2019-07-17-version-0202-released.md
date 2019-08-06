@@ -1,72 +1,68 @@
 ---
-title: "Version 0.20.2 released"
-author: The Nim Team
+title: "0.20.2现已发布"
+author: Nim团队
 ---
 
-The Nim team is happy to announce version 0.20.2, which is our second
-release candidate for version 1.0.
+Nim团队很荣幸为大家带来0.20.2版本，这是我们为1.0版本准备的第二个RC版本。
 
-To read more about version 0.20 and our plans for version 1.0 and beyond,
-check the [previous release notes](https://nim-lang.org/blog/2019/06/06/version-0200-released.html).
-This is mostly a bugfix release of version 0.20.0 (1.0 RC1).
+请点击[之前的版本发布日志](https://nim-lang.org/blog/2019/06/06/version-0200-released.html)
+以查看更多关于0.20版本的信息，以及我们关于1.0及之后版本的计划。
+此版本主要包含了对0.20.0（1.0 RC1）版本的BUG修复。
 
-The only new feature is that `toOpenArray`, our slicing operator,
-is now available for the JavaScript backend.
+唯一的新功能是我们添加了名为`toOpenArray`的切片操作符，
+现对JavaScript后端可用。
 
-Although this release comes only one month after a previous release,
-it has over 200 new commits, fixing over 70 reported issues and bringing
-lots of improvements which should make Nim even more stable.
+这次更新距离上一个版本的发布尽管只差了一个月，
+但它却包含了超过200次的新commit，修复了超过70个被提出来的issues，
+并且带来了很多应该能让Nim更加稳定的改进。
 
 
-### Style checks
+### 代码风格检查
 
-Since version 0.20.0 we improved our style checker to the point that
-Nim now bootstraps with `--styleCheck:error` flag, meaning that the compiler
-and the standard library are now style checked and they won't compile if
-different styles (e.g. `fooBar` and `foo_bar`) are used.
-
-If you would like to only style check your own nimble package, but not its
-dependencies, you can use `--styleCheck:hint`, making your package consistent
-while still retaining perfect interoperability with all other Nim code in the wild.
+在0.20.0版本发布后，我们改进了我们的代码样式检查器，
+现在可以通过在启动Nim时加上`--styleCheck:error`标识，
+这意味着可以对编译器和标准库进行代码风格检查了，
+如果使用了不同的代码风格（比如：`fooBar`和`foo_bar`），那么这些代码将不会被编译。
 
 
 ### Nimpretty
 
-One of the areas which we focused on for this release is our `nimpretty` tool --
-it is a Nim source code beautifier, to format code according to the official
-style guide ([NEP-1](https://nim-lang.org/docs/nep1.html)).
-More than 30 commits were made aiming to improve `nimpretty` experience and
-to make it more robust for real-world scenarios.
-Nimpretty version 0.2 ships with Nim, and we invite you to give it a try.
+我们对于这个版本的关注点还有一个，那就是我们的`nimpretty`工具：
+这是一个Nim的源码美化器，
+用来把代码格式化得符合官方风格([NEP-1](https://nim-lang.org/docs/nep1.html))。
+我们进行了超过30个提交，以改善`nimpretty`体验，让它更有能力应对现实场景。
 
 
-### New runtime
+### 新的runtime
 
-The new runtime is progressing nicely but it is off the critical path for
-version 1.0 as it's an opt-in feature.
-The next significant milestone is to make the new runtime work with `async`.
-Only after this is accomplished we can push for more adoption of it.
+新的runtime进展很顺利，但它还没有达到预想的状态，
+所以他在1.0版本中将作为一个可选的特性。
+下一个重要的里程碑是使新的运行时与`async`一起工作。
+只有完成这一点，我们才会真正地进行推广，让大家优先考虑它。
 
 
 
-## Installing 0.20.2
+## 安装0.20.2版本
 
-If you have installed a previous version of Nim using ``choosenim``,
-getting Nim 0.20.2 is as easy as:
+你之前如果已经使用``choosenim``来安装了旧版本的Nim，
+那么更新到0.20.2版本将会非常的简单：
 
 ```bash
 $ choosenim update stable
 ```
 
-If you don't have it already, you can get ``choosenim`` by following
-[these instructions](https://github.com/dom96/choosenim) or you can install
-Nim by following the instructions on our
-[install](https://nim-lang.org/install.html) page.
+如果你之前并没有使用它，你可以通过
+[这篇介绍](https://github.com/dom96/choosenim)来获取``choosenim``。
+当然你也可以直接根据我们的[安装](https://nim-lang-cn.org/install.html)页面，
+单独安装Nim。 
+
+（译者注：在Windows下的choosenim只支持32位的下载，
+你可以在64位系统下进行安装，但是这样的话你的nim版本只能也使用32位的，否则会报错）
 
 
 
 
-## Changes affecting backwards compatibility
+## 不向后兼容的更新
 
 - All `strutils.rfind` procs now take `start` and `last` like `strutils.find`
   with the same data slice/index meaning. This is backwards compatible for
@@ -79,7 +75,7 @@ Nim by following the instructions on our
 - On Windows stderr/stdout/stdin are not opened as binary files anymore. Use the switch
   `-d:nimBinaryStdFiles` for a transition period.
 
-### Breaking changes in the standard library
+### 影响标准库的更新
 
 - Mac OS X / BSD: TSa_Family is now the ``uint8`` type, so type
   conversions like ``x.sin_family = uint16 toInt(nativesockets.AF_INET)``
@@ -87,19 +83,19 @@ Nim by following the instructions on our
 
 
 
-## Library additions
+## 库的新增
 
-- `toOpenArray` is now available for the JS target.
+- 用于JS的`toOpenArray` 现已可用。
 
 
-## Library changes
+## 库的更新
 
 - Fix async IO operations stalling even after socket is closed. (#11232)
 
 - More informative error message for `streams.openFileStream`. (#11438)
 
 
-## Compiler changes
+## 编译器更新
 
 - Better error message for IndexError for empty containers. (#11476)
 
@@ -108,7 +104,7 @@ Nim by following the instructions on our
 - Fix for passing tuples as static params to macros. (#11423)
 
 
-## Bugfixes
+## Bug修复
 
 - Fixed "nimpretty goes crazy with this snippet"
   ([#10295](https://github.com/nim-lang/Nim/issues/10295))

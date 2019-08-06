@@ -1,8 +1,8 @@
 # Site settings
-title: "Nim编程语言"
+title: "Nim中文网"
 description: >
   NIM编程语言是一种简洁、快速的编程语言，
-  编译成C、C++和JavaScript。
+  可被编译成C、C++和JavaScript。
 baseurl: ""
 
 nim_version: 1.2.6

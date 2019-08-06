@@ -1,14 +1,16 @@
-# Nim website development
+# Nim中文官网开发代码库
 
-The Nim website hosted on https://nim-lang.org.
+当前仓库是nim中文官网的代码库，可通过(https://nim-lang-cn.org)[https://nim-lang-cn.org]进行访问。
 
-## Developing
 
-Install Jekyll, then `cd jekyll` and use `bundle exec jekyll serve`
-to serve to a local Web server with automatic refresh on changes.
+## 进行开发
 
-## License
+首先你需要安装Jekyll，然后键入 ``cd jekyll``命令来进入`jekyll/`目录， \
+之后就可以通过使用`bundle exec jekyll serve`命令来启动一个本地WEB服务器进行开发， \
+启动之后可以访问`http://localhost:4000/`来访问首页
 
-Unless otherwise stated, the content of this page is licensed under the Creative Commons Attribution 3.0 license.
+## 许可
 
-The design of this website is Copyright (C) Nim developers.
+除非特殊说明，否则本页内容皆于Creative Commons Attribution 3.0 license进行许可。
+
+本站设计的版权归属于(C) Nim 开发者.
