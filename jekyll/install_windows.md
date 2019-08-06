@@ -6,7 +6,7 @@ current: Install
 ---
 
 
-<h1 class="text-centered page-title main-heading">Install Nim on Windows</h1>
+<h1 class="text-centered page-title main-heading">在Windows下安装Nim</h1>
 
 # Manual installation
 
@@ -14,12 +14,12 @@ current: Install
   <a href="{{ site.baseurl }}/download/nim-{{ site.nim_version }}_x32.zip"
     class="pure-button pure-button-primary download-button">
     <i class="fa fa-file-archive-o" aria-hidden="true"></i>
-    Download x86 zip
+    下载32位版本的zip包
   </a>
   <a href="{{ site.baseurl }}/download/nim-{{ site.nim_version }}_x32.zip.sha256"
     class="pure-button">
     <i class="fa fa-file-text-o" aria-hidden="true"></i>
-    SHA256
+    SHA256校验
   </a>
 </div>
 
@@ -27,52 +27,51 @@ current: Install
   <a href="{{ site.baseurl }}/download/nim-{{ site.nim_version }}_x64.zip"
     class="pure-button pure-button-primary download-button">
     <i class="fa fa-file-archive-o" aria-hidden="true"></i>
-    Download x86_64 zip
+    下载64位zip包
   </a>
   <a href="{{ site.baseurl }}/download/nim-{{ site.nim_version }}_x64.zip.sha256"
     class="pure-button">
     <i class="fa fa-file-text-o" aria-hidden="true"></i>
-    SHA256
+    SHA256校验
   </a>
 </div>
 
-# Notes about binary installation
+# 关于二进制文件安装的说明
 
-The installation using the provided zip files should be fairly
-straightforward. Simply extract the files into the desired installation
-directory, and run ``finish.exe``.
+使用提供的zip文件的安装应该相当简单。
+只需将文件解压到所需的安装目录，
+然后运行``finish.exe``，跟随指引一步步配置即可。
 
-## Configuring the ``PATH`` environment variable
+## 配置``PATH``环境变量
 
-The binaries from the zip file live inside the ``bin`` directory.
-It is common for Nim developers to include two directories in their
-[``PATH`` environment variable](https://en.wikipedia.org/wiki/PATH_(variable)):
 
-* the aforementioned ``bin`` directory
-* ``%USERPROFILE%\.nimble\bin`` (where ``%USERPROFILE%`` is the home directory)
+要使用Nim进行开发，需要在你的[``PATH``环境变量](https://en.wikipedia.org/wiki/PATH_(variable))中添加以下两个目录：
 
-The zip file includes a simple application called ``finish.exe`` that can
-attempt to add the first directory into your ``PATH``.
-This tool also checks for the presence of a C compiler and can install ``MingW``,
-the GNU C compiler collection for Windows.
+* Nim的二进制文件位于你解压的文件夹下的``bin``目录下，所以这个目录在环境变量中是必需的；
+* ``%USERPROFILE%\.nimble\bin`` (``%USERPROFILE%``指的是你的HOME目录，Windows系统下是``我的文档``，Unix系统下是``~``)
 
-# Notes about compiler dependencies
+下载的zip文件中包含了一个名为``finish.exe``的文件，
+它会尝试在你的``PATH``中添加上面说的第一个目录，
+此工具还会自动检查你的系统中是否存在C编译器，你可以通过它安装MingW（一个Windows的GNU C编译器集合）。
 
-The Nim compiler needs a C compiler in order to compile software. You can
-use ``finish.exe`` to install MingW.
+# 关于编译器依赖的说明
 
+Nim编译器编译软件时需要一个C编译器，
+你可以使用``finish.exe``来安装MingW。
+
+以下版本的MingW可与最新版本的Nim完美合作。
 The following versions of MingW are known to work with the latest version of
 Nim.
 
 <!-- TODO: Instructions on what to do with these 7z files? -->
 
-* 32 bit - [mingw32.7z]({{ site.baseurl }}/download/mingw32.7z)
-* 64 bit - [mingw64.7z]({{ site.baseurl }}/download/mingw64.7z)
+* 32位 - [mingw32.7z]({{ site.official_baseurl }}/download/mingw32-6.3.0.7z)
+* 64位 - [mingw64.7z]({{ site.official_baseurl }}/download/mingw64-6.3.0.7z)
 
-# Other dependencies
+# 其他依赖
 
-There are a number of other dependencies that you may need to install in order
-to use Nim. They include:
+下面展示了一个包含了其他依赖的列表，
+你需要先确保安装了这些依赖，才能使用Nim。
 
 * PCRE
 * OpenSSL
