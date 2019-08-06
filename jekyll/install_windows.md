@@ -14,7 +14,7 @@ current: Install
   <a href="{{ site.baseurl }}/download/nim-{{ site.nim_version }}_x32.zip"
     class="pure-button pure-button-primary download-button">
     <i class="fa fa-file-archive-o" aria-hidden="true"></i>
-    下载32位版本的zip包
+    下载x86版本的zip包
   </a>
   <a href="{{ site.baseurl }}/download/nim-{{ site.nim_version }}_x32.zip.sha256"
     class="pure-button">
@@ -27,7 +27,7 @@ current: Install
   <a href="{{ site.baseurl }}/download/nim-{{ site.nim_version }}_x64.zip"
     class="pure-button pure-button-primary download-button">
     <i class="fa fa-file-archive-o" aria-hidden="true"></i>
-    下载64位zip包
+    下载x64版本的zip包
   </a>
   <a href="{{ site.baseurl }}/download/nim-{{ site.nim_version }}_x64.zip.sha256"
     class="pure-button">
@@ -59,9 +59,7 @@ current: Install
 Nim编译器编译软件时需要一个C编译器，
 你可以使用``finish.exe``来安装MingW。
 
-以下版本的MingW可与最新版本的Nim完美合作。
-The following versions of MingW are known to work with the latest version of
-Nim.
+以下版本的MingW可完美地与最新版本的Nim配合使用：
 
 <!-- TODO: Instructions on what to do with these 7z files? -->
 
@@ -76,31 +74,5 @@ Nim.
 * PCRE
 * OpenSSL
 
-Windows users can download the DLLs for these
-[here]({{ site.baseurl }}/download/dlls.zip).  Place the DLLs in the same
-directory as `nim.exe`.
-
-
-# Installation using ``choosenim``
-
-[``choosenim``](https://github.com/dom96/choosenim#choosenim) is an
-installer for the Nim programming language. It allows you
-to easily switch between versions of Nim, whether that is the latest stable
-release or the latest development version.
-
-
-# Install Nim using Scoop
-
-[Scoop](https://scoop.sh/) is a command-line installer for Windows.
-It can install Nim with following command line that also automatically install gcc and set PATH.
-
-```
-scoop install nim
-```
-
-Update Nim:
-
-```
-scoop update
-scoop update nim
-```
+Windows用户可以通过[这个链接]({{ site.official_baseurl }}/download/dlls.zip)一次性下载这些必要的DLL，
+并在`nim.exe`的同级目录下替换他们。
