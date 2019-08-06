@@ -28,18 +28,18 @@ css_class: features
       {% highlight nim %}
       import strformat
       type
-      Person = object
-      name*: string # 字段通过`*`导出。
-      age: Natural # 自然数类型确保年龄是正确的。
+        Person = object
+          name*: string # 字段通过`*`导出。
+          age: Natural # 自然数类型确保年龄是正确的。
 
       var people = [
-      Person(name: "John", age: 45),
-      Person(name: "Kate", age: 30)
+        Person(name: "John", age: 45),
+        Person(name: "Kate", age: 30)
       ]
 
       for person in people:
-      # 类型安全的字符串插值。
-      echo(fmt"{person.name} is {person.age} years old"){% endhighlight %}
+        # 类型安全的字符串中变量赋值
+        echo(fmt"{person.name} is {person.age} years old"){% endhighlight %}
     </div>
   </div>
 </section>
@@ -173,17 +173,17 @@ css_class: features
       import dom
 
       proc onLoad(event: Event) =
-      let p = document.createElement("p")
-      p.innerHTML = "Click me!"
-      p.style.fontFamily = "Helvetica"
-      p.style.color = "red"
+        let p = document.createElement("p")
+        p.innerHTML = "Click me!"
+        p.style.fontFamily = "Helvetica"
+        p.style.color = "red"
 
-      p.addEventListener("click",
-      proc (event: Event) =
-      window.alert("Hello World!")
-      )
+        p.addEventListener("click",
+          proc (event: Event) =
+            window.alert("Hello World!")
+        )
 
-      document.body.appendChild(p)
+        document.body.appendChild(p)
 
       window.onload = onLoad{% endhighlight %}
     </div>
@@ -212,13 +212,13 @@ css_class: features
         import macros, strutils
 
         macro toEnum(words: static[string]): untyped =
-        result = newTree(nnkEnumTy, newEmptyNode())
+          result = newTree(nnkEnumTy, newEmptyNode())
 
-        for w in splitWhitespace(words):
-        result.add ident(w)
+          for w in splitWhitespace(words):
+            result.add ident(w)
 
         type
-        Color = toEnum"Red Green Blue Indigo"
+          Color = toEnum"Red Green Blue Indigo"
 
         var color = Indigo{% endhighlight %}
       </div>
@@ -263,13 +263,13 @@ css_class: features
 
       import distros
       if detectOs(Ubuntu):
-      foreignDep "libssl-dev"
+        foreignDep "libssl-dev"
       else:
-      foreignDep "openssl"
+        foreignDep "openssl"
 
       task test, "Run the tester!":
-      withDir "tests":
-      exec "nim c -r tester"{% endhighlight %}
+        withDir "tests":
+          exec "nim c -r tester"{% endhighlight %}
     </div>
     <div class="pure-u-1 center">
       <a class="pure-button pure-button-primary" href="https://github.com/nim-lang/nimble#readme">了解更多</a>
@@ -288,16 +288,22 @@ css_class: features
         {.passL: "-lsfml-graphics -lsfml-system -lsfml-window".}
 
         type
-        VideoMode* {.importcpp: "sf::VideoMode".} = object
-        RenderWindowObj {.importcpp: "sf::RenderWindow".} = object
-        RenderWindow* = ptr RenderWindowObj
-        Color* {.importcpp: "sf::Color".} = object
-        Event* {.importcpp: "sf::Event".} = object
+          VideoMode* {.importcpp: "sf::VideoMode".} = object
+          RenderWindowObj {.importcpp: "sf::RenderWindow".} = object
+          RenderWindow* = ptr RenderWindowObj
+          Color* {.importcpp: "sf::Color".} = object
+          Event* {.importcpp: "sf::Event".} = object
 
-        {.push cdecl, header: "<SFML/Graphics.hpp>".} {.push importcpp.} proc videoMode*(modeWidth, modeHeight: cuint,
-          modeBitsPerPixel: cuint=32): VideoMode proc newRenderWindow*(mode: VideoMode, title: cstring): RenderWindow
-          proc pollEvent*(window: RenderWindow, event: var Event): bool proc newColor*(red, green, blue, alpha: uint8):
-          Color proc clear*(window: RenderWindow, color: Color) proc display*(window: RenderWindow) {% endhighlight %}
+        {.push cdecl, header: "<SFML/Graphics.hpp>".} 
+        {.push importcpp.} 
+        proc videoMode*(modeWidth, modeHeight: cuint,
+                        modeBitsPerPixel: cuint=32): VideoMode
+        proc newRenderWindow*(mode: VideoMode, title: cstring): RenderWindow
+        proc pollEvent*(window: RenderWindow, event: var Event): bool
+        proc newColor*(red, green, blue, alpha: uint8):Color 
+        proc clear*(window: RenderWindow, color: Color) 
+        proc display*(window: RenderWindow) 
+        {% endhighlight %}
           </div> <div class="pure-u-1 pure-u-md-1-2 center">
           <p>
             Nim可以轻松绑定到C、C++和Objective C库。
@@ -335,7 +341,7 @@ css_class: features
       module.nim(8) readData
       strutils.nim parseInt
       Error: unhandled exception:
-      invalid integer: Hello World [ValueError]{% endhighlight %}
+             invalid integer: Hello World [ValueError]{% endhighlight %}
     </div>
   </div>
 </section>
