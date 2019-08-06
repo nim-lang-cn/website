@@ -4,7 +4,7 @@ description: >
   NIM编程语言是一种简洁、快速的编程语言，
   可被编译成C、C++和JavaScript。
 baseurl: ""
-official_baseurl:"https://nim-lang.org"
+official_baseurl: "https://nim-lang.org"
 
 nim_version: 1.2.6
 
