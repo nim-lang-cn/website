@@ -85,7 +85,7 @@ for person in people:
         {% highlight nim %}
 # 感谢 Nim 的 'iterator' 和 'yield' 构造，
 # 迭代器和常规方法一样容易编写。
-# 它们被编译为了内联循环。
+# 它们会被编译为内联循环。
 iterator oddElements[Idx, T](a: array[Idx, T]): T =
   var i = 1
   while i < a.len:
