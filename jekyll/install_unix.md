@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Unix installation
+title: Unix下的安装
 css_class: install_unix
 current: Install
 ---

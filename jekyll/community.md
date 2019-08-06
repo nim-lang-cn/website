@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Community
+title: 社区
 css_class: community
 ---
 

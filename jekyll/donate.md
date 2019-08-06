@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Donate
+title: 捐赠
 css_class: donate
 ---
 

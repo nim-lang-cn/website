@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Windows installation
+title: Windows下安装
 css_class: install_windows
 current: Install
 ---
