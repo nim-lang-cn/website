@@ -7,104 +7,96 @@ css_class: documentation
   <h1 class="pure-u-1 text-centered page-title main-heading">{{page.title}}</h1>
 
   <div class="pure-u-1 pure-u-md-1-2">
-    <h2 class="">Standards &amp; Guides</h2>
+    <h2 class="">标准&amp;指南</h2>
 
-    <h3><a href="{{ site.baseurl }}/docs/lib.html">Standard Library</a></h3>
+    <h3><a href="{{ site.baseurl }}/docs/lib.html">标准库</a></h3>
     <p>
-      Provides a listing and description of all the modules in the standard
-      library.
+      列举并描述了标准库中所有模块。
     </p>
 
-    <h3><a href="{{ site.baseurl }}/docs/manual.html">Language Manual</a></h3>
+    <h3><a href="{{ site.baseurl }}/docs/manual.html">语言手册</a></h3>
     <p>
-      The Nim programming language specification.
+      Nim程序设计语言开发规范。
     </p>
 
-    <h3><a href="{{ site.baseurl }}/docs/nep1.html">Nim Style Guide</a></h3>
+    <h3><a href="{{ site.baseurl }}/docs/nep1.html">Nim风格指南</a></h3>
     <p>
-      The stylistic conventions that Nim's official projects adhere to.
+      Nim的官方项目所遵循的风格惯例。
     </p>
 
     <h3>
-      <a href="https://github.com/nim-lang/nimble#readme">Nimble Package Manager</a>
+      <a href="https://github.com/nim-lang/nimble#readme">Nimble包管理器</a>
     </h3>
     <p>
-      Explains configuration and usage of Nimble package manager, including
-      creating and publishing your own packages.
+      解释Nimble包管理器的配置和使用，包括创建和发布自己的包。
     </p>
 
-    <h3><a href="{{ site.baseurl }}/docs/nimc.html">Compiler User Guide</a></h3>
+    <h3><a href="{{ site.baseurl }}/docs/nimc.html">编译器用户指南</a></h3>
     <p>
-      Outlines the commands and command line flags the Nim compiler supports.
-      Explains how the Nim compiler can be configured and describes how to
-      cross-compile, generate DLLs, and more.
+      概述了Nim编译器支持的命令和命令行标志。
+      解释如何配置NIM编译器，并描述如何交叉编译、生成DLL等。
     </p>
     <h3><a href="{{ site.baseurl }}/docs/nims.html">NimScript</a></h3>
     <p>
-      Describes the subset of Nim used for configuring Nim and specifying
-      Nimble packages.
+      对用于配置Nim和指定Nimble包的Nim的子集的描述。
     </p>
     <h3>
-      <a href="{{ site.baseurl }}/docs/backends.html">Nim Backend Integration</a>
+      <a href="{{ site.baseurl }}/docs/backends.html">Nim后端集成</a>
     </h3>
     <p>
-      Describes the various backends supported by Nim, including C, C++, Obj C,
-      and JS. It also explains how to interface with libraries written in those
-      languages.
+      描述了NIM支持的各种后端，包括C、C++、Obj C和JS。
+      它还解释了如何与用这些语言编写的库进行交互。
     </p>
 
-    <h3><a href="https://nim-lang.github.io/Nim/">Bleeding Edge Docs</a></h3>
+    <h3><a href="https://nim-lang.github.io/Nim/">Bleeding Edge文档</a></h3>
     <p>
-       Latest docs built from the Nim <code>devel</code> branch. Rebuilt on
-       every commit.
+      从Nim最新的<code>devel</code>分支构建的版本。
+      每次提交都会重新构建
     </p>
   </div>
 
   <div class="pure-u-1 pure-u-md-1-2">
-    <h2 class="">Search Options</h2>
+    <h2 class="">搜索项</h2>
     <h3>
       <i class="fa fa-search" aria-hidden="true"></i>
-      <a href="{{ site.baseurl }}/docs/theindex.html">Searchable index</a>
+      <a href="{{ site.baseurl }}/docs/theindex.html">可搜索的索引</a>
     </h3>
     <p>
-      All Nim documents and modules in one place. Use Ctrl/Cmd+F.
+      使用Ctrl/Cmd+F，在所有的Nim文档和模块查找。
     </p>
 
-    <h2 class="">Tools &amp; Features</h2>
-    <h3><a href="{{ site.baseurl }}/docs/filters.html">Source Code Filters</a></h3>
+    <h2 class="">工具&amp;特性</h2>
+    <h3><a href="{{ site.baseurl }}/docs/filters.html">源代码筛选器</a></h3>
     <p>
-      The Nim compiler supports source code filters as a simple yet powerful
-      builtin templating system.
+      Nim编译器支持源码筛选器作为一个简单而强大的内置模板系统。
     </p>
-    <h3><a href="{{ site.baseurl }}/docs/tools.html">Tools Documentation</a></h3>
+    <h3><a href="{{ site.baseurl }}/docs/tools.html">工具文档</a></h3>
     <p>
-      Description of some tools that come with the standard distribution.
-    </p>
-
-    <h2 class="">Internal Details</h2>
-    <h3><a href="{{ site.baseurl }}/docs/gc.html">Memory Management</a></h3>
-    <p>
-      Additional documentation about Nim's multi-paradigm memory management strategies and how to operate them in a
-      realtime setting.
-    </p>
-    <h3><a href="{{ site.baseurl }}/docs/intern.html">Internal Documentation</a></h3>
-    <p>
-      The internal documentation describes how the compiler is implemented.
-      Read this if you want to hack the compiler.
+      标准发行版附带工具的一些说明。
     </p>
 
-    <h2 class="">Other</h2>
+    <h2 class="">内部详细信息</h2>
+    <h3><a href="{{ site.baseurl }}/docs/gc.html">垃圾回收器</a></h3>
     <p>
-      <a href="{{ site.baseurl }}/faq.html">Frequently Asked Questions</a>
+      有关NIM的GC以及如何在实时设置中操作它的附加文档。
+    </p>
+    <h3><a href="{{ site.baseurl }}/docs/intern.html">底层文档</a></h3>
+    <p>
+      底层文档描述了如何实现编译器。如果你想修改编译器，请阅读这个。
+    </p>
+
+    <h2 class="">其他</h2>
+    <p>
+      <a href="{{ site.baseurl }}/faq.html">常见问题</a>
     </p>
     <p>
       <a href="https://github.com/nim-lang/Nim/wiki">Wiki</a>
     </p>
     <p>
-      <a href="https://nimble.directory/">Nimble Package Directory</a>
+      <a href="https://nimble.directory/">Nimble包目录</a>
     </p>
     <p>
-      <a href="https://github.com/moigagoo/nimage">Docker images (unofficial)</a>
+      <a href="https://github.com/moigagoo/nimage">Docker镜像（非官方）</a>
     </p>
   </div>
 </section>
