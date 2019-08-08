@@ -33,8 +33,7 @@ Nim Tutorial (Part I)
 
   nim compile --run greetings.nim
 
-用 ``--run`` `switch <nimc.html#compiler-usage-command-line-switches>`_ Nim在编译之后自动执行文件。你可以在文件名后给程序追加命令行参数
-  nim compile --run greetings.nim arg1 arg2
+用 ``--run`` `switch <nimc.html#compiler-usage-command-line-switches>`_ Nim在编译之后自动执行文件。你可以在文件名后给程序追加命令行参数nim compile --run greetings.nim arg1 arg2
 
 经常使用的命令和开关有缩写，所以你可以用::
 
@@ -623,7 +622,7 @@ Nim提供类似C++的过程重载能力：
   echo toString(13)   # calls the toString(x: int) proc
   echo toString(true) # calls the toString(x: bool) proc
 
-(注意 ``toString`` 通常是Nim中的`$ <system.html#$>`_ 。) 编译器为 ``toString`` 调用选择最合适的过程。 
+(注意 ``toString`` 通常是Nim中的 `$ <system.html#$>`_ 。) 编译器为 ``toString`` 调用选择最合适的过程。 
 重载解析算法不在这里讨论（会在手册中具体说明）。 不论如何，它不会导致意外，并且基于一个非常简单的统一算法。有歧义的调用会作为错误报告。
 
 
@@ -748,118 +747,85 @@ Nim的布尔类型叫做 ``bool`` ，由两个预先定义好的值 ``true`` 和
 字符类型叫做 ``char`` 。大小总是一字节，所以不能表示大多数UTF-8字符；但可以表示组成多字节UTF-8字符的一个字节。原因是为了效率：对于绝大多数用例，程序依然可以正确处理UTF-8因为UTF-8是专为此设计的。
 字符字面值用单引号括起来。
 
-字符可以用 ``==``, ``<``, ``<=``, ``>``, ``>=`` 操作符比较。``$`` 操作符将一个 ``char`` 转换成一个 ``string`` 。字符不能和整型混合；用 ``ord`` 过程得到一个 ``char`` 的序数值。
+字符可以用 ``==``, ``<``, ``<=``, ``>``, ``>=`` 操作符比较。 ``$`` 操作符将一个 ``char`` 转换成一个 ``string`` 。字符不能和整型混合；用 ``ord`` 过程得到一个 ``char`` 的序数值。
 从整型到 ``char`` 转换使用 ``chr`` 过程。
 
 
 字符串
 -------
-字符串变量是 **可以改变的**, 追加到一个字符串是可能的，而且非常高效。Nim中的字符串有长度字段，以零结尾。A string's length can be retrieved with the builtin ``len``
-procedure; the length never counts the terminating zero. Accessing the
-terminating zero is an error, it only exists so that a Nim string can be converted
-to a ``cstring`` without doing a copy.
+字符串变量是 **可以改变的**, 字符串可以追加，而且非常高效。Nim中的字符串有长度字段，以零结尾。一个字符串长度可以用内置 ``len`` 过程获取；长度不计结尾的零。访问结尾零是一个错误，它只为Nim字符串无拷贝转换为 ``cstring`` 存在。
 
-The assignment operator for strings copies the string. You can use the ``&``
-operator to concatenate strings and ``add`` to append to a string.
+字符串赋值会产生拷贝。你可以用 ``&`` 操作符拼接字符串和 ``add`` 追加到一个字符串。
 
-Strings are compared using their lexicographical order. All the comparison operators
-are supported. By convention, all strings are UTF-8 encoded, but this is not
-enforced. For example, when reading strings from binary files, they are merely
-a sequence of bytes. The index operation ``s[i]`` means the i-th *char* of
-``s``, not the i-th *unichar*.
+字符串用字典序比较，支持所有比较操作符。通过转换，所有字符串是UTF-8编码过的，但不是强制。例如，当从进制文件读取字符串时，他们只是一串字节序列。索引操作符 ``s[i]`` 表示 ``s`` 的第i个 *字符* , 不是第i个 *unichar* 。
 
-A string variable is initialized with the empty string ``""``.
+一个字符串变量用空字符串初始化 ``""`` 。
 
 
 整型
 --------
-Nim has these integer types built-in:
-``int int8 int16 int32 int64 uint uint8 uint16 uint32 uint64``.
+Nim有以下内置整型：
+``int int8 int16 int32 int64 uint uint8 uint16 uint32 uint64`` 。
 
-The default integer type is ``int``. Integer literals can have a *type suffix*
-to specify a non-default integer type:
+默认整型是 ``int`` 。整型字面值可以用 *类型前缀* 来指定一个非默认整数类型：
 
 
 .. code-block:: nim
     :test: "nim c $1"
   let
-    x = 0     # x is of type ``int``
-    y = 0'i8  # y is of type ``int8``
-    z = 0'i64 # z is of type ``int64``
-    u = 0'u   # u is of type ``uint``
+    x = 0     # x是 ``int``
+    y = 0'i8  # y是 ``int8``
+    z = 0'i64 # z是 ``int64``
+    u = 0'u   # u是 ``uint``
 
-Most often integers are used for counting objects that reside in memory, so
-``int`` has the same size as a pointer.
+多数常用整数用来计数内存中的对象，所以 ``int`` 和指针具有相同的大小。
 
-The common operators ``+ - * div mod  <  <=  ==  !=  >  >=`` are defined for
-integers. The ``and or xor not`` operators are also defined for integers, and
-provide *bitwise* operations. Left bit shifting is done with the ``shl``, right
-shifting with the ``shr`` operator. Bit shifting operators always treat their
-arguments as *unsigned*. For `arithmetic bit shifts`:idx: ordinary
-multiplication or division can be used.
+整数支持通用操作符 ``+ - * div mod  <  <=  ==  !=  >  >=`` 。 也支持 ``and or xor not`` 操作符，并提供 *按位* 操作。 左移用 ``shl`` ，右移用 ``shr`` 。位移操作符实参总是被当作 *无符号整型* 。 
+`算术位移`:idx: 可以普通乘法或除法。
 
-Unsigned operations all wrap around; they cannot lead to over- or under-flow
-errors.
+无符号操作不会引起上溢和下溢。
 
-Lossless `Automatic type conversion`:idx: is performed in expressions where different
-kinds of integer types are used. However, if the type conversion
-would cause loss of information, the `EOutOfRange`:idx: exception is raised (if the error
-cannot be detected at compile time).
+无损 `自动类型转换`:idx: 在表达式中使用不同类型的整数时执行。如果会失真，会抛出`EOutOfRange`:idx: 异常（如果错误没能在编译时检查出来）。
 
 
 浮点
 ------
-Nim has these floating point types built-in: ``float float32 float64``.
+Nim有这些内置浮点类型： ``float float32 float64`` 。
 
-The default float type is ``float``. In the current implementation,
-``float`` is always 64-bits.
+默认浮点类型是 ``float`` 。在当前的实现， ``float`` 是64位。
 
-Float literals can have a *type suffix* to specify a non-default float
-type:
+浮点字面值可以有 *类型前缀* 来指定非默认浮点类型：
 
 .. code-block:: nim
     :test: "nim c $1"
   var
-    x = 0.0      # x is of type ``float``
-    y = 0.0'f32  # y is of type ``float32``
-    z = 0.0'f64  # z is of type ``float64``
+    x = 0.0      # x是 ``float``
+    y = 0.0'f32  # y是 ``float32``
+    z = 0.0'f64  # z是 ``float64``
 
-The common operators ``+ - * /  <  <=  ==  !=  >  >=`` are defined for
-floats and follow the IEEE-754 standard.
+浮点类型支持通用操作符 ``+ - * /  <  <=  ==  !=  >  >=`` 并遵循IEEE-754标准。
 
-Automatic type conversion in expressions with different kinds of floating
-point types is performed: the smaller type is converted to the larger. Integer
-types are **not** converted to floating point types automatically, nor vice
-versa. Use the `toInt <system.html#toInt>`_ and `toFloat <system.html#toFloat>`_
-procs for these conversions.
+自动类型转换在表达式中使用不同类型时执行：短类型转换为长类型。整数类型 **不** 是自动转换为浮点类型，反之亦然。使用 `toInt <system.html#toInt>`_ 和 `toFloat <system.html#toFloat>`_ 过程来转换。
 
 
 类型转换
 ---------------
-Conversion between numerical types is performed by using the
-type as a function:
+数字类型转换通过使用类型来执行：
 
 .. code-block:: nim
     :test: "nim c $1"
   var
-    x: int32 = 1.int32   # same as calling int32(1)
+    x: int32 = 1.int32   # 与调用int32(1)相同
     y: int8  = int8('a') # 'a' == 97'i8
-    z: float = 2.5       # int(2.5) rounds down to 2
+    z: float = 2.5       # int(2.5)向下取整为2
     sum: int = int(x) + int(y) + int(z) # sum == 100
 
 
 内部类型表示
 ============================
 
-As mentioned earlier, the built-in `$ <system.html#$>`_ (stringify) operator
-turns any basic type into a string, which you can then print to the console
-using the ``echo`` proc. However, advanced types, and your own custom types,
-won't work with the ``$`` operator until you define it for them.
-Sometimes you just want to debug the current value of a complex type without
-having to write its ``$`` operator.  You can use then the `repr
-<system.html#repr>`_ proc which works with any type and even complex data
-graphs with cycles. The following example shows that even for basic types
-there is a difference between the ``$`` and ``repr`` outputs:
+之前提到过，内置的 `$ <system.html#$>`_ （字符串化）操作符将基本类型转换成字符串，这样可以用 ``echo`` 过程将内容打印到控制台上。但是高级类型和你自定义的类型，需要定义 ``$`` 操作符才能使用。
+有时你只想在没有写一个高级类型的 ``$`` 操作符时调试当前的值，那么你可以用 `repr <system.html#repr>`_ 过程，它可以用于任何类型甚至复杂的有环数据图。下面的样例展示了  ``$`` and ``repr`` 在即使基本类型输出上也有不同：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -884,24 +850,20 @@ there is a difference between the ``$`` and ``repr`` outputs:
 高级类型
 ==============
 
-In Nim new types can be defined within a ``type`` statement:
+在Nim中新类型可以在 ``type`` 语句里定义：
 
 .. code-block:: nim
     :test: "nim c $1"
   type
-    biggestInt = int64      # biggest integer type that is available
-    biggestFloat = float64  # biggest float type that is available
+    biggestInt = int64      # 可用的最大整数类型
+    biggestFloat = float64  # 可用的最大浮点类型
 
-Enumeration and object types may only be defined within a
-``type`` statement.
+枚举和对象类型只能定义在 ``type`` 语句中。
 
 
 枚举
 ------------
-A variable of an enumeration type can only be assigned one of the enumeration's specified values.
-These values are a set of ordered symbols. Each symbol is mapped
-to an integer value internally. The first symbol is represented
-at runtime by 0, the second by 1 and so on. For example:
+枚举类型的变量只能赋值为枚举指定的值。这些值是有序符号的集合。每个符号映射到内部的一个整数类型。第一个符号用运行时的0表示，第二个用1，以此类推。例如：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -910,53 +872,44 @@ at runtime by 0, the second by 1 and so on. For example:
     Direction = enum
       north, east, south, west
 
-  var x = south     # `x` is of type `Direction`; its value is `south`
-  echo x            # writes "south" to `stdout`
+  var x = south     # `x`是`Direction`; 值是`south`
+  echo x            # 向标准输出写"south"
 
-All the comparison operators can be used with enumeration types.
+所有对比操作符可以用枚举类型。
 
-An enumeration's symbol can be qualified to avoid ambiguities:
-``Direction.south``.
+枚举符号
+枚举的符号可以被限定以避免歧义：``Direction.south``.
 
-The ``$`` operator can convert any enumeration value to its name, and the ``ord``
-proc can convert it to its underlying integer value.
+``$`` 操作符可以将任何枚举值转换为它的名字，``ord`` 过程可以转换为它底层的整数类型。
 
-For better interfacing to other programming languages, the symbols of enum
-types can be assigned an explicit ordinal value. However, the ordinal values
-must be in ascending order.
+为了更好的对接其它编程语言，枚举类型可以赋一个显式的序数值，序数值必须是升序。
 
 
 序数类型
 -------------
-Enumerations, integer types, ``char`` and ``bool`` (and
-subranges) are called ordinal types. Ordinal types have quite
-a few special operations:
+枚举、整型, ``char`` 和 ``bool`` （还有子范围）叫做序数类型。序数类型有一些特殊操作：
 
 -----------------     --------------------------------------------------------
 Operation             Comment
 -----------------     --------------------------------------------------------
-``ord(x)``            returns the integer value that is used to
-                      represent `x`'s value
-``inc(x)``            increments `x` by one
-``inc(x, n)``         increments `x` by `n`; `n` is an integer
-``dec(x)``            decrements `x` by one
-``dec(x, n)``         decrements `x` by `n`; `n` is an integer
-``succ(x)``           returns the successor of `x`
-``succ(x, n)``        returns the `n`'th successor of `x`
-``pred(x)``           returns the predecessor of `x`
-``pred(x, n)``        returns the `n`'th predecessor of `x`
+``ord(x)``            返回表示 `x` 的整数值
+``inc(x)``            `x` 递增1
+``inc(x, n)``         `x` 递增 `n`; `n` 是整数
+``dec(x)``            `x` 递减1
+``dec(x, n)``         `x` 递减 `n`; `n` 是整数
+``succ(x)``           返回 `x` 的下一个值
+``succ(x, n)``        返回 `x` 后的第n个值
+``pred(x)``           返回 `x` 的前一个值
+``pred(x, n)``        返回 `x` 前的第n个值
 -----------------     --------------------------------------------------------
 
-The `inc <system.html#inc>`_, `dec <system.html#dec>`_, `succ
-<system.html#succ>`_ and `pred <system.html#pred>`_ operations can fail by
-raising an `EOutOfRange` or `EOverflow` exception. (If the code has been
-compiled with the proper runtime checks turned on.)
+`inc <system.html#inc>`_, `dec <system.html#dec>`_, `succ <system.html#succ>`_ 和 `pred <system.html#pred>`_ 操作通过抛出 `EOutOfRange` 或 `EOverflow` 异常而失败。
+（如果代码编译时打开了运行时检查。）
 
 
 子范围
 ---------
-A subrange type is a range of values from an integer or enumeration type
-(the base type). Example:
+一个子范围是一个整型或枚举类型值（基本类型）的范围。例如：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -964,53 +917,113 @@ A subrange type is a range of values from an integer or enumeration type
     MySubrange = range[0..5]
 
 
-``MySubrange`` is a subrange of ``int`` which can only hold the values 0
-to 5. Assigning any other value to a variable of type ``MySubrange`` is a
-compile-time or runtime error. Assignments from the base type to one of its
-subrange types (and vice versa) are allowed.
+``MySubrange`` 是只包含0到5的 ``int`` 范围。赋任何其它值给 ``MySubrange`` 类型的变量是编译期或运行时错误。允许给子范围赋值它的基类型，反之亦然。
 
-The ``system`` module defines the important `Natural <system.html#Natural>`_
-type as ``range[0..high(int)]`` (`high <system.html#high>`_ returns the
-maximal value). Other programming languages may suggest the use of unsigned
-integers for natural numbers. This is often **unwise**: you don't want unsigned
-arithmetic (which wraps around) just because the numbers cannot be negative.
-Nim's ``Natural`` type helps to avoid this common programming error.
+``system`` 模块定义了重要的 `Natural <system.html#Natural>`_ 类型 ``range[0..high(int)]`` (`high <system.html#high>`_ 返回最大值）。其它编程语言可能建议使用无符号整数。这通常是 **不明智的** : 
+你不希望因为数字不能是负值而使用无符号算术。Nim的 ``Natural`` 类型帮助避免这个编程错误。
 
 
 集合
 ----
 
-.. include:: sets_fragment.txt
+集合模拟了数学集合的概念。 集合的基类型只能是固定大小的序数类型，它们是:
+
+* ``int8``-``int16``
+* ``uint8``/``byte``-``uint16``
+* ``char``
+* ``enum``
+
+或等价类型。对有符号整数集合的基类型被定义为在 ``0 .. MaxSetElements-1`` 的范围内， 其中 ``MaxSetElements`` 目前是2^16。
+
+原因在于集合实现成高性能位矢量。用大类型声明集合会出现错误：
+
+.. code-block:: nim
+
+  var s: set[int64] # 错误: 集合太大
+
+集合可以通过集合构造器来构造：``{}`` 是空集合。 空集合与其它具体的集合类型兼容。构造器也可以用来包含元素（和元素范围）：
+
+.. code-block:: nim
+  type
+    CharSet = set[char]
+  var
+    x: CharSet
+  x = {'a'..'z', '0'..'9'} # 构造一个包含'a'到'z'和'0'到'9'的集合 
+
+集合支持的操作符：
+
+==================    ========================================================
+操作符                 含义
+==================    ========================================================
+``A + B``             并集
+``A * B``             交集
+``A - B``             差集
+``A == B``            相等
+``A <= B``            子集
+``A < B``             真子集
+``e in A``            元素
+``e notin A``         A不包含元素e
+``contains(A, e)``    包含元素e
+``card(A)``           A的基 (集合A中的元素数量)
+``incl(A, elem)``     同 ``A = A + {elem}``
+``excl(A, elem)``     同 ``A = A - {elem}``
+==================    ========================================================
+
+位字段
+~~~~~~~~~~
+
+集合经常用来定义过程的 *标示* 。这比定义必须或在一起的整数常量清晰并且类型安全。
+
+枚举、集合和强转可以一起用：
+
+.. code-block:: nim
+
+  type
+    MyFlag* {.size: sizeof(cint).} = enum
+      A
+      B
+      C
+      D
+    MyFlags = set[MyFlag]
+
+  proc toNum(f: MyFlags): int = cast[cint](f)
+  proc toFlags(v: int): MyFlags = cast[MyFlags](v)
+
+  assert toNum({}) == 0
+  assert toNum({A}) == 1
+  assert toNum({D}) == 8
+  assert toNum({A, C}) == 5
+  assert toFlags(0) == {}
+  assert toFlags(7) == {A, B, C}
+
+注意集合如何把枚举变成2的指数。
+
+如果和C一起使用枚举和集合，使用distinct cint。
+
+为了和C互通见 `bitsize pragma <#implementation-specific-pragmas-bitsize-pragma>`_ 。
 
 数组
 ------
-An array is a simple fixed length container. Each element in
-an array has the same type. The array's index type can be any ordinal type.
+数组是固定长度的容器。数组中的元素具有相同的类型。数组索引类型可以是任意序数类型。
 
-Arrays can be constructed using ``[]``:
+数组可以用 ``[]`` 来构造：
 
 .. code-block:: nim
     :test: "nim c $1"
 
   type
-    IntArray = array[0..5, int] # an array that is indexed with 0..5
+    IntArray = array[0..5, int] # 0..5索引的数组
   var
     x: IntArray
   x = [1, 2, 3, 4, 5, 6]
   for i in low(x)..high(x):
     echo x[i]
 
-The notation ``x[i]`` is used to access the i-th element of ``x``.
-Array access is always bounds checked (at compile-time or at runtime). These
-checks can be disabled via pragmas or invoking the compiler with the
-``--bound_checks:off`` command line switch.
+``x[i]`` 标记用来访问 ``x`` 的第i个元素。数组访问总是有边界检查的 （编译期或运行时）。这些检查可以通过pragmas或调用编译器的命令行开关 ``--bound_checks:off`` 来关闭。
 
-Arrays are value types, like any other Nim type. The assignment operator
-copies the whole array contents.
+数组是值类型，和任何其它Nim类型一样。赋值操作符拷贝整个数组内容。
 
-The built-in `len <system.html#len,TOpenArray>`_ proc returns the array's
-length. `low(a) <system.html#low>`_ returns the lowest valid index for the
-array `a` and `high(a) <system.html#high>`_ the highest valid index.
+内置 `len <system.html#len,TOpenArray>`_ 过程返回数组长度。`low(a) <system.html#low>`_ 返回数组a的最小索引， `high(a) <system.html#high>`_ 返回最大索引。
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -1030,13 +1043,8 @@ array `a` and `high(a) <system.html#high>`_ the highest valid index.
   echo len(level)   # --> 4
   echo high(level)  # --> west
 
-The syntax for nested arrays (multidimensional) in other languages is a matter
-of appending more brackets because usually each dimension is restricted to the
-same index type as the others. In Nim you can have different dimensions with
-different index types, so the nesting syntax is slightly different. Building on
-the previous example where a level is defined as an array of enums indexed by
-yet another enum, we can add the following lines to add a light tower type
-subdivided in height levels accessed through their integer index:
+嵌套数组的语法，即其它语言中的多维数组，实际上是追加更多中括号因为通常每个维度限制为和其它一样的索引类型。在Nim中你可以在不同的维度有不同索引类型，所以嵌套语法稍有不同。
+基于上面的例子，其中一层定义为枚举的数组被另一个枚举索引，我们可以添加下面的行来添加一个灯塔类型，在高度层分隔通过他们的整数索引访问：
 
 .. code-block:: nim
   type
@@ -1048,27 +1056,23 @@ subdivided in height levels accessed through their integer index:
   echo len(tower)     # --> 10
   echo len(tower[1])  # --> 4
   echo repr(tower)    # --> [[slowBlink, mediumBlink, ...more output..
-  # The following lines don't compile due to type mismatch errors
+  # 下面的行不能编译因为类型不匹配
   #tower[north][east] = on
   #tower[0][1] = on
 
-Note how the built-in ``len`` proc returns only the array's first dimension
-length.  Another way of defining the ``LightTower`` to better illustrate its
-nested nature would be to omit the previous definition of the ``LevelSetting``
-type and instead write it embedded directly as the type of the first dimension:
+注意内置 ``len`` 过程如何只返回数组的第一维长度。另一个定义 ``LightTower`` 的方法来更好的说明它的嵌套本质是忽略上面定义的 ``LevelSetting`` 类型，取而代之是直接将它以第一维类型嵌入。
 
 .. code-block:: nim
   type
     LightTower = array[1..10, array[north..west, BlinkLights]]
 
-It is quite common to have arrays start at zero, so there's a shortcut syntax
-to specify a range from zero to the specified index minus one:
+从零开始对数组很普高，所以有从零到指定索引减1的范围简写语法：
 
 .. code-block:: nim
     :test: "nim c $1"
   type
-    IntArray = array[0..5, int] # an array that is indexed with 0..5
-    QuickArray = array[6, int]  # an array that is indexed with 0..5
+    IntArray = array[0..5, int] # 数组索引 0..5
+    QuickArray = array[6, int]  # 数组索引 0..5
   var
     x: IntArray
     y: QuickArray
@@ -1080,20 +1084,13 @@ to specify a range from zero to the specified index minus one:
 
 序列
 ---------
-Sequences are similar to arrays but of dynamic length which may change
-during runtime (like strings). Since sequences are resizable they are always
-allocated on the heap and garbage collected.
+序列类似数组但是动态长度，可以在运行时改变（像字符串）。因为序列是大小可变的它们总是分配在堆上，被垃圾回收。
 
-Sequences are always indexed with an ``int`` starting at position 0.  The `len
-<system.html#len,seq[T]>`_, `low <system.html#low>`_ and `high
-<system.html#high>`_ operations are available for sequences too.  The notation
-``x[i]`` can be used to access the i-th element of ``x``.
+序列总是以从零开始的 ``int`` 类型索引。`len <system.html#len,seq[T]>`_, `low <system.html#low>`_ 和 `high <system.html#high>`_ 操作符也可用于序列。 ``x[i]`` 标记可以用于访问 ``x`` 的第i个元素。
 
-Sequences can be constructed by the array constructor ``[]`` in conjunction
-with the array to sequence operator ``@``. Another way to allocate space for
-a sequence is to call the built-in `newSeq <system.html#newSeq>`_ procedure.
+序列可以用数组构造器 ``[]`` 数组到序列操作符 ``@`` 构成。另一个为序列分配空间的方法是调用内置 `newSeq <system.html#newSeq>`_ 过程。
 
-A sequence may be passed to an openarray parameter.
+序列可以传递给一个开放数组形参。
 
 Example:
 
@@ -1101,20 +1098,13 @@ Example:
     :test: "nim c $1"
 
   var
-    x: seq[int] # a reference to a sequence of integers
-  x = @[1, 2, 3, 4, 5, 6] # the @ turns the array into a sequence allocated on the heap
+    x: seq[int] # 整数序列引用
+  x = @[1, 2, 3, 4, 5, 6] # @ 把数组转成分配在堆上的序列
 
-Sequence variables are initialized with ``@[]``.
+序列变量用 ``@[]`` 初始化。
 
-The ``for`` statement can be used with one or two variables when used with a
-sequence. When you use the one variable form, the variable will hold the value
-provided by the sequence. The ``for`` statement is looping over the results
-from the `items() <system.html#items.i,seq[T]>`_ iterator from the `system
-<system.html>`_ module.  But if you use the two variable form, the first
-variable will hold the index position and the second variable will hold the
-value. Here the ``for`` statement is looping over the results from the
-`pairs() <system.html#pairs.i,seq[T]>`_ iterator from the `system
-<system.html>`_ module.  Examples:
+``for`` 语句可以用一到两个变量当和序列一起使用。当你使用一个变量的形式，变量持有序列提供的值。``for`` 语句是在 `system <system.html>`_ 模块中的 `items() <system.html#items.i,seq[T]>`_ 迭代器结果上迭代。
+但如果你使用两个变量形式，第一个变量将持有索引位置，第二个变量持有值。这里 ``for`` 语句是在 `system <system.html>`_ 模块中的 `pairs() <system.html#pairs.i,seq[T]>`_ 迭代器结果上迭代。例如：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -1133,43 +1123,34 @@ value. Here the ``for`` statement is looping over the results from the
 
 开放数组
 -----------
-**Note**: Openarrays can only be used for parameters.
+**注意**: 开放数组只用于形参。
 
-Often fixed size arrays turn out to be too inflexible; procedures should be
-able to deal with arrays of different sizes. The `openarray`:idx: type allows
-this. Openarrays are always indexed with an ``int`` starting at position 0.
-The `len <system.html#len,TOpenArray>`_, `low <system.html#low>`_ and `high
-<system.html#high>`_ operations are available for open arrays too.  Any array
-with a compatible base type can be passed to an openarray parameter, the index
-type does not matter.
+固定大小的数组经常被证明是不够灵活的；过程应当能够处理不同大小的数组。 `开放数组`:idx: 类型允许这样。开放数组总是以0开始的 ``int`` 索引。
+`len <system.html#len,TOpenArray>`_, `low <system.html#low>`_ 和 `high <system.html#high>`_ 操作符也可以用于开放数组。任何兼容基类型的数组可以传递给开放数组形参, 与索引类型无关。
 
 .. code-block:: nim
     :test: "nim c $1"
   var
-    fruits:   seq[string]       # reference to a sequence of strings that is initialized with '@[]'
-    capitals: array[3, string]  # array of strings with a fixed size
+    fruits:   seq[string]       # 字符串序列用 '@[]' 初始化
+    capitals: array[3, string]  # 固定大小的字符串数组
 
-  capitals = ["New York", "London", "Berlin"]   # array 'capitals' allows assignment of only three elements
-  fruits.add("Banana")          # sequence 'fruits' is dynamically expandable during runtime
+  capitals = ["New York", "London", "Berlin"]   # 数组 'capitals' 允许只有三个元素的赋值
+  fruits.add("Banana")          # 序列 'fruits' 在运行时动态扩展
   fruits.add("Mango")
 
   proc openArraySize(oa: openArray[string]): int =
     oa.len
 
-  assert openArraySize(fruits) == 2     # procedure accepts a sequence as parameter
-  assert openArraySize(capitals) == 3   # but also an array type
+  assert openArraySize(fruits) == 2     # 过程接受一个序列作为形参
+  assert openArraySize(capitals) == 3   # 也可以是一个数组
 
-The openarray type cannot be nested: multidimensional openarrays are not
-supported because this is seldom needed and cannot be done efficiently.
+开放数组类型无法嵌套：多维开放数组不支持，因为这个需求很少见且不能有效的实现。
 
 
 可变参数
 -------
 
-A ``varargs`` parameter is like an openarray parameter. However, it is
-also a means to implement passing a variable number of
-arguments to a procedure. The compiler converts the list of arguments
-to an array automatically:
+``varargs`` 参数像开放数组形参。 它也表示实现传递数量可变的实参给过程。 编译器将实参列表自动转换为数组：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -1179,12 +1160,10 @@ to an array automatically:
     write(f, "\n")
 
   myWriteln(stdout, "abc", "def", "xyz")
-  # is transformed by the compiler to:
+  # 编译器转为:
   myWriteln(stdout, ["abc", "def", "xyz"])
 
-This transformation is only done if the varargs parameter is the
-last parameter in the procedure header. It is also possible to perform
-type conversions in this context:
+转换只在可变形参是过程头的最后一个形参时完成。它也可以在这个情景执行类型转换：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -1194,21 +1173,17 @@ type conversions in this context:
     write(f, "\n")
 
   myWriteln(stdout, 123, "abc", 4.0)
-  # is transformed by the compiler to:
+  # 编译器转为:
   myWriteln(stdout, [$123, $"abc", $4.0])
 
-In this example `$ <system.html#$>`_ is applied to any argument that is passed
-to the parameter ``a``. Note that `$ <system.html#$>`_ applied to strings is a
-nop.
+在样例中 `$ <system.html#$>`_ 适用于任何传递给形参 ``a`` 的实参。注意 `$ <system.html#$>`_ 适用于空字符串指令。
 
 
 切片
 ------
 
-Slices look similar to subranges types in syntax but are used in a different
-context. A slice is just an object of type Slice which contains two bounds,
-`a` and `b`. By itself a slice is not very useful, but other collection types
-define operators which accept Slice objects to define ranges.
+切片语法看起来像子范围但用于不同的场景。切片只是一个包含两个边界 `a` and `b` 的切片类型对象。
+它自己不是很有用，但是其它收集类型定义接受切片对象来定义范围的操作符。
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -1221,48 +1196,33 @@ define operators which accept Slice objects to define ranges.
   b[11..^2] = "useful"
   echo b # --> 'Slices are useful.'
 
-In the previous example slices are used to modify a part of a string. The
-slice's bounds can hold any value supported by
-their type, but it is the proc using the slice object which defines what values
-are accepted.
+在上面的例子中切片用于修改字符串的一部分。切片边界可以持有任何它们的类型支持的值，但它是使用切片对象的过程，它定义了接受的值。
 
-To understand some of the different ways of specifying the indices of
-strings, arrays, sequences, etc., it must be remembered that Nim uses
-zero-based indices.
+为了理解指定字符串、数组、序列等索引的不同方法， 必须记住Nim使用基于零的索引。
 
-So the string ``b`` is of length 19, and two different ways of specifying the
-indices are
+所以字符串 ``b`` 长度是19, 两个不同的指定索引的方法是
 
 .. code-block:: nim
 
   "Slices are useless."
    |          |     |
-   0         11    17   using indices
-  ^19        ^8    ^2   using ^ syntax
+   0         11    17   使用索引
+  ^19        ^8    ^2   使用^
 
-where ``b[0..^1]`` is equivalent to ``b[0..b.len-1]`` and ``b[0..<b.len]``, and it
-can be seen that the ``^1`` provides a short-hand way of specifying the ``b.len-1``.
+其中 ``b[0..^1]`` 等价于 ``b[0..b.len-1]`` 和 ``b[0..<b.len]``，它可以看作 ``^1`` 提供一个指定 ``b.len-1`` 的简写。
 
-In the above example, because the string ends in a period, to get the portion of the
-string that is "useless" and replace it with "useful".
+在上面的例子中，因为字符串在句号中结束，来获取字符串中"useless"的部分并替换为"useful"。
 
-``b[11..^2]`` is the portion "useless", and ``b[11..^2] = "useful"`` replaces the
-"useless" portion with "useful", giving the result "Slices are useful."
+``b[11..^2]`` 是"useless"的部分， ``b[11..^2] = "useful"`` 用"useful"替换"useless"，得到结果"Slices are useful."
 
-Note: alternate ways of writing this are ``b[^8..^2] = "useful"`` or
-as ``b[11..b.len-2] = "useful"`` or as ``b[11..<b.len-1] = "useful"``.
+注意: 可选方法是 ``b[^8..^2] = "useful"`` 或 ``b[11..b.len-2] = "useful"`` 或 as ``b[11..<b.len-1] = "useful"`` 。
 
 对象
 -------
 
-The default type to pack different values together in a single
-structure with a name is the object type. An object is a value type,
-which means that when an object is assigned to a new variable all its
-components are copied as well.
+在具有名称的单个结构中将不同值打包在一起的默认类型是对象类型。对象是值类型，意味关当对象赋值给一个新变量时所有它的成分也一起拷贝。
 
-Each object type ``Foo`` has a constructor ``Foo(field: value, ...)``
-where all of its fields can be initialized. Unspecified fields will
-get their default value.
+每个对象类型 ``Foo`` 有一个构造函数 ``Foo(field: value, ...)`` 其中它的所有字段可以被初始化。没有指定的字段将获得它们的默认值。
 
 .. code-block:: nim
   type
@@ -1275,7 +1235,7 @@ get their default value.
   echo person1.name # "Peter"
   echo person1.age  # 30
 
-  var person2 = person1 # copy of person 1
+  var person2 = person1 # 复制person 1
 
   person2.age += 14
 
@@ -1283,60 +1243,47 @@ get their default value.
   echo person2.age # 44
 
 
-  # the order may be changed
+  # 顺序可以改变
   let person3 = Person(age: 12, name: "Quentin")
 
-  # not every member needs to be specified
+  # 不需要指定每个成员
   let person4 = Person(age: 3)
-  # unspecified members will be initialized with their default
-  # values. In this case it is the empty string.
+  # 未指定的成员将用默认值初始化。本例中它是一个空字符串。
   doAssert person4.name == ""
 
 
-Object fields that should be visible from outside the defining module have to
-be marked with ``*``.
+在定义的模块外可见的对象字段需要加上 ``*`` 。
 
 .. code-block:: nim
     :test: "nim c $1"
 
   type
-    Person* = object # the type is visible from other modules
-      name*: string  # the field of this type is visible from other modules
+    Person* = object # 其它模块可见
+      name*: string  # 这个类型的字段在其它模块可见
       age*: int
 
 元组
 ------
 
-Tuples are very much like what you have seen so far from objects. They
-are value types where the assignment operator copies each component.
-Unlike object types though, tuple types are structurally typed,
-meaning different tuple-types are *equivalent* if they specify fields of
-the same type and of the same name in the same order.
+元组和你目前见到的对象很像。它们是赋值时拷贝每个成分的值类型。与对象类型不同的是，元组类型是结构化类型，这意味着不同的元组类型是*等价的*如果它们以相同的顺序指定相同类型和相同名称的字段。
 
-The constructor ``()`` can be used to construct tuples. The order of the
-fields in the constructor must match the order in the tuple's
-definition. But unlike objects, a name for the tuple type may not be
-used here.
+构造函数 ``()`` 可以用来构造元组。构造函数中字段的顺序必须与元组定义中的顺序匹配。但与对象不同，此处可能不使用元组类型的名称。
 
-
-Like the object type the notation ``t.field`` is used to access a
-tuple's field. Another notation that is not available for objects is
-``t[i]`` to access the ``i``'th field. Here ``i`` must be a constant
-integer.
+如对象类型， ``t.field`` 用来访问一个元组的字段。 另一个对象不可用的标记法是 ``t[i]`` 访问第 ``i``' 个字段。这里 ``i`` 必须是一个常整数。
 
 .. code-block:: nim
     :test: "nim c $1"
   type
-    # type representing a person:
-    # A person consists of a name and an age.
+    # 类型表示一个人:
+    # 一个人有名字和年龄。
     Person = tuple
       name: string
       age: int
 
-    # Alternative syntax for an equivalent type.
+    # 等价类型的语法。
     PersonX = tuple[name: string, age: int]
 
-    # anonymous field syntax
+    # 匿名字段语法
     PersonY = (string, int)
 
   var
@@ -1345,18 +1292,17 @@ integer.
     personY: PersonY
 
   person = (name: "Peter", age: 30)
-  # Person and PersonX are equivalent
+  # Person和PersonX等价
   personX = person
 
-  # Create a tuple with anonymous fields:
+  # 用匿名字段创建一个元组：
   personY = ("Peter", 30)
 
-  # A tuple with anonymous fields is compatible with a tuple that has
-  # field names.
+  # 有匿名字段元组兼容有字段名元组。
   person = personY
   personY = person
 
-  # Usually used for short tuple initialization syntax
+  # 通常用于短元组初始化语法
   person = ("Peter", 30)
 
   echo person.name # "Peter"
@@ -1365,28 +1311,20 @@ integer.
   echo person[0] # "Peter"
   echo person[1] # 30
 
-  # You don't need to declare tuples in a separate type section.
+  # 你不需要在一个独立类型段中声明元组。
   var building: tuple[street: string, number: int]
   building = ("Rue del Percebe", 13)
   echo building.street
 
-  # The following line does not compile, they are different tuples!
+  # 下面的行不能编译，它们是不同的元组。
   #person = building
   # --> Error: type mismatch: got (tuple[street: string, number: int])
   #     but expected 'Person'
 
-Even though you don't need to declare a type for a tuple to use it, tuples
-created with different field names will be considered different objects despite
-having the same field types.
+即使你不需要为元组声明类型就可以使用，不同字段名创建的元组将认为是不同的对象，尽管有相同的字段类型。
 
-Tuples can be *unpacked* during variable assignment (and only then!). This can
-be handy to assign directly the fields of the tuples to individually named
-variables. An example of this is the `splitFile <os.html#splitFile>`_ proc
-from the `os module <os.html>`_ which returns the directory, name and
-extension of a path at the same time. For tuple unpacking to work you must
-use parentheses around the values you want to assign the unpacking to,
-otherwise you will be assigning the same value to all the individual
-variables! For example:
+元组只有在变量赋值期间可以 *解包* 。 这方便将元组字段直接一个个赋值给命名变量。一个例子是 `os module <os.html>`_模块中的 `splitFile <os.html#splitFile>`_ 过程，
+它同时返回一个路径的目录、名称和扩展名。元组解包必须使用小括号括住你想赋值的解包变量，否则你将为每个变量赋同样的值！例如：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -1397,38 +1335,27 @@ variables! For example:
     path = "usr/local/nimc.html"
     (dir, name, ext) = splitFile(path)
     baddir, badname, badext = splitFile(path)
-  echo dir      # outputs `usr/local`
-  echo name     # outputs `nimc`
-  echo ext      # outputs `.html`
-  # All the following output the same line:
+  echo dir      # 输出 `usr/local`
+  echo name     # 输出 `nimc`
+  echo ext      # 输出 `.html`
+  # 下面输出同样的行:
   # `(dir: usr/local, name: nimc, ext: .html)`
   echo baddir
   echo badname
   echo badext
 
-Fields of tuples are always public, they don't need to be explicity
-marked to be exported, unlike for example fields in an object type.
+元组字段总是公有的，你不必像对象类型字段显式的标记来导出。
 
 引用和指针类型
 ---------------------------
-References (similar to pointers in other programming languages) are a
-way to introduce many-to-one relationships. This means different references can
-point to and modify the same location in memory.
+引用（类似其它编程语言中的指针）是引入多对一关系的方式。这表示不同的引用可以指向和修改相同的内存位置。
 
-Nim distinguishes between `traced`:idx: and `untraced`:idx: references.
-Untraced references are also called *pointers*. Traced references point to
-objects in a garbage collected heap, untraced references point to
-manually allocated objects or to objects elsewhere in memory. Thus
-untraced references are *unsafe*. However for certain low-level operations
-(e.g., accessing the hardware), untraced references are necessary.
+Nim区分 `被追踪`:idx: 和 `未追踪`:idx: 引用。未追踪引用也被称为 *指针* 。追踪的引用指向垃圾回收堆里的对象，未追踪引用指向手动分配对象或内存中其它地方的对象。因此未追踪引用是 *不安全的* 。
+为了某些低级的操作（例如，访问硬件），未追踪的引用是必须的。
 
-Traced references are declared with the **ref** keyword; untraced references
-are declared with the **ptr** keyword.
+追踪的引用用 **ref** 关键字声明；未追踪引用用 **ptr** 关键字声明。
 
-The empty ``[]`` subscript notation can be used to *derefer* a reference,
-meaning to retrieve the item the reference points to. The ``.`` (access a
-tuple/object field operator) and ``[]`` (array/string/sequence index operator)
-operators perform implicit dereferencing operations for reference types:
+空 ``[]`` 下标标记可以用来 *解引用* 一个引用，表示获取引用指向的内容。 ``.`` （访问一个元组/对象字段操作符）和 ``[]`` (数组/字符串/序列索引操作符）操作符为引用类型执行隐式解引用操作：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -1441,22 +1368,16 @@ operators perform implicit dereferencing operations for reference types:
     n: Node
   new(n)
   n.data = 9
-  # no need to write n[].data; in fact n[].data is highly discouraged!
+  # 不必写n[].data; 实际上 n[].data是很不提倡的!
 
-To allocate a new traced object, the built-in procedure ``new`` must be used.
-To deal with untraced memory, the procedures ``alloc``, ``dealloc`` and
-``realloc`` can be used. The `system <system.html>`_
-module's documentation contains further details.
+为了分配一个新追踪的对象，必须使用内置过程 ``new` 。为了处理未追踪内存， 可以用``alloc``, ``dealloc`` 和 ``realloc`` 。 `system <system.html>`_ 模块文档包含更多细节。
 
-If a reference points to *nothing*, it has the value ``nil``.
+如果一个引用指向 *nothing*, 它的值是 ``nil`` 。
 
 
 过程类型
 ---------------
-A procedural type is a (somewhat abstract) pointer to a procedure.
-``nil`` is an allowed value for a variable of a procedural type.
-Nim uses procedural types to achieve `functional`:idx: programming
-techniques.
+过程类型是指向过程的指针。 ``nil`` 是过程类型变量允许的值。Nim使用过程类型达到 `函数式`:idx: 编程技术。
 
 Example:
 
@@ -1472,27 +1393,18 @@ Example:
 
   forEach(echoItem)
 
-A subtle issue with procedural types is that the calling convention of the
-procedure influences the type compatibility: procedural types are only compatible
-if they have the same calling convention. The different calling conventions are
-listed in the `manual <manual.html#types-procedural-type>`_.
+过程类型的一个小问题是调用规约影响类型兼容性：过程类型只兼容如果他们有相同的调用规约。不同的调用规约列在 `manual <manual.html#types-procedural-type>`_ 。
 
 Distinct类型
 -------------
-A Distinct type allows for the creation of new type that "does not imply a
-subtype relationship between it and its base type".
-You must **explicitly** define all behaviour for the distinct type.
-To help with this, both the distinct type and its base type can cast from one
-type to the other.
-Examples are provided in the `manual <manual.html#types-distinct-type>`_.
+一个Distinct类型允许用于创建“不暗示它与其基本类型之间的子类型关系”的新类型。你必须 **显式** 定义distinct类型的所有行为。
+为了帮助这点，distinct类型和它的基类型可以相互强转。
+样例提供在 `manual <manual.html#types-distinct-type>`_ 。
 
 模块
 =======
-Nim supports splitting a program into pieces with a module concept.
-Each module is in its own file. Modules enable `information hiding`:idx: and
-`separate compilation`:idx:. A module may gain access to the symbols of another
-module by using the `import`:idx: statement. Only top-level symbols that are marked
-with an asterisk (``*``) are exported:
+Nim支持用模块的概念把一个程序拆分成片段。每个模块在它自己的文件里。模块实现了 `信息隐藏`:idx: 和 `编译隔离`:idx: 。一个模块可以通过`import`:idx: 语句访问另一个模块符号。
+只有标记了星号(``*``)的顶级符号被导出：
 
 .. code-block:: nim
   # Module A
@@ -1500,28 +1412,22 @@ with an asterisk (``*``) are exported:
     x*, y: int
 
   proc `*` *(a, b: seq[int]): seq[int] =
-    # allocate a new sequence:
+    # 分配新序列：
     newSeq(result, len(a))
-    # multiply two int sequences:
+    # 两个序列相乘：
     for i in 0..len(a)-1: result[i] = a[i] * b[i]
 
   when isMainModule:
-    # test the new ``*`` operator for sequences:
+    # 测试序列乘 ``*`` :
     assert(@[1, 2, 3] * @[1, 2, 3] == @[1, 4, 9])
 
-The above module exports ``x`` and ``*``, but not ``y``.
+上面的模块导出 ``x`` 和 ``*``, 但没有 ``y`` 。
 
-A module's top-level statements are executed at the start of the program.
-This can be used to initialize complex data structures for example.
+一个模块的顶级语句在程序开始时执行，比如这可以用来初始化复杂数据结构。
 
-Each module has a special magic constant ``isMainModule`` that is true if the
-module is compiled as the main file. This is very useful to embed tests within
-the module as shown by the above example.
+每个模块有特殊的魔法常量 ``isMainModule`` 在作为主文件编译时为真。 如上面所示，这对模块内的嵌入测试非常有用。
 
-A symbol of a module *can* be *qualified* with the ``module.symbol`` syntax. And if
-a symbol is ambiguous, it *must* be qualified. A symbol is ambiguous
-if it is defined in two (or more) different modules and both modules are
-imported by a third one:
+一个模块的符号 *可以* 用 ``module.symbol`` 语法 *限定* 。如果一个符号有歧义，它 *必须* 被限定。一个符号有歧义如果定义在两个或多个不同的模块并且被第三个模块导入：
 
 .. code-block:: nim
   # Module A
@@ -1534,15 +1440,14 @@ imported by a third one:
 .. code-block:: nim
   # Module C
   import A, B
-  write(stdout, x) # error: x is ambiguous
-  write(stdout, A.x) # okay: qualifier used
+  write(stdout, x) # error: x 有歧义
+  write(stdout, A.x) # okay: 用了限定
 
   var x = 4
-  write(stdout, x) # not ambiguous: uses the module C's x
+  write(stdout, x) # 没有歧义: 使用模块C的x
 
 
-But this rule does not apply to procedures or iterators. Here the overloading
-rules apply:
+但这个规则不适用于过程或迭代器。重载规则适用于:
 
 .. code-block:: nim
   # Module A
@@ -1559,15 +1464,13 @@ rules apply:
   write(stdout, x(""))  # no error: B.x is called
 
   proc x*(a: int): string = discard
-  write(stdout, x(3))   # ambiguous: which `x` is to call?
+  write(stdout, x(3))   # 歧义: 调用哪个 `x` ?
 
 
 排除符号
 -----------------
 
-The normal ``import`` statement will bring in all exported symbols.
-These can be limited by naming symbols which should be excluded with
-the ``except`` qualifier.
+普通的 ``import`` 语句将带来所有导出的符号。这可以用 ``except`` 标识符点名限制哪个符号应当被排除。
 
 .. code-block:: nim
   import mymodule except y
@@ -1576,43 +1479,36 @@ the ``except`` qualifier.
 From语句
 --------------
 
-We have already seen the simple ``import`` statement that just imports all
-exported symbols. An alternative that only imports listed symbols is the
-``from import`` statement:
+我们已经看到简单的 ``import`` 语句导入所有导出的符号。一个只导入列出来的符号的可选方法是使用 ``from import`` 语句：
 
 .. code-block:: nim
   from mymodule import x, y, z
 
-The ``from`` statement can also force namespace qualification on
-symbols, thereby making symbols available, but needing to be qualified
-to be used.
+``from`` 语句也可以强制限定符号的命名空间，因此可以使符号可用，但需要限定。
 
 .. code-block:: nim
   from mymodule import x, y, z
 
-  x()           # use x without any qualification
+  x()           # 没有任何限定使用x
 
 .. code-block:: nim
   from mymodule import nil
 
-  mymodule.x()  # must qualify x with the module name as prefix
+  mymodule.x()  # 必须用模块名前缀限定x
 
-  x()           # using x here without qualification is a compile error
+  x()           # 没有限定使用x是编译错误
 
-Since module names are generally long to be descriptive, you can also
-define a shorter alias to use when qualifying symbols.
+l因为模块普遍比较长方便描述，你也可以在限定符号时使用短的别名。
 
 .. code-block:: nim
   from mymodule as m import nil
 
-  m.x()         # m is aliasing mymodule
+  m.x()         # m是mymodule别名
 
 
 Include语句
 -----------------
-The ``include`` statement does something fundamentally different than
-importing a module: it merely includes the contents of a file. The ``include``
-statement is useful to split up a large module into several files:
+``include`` 语句和导入一个模块做不同的基础工作：它只包含一个文件的内容。 ``include`` 语句在把一个大模块拆分为几个文件时有用：
 
 .. code-block:: nim
   include fileA, fileB, fileC
@@ -1622,8 +1518,7 @@ statement is useful to split up a large module into several files:
 Part 2
 ======
 
-So, now that we are done with the basics, let's see what Nim offers apart
-from a nice syntax for procedural programming: `Part II <tut2.html>`_
+那么, 既然我们完成了基本的，让我们看看Nim除了为过程编程提供漂亮的语法外还有哪些： `Part II <tut2.html>`_
 
 
 .. _strutils: strutils.html
