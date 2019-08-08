@@ -36,7 +36,7 @@ navigation:
   - title: 文档
     url: /documentation.html
   - title: 论坛
-    url: https://forum.nim-lang.org
+    url: https://forum.nim-lang-cn.org
   - title: 捐赠
     url: /donate.html
 
