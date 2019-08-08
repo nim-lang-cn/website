@@ -7,16 +7,15 @@ Nim Tutorial (Part I)
 
 .. contents::
 
-Introduction
+引言
 ============
 
 .. raw:: html
   <blockquote><p>
-  "Der Mensch ist doch ein Augentier -- sch&ouml;ne Dinge w&uuml;nsch ich mir."
+  "人是一种眼睛动物 -- 我希望好的东西。"
   </p></blockquote>
 
-本文是编程语言Nim的教程。该教程认为你熟悉基本的编程概念如变量、类型和语句但非常基础。`manual
-<manual.html>`_ 包含更多的高级特性样例。本教程的代码样例和其它的Nim文档遵守`Nim style guide <nep1.html>`_。
+本文是编程语言Nim的教程。该教程认为你熟悉基本的编程概念如变量、类型和语句但非常基础。 `manual <manual.html>`_  包含更多的高级特性样例。本教程的代码样例和其它的Nim文档遵守 `Nim style guide <nep1.html>`_ 。
 
 
 第一个程序
@@ -34,7 +33,7 @@ Introduction
 
   nim compile --run greetings.nim
 
-用``--run`` `switch <nimc.html#compiler-usage-command-line-switches>`_ Nim在编译之后自动执行文件。你可以在文件名后给程序追加命令行参数
+用 ``--run`` `switch <nimc.html#compiler-usage-command-line-switches>`_ Nim在编译之后自动执行文件。你可以在文件名后给程序追加命令行参数
   nim compile --run greetings.nim arg1 arg2
 
 经常使用的命令和开关有缩写，所以你可以用::
@@ -45,20 +44,20 @@ Introduction
 
   nim c -d:release greetings.nim
 
-Nim编译器默认生成大量运行时检查，旨在方便调试。用``-d:release`` 一些检查被`关闭并且打开了优化<nimc.html#compiler-usage-compile-time-symbols>`_。
+Nim编译器默认生成大量运行时检查，旨在方便调试。用 ``-d:release`` 一些检查被 `关闭并且打开了优化<nimc.html#compiler-usage-compile-time-symbols>`_ 。
 
 尽管程序的作用很明显，但我会解释下语法：没有缩进的语句会在程序开始时执行。缩进是Nim语句进行分组的方式。缩进仅允许空格，不允许制表符。
 
-字符串字面值用双引号括起来。``var``语句声明一个新的名为``name``，类型为``string``，值为`readLine <system.html#readLine,File>`_方法返回值的变量名。
-因为编译器知道`readLine <system.html#readLine,File>`_返回一个字符串，你可以省略声明中的类型(这叫作 `local type inference`:idx: )。所以这样也可以：
+字符串字面值用双引号括起来。 ``var`` 语句声明一个新的名为 ``name`` ，类型为 ``string`` ，值为 `readLine <system.html#readLine,File>`_ 方法返回值的变量名。
+因为编译器知道 `readLine <system.html#readLine,File>`_ 返回一个字符串，你可以省略声明中的类型(这叫作 `local type inference`:idx: )。所以这样也可以：
 
 .. code-block:: Nim
     :test: "nim c $1"
   var name = readLine(stdin)
 
-请注意，这基本上是Nim中存在的唯一类型推导形式：它是简洁性和可读性之间的良好折衷。
+请注意，这基本上是Nim中存在的唯一类型推导形式：它是简洁性和可读性之间的折衷。
 
-"hello world"程序包括一些编译器已知的标识符：``echo``，`readLine <system.html#readLine,File>`_等。这些内置声名在 system_ 模块中，它通过其它模块隐式的导出。
+"hello world"程序包括一些编译器已知的标识符：``echo`` ， `readLine <system.html#readLine,File>`_ 等。这些内置声名在 system_ 模块中，它通过其它模块隐式的导出。
 
 词法元素
 ================
@@ -69,20 +68,20 @@ Nim编译器默认生成大量运行时检查，旨在方便调试。用``-d:rel
 字符串和字符字面值
 -----------------------------
 
-字符串字面值通过双引号括起来；字符字面值用单引号。特殊字符通过``\``转义: ``\n``表示换行，``\t``表示制表符等，还有*原始*字符串字面值：
+字符串字面值通过双引号括起来；字符字面值用单引号。特殊字符通过 ``\`` 转义: ``\n`` 表示换行， ``\t`` 表示制表符等，还有 *原始* 字符串字面值：
 
 .. code-block:: Nim
   r"C:\program files\nim"
 
 在原始字面值中反斜杠不是转义字符。
 
-第三种也是最后一种写字符串字面值的方法是*长字符串字面值*。用三引号``"""..."""``写，他们可以跨行并且``\``也不是转义字符。例如它们对嵌入HTML代码模板非常有用。
+第三种也是最后一种写字符串字面值的方法是 *长字符串字面值* 。用三引号 ``"""..."""`` 写，他们可以跨行并且 ``\`` 也不是转义字符。例如它们对嵌入HTML代码模板非常有用。
 
 
 注释
 --------
 
-注释在任何字符串或字符字面值之外，以哈希字符``#``开始，文档以``##``开始：
+注释在任何字符串或字符字面值之外，以哈希字符 ``#`` 开始，文档以 ``##`` 开始：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -93,7 +92,7 @@ Nim编译器默认生成大量运行时检查，旨在方便调试。用``-d:rel
 
 文档注释是令牌；它们只允许在输入文件中的某些位置，因为它们属于语法树！此功能可实现更简单的文档生成器。
 
-多行注释以``#[``开始，以``]#``结束。多行注释也可以嵌套。
+多行注释以 ``#[`` 开始，以 ``]#`` 结束。多行注释也可以嵌套。
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -106,7 +105,7 @@ Nim编译器默认生成大量运行时检查，旨在方便调试。用``-d:rel
     ]#
   ]#
 
-你也可以和*长字符串字面值*一起使用`discard statement <#procedures-discard-statement>`_ 来构建块注释。
+你也可以和 *长字符串字面值* 一起使用 `discard statement <#procedures-discard-statement>`_ 来构建块注释。
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -118,8 +117,8 @@ Nim编译器默认生成大量运行时检查，旨在方便调试。用``-d:rel
 数字
 -------
 
-数字字面值与其它大多数语言一样。作为一个特别的地方，为了更好的可读性，允许使用下划线：``1_000_000`` (一百万)。
-包含点（或者'e'或'E'）的数字是浮点字面值：``1.0e9`` （十亿）。十六进制字面值前缀是``0x``，二进制字面值用``0b``，八进制用``0o``。
+数字字面值与其它大多数语言一样。作为一个特别的地方，为了更好的可读性，允许使用下划线： ``1_000_000`` (一百万)。
+包含点（或者'e'或'E'）的数字是浮点字面值： ``1.0e9`` （十亿）。十六进制字面值前缀是 ``0x`` ，二进制字面值用 ``0b`` ，八进制用 ``0o`` 。
 单独一个前导零不产生八进制。
 
 
@@ -128,9 +127,9 @@ var语句
 var语句声明一个本地或全局变量:
 
 .. code-block::
-  var x, y: int # 声明x和y拥有类型``int``
+  var x, y: int # 声明x和y拥有类型 ``int`` 
 
-缩进可以用在``var``关键字后来列一个变量段。
+缩进可以用在 ``var`` 关键字后来列一个变量段。
 
 .. code-block::
     :test: "nim c $1"
@@ -143,13 +142,13 @@ var语句声明一个本地或全局变量:
 赋值语句
 ========================
 
-赋值语句为一个变量赋予新值或者更一般地，赋值到一个存储地址。
+赋值语句为一个变量赋予新值或者更一般地，赋值到一个存储地址：
 
 .. code-block::
   var x = "abc" # 引入一个新变量`x`并且赋值给它
-  x = "xyz"     # 赋新值给`x`
+  x = "xyz"     # 赋新值给 `x`
 
-``=``是*赋值操作符*. 赋值操作符可以重载。你可以用一个赋值语句声明多个变量并且所有的变量具有相同的类型：
+``=`` 是 *赋值操作符* 。赋值操作符可以重载。你可以用一个赋值语句声明多个变量并且所有的变量具有相同的类型：
 
 .. code-block::
     :test: "nim c $1"
@@ -160,13 +159,7 @@ var语句声明一个本地或全局变量:
   echo "x ", x  # 输出"x 42"
   echo "y ", y  # 输出"y 3"
 
-注意用一个赋值声明多个变量调用方法可能有不可预见的结果：编译器将*展开*赋值并多次调用方法。如果方法的结果取决于副作用，你的变量可以有不同的值！为了安全起见，多赋值时使用没有副作用的方法。
-Note that declaring multiple variables with a single assignment which calls a
-procedure can have unexpected results: the compiler will *unroll* the
-assignments and end up calling the procedure several times. If the result of
-the procedure depends on side effects, your variables may end up having
-different values! For safety use side-effect free procedures if making multiple
-assignments.
+注意用一个赋值声明多个变量调用方法可能有不可预见的结果：编译器将 *展开* 赋值并多次调用方法。如果方法的结果取决于副作用，你的变量可以有不同的值！为了安全起见，多赋值时使用没有副作用的方法。
 
 
 常量
@@ -178,7 +171,7 @@ assignments.
     :test: "nim c $1"
   const x = "abc" # 常量x包含字符串"abc"
 
-缩进可以用在``const``关键字后来列一个常量段:
+缩进可以用在 ``const`` 关键字后来列一个常量段:
 
 .. code-block::
     :test: "nim c $1"
@@ -191,13 +184,13 @@ assignments.
 
 let语句
 =================
-``let``语句像``var``语句一样但声明的符号是*一次性赋值*变量：初始化后它们的值将不能改变。
+``let`` 语句像 ``var`` 语句一样但声明的符号是 *一次性赋值* 变量：初始化后它们的值将不能改变。
 
 .. code-block::
   let x = "abc" # 引入一个新变量`x`并绑定一个值
   x = "xyz"     # 非法: 给`x`赋值
 
-``let``和``const``的区别在于: ``let``引入一个变量不能重新赋值。 ``const``表示"强制编译期求值并放入一个数据段":
+``let`` 和 ``const`` 的区别在于: ``let`` 引入一个变量不能重新赋值。 ``const`` 表示"强制编译期求值并放入一个数据段":
 
 .. code-block::
   const input = readLine(stdin) # 错误: 需要常量表达式
@@ -228,7 +221,7 @@ if语句是使控制流分叉的一种方法:
   else:
     echo "Hi, ", name, "!"
 
-可以有零个或多个``elif``，并且``else``是可选的，``elif``关键字是``else if``的简写，并且避免过度缩进。（``""``是空字符串。它不包含字符。）
+可以有零个或多个 ``elif`` ，并且 ``else`` 是可选的，``elif`` 关键字是 ``else if`` 的简写，并且避免过度缩进。（ ``""`` 是空字符串。它不包含字符。）
 
 
 Case语句
@@ -249,7 +242,7 @@ Case语句
   else:
     echo "Hi, ", name, "!"
 
-可以看到，对一个``of``分支，逗号分隔的多个值也是允许的。
+可以看到，对一个 ``of`` 分支，逗号分隔的多个值也是允许的。
 
 case语句可以处理整型、其它序数类型和字符串。（序数类型后面会讲到）
 对整型或序数类型值，范围也是可能的：
@@ -264,7 +257,7 @@ case语句可以处理整型、其它序数类型和字符串。（序数类型�
   of 0..2, 4..7: echo "The number is in the set: {0, 1, 2, 4, 5, 6, 7}"
   of 3, 8: echo "The number is 3 or 8"
 
-上面的代码不能编译: 原因是你必须覆盖每个``n``可能包含的值，但代码里只处理了``0..8``。因为列出来每个可能的值不现实(尽管范围表示法可以实现), 我们通过告诉编译器不处理其它值来修复它:
+上面的代码不能编译: 原因是你必须覆盖每个 ``n`` 可能包含的值，但代码里只处理了 ``0..8`` 。因为列出来每个可能的值不现实（尽管范围标记可以实现），我们通过告诉编译器不处理其它值来修复：
 
 .. code-block:: nim
   ...
@@ -273,7 +266,7 @@ case语句可以处理整型、其它序数类型和字符串。（序数类型�
   of 3, 8: echo "The number is 3 or 8"
   else: discard
 
-空`discard statement`_ 是一个 *什么都不做* 的语句. 编译器知道有else的case语句不会出错因此错误消失了。注意，不可能覆盖所有可能的字符串值：所以字符串的情况总要一个``else``分支。
+空 `discard statement`_ 是一个 *什么都不做* 的语句. 编译器知道有else的case语句不会出错因此错误消失了。注意，不可能覆盖所有可能的字符串值：所以字符串的情况总要一个 ``else`` 分支。
 
 
 
@@ -293,7 +286,7 @@ while语句是一个简单的循环结构:
   while name == "":
     echo "Please tell me your name: "
     name = readLine(stdin)
-    # no ``var``, because we do not declare a new variable here
+    # 没有 ``var`` ， 因为我们没有声明一个新变量
 
 样例使用while循环来不断的询问用户的名字，只要用户什么都没有输入（只按回车）。
 
@@ -301,7 +294,7 @@ while语句是一个简单的循环结构:
 For语句
 -------------
 
-``for``语句是一个在提供*迭代器*的元素上循环的结构。样例使用内置的 `countup <system.html#countup>`_ 迭代器:
+``for`` 语句是一个在提供 *迭代器* 的元素上循环的结构。样例使用内置的 `countup <system.html#countup>`_ 迭代器:
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -310,7 +303,7 @@ For语句
     echo i
   # --> Outputs 1 2 3 4 5 6 7 8 9 10 on different lines
 
-变量``i``通过``for``循环隐式的声明并具有 ``int``类型, 因为这里 `countup <system.html#countup>`_ 返回的. ``i`` 遍历 1, 2, .., 10。每个值被 ``echo``。 这段代码作用是一样的:
+变量 ``i`` 通过 ``for`` 循环隐式的声明并具有 ``int`` 类型, 因为这里 `countup <system.html#countup>`_ 返回的。 ``i`` 遍历 1, 2, .., 10，每个值被 ``echo`` 。 这段代码作用是一样的:
 
 .. code-block:: nim
   echo "Counting to 10: "
@@ -329,13 +322,13 @@ For语句
     echo i
   # --> Outputs 10 9 8 7 6 5 4 3 2 1 on different lines
 
-因为计数在程序中经常出现，Nim有一个`..<system.html#...i,S,T>`_ 迭代器是一样的作用
+因为计数在程序中经常出现，Nim有一个 `..<system.html#...i,S,T>`_ 迭代器是一样的作用
 
 .. code-block:: nim
   for i in 1..10:
     ...
 
-零索引计数有两个简写``..<``和``..^``，为了简化计数到更高索引的前一位。
+零索引计数有两个简写 ``..<`` 和 ``..^`` ，为了简化计数到更高索引的前一位。
 
 .. code-block:: nim
   for i in 0..<10:
@@ -348,7 +341,9 @@ or
   for i in 0..<s.len:
     ...
 
-其它有用的迭代器（如数组和序列）是* ``items``和``mitems``,提供不可改变和可改变元素，* ``pairs``和``mpairs``提供元素和索引数字。
+其它有用的迭代器（如数组和序列）是
+* ``items`` 和 ``mitems`` ，提供不可改变和可改变元素，
+* ``pairs`` 和 ``mpairs`` 提供元素和索引数字。
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -359,7 +354,7 @@ or
 
 作用域和块语句
 ------------------------------
-控制流语句有一个还没有讲的特性: 它们有自己的作用域。这意味着在下面的样例中, ``x``在作用域外是不可访问的:
+控制流语句有一个还没有讲的特性: 它们有自己的作用域。这意味着在下面的样例中, ``x`` 在作用域外是不可访问的:
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -368,7 +363,7 @@ or
     var x = "hi"
   echo x # 不行
 
-一个while(for)语句引入一个隐式块。标识符是只在它们声明的块内部可见。``block``语句可以用来显式地打开一个新块：
+一个while(for)语句引入一个隐式块。标识符是只在它们声明的块内部可见。``block`` 语句可以用来显式地打开一个新块：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -377,12 +372,12 @@ or
     var x = "hi"
   echo x # 不行
 
-块的 *label* (本例中的``myblock`` ) 是可选的。
+块的 *label* (本例中的 ``myblock`` ) 是可选的。
 
 
 Break语句
 ---------------
-块可以用一个``break``语句离开。break语句可以离开一个``while``, ``for``, 或``block``语句. 它离开最内层的结构, 除非给定一个块标签:
+块可以用一个 ``break`` 语句离开。break语句可以离开一个 ``while``, ``for``, 或 ``block`` 语句. 它离开最内层的结构, 除非给定一个块标签:
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -403,7 +398,7 @@ Break语句
 
 Continue语句
 ------------------
-像其它编程语言一样，``continue``语句立刻开始下一次迭代:
+像其它编程语言一样，``continue`` 语句立刻开始下一次迭代:
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -430,13 +425,13 @@ Example:
   else:
     echo "unknown operating system"
 
-``when``语句几乎等价于``if``语句, 但有以下区别:
+``when`` 语句几乎等价于 ``if`` 语句, 但有以下区别:
 
 * 每个条件必须是常量表达式，因为它被编译器求值。
 * 分支内的语句不打开新作用域。
 * 编译器检查语义并*仅*为属于第一个求值为true的条件生成代码。
 
-``when``语句在写平台特定代码时有用，类似于C语言中的``#ifdef``结构。
+``when`` 语句在写平台特定代码时有用，类似于C语言中的``#ifdef``结构。
 
 
 语句和缩进
@@ -444,7 +439,7 @@ Example:
 
 既然我们覆盖了基本的控制流语句, 让我们回到Nim缩进规则。
 
-在Nim中*简单语句*和*复杂语句*有区别。*简单语句*不能包含其它语句：属于简单语句的赋值, 过程调用或``return``语句。 *复杂语句*像``if``、``when``、``for``、``while``可以包含其它语句。
+在Nim中 *简单语句* 和 *复杂语句* 有区别。*简单语句* 不能包含其它语句：属于简单语句的赋值, 过程调用或 ``return`` 语句。 *复杂语句* 像 ``if`` 、``when`` 、``for`` 、``while`` 可以包含其它语句。
 为了避免歧义，复杂语句必须缩进, 但单个简单语句不必:
 
 .. code-block:: nim
@@ -464,7 +459,7 @@ Example:
     y = false
 
 
-*表达式*是语句通常有一个值的部分。 例如，一个if语句中的条件是表达式。表达式为了更好的可读性可以在某些地方缩进：
+*表达式* 是语句通常有一个值的部分。 例如，一个if语句中的条件是表达式。表达式为了更好的可读性可以在某些地方缩进：
 
 .. code-block:: nim
 
@@ -486,7 +481,7 @@ Example:
 过程
 ==========
 
-为了在样例中定义如 `echo <system.html#echo>`_ 和 `readLine <system.html#readLine,File>`_ 的新命令, 需要`procedure`的概念。(一些语言叫*方法*或*函数*。) 在Nim中新的过程用``proc``关键字定义:
+为了在样例中定义如 `echo <system.html#echo>`_ 和 `readLine <system.html#readLine,File>`_ 的新命令, 需要 `procedure` 的概念。(一些语言叫 *方法* 或 *函数* 。) 在Nim中新的过程用 ``proc`` 关键字定义:
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -503,17 +498,14 @@ Example:
   else:
     echo "I think you know what the problem is just as well as I do."
 
-这个样例展示了一个名叫``yes``的过程，它问用户一个``question``并返回true如果他们回答"yes"（或类似的回答），返回false当他们回答"no"（或类似的回答）。一个``return``语句立即离开过程。
-``(question: string): bool``语法描述过程需要一个名为``question``，类型为``string``的变量，并且返回一个``bool``值。``bool``类型是内置的：合法的值只有``true``和``false``。
-if或while语句中的条件必须是``bool``类型。
+这个样例展示了一个名叫 ``yes`` 的过程，它问用户一个 ``question`` 并返回true如果他们回答"yes"（或类似的回答），返回false当他们回答"no"（或类似的回答）。一个 ``return`` 语句立即离开过程。``(question: string): bool`` 语法描述过程需要一个名为 ``question``，类型为 ``string``的变量，并且返回一个 ``bool``值。 ``bool`` 类型是内置的：合法的值只有 ``true`` 和 ``false`` 。if或while语句中的条件必须是 ``bool`` 类型。
 
-一些术语: 样例中``question``叫做一个(形) *参*,
-``"Should I..."``叫做*实参*传递给这个参数。
+一些术语: 样例中 ``question`` 叫做一个(形) *参*,``"Should I..."`` 叫做*实参*传递给这个参数。
 
 
 Result变量
 ---------------
-一个返回值的过程有一个隐式``result``变量声明代表返回值。一个没有表达式的``return``语句是``return result``的简写。 ``result``总在过程的结尾自动返回如果退出时没有``return``语句.
+一个返回值的过程有一个隐式 ``result`` 变量声明代表返回值。一个没有表达式的 ``return`` 语句是 ``return result`` 的简写。 ``result`` 总在过程的结尾自动返回如果退出时没有 ``return`` 语句.
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -527,13 +519,13 @@ Result变量
   echo sumTillNegative(3, 4, 5) # echos 12
   echo sumTillNegative(3, 4 , -1 , 6) # echos 7
 
-``result``变量已经隐式地声明在函数的开头，那么比如再次用'var result'声明， 将用一个相同名字的普通变量遮蔽它。result变量也已经用返回类型的默认值初始化过。
-注意引用数据类型将是``nil``在过程的开头，因此可能需要手动初始化。
+``result`` 变量已经隐式地声明在函数的开头，那么比如再次用'var result'声明， 将用一个相同名字的普通变量遮蔽它。result变量也已经用返回类型的默认值初始化过。
+注意引用数据类型将是 ``nil`` 在过程的开头，因此可能需要手动初始化。
 
 
-参数
+形参
 ----------
-参数在过程体中不可改变。默认地，它们的值不能被改变因为这允许编译器以最高效的方式实现参数传递。如果在一个过程内需要可以改变的变量，它必须在过程体中用``var``声明。 遮蔽参数名是可能的，实际上是一个习语：
+形参在过程体中不可改变。默认地，它们的值不能被改变，这允许编译器以最高效的方式实现参数传递。如果在一个过程内需要可以改变的变量，它必须在过程体中用 ``var`` 声明。 遮蔽形参名是可能的，实际上是一个习语：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -542,7 +534,7 @@ Result变量
     for i in 0 .. <nprinted:
       echo s[i]
 
-如果过程需要为调用者修改参数，可以用``var``参数:
+如果过程需要为调用者修改实参，可以用 ``var`` 参数:
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -556,20 +548,18 @@ Result变量
   echo x
   echo y
 
-样例中, ``res``和``remainder``是`var parameters`。Var参数可以被过程修改，改变对调用者可见。注意上面的样例用一个元组作为返回类型而不是var参数会更好。
+样例中, ``res`` 和 ``remainder`` 是 `var parameters` 。Var参数可以被过程修改，改变对调用者可见。注意上面的样例用一个元组作为返回类型而不是var参数会更好。
 
 
 Discard语句
 -----------------
-调用仅为其副作用返回值并忽略返回值的过程, **必须**用``discard``语句。Nim不允许静默地扔掉一个返回值：
+调用仅为其副作用返回值并忽略返回值的过程, **必须** 用 ``discard`` 语句。Nim不允许静默地扔掉一个返回值：
 
 .. code-block:: nim
   discard yes("May I ask a pointless question?")
 
 
-返回类型可以被隐式地忽略如果调用的方法、迭代器已经用``discardable``pragma声明过。
-The return value can be ignored implicitly if the called proc/iterator has
-been declared with the ``discardable`` pragma:
+返回类型可以被隐式地忽略如果调用的方法、迭代器已经用 ``discardable`` pragma声明过。
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -578,7 +568,7 @@ been declared with the ``discardable`` pragma:
 
   p(3, 4) # now valid
 
-在`Comments`_ 段中描述``discard``语句也可以用于创建块注释。
+在 `Comments`_ 段中描述 ``discard`` 语句也可以用于创建块注释。
 
 
 命名参数
@@ -594,7 +584,7 @@ been declared with the ``discardable`` pragma:
   var w = createWindow(show = true, title = "My Application",
                        x = 0, y = 0, height = 600, width = 800)
 
-既然我们使用命名实参来调用``createWindow``实参的顺序不再重要。有序实参和命名实参混合起来用也没有问题，但不是很好读：
+既然我们使用命名实参来调用 ``createWindow`` 实参的顺序不再重要。有序实参和命名实参混合起来用也没有问题，但不是很好读：
 
 .. code-block:: nim
   var w = createWindow(0, 0, title = "My Application",
@@ -605,7 +595,7 @@ been declared with the ``discardable`` pragma:
 
 默认值
 --------------
-为了使``createWindow``方法更易于使用，它应当提供`默认值`；这些值在调用者没有指定时用作实参：
+为了使 ``createWindow`` 方法更易于使用，它应当提供 `默认值` ；这些值在调用者没有指定时用作实参：
 
 .. code-block:: nim
   proc createWindow(x = 0, y = 0, width = 500, height = 700,
@@ -615,10 +605,9 @@ been declared with the ``discardable`` pragma:
 
   var w = createWindow(title = "My Application", height = 600, width = 800)
 
-现在调用 call to ``createWindow`` only needs to set the values that differ
-from the defaults.
+现在调用 ``createWindow`` 只需要设置不同于默认值的值。
 
-现在形参可以由默认值进行类型推导；例如，没有必要写``title: string = "unknown"``。
+现在形参可以由默认值进行类型推导；例如，没有必要写 ``title: string = "unknown"`` 。
 
 
 重载过程
@@ -634,17 +623,17 @@ Nim提供类似C++的过程重载能力：
   echo toString(13)   # calls the toString(x: int) proc
   echo toString(true) # calls the toString(x: bool) proc
 
-(注意``toString``通常是Nim中的`$ <system.html#$>`_ 。) 编译器为``toString``调用选择最恰当的过程。 
-重载解析算法不在这里讨论（会在手册中具体说明）。 不论如何，它不会导致令人讨厌的意外，并且基于一个非常简单的统一算法。有歧义的调用会作为错误报告。
+(注意 ``toString`` 通常是Nim中的`$ <system.html#$>`_ 。) 编译器为 ``toString`` 调用选择最合适的过程。 
+重载解析算法不在这里讨论（会在手册中具体说明）。 不论如何，它不会导致意外，并且基于一个非常简单的统一算法。有歧义的调用会作为错误报告。
 
 
 操作符
 ---------
-Nim库重度使用重载，一个原因是每个像``+``的操作符就是一个重载过程。解析器让你在`中缀标记` (``a + b``)或`前缀标记` (``+ a``)中使用操作符。
-一个中缀操作符总是有两个实参，一个前缀操作符总是一个。(后缀操作符是不可能的，因为这有歧义：``a @ @ b``表示``(a) @ (@b)``还是``(a@) @ (b)``？它总是表示``(a) @ (@b)``, 
+Nim库重度使用重载，一个原因是每个像 ``+`` 的操作符就是一个重载过程。解析器让你在 `中缀标记` (``a + b``)或 `前缀标记` (``+ a``)中使用操作符。
+一个中缀操作符总是有两个实参，一个前缀操作符总是一个。(后缀操作符是不可能的，因为这有歧义： ``a @ @ b`` 表示 ``(a) @ (@b)`` 还是 ``(a@) @ (b)`` ？它总是表示 ``(a) @ (@b)`` , 
 因为Nim中没有后缀操作符。
 
-除了几个内置的关键字操作符如``and``、``or``、``not``，操作符总是由以下符号构成：``+  -  *  \  /  <  >  =  @  $  ~  &  %  !  ?  ^  .  |``
+除了几个内置的关键字操作符如 ``and`` 、 ``or`` 、 ``not`` ，操作符总是由以下符号构成： ``+  -  *  \  /  <  >  =  @  $  ~  &  %  !  ?  ^  .  |``
 
 允许用户定义的操作符。没有什么阻止你定义自己的``@!?+~``操作符，但这么做降低了可读性。
 
@@ -666,7 +655,7 @@ Nim库重度使用重载，一个原因是每个像``+``的操作符就是一个
 前向声明
 --------------------
 
-每个变量、过程等，需要使用前声明。（这样做的原因是，在像Nim那样广泛支持元编程的语言中避免这种需求是非常重要的。）这不能通过互相递归的过程做到：
+每个变量、过程等，需要使用前声明。（这样做的原因是，在像Nim广泛支持元编程的语言中避免这种需求是非常重要的。）这不能通过互相递归的过程做到：
 
 .. code-block:: nim
   # 前向声明:
@@ -685,7 +674,7 @@ Nim库重度使用重载，一个原因是每个像``+``的操作符就是一个
     else:
       n == 0 or odd(n-1)
 
-这里``odd``取决于``even``反之亦然。因此``even``需要在完全定义前引入到编译器。前向声明的语法很简单：直接忽略``=``和过程体。``assert``只添加边界条件，将在`Modules`_ 段中讲到。
+这里 ``odd`` 取决于 ``even`` 反之亦然。因此 ``even`` 需要在完全定义前引入到编译器。前向声明的语法很简单：直接忽略 ``=`` 和过程体。 ``assert`` 只添加边界条件，将在 `Modules`_ 段中讲到。
 
 语言的后续版本将弱化前向声明的要求。
 
@@ -703,7 +692,7 @@ Nim库重度使用重载，一个原因是每个像``+``的操作符就是一个
   for i in countup(1, 10):
     echo i
 
-一个`countup <system.html#countup>`_过程可以支持这个循环吗？让我们试试：
+一个 `countup <system.html#countup>`_ 过程可以支持这个循环吗？让我们试试：
 
 .. code-block:: nim
   proc countup(a, b: int): int =
@@ -712,7 +701,8 @@ Nim库重度使用重载，一个原因是每个像``+``的操作符就是一个
       return res
       inc(res)
 
-这不行。问题在于过程不应当只``return``，但是迭代器后的return和**continue** 已经完成。这*return and continue*叫做`yield`语句。现在只剩下用``iterator``替换``proc``关键字，它来了——我们的第一个迭代器：
+这不行。问题在于过程不应当只 ``return`` ，但是迭代器后的return和 **continue** 已经完成。这 *return and continue* 叫做 `yield` 语句。现在只剩下用 ``iterator`` 替换 ``proc`` 关键字，
+它来了——我们的第一个迭代器：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -725,13 +715,13 @@ Nim库重度使用重载，一个原因是每个像``+``的操作符就是一个
 迭代器看起来像过程，但有几点重要的差异：
 
 * 迭代器只能从循环中调用。
-* 迭代器不能包含``return``语句（过程不能包含``yield``语句）。
-* 迭代器没有隐式``result``变量。
+* 迭代器不能包含 ``return`` 语句（过程不能包含 ``yield`` 语句）。
+* 迭代器没有隐式 ``result`` 变量。
 * 迭代器不支持递归。
 * 迭代器不能前向声明，因为编译器必须能够内联迭代器。（这个限制将在编译器的未来版本中消失。）
 
-你也可以用``closure``迭代器得到一个不同的限制集合。详见`一等迭代器<manual.html#iterators-and-the-for-statement-first-class-iterators>`_。 迭代器可以和过程有同样的名字和形参，因为它们有自己的命名空间。
-因此，通常的做法是将迭代器包装在同名的proc中，这些迭代器会累积结果并将其作为序列返回, 像`strutils module<strutils.html>`_中的``split``。
+你也可以用 ``closure`` 迭代器得到一个不同的限制集合。详见 `一等迭代器<manual.html#iterators-and-the-for-statement-first-class-iterators>`_ 。 迭代器可以和过程有同样的名字和形参，因为它们有自己的命名空间。
+因此，通常的做法是将迭代器包装在同名的proc中，这些迭代器会累积结果并将其作为序列返回, 像 `strutils module<strutils.html>`_ 中的 ``split`` 。
 
 
 基本类型
@@ -742,31 +732,29 @@ Nim库重度使用重载，一个原因是每个像``+``的操作符就是一个
 布尔值
 --------
 
-Nim的布尔类型叫做``bool``，由两个预先定义好的值``true``和``false``构成。while、if、elif和when语句中的条件必须是布尔类型。
+Nim的布尔类型叫做 ``bool`` ，由两个预先定义好的值 ``true`` 和 ``false`` 构成。while、if、elif和when语句中的条件必须是布尔类型。
 
-为布尔类型定义操作符``not, and, or, xor, <, <=, >, >=, !=, ==``。``and``和``or``操作符执行短路求值。例如：
+为布尔类型定义操作符 ``not, and, or, xor, <, <=, >, >=, !=, ==`` 。 ``and`` 和 ``or`` 操作符执行短路求值。例如：
 
 .. code-block:: nim
 
   while p != nil and p.name != "xyz":
-    # p.name is not evaluated if p == nil
+    # 如果p == nil，p.name不被求值
     p = p.next
 
 
 字符
 ----------
-字符类型叫做``char``。大小总是一字节，所以不能表示大多数UTF-8字符；但可以表示组成多字节UTF-8字符的一个字节。原因是为了效率：对于绝大多数用例，程序依然可以正确处理UTF-8因为UTF-8是专为此设计的。
+字符类型叫做 ``char`` 。大小总是一字节，所以不能表示大多数UTF-8字符；但可以表示组成多字节UTF-8字符的一个字节。原因是为了效率：对于绝大多数用例，程序依然可以正确处理UTF-8因为UTF-8是专为此设计的。
 字符字面值用单引号括起来。
 
-字符可以用``==``, ``<``, ``<=``, ``>``, ``>=``操作符比较。``$``操作符将一个``char``转换成一个``string``。字符不能和整型混合；用``ord``过程得到一个``char``的序数值。
-从整型到``char``转换使用``chr``过程。
+字符可以用 ``==``, ``<``, ``<=``, ``>``, ``>=`` 操作符比较。``$`` 操作符将一个 ``char`` 转换成一个 ``string`` 。字符不能和整型混合；用 ``ord`` 过程得到一个 ``char`` 的序数值。
+从整型到 ``char`` 转换使用 ``chr`` 过程。
 
 
 字符串
 -------
-String variables are **mutable**, so appending to a string
-is possible, and quite efficient. Strings in Nim are both zero-terminated and have a
-length field. A string's length can be retrieved with the builtin ``len``
+字符串变量是 **可以改变的**, 追加到一个字符串是可能的，而且非常高效。Nim中的字符串有长度字段，以零结尾。A string's length can be retrieved with the builtin ``len``
 procedure; the length never counts the terminating zero. Accessing the
 terminating zero is an error, it only exists so that a Nim string can be converted
 to a ``cstring`` without doing a copy.
