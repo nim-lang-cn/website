@@ -34,26 +34,26 @@
 
   </script>
 
-  <meta name="twitter:title" content="{{ page.title | default: site.title  }}">
+  <!-- <meta name="twitter:title" content="{{ page.title | default: site.title  }}"> -->
 
   {% if page.is_post %}
-  <meta name="twitter:description" content="{{ page.excerpt | strip_html | normalize_whitespace }}">
+  <!-- <meta name="twitter:description" content="{{ page.excerpt | strip_html | normalize_whitespace }}"> -->
   <meta property="og:description" content="{{ page.excerpt | strip_html | normalize_whitespace }}">
   {% else %}
-  <meta name="twitter:description" content="{{ site.description | normalize_whitespace }}">
+  <!-- <meta name="twitter:description" content="{{ site.description | normalize_whitespace }}"> -->
   <meta property="og:description" content="{{ site.description | normalize_whitespace }}">
   {% endif %}
 
-  <meta name="twitter:site" content="@nim_lang">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
 
   <meta property="og:title" content="{{ page.title | default: site.title }}" />
   <meta property="og:site_name" content="{{ site.title }}" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://nim-lang.org/assets/img/twitter_banner.png" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1000" />
   <meta property="og:image:height" content="500" />
-  <meta property="og:image:alt" content="Nim语言" />
+  <meta property="og:image:alt" content="Nim 语言" />
 </head>

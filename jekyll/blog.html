@@ -4,11 +4,10 @@ title: 博客
 ---
 
 <section class="content slim">
-  <h1 class="main-heading page-title">Blog</h1>
+  <h1 class="main-heading page-title">博客</h1>
   <h2 class="text-centered page-subtitle">
-    Our blog is home to many articles consisting of announcements,
-    descriptions of the language, use cases and much more. You will find articles
-    written by both the Nim developers as well as guest authors.
+    我们的博客上有很多文章，包括公告、语言描述、用例等等。
+    你能在这儿看到由Nim开发人员和客座作者撰写的文章。
   </h2>
   {% for post in site.posts %}
     <div class="pure-g news-item">
@@ -35,5 +34,5 @@ title: 博客
     </div>
     <hr>
   {% endfor %}
-  <p class="feed-rss"><a href="{{ '/feed.xml' | prepend: site.baseurl }}">RSS feed</a></p>
+  <p class="feed-rss"><a href="{{ '/feed.xml' | prepend: site.baseurl }}">订阅RSS</a></p>
 </section>

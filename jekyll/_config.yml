@@ -1,5 +1,5 @@
 # Site settings
-title: "Nim中文网"
+title: "Nim 中文"
 description: >
   NIM编程语言是一种简洁、快速的编程语言，
   可被编译成C、C++和JavaScript。
@@ -35,8 +35,8 @@ navigation:
     url: /learn.html
   - title: 文档
     url: /documentation.html
-  - title: 论坛
-    url: https://forum.nim-lang-cn.org
+  - title: 社区
+    url: /community.html
   - title: 捐赠
     url: /donate.html
 
