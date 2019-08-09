@@ -12,7 +12,7 @@ Nim Tutorial (Part I)
 
 .. raw:: html
   <blockquote><p>
-  "人是一种眼睛动物 -- 我希望好的东西。"
+  "人是一种视觉动物 -- 我希望看到好的东西。"
   </p></blockquote>
 
 本文是编程语言Nim的教程。该教程认为你熟悉基本的编程概念如变量、类型和语句但非常基础。 `manual <manual.html>`_  包含更多的高级特性样例。本教程的代码样例和其它的Nim文档遵守 `Nim style guide <nep1.html>`_ 。
@@ -1498,7 +1498,7 @@ From语句
 
   x()           # 没有限定使用x是编译错误
 
-l因为模块普遍比较长方便描述，你也可以在限定符号时使用短的别名。
+因为模块普遍比较长方便描述，你也可以在限定符号时使用短的别名。
 
 .. code-block:: nim
   from mymodule as m import nil
