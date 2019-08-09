@@ -1072,8 +1072,8 @@ Operation             Comment
 .. code-block:: nim
     :test: "nim c $1"
   type
-    IntArray = array[0..5, int] # 数组索引 0..5
-    QuickArray = array[6, int]  # 数组索引 0..5
+    IntArray = array[0..5, int] # 一个索引为0..5的数​组
+    QuickArray = array[6, int]  # 一个索引为0..5的数​组
   var
     x: IntArray
     y: QuickArray
