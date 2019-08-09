@@ -1240,7 +1240,7 @@ out inside this with no indentation restrictions.
 <h2><a class="toc-backref" id="基本类型-字符" href="#基本类型-字符">字符</a></h2><p>字符类型叫做 <tt class="docutils literal"><span class="pre">char</span></tt> 。大小总是一字节，所以不能表示大多数UTF-8字符；但可以表示组成多字节UTF-8字符的一个字节。原因是为了效率：对于绝大多数用例，程序依然可以正确处理UTF-8因为UTF-8是专为此设计的。 字符字面值用单引号括起来。</p>
 <p>字符可以用 <tt class="docutils literal"><span class="pre">==</span></tt>, <tt class="docutils literal"><span class="pre">&lt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;=</span></tt>, <tt class="docutils literal"><span class="pre">&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&gt;=</span></tt> 操作符比较。 <tt class="docutils literal"><span class="pre">$</span></tt> 操作符将一个 <tt class="docutils literal"><span class="pre">char</span></tt> 转换成一个 <tt class="docutils literal"><span class="pre">string</span></tt> 。字符不能和整型混合；用 <tt class="docutils literal"><span class="pre">ord</span></tt> 过程得到一个 <tt class="docutils literal"><span class="pre">char</span></tt> 的序数值。 从整型到 <tt class="docutils literal"><span class="pre">char</span></tt> 转换使用 <tt class="docutils literal"><span class="pre">chr</span></tt> 过程。</p>
 
-<h2><a class="toc-backref" id="基本类型-字符串" href="#基本类型-字符串">字符串</a></h2><p>字符串变量是 <strong>可以改变的</strong>, 字符串可以追加，而且非常高效。Nim中的字符串有长度字段，以零结尾。一个字符串长度可以用内置 <tt class="docutils literal"><span class="pre">len</span></tt> 过程获取；长度不计结尾的零。访问结尾零是一个错误，它只为Nim字符串无拷贝转换为 <tt class="docutils literal"><span class="pre">cstring</span></tt> 存在。</p>
+<h2><a class="toc-backref" id="基本类型-字符串" href="#基本类型-字符串">字符串</a></h2><p>字符串变量是 <strong>可以改变的</strong> ， 字符串可以追加，而且非常高效。Nim中的字符串有长度字段，以零结尾。一个字符串长度可以用内置 <tt class="docutils literal"><span class="pre">len</span></tt> 过程获取；长度不计结尾的零。访问结尾零是一个错误，它只为Nim字符串无拷贝转换为 <tt class="docutils literal"><span class="pre">cstring</span></tt> 存在。</p>
 <p>字符串赋值会产生拷贝。你可以用 <tt class="docutils literal"><span class="pre">&amp;</span></tt> 操作符拼接字符串和 <tt class="docutils literal"><span class="pre">add</span></tt> 追加到一个字符串。</p>
 <p>字符串用字典序比较，支持所有比较操作符。通过转换，所有字符串是UTF-8编码过的，但不是强制。例如，当从进制文件读取字符串时，他们只是一串字节序列。索引操作符 <tt class="docutils literal"><span class="pre">s[i]</span></tt> 表示 <tt class="docutils literal"><span class="pre">s</span></tt> 的第i个 <em>字符</em> , 不是第i个 <em>unichar</em> 。</p>
 <p>一个字符串变量用空字符串初始化 <tt class="docutils literal"><span class="pre">&quot;&quot;</span></tt> 。</p>
@@ -1252,9 +1252,9 @@ out inside this with no indentation restrictions.
   <span class="Identifier">y</span> <span class="Operator">=</span> <span class="DecNumber">0'i8</span>  <span class="Comment"># y是 ``int8``</span>
   <span class="Identifier">z</span> <span class="Operator">=</span> <span class="DecNumber">0'i64</span> <span class="Comment"># z是 ``int64``</span>
   <span class="Identifier">u</span> <span class="Operator">=</span> <span class="DecNumber">0'</span><span class="Identifier">u</span>   <span class="Comment"># u是 ``uint``</span></pre><p>多数常用整数用来计数内存中的对象，所以 <tt class="docutils literal"><span class="pre">int</span></tt> 和指针具有相同的大小。</p>
-<p>整数支持通用操作符 <tt class="docutils literal"><span class="pre">+ - * div mod &lt; &lt;= == != &gt; &gt;=</span></tt> 。 也支持 <tt class="docutils literal"><span class="pre">and or xor not</span></tt> 操作符，并提供 <em>按位</em> 操作。 左移用 <tt class="docutils literal"><span class="pre">shl</span></tt> ，右移用 <tt class="docutils literal"><span class="pre">shr</span></tt> 。位移操作符实参总是被当作 <em>无符号整型</em> 。 <span id="算术位移_1">算术位移</span> 可以普通乘法或除法。</p>
+<p>整数支持通用操作符 <tt class="docutils literal"><span class="pre">+ - * div mod &lt; &lt;= == != &gt; &gt;=</span></tt> 。 也支持 <tt class="docutils literal"><span class="pre">and or xor not</span></tt> 操作符，并提供 <em>按位</em> 操作。 左移用 <tt class="docutils literal"><span class="pre">shl</span></tt> ，右移用 <tt class="docutils literal"><span class="pre">shr</span></tt> 。位移操作符实参总是被当作 <em>无符号整型</em> 。 普通乘法或除法可以做 <span id="算术位移_1">算术位移</span> 。</p>
 <p>无符号操作不会引起上溢和下溢。</p>
-<p>无损 <span id="自动类型转换_1">自动类型转换</span> 在表达式中使用不同类型的整数时执行。如果会失真，会抛出 <span id="eoutofrange_1">EOutOfRange</span> 异常（如果错误没能在编译时检查出来）。</p>
+<p>无损 <span id="自动类型转换_1">自动类型转换</span> 在表达式中使用不同类型的整数时执行。如果失真，会抛出 <span id="eoutofrange_1">EOutOfRange</span> 异常（如果错误没能在编译时检查出来）。</p>
 
 <h2><a class="toc-backref" id="基本类型-浮点" href="#基本类型-浮点">浮点</a></h2><p>Nim有这些内置浮点类型： <tt class="docutils literal"><span class="pre">float float32 float64</span></tt> 。</p>
 <p>默认浮点类型是 <tt class="docutils literal"><span class="pre">float</span></tt> 。在当前的实现， <tt class="docutils literal"><span class="pre">float</span></tt> 是64位。</p>
@@ -1681,7 +1681,7 @@ out inside this with no indentation restrictions.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-08-09 02:56:41 UTC</small>
+        <small>Made with Nim. Generated: 2019-08-09 03:04:48 UTC</small>
       </div>
     </div>
   </div>
