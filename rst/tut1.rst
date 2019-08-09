@@ -15,7 +15,7 @@ Nim教程 (I)
   "人是一种视觉动物 -- 我希望看到好的东西。"
   </p></blockquote>
 
-本文是编程语言Nim的教程。该教程认为你熟悉基本的编程概念如变量、类型和语句但非常基础。 `manual <manual.html>`_  包含更多的高级特性样例。本教程的代码样例和其它的Nim文档遵守 `Nim style guide <nep1.html>`_ 。
+本文是编程语言Nim的教程。该教程认为你熟悉基本的编程概念如变量、类型和语句但非常基础。 `manual <manual.html>`_  包含更多的高级特性示例。本教程的代码示例和其它的Nim文档遵守 `Nim style guide <nep1.html>`_ 。
 
 
 第一个程序
@@ -287,13 +287,13 @@ while语句是一个简单的循环结构:
     name = readLine(stdin)
     # 没有 ``var`` ， 因为我们没有声明一个新变量
 
-样例使用while循环来不断的询问用户的名字，只要用户什么都没有输入（只按回车）。
+示例使用while循环来不断的询问用户的名字，只要用户什么都没有输入（只按回车）。
 
 
 For语句
 -------------
 
-``for`` 语句是一个在提供 *迭代器* 的元素上循环的结构。样例使用内置的 `countup <system.html#countup>`_ 迭代器:
+``for`` 语句是一个在提供 *迭代器* 的元素上循环的结构。示例使用内置的 `countup <system.html#countup>`_ 迭代器:
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -353,7 +353,7 @@ or
 
 作用域和块语句
 ------------------------------
-控制流语句有一个还没有讲的特性: 它们有自己的作用域。这意味着在下面的样例中, ``x`` 在作用域外是不可访问的:
+控制流语句有一个还没有讲的特性: 它们有自己的作用域。这意味着在下面的示例中, ``x`` 在作用域外是不可访问的:
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -480,7 +480,7 @@ Example:
 过程
 ==========
 
-为了在样例中定义如 `echo <system.html#echo>`_ 和 `readLine <system.html#readLine,File>`_ 的新命令, 需要 `procedure` 的概念。(一些语言叫 *方法* 或 *函数* 。) 在Nim中新的过程用 ``proc`` 关键字定义:
+为了在示例中定义如 `echo <system.html#echo>`_ 和 `readLine <system.html#readLine,File>`_ 的新命令, 需要 `procedure` 的概念。(一些语言叫 *方法* 或 *函数* 。) 在Nim中新的过程用 ``proc`` 关键字定义:
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -497,10 +497,10 @@ Example:
   else:
     echo "I think you know what the problem is just as well as I do."
 
-这个样例展示了一个名叫 ``yes`` 的过程，它问用户一个 ``question`` 并返回true如果他们回答"yes"（或类似的回答），返回false当他们回答"no"（或类似的回答）。一个 ``return`` 语句立即离开过程。
+这个示例展示了一个名叫 ``yes`` 的过程，它问用户一个 ``question`` 并返回true如果他们回答"yes"（或类似的回答），返回false当他们回答"no"（或类似的回答）。一个 ``return`` 语句立即离开过程。
 ``(question: string): bool`` 语法描述过程需要一个名为 ``question`` ，类型为 ``string`` 的变量，并且返回一个 ``bool`` 值。 ``bool`` 类型是内置的：合法的值只有 ``true`` 和 ``false`` 。if或while语句中的条件必须是 ``bool`` 类型。
 
-一些术语: 样例中 ``question`` 叫做一个(形) *参*, ``"Should I..."`` 叫做 *实参* 传递给这个参数。
+一些术语: 示例中 ``question`` 叫做一个(形) *参*, ``"Should I..."`` 叫做 *实参* 传递给这个参数。
 
 
 Result变量
@@ -548,7 +548,7 @@ Result变量
   echo x
   echo y
 
-样例中, ``res`` 和 ``remainder`` 是 `var parameters` 。Var参数可以被过程修改，改变对调用者可见。注意上面的样例用一个元组作为返回类型而不是var参数会更好。
+示例中, ``res`` 和 ``remainder`` 是 `var parameters` 。Var参数可以被过程修改，改变对调用者可见。注意上面的示例用一个元组作为返回类型而不是var参数会更好。
 
 
 Discard语句
@@ -678,13 +678,13 @@ Nim库重度使用重载，一个原因是每个像 ``+`` 的操作符就是一�
 
 语言的后续版本将弱化前向声明的要求。
 
-样例也展示了一个过程体可以由一个表达式构成，其值之后被隐式返回。
+示例也展示了一个过程体可以由一个表达式构成，其值之后被隐式返回。
 
 
 迭代器
 =========
 
-让我们回到简单的计数样例：
+让我们回到简单的计数示例：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -826,7 +826,7 @@ Nim有这些内置浮点类型： ``float float32 float64`` 。
 ============================
 
 之前提到过，内置的 `$ <system.html#$>`_ （字符串化）操作符将基本类型转换成字符串，这样可以用 ``echo`` 过程将内容打印到控制台上。但是高级类型和你自定义的类型，需要定义 ``$`` 操作符才能使用。
-有时你只想在没有写一个高级类型的 ``$`` 操作符时调试当前的值，那么你可以用 `repr <system.html#repr>`_ 过程，它可以用于任何类型甚至复杂的有环数据图。下面的样例展示了  ``$`` and ``repr`` 在即使基本类型输出上也有不同：
+有时你只想在没有写一个高级类型的 ``$`` 操作符时调试当前的值，那么你可以用 `repr <system.html#repr>`_ 过程，它可以用于任何类型甚至复杂的有环数据图。下面的示例展示了  ``$`` and ``repr`` 在即使基本类型输出上也有不同：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -1177,7 +1177,7 @@ Example:
   # 编译器转为:
   myWriteln(stdout, [$123, $"abc", $4.0])
 
-在样例中 `$ <system.html#$>`_ 适用于任何传递给形参 ``a`` 的实参。注意 `$ <system.html#$>`_ 适用于空字符串指令。
+在示例中 `$ <system.html#$>`_ 适用于任何传递给形参 ``a`` 的实参。注意 `$ <system.html#$>`_ 适用于空字符串指令。
 
 
 切片
@@ -1400,7 +1400,7 @@ Distinct类型
 -------------
 一个Distinct类型允许用于创建“非基本类型的子类型”。你必须 **显式** 定义distinct类型的所有行为。
 为了帮助这点，distinct类型和它的基类型可以相互强转。
-样例提供在 `manual <manual.html#types-distinct-type>`_ 。
+示例提供在 `manual <manual.html#types-distinct-type>`_ 。
 
 模块
 =======
