@@ -1013,7 +1013,7 @@ Operation             Comment
     :test: "nim c $1"
 
   type
-    IntArray = array[0..5, int] # 0..5索引的数组
+    IntArray = array[0..5, int] # 一个索引为0..5的数​组
   var
     x: IntArray
   x = [1, 2, 3, 4, 5, 6]
