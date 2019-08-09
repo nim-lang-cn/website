@@ -48,7 +48,7 @@ Nim编译器默认生成大量运行时检查，旨在方便调试。用 ``-d:re
 尽管程序的作用很明显，但我会解释下语法：没有缩进的语句会在程序开始时执行。缩进是Nim语句进行分组的方式。缩进仅允许空格，不允许制表符。
 
 字符串字面值用双引号括起来。 ``var`` 语句声明一个新的名为 ``name`` ，类型为 ``string`` ，值为 `readLine <system.html#readLine,File>`_ 方法返回值的变量名。
-因为编译器知道 `readLine <system.html#readLine,File>`_ 返回一个字符串，你可以省略声明中的类型(这叫作 `local type inference`:idx: )。所以这样也可以：
+因为编译器知道 `readLine <system.html#readLine,File>`_ 返回一个字符串，你可以省略声明中的类型(这叫作 `局部类型推导`:idx: )。所以这样也可以：
 
 .. code-block:: Nim
     :test: "nim c $1"

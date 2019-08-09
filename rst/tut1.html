@@ -913,7 +913,7 @@ nim c -d:release greetings.nim</pre>
 </p>
 <p>Nim编译器默认生成大量运行时检查，旨在方便调试。用 <tt class="docutils literal"><span class="pre">-d:release</span></tt> 一些检查被 <a class="reference external" href="nimc.html#compiler-usage-compile-time-symbols">关闭并且打开了优化</a> 。</p>
 <p>尽管程序的作用很明显，但我会解释下语法：没有缩进的语句会在程序开始时执行。缩进是Nim语句进行分组的方式。缩进仅允许空格，不允许制表符。</p>
-<p>字符串字面值用双引号括起来。 <tt class="docutils literal"><span class="pre">var</span></tt> 语句声明一个新的名为 <tt class="docutils literal"><span class="pre">name</span></tt> ，类型为 <tt class="docutils literal"><span class="pre">string</span></tt> ，值为 <a class="reference external" href="system.html#readLine,File">readLine</a> 方法返回值的变量名。 因为编译器知道 <a class="reference external" href="system.html#readLine,File">readLine</a> 返回一个字符串，你可以省略声明中的类型(这叫作 <span id="local-type-inference_1">local type inference</span> )。所以这样也可以：</p>
+<p>字符串字面值用双引号括起来。 <tt class="docutils literal"><span class="pre">var</span></tt> 语句声明一个新的名为 <tt class="docutils literal"><span class="pre">name</span></tt> ，类型为 <tt class="docutils literal"><span class="pre">string</span></tt> ，值为 <a class="reference external" href="system.html#readLine,File">readLine</a> 方法返回值的变量名。 因为编译器知道 <a class="reference external" href="system.html#readLine,File">readLine</a> 返回一个字符串，你可以省略声明中的类型(这叫作 <span id="局部类型推导_1">局部类型推导</span> )。所以这样也可以：</p>
 <pre class="listing"><span class="Keyword">var</span> <span class="Identifier">name</span> <span class="Operator">=</span> <span class="Identifier">readLine</span><span class="Punctuation">(</span><span class="Identifier">stdin</span><span class="Punctuation">)</span></pre><p>请注意，这基本上是Nim中存在的唯一类型推导形式：它是简洁性和可读性之间的折衷。</p>
 <p>&quot;hello world&quot;程序包括一些编译器已知的标识符： <tt class="docutils literal"><span class="pre">echo</span></tt> ， <a class="reference external" href="system.html#readLine,File">readLine</a> 等。这些内置声名在 <a class="reference external" href="system.html">system</a> 模块中，它通过其它模块隐式的导出。</p>
 
@@ -1681,7 +1681,7 @@ out inside this with no indentation restrictions.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-08-09 03:04:48 UTC</small>
+        <small>Made with Nim. Generated: 2019-08-09 03:12:05 UTC</small>
       </div>
     </div>
   </div>
