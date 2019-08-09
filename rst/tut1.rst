@@ -104,7 +104,7 @@ Nim编译器默认生成大量运行时检查，旨在方便调试。用 ``-d:re
     ]#
   ]#
 
-你也可以和 *长字符串字面值* 一起使用 `discard statement <#procedures-discard-statement>`_ 来构建块注释。
+你也可以和 *长字符串字面值* 一起使用 `discard语句 <#procedures-discard-statement>`_ 来构建块注释。
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -677,7 +677,7 @@ Nim库重度使用重载，一个原因是每个像 ``+`` 的操作符就是一�
     else:
       n == 0 or odd(n-1)
 
-这里 ``odd`` 取决于 ``even`` 反之亦然。因此 ``even`` 需要在完全定义前引入到编译器。前向声明的语法很简单：直接忽略 ``=`` 和过程体。 ``assert`` 只添加边界条件，将在 `Modules`_ 段中讲到。
+这里 ``odd`` 取决于 ``even`` 反之亦然。因此 ``even`` 需要在完全定义前引入到编译器。前向声明的语法很简单：直接忽略 ``=`` 和过程体。 ``assert`` 只添加边界条件，将在 `模块`_ 段中讲到。
 
 语言的后续版本将弱化前向声明的要求。
 
@@ -704,7 +704,7 @@ Nim库重度使用重载，一个原因是每个像 ``+`` 的操作符就是一�
       return res
       inc(res)
 
-这不行。问题在于过程不应当只 ``return`` ，但是迭代器后的return和 **continue** 已经完成。这 *return and continue* 叫做 `yield` 语句。现在只剩下用 ``iterator`` 替换 ``proc`` 关键字，
+这不行,问题在于过程不应当只 ``return`` ，但是迭代器后的return和 **continue** 已经完成。这 *return and continue* 叫做 `yield` 语句。现在只剩下用 ``iterator`` 替换 ``proc`` 关键字，
 它来了——我们的第一个迭代器：
 
 .. code-block:: nim
@@ -724,7 +724,7 @@ Nim库重度使用重载，一个原因是每个像 ``+`` 的操作符就是一�
 * 迭代器不能前向声明，因为编译器必须能够内联迭代器。（这个限制将在编译器的未来版本中消失。）
 
 你也可以用 ``closure`` 迭代器得到一个不同的限制集合。详见 `一等迭代器<manual.html#iterators-and-the-for-statement-first-class-iterators>`_ 。 迭代器可以和过程有同样的名字和形参，因为它们有自己的命名空间。
-因此，通常的做法是将迭代器包装在同名的proc中，这些迭代器会累积结果并将其作为序列返回, 像 `strutils module<strutils.html>`_ 中的 ``split`` 。
+因此，通常的做法是将迭代器包装在同名的proc中，这些迭代器会累积结果并将其作为序列返回, 像 `strutils模块<strutils.html>`_ 中的 ``split`` 。
 
 
 基本类型

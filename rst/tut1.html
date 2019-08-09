@@ -935,7 +935,7 @@ out inside this with no indentation restrictions.
   #[
      Note: these can be nested!!
   ]#
-]#</span></pre><p>你也可以和 <em>长字符串字面值</em> 一起使用 <a class="reference external" href="#procedures-discard-statement">discard statement</a> 来构建块注释。</p>
+]#</span></pre><p>你也可以和 <em>长字符串字面值</em> 一起使用 <a class="reference external" href="#procedures-discard-statement">discard语句</a> 来构建块注释。</p>
 <pre class="listing"><span class="Keyword">discard</span> <span class="LongStringLit">&quot;&quot;&quot; You can have any Nim code text commented
 out inside this with no indentation restrictions.
       yes(&quot;May I ask a pointless question?&quot;) &quot;&quot;&quot;</span></pre>
@@ -1003,7 +1003,7 @@ out inside this with no indentation restrictions.
 <span class="Keyword">case</span> <span class="Identifier">n</span>
 <span class="Keyword">of</span> <span class="FloatNumber">0.</span><span class="Operator">.</span><span class="DecNumber">2</span><span class="Punctuation">,</span> <span class="FloatNumber">4.</span><span class="Operator">.</span><span class="DecNumber">7</span><span class="Punctuation">:</span> <span class="Identifier">echo</span> <span class="StringLit">&quot;The number is in the set: {0, 1, 2, 4, 5, 6, 7}&quot;</span>
 <span class="Keyword">of</span> <span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">8</span><span class="Punctuation">:</span> <span class="Identifier">echo</span> <span class="StringLit">&quot;The number is 3 or 8&quot;</span>
-<span class="Keyword">else</span><span class="Punctuation">:</span> <span class="Keyword">discard</span></pre><p>空 <a class="reference external" href="#discard语句">discard语句</a> 是一个 <em>什么都不做</em> 的语句。编译器知道带有else部分的case语句不会失败，因此错误消失。 请注意，不可能覆盖所有可能的字符串值：这就是字符串情况总是需要else分支的原因。</p>
+<span class="Keyword">else</span><span class="Punctuation">:</span> <span class="Keyword">discard</span></pre><p>空 <a class="reference external" href="#procedures-discard-statement">discard语句</a> 是一个 <em>什么都不做</em> 的语句。编译器知道带有else部分的case语句不会失败，因此错误消失。 请注意，不可能覆盖所有可能的字符串值：这就是字符串情况总是需要else分支的原因。</p>
 <p>通常情况下，case语句用于枚举的子范围类型，其中编译器对检查您是否覆盖了任何可能的值有很大帮助。</p>
 
 <h2><a class="toc-backref" id="流程控制语句-while语句" href="#流程控制语句-while语句">While语句</a></h2><p>while语句是一个简单的循环结构:</p>
@@ -1204,7 +1204,7 @@ out inside this with no indentation restrictions.
   <span class="Identifier">assert</span><span class="Punctuation">(</span><span class="Identifier">n</span> <span class="Operator">&gt;=</span> <span class="DecNumber">0</span><span class="Punctuation">)</span> <span class="Comment"># 确保我们没有遇到负递归</span>
   <span class="Keyword">if</span> <span class="Identifier">n</span> <span class="Operator">==</span> <span class="DecNumber">1</span><span class="Punctuation">:</span> <span class="Identifier">false</span>
   <span class="Keyword">else</span><span class="Punctuation">:</span>
-    <span class="Identifier">n</span> <span class="Operator">==</span> <span class="DecNumber">0</span> <span class="Keyword">or</span> <span class="Identifier">odd</span><span class="Punctuation">(</span><span class="Identifier">n</span><span class="Operator">-</span><span class="DecNumber">1</span><span class="Punctuation">)</span></pre><p>这里 <tt class="docutils literal"><span class="pre">odd</span></tt> 取决于 <tt class="docutils literal"><span class="pre">even</span></tt> 反之亦然。因此 <tt class="docutils literal"><span class="pre">even</span></tt> 需要在完全定义前引入到编译器。前向声明的语法很简单：直接忽略 <tt class="docutils literal"><span class="pre">=</span></tt> 和过程体。 <tt class="docutils literal"><span class="pre">assert</span></tt> 只添加边界条件，将在 <a class="reference external" href="#modules">Modules</a> 段中讲到。</p>
+    <span class="Identifier">n</span> <span class="Operator">==</span> <span class="DecNumber">0</span> <span class="Keyword">or</span> <span class="Identifier">odd</span><span class="Punctuation">(</span><span class="Identifier">n</span><span class="Operator">-</span><span class="DecNumber">1</span><span class="Punctuation">)</span></pre><p>这里 <tt class="docutils literal"><span class="pre">odd</span></tt> 取决于 <tt class="docutils literal"><span class="pre">even</span></tt> 反之亦然。因此 <tt class="docutils literal"><span class="pre">even</span></tt> 需要在完全定义前引入到编译器。前向声明的语法很简单：直接忽略 <tt class="docutils literal"><span class="pre">=</span></tt> 和过程体。 <tt class="docutils literal"><span class="pre">assert</span></tt> 只添加边界条件，将在 <a class="reference external" href="#模块">模块</a> 段中讲到。</p>
 <p>语言的后续版本将弱化前向声明的要求。</p>
 <p>示例也展示了一个过程体可以由一个表达式构成，其值之后被隐式返回。</p>
 
@@ -1681,7 +1681,7 @@ out inside this with no indentation restrictions.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-08-09 12:02:59 UTC</small>
+        <small>Made with Nim. Generated: 2019-08-09 12:14:59 UTC</small>
       </div>
     </div>
   </div>
