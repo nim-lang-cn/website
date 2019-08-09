@@ -16,7 +16,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Nim Tutorial (Part I)</title>
+<title>Nim教程 (I)</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -804,7 +804,7 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Nim Tutorial (Part I)</h1>
+    <h1 class="title">Nim教程 (I)</h1>
     <div class="row">
   <div class="three columns">
   <div id="global-links">
@@ -895,7 +895,7 @@ function main() {
 <tr><th class="docinfo-name">Version:</th><td> 0.20.3</td></tr>
 </tbody></table>
 <h1><a class="toc-backref" id="引言" href="#引言">引言</a></h1><blockquote><p>
-"人是一种眼睛动物 -- 我希望好的东西。"
+"人是一种视觉动物 -- 我希望看到好的东西。"
 </p></blockquote><p>本文是编程语言Nim的教程。该教程认为你熟悉基本的编程概念如变量、类型和语句但非常基础。 <a class="reference external" href="manual.html">manual</a>  包含更多的高级特性样例。本教程的代码样例和其它的Nim文档遵守 <a class="reference external" href="nep1.html">Nim style guide</a> 。</p>
 
 <h1><a class="toc-backref" id="第一个程序" href="#第一个程序">第一个程序</a></h1><p>我们从一个修改过的&quot;hello world&quot;程序开始：</p>
@@ -915,7 +915,7 @@ nim c -d:release greetings.nim</pre>
 <p>尽管程序的作用很明显，但我会解释下语法：没有缩进的语句会在程序开始时执行。缩进是Nim语句进行分组的方式。缩进仅允许空格，不允许制表符。</p>
 <p>字符串字面值用双引号括起来。 <tt class="docutils literal"><span class="pre">var</span></tt> 语句声明一个新的名为 <tt class="docutils literal"><span class="pre">name</span></tt> ，类型为 <tt class="docutils literal"><span class="pre">string</span></tt> ，值为 <a class="reference external" href="system.html#readLine,File">readLine</a> 方法返回值的变量名。 因为编译器知道 <a class="reference external" href="system.html#readLine,File">readLine</a> 返回一个字符串，你可以省略声明中的类型(这叫作 <span id="local-type-inference_1">local type inference</span> )。所以这样也可以：</p>
 <pre class="listing"><span class="Keyword">var</span> <span class="Identifier">name</span> <span class="Operator">=</span> <span class="Identifier">readLine</span><span class="Punctuation">(</span><span class="Identifier">stdin</span><span class="Punctuation">)</span></pre><p>请注意，这基本上是Nim中存在的唯一类型推导形式：它是简洁性和可读性之间的折衷。</p>
-<p>&quot;hello world&quot;程序包括一些编译器已知的标识符：``echo`` ， <a class="reference external" href="system.html#readLine,File">readLine</a> 等。这些内置声名在 <a class="reference external" href="system.html">system</a> 模块中，它通过其它模块隐式的导出。</p>
+<p>&quot;hello world&quot;程序包括一些编译器已知的标识符： <tt class="docutils literal"><span class="pre">echo</span></tt> ， <a class="reference external" href="system.html#readLine,File">readLine</a> 等。这些内置声名在 <a class="reference external" href="system.html">system</a> 模块中，它通过其它模块隐式的导出。</p>
 
 <h1><a class="toc-backref" id="词法元素" href="#词法元素">词法元素</a></h1><p>让我们看看Nim词法元素的更多细节：像其它编程语言一样，Nim由（字符串）字面值、标识符、关键字、注释、操作符、和其它标点符号构成。</p>
 
@@ -977,7 +977,7 @@ out inside this with no indentation restrictions.
 <span class="Keyword">elif</span> <span class="Identifier">name</span> <span class="Operator">==</span> <span class="StringLit">&quot;name&quot;</span><span class="Punctuation">:</span>
   <span class="Identifier">echo</span> <span class="StringLit">&quot;Very funny, your name is name.&quot;</span>
 <span class="Keyword">else</span><span class="Punctuation">:</span>
-  <span class="Identifier">echo</span> <span class="StringLit">&quot;Hi, &quot;</span><span class="Punctuation">,</span> <span class="Identifier">name</span><span class="Punctuation">,</span> <span class="StringLit">&quot;!&quot;</span></pre><p>可以有零个或多个 <tt class="docutils literal"><span class="pre">elif</span></tt> ，并且 <tt class="docutils literal"><span class="pre">else</span></tt> 是可选的，``elif`` 关键字是 <tt class="docutils literal"><span class="pre">else if</span></tt> 的简写，并且避免过度缩进。（ <tt class="docutils literal"><span class="pre">&quot;&quot;</span></tt> 是空字符串。它不包含字符。）</p>
+  <span class="Identifier">echo</span> <span class="StringLit">&quot;Hi, &quot;</span><span class="Punctuation">,</span> <span class="Identifier">name</span><span class="Punctuation">,</span> <span class="StringLit">&quot;!&quot;</span></pre><p>可以有零个或多个 <tt class="docutils literal"><span class="pre">elif</span></tt> ，并且 <tt class="docutils literal"><span class="pre">else</span></tt> 是可选的， <tt class="docutils literal"><span class="pre">elif</span></tt> 关键字是 <tt class="docutils literal"><span class="pre">else if</span></tt> 的简写，并且避免过度缩进。（ <tt class="docutils literal"><span class="pre">&quot;&quot;</span></tt> 是空字符串。它不包含字符。）</p>
 
 <h2><a class="toc-backref" id="控制流语句-case语句" href="#控制流语句-case语句">Case语句</a></h2><p>另一个分支的方法是case语句。case语句是多分支：</p>
 <pre class="listing"><span class="Keyword">let</span> <span class="Identifier">name</span> <span class="Operator">=</span> <span class="Identifier">readLine</span><span class="Punctuation">(</span><span class="Identifier">stdin</span><span class="Punctuation">)</span>
@@ -1046,7 +1046,7 @@ out inside this with no indentation restrictions.
 <h2><a class="toc-backref" id="控制流语句-作用域和块语句" href="#控制流语句-作用域和块语句">作用域和块语句</a></h2><p>控制流语句有一个还没有讲的特性: 它们有自己的作用域。这意味着在下面的样例中, <tt class="docutils literal"><span class="pre">x</span></tt> 在作用域外是不可访问的:</p>
 <pre class="listing"><span class="Keyword">while</span> <span class="Identifier">false</span><span class="Punctuation">:</span>
   <span class="Keyword">var</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="StringLit">&quot;hi&quot;</span>
-<span class="Identifier">echo</span> <span class="Identifier">x</span> <span class="Comment"># 不行</span></pre><p>一个while(for)语句引入一个隐式块。标识符是只在它们声明的块内部可见。``block`` 语句可以用来显式地打开一个新块：</p>
+<span class="Identifier">echo</span> <span class="Identifier">x</span> <span class="Comment"># 不行</span></pre><p>一个while(for)语句引入一个隐式块。标识符是只在它们声明的块内部可见。 <tt class="docutils literal"><span class="pre">block</span></tt> 语句可以用来显式地打开一个新块：</p>
 <pre class="listing"><span class="Keyword">block</span> <span class="Identifier">myblock</span><span class="Punctuation">:</span>
   <span class="Keyword">var</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="StringLit">&quot;hi&quot;</span>
 <span class="Identifier">echo</span> <span class="Identifier">x</span> <span class="Comment"># 不行</span></pre><p>块的 <em>label</em> (本例中的 <tt class="docutils literal"><span class="pre">myblock</span></tt> ) 是可选的。</p>
@@ -1065,7 +1065,7 @@ out inside this with no indentation restrictions.
     <span class="Identifier">echo</span> <span class="StringLit">&quot;looping&quot;</span>
     <span class="Keyword">break</span> <span class="Identifier">myblock2</span> <span class="Comment"># 离开块 (和循环)</span>
   <span class="Identifier">echo</span> <span class="StringLit">&quot;still in block&quot;</span></pre>
-<h2><a class="toc-backref" id="控制流语句-continue语句" href="#控制流语句-continue语句">Continue语句</a></h2><p>像其它编程语言一样，``continue`` 语句立刻开始下一次迭代:</p>
+<h2><a class="toc-backref" id="控制流语句-continue语句" href="#控制流语句-continue语句">Continue语句</a></h2><p>像其它编程语言一样， <tt class="docutils literal"><span class="pre">continue</span></tt> 语句立刻开始下一次迭代:</p>
 <pre class="listing"><span class="Keyword">while</span> <span class="Identifier">true</span><span class="Punctuation">:</span>
   <span class="Keyword">let</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Identifier">readLine</span><span class="Punctuation">(</span><span class="Identifier">stdin</span><span class="Punctuation">)</span>
   <span class="Keyword">if</span> <span class="Identifier">x</span> <span class="Operator">==</span> <span class="StringLit">&quot;&quot;</span><span class="Punctuation">:</span> <span class="Keyword">continue</span>
@@ -1081,12 +1081,12 @@ out inside this with no indentation restrictions.
   <span class="Identifier">echo</span> <span class="StringLit">&quot;unknown operating system&quot;</span></pre><p><tt class="docutils literal"><span class="pre">when</span></tt> 语句几乎等价于 <tt class="docutils literal"><span class="pre">if</span></tt> 语句, 但有以下区别:</p>
 <ul class="simple"><li>每个条件必须是常量表达式，因为它被编译器求值。</li>
 <li>分支内的语句不打开新作用域。</li>
-<li>编译器检查语义并*仅*为属于第一个求值为true的条件生成代码。</li>
+<li>编译器检查语义并 <em>仅</em> 为属于第一个求值为true的条件生成代码。</li>
 </ul>
-<p><tt class="docutils literal"><span class="pre">when</span></tt> 语句在写平台特定代码时有用，类似于C语言中的``#ifdef``结构。</p>
+<p><tt class="docutils literal"><span class="pre">when</span></tt> 语句在写平台特定代码时有用，类似于C语言中的 <tt class="docutils literal"><span class="pre">#ifdef</span></tt> 结构。</p>
 
 <h1><a class="toc-backref" id="语句和缩进" href="#语句和缩进">语句和缩进</a></h1><p>既然我们覆盖了基本的控制流语句, 让我们回到Nim缩进规则。</p>
-<p>在Nim中 <em>简单语句</em> 和 <em>复杂语句</em> 有区别。*简单语句* 不能包含其它语句：属于简单语句的赋值, 过程调用或 <tt class="docutils literal"><span class="pre">return</span></tt> 语句。 <em>复杂语句</em> 像 <tt class="docutils literal"><span class="pre">if</span></tt> 、``when`` 、``for`` 、``while`` 可以包含其它语句。 为了避免歧义，复杂语句必须缩进, 但单个简单语句不必:</p>
+<p>在Nim中 <em>简单语句</em> 和 <em>复杂语句</em> 有区别。 <em>简单语句</em> 不能包含其它语句：属于简单语句的赋值, 过程调用或 <tt class="docutils literal"><span class="pre">return</span></tt> 语句。 <em>复杂语句</em> 像 <tt class="docutils literal"><span class="pre">if</span></tt> 、 <tt class="docutils literal"><span class="pre">when</span></tt> 、 <tt class="docutils literal"><span class="pre">for</span></tt> 、 <tt class="docutils literal"><span class="pre">while</span></tt> 可以包含其它语句。 为了避免歧义，复杂语句必须缩进, 但单个简单语句不必:</p>
 <pre class="listing"><span class="Comment"># 单个赋值语句不需要缩进:</span>
 <span class="Keyword">if</span> <span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Identifier">false</span>
 
@@ -1120,8 +1120,8 @@ out inside this with no indentation restrictions.
 <span class="Keyword">if</span> <span class="Identifier">yes</span><span class="Punctuation">(</span><span class="StringLit">&quot;Should I delete all your important files?&quot;</span><span class="Punctuation">)</span><span class="Punctuation">:</span>
   <span class="Identifier">echo</span> <span class="StringLit">&quot;I'm sorry Dave, I'm afraid I can't do that.&quot;</span>
 <span class="Keyword">else</span><span class="Punctuation">:</span>
-  <span class="Identifier">echo</span> <span class="StringLit">&quot;I think you know what the problem is just as well as I do.&quot;</span></pre><p>这个样例展示了一个名叫 <tt class="docutils literal"><span class="pre">yes</span></tt> 的过程，它问用户一个 <tt class="docutils literal"><span class="pre">question</span></tt> 并返回true如果他们回答&quot;yes&quot;（或类似的回答），返回false当他们回答&quot;no&quot;（或类似的回答）。一个 <tt class="docutils literal"><span class="pre">return</span></tt> 语句立即离开过程。``(question: string): bool`` 语法描述过程需要一个名为 <tt class="docutils literal"><span class="pre">question``，类型为 ``string``的变量，并且返回一个 ``bool``值。 ``bool</span></tt> 类型是内置的：合法的值只有 <tt class="docutils literal"><span class="pre">true</span></tt> 和 <tt class="docutils literal"><span class="pre">false</span></tt> 。if或while语句中的条件必须是 <tt class="docutils literal"><span class="pre">bool</span></tt> 类型。</p>
-<p>一些术语: 样例中 <tt class="docutils literal"><span class="pre">question</span></tt> 叫做一个(形) <em>参</em>,``&quot;Should I...&quot;`` 叫做*实参*传递给这个参数。</p>
+  <span class="Identifier">echo</span> <span class="StringLit">&quot;I think you know what the problem is just as well as I do.&quot;</span></pre><p>这个样例展示了一个名叫 <tt class="docutils literal"><span class="pre">yes</span></tt> 的过程，它问用户一个 <tt class="docutils literal"><span class="pre">question</span></tt> 并返回true如果他们回答&quot;yes&quot;（或类似的回答），返回false当他们回答&quot;no&quot;（或类似的回答）。一个 <tt class="docutils literal"><span class="pre">return</span></tt> 语句立即离开过程。 <tt class="docutils literal"><span class="pre">(question: string): bool</span></tt> 语法描述过程需要一个名为 <tt class="docutils literal"><span class="pre">question</span></tt> ，类型为 <tt class="docutils literal"><span class="pre">string</span></tt> 的变量，并且返回一个 <tt class="docutils literal"><span class="pre">bool</span></tt> 值。 <tt class="docutils literal"><span class="pre">bool</span></tt> 类型是内置的：合法的值只有 <tt class="docutils literal"><span class="pre">true</span></tt> 和 <tt class="docutils literal"><span class="pre">false</span></tt> 。if或while语句中的条件必须是 <tt class="docutils literal"><span class="pre">bool</span></tt> 类型。</p>
+<p>一些术语: 样例中 <tt class="docutils literal"><span class="pre">question</span></tt> 叫做一个(形) <em>参</em>, <tt class="docutils literal"><span class="pre">&quot;Should I...&quot;</span></tt> 叫做 <em>实参</em> 传递给这个参数。</p>
 
 <h2><a class="toc-backref" id="过程-result变量" href="#过程-result变量">Result变量</a></h2><p>一个返回值的过程有一个隐式 <tt class="docutils literal"><span class="pre">result</span></tt> 变量声明代表返回值。一个没有表达式的 <tt class="docutils literal"><span class="pre">return</span></tt> 语句是 <tt class="docutils literal"><span class="pre">return result</span></tt> 的简写。 <tt class="docutils literal"><span class="pre">result</span></tt> 总在过程的结尾自动返回如果退出时没有 <tt class="docutils literal"><span class="pre">return</span></tt> 语句.</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">sumTillNegative</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">varargs</span><span class="Punctuation">[</span><span class="Identifier">int</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">int</span> <span class="Operator">=</span>
@@ -1186,7 +1186,7 @@ out inside this with no indentation restrictions.
 
 <h2><a class="toc-backref" id="过程-操作符" href="#过程-操作符">操作符</a></h2><p>Nim库重度使用重载，一个原因是每个像 <tt class="docutils literal"><span class="pre">+</span></tt> 的操作符就是一个重载过程。解析器让你在 <tt class="docutils literal"><span class="pre">中缀标记</span></tt> (<tt class="docutils literal"><span class="pre">a + b</span></tt>)或 <tt class="docutils literal"><span class="pre">前缀标记</span></tt> (<tt class="docutils literal"><span class="pre">+ a</span></tt>)中使用操作符。 一个中缀操作符总是有两个实参，一个前缀操作符总是一个。(后缀操作符是不可能的，因为这有歧义： <tt class="docutils literal"><span class="pre">a @ @ b</span></tt> 表示 <tt class="docutils literal"><span class="pre">(a) @ (@b)</span></tt> 还是 <tt class="docutils literal"><span class="pre">(a@) @ (b)</span></tt> ？它总是表示 <tt class="docutils literal"><span class="pre">(a) @ (@b)</span></tt> , 因为Nim中没有后缀操作符。</p>
 <p>除了几个内置的关键字操作符如 <tt class="docutils literal"><span class="pre">and</span></tt> 、 <tt class="docutils literal"><span class="pre">or</span></tt> 、 <tt class="docutils literal"><span class="pre">not</span></tt> ，操作符总是由以下符号构成： <tt class="docutils literal"><span class="pre">+ - * \ / &lt; &gt; = @ $ ~ &amp; % ! ? ^ . |</span></tt></p>
-<p>允许用户定义的操作符。没有什么阻止你定义自己的``@!?+~``操作符，但这么做降低了可读性。</p>
+<p>允许用户定义的操作符。没有什么阻止你定义自己的 <tt class="docutils literal"><span class="pre">@!?+~</span></tt> 操作符，但这么做降低了可读性。</p>
 <p>操作符优先级由第一个字符决定。细节可以在手册中找到。</p>
 <p>用反引号&quot;``&quot;括起来定义一个新操作符：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Punctuation">`</span><span class="Operator">$</span><span class="Punctuation">`</span> <span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">myDataType</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">string</span> <span class="Operator">=</span> <span class="Operator">...</span>
@@ -1254,7 +1254,7 @@ out inside this with no indentation restrictions.
   <span class="Identifier">u</span> <span class="Operator">=</span> <span class="DecNumber">0'</span><span class="Identifier">u</span>   <span class="Comment"># u是 ``uint``</span></pre><p>多数常用整数用来计数内存中的对象，所以 <tt class="docutils literal"><span class="pre">int</span></tt> 和指针具有相同的大小。</p>
 <p>整数支持通用操作符 <tt class="docutils literal"><span class="pre">+ - * div mod &lt; &lt;= == != &gt; &gt;=</span></tt> 。 也支持 <tt class="docutils literal"><span class="pre">and or xor not</span></tt> 操作符，并提供 <em>按位</em> 操作。 左移用 <tt class="docutils literal"><span class="pre">shl</span></tt> ，右移用 <tt class="docutils literal"><span class="pre">shr</span></tt> 。位移操作符实参总是被当作 <em>无符号整型</em> 。 <span id="算术位移_1">算术位移</span> 可以普通乘法或除法。</p>
 <p>无符号操作不会引起上溢和下溢。</p>
-<p>无损 <span id="自动类型转换_1">自动类型转换</span> 在表达式中使用不同类型的整数时执行。如果会失真，会抛出`EOutOfRange`:idx: 异常（如果错误没能在编译时检查出来）。</p>
+<p>无损 <span id="自动类型转换_1">自动类型转换</span> 在表达式中使用不同类型的整数时执行。如果会失真，会抛出 <span id="eoutofrange_1">EOutOfRange</span> 异常（如果错误没能在编译时检查出来）。</p>
 
 <h2><a class="toc-backref" id="基本类型-浮点" href="#基本类型-浮点">浮点</a></h2><p>Nim有这些内置浮点类型： <tt class="docutils literal"><span class="pre">float float32 float64</span></tt> 。</p>
 <p>默认浮点类型是 <tt class="docutils literal"><span class="pre">float</span></tt> 。在当前的实现， <tt class="docutils literal"><span class="pre">float</span></tt> 是64位。</p>
@@ -1263,7 +1263,7 @@ out inside this with no indentation restrictions.
   <span class="Identifier">x</span> <span class="Operator">=</span> <span class="FloatNumber">0.0</span>      <span class="Comment"># x是 ``float``</span>
   <span class="Identifier">y</span> <span class="Operator">=</span> <span class="FloatNumber">0.0'f32</span>  <span class="Comment"># y是 ``float32``</span>
   <span class="Identifier">z</span> <span class="Operator">=</span> <span class="FloatNumber">0.0'f64</span>  <span class="Comment"># z是 ``float64``</span></pre><p>浮点类型支持通用操作符 <tt class="docutils literal"><span class="pre">+ - * / &lt; &lt;= == != &gt; &gt;=</span></tt> 并遵循IEEE-754标准。</p>
-<p>自动类型转换在表达式中使用不同类型时执行：短类型转换为长类型。整数类型 <strong>不</strong> 是自动转换为浮点类型，反之亦然。使用 <a class="reference external" href="system.html#toInt">toInt</a> 和 <a class="reference external" href="system.html#toFloat">toFloat</a> 过程来转换。</p>
+<p>自动类型转换在表达式中使用不同类型时执行：短类型转换为长类型。整数类型 <strong>不</strong> 会自动转换为浮点类型，反之亦然。使用 <a class="reference external" href="system.html#toInt">toInt</a> 和 <a class="reference external" href="system.html#toFloat">toFloat</a> 过程来转换。</p>
 
 <h2><a class="toc-backref" id="基本类型-类型转换" href="#基本类型-类型转换">类型转换</a></h2><p>数字类型转换通过使用类型来执行：</p>
 <pre class="listing"><span class="Keyword">var</span>
@@ -1300,8 +1300,8 @@ out inside this with no indentation restrictions.
 
 <span class="Keyword">var</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Identifier">south</span>     <span class="Comment"># `x`是`Direction`; 值是`south`</span>
 <span class="Identifier">echo</span> <span class="Identifier">x</span>            <span class="Comment"># 向标准输出写&quot;south&quot;</span></pre><p>所有对比操作符可以用枚举类型。</p>
-<p>枚举符号 枚举的符号可以被限定以避免歧义：``Direction.south``.</p>
-<p><tt class="docutils literal"><span class="pre">$</span></tt> 操作符可以将任何枚举值转换为它的名字，``ord`` 过程可以转换为它底层的整数类型。</p>
+<p>枚举符号 枚举的符号可以被限定以避免歧义： <tt class="docutils literal"><span class="pre">Direction.south</span></tt> 。</p>
+<p><tt class="docutils literal"><span class="pre">$</span></tt> 操作符可以将任何枚举值转换为它的名字， <tt class="docutils literal"><span class="pre">ord</span></tt> 过程可以转换为它底层的整数类型。</p>
 <p>为了更好的对接其它编程语言，枚举类型可以赋一个显式的序数值，序数值必须是升序。</p>
 
 <h2><a class="toc-backref" id="高级类型-序数类型" href="#高级类型-序数类型">序数类型</a></h2><p>枚举、整型, <tt class="docutils literal"><span class="pre">char</span></tt> 和 <tt class="docutils literal"><span class="pre">bool</span></tt> （还有子范围）叫做序数类型。序数类型有一些特殊操作：</p>
@@ -1330,7 +1330,7 @@ out inside this with no indentation restrictions.
 </ul>
 <p>或等价类型。对有符号整数集合的基类型被定义为在 <tt class="docutils literal"><span class="pre">0 .. MaxSetElements-1</span></tt> 的范围内， 其中 <tt class="docutils literal"><span class="pre">MaxSetElements</span></tt> 目前是2^16。</p>
 <p>原因在于集合实现成高性能位矢量。用大类型声明集合会出现错误：</p>
-<pre class="listing"><span class="Keyword">var</span> <span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Identifier">set</span><span class="Punctuation">[</span><span class="Identifier">int64</span><span class="Punctuation">]</span> <span class="Comment"># 错误: 集合太大</span></pre><p>集合可以通过集合构造器来构造：``{}`` 是空集合。 空集合与其它具体的集合类型兼容。构造器也可以用来包含元素（和元素范围）：</p>
+<pre class="listing"><span class="Keyword">var</span> <span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Identifier">set</span><span class="Punctuation">[</span><span class="Identifier">int64</span><span class="Punctuation">]</span> <span class="Comment"># 错误: 集合太大</span></pre><p>集合可以通过集合构造器来构造： <tt class="docutils literal"><span class="pre">{}</span></tt> 是空集合。 空集合与其它具体的集合类型兼容。构造器也可以用来包含元素（和元素范围）：</p>
 <pre class="listing"><span class="Keyword">type</span>
   <span class="Identifier">CharSet</span> <span class="Operator">=</span> <span class="Identifier">set</span><span class="Punctuation">[</span><span class="Identifier">char</span><span class="Punctuation">]</span>
 <span class="Keyword">var</span>
@@ -1430,7 +1430,7 @@ out inside this with no indentation restrictions.
 <pre class="listing"><span class="Keyword">var</span>
   <span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">seq</span><span class="Punctuation">[</span><span class="Identifier">int</span><span class="Punctuation">]</span> <span class="Comment"># 整数序列引用</span>
 <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">2</span><span class="Punctuation">,</span> <span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">4</span><span class="Punctuation">,</span> <span class="DecNumber">5</span><span class="Punctuation">,</span> <span class="DecNumber">6</span><span class="Punctuation">]</span> <span class="Comment"># @ 把数组转成分配在堆上的序列</span></pre><p>序列变量用 <tt class="docutils literal"><span class="pre">@[]</span></tt> 初始化。</p>
-<p><tt class="docutils literal"><span class="pre">for</span></tt> 语句可以用一到两个变量当和序列一起使用。当你使用一个变量的形式，变量持有序列提供的值。``for`` 语句是在 <a class="reference external" href="system.html">system</a> 模块中的 <a class="reference external" href="system.html#items.i,seq[T]">items()</a> 迭代器结果上迭代。 但如果你使用两个变量形式，第一个变量将持有索引位置，第二个变量持有值。这里 <tt class="docutils literal"><span class="pre">for</span></tt> 语句是在 <a class="reference external" href="system.html">system</a> 模块中的 <a class="reference external" href="system.html#pairs.i,seq[T]">pairs()</a> 迭代器结果上迭代。例如：</p>
+<p><tt class="docutils literal"><span class="pre">for</span></tt> 语句可以用一到两个变量当和序列一起使用。当你使用一个变量的形式，变量持有序列提供的值。 <tt class="docutils literal"><span class="pre">for</span></tt> 语句是在 <a class="reference external" href="system.html">system</a> 模块中的 <a class="reference external" href="system.html#items.i,seq[T]">items()</a> 迭代器结果上迭代。 但如果你使用两个变量形式，第一个变量将持有索引位置，第二个变量持有值。这里 <tt class="docutils literal"><span class="pre">for</span></tt> 语句是在 <a class="reference external" href="system.html">system</a> 模块中的 <a class="reference external" href="system.html#pairs.i,seq[T]">pairs()</a> 迭代器结果上迭代。例如：</p>
 <pre class="listing"><span class="Keyword">for</span> <span class="Identifier">value</span> <span class="Keyword">in</span> <span class="Operator">@</span><span class="Punctuation">[</span><span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">4</span><span class="Punctuation">,</span> <span class="DecNumber">5</span><span class="Punctuation">]</span><span class="Punctuation">:</span>
   <span class="Identifier">echo</span> <span class="Identifier">value</span>
 <span class="Comment"># --&gt; 3</span>
@@ -1466,7 +1466,7 @@ out inside this with no indentation restrictions.
 
 <span class="Identifier">myWriteln</span><span class="Punctuation">(</span><span class="Identifier">stdout</span><span class="Punctuation">,</span> <span class="StringLit">&quot;abc&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;def&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;xyz&quot;</span><span class="Punctuation">)</span>
 <span class="Comment"># 编译器转为:</span>
-<span class="Identifier">myWriteln</span><span class="Punctuation">(</span><span class="Identifier">stdout</span><span class="Punctuation">,</span> <span class="Punctuation">[</span><span class="StringLit">&quot;abc&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;def&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;xyz&quot;</span><span class="Punctuation">]</span><span class="Punctuation">)</span></pre><p>转换只在可变形参是过程头的最后一个形参时完成。它也可以在这个情景执行类型转换：</p>
+<span class="Identifier">myWriteln</span><span class="Punctuation">(</span><span class="Identifier">stdout</span><span class="Punctuation">,</span> <span class="Punctuation">[</span><span class="StringLit">&quot;abc&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;def&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;xyz&quot;</span><span class="Punctuation">]</span><span class="Punctuation">)</span></pre><p>转换只在可变形参是过程头部的最后一个形参时完成。它也可以在这个情景执行类型转换：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">myWriteln</span><span class="Punctuation">(</span><span class="Identifier">f</span><span class="Punctuation">:</span> <span class="Identifier">File</span><span class="Punctuation">,</span> <span class="Identifier">a</span><span class="Punctuation">:</span> <span class="Identifier">varargs</span><span class="Punctuation">[</span><span class="Identifier">string</span><span class="Punctuation">,</span> <span class="Punctuation">`</span><span class="Operator">$</span><span class="Punctuation">`</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">=</span>
   <span class="Keyword">for</span> <span class="Identifier">s</span> <span class="Keyword">in</span> <span class="Identifier">items</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">)</span><span class="Punctuation">:</span>
     <span class="Identifier">write</span><span class="Punctuation">(</span><span class="Identifier">f</span><span class="Punctuation">,</span> <span class="Identifier">s</span><span class="Punctuation">)</span>
@@ -1489,7 +1489,7 @@ out inside this with no indentation restrictions.
 <pre class="listing"><span class="StringLit">&quot;Slices are useless.&quot;</span>
  <span class="Operator">|</span>          <span class="Operator">|</span>     <span class="Operator">|</span>
  <span class="DecNumber">0</span>         <span class="DecNumber">11</span>    <span class="DecNumber">17</span>   <span class="Identifier">使用索引</span>
-<span class="Operator">^</span><span class="DecNumber">19</span>        <span class="Operator">^</span><span class="DecNumber">8</span>    <span class="Operator">^</span><span class="DecNumber">2</span>   <span class="Identifier">使用</span><span class="Operator">^</span></pre><p>其中 <tt class="docutils literal"><span class="pre">b[0..^1]</span></tt> 等价于 <tt class="docutils literal"><span class="pre">b[0..b.len-1]</span></tt> 和 <tt class="docutils literal"><span class="pre">b[0..&lt;b.len]``，它可以看作 ``^1</span></tt> 提供一个指定 <tt class="docutils literal"><span class="pre">b.len-1</span></tt> 的简写。</p>
+<span class="Operator">^</span><span class="DecNumber">19</span>        <span class="Operator">^</span><span class="DecNumber">8</span>    <span class="Operator">^</span><span class="DecNumber">2</span>   <span class="Identifier">使用</span><span class="Operator">^</span></pre><p>其中 <tt class="docutils literal"><span class="pre">b[0..^1]</span></tt> 等价于 <tt class="docutils literal"><span class="pre">b[0..b.len-1]</span></tt> 和 <tt class="docutils literal"><span class="pre">b[0..&lt;b.len]</span></tt> ，它可以看作 <tt class="docutils literal"><span class="pre">^1</span></tt> 提供一个指定 <tt class="docutils literal"><span class="pre">b.len-1</span></tt> 的简写。</p>
 <p>在上面的例子中，因为字符串在句号中结束，来获取字符串中&quot;useless&quot;的部分并替换为&quot;useful&quot;。</p>
 <p><tt class="docutils literal"><span class="pre">b[11..^2]</span></tt> 是&quot;useless&quot;的部分， <tt class="docutils literal"><span class="pre">b[11..^2] = &quot;useful&quot;</span></tt> 用&quot;useful&quot;替换&quot;useless&quot;，得到结果&quot;Slices are useful.&quot;</p>
 <p>注意: 可选方法是 <tt class="docutils literal"><span class="pre">b[^8..^2] = &quot;useful&quot;</span></tt> 或 <tt class="docutils literal"><span class="pre">b[11..b.len-2] = &quot;useful&quot;</span></tt> 或 as <tt class="docutils literal"><span class="pre">b[11..&lt;b.len-1] = &quot;useful&quot;</span></tt> 。</p>
@@ -1525,7 +1525,7 @@ out inside this with no indentation restrictions.
   <span class="Identifier">Person</span><span class="Operator">*</span> <span class="Operator">=</span> <span class="Keyword">object</span> <span class="Comment"># 其它模块可见</span>
     <span class="Identifier">name</span><span class="Operator">*:</span> <span class="Identifier">string</span>  <span class="Comment"># 这个类型的字段在其它模块可见</span>
     <span class="Identifier">age</span><span class="Operator">*:</span> <span class="Identifier">int</span></pre>
-<h2><a class="toc-backref" id="高级类型-元组" href="#高级类型-元组">元组</a></h2><p>元组和你目前见到的对象很像。它们是赋值时拷贝每个成分的值类型。与对象类型不同的是，元组类型是结构化类型，这意味着不同的元组类型是*等价的*如果它们以相同的顺序指定相同类型和相同名称的字段。</p>
+<h2><a class="toc-backref" id="高级类型-元组" href="#高级类型-元组">元组</a></h2><p>元组和你目前见到的对象很像。它们是赋值时拷贝每个成分的值类型。与对象类型不同的是，元组类型是结构化类型，这意味着不同的元组类型是 <em>等价的</em> 如果它们以相同的顺序指定相同类型和相同名称的字段。</p>
 <p>构造函数 <tt class="docutils literal"><span class="pre">()</span></tt> 可以用来构造元组。构造函数中字段的顺序必须与元组定义中的顺序匹配。但与对象不同，此处可能不使用元组类型的名称。</p>
 <p>如对象类型， <tt class="docutils literal"><span class="pre">t.field</span></tt> 用来访问一个元组的字段。 另一个对象不可用的标记法是 <tt class="docutils literal"><span class="pre">t[i]</span></tt> 访问第 <tt class="docutils literal"><span class="pre">i</span></tt>' 个字段。这里 <tt class="docutils literal"><span class="pre">i</span></tt> 必须是一个常整数。</p>
 <pre class="listing"><span class="Keyword">type</span>
@@ -1603,7 +1603,7 @@ out inside this with no indentation restrictions.
   <span class="Identifier">n</span><span class="Punctuation">:</span> <span class="Identifier">Node</span>
 <span class="Identifier">new</span><span class="Punctuation">(</span><span class="Identifier">n</span><span class="Punctuation">)</span>
 <span class="Identifier">n</span><span class="Operator">.</span><span class="Identifier">data</span> <span class="Operator">=</span> <span class="DecNumber">9</span>
-<span class="Comment"># 不必写n[].data; 实际上 n[].data是很不提倡的!</span></pre><p>为了分配一个新追踪的对象，必须使用内置过程 <tt class="docutils literal"><span class="pre">new` 。为了处理未追踪内存， 可以用``alloc</span></tt>, <tt class="docutils literal"><span class="pre">dealloc</span></tt> 和 <tt class="docutils literal"><span class="pre">realloc</span></tt> 。 <a class="reference external" href="system.html">system</a> 模块文档包含更多细节。</p>
+<span class="Comment"># 不必写n[].data; 实际上n[].data是不提倡的!</span></pre><p>为了分配一个新追踪的对象，必须使用内置过程 <tt class="docutils literal"><span class="pre">new</span></tt> 。 为了处理未追踪内存， 可以用 <tt class="docutils literal"><span class="pre">alloc</span></tt>, <tt class="docutils literal"><span class="pre">dealloc</span></tt> 和 <tt class="docutils literal"><span class="pre">realloc</span></tt> 。 <a class="reference external" href="system.html">system</a> 模块文档包含更多细节。</p>
 <p>如果一个引用指向 <em>nothing</em>, 它的值是 <tt class="docutils literal"><span class="pre">nil</span></tt> 。</p>
 
 <h2><a class="toc-backref" id="高级类型-过程类型" href="#高级类型-过程类型">过程类型</a></h2><p>过程类型是指向过程的指针。 <tt class="docutils literal"><span class="pre">nil</span></tt> 是过程类型变量允许的值。Nim使用过程类型达到 <span id="函数式_1">函数式</span> 编程技术。</p>
@@ -1618,9 +1618,9 @@ out inside this with no indentation restrictions.
 
 <span class="Identifier">forEach</span><span class="Punctuation">(</span><span class="Identifier">echoItem</span><span class="Punctuation">)</span></pre><p>过程类型的一个小问题是调用规约影响类型兼容性：过程类型只兼容如果他们有相同的调用规约。不同的调用规约列在 <a class="reference external" href="manual.html#types-procedural-type">manual</a> 。</p>
 
-<h2><a class="toc-backref" id="高级类型-distinct类型" href="#高级类型-distinct类型">Distinct类型</a></h2><p>一个Distinct类型允许用于创建“不暗示它与其基本类型之间的子类型关系”的新类型。你必须 <strong>显式</strong> 定义distinct类型的所有行为。 为了帮助这点，distinct类型和它的基类型可以相互强转。 样例提供在 <a class="reference external" href="manual.html#types-distinct-type">manual</a> 。</p>
+<h2><a class="toc-backref" id="高级类型-distinct类型" href="#高级类型-distinct类型">Distinct类型</a></h2><p>一个Distinct类型允许用于创建“非基本类型的子类型”。你必须 <strong>显式</strong> 定义distinct类型的所有行为。 为了帮助这点，distinct类型和它的基类型可以相互强转。 样例提供在 <a class="reference external" href="manual.html#types-distinct-type">manual</a> 。</p>
 
-<h1><a class="toc-backref" id="模块" href="#模块">模块</a></h1><p>Nim支持用模块的概念把一个程序拆分成片段。每个模块在它自己的文件里。模块实现了 <span id="信息隐藏_1">信息隐藏</span> 和 <span id="编译隔离_1">编译隔离</span> 。一个模块可以通过`import`:idx: 语句访问另一个模块符号。 只有标记了星号(<tt class="docutils literal"><span class="pre">*</span></tt>)的顶级符号被导出：</p>
+<h1><a class="toc-backref" id="模块" href="#模块">模块</a></h1><p>Nim支持用模块的概念把一个程序拆分成片段。每个模块在它自己的文件里。模块实现了 <span id="信息隐藏_1">信息隐藏</span> 和 <span id="编译隔离_1">编译隔离</span> 。一个模块可以通过 <span id="import_1">import</span> 语句访问另一个模块符号。 只有标记了星号(<tt class="docutils literal"><span class="pre">*</span></tt>)的顶级符号被导出：</p>
 <pre class="listing"><span class="Comment"># Module A</span>
 <span class="Keyword">var</span>
   <span class="Identifier">x</span><span class="Operator">*</span><span class="Punctuation">,</span> <span class="Identifier">y</span><span class="Punctuation">:</span> <span class="Identifier">int</span>
@@ -1665,7 +1665,7 @@ out inside this with no indentation restrictions.
 
 <span class="Identifier">mymodule</span><span class="Operator">.</span><span class="Identifier">x</span><span class="Punctuation">(</span><span class="Punctuation">)</span>  <span class="Comment"># 必须用模块名前缀限定x</span>
 
-<span class="Identifier">x</span><span class="Punctuation">(</span><span class="Punctuation">)</span>           <span class="Comment"># 没有限定使用x是编译错误</span></pre><p>l因为模块普遍比较长方便描述，你也可以在限定符号时使用短的别名。</p>
+<span class="Identifier">x</span><span class="Punctuation">(</span><span class="Punctuation">)</span>           <span class="Comment"># 没有限定使用x是编译错误</span></pre><p>因为模块普遍比较长方便描述，你也可以在限定符号时使用短的别名。</p>
 <pre class="listing"><span class="Keyword">from</span> <span class="Identifier">mymodule</span> <span class="Keyword">as</span> <span class="Identifier">m</span> <span class="Keyword">import</span> <span class="Keyword">nil</span>
 
 <span class="Identifier">m</span><span class="Operator">.</span><span class="Identifier">x</span><span class="Punctuation">(</span><span class="Punctuation">)</span>         <span class="Comment"># m是mymodule别名</span></pre>
@@ -1681,7 +1681,7 @@ out inside this with no indentation restrictions.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-08-08 11:54:39 UTC</small>
+        <small>Made with Nim. Generated: 2019-08-09 02:56:41 UTC</small>
       </div>
     </div>
   </div>
