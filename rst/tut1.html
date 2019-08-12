@@ -911,7 +911,7 @@ nim c -r greetings.nim</pre>
 <p>编译发布版使用:<pre>
 nim c -d:release greetings.nim</pre>
 </p>
-<p>Nim编译器默认生成大量运行时检查，旨在方便调试。用 <tt class="docutils literal"><span class="pre">-d:release</span></tt> 一些检查被 <a class="reference external" href="nimc.html#compiler-usage-compile-time-symbols">关闭并且打开了优化</a> 。</p>
+<p>Nim编译器默认生成大量运行时检查，旨在方便调试。用 <tt class="docutils literal"><span class="pre">-d:release</span></tt>  <a class="reference external" href="nimc.html#compiler-usage-compile-time-symbols">关闭一些检查并且打开优化</a> 。 （译者注，-d:release的功能在最近的版本已经发生变化，现在会打开所有运行时检查，使用 -d:danger来替代，以生成更好性能的代码）</p>
 <p>尽管程序的作用很明显，但我会解释下语法：没有缩进的语句会在程序开始时执行。缩进是Nim语句进行分组的方式。缩进仅允许空格，不允许制表符。</p>
 <p>字符串字面值用双引号括起来。 <tt class="docutils literal"><span class="pre">var</span></tt> 语句声明一个新的名为 <tt class="docutils literal"><span class="pre">name</span></tt> ，类型为 <tt class="docutils literal"><span class="pre">string</span></tt> ，值为 <a class="reference external" href="system.html#readLine,File">readLine</a> 方法返回值的变量名。 因为编译器知道 <a class="reference external" href="system.html#readLine,File">readLine</a> 返回一个字符串，你可以省略声明中的类型(这叫作 <span id="局部类型推导_1">局部类型推导</span> )。所以这样也可以：</p>
 <pre class="listing"><span class="Keyword">var</span> <span class="Identifier">name</span> <span class="Operator">=</span> <span class="Identifier">readLine</span><span class="Punctuation">(</span><span class="Identifier">stdin</span><span class="Punctuation">)</span></pre><p>请注意，这基本上是Nim中存在的唯一类型推导形式：它是简洁性和可读性之间的折衷。</p>
@@ -1216,7 +1216,7 @@ out inside this with no indentation restrictions.
   <span class="Keyword">var</span> <span class="Identifier">res</span> <span class="Operator">=</span> <span class="Identifier">a</span>
   <span class="Keyword">while</span> <span class="Identifier">res</span> <span class="Operator">&lt;=</span> <span class="Identifier">b</span><span class="Punctuation">:</span>
     <span class="Keyword">return</span> <span class="Identifier">res</span>
-    <span class="Identifier">inc</span><span class="Punctuation">(</span><span class="Identifier">res</span><span class="Punctuation">)</span></pre><p>这不行。问题在于过程不应当只 <tt class="docutils literal"><span class="pre">return</span></tt> ，但是迭代器后的return和 <strong>continue</strong> 已经完成。这 <em>return and continue</em> 叫做 <tt class="docutils literal"><span class="pre">yield</span></tt> 语句。现在只剩下用 <tt class="docutils literal"><span class="pre">iterator</span></tt> 替换 <tt class="docutils literal"><span class="pre">proc</span></tt> 关键字， 它来了——我们的第一个迭代器：</p>
+    <span class="Identifier">inc</span><span class="Punctuation">(</span><span class="Identifier">res</span><span class="Punctuation">)</span></pre><p>这不行,问题在于过程不应当只 <tt class="docutils literal"><span class="pre">return</span></tt> ，但是迭代器后的return和 <strong>continue</strong> 已经完成。这 <em>return and continue</em> 叫做 <tt class="docutils literal"><span class="pre">yield</span></tt> 语句。现在只剩下用 <tt class="docutils literal"><span class="pre">iterator</span></tt> 替换 <tt class="docutils literal"><span class="pre">proc</span></tt> 关键字， 它来了——我们的第一个迭代器：</p>
 <pre class="listing"><span class="Keyword">iterator</span> <span class="Identifier">countup</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">,</span> <span class="Identifier">b</span><span class="Punctuation">:</span> <span class="Identifier">int</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">int</span> <span class="Operator">=</span>
   <span class="Keyword">var</span> <span class="Identifier">res</span> <span class="Operator">=</span> <span class="Identifier">a</span>
   <span class="Keyword">while</span> <span class="Identifier">res</span> <span class="Operator">&lt;=</span> <span class="Identifier">b</span><span class="Punctuation">:</span>
@@ -1228,7 +1228,7 @@ out inside this with no indentation restrictions.
 <li>迭代器不支持递归。</li>
 <li>迭代器不能前向声明，因为编译器必须能够内联迭代器。（这个限制将在编译器的未来版本中消失。）</li>
 </ul>
-<p>你也可以用 <tt class="docutils literal"><span class="pre">closure</span></tt> 迭代器得到一个不同的限制集合。详见 <a class="reference external" href="manual.html#iterators-and-the-for-statement-first-class-iterators">一等迭代器</a> 。 迭代器可以和过程有同样的名字和形参，因为它们有自己的命名空间。 因此，通常的做法是将迭代器包装在同名的proc中，这些迭代器会累积结果并将其作为序列返回, 像 <a class="reference external" href="strutils.html">strutils module</a> 中的 <tt class="docutils literal"><span class="pre">split</span></tt> 。</p>
+<p>你也可以用 <tt class="docutils literal"><span class="pre">closure</span></tt> 迭代器得到一个不同的限制集合。详见 <a class="reference external" href="manual.html#iterators-and-the-for-statement-first-class-iterators">一等迭代器</a> 。 迭代器可以和过程有同样的名字和形参，因为它们有自己的命名空间。 因此，通常的做法是将迭代器包装在同名的proc中，这些迭代器会累积结果并将其作为序列返回, 像 <a class="reference external" href="strutils.html">strutils模块</a> 中的 <tt class="docutils literal"><span class="pre">split</span></tt> 。</p>
 
 <h1><a class="toc-backref" id="基本类型" href="#基本类型">基本类型</a></h1><p>本章处理基本内置类型和它们的操作细节。</p>
 
@@ -1681,7 +1681,7 @@ out inside this with no indentation restrictions.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-08-09 12:14:59 UTC</small>
+        <small>Made with Nim. Generated: 2019-08-12 01:44:17 UTC</small>
       </div>
     </div>
   </div>

@@ -14,15 +14,15 @@ Nim手册
 关于本文
 ===================
 
-**注意**: 本文是草案！Nim的一些功能可能需要更精确的措辞。本手册不断发展为适当的规范。
+**注意** : 本文是草案！Nim的一些功能可能需要更精确的措辞。本手册不断发展为适当的规范。
 
-**注意**: Nim的实验特性在这里 `here <manual_experimental.html>`_。
+**注意** : Nim的实验特性在这里 `here <manual_experimental.html>`_。
 
 本文描述Nim语言的词汇、语法，和语义。
 
-学习如何编译Nim程序和生成文档见 `Compiler User Guide <nimc.html>`_ and `DocGen Tools Guide <docgen.html>`_.
+学习如何编译Nim程序和生成文档见 `Compiler User Guide <nimc.html>`_ 和 `DocGen Tools Guide <docgen.html>`_ 。
 
-语言构造用扩展巴科斯范式（BNF）解释，其中 ``(a)*`` 表示 0 或者更多 ``a``, ``a+`` 表示1或更多 ``a``, 以及 ``(a)?`` 表示可选 *a*。小括号可以用来对分组进行元素。
+语言构造用扩展巴科斯范式（BNF）解释，其中 ``(a)*`` 表示 0 或者更多 ``a``, ``a+`` 表示1或更多 ``a``, 以及 ``(a)?`` 表示可选 *a* 。小括号用来对元素进行分组。
 
 ``&`` 是先行操作符; ``&a`` 表示需要 ``a`` 但不被消耗。它将在下列规则中消耗。
 
