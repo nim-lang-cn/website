@@ -43,7 +43,8 @@ Nim教程 (I)
 
   nim c -d:release greetings.nim
 
-Nim编译器默认生成大量运行时检查，旨在方便调试。用 ``-d:release`` 一些检查被 `关闭并且打开了优化<nimc.html#compiler-usage-compile-time-symbols>`_ 。
+Nim编译器默认生成大量运行时检查，旨在方便调试。用 ``-d:release``  `关闭一些检查并且打开优化<nimc.html#compiler-usage-compile-time-symbols>`_ 。
+（译者注，-d:release的功能在最近的版本已经发生变化，现在会打开所有运行时检查，使用 -d:danger来替代，以生成更好性能的代码）
 
 尽管程序的作用很明显，但我会解释下语法：没有缩进的语句会在程序开始时执行。缩进是Nim语句进行分组的方式。缩进仅允许空格，不允许制表符。
 

@@ -1,5 +1,5 @@
 ==========
-Nim手册
+Nim Manual
 ==========
 
 :Authors: Andreas Rumpf, Zahary Karadjov
@@ -8,77 +8,109 @@ Nim手册
 .. contents::
 
 
-  "复杂度"很像"能量": 你可以将它从最终用户转移到一个/一些其他玩家，但总量对于给定的任务保持不变。-- Ran
+  "Complexity" seems to be a lot like "energy": you can transfer it from the end
+  user to one/some of the other players, but the total amount seems to remain
+  pretty much constant for a given task. -- Ran
 
 
-关于本文
+About this document
 ===================
 
-**注意**: 本文是草案！Nim的一些功能可能需要更精确的措辞。本手册不断发展为适当的规范。
+**Note**: This document is a draft! Several of Nim's features may need more
+precise wording. This manual is constantly evolving into a proper specification.
 
-**注意**: Nim的实验特性在这里 `here <manual_experimental.html>`_。
+**Note**: The experimental features of Nim are
+covered `here <manual_experimental.html>`_.
 
-本文描述Nim语言的词汇、语法，和语义。
+This document describes the lexis, the syntax, and the semantics of the Nim language.
 
-学习如何编译Nim程序和生成文档见 `Compiler User Guide <nimc.html>`_ and `DocGen Tools Guide <docgen.html>`_.
+To learn how to compile Nim programs and generate documentation see
+`Compiler User Guide <nimc.html>`_ and `DocGen Tools Guide <docgen.html>`_.
 
-语言构造用扩展巴科斯范式（BNF）解释，其中 ``(a)*`` 表示 0 或者更多 ``a``, ``a+`` 表示1或更多 ``a``, 以及 ``(a)?`` 表示可选 *a*。小括号可以用来对分组进行元素。
+The language constructs are explained using an extended BNF, in which ``(a)*``
+means 0 or more ``a``'s, ``a+`` means 1 or more ``a``'s, and ``(a)?`` means an
+optional *a*. Parentheses may be used to group elements.
 
-``&`` 是先行操作符; ``&a`` 表示需要 ``a`` 但不被消耗。它将在下列规则中消耗。
+``&`` is the lookahead operator; ``&a`` means that an ``a`` is expected but
+not consumed. It will be consumed in the following rule.
 
-``|``, ``/`` 符号用于标记可选并且优先级最低。``/`` 是要求解析器尝试给定顺序的可选项的有序选择。 ``/`` 常用于确保语法没有歧义。
+The ``|``, ``/`` symbols are used to mark alternatives and have the lowest
+precedence. ``/`` is the ordered choice that requires the parser to try the
+alternatives in the given order. ``/`` is often used to ensure the grammar
+is not ambiguous.
 
-非终端符以小写字母开始，抽象终端符用大写。 
-
-逐字终端符（包括关键字）用 ``'`` 引用。示例::
+Non-terminals start with a lowercase letter, abstract terminal symbols are in
+UPPERCASE. Verbatim terminal symbols (including keywords) are quoted
+with ``'``. An example::
 
   ifStmt = 'if' expr ':' stmts ('elif' expr ':' stmts)* ('else' stmts)?
 
-二元操作符 ``^*`` 用于由第二个实参分隔的0或多次出现的简写；不像 ``^+`` 表示1或多个出现: ``a ^+ b`` 是 ``a (b a)*`` 的简写
-``a ^* b`` 是 ``(a (b a)*)?`` 的简写。示例::
+The binary ``^*`` operator is used as a shorthand for 0 or more occurrences
+separated by its second argument; likewise ``^+`` means 1 or more
+occurrences: ``a ^+ b`` is short for ``a (b a)*``
+and ``a ^* b`` is short for ``(a (b a)*)?``. Example::
 
   arrayConstructor = '[' expr ^* ',' ']'
 
-Nim的其他部分，如作用域规则或运行时语义，都是非正式描述的。
+Other parts of Nim, like scoping rules or runtime semantics, are
+described informally.
 
 
 
 
-定义
+Definitions
 ===========
 
-Nim代码指定一个计算，该计算作用于由称为 `位置`:idx: 的组件组成的内存。 变量基本上是位置的名称。每个变量和位置都是某种 `类型`:idx: 。
-变量类型叫做 `静态类型`:idx: ，位置的类型叫做 `动态类型`:idx: 。
-如果静态类型和动态类型不一样，它是动态类型的一个超类型或子类型。
+Nim code specifies a computation that acts on a memory consisting of
+components called `locations`:idx:. A variable is basically a name for a
+location. Each variable and location is of a certain `type`:idx:. The
+variable's type is called `static type`:idx:, the location's type is called
+`dynamic type`:idx:. If the static type is not the same as the dynamic type,
+it is a super-type or subtype of the dynamic type.
 
- `标识符`:idx: 是声明为变量，类型，过程等的名称的符号。
-声明适用的程序区域叫做 `作用域`:idx: 。作用域可以嵌套。
-标识符的含义由声明标识符的最小封闭范围确定，除非重载解析规则另有说明。
+An `identifier`:idx: is a symbol declared as a name for a variable, type,
+procedure, etc. The region of the program over which a declaration applies is
+called the `scope`:idx: of the declaration. Scopes can be nested. The meaning
+of an identifier is determined by the smallest enclosing scope in which the
+identifier is declared unless overloading resolution rules suggest otherwise.
 
-表达式指定生成值或位置的计算。产生位置的表达式叫 `左值`:idx: 。左值可以表示位置或位置包含的值，具体取决于上下文。
+An expression specifies a computation that produces a value or location.
+Expressions that produce locations are called `l-values`:idx:. An l-value
+can denote either a location or the value the location contains, depending on
+the context.
 
-Nim `程序`:idx: 由一个或多个包含Nim代码的文本 `源文件`:idx: 构成。
-它由Nim `编译器`:idx: 处理成一个 `可执行文件`:idx: 。
-可执行文件的类型取决于编译器实现； 例如它可以是原生二进制或JavaScript源代码。
+A Nim `program`:idx: consists of one or more text `source files`:idx: containing
+Nim code. It is processed by a Nim `compiler`:idx: into an `executable`:idx:.
+The nature of this executable depends on the compiler implementation; it may,
+for example, be a native binary or JavaScript source code.
 
-在典型的Nim程序中，多数代码编译成可执行文件。 但是，某些代码可以在 `编译期`:idx: 执行 。 
-这可以包括宏定义使用的常量表达式，宏定义，和Nim过程。
-编译期支持大部分Nim语言，但有一些限制 -- 详见 `Restrictions on Compile-Time Execution <#restrictions-on-compileminustime-execution>`_ 。
-我们用术语 `进行时`:idx: 来涵盖可执行文件中的编译时执行和代码执行。
+In a typical Nim program, most of the code is compiled into the executable.
+However, some of the code may be executed at
+`compile time`:idx:. This can include constant expressions, macro definitions,
+and Nim procedures used by macro definitions. Most of the Nim language is
+supported at compile time, but there are some restrictions -- see `Restrictions
+on Compile-Time Execution <#restrictions-on-compileminustime-execution>`_ for
+details. We use the term `runtime`:idx: to cover both compile-time execution
+and code execution in the executable.
 
-编译器把Nim源代码解析为称为 `抽象语法树`:idx: (`AST`:idx:) 的内部数据结构 。
-然后，在执行代码或编译成可执行文件前，通过 `语义分析`:idx: 变换AST。 
-这会添加语义信息，诸如表达式类型、标识符含义，以及某些情况下的表达式值。
-语义分析期间的错误叫做 `静态错误`:idx: 。
-未另行指定时，本手册中描述的错误是静态错误。
+The compiler parses Nim source code into an internal data structure called the
+`abstract syntax tree`:idx: (`AST`:idx:). Then, before executing the code or
+compiling it into the executable, it transforms the AST through `semantic
+analysis`:idx:. This adds semantic information such as expression types,
+identifier meanings, and in some cases expression values. An error detected
+during semantic analysis is called a `static error`:idx:. Errors described in
+this manual are static errors when not otherwise specified.
 
-`运行时检查错误`:idx: 是实现在运行时检查并报告的错误。
-报错此类错误的方法是通过 *引发异常* 或 *以致命错误退出* 。 
-但是，该实现提供了禁用这些 `运行时检查`:idx: 的方法 . 
-有关详细信息，请参阅 pragmas_ 部分。
+A `checked runtime error`:idx: is an error that the implementation detects
+and reports at runtime. The method for reporting such errors is via
+*raising exceptions* or *dying with a fatal error*. However, the implementation
+provides a means to disable these `runtime checks`:idx:. See the section
+pragmas_ for details.
 
-检查的运行时错误是导致异常还是致命错误取决于实现。
-因此以下程序无效；即使代码声称从越界数组访问中捕获 `IndexError` ，编译器也可以选择允许程序退出致命错误。
+Whether a checked runtime error results in an exception or in a fatal error is
+implementation specific. Thus the following program is invalid; even though the
+code purports to catch the `IndexError` from an out-of-bounds array access, the
+compiler may instead choose to allow the program to die with a fatal error.
 
 .. code-block:: nim
   var a: array[0..1, char]
@@ -88,23 +120,32 @@ Nim `程序`:idx: 由一个或多个包含Nim代码的文本 `源文件`:idx: �
   except IndexError:
     echo "invalid index"
 
-`未经检查的运行时错误`:idx: 是一个不能保证被检测到的错误，并且可能导致任意的计算后续行为。
-如果仅使用 `safe`:idx: 语言功能并且未禁用运行时检查，则不会发生未经检查的运行时错误。
+An `unchecked runtime error`:idx: is an error that is not guaranteed to be
+detected, and can cause the subsequent behavior of the computation to
+be arbitrary. Unchecked runtime errors cannot occur if only `safe`:idx:
+language features are used and if no runtime checks are disabled.
 
-`常量表达式`:idx: 是一个表达式，其值可以在出现的代码的语义分析期间计算。 
-它不是左值也没有副作用。
-常量表达式不仅限于语义分析的功能，例如常量折叠;他们可以使用编译时执行所支持的所有Nim语言功能。
-由于常量表达式可以用作语义分析的输入（例如用于定义数组边界），因此这种灵活性要求编译器交错语义分析和编译时代码执行。
+A `constant expression`:idx: is an expression whose value can be computed during
+semantic analysis of the code in which it appears. It is never an l-value and
+never has side effects. Constant expressions are not limited to the capabilities
+of semantic analysis, such as constant folding; they can use all Nim language
+features that are supported for compile-time execution. Since constant
+expressions can be used as an input to semantic analysis (such as for defining
+array bounds), this flexibility requires the compiler to interleave semantic
+analysis and compile-time code execution.
+
+It is mostly accurate to picture semantic analysis proceeding top to bottom and
+left to right in the source code, with compile-time code execution interleaved
+when necessary to compute values that are required for subsequent semantic
+analysis. We will see much later in this document that macro invocation not only
+requires this interleaving, but also creates a situation where semantic analyis
+does not entirely proceed top to bottom and left to right.
 
 
-在源代码中从上到下和从左到右进行图像语义分析是非常准确的，在必要时交错编译时代码执行以计算后续语义分析所需的值。
-我们将在本文档后面看到，宏调用不仅需要这种交错，而且还会产生语义分析不能完全从上到下，从左到右进行的情况。
-
-
-词汇分析
+Lexical Analysis
 ================
 
-编码
+Encoding
 --------
 
 All Nim source files are in the UTF-8 encoding (or its ASCII subset). Other
@@ -115,7 +156,7 @@ Macintosh form using the ASCII CR (return) character. All of these forms can be
 used equally, regardless of platform.
 
 
-缩进
+Indentation
 -----------
 
 Nim's standard grammar describes an `indentation sensitive`:idx: language.
@@ -149,7 +190,7 @@ statements (simplified example)::
 
 
 
-注释
+Comments
 --------
 
 Comments start anywhere outside a string or character literal with the
@@ -172,7 +213,7 @@ Documentation comments are tokens; they are only allowed at certain places in
 the input file as they belong to the syntax tree!
 
 
-多行注释
+Multiline comments
 ------------------
 
 Starting with version 0.13.0 of the language Nim supports multiline comments.
@@ -200,7 +241,7 @@ Multiline documentation comments also exist and support nesting too:
     ]##
 
 
-标识符 & 关键字
+Identifiers & Keywords
 ----------------------
 
 Identifiers in Nim can be any string of letters, digits
@@ -225,7 +266,7 @@ Some keywords are unused; they are reserved for future developments of the
 language.
 
 
-标识符相等性
+Identifier equality
 -------------------
 
 Two identifiers are considered equal if the following algorithm returns true:
@@ -259,7 +300,7 @@ it was not case-sensitive and underscores were ignored and there was not even a
 distinction between ``foo`` and ``Foo``.
 
 
-字符串字面值
+String literals
 ---------------
 
 Terminal symbol in the grammar: ``STR_LIT``.
@@ -300,7 +341,7 @@ Strings in Nim may contain any 8-bit value, even embedded zeros. However
 some operations may interpret the first binary zero as a terminator.
 
 
-三引用字符串字面值
+Triple quoted string literals
 -----------------------------
 
 Terminal symbol in the grammar: ``TRIPLESTR_LIT``.
@@ -322,7 +363,7 @@ Produces::
   "long string within quotes"
 
 
-原始字符串字面值
+Raw string literals
 -------------------
 
 Terminal symbol in the grammar: ``RSTR_LIT``.
@@ -352,7 +393,7 @@ as ``"""`` since triple quoted string literals do not interpret escape
 sequences either.
 
 
-广义原始字符串字面值
+Generalized raw string literals
 -------------------------------
 
 Terminal symbols in the grammar: ``GENERALIZED_STR_LIT``,
@@ -370,7 +411,7 @@ The construct ``identifier"""string literal"""`` exists too. It is a shortcut
 for ``identifier("""string literal""")``.
 
 
-字符字面值
+Character literals
 ------------------
 
 Character literals are enclosed in single quotes ``''`` and can contain the
@@ -410,7 +451,7 @@ type is used for Unicode characters, it can represent any Unicode character.
 ``Rune`` is declared in the `unicode module <unicode.html>`_.
 
 
-数字常量
+Numerical constants
 -------------------
 
 Numerical constants are of a single type and have the form::
@@ -497,7 +538,7 @@ the bit width of the datatype, it is accepted.
 Hence: 0b10000000'u8 == 0x80'u8 == 128, but, 0b10000000'i8 == 0x80'i8 == -1
 instead of causing an overflow error.
 
-操作符
+Operators
 ---------
 
 Nim allows user defined operators. An operator is any combination of the
@@ -520,7 +561,7 @@ The ``not`` keyword is always a unary operator, ``a not b`` is parsed
 as ``a(not b)``, not as ``(a) not (b)``.
 
 
-其它标识
+Other tokens
 ------------
 
 The following strings denote other tokens::
@@ -534,7 +575,7 @@ and not the two tokens `{.`:tok:, `.}`:tok:.
 
 
 
-句法
+Syntax
 ======
 
 This section lists Nim's standard syntax. How the parser handles
@@ -545,10 +586,11 @@ Binary operators have 11 different levels of precedence.
 
 
 
-结合律
+Associativity
 -------------
 
-Binary operators whose first character is ``^`` are right-associative, all other binary operators are left-associative.
+Binary operators whose first character is ``^`` are right-associative, all
+other binary operators are left-associative.
 
 .. code-block:: nim
   proc `^/`(x, y: float): float =
@@ -557,7 +599,7 @@ Binary operators whose first character is ``^`` are right-associative, all other
   echo 12 ^/ 4 ^/ 8 # 24.0 (4 / 8 = 0.5, then 12 / 0.5 = 24.0)
   echo 12  / 4  / 8 # 0.375 (12 / 4 = 3.0, then 3 / 8 = 0.375)
 
- 
+Precedence
 ----------
 
 Unary operators always bind stronger than any binary
@@ -616,7 +658,7 @@ of a call or whether it is parsed as a tuple constructor:
   echo (1, 2) # pass the tuple (1, 2) to echo
 
 
-语法
+Grammar
 -------
 
 The grammar's start symbol is ``module``.
@@ -626,7 +668,7 @@ The grammar's start symbol is ``module``.
 
 
 
-求值顺序
+Order of evaluation
 ===================
 
 Order of evaluation is strictly left-to-right, inside-out as it is typical for most others
@@ -675,7 +717,7 @@ Rationale: Consistency with overloaded assignment or assignment-like operations,
 ``a = b`` can be read as ``performSomeCopy(a, b)``.
 
 
-常量和常量表达式
+Constants and Constant Expressions
 ==================================
 
 A `constant`:idx: is a symbol that is bound to the value of a constant
@@ -737,7 +779,7 @@ problem!)
     echo display_fib
 
 
-编译期执行限制
+Restrictions on Compile-Time Execution
 ======================================
 
 Nim code that will be executed at compile time cannot use the following
@@ -752,7 +794,7 @@ language features:
 Some or all of these restrictions are likely to be lifted over time.
 
 
-类型
+Types
 =====
 
 All expressions have a type which is known during semantic analysis. Nim
@@ -771,9 +813,9 @@ These are the major type classes:
 * generic type
 
 
-序数类型
+Ordinal types
 -------------
-序数类型有以下特征：
+Ordinal types have the following characteristics:
 
 - Ordinal types are countable and ordered. This property allows
   the operation of functions as ``inc``, ``ord``, ``dec`` on ordinal types to
@@ -791,7 +833,7 @@ in later versions of the language.)
 A distinct type is an ordinal type if its base type is an ordinal type.
 
 
-预定义整数类型
+Pre-defined integer types
 -------------------------
 These integer types are pre-defined:
 
@@ -876,7 +918,7 @@ For further details, see `Convertible relation
 <#type-relations-convertible-relation>`_.
 
 
-子范围类型
+Subrange types
 --------------
 A subrange type is a range of values from an ordinal or floating point type (the base
 type). To define a subrange type, one must specify its limiting values -- the
@@ -900,7 +942,7 @@ A subrange type has the same size as its base type (``int`` in the
 Subrange example).
 
 
-预定义浮点类型
+Pre-defined floating point types
 --------------------------------
 
 The following floating point types are pre-defined:
@@ -968,7 +1010,7 @@ floating pointer values during semantic analysis; this means expressions like
 constant folding are true.
 
 
-布尔类型
+Boolean type
 ------------
 The boolean type is named `bool`:idx: in Nim and can be one of the two
 pre-defined values ``true`` and ``false``. Conditions in ``while``,
@@ -992,7 +1034,7 @@ evaluation. Example:
 The size of the bool type is one byte.
 
 
-字符类型
+Character type
 --------------
 The character type is named ``char`` in Nim. Its size is one byte.
 Thus it cannot represent an UTF-8 character, but a part of it.
@@ -1007,7 +1049,7 @@ character. ``Rune`` is declared in the `unicode module <unicode.html>`_.
 
 
 
-枚举类型
+Enumeration types
 -----------------
 Enumeration types define a new type whose values consist of the ones
 specified. The values are ordered. Example:
@@ -1089,7 +1131,7 @@ as ``MyEnum.value``:
 
 To implement bit fields with enums see `Bit fields <#set-type-bit-fields>`_
 
-字符串类型
+String type
 -----------
 All string literals are of the type ``string``. A string in Nim is very
 similar to a sequence of characters. However, strings in Nim are both
@@ -1149,7 +1191,7 @@ i-th *unichar*. The iterator ``runes`` from the `unicode module
 <unicode.html>`_ can be used for iteration over all Unicode characters.
 
 
-cstring类型
+cstring type
 ------------
 
 The ``cstring`` type meaning `compatible string` is the native representation
@@ -1185,13 +1227,13 @@ string from a cstring:
   var cstr: cstring = str
   var newstr: string = $cstr
 
-结构化类型
+Structured types
 ----------------
 A variable of a structured type can hold multiple values at the same
 time. Structured types can be nested to unlimited levels. Arrays, sequences,
 tuples, objects and sets belong to the structured types.
 
-数组和序列类型
+Array and sequence types
 ------------------------
 Arrays are a homogeneous type, meaning that each element in the array has the
 same type. Arrays always have a fixed length specified as a constant expression
@@ -1275,7 +1317,7 @@ value:
 
 
 
-开放数组
+Open arrays
 -----------
 
 Often fixed size arrays turn out to be too inflexible; procedures should
@@ -1296,7 +1338,7 @@ supported because this is seldom needed and cannot be done efficiently.
   testOpenArray([1,2,3])  # array[]
   testOpenArray(@[1,2,3]) # seq[]
 
-可变参数
+Varargs
 -------
 
 A ``varargs`` parameter is an openarray parameter that additionally
@@ -1476,10 +1518,8 @@ For a ``ref object`` type ``system.new`` is invoked implicitly.
 
 Object variants
 ---------------
-Often an object hierarchy is overkill in certain situations where simple variant
-types are needed. Object variants are tagged unions discriminated via a
-enumerated type used for runtime type flexibility, mirroring the concepts of
-*sum types* and *algebraic data types (ADTs)* as found in other languages.
+Often an object hierarchy is overkill in certain situations where simple
+variant types are needed.
 
 An example:
 
@@ -4366,21 +4406,7 @@ Procedures utilizing type classes in such manner are considered to be
 `implicitly generic`:idx:. They will be instantiated once for each unique
 combination of param types used within the program.
 
-Whilst the syntax of type classes appears to resemble that of ADTs/algebraic data
-types in ML-like languages, it should be understood that type classes are static
-constraints to be enforced at type instantations. Type classes are not really
-types in themsleves, but are instead a system of providing generic "checks" that
-ultimately *resolve* to some singular type. Type classes do not allow for
-runtime type dynamism, unlike object variants or methods.
-
-As an example, the following would not compile:
-
-.. code-block:: nim
-  type TypeClass = int | string
-  var foo: TypeClass = 2 # foo's type is resolved to an int here
-  foo = "this will fail" # error here, because foo is an int
-
-Nim allows for type classes and regular types to be specified
+Nim also allows for type classes and regular types to be specified
 as `type constraints`:idx: of the generic type parameter:
 
 .. code-block:: nim
@@ -7035,4 +7061,3 @@ Threads and exceptions
 The interaction between threads and exceptions is simple: A *handled* exception
 in one thread cannot affect any other thread. However, an *unhandled* exception
 in one thread terminates the whole *process*!
-

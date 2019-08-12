@@ -1,5 +1,5 @@
 ==============================================
-Nim增强建议书 #1 - 标准库风格指南
+Nim Enhancement Proposal #1 - Standard Library Style Guide
 ==============================================
 :Author: Clay Sweetser, Dominik Picheta
 :Version: |nimversion|
@@ -7,7 +7,7 @@ Nim增强建议书 #1 - 标准库风格指南
 .. contents::
 
 
-引言
+Introduction
 ============
 Although Nim supports a variety of code and formatting styles, it is
 nevertheless beneficial that certain community efforts, such as the standard
@@ -26,10 +26,10 @@ codebase and official projects, such as the Nim compiler, the standard library,
 and the various official tools such as C2Nim.
 
 ----------------
-风格指南
+Style Guidelines
 ----------------
 
-空格和空白字符公约
+Spacing and Whitespace Conventions
 -----------------------------------
 
 - Lines should be no longer than 80 characters. Limiting the amount of
@@ -59,7 +59,7 @@ and the various official tools such as C2Nim.
       LongLongPtr* = ptr LongLong
 
 
-命名公约
+Naming Conventions
 ------------------
 
 Note: While the rules outlined below are the *current* naming conventions,
@@ -147,7 +147,7 @@ changed in the future.
   an in-place version should get an ``-In`` suffix (``replaceIn`` for this example).
 
 
-The stdlib API is designed to be **易于使用** and consistent. Ease of use is
+The stdlib API is designed to be **easy to use** and consistent. Ease of use is
 measured by the number of calls to achieve a concrete high level action. The
 ultimate goal is that the programmer can *guess* a name.
 
@@ -221,7 +221,7 @@ indentation             indent
 -------------------     ------------   --------------------------------------
 
 
-编码公约
+Coding Conventions
 ------------------
 
 - The 'return' statement should ideally be used when its control-flow properties
@@ -244,7 +244,7 @@ indentation             indent
   of the code's purpose.
 
 
-多行语句和表达式公约
+Conventions for multi-line statements and expressions
 -----------------------------------------------------
 
 - Tuples which are longer than one line should indent their parameters to
