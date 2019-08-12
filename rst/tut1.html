@@ -970,14 +970,14 @@ out inside this with no indentation restrictions.
 <pre class="listing"><span class="Keyword">const</span> <span class="Identifier">input</span> <span class="Operator">=</span> <span class="Identifier">readLine</span><span class="Punctuation">(</span><span class="Identifier">stdin</span><span class="Punctuation">)</span> <span class="Comment"># 错误: 需要常量表达式</span></pre><pre class="listing"><span class="Keyword">let</span> <span class="Identifier">input</span> <span class="Operator">=</span> <span class="Identifier">readLine</span><span class="Punctuation">(</span><span class="Identifier">stdin</span><span class="Punctuation">)</span>   <span class="Comment"># 可以</span></pre>
 <h1><a class="toc-backref" id="流程控制语句" href="#流程控制语句">流程控制语句</a></h1><p>greetings程序由三个顺序执行的语句构成。只有最原始的程序可以不需要分支和循环。</p>
 
-<h2><a class="toc-backref" id="流程控制语句-if语句" href="#流程控制语句-if语句">If语句</a></h2><p>if语句是分支控制流的一种方法:</p>
+<h2><a class="toc-backref" id="流程控制语句-if语句" href="#流程控制语句-if语句">If语句</a></h2><p>if语句是使流程控制分支的一种方法:</p>
 <pre class="listing"><span class="Keyword">let</span> <span class="Identifier">name</span> <span class="Operator">=</span> <span class="Identifier">readLine</span><span class="Punctuation">(</span><span class="Identifier">stdin</span><span class="Punctuation">)</span>
 <span class="Keyword">if</span> <span class="Identifier">name</span> <span class="Operator">==</span> <span class="StringLit">&quot;&quot;</span><span class="Punctuation">:</span>
   <span class="Identifier">echo</span> <span class="StringLit">&quot;Poor soul, you lost your name?&quot;</span>
 <span class="Keyword">elif</span> <span class="Identifier">name</span> <span class="Operator">==</span> <span class="StringLit">&quot;name&quot;</span><span class="Punctuation">:</span>
   <span class="Identifier">echo</span> <span class="StringLit">&quot;Very funny, your name is name.&quot;</span>
 <span class="Keyword">else</span><span class="Punctuation">:</span>
-  <span class="Identifier">echo</span> <span class="StringLit">&quot;Hi, &quot;</span><span class="Punctuation">,</span> <span class="Identifier">name</span><span class="Punctuation">,</span> <span class="StringLit">&quot;!&quot;</span></pre><p>可以有零个或多个 <tt class="docutils literal"><span class="pre">elif</span></tt> ，并且 <tt class="docutils literal"><span class="pre">else</span></tt> 是可选的， <tt class="docutils literal"><span class="pre">elif</span></tt> 关键字是 <tt class="docutils literal"><span class="pre">else if</span></tt> 的简写，并且避免过度缩进。（ <tt class="docutils literal"><span class="pre">&quot;&quot;</span></tt> 是空字符串。它不包含字符。）</p>
+  <span class="Identifier">echo</span> <span class="StringLit">&quot;Hi, &quot;</span><span class="Punctuation">,</span> <span class="Identifier">name</span><span class="Punctuation">,</span> <span class="StringLit">&quot;!&quot;</span></pre><p>可以有零个或多个 <tt class="docutils literal"><span class="pre">elif</span></tt> ，并且 <tt class="docutils literal"><span class="pre">else</span></tt> 是可选的， <tt class="docutils literal"><span class="pre">elif</span></tt> 关键字是 <tt class="docutils literal"><span class="pre">else if</span></tt> 的简写，并且避免过度缩进。（ <tt class="docutils literal"><span class="pre">&quot;&quot;</span></tt> 是空字符串，不包含字符。）</p>
 
 <h2><a class="toc-backref" id="流程控制语句-case语句" href="#流程控制语句-case语句">Case语句</a></h2><p>另一个分支的方法是case语句。case语句是多分支：</p>
 <pre class="listing"><span class="Keyword">let</span> <span class="Identifier">name</span> <span class="Operator">=</span> <span class="Identifier">readLine</span><span class="Punctuation">(</span><span class="Identifier">stdin</span><span class="Punctuation">)</span>
@@ -1681,7 +1681,7 @@ out inside this with no indentation restrictions.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-08-12 01:44:17 UTC</small>
+        <small>Made with Nim. Generated: 2019-08-12 04:59:11 UTC</small>
       </div>
     </div>
   </div>
