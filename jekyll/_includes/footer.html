@@ -25,34 +25,46 @@
       </div>
       <div class="pure-u-1-3 right-center">
         <a href="https://www.hostwinds.com">
-          <img src="https://www.hostwinds.com/hw-images/presskit/logo-white.png"/>
+          <img src="https://www.hostwinds.com/hw-images/presskit/logo-white.png" />
         </a>
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
       </div>
     </div>
   </section>
 
 </footer>
 <script>
-    (function(){
-      function setTracking(a) {
-        var url = a.href;
-        a.onclick = function() {
-          if (typeof(ga) !== "undefined") {
-            ga('send', 'event', 'outbound', 'click', url, {
-              'transport': 'beacon',
-              'hitCallback': function(){document.location = url;}
-            });
-          }
-        };
-      }
-
-      var a = document.getElementsByTagName("a");
-      for (var i = 0; i < a.length; ++i) {
-        if (a[i].hostname != location.hostname &&
-            a[i].getAttribute("target") !== "_blank"
-        ) {
-          setTracking(a[i])
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
         }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
       }
-    })();
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("a").attr("target", "_blank").click(function (e) {
+      e.preventDefault();
+    });
+  });
 </script>
