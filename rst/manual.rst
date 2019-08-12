@@ -16,7 +16,7 @@ Nim手册
 
 **注意** : 本文是草案！Nim的一些功能可能需要更精确的措辞。本手册不断发展为适当的规范。
 
-**注意** : Nim的实验特性在这里 `here <manual_experimental.html>`_。
+**注意** : Nim的实验特性在这里 `here <manual_experimental.html>`_ 。
 
 本文描述Nim语言的词汇、语法，和语义。
 
@@ -107,36 +107,27 @@ Nim `程序`:idx: 由一个或多个包含Nim代码的文本 `源文件`:idx: �
 编码
 --------
 
-All Nim source files are in the UTF-8 encoding (or its ASCII subset). Other
-encodings are not supported. Any of the standard platform line termination
-sequences can be used - the Unix form using ASCII LF (linefeed), the Windows
-form using the ASCII sequence CR LF (return followed by linefeed), or the old
-Macintosh form using the ASCII CR (return) character. All of these forms can be
-used equally, regardless of platform.
+所有Nim源文件都采用UTF-8编码（或其ASCII子集）。
+其他编码不受支持。
+可以使用任何标准平台线路终端序列 - 使用ASCII LF（换行）的Unix表单，使用ASCII序列CR LF的Windows表单（返回后跟换行），或使用ASCII CR（返回）的旧Macintosh表单字符。
+无论平台如何，所有这些形式都可以平等使用。
 
 
 缩进
 -----------
 
-Nim's standard grammar describes an `indentation sensitive`:idx: language.
-This means that all the control structures are recognized by indentation.
-Indentation consists only of spaces; tabulators are not allowed.
+Nim的标准语法描述了一个 `缩进敏感`:idx: 语言。
+这意味着所有控制结构都可以通过缩进识别。
+缩进仅由空格组成;制表符是不允许的。
 
-The indentation handling is implemented as follows: The lexer annotates the
-following token with the preceding number of spaces; indentation is not
-a separate token. This trick allows parsing of Nim with only 1 token of
-lookahead.
+缩进处理按如下方式实现：词法分析器使用前面的空格数注释以下标记;缩进不是一个单独的标记。
+这个技巧允许只用1个先行标记解析Nim。
 
-The parser uses a stack of indentation levels: the stack consists of integers
-counting the spaces. The indentation information is queried at strategic
-places in the parser but ignored otherwise: The pseudo terminal ``IND{>}``
-denotes an indentation that consists of more spaces than the entry at the top
-of the stack; ``IND{=}`` an indentation that has the same number of spaces. ``DED``
-is another pseudo terminal that describes the *action* of popping a value
-from the stack, ``IND{>}`` then implies to push onto the stack.
+解析器使用由整数个空格组成的缩进堆栈级别。
+缩进信息在解析器重要的位置上查询，否则被忽略：伪终端 ``IND{>}`` 表示由比在堆栈顶部更多的空格构成； ``IND{=}`` 缩进具有相同数量的空格。
+``DED`` 是描述从堆栈弹出一个值的运作的伪代码，``IND{>}`` 意味着推到栈上。
 
-With this notation we can now easily define the core of the grammar: A block of
-statements (simplified example)::
+使用这种表示法，我们现在可以轻松定义语法的核心：一个语句块（简化示例）::
 
   ifStmt = 'if' expr ':' stmt
            (IND{=} 'elif' expr ':' stmt)*
@@ -152,125 +143,124 @@ statements (simplified example)::
 注释
 --------
 
-Comments start anywhere outside a string or character literal with the
-hash character ``#``.
-Comments consist of a concatenation of `comment pieces`:idx:. A comment piece
-starts with ``#`` and runs until the end of the line. The end of line characters
-belong to the piece. If the next line only consists of a comment piece with
-no other tokens between it and the preceding one, it does not start a new
-comment:
+
+注释从字符串或字符文字外的任何地方开始，并带有哈希字符 ``#`` 。
+注释包含 `注释片段`的连接:idx: 。
+评论文章以 `#` 开头，​​一直运行到行尾。
+行尾字符属于该片段。
+如果下一行只包含一个注释片段，而它与前一个片段之间没有其他符号，则它不会启动新注释：
 
 
 .. code-block:: nim
-  i = 0     # This is a single comment over multiple lines.
-    # The scanner merges these two pieces.
-    # The comment continues here.
+  i = 0     # 这是跨行的单个注释。
+    # 扫描器合并这个块。
+    # 注释从这里继续。
 
 
-`Documentation comments`:idx: are comments that start with two ``##``.
-Documentation comments are tokens; they are only allowed at certain places in
-the input file as they belong to the syntax tree!
+`文档注释`:idx: 由两个开始 ``##`` 。
+文档注释是符号；它们仅允许出现在输入文件的某个地方，因为它们属于语法树！
 
 
 多行注释
 ------------------
 
-Starting with version 0.13.0 of the language Nim supports multiline comments.
+从版本0.13.0开始，Nim支持多行注释。
 They look like:
 
 .. code-block:: nim
-  #[Comment here.
-  Multiple lines
-  are not a problem.]#
+  #[注释这里.
+  多行
+  不是问题。]#
 
-Multiline comments support nesting:
+多行注释支持嵌套：
 
 .. code-block:: nim
-  #[  #[ Multiline comment in already
-     commented out code. ]#
+  #[  #[ 在已经注释代码中的多行注释]#
   proc p[T](x: T) = discard
   ]#
 
-Multiline documentation comments also exist and support nesting too:
+多行文档注释也存在并支持嵌套：
 
 .. code-block:: nim
   proc foo =
-    ##[Long documentation comment
-    here.
+    ##[长文档注释。
     ]##
 
 
 标识符 & 关键字
 ----------------------
 
-Identifiers in Nim can be any string of letters, digits
-and underscores, beginning with a letter. Two immediate following
-underscores ``__`` are not allowed::
+Nim中的标识符可以是任何字符、数字和由字母开始的下划线。不允许两个连续的下划线 ``__`` ::
 
   letter ::= 'A'..'Z' | 'a'..'z' | '\x80'..'\xff'
   digit ::= '0'..'9'
   IDENTIFIER ::= letter ( ['_'] (letter | digit) )*
 
-Currently any Unicode character with an ordinal value > 127 (non ASCII) is
-classified as a ``letter`` and may thus be part of an identifier but later
-versions of the language may assign some Unicode characters to belong to the
-operator characters instead.
+目前，序数值> 127（非ASCII）的任何Unicode字符都被归类为 ``字母`` ，因此可能是标识符的一部分，但该语言的更高版本可能会指定某些Unicode字符来代替运算符字符。
 
-The following keywords are reserved and cannot be used as identifiers:
+下面预留的关键字不能用作标识符：
 
 .. code-block:: nim
-   :file: keywords.txt
+  addr and as asm
+  bind block break
+  case cast concept const continue converter
+  defer discard distinct div do
+  elif else end enum except export
+  finally for from func
+  if import in include interface is isnot iterator
+  let
+  macro method mixin mod
+  nil not notin
+  object of or out
+  proc ptr
+  raise ref return
+  shl shr static
+  template try tuple type
+  using
+  var
+  when while
+  xor
+  yield
 
-Some keywords are unused; they are reserved for future developments of the
-language.
+有些关键字未使用;它们是为语言的未来发展而保留的。
 
 
 标识符相等性
 -------------------
 
-Two identifiers are considered equal if the following algorithm returns true:
+两个标识符被认为是相等的如果下列算法返回真：
 
 .. code-block:: nim
   proc sameIdentifier(a, b: string): bool =
     a[0] == b[0] and
       a.replace("_", "").toLowerAscii == b.replace("_", "").toLowerAscii
 
-That means only the first letters are compared in a case sensitive manner. Other
-letters are compared case insensitively within the ASCII range and underscores are ignored.
+这意味着只有首字母大小写敏感。
+其他字母在ASCII范围内不区分大小写，并且忽略下划线。
 
-This rather unorthodox way to do identifier comparisons is called
-`partial case insensitivity`:idx: and has some advantages over the conventional
-case sensitivity:
+这种相当不正统的标识符比较方法称为 `部分不区分大小写`:idx: 并且具有优于传统区分大小写的一些优点:
 
-It allows programmers to mostly use their own preferred
-spelling style, be it humpStyle or snake_style, and libraries written
-by different programmers cannot use incompatible conventions.
-A Nim-aware editor or IDE can show the identifiers as preferred.
-Another advantage is that it frees the programmer from remembering
-the exact spelling of an identifier. The exception with respect to the first
-letter allows common code like ``var foo: Foo`` to be parsed unambiguously.
+它允许程序员大多使用他们自己喜欢的拼写样式，无论是humpStyle还是snake_style，不同程序员编写的库不能使用不兼容的约定。
+Nim-aware编辑器或IDE可以将标识符显示为首选。
+另一个优点是它使程序员不必记住标识符的确切拼写。关于第一个字母的例外允许明确地解析像``var foo：Foo``这样的公共代码。
 
-Note that this rule also applies to keywords, meaning that ``notin`` is
-the same as ``notIn`` and ``not_in`` (all-lowercase version (``notin``, ``isnot``)
-is the preferred way of writing keywords).
+请注意，此规则也适用于关键字，这意味着 ``notin`` 和 ``notIn`` 以及 ``not_in`` 是相同的， (全小写版本 (``notin``, ``isnot``) 是写关键字的首选方式)。
 
-Historically, Nim was a fully `style-insensitive`:idx: language. This meant that
-it was not case-sensitive and underscores were ignored and there was not even a
-distinction between ``foo`` and ``Foo``.
+从历史上看，Nim是一种完全 `风格不敏感`:idx: 语言。 
+这意味着它不区分大小写并且忽略了下划线，并且 ``foo`` 和 ``Foo`` 之间甚至没有区别。 
 
 
 字符串字面值
 ---------------
 
-Terminal symbol in the grammar: ``STR_LIT``.
+语法中的终端符号: ``STR_LIT`` 。
 
-String literals can be delimited by matching double quotes, and can
-contain the following `escape sequences`:idx:\ :
+字符串文字可以通过匹配双引号来分隔，并且可以包含以下 `转义序列`:idx: :
 
 ==================         ===================================================
-  Escape sequence          Meaning
+  转义序列                  含义
 ==================         ===================================================
-  ``\p``                   platform specific newline: CRLF on Windows,
+  ``\p``                   平台特定的换行: CRLF on Windows,
                            LF on Unix
   ``\r``, ``\c``           `carriage return`:idx:
   ``\n``, ``\l``           `line feed`:idx: (often called `newline`:idx:)
@@ -296,28 +286,24 @@ contain the following `escape sequences`:idx:\ :
 ==================         ===================================================
 
 
-Strings in Nim may contain any 8-bit value, even embedded zeros. However
-some operations may interpret the first binary zero as a terminator.
+Nim中的字符串可以包含任何8位值，甚至是嵌入的零。
+但是，某些操作可能会将第一个二进制零解释为终止符。
 
 
 三引用字符串字面值
 -----------------------------
 
-Terminal symbol in the grammar: ``TRIPLESTR_LIT``.
+语法中的终端符号: ``TRIPLESTR_LIT``.
 
-String literals can also be delimited by three double quotes
-``"""`` ... ``"""``.
-Literals in this form may run for several lines, may contain ``"`` and do not
-interpret any escape sequences.
-For convenience, when the opening ``"""`` is followed by a newline (there may
-be whitespace between the opening ``"""`` and the newline),
-the newline (and the preceding whitespace) is not included in the string. The
-ending of the string literal is defined by the pattern ``"""[^"]``, so this:
+字符串文字也可以用三个双引号分隔 ``"""`` ... ``"""`` 。
+这种形式的文字可能会持续几行，可能包含 ``"`` 并且不解释任何转义序列。
+为方便起见，当开头的 ``"""`` 后面跟一个换行符 (开头 ``"""`` 和换行符之间可能有空格）时,换行符（和前面的空格）不包含在字符串。 
+字符串文字的结尾由模式定义 ``"""[^"]``, 所以:
 
 .. code-block:: nim
   """"long string within quotes""""
 
-Produces::
+生成::
 
   "long string within quotes"
 
@@ -325,18 +311,16 @@ Produces::
 原始字符串字面值
 -------------------
 
-Terminal symbol in the grammar: ``RSTR_LIT``.
+语法中的终端符号: ``RSTR_LIT``.
 
-There are also raw string literals that are preceded with the
-letter ``r`` (or ``R``) and are delimited by matching double quotes (just
-like ordinary string literals) and do not interpret the escape sequences.
-This is especially convenient for regular expressions or Windows paths:
+还有原始字符串文字，前面带有字母 ``r`` (or ``R``) 并通过匹配双引号（就像普通的字符串文字一样）分隔并且不解释转义序列。
+这对于正则表达式或Windows路径特别方便：
 
 .. code-block:: nim
 
-  var f = openFile(r"C:\texts\text.txt") # a raw string, so ``\t`` is no tab
+  var f = openFile(r"C:\texts\text.txt") # 原始字符串, 所以 ``\t`` 不是制表符。
 
-To produce a single ``"`` within a raw string literal, it has to be doubled:
+为了在原始字符串中生成一个单独的 ``"`` , 必须使用两个:
 
 .. code-block:: nim
 
@@ -346,42 +330,31 @@ Produces::
 
   a"b
 
-``r""""`` is not possible with this notation, because the three leading
-quotes introduce a triple quoted string literal. ``r"""`` is the same
-as ``"""`` since triple quoted string literals do not interpret escape
-sequences either.
+``r""""`` 这个符号是不可能的，因为三个引号引用了三引号字符串文字。
+``r"""`` 与 ``"""`` 相同，因为三重引用的字符串文字也不解释转义序列。
 
 
 广义原始字符串字面值
 -------------------------------
 
-Terminal symbols in the grammar: ``GENERALIZED_STR_LIT``,
-``GENERALIZED_TRIPLESTR_LIT``.
+语法中的终端符号: ``GENERALIZED_STR_LIT``, ``GENERALIZED_TRIPLESTR_LIT`` 。
 
-The construct ``identifier"string literal"`` (without whitespace between the
-identifier and the opening quotation mark) is a
-generalized raw string literal. It is a shortcut for the construct
-``identifier(r"string literal")``, so it denotes a procedure call with a
-raw string literal as its only argument. Generalized raw string literals
-are especially convenient for embedding mini languages directly into Nim
-(for example regular expressions).
+``标识符"字符串字面值"`` 这种构造(标识符和开始引号之间没有空格)是广义原始字符串。
+这是 ``identifier(r"string literal")`` 的缩写， 所以它表示一个过程调用原始字符串文字作为唯一的参数。 
 
-The construct ``identifier"""string literal"""`` exists too. It is a shortcut
-for ``identifier("""string literal""")``.
+广义原始字符串文字特别便于将小型语言直接嵌入到Nim中（例如正则表达式）。
+
+``标识符"""字符串字面值"""`` 也存在。它是 ``标识符("""字符串字面值""")`` 的缩写。
 
 
 字符字面值
 ------------------
 
-Character literals are enclosed in single quotes ``''`` and can contain the
-same escape sequences as strings - with one exception: the platform
-dependent `newline`:idx: (``\p``)
-is not allowed as it may be wider than one character (often it is the pair
-CR/LF for example).  Here are the valid `escape sequences`:idx: for character
-literals:
+字符文字用单引号 ``''`` 括起来，并且可以包含与字符串相同的转义序列 - 有一个例外：平台依赖的 `newline`:idx: (``\p``) 是不允许的，因为它可能比一个字符宽（通常是CR / LF对）。  
+以下是对字符字面值有效的 `转义序列`:idx: :
 
 ==================         ===================================================
-  Escape sequence          Meaning
+  转义序列                  含义
 ==================         ===================================================
   ``\r``, ``\c``           `carriage return`:idx:
   ``\n``, ``\l``           `line feed`:idx:
@@ -401,19 +374,18 @@ literals:
                            exactly two hex digits are allowed
 ==================         ===================================================
 
-A character is not an Unicode character but a single byte. The reason for this
-is efficiency: for the overwhelming majority of use-cases, the resulting
-programs will still handle UTF-8 properly as UTF-8 was specially designed for
-this. Another reason is that Nim can thus support ``array[char, int]`` or
-``set[char]`` efficiently as many algorithms rely on this feature.  The `Rune`
-type is used for Unicode characters, it can represent any Unicode character.
-``Rune`` is declared in the `unicode module <unicode.html>`_.
+字符不是Unicode字符，而是单个字节。
+
+这样做的原因是效率：对于绝大多数用例，由于UTF-8是专门为此设计的，所得到的程序仍然可以正确处理UTF-8。
+另一个原因是Nim因此可以依靠这个特性像其它算法一样有效地支持 ``array[char, int]`` 或 ``set[char]`` 。
+`Rune` 类型用于Unicode字符，它可以表示任何Unicode字符。
+``Rune`` 在 `unicode module <unicode.html>`_ 声明。
 
 
-数字常量
+数值常量
 -------------------
 
-Numerical constants are of a single type and have the form::
+数值常量是单一类型，并具有以下形式::
 
   hexdigit = digit | 'A'..'F' | 'a'..'f'
   octdigit = '0'..'7'
@@ -449,20 +421,16 @@ Numerical constants are of a single type and have the form::
               | (FLOAT_LIT | DEC_LIT | OCT_LIT | BIN_LIT) ['\''] FLOAT64_SUFFIX
 
 
-As can be seen in the productions, numerical constants can contain underscores
-for readability. Integer and floating point literals may be given in decimal (no
-prefix), binary (prefix ``0b``), octal (prefix ``0o``) and hexadecimal
-(prefix ``0x``) notation.
+从产品中可以看出，数值常数可以包含下划线以便于阅读。
 
-There exists a literal for each numerical type that is
-defined. The suffix starting with an apostrophe ('\'') is called a
-`type suffix`:idx:. Literals without a type suffix are of an integer type,
-unless the literal contains a dot or ``E|e`` in which case it is of
-type ``float``. This integer type is ``int`` if the literal is in the range
-``low(i32)..high(i32)``, otherwise it is ``int64``.
-For notational convenience the apostrophe of a type suffix
-is optional if it is not ambiguous (only hexadecimal floating point literals
-with a type suffix can be ambiguous).
+整数和浮点文字可以用十进制（无前缀），二进制（前缀 ``0b`` ），八进制（前缀 ``0o`` ）和十六进制（前缀 ``0x`` ）表示法给出。
+
+每个定义的数字类型都有一个文字。
+以一撇开始的后缀 ('\'') 叫 `类型后缀`:idx: 。
+
+没有类型后缀的文字是整数类型，除非文字包含点或 ``E | e `` ，在这种情况下它是 ``浮动`` 类型。
+整数类型是 ``int`` 如果字面值在 ``low(i32)..high(i32)`` 范围，否则是 ``int64`` 。
+为了符号方便，类型后缀的撇号是可选的，如果它不是模糊的（只有具有类型后缀的十六进制浮点文字可能是不明确的）。
 
 
 The type suffixes are:
@@ -485,70 +453,60 @@ The type suffixes are:
   ``'f64``           float64
 =================    =========================
 
-Floating point literals may also be in binary, octal or hexadecimal
-notation:
-``0B0_10001110100_0000101001000111101011101111111011000101001101001001'f64``
-is approximately 1.72826e35 according to the IEEE floating point standard.
+浮点文字也可以是二进制，八进制或十六进制表示法：
+根据IEEE浮点标准， ``0B0_10001110100_0000101001000111101011101111111011000101001101001001'f64`` 约为 1.72826e35。
 
-Literals are bounds checked so that they fit the datatype. Non base-10
-literals are used mainly for flags and bit pattern representations, therefore
-bounds checking is done on bit width, not value range. If the literal fits in
-the bit width of the datatype, it is accepted.
-Hence: 0b10000000'u8 == 0x80'u8 == 128, but, 0b10000000'i8 == 0x80'i8 == -1
-instead of causing an overflow error.
+对文字进行边界检查，以使它们适合数据类型。
+非基数10字面值主要用于标志和位模式表示，因此边界检查是在位宽而非值范围上完成的。
+如果文字符合数据类型的位宽，则接受它。
+因此：0b10000000'u8 == 0x80'u8 == 128，但是，0b10000000'i8 == 0x80'i8 == -1而不是导致溢出错误。
 
 操作符
 ---------
 
-Nim allows user defined operators. An operator is any combination of the
-following characters::
+Nim允许用户定义的运算符。运算符是以下字符的任意组合
 
        =     +     -     *     /     <     >
        @     $     ~     &     %     |
        !     ?     ^     .     :     \
 
-These keywords are also operators:
+这些关键字也是操作符:
 ``and or not xor shl shr div mod in notin is isnot of``.
 
-`.`:tok: `=`:tok:, `:`:tok:, `::`:tok: are not available as general operators; they
-are used for other notational purposes.
+`.`:tok: `=`:tok:, `:`:tok:, `::`:tok: 不作为一般操作符；它们用于其他符号用途。
 
-``*:`` is as a special case treated as the two tokens `*`:tok: and `:`:tok:
-(to support ``var v*: T``).
+``*:`` 是一个特殊情况，被视为两个标记 `*`:tok: 和 `:`:tok: (为了支持 ``var v*: T``)。
 
-The ``not`` keyword is always a unary operator, ``a not b`` is parsed
-as ``a(not b)``, not as ``(a) not (b)``.
+``not`` 关键字问题一元操作符， ``a not b`` 解析成 ``a(not b)``, 不是 ``(a) not (b)`` 。
 
 
-其它标识
+其它标记
 ------------
 
-The following strings denote other tokens::
+以下字符串表示其他标记::
 
     `   (    )     {    }     [    ]    ,  ;   [.    .]  {.   .}  (.  .)  [:
 
 
-The `slice`:idx: operator `..`:tok: takes precedence over other tokens that
-contain a dot: `{..}`:tok: are the three tokens `{`:tok:, `..`:tok:, `}`:tok:
-and not the two tokens `{.`:tok:, `.}`:tok:.
+`切片`:idx: 运算符 `..`:tok: 优先于包含点的其它标记: `{..}`:tok: 是三个标记 `{`:tok:, `..`:tok:, `}`:tok: 而不是两个标记 `{.`:tok:, `.}`:tok: 。
 
 
 
 句法
 ======
 
-This section lists Nim's standard syntax. How the parser handles
-the indentation is already described in the `Lexical Analysis`_ section.
 
-Nim allows user-definable operators.
-Binary operators have 11 different levels of precedence.
+本节列出了Nim的标准语法。解析器如何处理缩进已在 `Lexical Analysis`_ 部分中描述。
+
+
+Nim允许用户可定义的运算符。二元运算符具有11个不同的优先级。
 
 
 
 结合律
 -------------
 
-Binary operators whose first character is ``^`` are right-associative, all other binary operators are left-associative.
+第一个字符是 ``^`` 的二元运算符是右结合，所有其他二元运算符都是左结合。
 
 .. code-block:: nim
   proc `^/`(x, y: float): float =
@@ -560,28 +518,22 @@ Binary operators whose first character is ``^`` are right-associative, all other
  
 ----------
 
-Unary operators always bind stronger than any binary
-operator: ``$a + b`` is ``($a) + b`` and not ``$(a + b)``.
+一元运算符总是比任何二元运算符结合的绑定更强: ``$a + b`` is ``($a) + b`` 而不是 ``$(a + b)`` 。
 
-If an unary operator's first character is ``@`` it is a `sigil-like`:idx:
-operator which binds stronger than a ``primarySuffix``: ``@x.abc`` is parsed
-as ``(@x).abc`` whereas ``$x.abc`` is parsed as ``$(x.abc)``.
+如果一元运算符的第一个字符是 ``@`` 它是 `sigil-like`:idx: 运算符，比 ``primarySuffix`` 绑定更强: ``@x.abc`` 解析成 ``(@x).abc`` 而 ``$x.abc`` 解析成 ``$(x.abc)`` 。
 
 
-For binary operators that are not keywords the precedence is determined by the
-following rules:
+对于非关键字的二元运算符，优先级由以下规则确定：
 
-Operators ending in either ``->``, ``~>`` or ``=>`` are called
-`arrow like`:idx:, and have the lowest precedence of all operators.
+以 ``->``, ``~>`` or ``=>`` 结尾的运算符称为 `arrow like`:idx:, 并且所有运算符的优先级最低。
 
-If the operator ends with ``=`` and its first character is none of
-``<``, ``>``, ``!``, ``=``, ``~``, ``?``, it is an *assignment operator* which
-has the second lowest precedence.
+如果操作符以 ``=`` 结尾，并且它的第一个字符不是 ``<``, ``>``, ``!``, ``=``, ``~``, ``?``, 它是一个 *赋值运算符* 具有第二低的优先级。
 
-Otherwise precedence is determined by the first character.
+否则优先级由第一个字符决定。
+
 
 ================  ===============================================  ==================  ===============
-Precedence level    Operators                                      First character     Terminal symbol
+优先级             运算符                                           首字符                终端符号
 ================  ===============================================  ==================  ===============
  10 (highest)                                                      ``$  ^``            OP10
   9               ``*    /    div   mod   shl  shr  %``            ``*  %  \  /``      OP9
@@ -592,13 +544,12 @@ Precedence level    Operators                                      First charact
   4               ``and``                                                              OP4
   3               ``or xor``                                                           OP3
   2                                                                ``@  :  ?``         OP2
-  1               *assignment operator* (like ``+=``, ``*=``)                          OP1
+  1               *赋值运算符* (like ``+=``, ``*=``)                                    OP1
   0 (lowest)      *arrow like operator* (like ``->``, ``=>``)                          OP0
 ================  ===============================================  ==================  ===============
 
 
-Whether an operator is used a prefix operator is also affected by preceding
-whitespace (this parsing change was introduced with version 0.13.0):
+运算符是否使用前缀运算符也受前面的空格影响（此版本的修改随版本0.13.0引入）：
 
 .. code-block:: nim
   echo $foo
@@ -606,20 +557,19 @@ whitespace (this parsing change was introduced with version 0.13.0):
   echo($foo)
 
 
-Spacing also determines whether ``(a, b)`` is parsed as an the argument list
-of a call or whether it is parsed as a tuple constructor:
+间距还决定了 ``(a, b)`` 是否被解析为调用的参数列表，或者它是否被解析为元组构造函数：
 
 .. code-block:: nim
-  echo(1, 2) # pass 1 and 2 to echo
+  echo(1, 2) # 传1和2给echo
 
 .. code-block:: nim
-  echo (1, 2) # pass the tuple (1, 2) to echo
+  echo (1, 2) # 传元组(1, 2)给echo
 
 
 语法
 -------
 
-The grammar's start symbol is ``module``.
+语法的起始符号是 ``module``.
 
 .. include:: grammar.txt
    :literal:
@@ -629,8 +579,7 @@ The grammar's start symbol is ``module``.
 求值顺序
 ===================
 
-Order of evaluation is strictly left-to-right, inside-out as it is typical for most others
-imperative programming languages:
+评估顺序是从左到右，从内到外，因为它是大多数其他命令式编程语言的典型：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -646,8 +595,7 @@ imperative programming languages:
   doAssert s == "123"
 
 
-Assignments are not special, the left-hand-side expression is evaluated before the
-right-hand side:
+赋值也不例外，左侧表达式在右侧之前进行求值：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -671,40 +619,29 @@ right-hand side:
   doAssert b == [1, 0, 0]
 
 
-Rationale: Consistency with overloaded assignment or assignment-like operations,
-``a = b`` can be read as ``performSomeCopy(a, b)``.
+基本原理：与重载赋值或赋值类操作的一致性 ``a = b`` 可以读作 ``performSomeCopy(a, b)``.
 
 
 常量和常量表达式
 ==================================
 
-A `constant`:idx: is a symbol that is bound to the value of a constant
-expression. Constant expressions are restricted to depend only on the following
-categories of values and operations, because these are either built into the
-language or declared and evaluated before semantic analysis of the constant
-expression:
+`常量`:idx: 是一个与常量表达式值绑定的符号。
+常量表达式仅限于依赖于以下类别的值和操作，因为它们要么构建在语言中，要么在对常量表达式进行语义分析之前进行声明和求值：
 
-* literals
-* built-in operators
-* previously declared constants and compile-time variables
-* previously declared macros and templates
-* previously declared procedures that have no side effects beyond
-  possibly modifying compile-time variables
+* 字面值
+* 内置运算符
+* 之前声明的常量和编译时变量
+* 之前声明过的宏和模板
+* 之前声明的过程除了可能修改编译时变量之外没有任何副作用
 
-A constant expression can contain code blocks that may internally use all Nim
-features supported at compile time (as detailed in the next section below).
-Within such a code block, it is possible to declare variables and then later
-read and update them, or declare variables and pass them to procedures that
-modify them. However, the code in such a block must still adhere to the
-retrictions listed above for referencing values and operations outside the
-block.
+常量表达式可以包含可以在内部使用编译时支持的所有Nim功能的代码块（详见下一节）。
+在这样的代码块中，可以声明变量然后稍后读取和更新它们，或者声明变量并将它们传递给修改它们的过程。
+但是，此类块中的代码仍必须遵循上面列出的用于引用块外部的值和操作的限制。
 
-The ability to access and modify compile-time variables adds flexibility to
-constant expressions that may be surprising to those coming from other
-statically typed languages. For example, the following code echoes the beginning
-of the Fibonacci series **at compile time**. (This is a demonstration of
-flexibility in defining constants, not a recommended style for solving this
-problem!)
+
+访问和修改编译时变量的能力增加了常量表达式的灵活性。
+例如，下面的代码在 **编译时** 打印了Fibonacci数列的开头。
+（这是对定义常量的灵活性的证明，而不是解决此问题的推荐样式！）
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -740,60 +677,50 @@ problem!)
 编译期执行限制
 ======================================
 
-Nim code that will be executed at compile time cannot use the following
-language features:
+将在编译时执行的Nim代码不能使用以下语言功能：
 
-* methods
-* closure iterators
-* the ``cast`` operator
-* reference (pointer) types
-* the FFI
+* 方法
+* 闭包迭代器
+* ``cast`` 运算符
+* 引用(指针)类型
+* 外部函数接口（FFI）
 
-Some or all of these restrictions are likely to be lifted over time.
+随着时间的推移，部分或全部这些限制可能会被取消。
 
 
 类型
 =====
 
-All expressions have a type which is known during semantic analysis. Nim
-is statically typed. One can declare new types, which is in essence defining
-an identifier that can be used to denote this custom type.
+所有表达式都具有在语义分析期间已知的类型。 Nim是静态类型的。可以声明新类型，这实际上定义了可用于表示此自定义类型的标识符。
 
-These are the major type classes:
+这些是主要的类型：
 
-* ordinal types (consist of integer, bool, character, enumeration
-  (and subranges thereof) types)
-* floating point types
-* string type
-* structured types
-* reference (pointer) type
-* procedural type
-* generic type
+* 序数类型（由整数，bool，字符，枚举（及其子范围）类型组成）
+* 浮点类型
+* 字符串类型
+* 结构化类型
+* 引用 (指针)类型
+* 过程类型
+* 泛型类型
 
 
 序数类型
 -------------
 序数类型有以下特征：
 
-- Ordinal types are countable and ordered. This property allows
-  the operation of functions as ``inc``, ``ord``, ``dec`` on ordinal types to
-  be defined.
-- Ordinal values have a smallest possible value. Trying to count further
-  down than the smallest value gives a checked runtime or static error.
-- Ordinal values have a largest possible value. Trying to count further
-  than the largest value gives a checked runtime or static error.
+- 序数类型是可数和有序的。该属性允许定义函数的操作 ``inc``, ``ord``, ``dec`` 。
+- 序数值具有最小可能值。尝试进一步向下计数低于最小值会产生已检查的运行时或静态错误。
+- 序数值具有最大可能值。尝试计数超过最大值会产生已检查的运行时或静态错误。
 
-Integers, bool, characters and enumeration types (and subranges of these
-types) belong to ordinal types. For reasons of simplicity of implementation
-the types ``uint`` and ``uint64`` are not ordinal types. (This will be changed
-in later versions of the language.)
+整数，bool，字符和枚举类型（以及这些类型的子范围）属于序数类型。
+出于简化实现的原因，类型 ``uint`` 和 ``uint64`` 不是序数类型。 （这将在该语言的更高版本中更改。）
 
-A distinct type is an ordinal type if its base type is an ordinal type.
+如果基类型是序数类型，则不同类型是序数类型。
 
 
 预定义整数类型
 -------------------------
-These integer types are pre-defined:
+这些整数类型是预定义的：
 
 ``int``
   the generic signed integer type; its size is platform dependent and has the
@@ -852,13 +779,10 @@ operation                meaning
                          ``int32`` type)
 ======================   ======================================================
 
-`Automatic type conversion`:idx: is performed in expressions where different
-kinds of integer types are used: the smaller type is converted to the larger.
+`Automatic type conversion`:idx: is performed in expressions where different kinds of integer types are used: the smaller type is converted to the larger.
 
-A `narrowing type conversion`:idx: converts a larger to a smaller type (for
-example ``int32 -> int16``. A `widening type conversion`:idx: converts a
-smaller type to a larger type (for example ``int16 -> int32``). In Nim only
-widening type conversions are *implicit*:
+A `narrowing type conversion`:idx: converts a larger to a smaller type (for example ``int32 -> int16``. A `widening type conversion`:idx: converts a smaller type to a larger type (for example ``int16 -> int32``). 
+In Nim only widening type conversions are *implicit*:
 
 .. code-block:: nim
   var myInt16 = 5i16
@@ -867,20 +791,15 @@ widening type conversions are *implicit*:
   myInt16 + myInt  # of type ``int``
   myInt16 + 2i32   # of type ``int32``
 
-However, ``int`` literals are implicitly convertible to a smaller integer type
-if the literal's value fits this smaller type and such a conversion is less
-expensive than other implicit conversions, so ``myInt16 + 34`` produces
-an ``int16`` result.
+However, ``int`` literals are implicitly convertible to a smaller integer type if the literal's value fits this smaller type and such a conversion is less expensive than other implicit conversions, so ``myInt16 + 34`` produces an ``int16`` result.
 
-For further details, see `Convertible relation
-<#type-relations-convertible-relation>`_.
+For further details, see `Convertible relation <#type-relations-convertible-relation>`_.
 
 
 子范围类型
 --------------
-A subrange type is a range of values from an ordinal or floating point type (the base
-type). To define a subrange type, one must specify its limiting values -- the
-lowest and highest value of the type. For example:
+A subrange type is a range of values from an ordinal or floating point type (the base type). 
+To define a subrange type, one must specify its limiting values -- the lowest and highest value of the type. For example:
 
 .. code-block:: nim
   type
@@ -888,16 +807,13 @@ lowest and highest value of the type. For example:
     PositiveFloat = range[0.0..Inf]
 
 
-``Subrange`` is a subrange of an integer which can only hold the values 0
-to 5. ``PositiveFloat`` defines a subrange of all positive floating point values.
+``Subrange`` is a subrange of an integer which can only hold the values 0 to 5. 
+``PositiveFloat`` defines a subrange of all positive floating point values.
 NaN does not belong to any subrange of floating point types.
-Assigning any other value to a variable of type ``Subrange`` is a
-checked runtime error (or static error if it can be determined during
-semantic analysis). Assignments from the base type to one of its subrange types
-(and vice versa) are allowed.
+Assigning any other value to a variable of type ``Subrange`` is a checked runtime error (or static error if it can be determined during semantic analysis). 
+Assignments from the base type to one of its subrange types (and vice versa) are allowed.
 
-A subrange type has the same size as its base type (``int`` in the
-Subrange example).
+A subrange type has the same size as its base type (``int`` in the Subrange example).
 
 
 预定义浮点类型
@@ -936,14 +852,11 @@ The IEEE standard defines five types of floating-point exceptions:
 * Inexact: operation produces a result that cannot be represented with infinite
   precision, for example, 2.0 / 3.0, log(1.1) and 0.1 in input.
 
-The IEEE exceptions are either ignored during execution or mapped to the
-Nim exceptions: `FloatInvalidOpError`:idx:, `FloatDivByZeroError`:idx:,
-`FloatOverflowError`:idx:, `FloatUnderflowError`:idx:,
-and `FloatInexactError`:idx:.
+The IEEE exceptions are either ignored during execution or mapped to the Nim exceptions: `FloatInvalidOpError`:idx:, `FloatDivByZeroError`:idx:,
+`FloatOverflowError`:idx:, `FloatUnderflowError`:idx:, and `FloatInexactError`:idx:.
 These exceptions inherit from the `FloatingPointError`:idx: base class.
 
-Nim provides the pragmas `nanChecks`:idx: and `infChecks`:idx: to control
-whether the IEEE exceptions are ignored or trap a Nim exception:
+Nim provides the pragmas `nanChecks`:idx: and `infChecks`:idx: to control whether the IEEE exceptions are ignored or trap a Nim exception:
 
 .. code-block:: nim
   {.nanChecks: on, infChecks: on.}
@@ -959,28 +872,22 @@ There is also a `floatChecks`:idx: pragma that is a short-cut for the
 combination of ``nanChecks`` and ``infChecks`` pragmas. ``floatChecks`` are
 turned off as default.
 
-The only operations that are affected by the ``floatChecks`` pragma are
-the ``+``, ``-``, ``*``, ``/`` operators for floating point types.
+The only operations that are affected by the ``floatChecks`` pragma are the ``+``, ``-``, ``*``, ``/`` operators for floating point types.
 
-An implementation should always use the maximum precision available to evaluate
-floating pointer values during semantic analysis; this means expressions like
-``0.09'f32 + 0.01'f32 == 0.09'f64 + 0.01'f64`` that are evaluating during
-constant folding are true.
+An implementation should always use the maximum precision available to evaluate floating pointer values during semantic analysis; 
+this means expressions like ``0.09'f32 + 0.01'f32 == 0.09'f64 + 0.01'f64`` that are evaluating during constant folding are true.
 
 
 布尔类型
 ------------
-The boolean type is named `bool`:idx: in Nim and can be one of the two
-pre-defined values ``true`` and ``false``. Conditions in ``while``,
-``if``, ``elif``, ``when``-statements need to be of type ``bool``.
+The boolean type is named `bool`:idx: in Nim and can be one of the two pre-defined values ``true`` and ``false``. Conditions in ``while``, ``if``, ``elif``, ``when``-statements need to be of type ``bool``.
 
 This condition holds::
 
   ord(false) == 0 and ord(true) == 1
 
-The operators ``not, and, or, xor, <, <=, >, >=, !=, ==`` are defined
-for the bool type. The ``and`` and ``or`` operators perform short-cut
-evaluation. Example:
+The operators ``not, and, or, xor, <, <=, >, >=, !=, ==`` are defined for the bool type. 
+The ``and`` and ``or`` operators perform short-cut evaluation. Example:
 
 .. code-block:: nim
 
@@ -1009,8 +916,7 @@ character. ``Rune`` is declared in the `unicode module <unicode.html>`_.
 
 枚举类型
 -----------------
-Enumeration types define a new type whose values consist of the ones
-specified. The values are ordered. Example:
+Enumeration types define a new type whose values consist of the ones specified. The values are ordered. Example:
 
 .. code-block:: nim
 
