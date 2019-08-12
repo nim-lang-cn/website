@@ -1,5 +1,5 @@
 ==================================
-Nim Destructors and Move Semantics
+Nim析构函数与移动语义
 ==================================
 
 :Authors: Andreas Rumpf
@@ -8,25 +8,20 @@ Nim Destructors and Move Semantics
 .. contents::
 
 
-About this document
+关于本文档
 ===================
 
-This document describes the upcoming Nim runtime which does
-not use classical GC algorithms anymore but is based on destructors and
-move semantics. The new runtime's advantages are that Nim programs become
-oblivious to the involved heap sizes and programs are easier to write to make
-effective use of multi-core machines. As a nice bonus, files and sockets and
-the like will not require manual ``close`` calls anymore.
+本文档描述了即将推出的Nim运行时，它不再使用经典的GC算法，而是基于析构函数和移动语义。
+新运行时的优点是Nim程序无法访问所涉及的堆大小，并且程序更易于编写以有效使用多核机器。
+作为一个很好的奖励，文件和套接字等不再需要手动“关闭”调用。
 
-This document aims to be a precise specification about how
-move semantics and destructors work in Nim.
+本文档旨在成为关于Nim中移动语义和析构函数如何工作的精确规范。
 
 
-Motivating example
+起因示例
 ==================
 
-With the language mechanisms described here a custom seq could be
-written as:
+使用此处描述的语言机制，自定义seq可以写为：
 
 .. code-block:: nim
 
@@ -42,7 +37,7 @@ written as:
       x.data = nil
 
   proc `=`*[T](a: var myseq[T]; b: myseq[T]) =
-    # do nothing for self-assignments:
+    # 自赋值不做任何事:
     if a.data == b.data: return
     `=destroy`(a)
     a.len = b.len
@@ -52,17 +47,12 @@ written as:
       for i in 0..<a.len:
         a.data[i] = b.data[i]
 
-  proc `=move`*[T](a, b: var myseq[T]) =
-    # do nothing for self-assignments:
-    if a.data == b.data: return
+  proc `=sink`*[T](a: var myseq[T]; b: myseq[T]) =
+    # 移动赋值
     `=destroy`(a)
     a.len = b.len
     a.cap = b.cap
     a.data = b.data
-    # b's elements have been stolen so ensure that the
-    # destructor for b does nothing:
-    b.data = nil
-    b.len = 0
 
   proc add*[T](x: var myseq[T]; y: sink T) =
     if x.len >= x.cap: resize(x)
@@ -87,36 +77,29 @@ written as:
 
 
 
-Lifetime-tracking hooks
+生命周期跟踪钩子
 =======================
 
-The memory management for Nim's standard ``string`` and ``seq`` types as
-well as other standard collections is performed via so called
-"Lifetime-tracking hooks" or "type-bound operators". There are 3 different
-hooks for each (generic or concrete) object type ``T`` (``T`` can also be a
-``distinct`` type) that are called implicitly by the compiler.
+Nim的标准 ``string`` 和 ``seq`` 类型以及其他标准集合的内存管理是通过所谓的 ``生命周期跟踪钩子`` 或 ``类型绑定运算符`` 执行的。
+每个（通用或具体）对象类型有3个不同的钩子 ``T``（ ``T`` 也可以是 ``distinct`` 类型），由编译器隐式调用。
 
-(Note: The word "hook" here does not imply any kind of dynamic binding
-or runtime indirections, the implicit calls are statically bound and
-potentially inlined.)
+（注意：这里的“钩子”一词并不表示任何类型的动态绑定或运行时间接，隐式调用是静态绑定的，可能是内联的。）
+(Note: The word "hook" here does not imply any kind of dynamic binding or runtime indirections, the implicit calls are statically bound and potentially inlined.)
 
 
-`=destroy` hook
+`=destroy` 钩子
 ---------------
 
-A `=destroy` hook frees the object's associated memory and releases
-other associated resources. Variables are destroyed via this hook when
-they go out of scope or when the routine they were declared in is about
-to return.
+`=destroy` 钩子释放对象的相关内存并释放其他相关资源。当变量超出范围或者声明它们的例程即将返回时，变量会通过此钩子被销毁。
 
-The prototype of this hook for a type ``T`` needs to be:
+这个类型 ``T`` 的钩子的原型需要是：
 
 .. code-block:: nim
 
   proc `=destroy`(x: var T)
 
 
-The general pattern in ``=destroy`` looks like:
+``=destroy`` 中的一般形式如下：
 
 .. code-block:: nim
 
@@ -128,100 +111,94 @@ The general pattern in ``=destroy`` looks like:
 
 
 
-`=move` hook
+`=sink` 钩子
 ------------
 
-A `=move` hook moves an object around, the resources are stolen from the source
-and passed to the destination. It must be ensured that source's destructor does
-not free the resources afterwards.
+`=sink` 钩子移动一个对象，资源从源头被移动并传递到目的地。 
+通过将对象设置为其默认值（对象状态开始的值），确保源的析构函数不会释放资源。
+将对象``x``设置回其默认值写为``wasMoved（x）``。
 
-The prototype of this hook for a type ``T`` needs to be:
+这个类型``T``的钩子的原型需要是：
+
 
 .. code-block:: nim
 
-  proc `=move`(dest, source: var T)
+  proc `=sink`(dest: var T; source: T)
 
 
-The general pattern in ``=move`` looks like:
+``=sink`` 的一般形式如下:
 
 .. code-block:: nim
 
-  proc `=move`(dest, source: var T) =
-    # protect against self-assignments:
-    if dest.field != source.field:
-      `=destroy`(dest)
-      dest.field = source.field
-      source.field = nil
+  proc `=sink`(dest: var T; source: T) =
+    `=destroy`(dest)
+    dest.field = source.field
 
 
+**注意**: ``=sink`` 不需要检查自赋值。
+如何处理自赋值将在本文档后面解释。
 
-`=` (copy) hook
+
+`=` (复制) 钩子
 ---------------
 
-The ordinary assignment in Nim conceptually copies the values. The ``=`` hook
-is called for assignments that couldn't be transformed into moves.
+Nim中的普通赋值在概念上复制值。
+对于无法转换为 ``= sink`` 操作的赋值，调用 ``=`` hook。
 
-The prototype of this hook for a type ``T`` needs to be:
+这个类型 ``T`` 的钩子的原型需要是：
 
 .. code-block:: nim
 
   proc `=`(dest: var T; source: T)
 
 
-The general pattern in ``=`` looks like:
+``=``的一般形式如下：
 
 .. code-block:: nim
 
   proc `=`(dest: var T; source: T) =
-    # protect against self-assignments:
+    # 阻止自赋值:
     if dest.field != source.field:
       `=destroy`(dest)
       dest.field = duplicateResource(source.field)
 
 
-The ``=`` proc can be marked with the ``{.error.}`` pragma. Then any assignment
-that otherwise would lead to a copy is prevented at compile-time.
+``=`` proc 可以用 ``{.error.}`` 标记。 
+然后，在编译时阻止任何可能导致副本的任务。
 
 
-Move semantics
+移动语义
 ==============
 
-A "move" can be regarded as an optimized copy operation. If the source of the
-copy operation is not used afterwards, the copy can be replaced by a move. This
-document uses the notation ``lastReadOf(x)`` to describe that ``x`` is not
-used afterwards. This property is computed by a static control flow analysis
-but can also be enforced by using ``system.move`` explicitly.
+“移动”可以被视为优化的复制操作。
+如果之后未使用复制操作的源，则可以通过移动替换副本。
+本文档使用符号 ``lastReadOf（x）`` 来描述之后不使用 ``x` `。
+此属性由静态流程控制分析计算，但也可以通过显式使用 ``system.move`` 来强制执行。
 
 
-Swap
+交换
 ====
 
-The need to check for self-assignments and also the need to destroy previous
-objects inside ``=`` and ``=move`` is a strong indicator to treat ``system.swap``
-as a builtin primitive of its own that simply swaps every field in the involved
-objects via ``copyMem`` or a comparable mechanism.
-In other words, ``swap(a, b)`` is **not** implemented
-as ``let tmp = move(a); b = move(a); a = move(tmp)``!
+需要检查自赋值以及是否需要销毁 ``=`` 和 ``= sink`` 中的先前对象，这是将 ``system.swap`` 视为内置原语的强大指标。只需通过 ``copyMem`` 或类似机制交换涉及对象中的每个字段。
+换句话说， ``swap(a, b)`` is **不是** 实现为 ``let tmp = move(a); b = move(a); a = move(tmp)`` 。
 
-This has further consequences:
+这还有其他后果：
 
-* Objects that contain pointers that point to the same object are not supported
-  by Nim's model. Otherwise swapped objects would end up in an inconsistent state.
-* Seqs can use ``realloc`` in the implementation.
+* Nim的模型不支持包含指向同一对象的指针的对象。否则，交换的对象最终会处于不一致状态。
+* Seqs可以在实现中使用 ``realloc`` 。
 
 
-Sink parameters
+Sink形参
 ===============
 
-To move a variable into a collection usually ``sink`` parameters are involved.
-A location that is passed to a ``sink`` parameters should not be used afterwards.
-This is ensured by a static analysis over a control flow graph. A sink parameter
-*may* be consumed once in the proc's body but doesn't have to be consumed at all.
-The reason for this is that signatures
-like ``proc put(t: var Table; k: sink Key, v: sink Value)`` should be possible
-without any further overloads and ``put`` might not take owership of ``k`` if
-``k`` already exists in the table. Sink parameters enable an affine type system,
-not a linear type system.
+要将变量移动到集合中，通常会涉及 ``sink`` 形参。
+之后不应使用传递给 ``sink`` 形参的位置。
+这通过控制流图上的静态分析来确保。
+如果无法证明它是该位置的最后一次使用，则会执行复制，然后将此副本传递给接收器参数。
+
+sink形参 *may* be consumed once in the proc's body but doesn't have to be consumed at all.
+The reason for this is that signatures like ``proc put(t: var Table; k: sink Key, v: sink Value)`` should be possible without any further overloads and ``put`` might not take owership of ``k`` if ``k`` already exists in the table. 
+Sink parameters enable an affine type system, not a linear type system.
 
 The employed static analysis is limited and only concerned with local variables;
 however object and tuple fields are treated as separate entities:
@@ -250,67 +227,13 @@ An implementation is allowed, but not required to implement even more move
 optimizations (and the current implementation does not).
 
 
-Self assignments
-================
 
-Unfortunately this document departs significantly from
-the older design as specified here, https://github.com/nim-lang/Nim/wiki/Destructors.
-The reason is that under the old design so called "self assignments" could not work.
-
-
-.. code-block:: nim
-
-  proc select(cond: bool; a, b: sink string): string =
-    if cond:
-      result = a # moves a into result
-    else:
-      result = b # moves b into result
-
-  proc main =
-    var x = "abc"
-    var y = "xyz"
-
-    # possible self-assignment:
-    x = select(rand() < 0.5, x, y)
-    # 'select' must communicate what parameter has been
-    # consumed. We cannot simply generate:
-    # (select(...); wasMoved(x); wasMoved(y))
-
-Consequence: ``sink`` parameters for objects that have a non-trivial destructor
-must be passed as by-pointer under the hood. A further advantage is that parameters
-are never destroyed, only variables are. The caller's location passed to
-a ``sink`` parameter has to be destroyed by the caller and does not burden
-the callee.
-
-
-Const temporaries
-=================
-
-Constant literals like ``nil`` cannot be easily be ``=moved``'d. The solution
-is to pass a temporary location that contains ``nil`` to the sink location.
-In other words, ``var T`` can only bind to locations, but ``sink T`` can bind
-to values.
-
-For example:
-
-.. code-block:: nim
-
-  var x: owned ref T = nil
-  # gets turned into by the compiler:
-  var tmp = nil
-  move(x, tmp)
-
-
-Rewrite rules
+重写规则
 =============
 
-**Note**: A function call ``f()`` is always the "last read" of the involved
-temporary location and so covered under the more general rewrite rules.
+**注意**: 允许两种不同的实施策略:
 
-**Note**: There are two different allowed implementation strategies:
-
-1. The produced ``finally`` section can be a single section that is wrapped
-   around the complete routine body.
+1. 生成的 ``finally`` 部分可以是一个环绕整个例程体的单个部分。
 2. The produced ``finally`` section is wrapped around the enclosing scope.
 
 The current implementation follows strategy (1). This means that resources are
@@ -324,17 +247,28 @@ not destroyed at the scope exit, but at the proc exit.
   finally: `=destroy`(x)
 
 
-  f(...)
-  ------------------------    (function-call)
-  (let tmp;
+  g(f(...))
+  ------------------------    (nested-function-call)
+  g(let tmp;
   bitwiseCopy tmp, f(...);
   tmp)
   finally: `=destroy`(tmp)
 
 
+  x = f(...)
+  ------------------------    (function-sink)
+  `=sink`(x, f(...))
+
+
   x = lastReadOf z
   ------------------          (move-optimization)
-  `=move`(x, z)
+  `=sink`(x, z)
+  wasMoved(z)
+
+
+  v = v
+  ------------------   (self-assignment-removal)
+  discard "nop"
 
 
   x = y
@@ -342,62 +276,106 @@ not destroyed at the scope exit, but at the proc exit.
   `=`(x, y)
 
 
-  x = move y
-  ------------------          (enforced-move)
-  `=move`(x, y)
+  f_sink(g())
+  -----------------------     (call-to-sink)
+  f_sink(g())
 
 
   f_sink(notLastReadOf y)
-  -----------------------     (copy-to-sink)
-  (let tmp; `=`(tmp, y); f_sink(tmp))
-  finally: `=destroy`(tmp)
+  --------------------------     (copy-to-sink)
+  (let tmp; `=`(tmp, y);
+  f_sink(tmp))
 
 
-  f_sink(move y)
-  -----------------------     (enforced-move-to-sink)
-  (let tmp; `=move`(tmp, y); f_sink(tmp))
-  finally: `=destroy`(tmp)
+  f_sink(lastReadOf y)
+  -----------------------     (move-to-sink)
+  f_sink(y)
+  wasMoved(y)
 
 
+Object and array construction
+=============================
 
-Cursor variables
+Object and array construction is treated as a function call where the
+function has ``sink`` parameters.
+
+
+Destructor removal
+==================
+
+``wasMoved(x);`` followed by a `=destroy(x)` operation cancel each other
+out. An implementation is encouraged to exploit this in order to improve
+efficiency and code sizes.
+
+
+Self assignments
 ================
 
-There is an additional rewrite rule for so called "cursor" variables.
-A cursor variable is a variable that is only used for navigation inside
-a data structure. The otherwise implied copies (or moves) and destructions
-can be avoided altogether for cursor variables:
+``=sink`` in combination with ``wasMoved`` can handle self-assignments but
+it's subtle.
 
-::
+The simple case of ``x = x`` cannot be turned
+into ``=sink(x, x); wasMoved(x)`` because that would lose ``x``'s value.
+The solution is that simple self-assignments are simply transformed into
+an empty statement that does nothing.
 
-  var x {.cursor.}: T
-  x = path(z)
-  stmts
-  --------------------------  (cursor-var)
-  x = bitwiseCopy(path z)
-  stmts
-  # x is not destroyed.
+The complex case looks like a variant of ``x = f(x)``, we consider
+``x = select(rand() < 0.5, x, y)`` here:
 
-
-``stmts`` must not mutate ``z`` nor ``x``. All assignments to ``x`` must be
-of the form ``path(z)`` but the ``z`` can differ. Neither ``z`` nor ``x``
-can be aliased; this implies the addresses of these locations must not be
-used explicitly.
-
-The current implementation does not compute cursor variables but supports
-the ``.cursor`` pragma annotation. Cursor variables are respected and
-simply trusted: No checking is performed that no mutations or aliasing
-occurs.
-
-Cursor variables are commonly used in ``iterator`` implementations:
 
 .. code-block:: nim
 
-  iterator nonEmptyItems(x: seq[string]): string =
-    for i in 0..high(x):
-      let it {.cursor.} = x[i] # no string copies, no destruction of 'it'
-      if it.len > 0:
-        yield it
+  proc select(cond: bool; a, b: sink string): string =
+    if cond:
+      result = a # moves a into result
+    else:
+      result = b # moves b into result
+
+  proc main =
+    var x = "abc"
+    var y = "xyz"
+    # possible self-assignment:
+    x = select(true, x, y)
+
+
+Is transformed into:
+
+
+.. code-block:: nim
+
+  proc select(cond: bool; a, b: sink string): string =
+    try:
+      if cond:
+        `=sink`(result, a)
+        wasMoved(a)
+      else:
+        `=sink`(result, b)
+        wasMoved(b)
+    finally:
+      `=destroy`(b)
+      `=destroy`(a)
+
+  proc main =
+    var
+      x: string
+      y: string
+    try:
+      `=sink`(x, "abc")
+      `=sink`(y, "xyz")
+      `=sink`(x, select(true,
+        let blitTmp = x
+        wasMoved(x)
+        blitTmp,
+        let blitTmp = y
+        wasMoved(y)
+        blitTmp))
+      echo [x]
+    finally:
+      `=destroy`(y)
+      `=destroy`(x)
+
+As can be manually verified, this transformation is correct for
+self-assignments.
 
 
 Lent type
@@ -425,14 +403,14 @@ for expressions of type ``lent T`` or of type ``var T``.
   proc construct(kids: sink seq[Tree]): Tree =
     result = Tree(kids: kids)
     # converted into:
-    `=move`(result.kids, kids)
+    `=sink`(result.kids, kids); wasMoved(kids)
 
   proc `[]`*(x: Tree; i: int): lent Tree =
     result = x.kids[i]
     # borrows from 'x', this is transformed into:
     result = addr x.kids[i]
     # This means 'lent' is like 'var T' a hidden pointer.
-    # Unlike 'var' this cannot be used to mutate the object.
+    # Unlike 'var' this hidden pointer cannot be used to mutate the object.
 
   iterator children*(t: Tree): lent Tree =
     for x in t.kids: yield x
@@ -459,11 +437,10 @@ Let ``W`` be an ``owned ref`` type. Conceptually its hooks look like:
 
   proc `=`(x: var W; y: W) {.error: "owned refs can only be moved".}
 
-  proc `=move`(x, y: var W) =
-    if x != y:
-      `=destroy`(x)
-      bitwiseCopy x, y # raw pointer copy
-      y = nil
+  proc `=sink`(x: var W; y: W) =
+    `=destroy`(x)
+    bitwiseCopy x, y # raw pointer copy
+
 
 Let ``U`` be an unowned ``ref`` type. Conceptually its hooks look like:
 
@@ -479,9 +456,8 @@ Let ``U`` be an unowned ``ref`` type. Conceptually its hooks look like:
     if x != nil: dec x.refcount
     bitwiseCopy x, y # raw pointer copy
 
-  proc `=move`(x, y: var U) =
-    # Note: Moves are the same as assignments.
-    `=`(x, y)
+  proc `=sink`(x: var U, y: U) {.error.}
+  # Note: Moves are not available.
 
 
 Hook lifting
@@ -490,7 +466,7 @@ Hook lifting
 The hooks of a tuple type ``(A, B, ...)`` are generated by lifting the
 hooks of the involved types ``A``, ``B``, ... to the tuple type. In
 other words, a copy ``x = y`` is implemented
-as ``x[0] = y[0]; x[1] = y[1]; ...``, likewise for ``=move`` and ``=destroy``.
+as ``x[0] = y[0]; x[1] = y[1]; ...``, likewise for ``=sink`` and ``=destroy``.
 
 Other value-based compound types like ``object`` and ``array`` are handled
 correspondingly. For ``object`` however, the compiler generated hooks
@@ -529,6 +505,8 @@ have been derived from the rewrite rules and are as follows:
   hooks are generated for ``typeof(x)``.
 - In ``x = ...`` (assignment) hooks are generated for ``typeof(x)``.
 - In ``f(...)`` (function call) hooks are generated for ``typeof(f(...))``.
+- For every sink parameter ``x: sink T`` the hooks are generated
+  for ``typeof(x)``.
 
 
 nodestroy pragma
