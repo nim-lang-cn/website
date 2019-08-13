@@ -142,8 +142,8 @@ Nim的标准 ``string`` 和 ``seq`` 类型以及其他标准集合的内存管�
 `=` (复制) 钩子
 ---------------
 
-Nim中的普通赋值在概念上复制值。
-对于无法转换为 ``= sink`` 操作的赋值，调用 ``=`` hook。
+Nim中的普通赋值是概念上地复制值。
+对于无法转换为 ``=sink`` 操作的赋值，调用 ``=`` hook。
 
 这个类型 ``T`` 的钩子的原型需要是：
 
@@ -193,7 +193,7 @@ Sink形参
 
 要将变量移动到集合中，通常会涉及 ``sink`` 形参。
 之后不应使用传递给 ``sink`` 形参的位置。
-这通过控制流图上的静态分析来确保。
+这通过控制流图的静态分析来确保。
 如果无法证明它是该位置的最后一次使用，则会执行复制，然后将此副本传递给接收器参数。
 
 sink形参 *may* be consumed once in the proc's body but doesn't have to be consumed at all.
@@ -233,7 +233,7 @@ optimizations (and the current implementation does not).
 
 **注意**: 允许两种不同的实施策略:
 
-1. 生成的 ``finally`` 部分可以是一个环绕整个例程体的单个部分。
+1. 生成的 ``finally`` 部分可以是一个环绕整个过程体的单个部分。
 2. The produced ``finally`` section is wrapped around the enclosing scope.
 
 The current implementation follows strategy (1). This means that resources are

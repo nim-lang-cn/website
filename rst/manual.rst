@@ -109,8 +109,8 @@ Nim `程序`:idx: 由一个或多个包含Nim代码的文本 `源文件`:idx: �
 
 所有Nim源文件都采用UTF-8编码（或其ASCII子集）。
 其他编码不受支持。
-可以使用任何标准平台线路终端序列 - 使用ASCII LF（换行）的Unix表单，使用ASCII序列CR LF的Windows表单（返回后跟换行），或使用ASCII CR（返回）的旧Macintosh表单字符。
-无论平台如何，所有这些形式都可以平等使用。
+可以使用任何标准平台行终端序列 - Unix使用ASCII LF（换行），Windows使用ASCII序列CR LF的（返回后跟换行），老的Macintosh使用ASCII CR（返回）字符。
+无论什么平台，使用这些形式的效果是一样的。
 
 
 缩进

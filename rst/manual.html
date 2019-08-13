@@ -1101,7 +1101,7 @@ arrayConstructor = '[' expr ^* ',' ']'</pre>
 <p>在源代码中从上到下和从左到右进行图像语义分析是非常准确的，在必要时交错编译时代码执行以计算后续语义分析所需的值。 我们将在本文档后面看到，宏调用不仅需要这种交错，而且还会产生语义分析不能完全从上到下，从左到右进行的情况。</p>
 
 <h1><a class="toc-backref" id="词汇分析" href="#词汇分析">词汇分析</a></h1>
-<h2><a class="toc-backref" id="词汇分析-编码" href="#词汇分析-编码">编码</a></h2><p>所有Nim源文件都采用UTF-8编码（或其ASCII子集）。 其他编码不受支持。 可以使用任何标准平台线路终端序列 - 使用ASCII LF（换行）的Unix表单，使用ASCII序列CR LF的Windows表单（返回后跟换行），或使用ASCII CR（返回）的旧Macintosh表单字符。 无论平台如何，所有这些形式都可以平等使用。</p>
+<h2><a class="toc-backref" id="词汇分析-编码" href="#词汇分析-编码">编码</a></h2><p>所有Nim源文件都采用UTF-8编码（或其ASCII子集）。 其他编码不受支持。 可以使用任何标准平台行终端序列 - Unix使用ASCII LF（换行），Windows使用ASCII序列CR LF的（返回后跟换行），老的Macintosh使用ASCII CR（返回）字符。 无论什么平台，使用这些形式的效果是一样的。</p>
 
 <h2><a class="toc-backref" id="词汇分析-缩进" href="#词汇分析-缩进">缩进</a></h2><p>Nim的标准语法描述了一个 <span id="缩进敏感_1">缩进敏感</span> 语言。 这意味着所有控制结构都可以通过缩进识别。 缩进仅由空格组成;制表符是不允许的。</p>
 <p>缩进处理按如下方式实现：词法分析器使用前面的空格数注释以下标记;缩进不是一个单独的标记。 这个技巧允许只用1个先行标记解析Nim。</p>
@@ -4443,7 +4443,7 @@ using namespace gui;
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-08-13 07:43:01 UTC</small>
+        <small>Made with Nim. Generated: 2019-08-13 13:53:48 UTC</small>
       </div>
     </div>
   </div>
