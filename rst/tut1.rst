@@ -20,7 +20,7 @@ Nim教程 (I)
 
 第一个程序
 =================
-我们从一个修改过的"hello world"程序开始：
+我们从一个调整过的"hello world"程序开始：
 
 .. code-block:: Nim
     :test: "nim c $1"
