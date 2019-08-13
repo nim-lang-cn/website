@@ -5337,7 +5337,7 @@ first implementation to play with a language feature before a nicer syntax
 to access the feature becomes available.
 
 
-deprecated pragma
+deprecated 编译指示
 -----------------
 
 The deprecated pragma is used to mark a symbol as deprecated:
@@ -5352,7 +5352,7 @@ This pragma can also take in an optional warning string to relay to developers.
   proc thing(x: bool) {.deprecated: "use thong instead".}
 
 
-noSideEffect pragma
+noSideEffect 编译指示
 -------------------
 
 The ``noSideEffect`` pragma is used to mark a proc/iterator to have no side
@@ -5383,7 +5383,7 @@ pragma block can be used:
       echo "test"
 
 
-compileTime pragma
+compileTime 编译指示
 ------------------
 The ``compileTime`` pragma is used to mark a proc or variable to be used only
 during compile-time execution. No code will be generated for it. Compile-time
@@ -5402,18 +5402,18 @@ Is the same as:
     result = n
 
 
-noReturn pragma
+noReturn 编译指示
 ---------------
 The ``noreturn`` pragma is used to mark a proc that never returns.
 
 
-acyclic pragma
+acyclic 编译指示
 --------------
 The ``acyclic`` pragma applies to type declarations. It is deprecated and
 ignored.
 
 
-final pragma
+final 编译指示
 ------------
 The ``final`` pragma can be used for an object type to specify that it
 cannot be inherited from. Note that inheritance is only available for
@@ -5421,7 +5421,7 @@ objects that inherit from an existing object (via the ``object of SuperType``
 syntax) or that have been marked as ``inheritable``.
 
 
-shallow pragma
+shallow 编译指示
 --------------
 The ``shallow`` pragma affects the semantics of a type: The compiler is
 allowed to make a shallow copy. This can cause serious semantic issues and
@@ -5441,7 +5441,7 @@ structure:
         children: seq[Node]
 
 
-pure pragma
+pure 编译指示
 -----------
 An object type can be marked with the ``pure`` pragma so that its type field
 which is used for runtime type identification is omitted. This used to be
@@ -5451,7 +5451,7 @@ An enum type can be marked as ``pure``. Then access of its fields always
 requires full qualification.
 
 
-asmNoStackFrame pragma
+asmNoStackFrame 编译指示
 ----------------------
 A proc can be marked with the ``asmNoStackFrame`` pragma to tell the compiler
 it should not generate a stack frame for the proc. There are also no exit
@@ -5462,7 +5462,7 @@ the used C compiler).
 **Note**: This pragma should only be used by procs which consist solely of
 assembler statements.
 
-error pragma
+error 编译指示
 ------------
 The ``error`` pragma is used to make the compiler output an error message
 with the given content. Compilation does not necessarily abort after an error
@@ -5478,7 +5478,7 @@ operation is valid due to overloading and type conversions:
   proc `==`(x, y: ptr int): bool {.error.}
 
 
-fatal pragma
+fatal 编译指示
 ------------
 The ``fatal`` pragma is used to make the compiler output an error message
 with the given content. In contrast to the ``error`` pragma, compilation
@@ -5488,17 +5488,17 @@ is guaranteed to be aborted by this pragma. 示例：
   when not defined(objc):
     {.fatal: "Compile this program with the objc command!".}
 
-warning pragma
+warning 编译指示
 --------------
 The ``warning`` pragma is used to make the compiler output a warning message
 with the given content. Compilation continues after the warning.
 
-hint pragma
+hint 编译指示
 -----------
 The ``hint`` pragma is used to make the compiler output a hint message with
 the given content. Compilation continues after the hint.
 
-line pragma
+line 编译指示
 -----------
 The ``line`` pragma can be used to affect line information of the annotated
 statement as seen in stack backtraces:
@@ -5516,7 +5516,7 @@ If the ``line`` pragma is used with a parameter, the parameter needs be a
 ``system.InstantiationInfo()`` is used.
 
 
-linearScanEnd pragma
+linearScanEnd 编译指示
 --------------------
 The ``linearScanEnd`` pragma can be used to tell the compiler how to
 compile a Nim `case`:idx: statement. Syntactically it has to be used as a
@@ -5544,7 +5544,7 @@ tested against via linear scanning. If put into the last branch of the
 whole ``case`` statement, the whole ``case`` statement uses linear scanning.
 
 
-computedGoto pragma
+computedGoto 编译指示
 -------------------
 The ``computedGoto`` pragma can be used to tell the compiler how to
 compile a Nim `case`:idx: in a ``while true`` statement.
@@ -5589,7 +5589,7 @@ the underlying backend (C compiler) does not support the computed goto
 extension the pragma is simply ignored.
 
 
-unroll pragma
+unroll 编译指示
 -------------
 The ``unroll`` pragma can be used to tell the compiler that it should unroll
 a `for`:idx: or `while`:idx: loop for execution efficiency:
@@ -5608,7 +5608,7 @@ factor.
 **Note**: Currently the compiler recognizes but ignores this pragma.
 
 
-immediate pragma
+immediate 编译指示
 ----------------
 
 The immediate pragma is obsolete. See `Typed vs untyped parameters`_.
@@ -5655,7 +5655,7 @@ callconv         cdecl|...        Specifies the default calling convention for
   # compile without runtime checks and optimize for speed
 
 
-push and pop pragmas
+push and pop 编译指示
 --------------------
 The `push/pop`:idx: pragmas are very similar to the option directive,
 but are used to override the settings temporarily. 示例：
@@ -5668,7 +5668,7 @@ but are used to override the settings temporarily. 示例：
   {.pop.} # restore old settings
 
 
-register pragma
+register 编译指示
 ---------------
 The ``register`` pragma is for variables only. It declares the variable as
 ``register``, giving the compiler a hint that the variable should be placed
@@ -5679,7 +5679,7 @@ In highly specific cases (a dispatch loop of a bytecode interpreter for
 example) it may provide benefits, though.
 
 
-global pragma
+global 编译指示
 -------------
 The ``global`` pragma can be applied to a variable within a proc to instruct
 the compiler to store it in a global location and initialize it once at program
@@ -5696,7 +5696,7 @@ the created global variables within a module is not defined, but all of them
 will be initialized after any top-level variables in their originating module
 and before any variable in a module that imports it.
 
-pragma pragma
+pragma 编译指示
 -------------
 
 The ``pragma`` pragma can be used to declare user defined pragmas. This is
@@ -5732,7 +5732,7 @@ identifier that can be used to enable or disable it:
 This is often better than disabling all warnings at once.
 
 
-used pragma
+used 编译指示
 -----------
 
 Nim produces a warning for symbols that are not exported and not used either.
@@ -5752,7 +5752,7 @@ is particularly useful when the symbol was generated by a macro:
 
 
 
-experimental pragma
+experimental 编译指示
 -------------------
 
 The ``experimental`` pragma enables experimental language features. Depending
@@ -5795,16 +5795,16 @@ put into a ``.push/pop`` environment:
   useParallel(1)
 
 
-Implementation Specific Pragmas
+特定实现的编译指示
 ===============================
 
 This section describes additional pragmas that the current Nim implementation
 supports but which should not be seen as part of the language specification.
 
-Bitsize pragma
+Bitsize 编译指示
 --------------
 
-The ``bitsize`` pragma is for object field members. It declares the field as
+The ``bitsize`` 编译指示 is for object field members. It declares the field as
 a bitfield in C/C++.
 
 .. code-block:: Nim
@@ -5820,7 +5820,7 @@ generates:
   };
 
 
-Volatile pragma
+Volatile 编译指示
 ---------------
 The ``volatile`` pragma is for variables only. It declares the variable as
 ``volatile``, whatever that means in C/C++ (its semantics are not well defined
@@ -5829,7 +5829,7 @@ in C/C++).
 **Note**: This pragma will not exist for the LLVM backend.
 
 
-NoDecl pragma
+NoDecl 编译指示
 -------------
 The ``noDecl`` pragma can be applied to almost any symbol (variable, proc,
 type, etc.) and is sometimes useful for interoperability with C:
@@ -5846,7 +5846,7 @@ However, the ``header`` pragma is often the better alternative.
 **Note**: This will not work for the LLVM backend.
 
 
-Header pragma
+Header 编译指示
 -------------
 The ``header`` pragma is very similar to the ``noDecl`` pragma: It can be
 applied to almost any symbol and specifies that it should not be declared
@@ -5865,7 +5865,7 @@ encloses the header file in ``""`` in the generated C code.
 **Note**: This will not work for the LLVM backend.
 
 
-IncompleteStruct pragma
+IncompleteStruct 编译指示
 -----------------------
 The ``incompleteStruct`` pragma tells the compiler to not use the
 underlying C ``struct`` in a ``sizeof`` expression:
@@ -5876,9 +5876,9 @@ underlying C ``struct`` in a ``sizeof`` expression:
            pure, incompleteStruct.} = object
 
 
-Compile pragma
+Compile编译指示
 --------------
-The ``compile`` pragma can be used to compile and link a C/C++ source file
+The ``compile`` 编译指示 can be used to compile and link a C/C++ source file
 with the project:
 
 .. code-block:: Nim
@@ -5889,32 +5889,30 @@ has changed. You can use the ``-f`` command line option to force recompilation
 of the file.
 
 
-Link pragma
+Link编译指示
 -----------
-The ``link`` pragma can be used to link an additional file with the project:
+The ``link`` 编译指示 can be used to link an additional file with the project:
 
 .. code-block:: Nim
   {.link: "myfile.o".}
 
 
-PassC pragma
+PassC编译指示
 ------------
-The ``passC`` pragma can be used to pass additional parameters to the C
+The ``passC`` 编译指示 can be used to pass additional parameters to the C
 compiler like you would using the commandline switch ``--passC``:
 
 .. code-block:: Nim
   {.passC: "-Wall -Werror".}
 
-Note that you can use ``gorge`` from the `system module <system.html>`_ to
-embed parameters from an external command that will be executed
-during semantic analysis:
+Note that you can use ``gorge`` from the `system module <system.html>`_ to embed parameters from an external command that will be executed during semantic analysis:
 
 .. code-block:: Nim
   {.passC: gorge("pkg-config --cflags sdl").}
 
-PassL pragma
+PassL编译指示
 ------------
-The ``passL`` pragma can be used to pass additional parameters to the linker
+The ``passL`` 编译指示 can be used to pass additional parameters to the linker
 like you would using the commandline switch ``--passL``:
 
 .. code-block:: Nim
@@ -5928,9 +5926,9 @@ during semantic analysis:
   {.passL: gorge("pkg-config --libs sdl").}
 
 
-Emit pragma
+Emit编译指示
 -----------
-The ``emit`` pragma can be used to directly affect the output of the
+The ``emit`` 编译指示 can be used to directly affect the output of the
 compiler's code generator. So it makes your code unportable to other code
 generators/backends. Its usage is highly discouraged! However, it can be
 extremely useful for interfacing with `C++`:idx: or `Objective C`:idx: code.
@@ -5986,20 +5984,15 @@ prefixes ``/*TYPESECTION*/`` or ``/*VARSECTION*/`` or ``/*INCLUDESECTION*/``:
   proc constructVector3(a: cfloat): Vector3 {.importcpp: "Vector3(@)", nodecl}
 
 
-ImportCpp pragma
+ImportCpp编译指示
 ----------------
 
-**Note**: `c2nim <https://github.com/nim-lang/c2nim/blob/master/doc/c2nim.rst>`_ can parse a large subset of C++ and knows
-about the ``importcpp`` pragma pattern language. It is not necessary
-to know all the details described here.
+**注意**: `c2nim <https://github.com/nim-lang/c2nim/blob/master/doc/c2nim.rst>`_ 可以解析C++子集并且知道 ``importcpp`` 编译指示模式语言。 
+没有必要知道这里描述的所有细节。
 
 
-Similar to the `importc pragma for C
-<#foreign-function-interface-importc-pragma>`_, the
-``importcpp`` pragma can be used to import `C++`:idx: methods or C++ symbols
-in general. The generated code then uses the C++ method calling
-syntax: ``obj->method(arg)``.  In combination with the ``header`` and ``emit``
-pragmas this allows *sloppy* interfacing with libraries written in C++:
+Similar to the `importc pragma for C <#foreign-function-interface-importc-pragma>`_, the ``importcpp`` pragma can be used to import `C++`:idx: methods or C++ symbols in general. 
+The generated code then uses the C++ method calling syntax: ``obj->method(arg)``.  In combination with the ``header`` and ``emit`` pragmas this allows *sloppy* interfacing with libraries written in C++:
 
 .. code-block:: Nim
   # Horrible example of how to interface with a C++ engine ... ;-)
@@ -6033,7 +6026,7 @@ this to work. The conditional symbol ``cpp`` is defined when the compiler
 emits C++ code.
 
 
-Namespaces
+命名空间
 ~~~~~~~~~~
 
 The *sloppy interfacing* example uses ``.emit`` to produce ``using namespace``
@@ -6046,7 +6039,7 @@ via the ``namespace::identifier`` notation:
                         importcpp: "irr::IrrlichtDevice".} = object
 
 
-Importcpp for enums
+枚举Importcpp
 ~~~~~~~~~~~~~~~~~~~
 
 When ``importcpp`` is applied to an enum type the numerical enum values are
@@ -6054,7 +6047,7 @@ annotated with the C++ enum type, like in this 示例： ``((TheCppEnum)(3))``.
 (This turned out to be the simplest way to implement it.)
 
 
-Importcpp for procs
+过程Importcpp
 ~~~~~~~~~~~~~~~~~~~
 
 Note that the ``importcpp`` variant for procs uses a somewhat cryptic pattern
@@ -6066,7 +6059,7 @@ language for maximum flexibility:
 - An at symbol ``@`` is replaced by the remaining arguments, separated by
   commas.
 
-For 示例：
+示例：
 
 .. code-block:: nim
   proc cppMethod(this: CppObj, a, b, c: cint) {.importcpp: "#.CppMethod(@)".}
@@ -6101,7 +6094,7 @@ capabilities:
   of the type. (So it "takes away a star" from the type; ``T*`` becomes ``T``.)
   Two stars can be used to get to the element type of the element type etc.
 
-For 示例：
+示例：
 
 .. code-block:: nim
 
@@ -6136,8 +6129,7 @@ Produces:
 .. code-block:: C
   x = new Foo(3, 4)
 
-However, depending on the use case ``new Foo`` can also be wrapped like this
-instead:
+However, depending on the use case ``new Foo`` can also be wrapped like this instead:
 
 .. code-block:: nim
   proc newFoo(a, b: cint): ptr Foo {.importcpp: "new Foo(@)".}
@@ -6145,39 +6137,33 @@ instead:
   let x = newFoo(3, 4)
 
 
-Wrapping constructors
+包装构造函数
 ~~~~~~~~~~~~~~~~~~~~~
 
-Sometimes a C++ class has a private copy constructor and so code like
-``Class c = Class(1,2);`` must not be generated but instead ``Class c(1,2);``.
-For this purpose the Nim proc that wraps a C++ constructor needs to be
-annotated with the `constructor`:idx: pragma. This pragma also helps to generate
-faster C++ code since construction then doesn't invoke the copy constructor:
+Sometimes a C++ class has a private copy constructor and so code like ``Class c = Class(1,2);`` must not be generated but instead ``Class c(1,2);``.
+For this purpose the Nim proc that wraps a C++ constructor needs to be annotated with the `constructor`:idx: pragma. 
+This pragma also helps to generate faster C++ code since construction then doesn't invoke the copy constructor:
 
 .. code-block:: nim
-  # a better constructor of 'Foo':
+  # 更好的'Foo'构建函数：
   proc constructFoo(a, b: cint): Foo {.importcpp: "Foo(@)", constructor.}
 
 
-Wrapping destructors
+包装析构函数
 ~~~~~~~~~~~~~~~~~~~~
-
-Since Nim generates C++ directly, any destructor is called implicitly by the
-C++ compiler at the scope exits. This means that often one can get away with
-not wrapping the destructor at all! However when it needs to be invoked
-explicitly, it needs to be wrapped. The pattern language provides
-everything that is required:
+包装destruct由于Nim直接生成C++，所以任何析构函数都由C++编译器在作用域出口处隐式调用。
+这意味着通常人们可以完全没有包装析构函数！
+但是当需要显式调用它时，需要将其包装起来。
+模式语言提供了所需的一切：
 
 .. code-block:: nim
   proc destroyFoo(this: var Foo) {.importcpp: "#.~Foo()".}
 
 
-Importcpp for objects
+对象的Importcpp
 ~~~~~~~~~~~~~~~~~~~~~
 
-Generic ``importcpp``'ed objects are mapped to C++ templates. This means that
-you can import C++'s templates rather easily without the need for a pattern
-language for object types:
+泛型 ``importcpp`` 的对象映射成C++模板。这意味着您可以轻松导入C++的模板，而无需对象类型的模式语言：
 
 .. code-block:: nim
   type
@@ -6215,10 +6201,9 @@ Produces:
   std::vector<int>::iterator x;
 
 
-ImportObjC pragma
+ImportObjC编译指示
 -----------------
-Similar to the `importc pragma for C
-<#foreign-function-interface-importc-pragma>`_, the ``importobjc`` pragma can
+Similar to the `importc pragma for C <#foreign-function-interface-importc-pragma>`_ , the ``importobjc`` pragma can
 be used to import `Objective C`:idx: methods.  The generated code then uses the
 Objective C method calling syntax: ``[obj method param1: arg]``.
 In addition with the ``header`` and ``emit`` pragmas this
@@ -6265,10 +6250,10 @@ this to work. The conditional symbol ``objc`` is defined when the compiler
 emits Objective C code.
 
 
-CodegenDecl pragma
+CodegenDecl编译指示
 ------------------
 
-The ``codegenDecl`` pragma can be used to directly influence Nim's code
+The ``codegenDecl`` 编译指示 can be used to directly influence Nim's code
 generator. It receives a format string that determines how the variable
 or proc is declared in the generated code.
 
@@ -6301,33 +6286,30 @@ will generate this code:
   __interrupt void myinterrupt()
 
 
-InjectStmt pragma
+InjectStmt编译指示
 -----------------
 
-The ``injectStmt`` pragma can be used to inject a statement before every
-other statement in the current module. It is only supposed to be used for
-debugging:
+The ``injectStmt`` 编译指示can be used to inject a statement before every other statement in the current module. 
+It is only supposed to be used for debugging:
 
 .. code-block:: nim
   {.injectStmt: gcInvariants().}
 
   # ... complex code here that produces crashes ...
 
-compile time define pragmas
+编译期定义的编译指示
 ---------------------------
 
-The pragmas listed here can be used to optionally accept values from
-the -d/--define option at compile time.
+此处列出的编译指示可用于在编译时选择接受-d /--define选项中的值。
 
-The implementation currently provides the following possible options (various
-others may be added later).
+该实现目前提供以下可能的选项（稍后可以添加各种其他选项）。
 
 =================  ============================================
 pragma             description
 =================  ============================================
-`intdefine`:idx:   Reads in a build-time define as an integer
-`strdefine`:idx:   Reads in a build-time define as a string
-`booldefine`:idx:  Reads in a build-time define as a bool
+`intdefine`:idx:   读取构建时定义为整数
+`strdefine`:idx:   读取构建时定义为字符串
+`booldefine`:idx:  读取构建时定义为bool
 =================  ============================================
 
 .. code-block:: nim
@@ -6344,7 +6326,7 @@ used. To see if a value was provided, `defined(FooBar)` can be used.
 
 The syntax `-d:flag` is actually just a shortcut for `-d:flag=true`.
 
-Custom annotations
+自定义标注
 ------------------
 It is possible to define custom typed pragmas. Custom pragmas do not effect
 code generation directly, but their presence can be detected by macros.
@@ -6412,45 +6394,40 @@ More examples with custom pragmas:
 
 
 
-Foreign function interface
+外部函数接口
 ==========================
 
-Nim's `FFI`:idx: (foreign function interface) is extensive and only the
-parts that scale to other future backends (like the LLVM/JavaScript backends)
-are documented here.
+Nim的 `FFI`:idx: (外部函数接口) 非常广泛，这里只记载扩展到其它未来后端的部分 (如 LLVM/JavaScript后端)。
 
 
-Importc pragma
+Importc编译指示
 --------------
-The ``importc`` pragma provides a means to import a proc or a variable
-from C. The optional argument is a string containing the C identifier. If
-the argument is missing, the C name is the Nim identifier *exactly as
-spelled*:
+``importc`` 编译指示提供了一种从C导入proc或变量的方法。
+可选参数是包含C标识符的字符串。
+如果缺少参数，则C名称与Nim标识符 *拼写完全相同* ：
 
 .. code-block::
   proc printf(formatstr: cstring) {.header: "<stdio.h>", importc: "printf", varargs.}
 
-Note that this pragma is somewhat of a misnomer: Other backends do provide
-the same feature under the same name. Also, if one is interfacing with C++
-the `ImportCpp pragma <manual.html#implementation-specific-pragmas-importcpp-pragma>`_ and
-interfacing with Objective-C the `ImportObjC pragma
-<manual.html#implementation-specific-pragmas-importobjc-pragma>`_ can be used.
+请注意，此pragma有点用词不当：其他后端确实在同一名称下提供相同的功能。
 
-The string literal passed to ``importc`` can be a format string:
+此外，如果一个人正在与C++接口，那么 `ImportCpp pragma <manual.html＃implementation-specific-pragmas-importcpp-pragma>`_ 并与Objective-C连接 `importObjC pragma <manual.html＃implementation-specific-pragmas- importobjc-pragma>`_ 可以使用。
+
+传递给``importc``的字符串文字可以是格式字符串：
 
 .. code-block:: Nim
   proc p(s: cstring) {.importc: "prefix$1".}
 
-In the example the external name of ``p`` is set to ``prefixp``. Only ``$1``
-is available and a literal dollar sign must be written as ``$$``.
+在示例中，``p`` 的外部名称设置为 ``prefixp`` 。
+只有 ``$1`` 可用，文字美元符号必须写成 ``$$`` 。
 
 
-Exportc pragma
+Exportc编译指示
 --------------
-The ``exportc`` pragma provides a means to export a type, a variable, or a
-procedure to C. Enums and constants can't be exported. The optional argument
-is a string containing the C identifier.  If the argument is missing, the C
-name is the Nim identifier *exactly as spelled*:
+The ``exportc`` pragma provides a means to export a type, a variable, or a procedure to C. 
+Enums and constants can't be exported. 
+The optional argument is a string containing the C identifier.  
+If the argument is missing, the C name is the Nim identifier *exactly as spelled*:
 
 .. code-block:: Nim
   proc callme(formatstr: cstring) {.exportc: "callMe", varargs.}
@@ -6464,12 +6441,12 @@ The string literal passed to ``exportc`` can be a format string:
   proc p(s: string) {.exportc: "prefix$1".} =
     echo s
 
-In the example the external name of ``p`` is set to ``prefixp``. Only ``$1``
-is available and a literal dollar sign must be written as ``$$``.
+In the example the external name of ``p`` is set to ``prefixp``. 
+Only ``$1`` is available and a literal dollar sign must be written as ``$$``.
 
 
 
-Extern pragma
+Extern编译指示
 -------------
 Like ``exportc`` or ``importc``, the ``extern`` pragma affects name
 mangling. The string literal passed to ``extern`` can be a format string:
@@ -6483,11 +6460,10 @@ is available and a literal dollar sign must be written as ``$$``.
 
 
 
-Bycopy pragma
+Bycopy编译指示
 -------------
 
-The ``bycopy`` pragma can be applied to an object or tuple type and
-instructs the compiler to pass the type by value to procs:
+``bycopy`` 编译指示可以应用于对象或元组类型，并指示编译器按类型将类型传递给procs：
 
 .. code-block:: nim
   type
@@ -6495,70 +6471,60 @@ instructs the compiler to pass the type by value to procs:
       x, y, z: float
 
 
-Byref pragma
+Byref编译指示
 ------------
 
-The ``byref`` pragma can be applied to an object or tuple type and instructs
-the compiler to pass the type by reference (hidden pointer) to procs.
+``byref`` 编译指示可以应用于对象或元组类型，并指示编译器通过引用（隐藏指针）将类型传递给procs。
 
 
-Varargs pragma
+Varargs编译指示
 --------------
-The ``varargs`` pragma can be applied to procedures only (and procedure
-types). It tells Nim that the proc can take a variable number of parameters
-after the last specified parameter. Nim string values will be converted to C
-strings automatically:
+``varargs`` 编译指示只适用于过程 (和过程类型)。 
+它告诉Nim proc可以在最后指定的参数获取可变数量的参数。
+Nim字符串值将自动转换为C字符串：
 
 .. code-block:: Nim
   proc printf(formatstr: cstring) {.nodecl, varargs.}
 
-  printf("hallo %s", "world") # "world" will be passed as C string
+  printf("hallo %s", "world") # "world"将作为C字符串传递
 
 
-Union pragma
+Union编译指示
 ------------
-The ``union`` pragma can be applied to any ``object`` type. It means all
-of the object's fields are overlaid in memory. This produces a ``union``
-instead of a ``struct`` in the generated C/C++ code. The object declaration
-then must not use inheritance or any GC'ed memory but this is currently not
-checked.
+``union`` 编译指示适用于任何 ``对象`` 类型。 这意味着所有对象的字段在内存中是重叠的。 
+这会在生成的C / C ++代码中生成一个 ``union`` 而不是 ``struct`` 。
+然后，对象声明不能使用继承或任何GC的内存，但目前尚不做检查。
 
-**Future directions**: GC'ed memory should be allowed in unions and the GC
-should scan unions conservatively.
+**未来方向**: 应该允许在联合中使用GC内存并且GC应当保守地扫描联合。
 
-Packed pragma
+Packed编译指示
 -------------
-The ``packed`` pragma can be applied to any ``object`` type. It ensures
-that the fields of an object are packed back-to-back in memory. It is useful
-to store packets or messages from/to network or hardware drivers, and for
-interoperability with C. Combining packed pragma with inheritance is not
-defined, and it should not be used with GC'ed memory (ref's).
+``packed`` 编译指示适用于任何 ``对象`` 类型。
+它确保对象的字段打包在连续的内存中。 
+将数据包或消息存储到网络或硬件驱动程序以及与C的互操作性非常有用。
+没有定义packed编译指示的继承用法，且不应该与GC的内存（ref）一起使用。
 
-**Future directions**: Using GC'ed memory in packed pragma will result in
-a static error. Usage with inheritance should be defined and documented.
+**未来方向**: 在packed pragma中使用GC内存将导致静态错误。应该定义和记录继承的用法。
 
 
-Dynlib pragma for import
+用于导入的Dynlib编译指示
 ------------------------
-With the ``dynlib`` pragma a procedure or a variable can be imported from
-a dynamic library (``.dll`` files for Windows, ``lib*.so`` files for UNIX).
-The non-optional argument has to be the name of the dynamic library:
+使用 ``dynlib`` 编译指示，可以从动态库（Windows的 ``.dll`` 文件，UNIX的 ``lib*.so`` 文件）导入过程或变量。
 
 .. code-block:: Nim
   proc gtk_image_new(): PGtkWidget
     {.cdecl, dynlib: "libgtk-x11-2.0.so", importc.}
 
-In general, importing a dynamic library does not require any special linker
-options or linking with import libraries. This also implies that no *devel*
-packages need to be installed.
+通常，导入动态库不需要任何特殊的链接器选项或链接到导入库。
+这也意味着不需要安装 *开发* 包。
 
-The ``dynlib`` import mechanism supports a versioning scheme:
+``dynlib`` 导入机制支持版本控制方案：
 
 .. code-block:: nim
   proc Tcl_Eval(interp: pTcl_Interp, script: cstring): int {.cdecl,
     importc, dynlib: "libtcl(|8.5|8.4|8.3).so.(1|0)".}
 
-At runtime the dynamic library is searched for (in this order)::
+在运行时，搜索动态库（按此顺序）
 
   libtcl.so.1
   libtcl.so.0
@@ -6569,8 +6535,7 @@ At runtime the dynamic library is searched for (in this order)::
   libtcl8.3.so.1
   libtcl8.3.so.0
 
-The ``dynlib`` pragma supports not only constant strings as argument but also
-string expressions in general:
+``dynlib`` 编译指示不仅支持常量字符串作为参数，还支持字符串表达式：
 
 .. code-block:: nim
   import os
@@ -6584,86 +6549,64 @@ string expressions in general:
 
   proc myImport(s: cstring) {.cdecl, importc, dynlib: getDllName().}
 
-**Note**: Patterns like ``libtcl(|8.5|8.4).so`` are only supported in constant
-strings, because they are precompiled.
+**注意**: 形如 ``libtcl(|8.5|8.4).so`` 只支持常量字符串，因为它们需要预编译。
 
-**Note**: Passing variables to the ``dynlib`` pragma will fail at runtime
-because of order of initialization problems.
+**注意**: 传变量给 ``dynlib`` pragma 在进行时会失败，因为初始化问题的顺序。
 
-**Note**: A ``dynlib`` import can be overridden with
-the ``--dynlibOverride:name`` command line option. The Compiler User Guide
-contains further information.
+**注意**: ``dynlib`` 导入可以用 ``--dynlibOverride:name`` 命令行选项重写。
+编译器用户指南包括更多信息。
 
 
-Dynlib pragma for export
+用于导出的Dynlib编译指示
 ------------------------
 
-With the ``dynlib`` pragma a procedure can also be exported to
-a dynamic library. The pragma then has no argument and has to be used in
-conjunction with the ``exportc`` pragma:
+过程可以用 ``dynlib`` 编译指示导出到一个动态库。
+编译指示没有实参而且必须和 ``exportc`` 拼接在一起:
 
 .. code-block:: Nim
   proc exportme(): int {.cdecl, exportc, dynlib.}
 
-This is only useful if the program is compiled as a dynamic library via the
-``--app:lib`` command line option. This pragma only has an effect for the code
-generation on the Windows target, so when this pragma is forgotten and the dynamic
-library is only tested on Mac and/or Linux, there won't be an error. On Windows
-this pragma adds ``__declspec(dllexport)`` to the function declaration.
+这只有当程序通过 ``--app:lib`` 命令行选项编译为动态库时有用。
+此编译指示仅对Windows目标上的代码生成有影响，因此当忘写并且仅在Mac和/或Linux上测试动态库时，不会出现错误。
+在Windows上，这个编译指示在函数声明中添加了 ``__declspec(dllexport)`` 。
 
 
 
-Threads
+线程
 =======
 
-To enable thread support the ``--threads:on`` command line switch needs to
-be used. The ``system`` module then contains several threading primitives.
-See the `threads <threads.html>`_ and `channels <channels.html>`_ modules
-for the low level thread API. There are also high level parallelism constructs
-available. See `spawn <manual_experimental.html#parallel-amp-spawn>`_ for
-further details.
+要启用线程支持，需要使用 ``--threads:on`` 命令行开关。
+然后 ``system`` 模块包含几个线程原语。
+请参阅低级线程API `threads <threads.html>`_ 和 `channels <channels.html>`_  模块。
+还有高级并行结构可用。见 `spawn <manual_experimental.html#parallel-amp-spawn>`_ 更多细节。
 
-Nim's memory model for threads is quite different than that of other common
-programming languages (C, Pascal, Java): Each thread has its own (garbage
-collected) heap and sharing of memory is restricted to global variables. This
-helps to prevent race conditions. GC efficiency is improved quite a lot,
-because the GC never has to stop other threads and see what they reference.
+Nim's memory model for threads is quite different than that of other common programming languages (C, Pascal, Java): Each thread has its own (garbage collected) heap and sharing of memory is restricted to global variables. 
+This helps to prevent race conditions. GC efficiency is improved quite a lot, because the GC never has to stop other threads and see what they reference.
 
 
-Thread pragma
+Thread编译指示
 -------------
 
-A proc that is executed as a new thread of execution should be marked by the
-``thread`` pragma for reasons of readability. The compiler checks for
-violations of the `no heap sharing restriction`:idx:\: This restriction implies
-that it is invalid to construct a data structure that consists of memory
-allocated from different (thread local) heaps.
+A proc that is executed as a new thread of execution should be marked by the ``thread`` pragma for reasons of readability. 
+The compiler checks for violations of the `no heap sharing restriction`:idx:\: This restriction implies that it is invalid to construct a data structure that consists of memory allocated from different (thread local) heaps.
 
-A thread proc is passed to ``createThread`` or ``spawn`` and invoked
-indirectly; so the ``thread`` pragma implies ``procvar``.
+A thread proc is passed to ``createThread`` or ``spawn`` and invoked indirectly; so the ``thread`` pragma implies ``procvar``.
 
 
-GC safety
+GC安全
 ---------
+我们称过程 ``p`` `GC安全`:idx: ，当它不通过调用GC不安全的过程直接或间接访问任何含有GC内存的全局变量(``string``, ``seq``, ``ref`` 或闭包)。
 
-We call a proc ``p`` `GC safe`:idx: when it doesn't access any global variable
-that contains GC'ed memory (``string``, ``seq``, ``ref`` or a closure) either
-directly or indirectly through a call to a GC unsafe proc.
-
-The `gcsafe`:idx: annotation can be used to mark a proc to be gcsafe,
-otherwise this property is inferred by the compiler. Note that ``noSideEffect``
-implies ``gcsafe``. The only way to create a thread is via ``spawn`` or
-``createThread``. The invoked proc must not use ``var`` parameters nor must
-any of its parameters contain a ``ref`` or ``closure`` type. This enforces
-the *no heap sharing restriction*.
+The `gcsafe`:idx: annotation can be used to mark a proc to be gcsafe, otherwise this property is inferred by the compiler. 
+Note that ``noSideEffect`` implies ``gcsafe``. The only way to create a thread is via ``spawn`` or ``createThread``. 
+The invoked proc must not use ``var`` parameters nor must any of its parameters contain a ``ref`` or ``closure`` type. 
+This enforces the *no heap sharing restriction*.
 
 Routines that are imported from C are always assumed to be ``gcsafe``.
-To disable the GC-safety checking the ``--threadAnalysis:off`` command line
-switch can be used. This is a temporary workaround to ease the porting effort
-from old code to the new threading model.
+To disable the GC-safety checking the ``--threadAnalysis:off`` command line switch can be used. 
+This is a temporary workaround to ease the porting effort from old code to the new threading model.
 
-To override the compiler's gcsafety analysis a ``{.gcsafe.}`` pragma block can
-be used:
+To override the compiler's gcsafety analysis a ``{.gcsafe.}`` pragma block can be used:
 
 .. code-block:: nim
 
@@ -6681,25 +6624,21 @@ Future directions:
 - A shared GC'ed heap might be provided.
 
 
-Threadvar pragma
+Threadvar编译指示
 ----------------
 
-A variable can be marked with the ``threadvar`` pragma, which makes it a
-`thread-local`:idx: variable; Additionally, this implies all the effects
-of the ``global`` pragma.
+变量可以用 ``threadvar`` 编译指示标记，使它成为 `thread-local`:idx: 变量; 
+另外，这意味着 ``global`` 编译指示的所有效果。
 
 .. code-block:: nim
   var checkpoints* {.threadvar.}: seq[string]
 
-Due to implementation restrictions thread local variables cannot be
-initialized within the ``var`` section. (Every thread local variable needs to
-be replicated at thread creation.)
+由于实现限制，无法在 ``var`` 部分中初始化线程局部变量。
+（在创建线程时需要复制每个线程局部变量。）
 
 
 线程和异常
 ----------------------
 
-The interaction between threads and exceptions is simple: A *handled* exception
-in one thread cannot affect any other thread. However, an *unhandled* exception
-in one thread terminates the whole *process*!
+线程和异常之间的交互很简单：一个线程中的 *处理过的* 异常不会影响任何其他线程。但是，一个线程中的 *未处理的* 异常终止整个 *进程* ！
 
