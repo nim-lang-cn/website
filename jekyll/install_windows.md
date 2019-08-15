@@ -11,12 +11,12 @@ current: Install
 # Manual installation
 
 <div class="center">
-  <a href="{{ site.baseurl }}/download/nim-{{ site.nim_version }}_x32.zip"
+  <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}_x32.zip"
     class="pure-button pure-button-primary download-button">
     <i class="fa fa-file-archive-o" aria-hidden="true"></i>
     下载x86版本的zip包
   </a>
-  <a href="{{ site.baseurl }}/download/nim-{{ site.nim_version }}_x32.zip.sha256"
+  <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}_x32.zip.sha256"
     class="pure-button">
     <i class="fa fa-file-text-o" aria-hidden="true"></i>
     SHA256校验
@@ -24,12 +24,12 @@ current: Install
 </div>
 
 <div class="center">
-  <a href="{{ site.baseurl }}/download/nim-{{ site.nim_version }}_x64.zip"
+  <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}_x64.zip"
     class="pure-button pure-button-primary download-button">
     <i class="fa fa-file-archive-o" aria-hidden="true"></i>
     下载x64版本的zip包
   </a>
-  <a href="{{ site.baseurl }}/download/nim-{{ site.nim_version }}_x64.zip.sha256"
+  <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}_x64.zip.sha256"
     class="pure-button">
     <i class="fa fa-file-text-o" aria-hidden="true"></i>
     SHA256校验
@@ -45,7 +45,7 @@ current: Install
 ## 配置``PATH``环境变量
 
 
-要使用Nim进行开发，需要在你的[``PATH``环境变量](https://en.wikipedia.org/wiki/PATH_(variable))中添加以下两个目录：
+要使用Nim进行开发，需要在你的[``PATH``环境变量](https://zh.wikipedia.org/wiki/PATH_(%E5%8F%98%E9%87%8F))中添加以下两个目录：
 
 * Nim的二进制文件位于你解压的文件夹下的``bin``目录下，所以这个目录在环境变量中是必需的；
 * ``%USERPROFILE%\.nimble\bin`` (``%USERPROFILE%``指的是你的HOME目录，Windows系统下是``我的文档``，Unix系统下是``~``)
