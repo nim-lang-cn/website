@@ -1799,7 +1799,7 @@ Distinct类型
 
 现在我们有针对SQL注入攻击的编译时检查。
 因为 ``"".SQL`` 转换为 ``SQL("")`` 不需要新的语法来获得漂亮的 ``SQL`` 字符串文字。 
-假设的 ``SQL`` 类型实际上存在于库中，作为`db_sqlite <db_sqlite.html>`_ 等模块的 `TSqlQuery类型<db_sqlite.html＃TSqlQuery>`_ 。
+假设的 ``SQL`` 类型实际上存在于库中，作为 `db_sqlite <db_sqlite.html>`_ 等模块的 `TSqlQuery类型<db_sqlite.html＃TSqlQuery>`_ 。
 
 
 自动类型
@@ -1919,7 +1919,7 @@ Nim对大多数类型使用结构类型等价。
 子类型关系
 ----------------
 如果对象 ``a`` 继承自 ``b``, ``a`` 是 ``b`` 的类型。 
-这种了类型关系扩展到 ``var``, ``ref``, ``ptr``:
+这种了类型关系扩展到 ``var``, ``ref``, ``ptr`` :
 
 .. code-block:: nim
   proc isSubtype(a, b: PType): bool =
@@ -1973,7 +1973,7 @@ Nim为 ``范围`` 类型构造函数执行了隐式转换。
 设 ``a0``, ``b0`` 为类型 ``T``.
 
 设 ``A = range[a0..b0]`` 为实参类型, ``F`` 正式的形参类型。
-Then an implicit conversion from ``A`` to ``F`` exists if ``a0 >= low(F) and b0 <= high(F)`` and both ``T`` and ``F`` are signed integers or if both are unsigned integers.
+从 ``A`` 到 ``F`` 存在隐式转换，如果 ``a0 >= low(F) 且 b0 <= high(F)`` 且 ``T`` 各 ``F`` 是有符号或无符号整型。
 
 如果以下算法返回true，则类型 ``a``  可 **显式** 转换为类型 ``b`` ：
 
@@ -2215,9 +2215,8 @@ An empty ``discard`` statement is often used as a null statement:
 Void上下文
 ------------
 
-In a list of statements every expression except the last one needs to have the
-type ``void``. In addition to this rule an assignment to the builtin ``result``
-symbol also triggers a mandatory ``void`` context for the subsequent expressions:
+In a list of statements every expression except the last one needs to have the type ``void``. 
+In addition to this rule an assignment to the builtin ``result`` symbol also triggers a mandatory ``void`` context for the subsequent expressions:
 
 .. code-block:: nim
   proc invalid*(): string =
@@ -2233,9 +2232,8 @@ symbol also triggers a mandatory ``void`` context for the subsequent expressions
 Var语句
 -------------
 
-Var statements declare new local and global variables and
-initialize them. A comma separated list of variables can be used to specify
-variables of the same type:
+Var statements declare new local and global variables and initialize them. 
+A comma separated list of variables can be used to specify variables of the same type:
 
 .. code-block:: nim
 
@@ -2243,10 +2241,9 @@ variables of the same type:
     a: int = 0
     x, y, z: int
 
-If an initializer is given the type can be omitted: the variable is then of the
-same type as the initializing expression. Variables are always initialized
-with a default value if there is no initializing expression. The default
-value depends on the type and is always a zero in binary.
+If an initializer is given the type can be omitted: the variable is then of the same type as the initializing expression. 
+Variables are always initialized with a default value if there is no initializing expression. 
+The default value depends on the type and is always a zero in binary.
 
 ============================    ==============================================
 Type                            default value
@@ -2267,24 +2264,21 @@ T = enum                        cast[T](0); this may be an invalid value
 ============================    ==============================================
 
 
-The implicit initialization can be avoided for optimization reasons with the
-`noinit`:idx: pragma:
+The implicit initialization can be avoided for optimization reasons with the `noinit`:idx: pragma:
 
 .. code-block:: nim
   var
     a {.noInit.}: array[0..1023, char]
 
-If a proc is annotated with the ``noinit`` pragma this refers to its implicit
-``result`` variable:
+If a proc is annotated with the ``noinit`` pragma this refers to its implicit ``result`` variable:
 
 .. code-block:: nim
   proc returnUndefinedValue: int {.noinit.} = discard
 
 
-The implicit initialization can be also prevented by the `requiresInit`:idx:
-type pragma. The compiler requires an explicit initialization for the object
-and all of its fields. However it does a `control flow analysis`:idx: to prove
-the variable has been initialized and does not rely on syntactic properties:
+The implicit initialization can be also prevented by the `requiresInit`:idx: type pragma. 
+The compiler requires an explicit initialization for the object and all of its fields. 
+However it does a `control flow analysis`:idx: to prove the variable has been initialized and does not rely on syntactic properties:
 
 .. code-block:: nim
   type
@@ -2303,11 +2297,9 @@ the variable has been initialized and does not rely on syntactic properties:
 Let语句
 -------------
 
-A ``let`` statement declares new local and global `single assignment`:idx:
-variables and binds a value to them. The syntax is the same as that of the ``var``
-statement, except that the keyword ``var`` is replaced by the keyword ``let``.
-Let variables are not l-values and can thus not be passed to ``var`` parameters
-nor can their address be taken. They cannot be assigned new values.
+A ``let`` statement declares new local and global `single assignment`:idx: variables and binds a value to them. 
+The syntax is the same as that of the ``var`` statement, except that the keyword ``var`` is replaced by the keyword ``let``.
+Let variables are not l-values and can thus not be passed to ``var`` parameters nor can their address be taken. They cannot be assigned new values.
 
 For let variables the same pragmas are available as for ordinary variables.
 
@@ -2315,8 +2307,8 @@ For let variables the same pragmas are available as for ordinary variables.
 Tuple解包
 ---------------
 
-In a ``var`` or ``let`` statement tuple unpacking can be performed. The special
-identifier ``_`` can be used to ignore some parts of the tuple:
+In a ``var`` or ``let`` statement tuple unpacking can be performed. 
+The special identifier ``_`` can be used to ignore some parts of the tuple:
 
 .. code-block:: nim
     proc returnsTuple(): (int, int, int) = (4, 2, 3)
@@ -2325,7 +2317,7 @@ identifier ``_`` can be used to ignore some parts of the tuple:
 
 
 
-Const段
+常量段
 -------------
 
 A const section declares constants whose values are constant expressions:
@@ -2467,8 +2459,7 @@ When语句
   else:
     echo "cannot happen!"
 
-The ``when`` statement is almost identical to the ``if`` statement with some
-exceptions:
+The ``when`` statement is almost identical to the ``if`` statement with some exceptions:
 
 * Each condition (``expr``) has to be a constant expression (of type ``bool``).
 * The statements do not open a new scope.
@@ -2476,9 +2467,8 @@ exceptions:
   translated by the compiler, the other statements are not checked for
   semantics! However, each condition is checked for semantics.
 
-The ``when`` statement enables conditional compilation techniques. As
-a special syntactic extension, the ``when`` construct is also available
-within ``object`` definitions.
+The ``when`` statement enables conditional compilation techniques. 
+As a special syntactic extension, the ``when`` construct is also available within ``object`` definitions.
 
 
 When nimvm语句
