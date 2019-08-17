@@ -809,14 +809,12 @@ NaN不属于任何浮点类型的子范围。
 以下浮点类型是预定义的：
 
 ``float``
-  通用浮点类型;它的大小曾经是平台相关的，但现在它总是映射到``float64``。一般应该使用这种类型。
+  通用浮点类型;它的大小曾经是平台相关的，但现在它总是映射到 ``float64`` 。一般应该使用这种类型。
 
 floatXX
   实现可以使用此命名方案定义XX位的其他浮点类型（例如：float64是64位宽的浮点数）。
   当前的实现支持 ``float32`` and ``float64`` 。
   这些类型的字面值具有后缀 'fXX 。
-
-
 
 执行具有不同类型浮点类型的表达式中的自动类型转换：有关更多详细信息，请参阅 `可转换关系` 。
 在浮点类型上执行的算术遵循IEEE标准。
@@ -866,7 +864,7 @@ Nim提供了编译指示 `nanChecks`:idx: 和 `infChecks`:idx: 控制是否忽�
 .. code-block:: nim
 
   while p != nil and p.name != "xyz":
-    # p.name is not evaluated if p == nil
+    # 如果 p == nil， p.name不被求值。 
     p = p.next
 
 
@@ -1024,7 +1022,7 @@ cstring类型
 其主要目的在于与C轻松互通。
 索引操作 ``s [i]`` 表示 ``s`` 的第i个 *char*;但是没有执行检查 ``cstring`` 的边界，使索引操作不安全。
 
-为方便起见，Nim``tring``可以隐式转换为``cstring``。 
+为方便起见，Nim中的 ``string`` 可以隐式转换为 ``cstring`` 。 
 如果将Nim字符串传递给C风格的可变参数proc，它也会隐式转换为 ``cstring`` ：
 
 .. code-block:: nim
@@ -1033,9 +1031,9 @@ cstring类型
 
   printf("This works %s", "as expected")
 
-即使转换是隐式的，它也不是 *安全的* ：垃圾收集器不认为``cstring``是根，并且可能收集底层内存。
+即使转换是隐式的，它也不是 *安全的* ：垃圾收集器不认为 ``cstring`` 是根，并且可能收集底层内存。
 然而在实践中，这几乎从未发生过，因为GC保守地估计堆栈根。
-可以使用内置过程``GC_ref``和``GC_unref``来保持字符串数据在少数情况下保持活动状态。
+可以使用内置过程 ``GC_ref`` 和 ``GC_unref`` 来保持字符串数据在少数情况下保持活动状态。
 
 为返回字符串的cstrings定义了 `$` proc。因此，从cstring获取一个nim字符串：
 
@@ -1048,16 +1046,16 @@ cstring类型
 ----------------
 结构化类型的变量可以同时保存多个值。
 结构化类型可以嵌套到无限级别。
-数组，序列，元组，对象和集属于结构化类型。
+数组、序列、元组、对象和集合属于结构化类型。
 
 数组和序列类型
 ------------------------
 数组是同类型的，这意味着数组中的每个元素都具有相同的类型。
 数组总是具有指定为常量表达式的固定长度（开放数组除外）。
-它们可以按任何序数类型编制索引。
+它们可以按任何序数类型索引。
 参数 ``A`` 可以是 *开放数组* ，在这种情况下，它由0到 ``len（A）- 1`` 的整数索引。
 数组表达式可以由数组构造函数 ``[]`` 构造。
-此数组表达式的元素类型是从第一个元素的类型推断出来的。
+数组表达式的元素类型是从第一个元素的类型推断出来的。
 所有其他元素都需要隐式转换为此类型。
 
 序列类似于数组，但动态长度可能在运行时期间发生变化（如字符串）。
@@ -1085,7 +1083,7 @@ cstring类型
 
 数组或序列的下限可以由内置的proc ``low()``接收，上限由 ``high()`` 接收。
 长度可以由 ``len()`` 接收。序列或开放数组的 ``low()`` 总是返回0，因为这是第一个有效索引。
-可以使用 ``add()`` proc或 ``&`` 运算符将元素追加到序列中，并使用 ``pop（）`` proc删除（并获取）序列的最后一个元素
+可以使用 ``add()`` proc或 ``&`` 运算符将元素追加到序列中，并使用 ``pop（）`` proc删除（并获取）序列的最后一个元素。
 
 符号 ``x [i]`` 可用于访问 ``x`` 的第i个元素。
 
@@ -1124,17 +1122,17 @@ cstring类型
 
 
 
-开放数组
+开放数组（openarray）
 -----------
 
-通常，固定大小的阵列太不灵活了;程序应该能够处理不同大小的数组。
-`开放数组`:idx: 类型它只能用于参数。
+通常，固定大小的数组太不灵活了;程序应该能够处理不同大小的数组。
+`开放数组`:idx: 类型只能用于参数。
 开放数组总是从位置0开始用 ``int`` 索引。
 ``len`` ， ``low`` 和 ``high`` 操作也可用于开放数组。
-具有兼容基类型的任何数组都可以传递给openarray参数，索引类型无关紧要。
+具有兼容基类型的任何数组都可以传递给开放数组形参，无关索引类型。
 除了数组序列之外，还可以将序列传递给开放数组参数。
 
-开放数组类型不能嵌套： 不支持多维开放数组，因为这很少需要并且不能有效地完成。
+开放数组类型不能嵌套： 不支持多维开放数组，因为这种需求很少并且不能有效地完成。
 
 .. code-block:: nim
   proc testOpenArray(x: openArray[int]) = echo repr(x)
@@ -1171,7 +1169,7 @@ cstring类型
   # 转换成:
   myWriteln(stdout, [$123, $"def", $4.0])
 
-在这个例子中，``$`` 应用于传递给参数 ``a`` 的任何参数。 （注意 ``$`` 应用于字符串是一个nop。）
+在这个例子中，``$`` 应用于传递给参数 ``a`` 的任何参数。 （注意 ``$`` 应用于字符串是一个空操作。）
 
 
 请注意，传递给 ``varargs`` 参数的显式数组构造函数不包含在另一个隐式数组构造中：
@@ -1194,9 +1192,9 @@ cstring类型
 
 未检查数组
 ----------------
-``UncheckedArray [T]`` 类型是一种特殊的 ``array`` ，它的边界不被检查。
+``UncheckedArray[T]`` 类型是一种特殊的 ``数组`` ，编译器不检查它的边界。
 这对于实现定制灵活大小的数组通常很有用。
-另外，未检查数组被转换为未确定大小的C数组：
+另外，未检查数组转换为不确定大小的C数组：
 
 .. code-block:: nim
   type
@@ -1223,9 +1221,9 @@ cstring类型
 -----------------------
 元组或对象类型的变量是异构存储容器。
 元组或对象定义类型的各种命名 *字段* 。
-元组还定义了字段的 *order* 。
+元组还定义了字段的 *顺序* 。
 元组用于异构存储类型，没有开销和很少的抽象可能性。
-构造函数 ``（）`` 可用于构造元组。
+构造函数 ``()`` 可用于构造元组。
 构造函数中字段的顺序必须与元组定义的顺序相匹配。
 如果它们以相同的顺序指定相同类型的相同字段，则不同的元组类型 *等效* 。字段的 *名称* 也必须相同。
 
@@ -1308,11 +1306,11 @@ cstring类型
 在需要简单变体类型的某些情况下，对象层次结构通常是过度的。
 对象变体是通过用于运行时类型灵活性的枚举类型区分的标记联合，镜像 *sum类型* 和 *代数数据类型（ADT）* 的概念，如在其他语言中找到的。
 
-An 示例：
+一个示例：
 
 .. code-block:: nim
 
-  # This is an example how an abstract syntax tree could be modelled in Nim
+  # 这是一个如何在Nim中建模抽象语法树的示例
   type
     NodeKind = enum  # 不同的节点类型
       nkInt,          # 带有整数值的叶节点
@@ -1337,7 +1335,7 @@ An 示例：
   # 访问n.thenPart是有效的，因为 ``nkIf`` 分支是活动的
   n.thenPart = Node(kind: nkFloat, floatVal: 2.0)
 
-  # 以下语句引发了一个 `FieldError` 异常，因为n.kind的值不合适且``nkString``分支未激活：
+  # 以下语句引发了一个 `FieldError` 异常，因为n.kind的值不合适且 ``nkString`` 分支未激活：
   n.strVal = ""
 
   # 无效：会更改活动对象分支：
@@ -1500,7 +1498,7 @@ Into:
 将GC内存和 ``ptr`` 混用
 --------------------------------
 
-如果未追踪对象包含追踪对象（如追踪引用，字符串或序列），则必须特别小心：为了正确释放所有内容，必须在手动释放未追踪内存之前调用内置过程 ``GCunref`` ：
+如果未追踪对象包含追踪对象（如追踪引用，字符串或序列），则需要特别小心：为了正确释放所有内容，必须在手动释放未追踪内存之前调用内置过程 ``GCunref`` ：
 
 .. code-block:: nim
   type
@@ -1622,7 +1620,7 @@ Nim支持这些 `调用约定`:idx:\：
 
 `noconv`:idx:
     生成的C代码将没有任何显式调用约定，因此使用C编译器的默认调用约定。
-    这是必需的，因为Nim对程序的默认调用约定是``fastcall``来提高速度。
+    这是必需的，因为Nim对程序的默认调用约定是 ``fastcall`` 来提高速度。
 
 大多数调用约定仅适用于Windows 32位平台。
 
@@ -1636,7 +1634,7 @@ Distinct类型
 
 ``distinct`` 类型是从 `基类型`:idx:  派生的新类型与它的基类型不兼容。
 特别是，它是一种不同类型的基本属性，它 *并不* 意味着它和基本类型之间的子类型关系。
-允许从不同类型到其基本类型的显式类型转换，反之亦然。另请参阅``distinctBase``以获得逆操作。
+允许从不同类型到其基本类型的显式类型转换，反之亦然。另请参阅 ``distinctBase`` 以获得逆操作。
 
 如果基类型是序数类型，则不同类型是序数类型。
 
@@ -1749,9 +1747,8 @@ Distinct类型
 避免SQL注入攻击
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-An SQL statement that is passed from Nim to an SQL database might be
-modelled as a string. However, using string templates and filling in the
-values is vulnerable to the famous `SQL injection attack`:idx:\:
+从Nim传递到SQL数据库的SQL语句可能被模拟为字符串。
+但是，使用字符串模板并填充值很容易受到 `SQL注入攻击`:idx:\:
 
 .. code-block:: nim
   import strutils
@@ -1762,11 +1759,10 @@ values is vulnerable to the famous `SQL injection attack`:idx:\:
     username: string
 
   db.query("SELECT FROM users WHERE name = '$1'" % username)
-  # Horrible security hole, but the compiler does not mind!
+  # 可怕的安全漏洞，但编译没有问题
 
-This can be avoided by distinguishing strings that contain SQL from strings
-that don't. Distinct types provide a means to introduce a new string type
-``SQL`` that is incompatible with ``string``:
+通过将包含SQL的字符串与不包含SQL的字符串区分开来可以避免这种情况。
+不同类型提供了一种引入与 ``string`` 不兼容的新字符串类型 ``SQL`` 的方法：
 
 .. code-block:: nim
   type
@@ -1778,73 +1774,68 @@ that don't. Distinct types provide a means to introduce a new string type
     username: string
 
   db.query("SELECT FROM users WHERE name = '$1'" % username)
-  # Static error: `query` expects an SQL string!
+  # 静态错误：`query` 需要一个SQL字符串！
 
 
-It is an essential property of abstract types that they **do not** imply a
-subtype relation between the abstract type and its base type. Explicit type
-conversions from ``string`` to ``SQL`` are allowed:
+它是抽象类型的基本属性，它们*并不*意味着抽象类型与其基类型之间的子类型关系。
+允许从 ``string`` 到 ``SQL`` 的显式类型转换：
 
 .. code-block:: nim
   import strutils, sequtils
 
   proc properQuote(s: string): SQL =
-    # quotes a string properly for an SQL statement
+    # 为SQL语句正确引用字符串
     return SQL(s)
 
   proc `%` (frmt: SQL, values: openarray[string]): SQL =
-    # quote each argument:
+    # 引用每个论点：
     let v = values.mapIt(SQL, properQuote(it))
     # we need a temporary type for the type conversion :-(
     type StrSeq = seq[string]
-    # call strutils.`%`:
+    # 调用 strutils.`%`:
     result = SQL(string(frmt) % StrSeq(v))
 
   db.query("SELECT FROM users WHERE name = '$1'".SQL % [username])
 
-Now we have compile-time checking against SQL injection attacks.  Since
-``"".SQL`` is transformed to ``SQL("")`` no new syntax is needed for nice
-looking ``SQL`` string literals. The hypothetical ``SQL`` type actually
-exists in the library as the `TSqlQuery type <db_sqlite.html#TSqlQuery>`_ of
-modules like `db_sqlite <db_sqlite.html>`_.
+现在我们有针对SQL注入攻击的编译时检查。
+因为 ``"".SQL`` 转换为 ``SQL("")`` 不需要新的语法来获得漂亮的 ``SQL`` 字符串文字。 
+假设的 ``SQL`` 类型实际上存在于库中，作为`db_sqlite <db_sqlite.html>`_ 等模块的 `TSqlQuery类型<db_sqlite.html＃TSqlQuery>`_ 。
 
 
 自动类型
 ---------
 
-The ``auto`` type can only be used for return types and parameters. For return
-types it causes the compiler to infer the type from the routine body:
+``auto`` 类型只能用于返回类型和参数。
+对于返回类型，它会使编译器从过程体中推断出类型：
 
 .. code-block:: nim
   proc returnsInt(): auto = 1984
 
-For parameters it currently creates implicitly generic routines:
+对于形参，它现在是创建隐式的泛型例程：
 
 .. code-block:: nim
   proc foo(a, b: auto) = discard
 
-Is the same as:
+同:
 
 .. code-block:: nim
   proc foo[T1, T2](a: T1, b: T2) = discard
 
-However later versions of the language might change this to mean "infer the
-parameters' types from the body". Then the above ``foo`` would be rejected as
-the parameters' types can not be inferred from an empty ``discard`` statement.
+然而，该语言的更高版本可能会将其更改为从方法体 ``推断形参类型`` 。
+然后上面的 ``foo`` 将被拒绝，因为形参的类型不能从空的 ``discard`` 语句中推断出来。
 
 
 类型关系
 ==============
 
-The following section defines several relations on types that are needed to
-describe the type checking done by the compiler.
+以下部分定义了描述编译器类型检查所需类型的几个关系。
 
 
 类型相等性
 -------------
-Nim uses structural type equivalence for most types. Only for objects,
-enumerations and distinct types name equivalence is used. The following
-algorithm, *in pseudo-code*, determines type equality:
+Nim对大多数类型使用结构类型等价。
+仅对于对象，枚举和不同类型使用名称等价。
+*伪代码中* 的以下算法确定类型相等：
 
 .. code-block:: nim
   proc typeEqualsAux(a, b: PType,
@@ -1855,7 +1846,7 @@ algorithm, *in pseudo-code*, determines type equality:
       case a.kind
       of int, intXX, float, floatXX, char, string, cstring, pointer,
           bool, nil, void:
-        # leaf type: kinds identical; nothing more to check
+        # 叶类型: 类型等价; 不做更多检查
         result = true
       of ref, ptr, var, set, seq, openarray:
         result = typeEqualsAux(a.baseType, b.baseType, s)
@@ -1881,16 +1872,14 @@ algorithm, *in pseudo-code*, determines type equality:
     var s: HashSet[(PType, PType)] = {}
     result = typeEqualsAux(a, b, s)
 
-Since types are graphs which can have cycles, the above algorithm needs an
-auxiliary set ``s`` to detect this case.
+由于类型可以是有环图，因此上述算法需要辅助集合 ``s`` 来检测这种情况
 
 
-类型等式模数类型区分
-Type equality modulo type distinction
+类型相等与类型区分
 -------------------------------------
 
-The following algorithm (in pseudo-code) determines whether two types are equal with no respect to ``distinct`` types. 
-For brevity the cycle check with an auxiliary set ``s`` is omitted:
+以下算法（伪代码）确定两种类型是否相等而不是 ``不同`` 类型。
+为简洁起见，省略了辅助集 ``s`` 的循环检查：
 
 .. code-block:: nim
   proc typeEqualsOrDistinct(a, b: PType): bool =
@@ -2021,8 +2010,7 @@ Then an implicit conversion from ``A`` to ``F`` exists if ``a0 >= low(F) and b0 
 赋值兼容性
 ------------------------
 
-An expression ``b`` can be assigned to an expression ``a`` iff ``a`` is an
-`l-value` and ``isImplicitlyConvertible(b.typ, a.typ)`` holds.
+表达式 ``b`` 可以赋给表达式 ``a`` 如果 ``a`` 就左值 `l-value` 并且 ``isImplicitlyConvertible(b.typ, a.typ)`` 成立。
 
 
 重载解析
@@ -2075,8 +2063,8 @@ algorithm returns true::
   takesInt(z) # "T"
 
 
-If this algorithm returns "ambiguous" further disambiguation is performed:
-If the argument ``a`` matches both the parameter type ``f`` of ``p`` and ``g`` of ``q`` via a subtyping relation, the inheritance depth is taken into account:
+如果算法返回 "歧义" 则执行进一步消歧:
+如果参数 ``a`` 通过子类型关系匹配 ``p`` 的参数类型 ``f`` 和 ``q`` 的 ``g`` ，则考虑继承深度：
 
 .. code-block:: nim
   type
@@ -2102,8 +2090,7 @@ If the argument ``a`` matches both the parameter type ``f`` of ``p`` and ``g`` o
   pp(c, c)
 
 
-Likewise for generic matches the most specialized generic type (that still
-matches) is preferred:
+同样，对于通用匹配，匹配的结果中首选最特化的泛型类型：
 
 .. code-block:: nim
   proc gen[T](x: ref ref T) = echo "ref ref T"
@@ -2117,21 +2104,21 @@ matches) is preferred:
 基于'var T'的重载
 ----------------------------
 
-If the formal parameter ``f`` is of type ``var T`` in addition to the ordinary type checking, the argument is checked to be an `l-value`:idx:. 
-``var T`` matches better than just ``T`` then.
+如果形式参数 ``f`` 是除了普通类型检查外的 ``var T`` 类型， 则检查实参是否 `左值`:idx: 。
+``var T`` 比 ``T`` 更好地匹配。
 
 .. code-block:: nim
   proc sayHi(x: int): string =
-    # matches a non-var int
+    # 匹配非var整型
     result = $x
   proc sayHi(x: var int): string =
-    # matches a var int
+    # 匹配var整型
     result = $(x + 10)
 
   proc sayHello(x: int) =
-    var m = x # a mutable version of x
-    echo sayHi(x) # matches the non-var version of sayHi
-    echo sayHi(m) # matches the var version of sayHi
+    var m = x # 可改变的x
+    echo sayHi(x) # 匹配sayHi的非var版本
+    echo sayHi(m) # 匹配sayHi的var版本
 
   sayHello(3) # 3
               # 13
@@ -2140,49 +2127,46 @@ If the formal parameter ``f`` is of type ``var T`` in addition to the ordinary t
 无类型的延迟类型解析
 --------------------------------
 
-**Note**: An `unresolved`:idx: expression is an expression for which no symbol lookups and no type checking have been performed.
+**注意**: `未解析`:idx: 表达式是为没有执行符号查找和类型检查的表达式。
 
-Since templates and macros that are not declared as ``immediate`` participate in overloading resolution it's essential to have a way to pass unresolved expressions to a template or macro. 
-This is what the meta-type ``untyped`` accomplishes:
+由于未声明为 ``立即`` 的模板和宏参与重载分析，因此必须有一种方法将未解析的表达式传递给模板或宏。
 
 .. code-block:: nim
   template rem(x: untyped) = discard
 
   rem unresolvedExpression(undeclaredIdentifier)
 
-A parameter of type ``untyped`` always matches any argument (as long as there is any argument passed to it).
+``untyped`` 类型的参数总是匹配任何参数（只要有任何参数传递给它）。
 
-But one has to watch out because other overloads might trigger the argument's resolution:
+
+但是必须注意，因为其他重载可能触发参数的解析：
 
 .. code-block:: nim
   template rem(x: untyped) = discard
   proc rem[T](x: T) = discard
 
-  # undeclared identifier: 'unresolvedExpression'
+  # 未声明的标识符：'unresolvedExpression'
   rem unresolvedExpression(undeclaredIdentifier)
 
-``untyped`` and ``varargs[untyped]`` are the only metatype that are lazy in this sense, the other metatypes ``typed`` and ``typedesc`` are not lazy.
+``untyped`` 和 ``varargs [untyped]`` 是这种意义上唯一的惰性元类型，其他元类型 ``typed`` 和 ``typedesc`` 并不是惰性的。
 
 
 可变参数匹配
 ----------------
 
-See `Varargs <#types-varargs>`_.
+见 `Varargs <#types-varargs>`_.
 
 
 语句和表达式
 ==========================
 
-Nim uses the common statement/expression paradigm: Statements do not
-produce a value in contrast to expressions. However, some expressions are
-statements.
+Nim使用通用语句/表达式范例：与表达式相比，语句不会产生值。
+但是，有些表达式是语句。
 
-Statements are separated into `simple statements`:idx: and
-`complex statements`:idx:.
-Simple statements are statements that cannot contain other statements like
-assignments, calls or the ``return`` statement; complex statements can
-contain other statements. To avoid the `dangling else problem`:idx:, complex
-statements always have to be indented. The details can be found in the grammar.
+Statements are separated into `simple statements`:idx: and `complex statements`:idx:.
+Simple statements are statements that cannot contain other statements like assignments, calls or the ``return`` statement; complex statements can contain other statements. 
+To avoid the `dangling else problem`:idx:, complex statements always have to be indented. 
+The details can be found in the grammar.
 
 
 语句列表表达式
