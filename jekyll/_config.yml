@@ -37,8 +37,8 @@ navigation:
     url: /documentation.html
   - title: 社区
     url: /community.html
-  - title: 捐赠
-    url: /donate.html
+  # - title: 捐赠
+  #   url: /donate.html
 
 # Build settings
 markdown: kramdown
