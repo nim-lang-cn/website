@@ -940,7 +940,7 @@ Operation             Comment
 
 或等价类型。对有符号整数集合的基类型被定义为在 ``0 .. MaxSetElements-1`` 的范围内， 其中 ``MaxSetElements`` 目前是2^16。
 
-原因在于集合实现成高性能位矢量。用大类型声明集合会出现错误：
+原因是集合被实现为高性能位向量。尝试声明具有更大类型的集将导致错误：
 
 .. code-block:: nim
 
@@ -1028,7 +1028,7 @@ Operation             Comment
 
 数组是值类型，和任何其它Nim类型一样。赋值操作符拷贝整个数组内容。
 
-内置 `len <system.html#len,TOpenArray>`_ 过程返回数组长度。`low(a) <system.html#low>`_ 返回数组a的最小索引， `high(a) <system.html#high>`_ 返回最大索引。
+内置 `len <system.html#len,TOpenArray>`_ 过程返回数组长度。 `low(a) <system.html#low>`_ 返回数组a的最小索引， `high(a) <system.html#high>`_ 返回最大索引。
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -1091,7 +1091,7 @@ Operation             Comment
 ---------
 序列类似数组但是动态长度，可以在运行时改变（像字符串）。因为序列是大小可变的它们总是分配在堆上，被垃圾回收。
 
-序列总是以从零开始的 ``int`` 类型索引。`len <system.html#len,seq[T]>`_, `low <system.html#low>`_ 和 `high <system.html#high>`_ 操作符也可用于序列。 ``x[i]`` 标记可以用于访问 ``x`` 的第i个元素。
+序列总是以从零开始的 ``int`` 类型索引。 `len <system.html#len,seq[T]>`_ , `low <system.html#low>`_ 和 `high <system.html#high>`_ 操作符也可用于序列。 ``x[i]`` 标记可以用于访问 ``x`` 的第i个元素。
 
 序列可以用数组构造器 ``[]`` 数组到序列操作符 ``@`` 构成。另一个为序列分配空间的方法是调用内置 `newSeq <system.html#newSeq>`_ 过程。
 
@@ -1328,7 +1328,7 @@ Example:
 
 即使你不需要为元组声明类型就可以使用，不同字段名创建的元组将认为是不同的对象，尽管有相同的字段类型。
 
-元组只有在变量赋值期间可以 *解包* 。 这方便将元组字段直接一个个赋值给命名变量。一个例子是 `os module <os.html>`_模块中的 `splitFile <os.html#splitFile>`_ 过程，
+元组只有在变量赋值期间可以 *解包* 。 这方便将元组字段直接一个个赋值给命名变量。一个例子是 `os module <os.html>`_ 模块中的 `splitFile <os.html#splitFile>`_ 过程，
 它同时返回一个路径的目录、名称和扩展名。元组解包必须使用小括号括住你想赋值的解包变量，否则你将为每个变量赋同样的值！例如：
 
 .. code-block:: nim
