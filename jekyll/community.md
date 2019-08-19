@@ -61,7 +61,7 @@ css_class: community
 我们建立了一个GitHub的组织，以便借助中文开源社区的力量去推动Nim的发展。
 欢迎加入进来，贡献自己的力量。
 
-<i class="fa fa-github" aria-hidden="true"></i> 
+<i class="fab fa-github" aria-hidden="true"></i> 
 [Nim中文社区](https://github.com/nim-lang-cn)
 
 # 官方社区
