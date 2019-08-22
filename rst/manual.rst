@@ -2370,8 +2370,11 @@ If语句
 如果所有条件都失败，则执行 ``else`` 部分。
 如果没有 ``else`` 部分，则继续执行下一个语句。
 
-In ``if`` statements new scopes begin immediately after the ``if``/``elif``/``else`` keywords and ends after the corresponding *then* block.
-For visualization purposes the scopes have been enclosed in ``{|  |}`` in the following 示例：
+在 ``if`` 语句中，新的作用域在 ``if`` 或 ``elif`` 或 ``else`` 关键字之后立即开始，并在相应的 *then* 块之后结束。
+
+出于可视化目的，作用域已包含在 ``{| |}`` 在以下示例中
+
+示例：
 
 .. code-block:: nim
   if {| (let m = input =~ re"(\w+)=\w+"; m.isMatch):
@@ -2394,8 +2397,8 @@ Case语句
   of "go-for-a-walk":     echo "please yourself"
   else:                   echo "unknown command"
 
-  # indentation of the branches is also allowed; and so is an optional colon
-  # after the selecting expression:
+  # 允许分支缩进; 冒号也是可选的
+  # 在选择表达式后:
   case readline(stdin):
     of "delete-everything", "restart-computer":
       echo "permission denied"
@@ -2403,12 +2406,14 @@ Case语句
     else:                   echo "unknown command"
 
 
-The ``case`` statement is similar to the if statement, but it represents a multi-branch selection. 
-The expression after the keyword ``case`` is evaluated and if its value is in a *slicelist* the corresponding statements (after the ``of`` keyword) are executed. 
-If the value is not in any  given *slicelist* the ``else`` part is executed. 
-If there is no ``else`` part and not all possible values that ``expr`` can hold occur in a ``slicelist``, a static error occurs. 
-This holds only for expressions of ordinal types. 
-"All possible values" of ``expr`` are determined by ``expr``'s type. 
+``case`` 语句类似于if语句，但它表示多分支选择。
+
+评估关键字 ``case`` 之后的表达式，如果它的值在 *slicelist* 中，则执行在 ``of`` 关键字之后的相应语句。
+
+如果该值不在任何给定的 *slicelist* 中，则执行 ``else`` 部分。
+如果没有 ``else`` 部分而且 ``expr`` 可以保持在 ``slicelist`` 中的所有可能值，则会发生静态错误。
+这仅适用于序数类型的表达式。
+``expr`` 的“所有可能的值”由 ``expr`` 的类型决定。
 To suppress the static error an ``else`` part with an empty ``discard`` statement should be used.
 
 For non ordinal types it is not possible to list every possible value and so these always require an ``else`` part.
