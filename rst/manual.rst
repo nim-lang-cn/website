@@ -2414,14 +2414,14 @@ Case语句
 如果没有 ``else`` 部分而且 ``expr`` 可以保持在 ``slicelist`` 中的所有可能值，则会发生静态错误。
 这仅适用于序数类型的表达式。
 ``expr`` 的“所有可能的值”由 ``expr`` 的类型决定。
-To suppress the static error an ``else`` part with an empty ``discard`` statement should be used.
+为了阻止静态错误，应该使用带有空 ``discard`` 语句的 ``else`` 部分。
 
-For non ordinal types it is not possible to list every possible value and so these always require an ``else`` part.
+对于非序数类型，不可能列出每个可能的值，因此这些值总是需要 ``else`` 部分。
 
-Because case statements are checked for exhaustiveness during semantic analysis, the value in every ``of`` branch must be a constant expression.
-This restriction also allows the compiler to generate more performant code.
+因为在语义分析期间检查case语句的详尽性，所以每个 ``of`` 分支中的值必须是常量表达式。
+此限制还允许编译器生成更高性能的代码。
 
-As a special semantic extension, an expression in an ``of`` branch of a case statement may evaluate to a set or array constructor; the set or array is then expanded into a list of its elements:
+作为一种特殊的语义扩展，case语句的 ``of`` 分支中的表达式可以计算为集合或数组构造函数;然后将集合或数组扩展为其元素列表：
 
 .. code-block:: nim
   const
@@ -2457,41 +2457,37 @@ When语句
   else:
     echo "cannot happen!"
 
-The ``when`` statement is almost identical to the ``if`` statement with some exceptions:
+``when`` 语句几乎与 ``if`` 语句完全相同，但有一些例外：
 
-* Each condition (``expr``) has to be a constant expression (of type ``bool``).
-* The statements do not open a new scope.
-* The statements that belong to the expression that evaluated to true are
-  translated by the compiler, the other statements are not checked for
-  semantics! However, each condition is checked for semantics.
+* 每个条件 (``expr``) 必须是一个类型为 ``bool`` 的常量表达式。
+* 语句不打开新作用域。
+* 属于计算结果为true的表达式的语句由编译器翻译，其他语句不检查语义。
 
-The ``when`` statement enables conditional compilation techniques. 
-As a special syntactic extension, the ``when`` construct is also available within ``object`` definitions.
+``when`` 语句启用条件编译技术。
+作为一种特殊的语法扩展，``when`` 结构也可以在 ``object`` 定义中使用。
 
 
 When nimvm语句
 --------------------
 
-``nimvm`` is a special symbol, that may be used as expression of ``when nimvm``
-statement to differentiate execution path between compile time and the
-executable.
+``nimvm`` 是一个特殊的符号，可以用作 ``when nimvm`` 语句的表达式来区分编译时和可执行文件之间的执行路径。
 
 示例：
 
 .. code-block:: nim
   proc someProcThatMayRunInCompileTime(): bool =
     when nimvm:
-      # This branch is taken at compile time.
+      # 编译时采用这个分支。
       result = true
     else:
-      # This branch is taken in the executable.
+      # 可执行文件中采用这个分支
       result = false
   const ctValue = someProcThatMayRunInCompileTime()
   let rtValue = someProcThatMayRunInCompileTime()
   assert(ctValue == true)
   assert(rtValue == false)
 
-``when nimvm`` statement must meet the following requirements:
+``when nimvm`` 语句必须满足以下要求：
 
 * Its expression must always be ``nimvm``. More complex expressions are not
   allowed.
@@ -2510,8 +2506,7 @@ Return语句
   return 40+2
 
 The ``return`` statement ends the execution of the current procedure.
-It is only allowed in procedures. If there is an ``expr``, this is syntactic
-sugar for:
+It is only allowed in procedures. If there is an ``expr``, this is syntactic sugar for:
 
 .. code-block:: nim
   result = expr
@@ -2536,12 +2531,10 @@ Yield语句
 .. code-block:: nim
   yield (1, 2, 3)
 
-The ``yield`` statement is used instead of the ``return`` statement in
-iterators. It is only valid in iterators. Execution is returned to the body
-of the for loop that called the iterator. Yield does not end the iteration
-process, but execution is passed back to the iterator if the next iteration
-starts. See the section about iterators (`Iterators and the for statement`_)
-for further information.
+The ``yield`` statement is used instead of the ``return`` statement in iterators. 
+It is only valid in iterators. Execution is returned to the body of the for loop that called the iterator. 
+Yield does not end the iteration process, but execution is passed back to the iterator if the next iteration starts. 
+See the section about iterators (`Iterators and the for statement`_) for further information.
 
 
 Block语句
@@ -2560,9 +2553,8 @@ Block语句
   echo found
 
 The block statement is a means to group statements to a (named) ``block``.
-Inside the block, the ``break`` statement is allowed to leave the block
-immediately. A ``break`` statement can contain a name of a surrounding
-block to specify which block is to leave.
+Inside the block, the ``break`` statement is allowed to leave the block immediately. 
+A ``break`` statement can contain a name of a surrounding block to specify which block is to leave.
 
 
 Break语句
@@ -2592,16 +2584,15 @@ While语句
 
 
 The ``while`` statement is executed until the ``expr`` evaluates to false.
-Endless loops are no error. ``while`` statements open an `implicit block`,
-so that they can be left with a ``break`` statement.
+Endless loops are no error. 
+``while`` statements open an `implicit block`, so that they can be left with a ``break`` statement.
 
 
 Continue语句
 ------------------
 
-A ``continue`` statement leads to the immediate next iteration of the
-surrounding loop construct. It is only allowed within a loop. A continue
-statement is syntactic sugar for a nested block:
+A ``continue`` statement leads to the immediate next iteration of the surrounding loop construct. 
+It is only allowed within a loop. A continue statement is syntactic sugar for a nested block:
 
 .. code-block:: nim
   while expr1:
