@@ -2163,20 +2163,21 @@ algorithm returns true::
 Nim使用通用语句/表达式范例：与表达式相比，语句不会产生值。
 但是，有些表达式是语句。
 
-Statements are separated into `simple statements`:idx: and `complex statements`:idx:.
-Simple statements are statements that cannot contain other statements like assignments, calls or the ``return`` statement; complex statements can contain other statements. 
-To avoid the `dangling else problem`:idx:, complex statements always have to be indented. 
-The details can be found in the grammar.
+语句分为 `简单语句`:idx: 和 `复杂语句`:idx: 。
+简单语句是不能包含像赋值，调用或者 ``return`` 的语句； 复杂语句可以包含其它语句。 
+为了避免 `dangling else问题`:idx:, 复杂语句必须缩进。 
+细节可以在语法中找到。
 
 
 语句列表表达式
 -------------------------
-
-Statements can also occur in an expression context that looks like ``(stmt1; stmt2; ...; ex)``. 
-This is called an statement list expression or ``(;)``. 
-The type of ``(stmt1; stmt2; ...; ex)`` is the type of ``ex``. 
-All the other statements must be of type ``void``. 
-(One can use ``discard`` to produce a ``void`` type.) ``(;)`` does not introduce a new scope.
+ 
+语句也可以出现在类似于 ``(stmt1; stmt2; ...; ex)`` 的表达式上下文中。
+语句也可以出现在表达式上下文中。
+这叫做语句列表表达式或 ``(;)`` 。
+``(stmt1; stmt2; ...; ex)`` 的类型是 ``ex`` 的类型。
+所有其他语句必须是 ``void`` 类型。  
+(可以用 ``discard`` 生成 ``void`` 类型。) ``(;)`` 不引入新作用域。
 
 
 Discard表达式
@@ -2188,13 +2189,13 @@ Discard表达式
   proc p(x, y: int): int =
     result = x + y
 
-  discard p(3, 4) # discard the return value of `p`
+  discard p(3, 4) # 丢弃 `p` 的返回值
 
-The ``discard`` statement evaluates its expression for side-effects and throws the expression's resulting value away.
+``discard`` 语句评估其副作用的表达式，并丢弃表达式的结果。
 
-Ignoring the return value of a procedure without using a discard statement is a static error.
+在不使用discard语句的情况下忽略过程的返回值是一个静态错误。
 
-The return value can be ignored implicitly if the called proc/iterator has been declared with the `discardable`:idx: pragma:
+如果使用 `discardable`:idx: 编译指示声明了被调用的proc或iterator，则可以隐式忽略返回值：
 
 .. code-block:: nim
   proc p(x, y: int): int {.discardable.} =
@@ -2202,7 +2203,7 @@ The return value can be ignored implicitly if the called proc/iterator has been 
 
   p(3, 4) # now valid
 
-An empty ``discard`` statement is often used as a null statement:
+空 ``discard`` 语句通常用作null语句:
 
 .. code-block:: nim
   proc classify(s: string) =
@@ -2215,13 +2216,13 @@ An empty ``discard`` statement is often used as a null statement:
 Void上下文
 ------------
 
-In a list of statements every expression except the last one needs to have the type ``void``. 
-In addition to this rule an assignment to the builtin ``result`` symbol also triggers a mandatory ``void`` context for the subsequent expressions:
+在语句列表中，除最后一个表达式之外的每个表达式都需要具有类型 ``void`` 。
+除了这个规则之外，对内置 ``result`` 符号的赋值也会触发后续表达式的强制 ``void`` 上下文：
 
 .. code-block:: nim
   proc invalid*(): string =
     result = "foo"
-    "invalid"  # Error: value of type 'string' has to be discarded
+    "invalid"  # 错误: 'string' 类型值必须丢弃
 
 .. code-block:: nim
   proc valid*(): string =
@@ -2232,8 +2233,8 @@ In addition to this rule an assignment to the builtin ``result`` symbol also tri
 Var语句
 -------------
 
-Var statements declare new local and global variables and initialize them. 
-A comma separated list of variables can be used to specify variables of the same type:
+Var语句声明新的局部变量和全局变量并初始化它们。
+逗号分隔的变量列表可用于指定相同类型的变量：
 
 .. code-block:: nim
 
@@ -2241,12 +2242,12 @@ A comma separated list of variables can be used to specify variables of the same
     a: int = 0
     x, y, z: int
 
-If an initializer is given the type can be omitted: the variable is then of the same type as the initializing expression. 
-Variables are always initialized with a default value if there is no initializing expression. 
-The default value depends on the type and is always a zero in binary.
+如果给出初始值设定项，则可以省略该类型：该变量的类型与初始化表达式的类型相同。
+如果没有初始化表达式，变量总是使用默认值初始化。
+默认值取决于类型，并且在二进制中始终为零。
 
 ============================    ==============================================
-Type                            default value
+类型                             默认值
 ============================    ==============================================
 any integer type                0
 any float                       0.0
@@ -2264,28 +2265,28 @@ T = enum                        cast[T](0); this may be an invalid value
 ============================    ==============================================
 
 
-The implicit initialization can be avoided for optimization reasons with the `noinit`:idx: pragma:
+出于优化原因，可以使用 `noinit`:idx: 编译指示来避免隐式初始化:
 
 .. code-block:: nim
   var
     a {.noInit.}: array[0..1023, char]
 
-If a proc is annotated with the ``noinit`` pragma this refers to its implicit ``result`` variable:
+如果一个proc用 ``noinit`` 编译指示注释，则指的是它隐含的 ``result`` 变量：
 
 .. code-block:: nim
   proc returnUndefinedValue: int {.noinit.} = discard
 
 
-The implicit initialization can be also prevented by the `requiresInit`:idx: type pragma. 
-The compiler requires an explicit initialization for the object and all of its fields. 
-However it does a `control flow analysis`:idx: to prove the variable has been initialized and does not rely on syntactic properties:
+隐式初始化可以用 `requiresInit`:idx: 类型编译指示阻止。 
+编译器需要对对象及其所有字段进行显式初始化。
+然而它执行 `控制流分析`:idx: 证明变量已经初始化并且不依赖于语法属性：
 
 .. code-block:: nim
   type
     MyObject = object {.requiresInit.}
 
   proc p() =
-    # the following is valid:
+    # 以下内容有效：
     var x: MyObject
     if someCondition():
       x = a()
@@ -2297,18 +2298,18 @@ However it does a `control flow analysis`:idx: to prove the variable has been in
 Let语句
 -------------
 
-A ``let`` statement declares new local and global `single assignment`:idx: variables and binds a value to them. 
-The syntax is the same as that of the ``var`` statement, except that the keyword ``var`` is replaced by the keyword ``let``.
-Let variables are not l-values and can thus not be passed to ``var`` parameters nor can their address be taken. They cannot be assigned new values.
+``let``语句声明了新的本地和全局 `单次赋值`:idx: 变量并绑定值。
+语法与 ``var`` 语句的语法相同，只是关键字 ``var`` 被替换为关键字 ``let`` 。
+Let变量不是左值因此不能传递给``var``参数，也不能采用它们的地址。他们无法分配新值。
 
-For let variables the same pragmas are available as for ordinary variables.
+对于let变量，可以使用与普通变量相同的编译指示。
 
 
-Tuple解包
+元组解包
 ---------------
 
-In a ``var`` or ``let`` statement tuple unpacking can be performed. 
-The special identifier ``_`` can be used to ignore some parts of the tuple:
+在 ``var`` 或 ``let`` 语句中可以执行元组解包。 
+特殊标识符 ``_`` 可以用来忽略元组的某些部分：
 
 .. code-block:: nim
     proc returnsTuple(): (int, int, int) = (4, 2, 3)
@@ -2320,7 +2321,7 @@ The special identifier ``_`` can be used to ignore some parts of the tuple:
 常量段
 -------------
 
-A const section declares constants whose values are constant expressions:
+const部分声明其值为常量表达式的常量：
 
 .. code-block::
   import strutils
@@ -2328,24 +2329,24 @@ A const section declares constants whose values are constant expressions:
     roundPi = 3.1415
     constEval = contains("abc", 'b') # computed at compile time!
 
-Once declared, a constant's symbol can be used as a constant expression.
+声明后，常量符号可用作常量表达式。
 
-See `Constants and Constant Expressions <#constants-and-constant-expressions>`_ for details.
+详见 `Constants and Constant Expressions <#constants-and-constant-expressions>`_ 。
 
 静态语句和表达式
 ---------------------------
 
-A static statement/expression explicitly requires compile-time execution.
-Even some code that has side effects is permitted in a static block:
+静态语句/表达式显式需要编译时执行。
+甚至一些具有副作用的代码也允许在静态块中：
 
 .. code-block::
 
   static:
     echo "echo at compile time"
 
-There are limitations on what Nim code can be executed at compile time;
-see `Restrictions on Compile-Time Execution <#restrictions-on-compileminustime-execution>`_ for details.
-It's a static error if the compiler cannot execute the block at compile time.
+在编译时可以执行哪些Nim代码存在限制;
+详见 `Restrictions on Compile-Time Execution <#restrictions-on-compileminustime-execution>`_ 。
+如果编译器无法在编译时执行块，那么这是一个静态错误。
 
 
 If语句
@@ -2364,11 +2365,10 @@ If语句
   else:
     echo "Boring name..."
 
-The ``if`` statement is a simple way to make a branch in the control flow: The expression after the keyword ``if`` is evaluated, if it is true the corresponding statements after the ``:`` are executed. 
-Otherwise the expression after the ``elif`` is evaluated (if there is an ``elif`` branch), if it is true the corresponding statements after the ``:`` are executed. 
-This goes on until the last ``elif``. 
-If all conditions fail, the ``else`` part is executed. 
-If there is no ``else`` part, execution continues with the next statement.
+``if`` 语句是在控制流中创建分支的简单方法：计算关键字 ``if`` 之后的表达式，如果为真，则执行 ``:`` 之后的相应语句。
+这一直持续到最后一个 ``elif`` 。
+如果所有条件都失败，则执行 ``else`` 部分。
+如果没有 ``else`` 部分，则继续执行下一个语句。
 
 In ``if`` statements new scopes begin immediately after the ``if``/``elif``/``else`` keywords and ends after the corresponding *then* block.
 For visualization purposes the scopes have been enclosed in ``{|  |}`` in the following 示例：
@@ -2403,27 +2403,20 @@ Case语句
     else:                   echo "unknown command"
 
 
-The ``case`` statement is similar to the if statement, but it represents
-a multi-branch selection. The expression after the keyword ``case`` is
-evaluated and if its value is in a *slicelist* the corresponding statements
-(after the ``of`` keyword) are executed. If the value is not in any
-given *slicelist* the ``else`` part is executed. If there is no ``else``
-part and not all possible values that ``expr`` can hold occur in a
-``slicelist``, a static error occurs. This holds only for expressions of
-ordinal types. "All possible values" of ``expr`` are determined by ``expr``'s
-type. To suppress the static error an ``else`` part with an
-empty ``discard`` statement should be used.
+The ``case`` statement is similar to the if statement, but it represents a multi-branch selection. 
+The expression after the keyword ``case`` is evaluated and if its value is in a *slicelist* the corresponding statements (after the ``of`` keyword) are executed. 
+If the value is not in any  given *slicelist* the ``else`` part is executed. 
+If there is no ``else`` part and not all possible values that ``expr`` can hold occur in a ``slicelist``, a static error occurs. 
+This holds only for expressions of ordinal types. 
+"All possible values" of ``expr`` are determined by ``expr``'s type. 
+To suppress the static error an ``else`` part with an empty ``discard`` statement should be used.
 
-For non ordinal types it is not possible to list every possible value and so
-these always require an ``else`` part.
+For non ordinal types it is not possible to list every possible value and so these always require an ``else`` part.
 
-Because case statements are checked for exhaustiveness during semantic analysis,
-the value in every ``of`` branch must be a constant expression.
+Because case statements are checked for exhaustiveness during semantic analysis, the value in every ``of`` branch must be a constant expression.
 This restriction also allows the compiler to generate more performant code.
 
-As a special semantic extension, an expression in an ``of`` branch of a case
-statement may evaluate to a set or array constructor; the set or array is then
-expanded into a list of its elements:
+As a special semantic extension, an expression in an ``of`` branch of a case statement may evaluate to a set or array constructor; the set or array is then expanded into a list of its elements:
 
 .. code-block:: nim
   const
@@ -2782,7 +2775,7 @@ has lots of advantages:
   know about tables.
 
 
-Type转换
+类型转换
 ----------------
 Syntactically a `type conversion` is like a procedure call, but a
 type name replaces the procedure name. A type conversion is always
@@ -2804,7 +2797,7 @@ A type conversion can also be used to disambiguate overloaded routines:
   procVar("a")
 
 
-Type强转
+类型强转
 ----------
 示例：
 
@@ -2815,15 +2808,13 @@ Type casts are a crude mechanism to interpret the bit pattern of an expression a
 Type casts are only needed for low-level programming and are inherently unsafe.
 
 
-The addr operator
+addr操作符
 -----------------
-The ``addr`` operator returns the address of an l-value. If the type of the
-location is ``T``, the `addr` operator result is of the type ``ptr T``. An
-address is always an untraced reference. Taking the address of an object that
-resides on the stack is **unsafe**, as the pointer may live longer than the
-object on the stack and can thus reference a non-existing object. One can get
-the address of variables, but one can't use it on variables declared through
-``let`` statements:
+The ``addr`` operator returns the address of an l-value. 
+If the type of the location is ``T``, the `addr` operator result is of the type ``ptr T``. 
+An address is always an untraced reference. 
+Taking the address of an object that resides on the stack is **unsafe**, as the pointer may live longer than the object on the stack and can thus reference a non-existing object. 
+One can get the address of variables, but one can't use it on variables declared through ``let`` statements:
 
 .. code-block:: nim
 
@@ -2843,9 +2834,7 @@ the address of variables, but one can't use it on variables declared through
 unsafeAddr操作符
 -----------------------
 
-For easier interoperability with other compiled languages such as C, retrieving
-the address of a ``let`` variable, a parameter or a ``for`` loop variable, the
-``unsafeAddr`` operation can be used:
+For easier interoperability with other compiled languages such as C, retrieving the address of a ``let`` variable, a parameter or a ``for`` loop variable, the ``unsafeAddr`` operation can be used:
 
 .. code-block:: nim
 
@@ -2856,15 +2845,12 @@ the address of a ``let`` variable, a parameter or a ``for`` loop variable, the
 过程
 ==========
 
-What most programming languages call `methods`:idx: or `functions`:idx: are
-called `procedures`:idx: in Nim. A procedure
-declaration consists of an identifier, zero or more formal parameters, a return
-value type and a block of code. Formal parameters are declared as a list of
-identifiers separated by either comma or semicolon. A parameter is given a type
-by ``: typename``. The type applies to all parameters immediately before it,
-until either the beginning of the parameter list, a semicolon separator or an
-already typed parameter, is reached. The semicolon can be used to make
-separation of types and subsequent identifiers more distinct.
+What most programming languages call `methods`:idx: or `functions`:idx: are called `procedures`:idx: in Nim. 
+A procedure declaration consists of an identifier, zero or more formal parameters, a return value type and a block of code. 
+Formal parameters are declared as a list of identifiers separated by either comma or semicolon. 
+A parameter is given a type by ``: typename``. 
+The type applies to all parameters immediately before it, until either the beginning of the parameter list, a semicolon separator or an already typed parameter, is reached. 
+The semicolon can be used to make separation of types and subsequent identifiers more distinct.
 
 .. code-block:: nim
   # Using only commas
@@ -2876,15 +2862,13 @@ separation of types and subsequent identifiers more distinct.
   # Will fail: a is untyped since ';' stops type propagation.
   proc foo(a; b: int; c, d: bool): int
 
-A parameter may be declared with a default value which is used if the caller
-does not provide a value for the argument.
+A parameter may be declared with a default value which is used if the caller does not provide a value for the argument.
 
 .. code-block:: nim
   # b is optional with 47 as its default value
   proc foo(a: int, b: int = 47): int
 
-Parameters can be declared mutable and so allow the proc to modify those
-arguments, by using the type modifier `var`.
+Parameters can be declared mutable and so allow the proc to modify those arguments, by using the type modifier `var`.
 
 .. code-block:: nim
   # "returning" a value to the caller through the 2nd argument
@@ -2892,11 +2876,12 @@ arguments, by using the type modifier `var`.
   proc foo(inp: int, outp: var int) =
     outp = inp + 47
 
-If the proc declaration has no body, it is a `forward`:idx: declaration. If the
-proc returns a value, the procedure body can access an implicitly declared
-variable named `result`:idx: that represents the return value. Procs can be
-overloaded. The overloading resolution algorithm determines which proc is the
-best match for the arguments. 示例：
+If the proc declaration has no body, it is a `forward`:idx: declaration. 
+If the proc returns a value, the procedure body can access an implicitly declared variable named `result`:idx: that represents the return value. 
+Procs can be overloaded. 
+The overloading resolution algorithm determines which proc is the best match for the arguments. 
+
+示例：
 
 .. code-block:: nim
 
@@ -2926,7 +2911,6 @@ Calling a procedure can be done in many different ways:
   callme 0, 1, "abc", '\t'              # (x=0, y=1, s="abc", c='\t', b=false)
 
 A procedure may call itself recursively.
-
 
 `Operators`:idx: are procedures with a special operator symbol as identifier:
 
@@ -2974,12 +2958,10 @@ If a declared symbol is marked with an `asterisk`:idx: it is exported from the c
 方法调用语法
 ------------------
 
-For object oriented programming, the syntax ``obj.method(args)`` can be used
-instead of ``method(obj, args)``. The parentheses can be omitted if there are no
-remaining arguments: ``obj.len`` (instead of ``len(obj)``).
+For object oriented programming, the syntax ``obj.method(args)`` can be used instead of ``method(obj, args)``. 
+The parentheses can be omitted if there are no remaining arguments: ``obj.len`` (instead of ``len(obj)``).
 
-This method call syntax is not restricted to objects, it can be used
-to supply any type of first argument for procedures:
+This method call syntax is not restricted to objects, it can be used to supply any type of first argument for procedures:
 
 .. code-block:: nim
 
@@ -2988,15 +2970,13 @@ to supply any type of first argument for procedures:
   echo {'a', 'b', 'c'}.card
   stdout.writeLine("Hallo") # the same as writeLine(stdout, "Hallo")
 
-Another way to look at the method call syntax is that it provides the missing
-postfix notation.
+Another way to look at the method call syntax is that it provides the missing postfix notation.
 
 The method call syntax conflicts with explicit generic instantiations:
-``p[T](x)`` cannot be written as ``x.p[T]`` because ``x.p[T]`` is always
-parsed as ``(x.p)[T]``.
+``p[T](x)`` cannot be written as ``x.p[T]`` because ``x.p[T]`` is always parsed as ``(x.p)[T]``.
 
 See also: `Limitations of the method call syntax
-<#templates-limitations-of-the-method-call-syntax>`_.
+<#templates-limitations-of-the-method-call-syntax>`_ .
 
 The ``[: ]`` notation has been designed to mitigate this issue: ``x.p[:T]``
 is rewritten by the parser to ``p[T](x)``, ``x.p[:T](y)`` is rewritten to
