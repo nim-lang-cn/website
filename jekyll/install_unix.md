@@ -140,13 +140,13 @@ apt-get install nim
 在Docker Hub上发布，包括了编译器和Nimble。
 有独立脚本和Nimble包的镜像。
 
-获取最新的稳定镜像：
+获取最新的**稳定**镜像：
 
 ```
 docker pull nimlang/nim
 ```
 
-获取最新的开发镜像：
+获取最新的**开发**镜像：
 
 ```
 docker pull nimlang/nim:devel
