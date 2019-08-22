@@ -1071,7 +1071,7 @@ Operation             Comment
   type
     LightTower = array[1..10, array[north..west, BlinkLights]]
 
-从零开始对数组很普高，所以有从零到指定索引减1的范围简写语法：
+从零开始对数组很普遍，有从零到指定索引减1的范围简写语法：
 
 .. code-block:: nim
     :test: "nim c $1"
