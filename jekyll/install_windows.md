@@ -48,7 +48,7 @@ current: Install
 要使用Nim进行开发，需要在你的[``PATH``环境变量](https://zh.wikipedia.org/wiki/PATH_(%E5%8F%98%E9%87%8F))中添加以下两个目录：
 
 * Nim的二进制文件位于你解压的文件夹下的``bin``目录下，所以这个目录在环境变量中是必需的；
-* ``%USERPROFILE%\.nimble\bin`` (``%USERPROFILE%``指的是你的HOME目录，Windows系统下是``我的文档``，Unix系统下是``~``)
+* ``%USERPROFILE%\.nimble\bin`` (``%USERPROFILE%``指的是你的HOME目录，Win7以下是``我的文档``，也可能叫做``Administrator``之类的用户名)
 
 下载的zip文件中包含了一个名为``finish.exe``的文件，
 它会尝试在你的``PATH``中添加上面说的第一个目录，
