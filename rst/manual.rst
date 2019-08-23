@@ -3598,8 +3598,7 @@ Defer语句
 
 Instead of a ``try finally`` statement a ``defer`` statement can be used.
 
-Any statements following the ``defer`` in the current block will be considered
-to be in an implicit try block:
+Any statements following the ``defer`` in the current block will be considered to be in an implicit try block:
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -3623,8 +3622,7 @@ Is rewritten to:
     finally:
       close(f)
 
-Top level ``defer`` statements are not supported
-since it's unclear what such a statement should refer to.
+Top level ``defer`` statements are not supported since it's unclear what such a statement should refer to.
 
 
 Raise语句
