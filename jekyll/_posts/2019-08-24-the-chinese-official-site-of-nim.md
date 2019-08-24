@@ -1,10 +1,10 @@
 ---
-title: "Nim中文社区官网现已上线！"
+title: "Nim中文官网现已上线！"
 author: Nim中文社区
 ---
 
-**[Nim中文社区官网](https://nim-lang-cn.org)现已上线！
-大家可以通过[https://nim-lang-cn.org](https://nim-lang-cn.org)来访问。** 
+[Nim中文官网](https://nim-lang-cn.org)现已上线！
+大家可以通过[https://nim-lang-cn.org](https://nim-lang-cn.org)来访问。
 
 
 ## 足下
