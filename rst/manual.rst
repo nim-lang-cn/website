@@ -2298,9 +2298,9 @@ T = enum                        cast[T](0); this may be an invalid value
 Let语句
 -------------
 
-``let``语句声明了新的本地和全局 `单次赋值`:idx: 变量并绑定值。
+``let`` 语句声明了新的本地和全局 `单次赋值`:idx: 变量并绑定值。
 语法与 ``var`` 语句的语法相同，只是关键字 ``var`` 被替换为关键字 ``let`` 。
-Let变量不是左值因此不能传递给``var``参数，也不能采用它们的地址。他们无法分配新值。
+Let变量不是左值因此不能传递给 ``var`` 参数，也不能采用它们的地址。他们无法分配新值。
 
 对于let变量，可以使用与普通变量相同的编译指示。
 
@@ -2514,7 +2514,7 @@ Return语句
 如果proc有返回类型，没有表达式的 ``return`` 是 ``return result`` 的简短表示法。
 `result`:idx: 变量始终是过程的返回值。
 它由编译器自动声明。
-作为所有变量，``result`` 被初始化为（二进制）零：
+作为所有变量， ``result`` 被初始化为（二进制）零：
 
 .. code-block:: nim
   proc returnZero(): int =
@@ -2550,7 +2550,7 @@ Block语句
           break myblock # 离开两个for循环块
   echo found
 
-块语句是一种将语句分组到（命名）``block`` 的方法。
+块语句是一种将语句分组到（命名） ``block`` 的方法。
 在块内，允许 ``break`` 语句立即离开块。
 ``break`` 语句可以包含周围块的名称，以指定要离开的块。
 
@@ -2683,9 +2683,9 @@ Instead of:
 
 ``using`` 部分使用相同的基于缩进的分组语法作为 ``var`` 或 ``let`` 部分。
 
-请注意，``using`` 不适用于 ``template`` ，因为无类型模板参数默认为类型 ``system.untyped`` 。
+请注意， ``using`` 不适用于 ``template`` ，因为无类型模板参数默认为类型 ``system.untyped`` 。
 
-应该使用``using``声明和明确键入的参数混合参数，它们之间需要分号。
+应该使用 ``using`` 声明和明确键入的参数混合参数，它们之间需要分号。
 
 
 If表达式
@@ -2757,11 +2757,11 @@ Table构造函数
 
 类型转换
 ----------------
-语法上，`类型转换` 类似于过程调用，但类型名称替换过程名称。
+语法上， `类型转换` 类似于过程调用，但类型名称替换过程名称。
 
 类型转换总是安全的，因为将类型转换为另一个类型失败会导致异常（如果无法静态确定）。
 
-普通的procs通常比Nim中的类型转换更受欢迎：例如，``$`` 是 ``toString`` 运算符，而 ``toFloat`` 和 ``toInt`` 可用于从浮点转换为整数，反之亦然。
+普通的procs通常比Nim中的类型转换更受欢迎：例如， ``$`` 是 ``toString`` 运算符，而 ``toFloat`` 和 ``toInt`` 可用于从浮点转换为整数，反之亦然。
 
 类型转换也可用于消除重载例程的歧义：
 
@@ -2788,7 +2788,7 @@ Table构造函数
 addr操作符
 -----------------
 
-``addr``运算符返回左值的地址。
+``addr`` 运算符返回左值的地址。
 如果位置的类型是 ``T`` ，则 `addr` 运算符结果的类型为 ``ptr T`` 。
 地址是未追踪引用。
 获取驻留在堆栈上的对象的地址是 *不安全的* ，因为指针可能比堆栈中的对象存在更久，因此可以引用不存在的对象。
@@ -2940,7 +2940,7 @@ unsafeAddr操作符
 
 对于面向对象的编程，可以使用语法 ``obj.method(args)`` 而不是 ``method(obj, args)`` 。
 
-如果没有剩余的参数，则可以省略括号：``obj.len`` (而不是 ``len(obj)`` )。
+如果没有剩余的参数，则可以省略括号： ``obj.len`` (而不是 ``len(obj)`` )。
 
 此方法调用语法不限于对象，它可用于为过程提供任何类型的第一个参数：
 
@@ -2949,7 +2949,7 @@ unsafeAddr操作符
   echo "abc".len # 与echo len"abc"相同
   echo "abc".toUpper()
   echo {'a', 'b', 'c'}.card
-  stdout.writeLine("Hallo") # 与writeLine相同（stdout，"Hallo"）
+  stdout.writeLine("Hallo") # 与相同writeLine(stdout，"Hallo")
 
 查看方法调用语法的另一种方法是它提供了缺少的后缀表示法。
 
@@ -2958,14 +2958,14 @@ unsafeAddr操作符
 
 见: `Limitations of the method call syntax <#templates-limitations-of-the-method-call-syntax>`_ 。
 
-``[:]`` 符号旨在缓解这个问题： ``xp[:T]`` 由解析器重写为 ``p[T](x)``， ``xp[:T](y)`` 被重写为 ``p[T](x,y)`` 。
+``[:]`` 符号旨在缓解这个问题： ``xp[:T]`` 由解析器重写为 ``p[T](x)`` ， ``xp[:T](y)`` 被重写为 ``p[T](x,y)`` 。
 注意 ``[:]`` 没有AST表示，重写直接在解析步骤中执行。
 
 
 属性
 ----------
 
-Nim不需要 *get-properties*：使用 *方法调用语法* 调用的普通get-procedure达到相同目的。
+Nim不需要 *get-properties* ：使用 *方法调用语法* 调用的普通get-procedure达到相同目的。
 但设定值是不同的;为此需要一个特殊的setter语法：
 
 .. code-block:: nim
@@ -3106,7 +3106,7 @@ Var形参
   assert x == 1
   assert y == 3
 
-在示例中，``res`` 和 ``remainder`` 是 `var parameters` 。
+在示例中， ``res`` 和 ``remainder`` 是 `var parameters` 。
 可以通过过程修改Var参数，并且调用者可以看到更改。
 传递给var参数的参数必须是左值。
 Var参数实现为隐藏指针。
@@ -3202,7 +3202,7 @@ Nim的更高版本可以使用如下语法更准确地了解借用规则：
 多方法
 =============
 
-**注意：** 从Nim 0.20开始，要使用多方法，必须在编译时明确传递``--multimethods：on``。
+**注意：** 从Nim 0.20开始，要使用多方法，必须在编译时明确传递 ``--multimethods：on`` 。
 
 程序总是使用静态调度。多方法使用动态调度。
 要使动态分派处理对象，它应该是引用类型。
@@ -3273,7 +3273,7 @@ Nim的更高版本可以使用如下语法更准确地了解借用规则：
 迭代器和for语句
 ===============================
 `for`:idx: 语句是一种迭代容器元素的抽象机制。
-它依赖于 `iterator`:idx:这样做。就像 ``while`` 语句一样，``for`` 语句打开一个 `隐式块`:idx:，这样它们就可以留下一个 ``break`` 语句。
+它依赖于 `iterator`:idx:这样做。就像 ``while`` 语句一样， ``for`` 语句打开一个 `隐式块`:idx:，这样它们就可以留下一个 ``break`` 语句。
 
 ``for`` 循环声明迭代变量 - 它们的范围一直到循环体的末尾。
 迭代变量的类型由迭代器的返回类型推断。
@@ -3327,7 +3327,7 @@ Nim的更高版本可以使用如下语法更准确地了解借用规则：
 第一类迭代器
 ---------------------
 
-Nim中有两种迭代器：*inline*和 *closure* 迭代器。
+Nim中有两种迭代器： *inline* 和 *closure* 迭代器。
 一个 `内联迭代器`:idx: 是一个迭代器，总是由编译器内联，导致抽象的开销为零，但可能导致代码大小的大量增加。
 
 注意：内联迭代器上的for循环体被内联到迭代器代码中出现的每个 ``yield`` 语句中，因此理想情况下，代码应该被重构为包含单个yield，以避免代码膨胀。
@@ -3335,7 +3335,7 @@ Nim中有两种迭代器：*inline*和 *closure* 迭代器。
 内联迭代器是二等公民;
 它们只能作为参数传递给其他内联代码工具，如模板、宏和其他内联迭代器。
 
-与此相反，`闭包迭代器`:idx: 可以更自由地传递：
+与此相反， `闭包迭代器`:idx: 可以更自由地传递：
 
 .. code-block:: nim
   iterator count0(): int {.closure.} =
@@ -3638,30 +3638,29 @@ the ``raise`` statement is the only way to raise an exception.
 
 .. XXX document this better!
 
-If no exception name is given, the current exception is `re-raised`:idx:. The
-`ReraiseError`:idx: exception is raised if there is no exception to
-re-raise. It follows that the ``raise`` statement *always* raises an
-exception.
+If no exception name is given, the current exception is `re-raised`:idx:. 
+The `ReraiseError`:idx: exception is raised if there is no exception to re-raise. 
+It follows that the ``raise`` statement *always* raises an exception.
 
 
 异常层级
 -------------------
 
 The exception tree is defined in the `system <system.html>`_ module.
-Every exception inherits from ``system.Exception``. Exceptions that indicate
-programming bugs inherit from ``system.Defect`` (which is a subtype of ``Exception``)
+Every exception inherits from ``system.Exception``. 
+Exceptions that indicate programming bugs inherit from ``system.Defect`` (which is a subtype of ``Exception``)
 and are stricly speaking not catchable as they can also be mapped to an operation
-that terminates the whole process. Exceptions that indicate any other runtime
-error that can be caught inherit from ``system.CatchableError``
-(which is a subtype of ``Exception``).
+that terminates the whole process. 
+Exceptions that indicate any other runtime error that can be caught inherit from ``system.CatchableError`` (which is a subtype of ``Exception``).
 
 
 导入的异常
 -------------------
 
-It is possible to raise/catch imported C++ exceptions. Types imported using
-`importcpp` can be raised or caught. Exceptions are raised by value and
-caught by reference. 示例：
+It is possible to raise/catch imported C++ exceptions. 
+Types imported using `importcpp` can be raised or caught. Exceptions are raised by value and caught by reference. 
+
+示例：
 
 .. code-block:: nim
 
@@ -5726,7 +5725,7 @@ However, the ``header`` pragma is often the better alternative.
 **Note**: This will not work for the LLVM backend.
 
 
-Header 编译指示
+Header编译指示
 -------------
 The ``header`` pragma is very similar to the ``noDecl`` pragma: It can be
 applied to almost any symbol and specifies that it should not be declared
@@ -5871,8 +5870,10 @@ ImportCpp编译指示
 没有必要知道这里描述的所有细节。
 
 
-Similar to the `importc pragma for C <#foreign-function-interface-importc-pragma>`_, the ``importcpp`` pragma can be used to import `C++`:idx: methods or C++ symbols in general. 
-The generated code then uses the C++ method calling syntax: ``obj->method(arg)``.  In combination with the ``header`` and ``emit`` pragmas this allows *sloppy* interfacing with libraries written in C++:
+和 `importc pragma for C <#foreign-function-interface-importc-pragma>`_ 类似, ``importcpp`` 编译指示一般可以用于引入 `C++`:idx: 方法或C++符号。 
+生成的代码会使用C++方法调用的语法: ``obj->method(arg)`` 。
+
+结合 ``header`` 和 ``emit`` 编译指示，这允许与C++库的 *草率* 接口：  
 
 .. code-block:: Nim
   # Horrible example of how to interface with a C++ engine ... ;-)
@@ -5901,17 +5902,15 @@ The generated code then uses the C++ method calling syntax: ``obj->method(arg)``
   proc run(device: IrrlichtDevice): bool {.
     header: irr, importcpp: "#.run(@)".}
 
-The compiler needs to be told to generate C++ (command ``cpp``) for
-this to work. The conditional symbol ``cpp`` is defined when the compiler
-emits C++ code.
+需要告诉编译器生成C++（命令 ``cpp`` ）才能使其工作。
+当编译器发射C++代码时，会定义条件符号 ``cpp`` 。
 
 
 命名空间
 ~~~~~~~~~~
 
-The *sloppy interfacing* example uses ``.emit`` to produce ``using namespace``
-declarations. It is usually much better to instead refer to the imported name
-via the ``namespace::identifier`` notation:
+*草率接口* 示例使用 ``.emit`` 来生成 ``using namespace`` 声明。
+通过 ``命名空间::标识符`` 符号来引用导入的名称通常要好得多：
 
 .. code-block:: nim
   type
@@ -5922,22 +5921,18 @@ via the ``namespace::identifier`` notation:
 枚举Importcpp
 ~~~~~~~~~~~~~~~~~~~
 
-When ``importcpp`` is applied to an enum type the numerical enum values are
-annotated with the C++ enum type, like in this 示例： ``((TheCppEnum)(3))``.
-(This turned out to be the simplest way to implement it.)
+当 ``importcpp`` 应用于枚举类型时，数字枚举值用C++枚举类型注释, 像这个示例： ``((TheCppEnum)(3))`` 。
+（事实证明这是实现它的最简单方法。）
 
 
 过程Importcpp
 ~~~~~~~~~~~~~~~~~~~
 
-Note that the ``importcpp`` variant for procs uses a somewhat cryptic pattern
-language for maximum flexibility:
+请注意，procs的 ``importcpp`` 变体使用了一种有点神秘的模式语言，以获得最大的灵活性：
 
-- A hash ``#`` symbol is replaced by the first or next argument.
-- A dot following the hash ``#.`` indicates that the call should use C++'s dot
-  or arrow notation.
-- An at symbol ``@`` is replaced by the remaining arguments, separated by
-  commas.
+- 哈希 ``#`` 符号被第一个或下一个参数替换。
+哈希 ``#.`` 后面的一个点表示该调用应使用C++的点或箭头表示法。
+- 符号 ``@`` 被剩下的参数替换，用逗号分隔。
 
 示例：
 
@@ -5951,16 +5946,12 @@ Produces:
 .. code-block:: C
   x->CppMethod(1, 2, 3)
 
-As a special rule to keep backwards compatibility with older versions of the
-``importcpp`` pragma, if there is no special pattern
-character (any of ``# ' @``) at all, C++'s
-dot or arrow notation is assumed, so the above example can also be written as:
+作为一个特殊的规则来保持与旧版本的 ``importcpp`` 编译指示的向后兼容性，如果没有特殊的模式字符（任何一个 ``#'@`` ），那么认为是C++的点或箭头符号，所以上面的例子也可以写成：
 
 .. code-block:: nim
   proc cppMethod(this: CppObj, a, b, c: cint) {.importcpp: "CppMethod".}
 
-Note that the pattern language naturally also covers C++'s operator overloading
-capabilities:
+请注意，模式语言自然也涵盖了C++的运算符重载功能：
 
 .. code-block:: nim
   proc vectorAddition(a, b: Vec3): Vec3 {.importcpp: "# + #".}
@@ -6017,7 +6008,7 @@ However, depending on the use case ``new Foo`` can also be wrapped like this ins
   let x = newFoo(3, 4)
 
 
-包装构造函数
+封装构造函数
 ~~~~~~~~~~~~~~~~~~~~~
 
 Sometimes a C++ class has a private copy constructor and so code like ``Class c = Class(1,2);`` must not be generated but instead ``Class c(1,2);``.
@@ -6029,9 +6020,9 @@ This pragma also helps to generate faster C++ code since construction then doesn
   proc constructFoo(a, b: cint): Foo {.importcpp: "Foo(@)", constructor.}
 
 
-包装析构函数
+封装析构函数
 ~~~~~~~~~~~~~~~~~~~~
-包装destruct由于Nim直接生成C++，所以任何析构函数都由C++编译器在作用域出口处隐式调用。
+封装destruct由于Nim直接生成C++，所以任何析构函数都由C++编译器在作用域出口处隐式调用。
 这意味着通常人们可以完全没有包装析构函数！
 但是当需要显式调用它时，需要将其包装起来。
 模式语言提供了所需的一切：
