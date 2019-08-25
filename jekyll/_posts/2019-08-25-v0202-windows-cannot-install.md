@@ -3,6 +3,9 @@ title: "Windows下nim-lang 0.20版本安装，无法运行finish.exe的解决方
 author: ch4o5
 ---
 
+Windows下 nim v0.20 版本安装，无法运行 finish.exe 的解决方案
+
+
     Nim is a statically typed compiled systems programming language. 
     It combines successful concepts from mature languages like Python,Ada and Modula.
 
