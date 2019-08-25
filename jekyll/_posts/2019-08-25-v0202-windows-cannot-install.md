@@ -12,6 +12,11 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
 
 下载页：[https://nim-lang-cn.org/install.html](https://nim-lang-cn.org/install.html)
 
+## 目录
+
+1. [安装Nim](#安装步骤)
+2. [无法运行finish.exe的解决方案](#无法运行finish_exe的解决方案)
+
 ## 安装步骤
 
 1. 进入上方官方网站，
@@ -38,7 +43,7 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
 
 但在0.20版本安装的过程中，出现了finish.exe无法运行的情况，点击之后没有反应，后来终于找到了解决方案，并亲测有效。
 
-## 无法运行finish.exe的解决方案
+## 无法运行finish_exe的解决方案
 
 ### 一、查找问题
 
