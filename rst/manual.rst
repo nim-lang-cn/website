@@ -2824,11 +2824,11 @@ unsafeAddr操作符
 过程
 ==========
 
-大多数编程语言称之为 `methods`:idx: or `functions`:idx: 在Nim中称为 `过程`:idx: 。
+大多数编程语言称之为 `methods`:idx: 或 `functions`:idx: 在Nim中称为 `过程`:idx: 。
 过程声明由标识符，零个或多个形式参数，返回值类型和代码块组成。
 
 正式参数声明为由逗号或分号分隔的标识符列表。
-形参由 ``: typename`` 给出一个类型。 
+形参由 ``: 类型名称`` 给出一个类型。 
 
 该类型适用于紧接其之前的所有参数，直到达到参数列表的开头，分号分隔符或已经键入的参数。
 
@@ -2906,7 +2906,7 @@ unsafeAddr操作符
 （但是，解析器将这些与运算符在表达式中的位置区分开来。）
 没有办法声明后缀运算符：所有后缀运算符都是内置的，并由语法显式处理。
 
-任何运算符都可以像普通的proc一样用 '`opr`' 表示法调用。 （因此运算符可以有两个以上的参数）：
+任何运算符都可以像普通的proc一样用 '`opr`' 表示法调用。（因此运算符可以有两个以上的参数）：
 
 .. code-block:: nim
   proc `*+` (a, b, c: int): int =
@@ -3314,14 +3314,14 @@ Nim的更高版本可以使用如下语法更准确地了解借用规则：
 隐式items和pairs调用
 -------------------------------
 
-如果for循环表达式 ``e`` 不表示迭代器而for循环正好有1个变量，则for循环表达式被重写为 ``items（e）`` ;即隐式调用 ``items`` 迭代器：
+如果for循环表达式 ``e`` 不表示迭代器而for循环正好有1个变量，则for循环表达式被重写为 ``items(e)`` ;即隐式调用 ``items`` 迭代器：
 
 .. code-block:: nim
   for x in [1,2,3]: echo x
 
 如果for循环恰好有2个变量，则隐式调用 ``pairs`` 迭代器。
 
-在重写步骤之后执行标识符 ``items``/``pairs`` 的符号查找，以便考虑所有 ``items``/ ``pairs`` 的重载。
+在重写步骤之后执行标识符 ``items`` 或 ``pairs`` 的符号查找，以便考虑所有 ``items`` 或 ``pairs`` 的重载。
 
 
 第一类迭代器
@@ -3366,7 +3366,7 @@ Nim中有两种迭代器： *inline* 和 *closure* 迭代器。
 ``iterator`` 类型总是隐式调用约定 ``closure`` ;以下示例显示如何使用迭代器实现 `协作任务`:idx: 系统:
 
 .. code-block:: nim
-  # simple tasking:
+  # 简单任务:
   type
     Task = iterator (ticker: int)
 
@@ -3525,19 +3525,18 @@ Try语句
 如果存在未列出的异常，则执行空的 `except`:idx: 子句。
 它类似于 ``if`` 语句中的 ``else`` 子句。
 
-If there is a `finally`:idx: clause, it is always executed after the exception handlers.
+如果有一个 `finally`:idx: 子句，它总是在异常处理程序之后执行。
 
-The exception is *consumed* in an exception handler. However, an
-exception handler may raise another exception. If the exception is not
-handled, it is propagated through the call stack. This means that often
-the rest of the procedure - that is not within a ``finally`` clause -
-is not executed (if an exception occurs).
+异常处理程序中的 *consume* 异常。
+但是，异常处理程序可能会引发另一个异常。
+如果未处理异常，则通过调用堆栈传播该异常。
+这意味着程序不在 ``finally`` 子句中的其余部分通常不会被执行（如果发生异常）。
 
 
 Try表达式
 --------------
 
-Try can also be used as an expression; the type of the ``try`` branch then needs to fit the types of ``except`` branches, but the type of the ``finally`` branch always has to be ``void``:
+尝试也可以用作表达式;然后 ``try`` 分支的类型需要适合 ``except`` 分支的类型，但 ``finally`` 分支的类型总是必须是 ``void`` ：
 
 .. code-block:: nim
   let x = try: parseInt("133a")
@@ -3545,7 +3544,7 @@ Try can also be used as an expression; the type of the ``try`` branch then needs
           finally: echo "hi"
 
 
-To prevent confusing code there is a parsing limitation; if the ``try`` follows a ``(`` it has to be written as a one liner:
+为了防止令人困惑的代码，有一个解析限制，如果 ``try`` 跟在一个 ``(`` 它必须写成一行：
 
 .. code-block:: nim
   let x = (try: parseInt("133a") except: -1)
@@ -3554,7 +3553,7 @@ To prevent confusing code there is a parsing limitation; if the ``try`` follows 
 排除从句
 --------------
 
-Within an ``except`` clause it is possible to access the current exception using the following syntax:
+在 ``except`` 子句中，可以使用以下语法访问当前异常：
 
 .. code-block:: nim
   try:
@@ -3563,28 +3562,28 @@ Within an ``except`` clause it is possible to access the current exception using
     # Now use "e"
     echo "I/O error: " & e.msg
 
-Alternatively, it is possible to use ``getCurrentException`` to retrieve the exception that has been raised:
+或者，可以使用 ``getCurrentException`` 来检索已经引发的异常：
 
 .. code-block:: nim
   try:
     # ...
   except IOError:
     let e = getCurrentException()
-    # Now use "e"
+    # 现在使用"e"
 
-Note that ``getCurrentException`` always returns a ``ref Exception`` type. 
-If a variable of the proper type is needed (in the example above, ``IOError``), one must convert it explicitly:
+注意 ``getCurrentException`` 总是返回一个 ``ref Exception`` 类型。
+
+如果需要一个正确类型的变量（在上面的例子中，``IOError`` ），必须明确地转换它：
 
 .. code-block:: nim
   try:
     # ...
   except IOError:
     let e = (ref IOError)(getCurrentException())
-    # "e" is now of the proper type
+    # "e"现在是合适的类型
 
-However, this is seldom needed. The most common case is to extract an
-error message from ``e``, and for such situations it is enough to use
-``getCurrentExceptionMsg``:
+但是，这很少需要。
+最常见的情况是从 ``e`` 中提取错误消息，对于这种情况，使用 ``getCurrentExceptionMsg`` 就足够了：
 
 .. code-block:: nim
   try:
@@ -3596,9 +3595,9 @@ error message from ``e``, and for such situations it is enough to use
 Defer语句
 ---------------
 
-Instead of a ``try finally`` statement a ``defer`` statement can be used.
+可以使用 ``defer`` 语句而不是 ``try finally`` 语句。
 
-Any statements following the ``defer`` in the current block will be considered to be in an implicit try block:
+当前块中　``defer`` 之后的任何语句都将被视为隐式try块：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -3609,7 +3608,7 @@ Any statements following the ``defer`` in the current block will be considered t
     f.write "abc"
     f.write "def"
 
-Is rewritten to:
+被重写为：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -3622,7 +3621,7 @@ Is rewritten to:
     finally:
       close(f)
 
-Top level ``defer`` statements are not supported since it's unclear what such a statement should refer to.
+不支持顶级 ``defer`` 语句，因为不清楚这样的语句应该引用什么。
 
 
 Raise语句
@@ -3633,32 +3632,29 @@ Raise语句
 .. code-block:: nim
   raise newEOS("operating system failed")
 
-Apart from built-in operations like array indexing, memory allocation, etc.
-the ``raise`` statement is the only way to raise an exception.
+除了数组索引，内存分配等内置操作之外，``raise`` 语句是引发异常的唯一方法。
 
 .. XXX document this better!
 
-If no exception name is given, the current exception is `re-raised`:idx:. 
-The `ReraiseError`:idx: exception is raised if there is no exception to re-raise. 
-It follows that the ``raise`` statement *always* raises an exception.
+如果没有给出异常名称，则当前异常会 `re-raised`:idx: 。
+如果没有异常重新加注，则引发 `ReraiseError`:idx:异常。
+因此， ``raise`` 语句 *总是* 引发异常。
 
 
 异常层级
 -------------------
 
-The exception tree is defined in the `system <system.html>`_ module.
-Every exception inherits from ``system.Exception``. 
-Exceptions that indicate programming bugs inherit from ``system.Defect`` (which is a subtype of ``Exception``)
-and are stricly speaking not catchable as they can also be mapped to an operation
-that terminates the whole process. 
-Exceptions that indicate any other runtime error that can be caught inherit from ``system.CatchableError`` (which is a subtype of ``Exception``).
+异常树在 `system <system.html>`_ 模块中定义。
+每个异常都继承自 ``system.Exception`` 。
+表示编程错误的异常继承自``system.Defect``（它是``Exception``的子类型）并严格地说是不可捕获的，因为它们也可以映射到终止整个过程的操作。
+表示可以捕获的任何其他运行时错误的异常继承自 ``system.CatchableError``（这是 ``Exception`` 的子类型）。
 
 
 导入的异常
 -------------------
 
-It is possible to raise/catch imported C++ exceptions. 
-Types imported using `importcpp` can be raised or caught. Exceptions are raised by value and caught by reference. 
+可以引发和捕获导入的C++异常。
+使用 `importcpp` 导入的类型可以被引发或捕获。例外是通过值引发并通过引用捕获。
 
 示例：
 
@@ -3682,9 +3678,7 @@ Types imported using `importcpp` can be raised or caught. Exceptions are raised 
 异常跟踪
 ------------------
 
-Nim supports exception tracking. The `raises`:idx: pragma can be used
-to explicitly define which exceptions a proc/iterator/method/converter is
-allowed to raise. The compiler verifies this:
+Nim支持异常跟踪。 `raises`:idx: 编译器可用于显式定义允许proc/iterator/method/converter引发的异常。编译器验证这个：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -3693,7 +3687,7 @@ allowed to raise. The compiler verifies this:
     if what: raise newException(IOError, "IO")
     else: raise newException(OSError, "OS")
 
-An empty ``raises`` list (``raises: []``) means that no exception may be raised:
+一个空的 ``raises`` 列表（ ``raises：[]`` ）意味着不会引发任何异常：
 
 .. code-block:: nim
   proc p(): bool {.raises: [].} =
@@ -3703,8 +3697,7 @@ An empty ``raises`` list (``raises: []``) means that no exception may be raised:
     except:
       result = false
 
-
-A ``raises`` list can also be attached to a proc type. This affects type compatibility:
+``raises`` 列表也可以附加到proc类型。这会影响类型兼容性：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -3718,54 +3711,43 @@ A ``raises`` list can also be attached to a proc type. This affects type compati
   proc p(x: string) =
     raise newException(OSError, "OS")
 
-  c = p # type error
+  c = p # 类型错误
 
+对于例程 ``p`` ，编译器使用推理规则来确定可能引发的异常集;算法在 ``p`` 的调用图上运行：
 
-For a routine ``p`` the compiler uses inference rules to determine the set of
-possibly raised exceptions; the algorithm operates on ``p``'s call graph:
+1.通过某些proc类型 ``T`` 的每个间接调用都被假定为引发 ``system.Exception`` （异常层次结构的基本类型），因此除非 ``T`` 有明确的 ``raises`` 列表。
+   但是如果调用的形式是 ``f(...)`` 其中 ``f`` 是当前分析的例程的参数，则忽略它。
+   乐观地认为该呼叫没有效果。规则2补偿了这种情况。
+2.假定在一个不是调用本身（而不是nil）的调用中的某些proc类型的每个表达式都以某种方式间接调用，因此它的引发列表被添加到 ``p`` 的引发列表中。
+3.对前向声明或 ``importc`` 编译指示的未知proc ``q`` 的每次调用，假定会引发 ``system.Exception``，除非 ``q`` 有一个明确的 ``raises`` 列表。
+4.每次对方法 ``m`` 的调用都会被假定为引发 ``system.Exception`` ，除非 ``m`` 有一个明确的 ``raises`` 列表。
+5.对于每个其他调用，分析可以确定一个确切的 ``raises`` 列表。
+6.为了确定 ``raises`` 列表，考虑 ``p`` 的 ``raise`` 和 ``try`` 语句。
 
-1. Every indirect call via some proc type ``T`` is assumed to
-   raise ``system.Exception`` (the base type of the exception hierarchy) and
-   thus any exception unless ``T`` has an explicit ``raises`` list.
-   However if the call is of the form ``f(...)`` where ``f`` is a parameter
-   of the currently analysed routine it is ignored. The call is optimistically
-   assumed to have no effect. Rule 2 compensates for this case.
-2. Every expression of some proc type within a call that is not a call
-   itself (and not nil) is assumed to be called indirectly somehow and thus
-   its raises list is added to ``p``'s raises list.
-3. Every call to a proc ``q`` which has an unknown body (due to a forward
-   declaration or an ``importc`` pragma) is assumed to
-   raise ``system.Exception`` unless ``q`` has an explicit ``raises`` list.
-4. Every call to a method ``m`` is assumed to
-   raise ``system.Exception`` unless ``m`` has an explicit ``raises`` list.
-5. For every other call the analysis can determine an exact ``raises`` list.
-6. For determining a ``raises`` list, the ``raise`` and ``try`` statements
-   of ``p`` are taken into consideration.
-
-Rules 1-2 ensure the following works:
+规则1-2确保下面的代码正常工作：
 
 .. code-block:: nim
   proc noRaise(x: proc()) {.raises: [].} =
-    # unknown call that might raise anything, but valid:
+    # 可能引发任何异常的未知调用, 但这是合法的:
     x()
 
   proc doRaise() {.raises: [IOError].} =
     raise newException(IOError, "IO")
 
   proc use() {.raises: [].} =
-    # doesn't compile! Can raise IOError!
+    # 不能编译! 可能引发IOError!
     noRaise(doRaise)
 
-So in many cases a callback does not cause the compiler to be overly
-conservative in its effect analysis.
+因此，在许多情况下，回调不会导致编译器在其效果分析中过于保守。
 
 
 Tag跟踪
 ------------
 
-The exception tracking is part of Nim's `effect system`:idx:. Raising an
-exception is an *effect*. Other effects can also be defined. A user defined
-effect is a means to *tag* a routine and to perform checks against this tag:
+异常跟踪是Nim ``效应系统``:idx: 的一部分。
+引发异常是 *效应* 。
+其他效应也可以定义。
+用户定义的效应是 *标记* 例程并对此标记执行检查的方法：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -3778,20 +3760,17 @@ effect is a means to *tag* a routine and to perform checks against this tag:
     # the compiler prevents this:
     let x = readLine()
 
-A tag has to be a type name. A ``tags`` list - like a ``raises`` list - can
-also be attached to a proc type. This affects type compatibility.
+标签必须是类型名称。一个 ``tags`` 列表 - 就像一个 ``raises`` 列表 - 也可以附加到一个proc类型。
+这会影响类型兼容性。
 
-The inference for tag tracking is analogous to the inference for
-exception tracking.
+标签跟踪的推断类似于异常跟踪的推断。
 
 
 
 Effects编译指示
 --------------
-
-The ``effects`` pragma has been designed to assist the programmer with the
-effects analysis. It is a statement that makes the compiler output all inferred
-effects up to the ``effects``'s position:
+``effects`` 编译指示旨在帮助程序员进行效果分析。
+这是一个声明，使编译器将所有推断的效果输出到 ``effects`` 的位置：
 
 .. code-block:: nim
   proc p(what: bool) =
@@ -3801,42 +3780,38 @@ effects up to the ``effects``'s position:
     else:
       raise newException(OSError, "OS")
 
-The compiler produces a hint message that ``IOError`` can be raised. ``OSError``
-is not listed as it cannot be raised in the branch the ``effects`` pragma
-appears in.
+编译器生成一条提示消息，可以引发 ``IOError`` 。
+未列出 ``OSError`` ，因为它不能在分支中引发 ``effects`` 编译指示。
 
 
 泛型
 ========
+泛型是Nim用 `类型形参`:idx: 参数化过程、迭代器或类型的方法 。
+根据上下文，括号用于引入类型形参或实例化泛型过程、迭代器或类型。
 
-Generics are Nim's means to parametrize procs, iterators or types with
-`type parameters`:idx:. Depending on context, the brackets are used either to
-introduce type parameters or to instantiate a generic proc, iterator or type.
 
-The following example shows a generic binary tree can be modelled:
+以下示例显示了可以建模的通用二叉树：
 
 .. code-block:: nim
     :test: "nim c $1"
 
   type
-    BinaryTree*[T] = ref object # BinaryTree is a generic type with
-                                # generic param ``T``
-      le, ri: BinaryTree[T]     # left and right subtrees; may be nil
-      data: T                   # the data stored in a node
+    BinaryTree*[T] = ref object # 二叉树是左右子树带有泛型形参 ``T`` 的泛型类型，其值可能为nil
+      le, ri: BinaryTree[T]     
+      data: T                   # 数据存储在节点中。
 
   proc newNode*[T](data: T): BinaryTree[T] =
-    # constructor for a node
+    # 构造一个节点
     result = BinaryTree[T](le: nil, ri: nil, data: data)
 
   proc add*[T](root: var BinaryTree[T], n: BinaryTree[T]) =
-    # insert a node into the tree
+    # 把节点插入到一颗树
     if root == nil:
       root = n
     else:
       var it = root
       while it != nil:
-        # compare the data items; uses the generic ``cmp`` proc
-        # that works for any type that has a ``==`` and ``<`` operator
+        # 比较数据项;使用泛型 ``cmp`` proc，适用于任何具有``==``和````运算符的类型
         var c = cmp(it.data, n.data)
         if c < 0:
           if it.le == nil:
@@ -3850,136 +3825,123 @@ The following example shows a generic binary tree can be modelled:
           it = it.ri
 
   proc add*[T](root: var BinaryTree[T], data: T) =
-    # convenience proc:
+    # 便利过程:
     add(root, newNode(data))
 
   iterator preorder*[T](root: BinaryTree[T]): T =
-    # Preorder traversal of a binary tree.
-    # Since recursive iterators are not yet implemented,
-    # this uses an explicit stack (which is more efficient anyway):
+    # 前序遍历二叉树
+    # 由于递归迭代器尚未实现，因此它使用显式堆栈（因为更高效）：
     var stack: seq[BinaryTree[T]] = @[root]
     while stack.len > 0:
       var n = stack.pop()
       while n != nil:
         yield n.data
-        add(stack, n.ri)  # push right subtree onto the stack
-        n = n.le          # and follow the left pointer
+        add(stack, n.ri)  # 将右子树推入堆栈
+        n = n.le          # 跟着左指针
 
   var
-    root: BinaryTree[string] # instantiate a BinaryTree with ``string``
-  add(root, newNode("hello")) # instantiates ``newNode`` and ``add``
-  add(root, "world")          # instantiates the second ``add`` proc
+    root: BinaryTree[string] # 使用 ``string`` 实例化二叉树
+  add(root, newNode("hello")) # 实例化 ``newNode`` 和 ``add``
+  add(root, "world")          # 实例化第二个 ``add`` proc
   for str in preorder(root):
     stdout.writeLine(str)
 
-The ``T`` is called a `generic type parameter`:idx: or
-a `type variable`:idx:.
+``T`` 被称为 `泛型类型形参` :idx: 或 `类型变量`:idx: 。
 
 
 Is操作符
 -----------
 
-The ``is`` operator is evaluated during semantic analysis to check for type
-equivalence. It is therefore very useful for type specialization within generic
-code:
+在语义分析期间评估 ``is`` 运算符以检查类型等价。
+因此，它对于泛型代码中的类型特化非常有用：
 
 .. code-block:: nim
   type
     Table[Key, Value] = object
       keys: seq[Key]
       values: seq[Value]
-      when not (Key is string): # empty value for strings used for optimization
+      when not (Key is string): # 用于优化的字符串的空值
         deletedKeys: seq[bool]
 
 
 类型类别
 ------------
 
-A type class is a special pseudo-type that can be used to match against
-types in the context of overload resolution or the ``is`` operator.
-Nim supports the following built-in type classes:
+类型类是一种特殊的伪类型，可用于匹配重载决策或 ``is`` 运算符中的类型。
+Nim支持以下内置类型类：
 
 ==================   ===================================================
-type class           matches
+类型                  匹配
 ==================   ===================================================
-``object``           any object type
-``tuple``            any tuple type
+``object``           任意对象类型
+``tuple``            任意元组类型
 
-``enum``             any enumeration
-``proc``             any proc type
-``ref``              any ``ref`` type
-``ptr``              any ``ptr`` type
-``var``              any ``var`` type
-``distinct``         any distinct type
-``array``            any array type
-``set``              any set type
-``seq``              any seq type
-``auto``             any type
-``any``              distinct auto (see below)
+``enum``             任意枚举
+``proc``             任意过程类型
+``ref``              任意 ``ref`` 类型
+``ptr``              任意 ``ptr`` 类型
+``var``              任意 ``var`` 类型
+``distinct``         任意distinct类型
+``array``            任意数组array类型
+``set``              任意set类型
+``seq``              任意seq类型
+``auto``             任意类型
+``any``              distinct auto (见下方)
 ==================   ===================================================
 
-Furthermore, every generic type automatically creates a type class of the same
-name that will match any instantiation of the generic type.
+此外，每个泛型类型都会自动创建一个与通用类型的任何实例化相匹配的相同名称的类型类。
 
-Type classes can be combined using the standard boolean operators to form
-more complex type classes:
+可以使用标准布尔运算符组合类型类，以形成更复杂的类型类：
 
 .. code-block:: nim
-  # create a type class that will match all tuple and object types
+  # 创建一个匹配所有元组和对象类型的类型类
   type RecordType = tuple or object
 
   proc printFields(rec: RecordType) =
     for key, value in fieldPairs(rec):
       echo key, " = ", value
 
-Procedures utilizing type classes in such manner are considered to be
-`implicitly generic`:idx:. They will be instantiated once for each unique
-combination of param types used within the program.
+以这种方式使用类型类的过程被认为是 ``隐式通用的``:idx: 。
+对于程序中使用的每个唯一的param类型组合，它们将被实例化一次。
 
-Whilst the syntax of type classes appears to resemble that of ADTs/algebraic data
-types in ML-like languages, it should be understood that type classes are static
-constraints to be enforced at type instantations. Type classes are not really
-types in themsleves, but are instead a system of providing generic "checks" that
-ultimately *resolve* to some singular type. Type classes do not allow for
-runtime type dynamism, unlike object variants or methods.
+虽然类型类的语法看起来类似于ML的语言中的ADT /代数数据类型，但应该理解类型类是类型实例化时强制执行的静态约束。
+类型类不是真正的类型，而是一个提供通用“检查”的系统，最终将 *解析* 为某种单一类型。
+与对象变体或方法不同，类型类不允许运行时类型动态。
 
-As an example, the following would not compile:
+例如，以下内容无法编译：
 
 .. code-block:: nim
   type TypeClass = int | string
-  var foo: TypeClass = 2 # foo's type is resolved to an int here
-  foo = "this will fail" # error here, because foo is an int
+  var foo: TypeClass = 2 # foo的类型在这里解析为int
+  foo = "this will fail" # 错误在这里，因为foo是一个int
 
-Nim allows for type classes and regular types to be specified
-as `type constraints`:idx: of the generic type parameter:
+Nim允许将类型类和常规类型指定为 `类型限制`:idx: 泛型类型参数：
 
 .. code-block:: nim
   proc onlyIntOrString[T: int|string](x, y: T) = discard
 
-  onlyIntOrString(450, 616) # valid
-  onlyIntOrString(5.0, 0.0) # type mismatch
-  onlyIntOrString("xy", 50) # invalid as 'T' cannot be both at the same time
+  onlyIntOrString(450, 616) # 合法
+  onlyIntOrString(5.0, 0.0) # 类型不匹配
+  onlyIntOrString("xy", 50) # 不合法因为 'T' 不能同时是两种类型
 
-By default, during overload resolution each named type class will bind to
-exactly one concrete type. We call such type classes `bind once`:idx: types.
-Here is an example taken directly from the system module to illustrate this:
+
+默认情况下，在重载解析期间，每个命名类型类将仅绑定到一个具体类型。
+我们称这样的类类为 `绑定一次`:idx: 类型。
+以下是直接从系统模块中抽取的用于展示的示例：
 
 .. code-block:: nim
   proc `==`*(x, y: tuple): bool =
-    ## requires `x` and `y` to be of the same tuple type
-    ## generic ``==`` operator for tuples that is lifted from the components
-    ## of `x` and `y`.
+    ## 要求 `x` and `y` 是同样的元组类型
+    ## 从 `x` 和 `y` 部分中提升的元组泛型 ``==`` 操作符。
     result = true
     for a, b in fields(x, y):
       if a != b: result = false
 
-Alternatively, the ``distinct`` type modifier can be applied to the type class
-to allow each param matching the type class to bind to a different type. Such
-type classes are called `bind many`:idx: types.
+或者，可以将 ``distinct`` 类型修饰符应用于类型类，以允许与类型类匹配的每个参数绑定到不同的类型。
+这种类型类称为 `绑定多次`:idx: 类型
 
-Procs written with the implicitly generic style will often need to refer to the
-type parameters of the matched generic type. They can be easily accessed using
-the dot syntax:
+使用隐式通用样式编写的过程通常需要引用匹配泛型类型的类型参数。
+可以使用点语法轻松访问它们：
 
 .. code-block:: nim
   type Matrix[T, Rows, Columns] = object
@@ -3988,32 +3950,26 @@ the dot syntax:
   proc `[]`(m: Matrix, row, col: int): Matrix.T =
     m.data[col * high(Matrix.Columns) + row]
 
-Alternatively, the `type` operator can be used over the proc params for similar
-effect when anonymous or distinct type classes are used.
+或者，当使用匿名或不同类型类时，可以在proc参数上使用 `type` 运算符以获得类似的效果。
 
-When a generic type is instantiated with a type class instead of a concrete
-type, this results in another more specific type class:
+当使用类型类而不是具体类型实例化泛型类型时，这会产生另一个更具体的类型类：
 
 .. code-block:: nim
-  seq[ref object]  # Any sequence storing references to any object type
+  seq[ref object]  # 存储任意对象类型引用的序列
 
   type T1 = auto
   proc foo(s: seq[T1], e: T1)
-    # seq[T1] is the same as just `seq`, but T1 will be allowed to bind
-    # to a single type, while the signature is being matched
+    # seq[T1]与 `seq` 相同，但T1允许当签名匹配时绑定到单个类型
 
-  Matrix[Ordinal] # Any Matrix instantiation using integer values
+  Matrix[Ordinal] # 任何使用整数值的矩阵实例化
 
-As seen in the previous example, in such instantiations, it's not necessary to
-supply all type parameters of the generic type, because any missing ones will
-be inferred to have the equivalent of the `any` type class and thus they will
-match anything without discrimination.
+如前面的例子所示，在这样的实例化中，没有必要提供泛型类型的所有类型参数，因为任何缺失的参数都将被推断为具有 `any` 类型的等价物，因此它们将匹配任何类型而不受歧视。
 
 
 泛型推导限制
 ------------------------------
 
-The types ``var T`` and ``typedesc[T]`` cannot be inferred in a generic instantiation. The following is not allowed:
+类型 ``var T`` 和 ``typedesc [T]`` 不能在泛型实例中推断出来。以下是不允许的：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4027,13 +3983,13 @@ The types ``var T`` and ``typedesc[T]`` cannot be inferred in a generic instanti
     y += 100
   var i: int
 
-  # allowed: infers 'T' to be of type 'int'
+  # 允许：推断 'T' 为 'int' 类型
   g(c, 42)
 
-  # not valid: 'T' is not inferred to be of type 'var int'
+  # 无效：'T'不推断为'var int'类型
   g(v, i)
 
-  # also not allowed: explict instantiation via 'var int'
+  # 也不允许：通过'var int'进行显式实例化
   g[var int](v, i)
 
 
@@ -4041,14 +3997,14 @@ The types ``var T`` and ``typedesc[T]`` cannot be inferred in a generic instanti
 泛型符号查找
 -------------------------
 
-开放和关闭的符号
+开放和封闭的符号
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The symbol binding rules in generics are slightly subtle: There are "open" and "closed" symbols. 
-A "closed" symbol cannot be re-bound in the instantiation context, an "open" symbol can. 
-Per default overloaded symbols are open and every other symbol is closed.
+泛型中的符号绑定规则略微微妙：有“开放”和“封闭”符号。
+“封闭”符号不能在实例化上下文中重新绑定，“开放”符号可以。
+默认重载符号是打开的，每个其他符号都是关闭的。
 
-Open symbols are looked up in two different contexts: Both the context at definition and the context at instantiation are considered:
+在两个不同的上下文中查找开放符号：定义上下文和实例化时的上下文都被考虑：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4063,23 +4019,19 @@ Open symbols are looked up in two different contexts: Both the context at defini
 
   echo a == b # works!
 
-In the example the generic ``==`` for tuples (as defined in the system module)
-uses the ``==`` operators of the tuple's components. However, the ``==`` for
-the ``Index`` type is defined *after* the ``==`` for tuples; yet the example
-compiles as the instantiation takes the currently defined symbols into account
-too.
+在示例中，元组的通用 ``==`` （在系统模块中定义）使用元组组件的 ``==`` 运算符。
+但是， ``Index`` 类型的 ``==`` 是在元组的 ``==`` 之后定义的*;然而，该示例编译为实例化也将当前定义的符号考虑在内。
 
 Mixin语句
 ---------------
 
-A symbol can be forced to be open by a `mixin`:idx: declaration:
+可以通过 `mixin`:idx: 强制打开符号声明:
 
 .. code-block:: nim
     :test: "nim c $1"
 
   proc create*[T](): ref T =
-    # there is no overloaded 'init' here, so we need to state that it's an
-    # open symbol explicitly:
+    # 这里没有重载'init'，所以我们需要明确说明它是一个开放的符号：
     mixin init
     new result
     init result
@@ -4090,11 +4042,11 @@ A symbol can be forced to be open by a `mixin`:idx: declaration:
 Bind语句
 --------------
 
-The ``bind`` statement is the counterpart to the ``mixin`` statement. 
-It can be used to explicitly declare identifiers that should be bound early (i.e. the identifiers should be looked up in the scope of the template/generic definition):
+``bind`` 语句是 ``mixin`` 语句的对应语句。
+它可以用于显式声明应该提前绑定的标识符（即标识符应该在模板/泛型定义的范围内查找）：
 
 .. code-block:: nim
-  # Module A
+  # 模块A
   var
     lastId = 0
 
@@ -4104,53 +4056,49 @@ It can be used to explicitly declare identifiers that should be bound early (i.e
     lastId
 
 .. code-block:: nim
-  # Module B
+  # 模块B
   import A
 
   echo genId()
 
-But a ``bind`` is rarely useful because symbol binding from the definition scope is the default.
-
-``bind`` statements only make sense in templates and generics.
+但是 ``bind`` 很少有用，因为来自定义范围的符号绑定是默认的。
+``bind`` 语句只在模板和泛型中有意义。
 
 
 模板
 =========
 
-A template is a simple form of a macro: It is a simple substitution
-mechanism that operates on Nim's abstract syntax trees. It is processed in
-the semantic pass of the compiler.
+模板是宏的一种简单形式：它是一种简单的替换机制，可以在Nim的抽象语法树上运行。
+它在编译器的语义传递中处理。
 
-The syntax to *invoke* a template is the same as calling a procedure.
+*调用* 模板的语法与调用过程相同。
 
 示例：
 
 .. code-block:: nim
   template `!=` (a, b: untyped): untyped =
-    # this definition exists in the System module
+    # 此定义存在于系统模块中
     not (a == b)
 
-  assert(5 != 6) # the compiler rewrites that to: assert(not (5 == 6))
+  assert(5 != 6) # 编译器将其重写为：: assert(not (5 == 6))
 
-The ``!=``, ``>``, ``>=``, ``in``, ``notin``, ``isnot`` operators are in fact
-templates:
+``!=``, ``>``, ``>=``, ``in``, ``notin``, ``isnot`` 运算符实际上是模板：
 
-| ``a > b`` is transformed into ``b < a``.
-| ``a in b`` is transformed into ``contains(b, a)``.
-| ``notin`` and ``isnot`` have the obvious meanings.
+| ``a > b`` 变换成 ``b < a``.
+| ``a in b`` 变换成 ``contains(b, a)``.
+| ``notin`` 和 ``isnot`` 见名知意。
 
-The "types" of templates can be the symbols ``untyped``,
-``typed`` or ``typedesc``. These are "meta types", they can only be used in certain
-contexts. Regular types can be used too; this implies that ``typed`` expressions
-are expected.
+
+模板的“类型”可以是符号 ``untyped`` ， ``typed`` 或 ``typedesc`` 。
+这些是“元类型”，它们只能在某些上下文中使用。
+也可以使用常规类型;这意味着需要 ``typed`` 表达式。
 
 
 类型化和无类型形参
 ---------------------------
 
-An ``untyped`` parameter means that symbol lookups and type resolution is not
-performed before the expression is passed to the template. This means that for
-example *undeclared* identifiers can be passed to the template:
+``无类型`` 参数表示在将表达式传递给模板之前不执行符号查找和类型解析。
+这意味着例如 *未声明* 标识符可以传递给模板：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4158,7 +4106,7 @@ example *undeclared* identifiers can be passed to the template:
   template declareInt(x: untyped) =
     var x: int
 
-  declareInt(x) # valid
+  declareInt(x) # 有效
   x = 3
 
 
@@ -4169,22 +4117,19 @@ example *undeclared* identifiers can be passed to the template:
   template declareInt(x: typed) =
     var x: int
 
-  declareInt(x) # invalid, because x has not been declared and so has no type
+  declareInt(x) # 无效，因为x尚未声明，因此没有类型
 
-A template where every parameter is ``untyped`` is called an `immediate`:idx:
-template. For historical reasons templates can be explicitly annotated with
-an ``immediate`` pragma and then these templates do not take part in
-overloading resolution and the parameters' types are *ignored* by the
-compiler. Explicit immediate templates are now deprecated.
+每个参数都是 ``无类型`` 的模板称为 `立即`:idx: 模板。
+由于历史原因模板可以使用 ``立即`` 编译指示进行显式注释，然后这些模板不会参与重载分辨率，编译器会 *忽略* 参数的类型。
+现在不推荐使用显式立即模板。
 
-**Note**: For historical reasons ``stmt`` was an alias for ``typed`` and
-``expr`` was an alias for ``untyped``, but they are removed.
+**注意**: 由于历史原因 ``stmt`` 是类型化 ``typed`` 的别名， ``expr`` 是无类型 ``untyped`` 的别名, 但他们被移除了。
 
 
 向模板传代码块
 ----------------------------------
 
-You can pass a block of statements as the last argument to a template following the special ``:`` syntax:
+您可以在特殊的 ``:`` 语法之后将一个语句块作为最后一个参数传递给模板：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4199,14 +4144,15 @@ You can pass a block of statements as the last argument to a template following 
     else:
       quit("cannot open: " & fn)
 
-  withFile(txt, "ttempl3.txt", fmWrite):  # special colon
+  withFile(txt, "ttempl3.txt", fmWrite):  # 特殊冒号
     txt.writeLine("line 1")
     txt.writeLine("line 2")
 
-In the example, the two ``writeLine`` statements are bound to the ``actions`` parameter.
+在这个例子中，两个 ``writeLine`` 语句绑定到 ``actions`` 参数。
 
 
-Usually to pass a block of code to a template the parameter that accepts the block needs to be of type ``untyped``. Because symbol lookups are then delayed until template instantiation time:
+通常将一块代码传递给模板，接受块的参数需要是“untyped”类型。
+因为符号查找会延迟到模板实例化时间：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4221,17 +4167,14 @@ Usually to pass a block of code to a template the parameter that accepts the blo
     echo i
 
   t:
-    var i = 2  # fails with 'attempt to redeclare i'
+    var i = 2  # '尝试重新声明i'失败
     echo i
 
-The above code fails with the mysterious error message that ``i`` has already
-been declared. The reason for this is that the ``var i = ...`` bodies need to
-be type-checked before they are passed to the ``body`` parameter and type
-checking in Nim implies symbol lookups. For the symbol lookups to succeed
-``i`` needs to be added to the current (i.e. outer) scope. After type checking
-these additions to the symbol table are not rolled back (for better or worse).
-The same code works with ``untyped`` as the passed body is not required to be
-type-checked:
+上面的代码因已经声明了``i`` 的错误信息失败。
+原因是``var i = ...``body需要在传递给``body``参数之前进行类型检查，而Nim中的类型检查意味着符号查找。
+为了使符号查找成功，需要将 ``i`` 添加到当前（即外部）范围。
+在类型检查之后，这些对符号表的添加不会回滚（无论好坏）。
+同样的代码可以用 ``untyped`` ，因为传递的主体不需要进行类型检查：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4245,15 +4188,14 @@ type-checked:
     echo i
 
   t:
-    var i = 2  # compiles
+    var i = 2  # 编译
     echo i
 
 
 无类型可变参数
 ------------------
 
-In addition to the ``untyped`` meta-type that prevents type checking there is
-also ``varargs[untyped]`` so that not even the number of parameters is fixed:
+除了防止类型检查的 ``untyped`` 元类型之外，还有 ``varargs[untyped]`` 所以即使参数的数量都没有确定：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4262,18 +4204,16 @@ also ``varargs[untyped]`` so that not even the number of parameters is fixed:
 
   hideIdentifiers(undeclared1, undeclared2)
 
-However, since a template cannot iterate over varargs, this feature is
-generally much more useful for macros.
+但是，由于模板无法通过varargs进行迭代，因此该功能通常对宏非常有用。
 
 
 模板符号绑定
 ---------------------------
 
-A template is a `hygienic`:idx: macro and so opens a new scope. Most symbols are
-bound from the definition scope of the template:
+模板是 `卫生`:idx: 宏因此打开了一个新的范围。大多数符号都是从模板的定义作用域绑定的：
 
 .. code-block:: nim
-  # Module A
+  # 模块A
   var
     lastId = 0
 
@@ -4282,20 +4222,17 @@ bound from the definition scope of the template:
     lastId
 
 .. code-block:: nim
-  # Module B
+  # 模块B
   import A
 
-  echo genId() # Works as 'lastId' has been bound in 'genId's defining scope
+  echo genId() # 'lastId'已被'genId'的定义作用域所约束
 
-As in generics symbol binding can be influenced via ``mixin`` or ``bind``
-statements.
-
-
+在泛型中，符号绑定可以通过 ``mixin`` 或 ``bind`` 语句来影响。
 
 标识符构造
 -----------------------
 
-In templates identifiers can be constructed with the backticks notation:
+在模板中，可以使用反引号表示法构造标识符：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4308,19 +4245,16 @@ In templates identifiers can be constructed with the backticks notation:
   typedef(myint, int)
   var x: PMyInt
 
-In the example ``name`` is instantiated with ``myint``, so \`T name\` becomes
-``Tmyint``.
+示例中 ``name`` 用 ``myint`` 实例化，所以 \`T name\` 变为 ``Tmyint`` 。
 
 
 模板形参查询规则
 ------------------------------------
-
-A parameter ``p`` in a template is even substituted in the expression ``x.p``.
-Thus template arguments can be used as field names and a global symbol can be
-shadowed by the same argument name even when fully qualified:
+模板中的参数 ``p`` 甚至在表达式 ``x.p`` 中被替换。
+因此，模板参数可以用作字段名称，也可以使用相同的参数名称对限定的全局符号进行遮罩：
 
 .. code-block:: nim
-  # module 'm'
+  # 模块'm'
 
   type
     Lev = enum
@@ -4332,12 +4266,12 @@ shadowed by the same argument name even when fully qualified:
     echo abclev, " ", m.abclev
 
   tstLev(levA)
-  # produces: 'levA levA'
+  # 生成: 'levA levA'
 
-But the global symbol can properly be captured by a ``bind`` statement:
+但是可以通过 ``bind`` 语句正确捕获全局符号：
 
 .. code-block:: nim
-  # module 'm'
+  # 模块'm'
 
   type
     Lev = enum
@@ -4350,14 +4284,13 @@ But the global symbol can properly be captured by a ``bind`` statement:
     echo abclev, " ", m.abclev
 
   tstLev(levA)
-  # produces: 'levA levB'
+  # 生成: 'levA levB'
 
 
 模板卫生
 --------------------
-
-Per default templates are `hygienic`:idx:\: Local identifiers declared in a
-template cannot be accessed in the instantiation context:
+每个默认模板是 `卫生的`:idx:\: 
+无法在实例化上下文中访问模板中声明的本地标识符：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4369,19 +4302,13 @@ template cannot be accessed in the instantiation context:
     e.msg = message
     e
 
-  # so this works:
+  # 所以这是可以的:
   let e = "message"
   raise newException(IoError, e)
 
-
-Whether a symbol that is declared in a template is exposed to the instantiation
-scope is controlled by the `inject`:idx: and `gensym`:idx: pragmas: gensym'ed
-symbols are not exposed but inject'ed are.
-
-The default for symbols of entity ``type``, ``var``, ``let`` and ``const``
-is ``gensym`` and for ``proc``, ``iterator``, ``converter``, ``template``,
-``macro`` is ``inject``. However, if the name of the entity is passed as a
-template parameter, it is an inject'ed symbol:
+是否在模板中声明的符号是否暴露给实例化范围由 `inject`:idx: 和 `gensym`:idx: 编译指示控制，gensym的符号不会暴露而是注入。
+``type``, ``var``, ``let`` 和 ``const`` 的实体符号默认是 ``gensym`` ，``proc``, ``iterator``, ``converter``, ``template``, ``macro`` 是 ``inject``. 
+但是，如果实体的名称作为模板参数传递，则它是一个注入符号：
 
 .. code-block:: nim
   template withFile(f, fn, mode: untyped, actions: untyped): untyped =
@@ -4394,28 +4321,25 @@ template parameter, it is an inject'ed symbol:
     txt.writeLine("line 2")
 
 
-The ``inject`` and ``gensym`` pragmas are second class annotations; they have
-no semantics outside of a template definition and cannot be abstracted over:
+``inject`` 和 ``gensym`` 编译指示是二等注释;它们在模板定义之外没有语义，不能被抽象：
 
 .. code-block:: nim
   {.pragma myInject: inject.}
 
   template t() =
-    var x {.myInject.}: int # does NOT work
+    var x {.myInject.}: int # 不行
 
 
-To get rid of hygiene in templates, one can use the `dirty`:idx: pragma for
-a template. ``inject`` and ``gensym`` have no effect in ``dirty`` templates.
+为了摆脱模板中的卫生，可以为模板使用 `dirty`:idx: 编译指示。
+``inject`` 和 ``gensym`` 在 ``dirty`` 模板中没有意义。
 
 
 
 方法调用语法限制
 -------------------------------------
 
-The expression ``x`` in ``x.f`` needs to be semantically checked (that means
-symbol lookup and type checking) before it can be decided that it needs to be
-rewritten to ``f(x)``. Therefore the dot syntax has some limitations when it
-is used to invoke templates/macros:
+``x.f`` 中的表达式 ``x`` 需要进行语义检查（即符号查找和类型检查），然后才能确定需要将其重写为 ``f（x）`` 。
+因此，当用于调用模板/宏时，点语法有一些限制：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4424,11 +4348,11 @@ is used to invoke templates/macros:
   template declareVar(name: untyped) =
     const name {.inject.} = 45
 
-  # Doesn't compile:
+  # 不能编译:
   unknownIdentifier.declareVar
 
 
-Another common example is this:
+另一个常见的例子是：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4442,41 +4366,38 @@ Another common example is this:
 
   var info = something().toSeq
 
-The problem here is that the compiler already decided that ``something()`` as
-an iterator is not callable in this context before ``toSeq`` gets its
-chance to convert it into a sequence.
+这里的问题是编译器已经决定 ``something()`` 作为迭代器在 ``toSeq`` 将其转换为序列之前不可调用。
 
 
 宏
 ======
 
-A macro is a special function that is executed at compile time.
-Normally the input for a macro is an abstract syntax tree (AST) of the code that is passed to it. 
-The macro can then do transformations on it and return the transformed AST. 
-This can be used to add custom language features and implement `domain specific languages`:idx:.
+宏是在编译时执行的特殊函数。
+通常，宏的输入是传递给它的代码的抽象语法树（AST）。
+然后，宏可以对其进行转换并返回转换后的AST。
+这可用于添加自定义语言功能并实现 `领域特定语言（DSL）`:idx: 。
 
-Macro invocation is a case where semantic analyis does **not** entirely proceed top to bottom and left to right. Instead, semantic analysis happens at least twice:
 
-* Semantic analysis recognizes and resolves the macro invocation.
-* The compiler executes the macro body (which may invoke other procs).
-* It replaces the AST of the macro invocation with the AST returned by the macro.
-* It repeats semantic analysis of that region of the code.
-* If the AST returned by the macro contains other macro invocations,
-  this process iterates.
+宏调用是一种语义分析 *不* 会完全从上到下，从左到右进行的情况。相反，语义分析至少发生两次：
 
-While macros enable advanced compile-time code transformations, they cannot change Nim's syntax. However, this is no real restriction because Nim's syntax is flexible enough anyway.
+* 语义分析识别并解析宏调用。
+* 编译器执行宏体（可以调用其他触发器）。
+* 它将宏调用的AST替换为宏返回的AST。
+* 它重复了代码区域的语义分析。
+* 如果宏返回的AST包含其他宏调用，则此过程将进行迭代。
+
+虽然宏启用了高级编译时代码转换，但它们无法更改Nim的语法。
+但是，这并不是真正的限制因为Nim的语法无论如何都足够灵活。
 
 Debug示例
 -------------
 
-The following example implements a powerful ``debug`` command that accepts a
-variable number of arguments:
+以下示例实现了一个强大的 ``debug`` 命令，该命令接受可变数量的参数：
 
 .. code-block:: nim
     :test: "nim c $1"
 
-  # to work with Nim syntax trees, we need an API that is defined in the
-  # ``macros`` module:
+  # 使用Nim语法树，我们需要一个在``macros``模块中定义的API：
   import macros
 
   macro debug(args: varargs[untyped]): untyped =
@@ -4519,19 +4440,16 @@ The macro call expands to:
   writeLine(stdout, x)
 
 
-Arguments that are passed to a ``varargs`` parameter are wrapped in an array
-constructor expression. This is why ``debug`` iterates over all of ``n``'s
-children.
+传递给 ``varargs`` 参数的参数包含在数组构造函数表达式中。
+这就是为什么 ``debug`` 遍历所有 ``n`` 的子节点。
 
 
 BindSym
 -------
 
-The above ``debug`` macro relies on the fact that ``write``, ``writeLine`` and
-``stdout`` are declared in the system module and thus visible in the
-instantiating context. There is a way to use bound identifiers
-(aka `symbols`:idx:) instead of using unbound identifiers. The ``bindSym``
-builtin can be used for that:
+上面的 ``debug`` 宏依赖于 ``write`` ， ``writeLine`` 和 ``stdout`` 在系统模块中声明的事实，因此在实例化的上下文中可见。
+有一种方法可以使用绑定标识符（又名 `符号`:idx:)而不是使用未绑定的标识符。
+内置的 ``bindSym`` 可以用于：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4554,7 +4472,7 @@ builtin can be used for that:
 
   debug(a[0], a[1], x)
 
-The macro call expands to:
+宏调用扩展为：
 
 .. code-block:: nim
   write(stdout, "a[0]")
@@ -4569,27 +4487,25 @@ The macro call expands to:
   write(stdout, ": ")
   writeLine(stdout, x)
 
-However, the symbols ``write``, ``writeLine`` and ``stdout`` are already bound
-and are not looked up again. As the example shows, ``bindSym`` does work with
-overloaded symbols implicitly.
+但是，符号 ``write`` ， ``writeLine`` 和 ``stdout`` 已经绑定，不再被查找。如示例所示， ``bindSym`` 可以隐式地处理重载符号。
 
 Case-Of宏
 -------------
 
-In Nim it is possible to have a macro with the syntax of a *case-of* expression just with the difference that all of branches are passed to and processed by the macro implementation. 
-It is then up the macro implementation to transform the *of-branches* into a valid Nim statement. 
-The following example should show how this feature could be used for a lexical analyzer.
+在Nim中，可以使用具有 *case-of* 表达式的语法的宏，区别在于所有分支都传递给宏实现并由宏实现处理。
+然后是宏实现将 *of-branches* 转换为有效的Nim语句。
+以下示例应显示如何将此功能用于词法分析器。
 
 .. code-block:: nim
   import macros
 
   macro case_token(args: varargs[untyped]): untyped =
     echo args.treeRepr
-    # creates a lexical analyzer from regular expressions
+    # 从正则表达式创建词法分析器
     # ... (implementation is an exercise for the reader ;-)
     discard
 
-  case_token: # this colon tells the parser it is a macro statement
+  case_token: # 这个冒号告诉解析器它是一个宏语句
   of r"[A-Za-z_]+[A-Za-z_0-9]*":
     return tkIdentifier
   of r"0-9+":
@@ -4599,26 +4515,25 @@ The following example should show how this feature could be used for a lexical a
   else:
     return tkUnknown
 
+**风格注释** ：为了代码可读性，最好使用功能最少但仍然足够的编程结构。所以“检查清单”是：
 
-**Style note**: For code readability, it is the best idea to use the least powerful programming construct that still suffices. So the "check list" is:
-
-(1) Use an ordinary proc/iterator, if possible.
-(2) Else: Use a generic proc/iterator, if possible.
-(3) Else: Use a template, if possible.
-(4) Else: Use a macro.
+(1) 如果可能，请使用普通的proc和iterator。
+(2) 否则：如果可能，使用泛型的proc和iterator。
+(3) 否则：如果可能，请使用模板。
+(4) 否则：使用宏。
 
 
 Macros用作编译指示
 -----------------
 
-Whole routines (procs, iterators etc.) can also be passed to a template or a macro via the pragma notation:
+整个例程（procs，iterators等）也可以通过编译指示表示法传递给模板或宏：
 
 .. code-block:: nim
   template m(s: untyped) = discard
 
   proc p() {.m.} = discard
 
-This is a simple syntactic transformation into:
+这是一个简单的语法转换：
 
 .. code-block:: nim
   template m(s: untyped) = discard
@@ -4630,7 +4545,7 @@ This is a simple syntactic transformation into:
 For循环宏
 --------------
 
-A macro that takes as its only input parameter an expression of the special type ``system.ForLoopStmt`` can rewrite the entirety of a ``for`` loop:
+一个宏作为唯一的输入参数，特殊类型 ``system.ForLoopStmt`` 的表达式可以重写整个 ``for`` 循环：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4662,13 +4577,12 @@ A macro that takes as its only input parameter an expression of the special type
   for a, b in enumerate(items([1, 2, 3])):
     echo a, " ", b
 
-  # without wrapping the macro in a block, we'd need to choose different
-  # names for `a` and `b` here to avoid redefinition errors
+  # 没有将宏包装在一个块中，我们需要在这里为`a`和`b`选择不同的名称以避免重定义错误
   for a, b in enumerate([1, 2, 3, 5]):
     echo a, " ", b
 
 
-Currently for loop macros must be enabled explicitly via ``{.experimental: "forLoopMacros".}``.
+目前，必须通过 ``{.experimental: "forLoopMacros".}`` 显式启用循环宏。
 
 
 特殊类型
@@ -4677,7 +4591,7 @@ Currently for loop macros must be enabled explicitly via ``{.experimental: "forL
 static[T]
 ---------
 
-As their name suggests, static parameters must be constant expressions:
+顾名思义，静态参数必须是常量表达式：
 
 .. code-block:: nim
 
@@ -4685,64 +4599,52 @@ As their name suggests, static parameters must be constant expressions:
     var res {.global.} = re(pattern)
     return res
 
-  precompiledRegex("/d+") # Replaces the call with a precompiled
-                          # regex, stored in a global variable
+  precompiledRegex("/d+") # 用预编译的正则表达式替换调用，存储在全局变量中
 
-  precompiledRegex(paramStr(1)) # Error, command-line options
-                                # are not constant expressions
+  precompiledRegex(paramStr(1)) # 错误，命令行选项不是常量表达式
 
 
-For the purposes of code generation, all static params are treated as
-generic params - the proc will be compiled separately for each unique
-supplied value (or combination of values).
+出于代码生成的目的，所有静态参数都被视为通用参数 -  proc将针对每个唯一提供的值（或值的组合）单独编译。
 
-Static params can also appear in the signatures of generic types:
+静态参数也可以出现在泛型类型的签名中：
 
 .. code-block:: nim
 
   type
     Matrix[M,N: static int; T: Number] = array[0..(M*N - 1), T]
-      # Note how `Number` is just a type constraint here, while
-      # `static int` requires us to supply an int value
+      # 注意 `Number` 在这里只是一个类型约束，而 `static int` 要求我们提供一个int值
 
     AffineTransform2D[T] = Matrix[3, 3, T]
     AffineTransform3D[T] = Matrix[4, 4, T]
 
-  var m1: AffineTransform3D[float]  # OK
-  var m2: AffineTransform2D[string] # Error, `string` is not a `Number`
+  var m1: AffineTransform3D[float]  # 正确
+  var m2: AffineTransform2D[string] # 错误 `string`不是`Number`
 
-Please note that ``static T`` is just a syntactic convenience for the underlying
-generic type ``static[T]``. The type param can be omitted to obtain the type
-class of all constant expressions. A more specific type class can be created by
-instantiating ``static`` with another type class.
+Please note that ``static T`` is just a syntactic convenience for the underlying generic type ``static[T]``. 
+The type param can be omitted to obtain the type class of all constant expressions. 
+A more specific type class can be created by instantiating ``static`` with another type class.
 
-You can force an expression to be evaluated at compile time as a constant
-expression by coercing it to a corresponding ``static`` type:
+You can force an expression to be evaluated at compile time as a constant expression by coercing it to a corresponding ``static`` type:
 
 .. code-block:: nim
   import math
 
   echo static(fac(5)), " ", static[bool](16.isPowerOfTwo)
 
-The complier will report any failure to evaluate the expression or a
-possible type mismatch error.
+The complier will report any failure to evaluate the expression or a possible type mismatch error.
 
 typedesc[T]
 -----------
 
-In many contexts, Nim allows you to treat the names of types as regular
-values. These values exists only during the compilation phase, but since
-all values must have a type, ``typedesc`` is considered their special type.
+在许多情况下，Nim允许您将类型的名称视为常规值。
+这些值仅在编译阶段存在，但由于所有值必须具有类型，因此 ``typedesc`` 被视为其特殊类型。
 
-``typedesc`` acts like a generic type. For instance, the type of the symbol
-``int`` is ``typedesc[int]``. Just like with regular generic types, when the
-generic param is ommited, ``typedesc`` denotes the type class of all types.
-As a syntactic convenience, you can also use ``typedesc`` as a modifier.
+``typedesc`` 就像一个通用类型。例如，符号 ``int`` 的类型是 ``typedesc [int]`` 。
+就像常规泛型类型一样，当泛型参数被省略时，``typedesc``表示所有类型的类型类。
+作为一种语法方便，您还可以使用``typedesc``作为修饰符。
 
-Procs featuring ``typedesc`` params are considered implicitly generic.
-They will be instantiated for each unique combination of supplied types
-and within the body of the proc, the name of each param will refer to
-the bound concrete type:
+具有 ``typedesc`` 参数的过程被认为是隐式通用的。
+它们将针对提供的类型的每个唯一组合进行实例化，并且在proc的主体内，每个参数的名称将引用绑定的具体类型：
 
 .. code-block:: nim
 
@@ -4753,13 +4655,13 @@ the bound concrete type:
   var n = Node.new
   var tree = new(BinaryTree[int])
 
-When multiple type params are present, they will bind freely to different
-types. To force a bind-once behavior one can use an explicit generic param:
+当存在多种类型的参数时，它们将自由地绑定到不同类型。
+要强制绑定一次行为，可以使用显式通用参数：
 
 .. code-block:: nim
   proc acceptOnlyTypePairs[T, U](A, B: typedesc[T]; C, D: typedesc[U])
 
-Once bound, type params can appear in the rest of the proc signature:
+绑定后，类型参数可以出现在proc签名的其余部分中：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4769,11 +4671,10 @@ Once bound, type params can appear in the rest of the proc signature:
 
   declareVariableWithType int, 42
 
+通过约束与类型参数匹配的类型集，可以进一步影响重载解析。
+这在实践中通过模板将属性附加到类型。
+约束可以是具体类型或类型类。
 
-Overload resolution can be further influenced by constraining the set
-of types that will match the type param. This works in practice to
-attaching attributes to types via templates. The constraint can be a
-concrete type or a type class.
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4794,9 +4695,8 @@ concrete type or a type class.
   echo "is float a number? ", isNumber(float)
   echo "is RootObj a number? ", isNumber(RootObj)
 
-Passing ``typedesc`` almost identical, just with the differences that
-the macro is not instantiated generically. The type expression is
-simply passed as a ``NimNode`` to the macro, like everything else.
+传递 ``typedesc`` 几乎完全相同，只是因为宏没有一般地实例化。
+类型表达式简单地作为 ``NimNode`` 传递给宏，就像其他所有东西一样。
 
 .. code-block:: nim
 
@@ -4812,11 +4712,9 @@ simply passed as a ``NimNode`` to the macro, like everything else.
 typeof操作符
 ---------------
 
-**Note**: ``typeof(x)`` can for historical reasons also be written as ``type(x)`` but ``type(x)`` is discouraged.
+**注意**: ``typeof(x)`` 由于历史原因也可以写成 ``type(x)`` ，但不鼓励。
 
-You can obtain the type of a given expression by constructing a ``typeof``
-value from it (in many other languages this is known as the `typeof`:idx:
-operator):
+您可以通过从中构造一个``typeof``值来获取给定表达式的类型（在许多其他语言中，这被称为 `typeof`:idx: 操作符):
 
 .. code-block:: nim
 
@@ -4824,11 +4722,7 @@ operator):
   var y: typeof(x) # y has type int
 
 
-If ``typeof`` is used to determine the result type of a proc/iterator/converter
-call ``c(X)`` (where ``X`` stands for a possibly empty list of arguments), the
-interpretation where ``c`` is an iterator is preferred over the
-other interpretations, but this behavior can be changed by
-passing ``typeOfProc`` as the second argument to ``typeof``:
+如果 ``typeof`` 用于确定proc/iterator/converter ``c(X)`` 调用的结果类型（其中``X``代表可能为空的参数列表），首选将 ``c`` 解释为迭代器，这种可以通过将 ``typeOfProc`` 作为第二个参数传递给 ``typeof`` 来改变：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4836,23 +4730,20 @@ passing ``typeOfProc`` as the second argument to ``typeof``:
   iterator split(s: string): string = discard
   proc split(s: string): seq[string] = discard
 
-  # since an iterator is the preferred interpretation, `y` has the type ``string``:
+  # 因为迭代器是首选解释，`y` 的类型为 ``string`` ：
   assert typeof("a b c".split) is string
 
   assert typeof("a b c".split, typeOfProc) is seq[string]
-
-
 
 模块
 =======
 Nim supports splitting a program into pieces by a module concept.
 Each module needs to be in its own file and has its own `namespace`:idx:.
 Modules enable `information hiding`:idx: and `separate compilation`:idx:.
-A module may gain access to symbols of another module by the `import`:idx:
-statement. `Recursive module dependencies`:idx: are allowed, but slightly
-subtle. Only top-level symbols that are marked with an asterisk (``*``) are
-exported. A valid module name can only be a valid Nim identifier (and thus its
-filename is ``identifier.nim``).
+A module may gain access to symbols of another module by the `import`:idx: statement. 
+`Recursive module dependencies`:idx: are allowed, but slightly subtle. 
+Only top-level symbols that are marked with an asterisk (``*``) are exported. 
+A valid module name can only be a valid Nim identifier (and thus its filename is ``identifier.nim``).
 
 The algorithm for compiling modules is:
 
@@ -4861,7 +4752,7 @@ The algorithm for compiling modules is:
 - if there is a cycle only import the already parsed symbols (that are
   exported); if an unknown identifier occurs then abort
 
-This is best illustrated by an 示例：
+这可以通过一个例子来说明：
 
 .. code-block:: nim
   # Module A
@@ -4889,9 +4780,7 @@ This is best illustrated by an 示例：
 Import语句
 ~~~~~~~~~~~~~~~~
 
-After the ``import`` statement a list of module names can follow or a single
-module name followed by an ``except`` list to prevent some symbols to be
-imported:
+After the ``import`` statement a list of module names can follow or a single module name followed by an ``except`` list to prevent some symbols to be imported:
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4904,15 +4793,13 @@ imported:
 
 
 It is not checked that the ``except`` list is really exported from the module.
-This feature allows to compile against an older version of the module that
-does not export these identifiers.
+This feature allows to compile against an older version of the module that does not export these identifiers.
 
 
 Include语句
 ~~~~~~~~~~~~~~~~~
-The ``include`` statement does something fundamentally different than
-importing a module: it merely includes the contents of a file. The ``include``
-statement is useful to split up a large module into several files:
+The ``include`` statement does something fundamentally different than importing a module: it merely includes the contents of a file. 
+The ``include`` statement is useful to split up a large module into several files:
 
 .. code-block:: nim
   include fileA, fileB, fileC
@@ -5980,10 +5867,9 @@ Produces:
   x = SystemManager::getSubsystem<System::Input>()
 
 
-- ``#@`` is a special case to support a ``cnew`` operation. It is required so
-  that the call expression is inlined directly, without going through a
-  temporary location. This is only required to circumvent a limitation of the
-  current code generator.
+- ``#@`` is a special case to support a ``cnew`` operation. 
+  It is required so that the call expression is inlined directly, without going through a temporary location. 
+  This is only required to circumvent a limitation of the current code generator.
 
 For example C++'s ``new`` operator can be "imported" like this:
 
