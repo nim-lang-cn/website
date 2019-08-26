@@ -507,7 +507,7 @@ Nim允许用户可定义的运算符。二元运算符具有11个不同的优先
 
 .. code-block:: nim
   proc `^/`(x, y: float): float =
-    # a right-associative division operator
+    # 右关联除法运算符
     result = x / y
   echo 12 ^/ 4 ^/ 8 # 24.0 (4 / 8 = 0.5, then 12 / 0.5 = 24.0)
   echo 12  / 4  / 8 # 0.375 (12 / 4 = 3.0, then 3 / 8 = 0.375)
