@@ -380,7 +380,7 @@ or
 
 Break语句
 ---------------
-块可以用一个 ``break`` 语句离开。break语句可以离开一个 ``while``, ``for``, 或 ``block`` 语句. 它离开最内层的结构, 除非给定一个块标签:
+块可以用一个 ``break`` 语句跳出。break语句可以跳出一个 ``while``, ``for``, 或 ``block`` 语句. 它跳出最内层的结构, 除非给定一个块标签:
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -388,14 +388,14 @@ Break语句
     echo "entering block"
     while true:
       echo "looping"
-      break # 离开循环,但不离开块
+      break # 跳出循环,但不跳出块
     echo "still in block"
 
   block myblock2:
     echo "entering block"
     while true:
       echo "looping"
-      break myblock2 # 离开块 (和循环)
+      break myblock2 # 跳出块 (和循环)
     echo "still in block"
 
 
@@ -501,7 +501,7 @@ Example:
   else:
     echo "I think you know what the problem is just as well as I do."
 
-这个示例展示了一个名叫 ``yes`` 的过程，它问用户一个 ``question`` 并返回true如果他们回答"yes"（或类似的回答），返回false当他们回答"no"（或类似的回答）。一个 ``return`` 语句立即离开过程。
+这个示例展示了一个名叫 ``yes`` 的过程，它问用户一个 ``question`` 并返回true如果他们回答"yes"（或类似的回答），返回false当他们回答"no"（或类似的回答）。一个 ``return`` 语句立即跳出过程。
 ``(question: string): bool`` 语法描述过程需要一个名为 ``question`` ，类型为 ``string`` 的变量，并且返回一个 ``bool`` 值。 ``bool`` 类型是内置的：合法的值只有 ``true`` 和 ``false`` 。if或while语句中的条件必须是 ``bool`` 类型。
 
 一些术语: 示例中 ``question`` 叫做一个(形) *参*, ``"Should I..."`` 叫做 *实参* 传递给这个参数。

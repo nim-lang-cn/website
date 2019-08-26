@@ -966,7 +966,7 @@ out inside this with no indentation restrictions.
   <span class="Identifier">z</span> <span class="Operator">=</span> <span class="Identifier">y</span> <span class="Operator">+</span> <span class="DecNumber">5</span> <span class="Comment"># 计算是可能的</span></pre>
 <h1><a class="toc-backref" id="let语句" href="#let语句">let语句</a></h1><p><tt class="docutils literal"><span class="pre">let</span></tt> 语句像 <tt class="docutils literal"><span class="pre">var</span></tt> 语句一样但声明的符号是 <em>单赋值</em> 变量：初始化后它们的值将不能改变。</p>
 <pre class="listing"><span class="Keyword">let</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="StringLit">&quot;abc&quot;</span> <span class="Comment"># 引入一个新变量`x`并绑定一个值</span>
-<span class="Identifier">x</span> <span class="Operator">=</span> <span class="StringLit">&quot;xyz&quot;</span>     <span class="Comment"># 非法: 给`x`赋值</span></pre><p><tt class="docutils literal"><span class="pre">let</span></tt> 和 <tt class="docutils literal"><span class="pre">const</span></tt> 的区别在于: <tt class="docutils literal"><span class="pre">let</span></tt> 引入一个变量不能重新赋值。 <tt class="docutils literal"><span class="pre">const</span></tt> 表示&quot;强制编译期求值并放入一个数据段&quot;:</p>
+<span class="Identifier">x</span> <span class="Operator">=</span> <span class="StringLit">&quot;xyz&quot;</span>     <span class="Comment"># 非法: 给`x`赋值</span></pre><p><tt class="docutils literal"><span class="pre">let</span></tt> 和 <tt class="docutils literal"><span class="pre">const</span></tt> 的区别在于: <tt class="docutils literal"><span class="pre">let</span></tt> 引入一个变量不能重新赋值。 <tt class="docutils literal"><span class="pre">const</span></tt> 表示&quot;强制编译期求值并放入数据段&quot;:</p>
 <pre class="listing"><span class="Keyword">const</span> <span class="Identifier">input</span> <span class="Operator">=</span> <span class="Identifier">readLine</span><span class="Punctuation">(</span><span class="Identifier">stdin</span><span class="Punctuation">)</span> <span class="Comment"># 错误: 需要常量表达式</span></pre><pre class="listing"><span class="Keyword">let</span> <span class="Identifier">input</span> <span class="Operator">=</span> <span class="Identifier">readLine</span><span class="Punctuation">(</span><span class="Identifier">stdin</span><span class="Punctuation">)</span>   <span class="Comment"># 可以</span></pre>
 <h1><a class="toc-backref" id="流程控制语句" href="#流程控制语句">流程控制语句</a></h1><p>greetings程序由三个顺序执行的语句构成。只有最原始的程序可以不需要分支和循环。</p>
 
@@ -1051,19 +1051,19 @@ out inside this with no indentation restrictions.
   <span class="Keyword">var</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="StringLit">&quot;hi&quot;</span>
 <span class="Identifier">echo</span> <span class="Identifier">x</span> <span class="Comment"># 不行</span></pre><p>块的 <em>label</em> (本例中的 <tt class="docutils literal"><span class="pre">myblock</span></tt> ) 是可选的。</p>
 
-<h2><a class="toc-backref" id="流程控制语句-break语句" href="#流程控制语句-break语句">Break语句</a></h2><p>块可以用一个 <tt class="docutils literal"><span class="pre">break</span></tt> 语句离开。break语句可以离开一个 <tt class="docutils literal"><span class="pre">while</span></tt>, <tt class="docutils literal"><span class="pre">for</span></tt>, 或 <tt class="docutils literal"><span class="pre">block</span></tt> 语句. 它离开最内层的结构, 除非给定一个块标签:</p>
+<h2><a class="toc-backref" id="流程控制语句-break语句" href="#流程控制语句-break语句">Break语句</a></h2><p>块可以用一个 <tt class="docutils literal"><span class="pre">break</span></tt> 语句跳出。break语句可以跳出一个 <tt class="docutils literal"><span class="pre">while</span></tt>, <tt class="docutils literal"><span class="pre">for</span></tt>, 或 <tt class="docutils literal"><span class="pre">block</span></tt> 语句. 它跳出最内层的结构, 除非给定一个块标签:</p>
 <pre class="listing"><span class="Keyword">block</span> <span class="Identifier">myblock</span><span class="Punctuation">:</span>
   <span class="Identifier">echo</span> <span class="StringLit">&quot;entering block&quot;</span>
   <span class="Keyword">while</span> <span class="Identifier">true</span><span class="Punctuation">:</span>
     <span class="Identifier">echo</span> <span class="StringLit">&quot;looping&quot;</span>
-    <span class="Keyword">break</span> <span class="Comment"># 离开循环,但不离开块</span>
+    <span class="Keyword">break</span> <span class="Comment"># 跳出循环,但不跳出块</span>
   <span class="Identifier">echo</span> <span class="StringLit">&quot;still in block&quot;</span>
 
 <span class="Keyword">block</span> <span class="Identifier">myblock2</span><span class="Punctuation">:</span>
   <span class="Identifier">echo</span> <span class="StringLit">&quot;entering block&quot;</span>
   <span class="Keyword">while</span> <span class="Identifier">true</span><span class="Punctuation">:</span>
     <span class="Identifier">echo</span> <span class="StringLit">&quot;looping&quot;</span>
-    <span class="Keyword">break</span> <span class="Identifier">myblock2</span> <span class="Comment"># 离开块 (和循环)</span>
+    <span class="Keyword">break</span> <span class="Identifier">myblock2</span> <span class="Comment"># 跳出块 (和循环)</span>
   <span class="Identifier">echo</span> <span class="StringLit">&quot;still in block&quot;</span></pre>
 <h2><a class="toc-backref" id="流程控制语句-continue语句" href="#流程控制语句-continue语句">Continue语句</a></h2><p>像其它编程语言一样， <tt class="docutils literal"><span class="pre">continue</span></tt> 语句立刻开始下一次迭代:</p>
 <pre class="listing"><span class="Keyword">while</span> <span class="Identifier">true</span><span class="Punctuation">:</span>
@@ -1120,7 +1120,7 @@ out inside this with no indentation restrictions.
 <span class="Keyword">if</span> <span class="Identifier">yes</span><span class="Punctuation">(</span><span class="StringLit">&quot;Should I delete all your important files?&quot;</span><span class="Punctuation">)</span><span class="Punctuation">:</span>
   <span class="Identifier">echo</span> <span class="StringLit">&quot;I'm sorry Dave, I'm afraid I can't do that.&quot;</span>
 <span class="Keyword">else</span><span class="Punctuation">:</span>
-  <span class="Identifier">echo</span> <span class="StringLit">&quot;I think you know what the problem is just as well as I do.&quot;</span></pre><p>这个示例展示了一个名叫 <tt class="docutils literal"><span class="pre">yes</span></tt> 的过程，它问用户一个 <tt class="docutils literal"><span class="pre">question</span></tt> 并返回true如果他们回答&quot;yes&quot;（或类似的回答），返回false当他们回答&quot;no&quot;（或类似的回答）。一个 <tt class="docutils literal"><span class="pre">return</span></tt> 语句立即离开过程。 <tt class="docutils literal"><span class="pre">(question: string): bool</span></tt> 语法描述过程需要一个名为 <tt class="docutils literal"><span class="pre">question</span></tt> ，类型为 <tt class="docutils literal"><span class="pre">string</span></tt> 的变量，并且返回一个 <tt class="docutils literal"><span class="pre">bool</span></tt> 值。 <tt class="docutils literal"><span class="pre">bool</span></tt> 类型是内置的：合法的值只有 <tt class="docutils literal"><span class="pre">true</span></tt> 和 <tt class="docutils literal"><span class="pre">false</span></tt> 。if或while语句中的条件必须是 <tt class="docutils literal"><span class="pre">bool</span></tt> 类型。</p>
+  <span class="Identifier">echo</span> <span class="StringLit">&quot;I think you know what the problem is just as well as I do.&quot;</span></pre><p>这个示例展示了一个名叫 <tt class="docutils literal"><span class="pre">yes</span></tt> 的过程，它问用户一个 <tt class="docutils literal"><span class="pre">question</span></tt> 并返回true如果他们回答&quot;yes&quot;（或类似的回答），返回false当他们回答&quot;no&quot;（或类似的回答）。一个 <tt class="docutils literal"><span class="pre">return</span></tt> 语句立即跳出过程。 <tt class="docutils literal"><span class="pre">(question: string): bool</span></tt> 语法描述过程需要一个名为 <tt class="docutils literal"><span class="pre">question</span></tt> ，类型为 <tt class="docutils literal"><span class="pre">string</span></tt> 的变量，并且返回一个 <tt class="docutils literal"><span class="pre">bool</span></tt> 值。 <tt class="docutils literal"><span class="pre">bool</span></tt> 类型是内置的：合法的值只有 <tt class="docutils literal"><span class="pre">true</span></tt> 和 <tt class="docutils literal"><span class="pre">false</span></tt> 。if或while语句中的条件必须是 <tt class="docutils literal"><span class="pre">bool</span></tt> 类型。</p>
 <p>一些术语: 示例中 <tt class="docutils literal"><span class="pre">question</span></tt> 叫做一个(形) <em>参</em>, <tt class="docutils literal"><span class="pre">&quot;Should I...&quot;</span></tt> 叫做 <em>实参</em> 传递给这个参数。</p>
 
 <h2><a class="toc-backref" id="过程-result变量" href="#过程-result变量">Result变量</a></h2><p>一个返回值的过程有一个隐式 <tt class="docutils literal"><span class="pre">result</span></tt> 变量声明代表返回值。一个没有表达式的 <tt class="docutils literal"><span class="pre">return</span></tt> 语句是 <tt class="docutils literal"><span class="pre">return result</span></tt> 的简写。 <tt class="docutils literal"><span class="pre">result</span></tt> 总在过程的结尾自动返回如果退出时没有 <tt class="docutils literal"><span class="pre">return</span></tt> 语句.</p>
@@ -1681,7 +1681,7 @@ out inside this with no indentation restrictions.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-08-26 12:46:59 UTC</small>
+        <small>Made with Nim. Generated: 2019-08-26 12:51:26 UTC</small>
       </div>
     </div>
   </div>
