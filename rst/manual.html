@@ -1065,15 +1065,15 @@ function main() {
   
   <p class="module-desc"><table class="docinfo" frame="void" rules="none"><col class="docinfo-name" /><col class="docinfo-content" /><tbody valign="top"><tr><th class="docinfo-name">Authors:</th><td> Andreas Rumpf, Zahary Karadjov</td></tr>
 <tr><th class="docinfo-name">Version:</th><td> 0.20.3</td></tr>
-</tbody></table><blockquote><p>&quot;复杂度&quot;很像&quot;能量&quot;: 你可以将它从最终用户转移到一个/一些其他玩家，但总量对于给定的任务保持不变。-- Ran</p></blockquote>
+</tbody></table><blockquote><p>&quot;复杂度&quot;很像&quot;能量&quot;: 你可以将它从最终用户转移到一个或多个其他玩家，但总量对于给定的任务保持不变。-- Ran</p></blockquote>
 
-<h1><a class="toc-backref" id="关于本文" href="#关于本文">关于本文</a></h1><p><strong>注意</strong> : 本文是草案！Nim的一些功能可能需要更精确的措辞。本手册不断发展为适当的规范。</p>
-<p><strong>注意</strong> : Nim的实验特性在这里 <a class="reference external" href="manual_experimental.html">here</a> 。</p>
+<h1><a class="toc-backref" id="关于本文" href="#关于本文">关于本文</a></h1><p><strong>注意</strong> : 这份文件是草案，Nim的一些功能可能需要更精确的措辞。本手册不断发展为合适的规范。</p>
+<p><strong>注意</strong> : Nim的实验特性在 <a class="reference external" href="manual_experimental.html">这里</a> 。</p>
 <p>本文描述Nim语言的词汇、语法，和语义。</p>
 <p>学习如何编译Nim程序和生成文档见 <a class="reference external" href="nimc.html">Compiler User Guide</a> 和 <a class="reference external" href="docgen.html">DocGen Tools Guide</a> 。</p>
 <p>语言构造用扩展巴科斯范式（BNF）解释，其中 <tt class="docutils literal"><span class="pre">(a)*</span></tt> 表示 0 或者更多 <tt class="docutils literal"><span class="pre">a</span></tt>, <tt class="docutils literal"><span class="pre">a+</span></tt> 表示1或更多 <tt class="docutils literal"><span class="pre">a</span></tt>, 以及 <tt class="docutils literal"><span class="pre">(a)?</span></tt> 表示可选 <em>a</em> 。小括号用来对元素进行分组。</p>
 <p><tt class="docutils literal"><span class="pre">&amp;</span></tt> 是先行操作符; <tt class="docutils literal"><span class="pre">&amp;a</span></tt> 表示需要 <tt class="docutils literal"><span class="pre">a</span></tt> 但不被消耗。它将在下列规则中消耗。</p>
-<p><tt class="docutils literal"><span class="pre">|</span></tt>, <tt class="docutils literal"><span class="pre">/</span></tt> 符号用于标记可选并且优先级最低。``/`` 是要求解析器尝试给定顺序的可选项的有序选择。 <tt class="docutils literal"><span class="pre">/</span></tt> 常用于确保语法没有歧义。</p>
+<p><tt class="docutils literal"><span class="pre">|</span></tt>, <tt class="docutils literal"><span class="pre">/</span></tt> 符号用于标记可选并且优先级最低。 <tt class="docutils literal"><span class="pre">/</span></tt> 是要求解析器尝试给定顺序的可选项的有序选择。 <tt class="docutils literal"><span class="pre">/</span></tt> 常用于确保语法没有歧义。</p>
 <p>非终端符以小写字母开始，抽象终端符用大写。</p>
 <p>逐字终端符（包括关键字）用 <tt class="docutils literal"><span class="pre">'</span></tt> 引用。示例:<pre>
 ifStmt = 'if' expr ':' stmts ('elif' expr ':' stmts)* ('else' stmts)?</pre>
@@ -1118,10 +1118,10 @@ stmt = IND{&gt;} stmt ^+ IND{=} DED  # list of statements
      / simpleStmt                 # or a simple statement</pre>
 </p>
 
-<h2><a class="toc-backref" id="词汇分析-注释" href="#词汇分析-注释">注释</a></h2><p>注释从字符串或字符文字外的任何地方开始，并带有哈希字符 <tt class="docutils literal"><span class="pre">#</span></tt> 。 注释包含 <tt class="docutils literal"><span class="pre">注释片段</span></tt> 的连接:idx: 。 评论文章以 <tt class="docutils literal"><span class="pre">#</span></tt> 开头，​​一直运行到行尾。 行尾字符属于该片段。 如果下一行只包含一个注释片段，而它与前一个片段之间没有其他符号，则它不会启动新注释：</p>
+<h2><a class="toc-backref" id="词汇分析-注释" href="#词汇分析-注释">注释</a></h2><p>注释从字符串或字符字面值外的任何地方开始，并带有哈希字符 <tt class="docutils literal"><span class="pre">#</span></tt> 。 注释包含 <tt class="docutils literal"><span class="pre">注释片段</span></tt> 的连接:idx: 。 评论文章以 <tt class="docutils literal"><span class="pre">#</span></tt> 开头，​​一直运行到行尾。 行尾字符属于该片段。 如果下一行只包含一个注释片段，而它与前一个片段之间没有其他符号，则它不会启动新注释：</p>
 <pre class="listing"><span class="Identifier">i</span> <span class="Operator">=</span> <span class="DecNumber">0</span>     <span class="Comment"># 这是跨行的单个注释。</span>
   <span class="Comment"># 扫描器合并这个块。</span>
-  <span class="Comment"># 注释从这里继续。</span></pre><p><span id="文档注释_1">文档注释</span> 由两个开始 <tt class="docutils literal"><span class="pre">##</span></tt> 。 文档注释是符号；它们仅允许出现在输入文件的某个地方，因为它们属于语法树！</p>
+  <span class="Comment"># 注释从这里继续。</span></pre><p><span id="文档注释_1">文档注释</span> 由两个开始 <tt class="docutils literal"><span class="pre">##</span></tt> 。 文档注释是符号；它们仅允许出现在输入文件的某个地方，因为它们属于语法树。</p>
 
 <h2><a class="toc-backref" id="词汇分析-多行注释" href="#词汇分析-多行注释">多行注释</a></h2><p>从版本0.13.0开始，Nim支持多行注释。</p>
 <pre class="listing"><span class="LongComment">#[注释这里.
@@ -1129,16 +1129,16 @@ stmt = IND{&gt;} stmt ^+ IND{=} DED  # list of statements
 不是问题。]#</span></pre><p>多行注释支持嵌套：</p>
 <pre class="listing"><span class="LongComment">#[  #[ 在已经注释代码中的多行注释]#
 proc p[T](x: T) = discard
-]#</span></pre><p>多行文档注释也存在并支持嵌套：</p>
+]#</span></pre><p>多行文档注释并支持嵌套：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">foo</span> <span class="Operator">=</span>
   <span class="LongComment">##[长文档注释。
   ]##</span></pre>
-<h2><a class="toc-backref" id="词汇分析-标识符-amp-关键字" href="#词汇分析-标识符-amp-关键字">标识符 &amp; 关键字</a></h2><p>Nim中的标识符可以是任何字符、数字和由字母开始的下划线。不允许两个连续的下划线 <tt class="docutils literal"><span class="pre">__</span></tt> :<pre>
+<h2><a class="toc-backref" id="词汇分析-标识符-amp-关键字" href="#词汇分析-标识符-amp-关键字">标识符 &amp; 关键字</a></h2><p>Nim中的标识符可以是任何以字母开头的数字、字母和下划线。不允许两个连续的下划线 <tt class="docutils literal"><span class="pre">__</span></tt> :<pre>
 letter ::= 'A'..'Z' | 'a'..'z' | '\x80'..'\xff'
 digit ::= '0'..'9'
 IDENTIFIER ::= letter ( ['_'] (letter | digit) )*</pre>
 </p>
-<p>目前，序数值&gt; 127（非ASCII）的任何Unicode字符都被归类为 <tt class="docutils literal"><span class="pre">字母</span></tt> ，因此可能是标识符的一部分，但该语言的更高版本可能会指定某些Unicode字符来代替运算符字符。</p>
+<p>目前，序数值&gt; 127（非ASCII）的任何Unicode字符都被归类为 <tt class="docutils literal"><span class="pre">字母</span></tt> ，因此可能是标识符的一部分，但该语言的后续版本可能会指定某些Unicode字符来代替运算符字符。</p>
 <p>下面预留的关键字不能用作标识符：</p>
 <pre class="listing"><span class="Keyword">addr</span> <span class="Keyword">and</span> <span class="Keyword">as</span> <span class="Keyword">asm</span>
 <span class="Keyword">bind</span> <span class="Keyword">block</span> <span class="Keyword">break</span>
@@ -1171,60 +1171,60 @@ IDENTIFIER ::= letter ( ['_'] (letter | digit) )*</pre>
 <p>从历史上看，Nim是一种完全 <span id="风格不敏感_1">风格不敏感</span> 语言。 这意味着它不区分大小写并且忽略了下划线，并且 <tt class="docutils literal"><span class="pre">foo</span></tt> 和 <tt class="docutils literal"><span class="pre">Foo</span></tt> 之间甚至没有区别。</p>
 
 <h2><a class="toc-backref" id="词汇分析-字符串字面值" href="#词汇分析-字符串字面值">字符串字面值</a></h2><p>语法中的终端符号: <tt class="docutils literal"><span class="pre">STR_LIT</span></tt> 。</p>
-<p>字符串文字可以通过匹配双引号来分隔，并且可以包含以下 <span id="转义序列_1">转义序列</span> :</p>
+<p>字符串字面值可以通过匹配双引号来分隔，并且可以包含以下 <span id="转义序列_1">转义序列</span> :</p>
 <table border="1" class="docutils"><tr><th>转义序列</th><th>含义</th></tr>
 <tr><td><tt class="docutils literal"><span class="pre">\p</span></tt></td><td>平台特定的换行: CRLF on Windows, LF on Unix</td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\r</span></tt>, <tt class="docutils literal"><span class="pre">\c</span></tt></td><td><span id="carriage-return_1">carriage return</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\n</span></tt>, <tt class="docutils literal"><span class="pre">\l</span></tt></td><td><span id="line-feed_1">line feed</span> (often called <span id="newline_1">newline</span>)</td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\f</span></tt></td><td><span id="form-feed_1">form feed</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\t</span></tt></td><td><span id="tabulator_1">tabulator</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\v</span></tt></td><td><span id="vertical-tabulator_1">vertical tabulator</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\\</span></tt></td><td><span id="backslash_1">backslash</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\&quot;</span></tt></td><td><span id="quotation-mark_1">quotation mark</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\'</span></tt></td><td><span id="apostrophe_1">apostrophe</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\</span></tt> '0'..'9'+</td><td><span id="character-with-decimal-value-d_1">character with decimal value d</span>; all decimal digits directly following are used for the character</td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\a</span></tt></td><td><span id="alert_1">alert</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\b</span></tt></td><td><span id="backspace_1">backspace</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\e</span></tt></td><td><span id="escape_1">escape</span> <span id="esc_1">[ESC]</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\x</span></tt> HH</td><td><span id="character-with-hex-value-hh_1">character with hex value HH</span>; exactly two hex digits are allowed</td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\u</span></tt> HHHH</td><td><span id="unicode-codepoint-with-hex-value-hhhh_1">unicode codepoint with hex value HHHH</span>; exactly four hex digits are allowed</td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\u</span></tt> {H+}</td><td><span id="unicode-codepoint_1">unicode codepoint</span>; all hex digits enclosed in <tt class="docutils literal"><span class="pre">{}</span></tt> are used for the codepoint</td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\r</span></tt>, <tt class="docutils literal"><span class="pre">\c</span></tt></td><td><span id="回车_1">回车</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\n</span></tt>, <tt class="docutils literal"><span class="pre">\l</span></tt></td><td><span id="换行_1">换行</span> (通常叫做 <span id="新行_1">新行</span>)</td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\f</span></tt></td><td><span id="换页_1">换页</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\t</span></tt></td><td><span id="制表符_1">制表符</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\v</span></tt></td><td><span id="垂直制表符_1">垂直制表符</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\\</span></tt></td><td><span id="反斜线_1">反斜线</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\&quot;</span></tt></td><td><span id="双引号_1">双引号</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\'</span></tt></td><td><span id="单引号_1">单引号</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\</span></tt> '0'..'9'+</td><td><span id="十进制值的字符d_1">十进制值的字符d</span>; 后跟的所有十进制数字都用于该字符</td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\a</span></tt></td><td><span id="告警_1">告警</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\b</span></tt></td><td><span id="退格_1">退格</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\e</span></tt></td><td><span id="退出_1">退出</span> <span id="esc_1">[ESC]</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\x</span></tt> HH</td><td><span id="带十六进制值的字符hh_1">带十六进制值的字符HH</span>; 只允许两位十六进制数字</td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\u</span></tt> HHHH</td><td><span id="具有十六进制值的unicode代码点hhhh_1">具有十六进制值的unicode代码点HHHH</span> ; 只允许四位十六进制数字</td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\u</span></tt> {H+}</td><td><span id="unicode代码点_1">unicode代码点</span>; 用 <tt class="docutils literal"><span class="pre">{}</span></tt> 括起来的所有十六进制数字都用于代码点</td></tr>
 </table><p>Nim中的字符串可以包含任何8位值，甚至是嵌入的零。 但是，某些操作可能会将第一个二进制零解释为终止符。</p>
 
 <h2><a class="toc-backref" id="词汇分析-三引用字符串字面值" href="#词汇分析-三引用字符串字面值">三引用字符串字面值</a></h2><p>语法中的终端符号: <tt class="docutils literal"><span class="pre">TRIPLESTR_LIT</span></tt>.</p>
-<p>字符串文字也可以用三个双引号分隔 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> ... <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> 。 这种形式的文字可能会持续几行，可能包含 <tt class="docutils literal"><span class="pre">&quot;</span></tt> 并且不解释任何转义序列。 为方便起见，当开头的 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> 后面跟一个换行符 (开头 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> 和换行符之间可能有空格）时,换行符（和前面的空格）不包含在字符串。 字符串文字的结尾由模式定义 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;[^&quot;]</span></tt>, 所以:</p>
+<p>字符串字面值也可以用三个双引号分隔 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> ... <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> 。 这种形式的字面值可能会持续几行，可能包含 <tt class="docutils literal"><span class="pre">&quot;</span></tt> 并且不解释任何转义序列。 为方便起见，当开头的 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> 后面跟一个换行符 (开头 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> 和换行符之间可能有空格）时,换行符（和前面的空格）不包含在字符串。 字符串字面值的结尾由模式定义 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;[^&quot;]</span></tt>, 所以:</p>
 <pre class="listing"><span class="LongStringLit">&quot;&quot;&quot;&quot;long string within quotes&quot;&quot;&quot;&quot;</span></pre><p>生成:<pre>
 &quot;long string within quotes&quot;</pre>
 </p>
 
 <h2><a class="toc-backref" id="词汇分析-原始字符串字面值" href="#词汇分析-原始字符串字面值">原始字符串字面值</a></h2><p>语法中的终端符号: <tt class="docutils literal"><span class="pre">RSTR_LIT</span></tt>.</p>
-<p>还有原始字符串文字，前面带有字母 <tt class="docutils literal"><span class="pre">r</span></tt> (or <tt class="docutils literal"><span class="pre">R</span></tt>) 并通过匹配双引号（就像普通的字符串文字一样）分隔并且不解释转义序列。 这对于正则表达式或Windows路径特别方便：</p>
+<p>还有原始字符串字面值，前面带有字母 <tt class="docutils literal"><span class="pre">r</span></tt> (or <tt class="docutils literal"><span class="pre">R</span></tt>) 并通过匹配双引号（就像普通的字符串字面值一样）分隔并且不解释转义序列。 这对于正则表达式或Windows路径特别方便：</p>
 <pre class="listing"><span class="Keyword">var</span> <span class="Identifier">f</span> <span class="Operator">=</span> <span class="Identifier">openFile</span><span class="Punctuation">(</span><span class="RawData">r&quot;C:\texts\text.txt&quot;</span><span class="Punctuation">)</span> <span class="Comment"># 原始字符串, 所以 ``\t`` 不是制表符。</span></pre><p>为了在原始字符串中生成一个单独的 <tt class="docutils literal"><span class="pre">&quot;</span></tt> , 必须使用两个:</p>
 <pre class="listing"><span class="RawData">r&quot;a&quot;&quot;</span><span class="RawData">b&quot;</span></pre><p>Produces:<pre>
 a&quot;b</pre>
 </p>
-<p><tt class="docutils literal"><span class="pre">r&quot;&quot;&quot;&quot;</span></tt> 这个符号是不可能的，因为三个引号引用了三引号字符串文字。 <tt class="docutils literal"><span class="pre">r&quot;&quot;&quot;</span></tt> 与 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> 相同，因为三重引用的字符串文字也不解释转义序列。</p>
+<p><tt class="docutils literal"><span class="pre">r&quot;&quot;&quot;&quot;</span></tt> 这个符号是不可能的，因为三个引号引用了三引号字符串字面值。 <tt class="docutils literal"><span class="pre">r&quot;&quot;&quot;</span></tt> 与 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> 相同，因为三重引用的字符串字面值也不解释转义序列。</p>
 
 <h2><a class="toc-backref" id="词汇分析-广义原始字符串字面值" href="#词汇分析-广义原始字符串字面值">广义原始字符串字面值</a></h2><p>语法中的终端符号: <tt class="docutils literal"><span class="pre">GENERALIZED_STR_LIT</span></tt>, <tt class="docutils literal"><span class="pre">GENERALIZED_TRIPLESTR_LIT</span></tt> 。</p>
-<p><tt class="docutils literal"><span class="pre">标识符&quot;字符串字面值&quot;</span></tt> 这种构造(标识符和开始引号之间没有空格)是广义原始字符串。 这是 <tt class="docutils literal"><span class="pre">identifier(r&quot;string literal&quot;)</span></tt> 的缩写， 所以它表示一个过程调用原始字符串文字作为唯一的参数。</p>
-<p>广义原始字符串文字特别便于将小型语言直接嵌入到Nim中（例如正则表达式）。</p>
+<p><tt class="docutils literal"><span class="pre">标识符&quot;字符串字面值&quot;</span></tt> 这种构造(标识符和开始引号之间没有空格)是广义原始字符串。 这是 <tt class="docutils literal"><span class="pre">identifier(r&quot;string literal&quot;)</span></tt> 的缩写， 所以它表示一个过程调用原始字符串字面值作为唯一的参数。</p>
+<p>广义原始字符串字面值特别便于将小型语言直接嵌入到Nim中（例如正则表达式）。</p>
 <p><tt class="docutils literal"><span class="pre">标识符&quot;&quot;&quot;字符串字面值&quot;&quot;&quot;</span></tt> 也存在。它是 <tt class="docutils literal"><span class="pre">标识符(&quot;&quot;&quot;字符串字面值&quot;&quot;&quot;)</span></tt> 的缩写。</p>
 
-<h2><a class="toc-backref" id="词汇分析-字符字面值" href="#词汇分析-字符字面值">字符字面值</a></h2><p>字符文字用单引号 <tt class="docutils literal"><span class="pre">''</span></tt> 括起来，并且可以包含与字符串相同的转义序列 - 有一个例外：平台依赖的 <span id="newline_2">newline</span> (<tt class="docutils literal"><span class="pre">\p</span></tt>) 是不允许的，因为它可能比一个字符宽（通常是CR / LF对）。 以下是对字符字面值有效的 <span id="转义序列_2">转义序列</span> :</p>
+<h2><a class="toc-backref" id="词汇分析-字符字面值" href="#词汇分析-字符字面值">字符字面值</a></h2><p>字符字面值用单引号 <tt class="docutils literal"><span class="pre">''</span></tt> 括起来，并且可以包含与字符串相同的转义序列 - 有一个例外：平台依赖的 <span id="newline_1">newline</span> (<tt class="docutils literal"><span class="pre">\p</span></tt>) 是不允许的，因为它可能比一个字符宽（通常是CR / LF对）。 以下是对字符字面值有效的 <span id="转义序列_2">转义序列</span> :</p>
 <table border="1" class="docutils"><tr><th>转义序列</th><th>含义</th></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\r</span></tt>, <tt class="docutils literal"><span class="pre">\c</span></tt></td><td><span id="carriage-return_2">carriage return</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\n</span></tt>, <tt class="docutils literal"><span class="pre">\l</span></tt></td><td><span id="line-feed_2">line feed</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\f</span></tt></td><td><span id="form-feed_2">form feed</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\t</span></tt></td><td><span id="tabulator_2">tabulator</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\v</span></tt></td><td><span id="vertical-tabulator_2">vertical tabulator</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\\</span></tt></td><td><span id="backslash_2">backslash</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\&quot;</span></tt></td><td><span id="quotation-mark_2">quotation mark</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\'</span></tt></td><td><span id="apostrophe_2">apostrophe</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\</span></tt> '0'..'9'+</td><td><span id="character-with-decimal-value-d_2">character with decimal value d</span>; all decimal digits directly following are used for the character</td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\a</span></tt></td><td><span id="alert_2">alert</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\b</span></tt></td><td><span id="backspace_2">backspace</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\e</span></tt></td><td><span id="escape_2">escape</span> <span id="esc_2">[ESC]</span></td></tr>
-<tr><td><tt class="docutils literal"><span class="pre">\x</span></tt> HH</td><td><span id="character-with-hex-value-hh_2">character with hex value HH</span>; exactly two hex digits are allowed</td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\r</span></tt>, <tt class="docutils literal"><span class="pre">\c</span></tt></td><td><span id="回车_2">回车</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\n</span></tt>, <tt class="docutils literal"><span class="pre">\l</span></tt></td><td><span id="换行_2">换行</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\f</span></tt></td><td><span id="换页_2">换页</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\t</span></tt></td><td><span id="制表符_2">制表符</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\v</span></tt></td><td><span id="垂直制表符_2">垂直制表符</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\\</span></tt></td><td><span id="反斜杠_1">反斜杠</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\&quot;</span></tt></td><td><span id="双引号_2">双引号</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\'</span></tt></td><td><span id="单引号_2">单引号</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\</span></tt> '0'..'9'+</td><td><span id="十进制值的字符d_2">十进制值的字符d</span>; 后跟的所有十进制数字都用于该字符</td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\a</span></tt></td><td><span id="告警_2">告警</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\b</span></tt></td><td><span id="退格_2">退格</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\e</span></tt></td><td><span id="退出_2">退出</span> <span id="esc_2">[ESC]</span></td></tr>
+<tr><td><tt class="docutils literal"><span class="pre">\x</span></tt> HH</td><td><span id="十六进制字符hh_1">十六进制字符HH</span>; 只允许两位数字</td></tr>
 </table><p>字符不是Unicode字符，而是单个字节。</p>
 <p>这样做的原因是效率：对于绝大多数用例，由于UTF-8是专门为此设计的，所得到的程序仍然可以正确处理UTF-8。 另一个原因是Nim因此可以依靠这个特性像其它算法一样有效地支持 <tt class="docutils literal"><span class="pre">array[char, int]</span></tt> 或 <tt class="docutils literal"><span class="pre">set[char]</span></tt> 。 <tt class="docutils literal"><span class="pre">Rune</span></tt> 类型用于Unicode字符，它可以表示任何Unicode字符。 <tt class="docutils literal"><span class="pre">Rune</span></tt> 在 <a class="reference external" href="unicode.html">unicode module</a> 声明。</p>
 
@@ -1262,12 +1262,12 @@ FLOAT64_SUFFIX = ( ('f' | 'F') '64' ) | 'd' | 'D'
 FLOAT64_LIT = HEX_LIT '\'' FLOAT64_SUFFIX
             | (FLOAT_LIT | DEC_LIT | OCT_LIT | BIN_LIT) ['\''] FLOAT64_SUFFIX</pre>
 </p>
-<p>从产品中可以看出，数值常数可以包含下划线以便于阅读。</p>
-<p>整数和浮点文字可以用十进制（无前缀），二进制（前缀 <tt class="docutils literal"><span class="pre">0b</span></tt> ），八进制（前缀 <tt class="docutils literal"><span class="pre">0o</span></tt> ）和十六进制（前缀 <tt class="docutils literal"><span class="pre">0x</span></tt> ）表示法给出。</p>
-<p>每个定义的数字类型都有一个文字。 以一撇开始的后缀 (''') 叫 <span id="类型后缀_1">类型后缀</span> 。</p>
-<p>没有类型后缀的文字是整数类型，除非文字包含点或 <tt class="docutils literal"><span class="pre">E | e `` ，在这种情况下它是 ``浮动</span></tt> 类型。 整数类型是 <tt class="docutils literal"><span class="pre">int</span></tt> 如果字面值在 <tt class="docutils literal"><span class="pre">low(i32)..high(i32)</span></tt> 范围，否则是 <tt class="docutils literal"><span class="pre">int64</span></tt> 。 为了符号方便，类型后缀的撇号是可选的，如果它不是模糊的（只有具有类型后缀的十六进制浮点文字可能是不明确的）。</p>
-<p>The type suffixes are:</p>
-<table border="1" class="docutils"><tr><th>Type Suffix</th><th>Resulting type of literal</th></tr>
+<p>从结果中可以看出，数值常数可以包含下划线以便于阅读。</p>
+<p>整数和浮点字面值可以用十进制（无前缀），二进制（前缀 <tt class="docutils literal"><span class="pre">0b</span></tt> ），八进制（前缀 <tt class="docutils literal"><span class="pre">0o</span></tt> ）和十六进制（前缀 <tt class="docutils literal"><span class="pre">0x</span></tt> ）表示法给出。</p>
+<p>每个定义的数字类型都有一个字面值。 以一撇开始的后缀 (''') 叫 <span id="类型后缀_1">类型后缀</span> 。</p>
+<p>没有类型后缀的字面值是整数类型，除非字面值包含点或 <tt class="docutils literal"><span class="pre">E | e `` ，在这种情况下它是 ``浮动</span></tt> 类型。 整数类型是 <tt class="docutils literal"><span class="pre">int</span></tt> 如果字面值在 <tt class="docutils literal"><span class="pre">low(i32)..high(i32)</span></tt> 范围，否则是 <tt class="docutils literal"><span class="pre">int64</span></tt> 。 为了符号方便，类型后缀的撇号是可选的，如果它没有歧义（只有具有类型后缀的十六进制浮点字面值可能是不明确的）。</p>
+<p>类型后缀是:</p>
+<table border="1" class="docutils"><tr><th>类型后缀</th><th>字面值类型</th></tr>
 <tr><td><tt class="docutils literal"><span class="pre">'i8</span></tt></td><td>int8</td></tr>
 <tr><td><tt class="docutils literal"><span class="pre">'i16</span></tt></td><td>int16</td></tr>
 <tr><td><tt class="docutils literal"><span class="pre">'i32</span></tt></td><td>int32</td></tr>
@@ -1281,8 +1281,8 @@ FLOAT64_LIT = HEX_LIT '\'' FLOAT64_SUFFIX
 <tr><td><tt class="docutils literal"><span class="pre">'d</span></tt></td><td>float64</td></tr>
 <tr><td><tt class="docutils literal"><span class="pre">'f32</span></tt></td><td>float32</td></tr>
 <tr><td><tt class="docutils literal"><span class="pre">'f64</span></tt></td><td>float64</td></tr>
-</table><p>浮点文字也可以是二进制，八进制或十六进制表示法： 根据IEEE浮点标准， <tt class="docutils literal"><span class="pre">0B0_10001110100_0000101001000111101011101111111011000101001101001001'f64</span></tt> 约为 1.72826e35。</p>
-<p>对文字进行边界检查，以使它们适合数据类型。 非基数10字面值主要用于标志和位模式表示，因此边界检查是在位宽而非值范围上完成的。 如果文字符合数据类型的位宽，则接受它。 因此：0b10000000'u8 == 0x80'u8 == 128，但是，0b10000000'i8 == 0x80'i8 == -1而不是导致溢出错误。</p>
+</table><p>浮点字面值也可以是二进制，八进制或十六进制表示法： 根据IEEE浮点标准， <tt class="docutils literal"><span class="pre">0B0_10001110100_0000101001000111101011101111111011000101001101001001'f64</span></tt> 约为 1.72826e35。</p>
+<p>对字面值进行边界检查，以使它们适合数据类型。 非基数10字面值主要用于标志和位模式表示，因此边界检查是在位宽而非值范围上完成的。 如果字面值符合数据类型的位宽，则接受它。 因此：0b10000000'u8 == 0x80'u8 == 128，但是，0b10000000'i8 == 0x80'i8 == -1而不是导致溢出错误。</p>
 
 <h2><a class="toc-backref" id="词汇分析-操作符" href="#词汇分析-操作符">操作符</a></h2><p>Nim允许用户定义的运算符。运算符是以下字符的任意组合</p>
 <blockquote><p>=     +     -     *     /     &lt;     &gt; @     $     ~     &amp;     %     | !     ?     ^     .     :     
@@ -1309,7 +1309,7 @@ FLOAT64_LIT = HEX_LIT '\'' FLOAT64_SUFFIX
 <p>一元运算符总是比任何二元运算符优先: <tt class="docutils literal"><span class="pre">$a + b</span></tt> is <tt class="docutils literal"><span class="pre">($a) + b</span></tt> 而不是 <tt class="docutils literal"><span class="pre">$(a + b)</span></tt> 。</p>
 <p>如果一元运算符的第一个字符是 <tt class="docutils literal"><span class="pre">@</span></tt> 它是 <span id="符印样_1">符印样</span> 运算符，比 <tt class="docutils literal"><span class="pre">主后缀</span></tt> 优先: <tt class="docutils literal"><span class="pre">@x.abc</span></tt> 解析成 <tt class="docutils literal"><span class="pre">(@x).abc</span></tt> 而 <tt class="docutils literal"><span class="pre">$x.abc</span></tt> 解析成 <tt class="docutils literal"><span class="pre">$(x.abc)</span></tt> 。</p>
 <p>对于非关键字的二元运算符，优先级由以下规则确定：</p>
-<p>以 <tt class="docutils literal"><span class="pre">-&gt;</span></tt>, <tt class="docutils literal"><span class="pre">~&gt;</span></tt> or <tt class="docutils literal"><span class="pre">=&gt;</span></tt> 结尾的运算符称为 <span id="箭头样_1">箭头样</span>, 优先级最低。</p>
+<p>以 <tt class="docutils literal"><span class="pre">-&gt;</span></tt>, <tt class="docutils literal"><span class="pre">~&gt;</span></tt> or <tt class="docutils literal"><span class="pre">=&gt;</span></tt> 结尾的运算符称为 <span id="箭头形_1">箭头形</span>, 优先级最低。</p>
 <p>如果操作符以 <tt class="docutils literal"><span class="pre">=</span></tt> 结尾，并且它的第一个字符不是 <tt class="docutils literal"><span class="pre">&lt;</span></tt>, <tt class="docutils literal"><span class="pre">&gt;</span></tt>, <tt class="docutils literal"><span class="pre">!</span></tt>, <tt class="docutils literal"><span class="pre">=</span></tt>, <tt class="docutils literal"><span class="pre">~</span></tt>, <tt class="docutils literal"><span class="pre">?</span></tt>, 它是一个 <em>赋值运算符</em> 具有第二低的优先级。</p>
 <p>否则优先级由第一个字符决定。</p>
 <table border="1" class="docutils"><tr><th>优先级</th><th>运算符</th><th>首字符</th><th>终端符号</th></tr>
@@ -1323,10 +1323,10 @@ FLOAT64_LIT = HEX_LIT '\'' FLOAT64_SUFFIX
 <tr><td>3</td><td><tt class="docutils literal"><span class="pre">or xor</span></tt></td><td></td><td>OP3</td></tr>
 <tr><td>2</td><td></td><td><tt class="docutils literal"><span class="pre">@ : ?</span></tt></td><td>OP2</td></tr>
 <tr><td>1</td><td><em>赋值运算符</em> (like <tt class="docutils literal"><span class="pre">+=</span></tt>, <tt class="docutils literal"><span class="pre">*=</span></tt>)</td><td></td><td>OP1</td></tr>
-<tr><td>0 (lowest)</td><td><em>arrow like operator</em> (like <tt class="docutils literal"><span class="pre">-&gt;</span></tt>, <tt class="docutils literal"><span class="pre">=&gt;</span></tt>)</td><td></td><td>OP0</td></tr>
+<tr><td>0 (lowest)</td><td><em>箭头形操作符</em> (like <tt class="docutils literal"><span class="pre">-&gt;</span></tt>, <tt class="docutils literal"><span class="pre">=&gt;</span></tt>)</td><td></td><td>OP0</td></tr>
 </table><p>运算符是否使用前缀运算符也受前面的空格影响（此版本的修改随版本0.13.0引入）：</p>
 <pre class="listing"><span class="Identifier">echo</span> <span class="Operator">$</span><span class="Identifier">foo</span>
-<span class="Comment"># is parsed as</span>
+<span class="Comment"># 解析成</span>
 <span class="Identifier">echo</span><span class="Punctuation">(</span><span class="Operator">$</span><span class="Identifier">foo</span><span class="Punctuation">)</span></pre><p>间距还决定了 <tt class="docutils literal"><span class="pre">(a, b)</span></tt> 是否被解析为调用的参数列表，或者它是否被解析为元组构造函数：</p>
 <pre class="listing"><span class="Identifier">echo</span><span class="Punctuation">(</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">2</span><span class="Punctuation">)</span> <span class="Comment"># 传1和2给echo</span></pre><pre class="listing"><span class="Identifier">echo</span> <span class="Punctuation">(</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">2</span><span class="Punctuation">)</span> <span class="Comment"># 传元组(1, 2)给echo</span></pre>
 <h2><a class="toc-backref" id="句法-语法" href="#句法-语法">语法</a></h2><p>语法的起始符号是 <tt class="docutils literal"><span class="pre">module</span></tt>.</p>
@@ -1537,7 +1537,7 @@ stmt = (IND{&gt;} complexOrSimpleStmt^+(IND{=} / ';') DED)
      / simpleStmt ^+ ';'
 </pre>
 
-<h1><a class="toc-backref" id="求值顺序" href="#求值顺序">求值顺序</a></h1><p>评估顺序是从左到右，从内到外，因为它是大多数其他命令式编程语言的典型：</p>
+<h1><a class="toc-backref" id="求值顺序" href="#求值顺序">求值顺序</a></h1><p>求值顺序是从左到右，从内到外，和典型的大多数其他命令式编程语言一样：</p>
 <pre class="listing"><span class="Keyword">var</span> <span class="Identifier">s</span> <span class="Operator">=</span> <span class="StringLit">&quot;&quot;</span>
 
 <span class="Keyword">proc</span> <span class="Identifier">p</span><span class="Punctuation">(</span><span class="Identifier">arg</span><span class="Punctuation">:</span> <span class="Identifier">int</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">int</span> <span class="Operator">=</span>
@@ -1631,9 +1631,9 @@ stmt = (IND{&gt;} complexOrSimpleStmt^+(IND{=} / ';') DED)
 
 <h2><a class="toc-backref" id="类型-预定义整数类型" href="#类型-预定义整数类型">预定义整数类型</a></h2><p>这些整数类型是预定义的：</p>
 <dl class="docutils"><dt><tt class="docutils literal"><span class="pre">int</span></tt></dt>
-<dd>通用有符号整数类型;它的大小取决于平台，并且与指针大小相同。 一般应该使用这种类型。 没有类型后缀的整数文字是这种类型，如果它在 <tt class="docutils literal"><span class="pre">low(int32)... high(int32)</span></tt> 范围内，否则文字的类型是 <tt class="docutils literal"><span class="pre">int64</span></tt> 。</dd>
+<dd>通用有符号整数类型;它的大小取决于平台，并且与指针大小相同。 一般应该使用这种类型。 没有类型后缀的整数字面值是这种类型，如果它在 <tt class="docutils literal"><span class="pre">low(int32)... high(int32)</span></tt> 范围内，否则字面值的类型是 <tt class="docutils literal"><span class="pre">int64</span></tt> 。</dd>
 <dt>intXX</dt>
-<dd>附加的有符号整数类型的XX位使用此命名方案（例如：int16是16位宽整数）。 当前的实现支持 <tt class="docutils literal"><span class="pre">int8</span></tt>, <tt class="docutils literal"><span class="pre">int16</span></tt>, <tt class="docutils literal"><span class="pre">int32</span></tt>, <tt class="docutils literal"><span class="pre">int64</span></tt> 。 这些类型的文字后缀为'iXX。</dd>
+<dd>附加的有符号整数类型的XX位使用此命名方案（例如：int16是16位宽整数）。 当前的实现支持 <tt class="docutils literal"><span class="pre">int8</span></tt>, <tt class="docutils literal"><span class="pre">int16</span></tt>, <tt class="docutils literal"><span class="pre">int32</span></tt>, <tt class="docutils literal"><span class="pre">int64</span></tt> 。 这些类型的字面值后缀为'iXX。</dd>
 <dt><tt class="docutils literal"><span class="pre">uint</span></tt></dt>
 <dd>通用的 <span id="无符号整型_1">无符号整型</span> ; 它的大小取决于平台，并且与指针大小相同。 类型后缀为 <tt class="docutils literal"><span class="pre">'u</span></tt> 的整数字面值就是这种类型。</dd>
 <dt>uintXX</dt>
@@ -1658,7 +1658,7 @@ stmt = (IND{&gt;} complexOrSimpleStmt^+(IND{=} / ';') DED)
 <span class="Keyword">var</span> <span class="Identifier">myInt</span><span class="Punctuation">:</span> <span class="Identifier">int</span>
 <span class="Identifier">myInt16</span> <span class="Operator">+</span> <span class="DecNumber">34</span>     <span class="Comment"># of type ``int16``</span>
 <span class="Identifier">myInt16</span> <span class="Operator">+</span> <span class="Identifier">myInt</span>  <span class="Comment"># of type ``int``</span>
-<span class="Identifier">myInt16</span> <span class="Operator">+</span> <span class="DecNumber">2</span><span class="Identifier">i32</span>   <span class="Comment"># of type ``int32``</span></pre><p>但是，如果字面值适合这个较小的类型并且这样的转换比其他隐式转换便宜，则 <tt class="docutils literal"><span class="pre">int</span></tt> 文字可以隐式转换为较小的整数类型，因此 <tt class="docutils literal"><span class="pre">myInt16 + 34</span></tt> 产生 <tt class="docutils literal"><span class="pre">int16</span></tt> 结果。</p>
+<span class="Identifier">myInt16</span> <span class="Operator">+</span> <span class="DecNumber">2</span><span class="Identifier">i32</span>   <span class="Comment"># of type ``int32``</span></pre><p>但是，如果字面值适合这个较小的类型并且这样的转换比其他隐式转换便宜，则 <tt class="docutils literal"><span class="pre">int</span></tt> 字面值可以隐式转换为较小的整数类型，因此 <tt class="docutils literal"><span class="pre">myInt16 + 34</span></tt> 产生 <tt class="docutils literal"><span class="pre">int16</span></tt> 结果。</p>
 <p>有关详细信息，请参阅 <a class="reference external" href="#type-relations-convertible-relation">可转换关系</a> 。</p>
 
 <h2><a class="toc-backref" id="类型-子范围类型" href="#类型-子范围类型">子范围类型</a></h2><p>子范围类型是序数或浮点类型（基本类型）的值范围。</p>
@@ -1741,7 +1741,7 @@ ord(Direction.west) == 3</pre>
 <span class="Identifier">echo</span> <span class="Identifier">amb</span>    <span class="Comment"># 错误：不清楚它是MyEnum.amb还是OtherEnum.amb</span>
 <span class="Identifier">echo</span> <span class="Identifier">MyEnum</span><span class="Operator">.</span><span class="Identifier">amb</span> <span class="Comment"># OK.</span></pre><p>要使用枚举实现位字段，请参阅 <a class="reference external" href="#set-type-bit-fields">Bit fields</a></p>
 
-<h2><a class="toc-backref" id="类型-字符串类型" href="#类型-字符串类型">字符串类型</a></h2><p>所有字符串文字都是 <tt class="docutils literal"><span class="pre">string</span></tt> 类型。 Nim中的字符串与字符序列非常相似。 但是，Nim中的字符串都是以零结尾的并且具有长度字段。 可以用内置的 <tt class="docutils literal"><span class="pre">len</span></tt> 过程检索长度;长度永远不会计算终止零。</p>
+<h2><a class="toc-backref" id="类型-字符串类型" href="#类型-字符串类型">字符串类型</a></h2><p>所有字符串字面值都是 <tt class="docutils literal"><span class="pre">string</span></tt> 类型。 Nim中的字符串与字符序列非常相似。 但是，Nim中的字符串都是以零结尾的并且具有长度字段。 可以用内置的 <tt class="docutils literal"><span class="pre">len</span></tt> 过程检索长度;长度永远不会计算终止零。</p>
 <p>除非首先将字符串转换为 <tt class="docutils literal"><span class="pre">cstring</span></tt> 类型，否则无法访问终止零。 终止零确保可以在O(1)中完成此转换，无需任何分配。</p>
 <p>字符串的赋值运算符始终复制字符串。 <tt class="docutils literal"><span class="pre">&amp;</span></tt> 运算符拼接字符串。</p>
 <p>大多数原生Nim类型支持使用特殊的 <tt class="docutils literal"><span class="pre">$</span></tt> proc转换为字符串。</p>
@@ -2221,7 +2221,7 @@ ord(Direction.west) == 3</pre>
   <span class="Comment"># 调用 strutils.`%`:</span>
   <span class="Identifier">result</span> <span class="Operator">=</span> <span class="Identifier">SQL</span><span class="Punctuation">(</span><span class="Identifier">string</span><span class="Punctuation">(</span><span class="Identifier">frmt</span><span class="Punctuation">)</span> <span class="Operator">%</span> <span class="Identifier">StrSeq</span><span class="Punctuation">(</span><span class="Identifier">v</span><span class="Punctuation">)</span><span class="Punctuation">)</span>
 
-<span class="Identifier">db</span><span class="Operator">.</span><span class="Identifier">query</span><span class="Punctuation">(</span><span class="StringLit">&quot;SELECT FROM users WHERE name = '$1'&quot;</span><span class="Operator">.</span><span class="Identifier">SQL</span> <span class="Operator">%</span> <span class="Punctuation">[</span><span class="Identifier">username</span><span class="Punctuation">]</span><span class="Punctuation">)</span></pre><p>现在我们有针对SQL注入攻击的编译时检查。 因为 <tt class="docutils literal"><span class="pre">&quot;&quot;.SQL</span></tt> 转换为 <tt class="docutils literal"><span class="pre">SQL(&quot;&quot;)</span></tt> 不需要新的语法来获得漂亮的 <tt class="docutils literal"><span class="pre">SQL</span></tt> 字符串文字。 假设的 <tt class="docutils literal"><span class="pre">SQL</span></tt> 类型实际上存在于库中，作为 <a class="reference external" href="db_sqlite.html">db_sqlite</a> 等模块的 <a class="reference external" href="db_sqlite.html＃TSqlQuery">TSqlQuery类型</a> 。</p>
+<span class="Identifier">db</span><span class="Operator">.</span><span class="Identifier">query</span><span class="Punctuation">(</span><span class="StringLit">&quot;SELECT FROM users WHERE name = '$1'&quot;</span><span class="Operator">.</span><span class="Identifier">SQL</span> <span class="Operator">%</span> <span class="Punctuation">[</span><span class="Identifier">username</span><span class="Punctuation">]</span><span class="Punctuation">)</span></pre><p>现在我们有针对SQL注入攻击的编译时检查。 因为 <tt class="docutils literal"><span class="pre">&quot;&quot;.SQL</span></tt> 转换为 <tt class="docutils literal"><span class="pre">SQL(&quot;&quot;)</span></tt> 不需要新的语法来获得漂亮的 <tt class="docutils literal"><span class="pre">SQL</span></tt> 字符串字面值。 假设的 <tt class="docutils literal"><span class="pre">SQL</span></tt> 类型实际上存在于库中，作为 <a class="reference external" href="db_sqlite.html">db_sqlite</a> 等模块的 <a class="reference external" href="db_sqlite.html＃TSqlQuery">TSqlQuery类型</a> 。</p>
 
 <h2><a class="toc-backref" id="类型-自动类型" href="#类型-自动类型">自动类型</a></h2><p><tt class="docutils literal"><span class="pre">auto</span></tt> 类型只能用于返回类型和参数。 对于返回类型，它会使编译器从过程体中推断出类型：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">returnsInt</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">auto</span> <span class="Operator">=</span> <span class="DecNumber">1984</span></pre><p>对于形参，它现在是创建隐式的泛型例程：</p>
@@ -2371,7 +2371,7 @@ ord(Direction.west) == 3</pre>
 <li>整数转换匹配: <tt class="docutils literal"><span class="pre">a</span></tt> 可转换为 <tt class="docutils literal"><span class="pre">f</span></tt> 且 <tt class="docutils literal"><span class="pre">f</span></tt> 和 <tt class="docutils literal"><span class="pre">a</span></tt> 是同样的整数或浮点类型。</li>
 <li>转换匹配: <tt class="docutils literal"><span class="pre">a</span></tt> 可能通过用户定义的转换器转换为 <tt class="docutils literal"><span class="pre">f</span></tt> 。</li>
 </ol>
-<p>这些匹配类别具有优先级：完全匹配优于文字匹配，并且优于通用匹配等。 在下面的 <tt class="docutils literal"><span class="pre">count(p, m)</span></tt> 计算 <tt class="docutils literal"><span class="pre">m</span></tt> 匹配过程 <tt class="docutils literal"><span class="pre">p</span></tt> 的匹配数。</p>
+<p>这些匹配类别具有优先级：完全匹配优于字面值匹配，并且优于通用匹配等。 在下面的 <tt class="docutils literal"><span class="pre">count(p, m)</span></tt> 计算 <tt class="docutils literal"><span class="pre">m</span></tt> 匹配过程 <tt class="docutils literal"><span class="pre">p</span></tt> 的匹配数。</p>
 <p>A routine <tt class="docutils literal"><span class="pre">p</span></tt> matches better than a routine <tt class="docutils literal"><span class="pre">q</span></tt> if the following algorithm returns true:<pre>
 for each matching category m in [&quot;exact match&quot;, &quot;literal match&quot;,
                                 &quot;generic match&quot;, &quot;subtype match&quot;,
@@ -3396,7 +3396,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
 <span class="Comment"># 也不允许：通过'var int'进行显式实例化</span>
 <span class="Identifier">g</span><span class="Punctuation">[</span><span class="Keyword">var</span> <span class="Identifier">int</span><span class="Punctuation">]</span><span class="Punctuation">(</span><span class="Identifier">v</span><span class="Punctuation">,</span> <span class="Identifier">i</span><span class="Punctuation">)</span></pre>
 <h2><a class="toc-backref" id="泛型-泛型符号查找" href="#泛型-泛型符号查找">泛型符号查找</a></h2>
-<h3><a class="toc-backref" id="泛型符号查找-开放和封闭的符号" href="#泛型符号查找-开放和封闭的符号">开放和封闭的符号</a></h3><p>泛型中的符号绑定规则略微微妙：有“开放”和“封闭”符号。 “封闭”符号不能在实例化上下文中重新绑定，“开放”符号可以。 默认重载符号是打开的，每个其他符号都是关闭的。</p>
+<h3><a class="toc-backref" id="泛型符号查找-开放和封闭的符号" href="#泛型符号查找-开放和封闭的符号">开放和封闭的符号</a></h3><p>泛型中的符号绑定规则比较微妙：有“开放”和“封闭”符号。 “封闭”符号不能在实例化上下文中重新绑定，“开放”符号可以。 默认重载符号是打开的，每个其他符号都是关闭的。</p>
 <p>在两个不同的上下文中查找开放符号：定义上下文和实例化时的上下文都被考虑：</p>
 <pre class="listing"><span class="Keyword">type</span>
   <span class="Identifier">Index</span> <span class="Operator">=</span> <span class="Keyword">distinct</span> <span class="Identifier">int</span>
@@ -3406,7 +3406,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
 <span class="Keyword">var</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span> <span class="FloatNumber">0.</span><span class="Identifier">Index</span><span class="Punctuation">)</span>
 <span class="Keyword">var</span> <span class="Identifier">b</span> <span class="Operator">=</span> <span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span> <span class="FloatNumber">0.</span><span class="Identifier">Index</span><span class="Punctuation">)</span>
 
-<span class="Identifier">echo</span> <span class="Identifier">a</span> <span class="Operator">==</span> <span class="Identifier">b</span> <span class="Comment"># works!</span></pre><p>在示例中，元组的通用 <tt class="docutils literal"><span class="pre">==</span></tt> （在系统模块中定义）使用元组组件的 <tt class="docutils literal"><span class="pre">==</span></tt> 运算符。 但是， <tt class="docutils literal"><span class="pre">Index</span></tt> 类型的 <tt class="docutils literal"><span class="pre">==</span></tt> 是在元组的 <tt class="docutils literal"><span class="pre">==</span></tt> 之后定义的*;然而，该示例编译为实例化也将当前定义的符号考虑在内。</p>
+<span class="Identifier">echo</span> <span class="Identifier">a</span> <span class="Operator">==</span> <span class="Identifier">b</span> <span class="Comment"># 可以了</span></pre><p>在示例中，元组的通用 <tt class="docutils literal"><span class="pre">==</span></tt> （在系统模块中定义）使用元组组件的 <tt class="docutils literal"><span class="pre">==</span></tt> 运算符。 但是， <tt class="docutils literal"><span class="pre">Index</span></tt> 类型的 <tt class="docutils literal"><span class="pre">==</span></tt> 是在元组的 <tt class="docutils literal"><span class="pre">==</span></tt>  <em>之后</em> 定义的;然而，该示例编译为实例化也将当前定义的符号考虑在内。</p>
 
 <h2><a class="toc-backref" id="泛型-mixin语句" href="#泛型-mixin语句">Mixin语句</a></h2><p>可以通过 <span id="mixin_1">mixin</span> 强制打开符号声明:</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">create</span><span class="Operator">*</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">ref</span> <span class="Identifier">T</span> <span class="Operator">=</span>
@@ -3426,7 +3426,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
   <span class="Identifier">lastId</span></pre><pre class="listing"><span class="Comment"># 模块B</span>
 <span class="Keyword">import</span> <span class="Identifier">A</span>
 
-<span class="Identifier">echo</span> <span class="Identifier">genId</span><span class="Punctuation">(</span><span class="Punctuation">)</span></pre><p>但是 <tt class="docutils literal"><span class="pre">bind</span></tt> 很少有用，因为来自定义范围的符号绑定是默认的。 <tt class="docutils literal"><span class="pre">bind</span></tt> 语句只在模板和泛型中有意义。</p>
+<span class="Identifier">echo</span> <span class="Identifier">genId</span><span class="Punctuation">(</span><span class="Punctuation">)</span></pre><p>但是 <tt class="docutils literal"><span class="pre">bind</span></tt> 很少有用，因为符号绑定默认来自定义的作用域。 <tt class="docutils literal"><span class="pre">bind</span></tt> 语句只在模板和泛型中有意义。</p>
 
 <h1><a class="toc-backref" id="模板" href="#模板">模板</a></h1><p>模板是宏的一种简单形式：它是一种简单的替换机制，可以在Nim的抽象语法树上运行。 它在编译器的语义传递中处理。</p>
 <p><em>调用</em> 模板的语法与调用过程相同。</p>
@@ -3474,7 +3474,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
 
 <span class="Identifier">t</span><span class="Punctuation">:</span>
   <span class="Keyword">var</span> <span class="Identifier">i</span> <span class="Operator">=</span> <span class="DecNumber">2</span>  <span class="Comment"># '尝试重新声明i'失败</span>
-  <span class="Identifier">echo</span> <span class="Identifier">i</span></pre><p>上面的代码因已经声明了``i`` 的错误信息失败。 原因是``var i = ...``body需要在传递给``body``参数之前进行类型检查，而Nim中的类型检查意味着符号查找。 为了使符号查找成功，需要将 <tt class="docutils literal"><span class="pre">i</span></tt> 添加到当前（即外部）范围。 在类型检查之后，这些对符号表的添加不会回滚（无论好坏）。 同样的代码可以用 <tt class="docutils literal"><span class="pre">untyped</span></tt> ，因为传递的主体不需要进行类型检查：</p>
+  <span class="Identifier">echo</span> <span class="Identifier">i</span></pre><p>上面的代码因已经声明了 <tt class="docutils literal"><span class="pre">i</span></tt> 的错误信息失败。 原因是 <tt class="docutils literal"><span class="pre">var i = ...</span></tt> 需要在传递给 <tt class="docutils literal"><span class="pre">body</span></tt> 参数之前进行类型检查，而Nim中的类型检查意味着符号查找。 为了使符号查找成功，需要将 <tt class="docutils literal"><span class="pre">i</span></tt> 添加到当前（即外部）范围。 在类型检查之后，这些对符号表的添加不会回滚（无论好坏）。 同样的代码可以用 <tt class="docutils literal"><span class="pre">untyped</span></tt> ，因为传递的主体不需要进行类型检查：</p>
 <pre class="listing"><span class="Keyword">template</span> <span class="Identifier">t</span><span class="Punctuation">(</span><span class="Identifier">body</span><span class="Punctuation">:</span> <span class="Identifier">untyped</span><span class="Punctuation">)</span> <span class="Operator">=</span>
   <span class="Keyword">block</span><span class="Punctuation">:</span>
     <span class="Identifier">body</span>
@@ -3486,12 +3486,12 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
 <span class="Identifier">t</span><span class="Punctuation">:</span>
   <span class="Keyword">var</span> <span class="Identifier">i</span> <span class="Operator">=</span> <span class="DecNumber">2</span>  <span class="Comment"># 编译</span>
   <span class="Identifier">echo</span> <span class="Identifier">i</span></pre>
-<h2><a class="toc-backref" id="模板-无类型可变参数" href="#模板-无类型可变参数">无类型可变参数</a></h2><p>除了防止类型检查的 <tt class="docutils literal"><span class="pre">untyped</span></tt> 元类型之外，还有 <tt class="docutils literal"><span class="pre">varargs[untyped]</span></tt> 所以即使参数的数量都没有确定：</p>
+<h2><a class="toc-backref" id="模板-无类型可变参数" href="#模板-无类型可变参数">无类型可变参数</a></h2><p>除了 <tt class="docutils literal"><span class="pre">untyped</span></tt> 元类型防止类型检查之外，``varargs[untyped]`` 甚至连参数的数量都可以不确定：</p>
 <pre class="listing"><span class="Keyword">template</span> <span class="Identifier">hideIdentifiers</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">varargs</span><span class="Punctuation">[</span><span class="Identifier">untyped</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="Keyword">discard</span>
 
 <span class="Identifier">hideIdentifiers</span><span class="Punctuation">(</span><span class="Identifier">undeclared1</span><span class="Punctuation">,</span> <span class="Identifier">undeclared2</span><span class="Punctuation">)</span></pre><p>但是，由于模板无法通过varargs进行迭代，因此该功能通常对宏非常有用。</p>
 
-<h2><a class="toc-backref" id="模板-模板符号绑定" href="#模板-模板符号绑定">模板符号绑定</a></h2><p>模板是 <span id="卫生_1">卫生</span> 宏因此打开了一个新的范围。大多数符号都是从模板的定义作用域绑定的：</p>
+<h2><a class="toc-backref" id="模板-模板符号绑定" href="#模板-模板符号绑定">模板符号绑定</a></h2><p>模板是 <span id="卫生_1">卫生</span> 宏，它打开了一个新的作用域。大多数符号都是从模板的定义作用域绑定的：</p>
 <pre class="listing"><span class="Comment"># 模块A</span>
 <span class="Keyword">var</span>
   <span class="Identifier">lastId</span> <span class="Operator">=</span> <span class="DecNumber">0</span>
@@ -3501,7 +3501,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
   <span class="Identifier">lastId</span></pre><pre class="listing"><span class="Comment"># 模块B</span>
 <span class="Keyword">import</span> <span class="Identifier">A</span>
 
-<span class="Identifier">echo</span> <span class="Identifier">genId</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Comment"># 'lastId'已被'genId'的定义作用域所约束</span></pre><p>在泛型中，符号绑定可以通过 <tt class="docutils literal"><span class="pre">mixin</span></tt> 或 <tt class="docutils literal"><span class="pre">bind</span></tt> 语句来影响。</p>
+<span class="Identifier">echo</span> <span class="Identifier">genId</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Comment"># 'lastId'已被'genId'的定义作用域所约束</span></pre><p>在泛型中，``mixin`` 或 <tt class="docutils literal"><span class="pre">bind</span></tt> 语句可以影响符号绑定。</p>
 
 <h2><a class="toc-backref" id="模板-标识符构造" href="#模板-标识符构造">标识符构造</a></h2><p>在模板中，可以使用反引号表示法构造标识符：</p>
 <pre class="listing"><span class="Keyword">template</span> <span class="Identifier">typedef</span><span class="Punctuation">(</span><span class="Identifier">name</span><span class="Punctuation">:</span> <span class="Identifier">untyped</span><span class="Punctuation">,</span> <span class="Identifier">typ</span><span class="Punctuation">:</span> <span class="Identifier">typedesc</span><span class="Punctuation">)</span> <span class="Operator">=</span>
@@ -3512,7 +3512,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
 <span class="Identifier">typedef</span><span class="Punctuation">(</span><span class="Identifier">myint</span><span class="Punctuation">,</span> <span class="Identifier">int</span><span class="Punctuation">)</span>
 <span class="Keyword">var</span> <span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">PMyInt</span></pre><p>示例中 <tt class="docutils literal"><span class="pre">name</span></tt> 用 <tt class="docutils literal"><span class="pre">myint</span></tt> 实例化，所以 `T name` 变为 <tt class="docutils literal"><span class="pre">Tmyint</span></tt> 。</p>
 
-<h2><a class="toc-backref" id="模板-模板形参查询规则" href="#模板-模板形参查询规则">模板形参查询规则</a></h2><p>模板中的参数 <tt class="docutils literal"><span class="pre">p</span></tt> 甚至在表达式 <tt class="docutils literal"><span class="pre">x.p</span></tt> 中被替换。 因此，模板参数可以用作字段名称，也可以使用相同的参数名称对限定的全局符号进行遮罩：</p>
+<h2><a class="toc-backref" id="模板-模板形参查询规则" href="#模板-模板形参查询规则">模板形参查询规则</a></h2><p>模板中的参数 <tt class="docutils literal"><span class="pre">p</span></tt> 甚至在表达式 <tt class="docutils literal"><span class="pre">x.p</span></tt> 中被替换。 因此，模板参数可以用作字段名称，也可以使用相同的参数名称对限定的全局符号进行隐藏：</p>
 <pre class="listing"><span class="Comment"># 模块'm'</span>
 
 <span class="Keyword">type</span>
@@ -4355,8 +4355,8 @@ using namespace gui;
 <h2><a class="toc-backref" id="外部函数接口-importc编译指示" href="#外部函数接口-importc编译指示">Importc编译指示</a></h2><p><tt class="docutils literal"><span class="pre">importc</span></tt> 编译指示提供了一种从C导入proc或变量的方法。 可选参数是包含C标识符的字符串。 如果缺少参数，则C名称与Nim标识符 <em>拼写完全相同</em> ：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">printf</span><span class="Punctuation">(</span><span class="Identifier">formatstr</span><span class="Punctuation">:</span> <span class="Identifier">cstring</span><span class="Punctuation">)</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">header</span><span class="Punctuation">:</span> <span class="StringLit">&quot;&lt;stdio.h&gt;&quot;</span><span class="Punctuation">,</span> <span class="Identifier">importc</span><span class="Punctuation">:</span> <span class="StringLit">&quot;printf&quot;</span><span class="Punctuation">,</span> <span class="Identifier">varargs</span><span class="Operator">.</span><span class="Punctuation">}</span></pre><p>请注意，此pragma有点用词不当：其他后端确实在同一名称下提供相同的功能。</p>
 <p>此外，如果一个人正在与C++接口，那么 <a class="reference external" href="manual.html＃implementation-specific-pragmas-importcpp-pragma">ImportCpp pragma</a> 并与Objective-C连接 <a class="reference external" href="manual.html＃implementation-specific-pragmas- importobjc-pragma">importObjC pragma</a> 可以使用。</p>
-<p>传递给``importc``的字符串文字可以是格式字符串：</p>
-<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">p</span><span class="Punctuation">(</span><span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Identifier">cstring</span><span class="Punctuation">)</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">importc</span><span class="Punctuation">:</span> <span class="StringLit">&quot;prefix$1&quot;</span><span class="Operator">.</span><span class="Punctuation">}</span></pre><p>在示例中，``p`` 的外部名称设置为 <tt class="docutils literal"><span class="pre">prefixp</span></tt> 。 只有 <tt class="docutils literal"><span class="pre">$1</span></tt> 可用，文字美元符号必须写成 <tt class="docutils literal"><span class="pre">$$</span></tt> 。</p>
+<p>传递给``importc``的字符串字面值可以是格式字符串：</p>
+<pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">p</span><span class="Punctuation">(</span><span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Identifier">cstring</span><span class="Punctuation">)</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">importc</span><span class="Punctuation">:</span> <span class="StringLit">&quot;prefix$1&quot;</span><span class="Operator">.</span><span class="Punctuation">}</span></pre><p>在示例中，``p`` 的外部名称设置为 <tt class="docutils literal"><span class="pre">prefixp</span></tt> 。 只有 <tt class="docutils literal"><span class="pre">$1</span></tt> 可用，字面值美元符号必须写成 <tt class="docutils literal"><span class="pre">$$</span></tt> 。</p>
 
 <h2><a class="toc-backref" id="外部函数接口-exportc编译指示" href="#外部函数接口-exportc编译指示">Exportc编译指示</a></h2><p>The <tt class="docutils literal"><span class="pre">exportc</span></tt> pragma provides a means to export a type, a variable, or a procedure to C. Enums and constants can't be exported. The optional argument is a string containing the C identifier. If the argument is missing, the C name is the Nim identifier <em>exactly as spelled</em>:</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">callme</span><span class="Punctuation">(</span><span class="Identifier">formatstr</span><span class="Punctuation">:</span> <span class="Identifier">cstring</span><span class="Punctuation">)</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">exportc</span><span class="Punctuation">:</span> <span class="StringLit">&quot;callMe&quot;</span><span class="Punctuation">,</span> <span class="Identifier">varargs</span><span class="Operator">.</span><span class="Punctuation">}</span></pre><p>Note that this pragma is somewhat of a misnomer: Other backends do provide the same feature under the same name.</p>
@@ -4441,7 +4441,7 @@ using namespace gui;
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-08-26 09:09:44 UTC</small>
+        <small>Made with Nim. Generated: 2019-08-26 10:01:15 UTC</small>
       </div>
     </div>
   </div>
