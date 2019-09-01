@@ -34,11 +34,11 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
 ### 一、Karax的立即模式
     立即模式（immediate mode）是GUI的概念，和立即模式相对的是保留模式（retained mode）,
     关于两个模式比较形象的解释：https://blog.csdn.net/cvper/article/details/86568245
-    Karax引入这种概念使得它的虚拟DOM节点成为无状态的(stateless)节点，浏览器window对象向GPU请求的每一帧回调都将重绘虚拟DOM树，diff算法用来对比新旧两颗树，得到补丁集，对虚拟DOM树进行部分更新。    
+    Karax引入这种概念使得它的虚拟DOM节点成为无状态的(stateless)节点，Karax设置浏览器window对象请求的每一帧回调都将重绘虚拟DOM树，diff算法用来对比新旧两颗树，得到补丁集，对虚拟DOM树进行部分更新。    
 
 
 ### 二、Echarts模块函数的导入
-    可以把这些模块写成pure的组件，直接使用Echarts模块中的函数最简单，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同Javascript模块类型，导入浏览器全局变量和方法，如Echarts的模块类型组织方式为
+    可以把这些模块写成pure的组件，我们采用直接使用Echarts模块这种最简单的方式，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同Javascript模块类型，导入浏览器全局变量和方法，如Echarts的模块类型组织方式为
 
         ![]({{ site.baseurl }}/assets/img/posts/2019-08-31-v0202-web-fullstack-1.png)
 
