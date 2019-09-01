@@ -29,7 +29,7 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
 
 
 ## 技术点
-    理论上的重点在Karax重绘机制，实践上的重点在Javascript原生模块导入。
+    理论上的重点在Karax重绘机制，实践上的重点在Javascript原生模块导入。具体到机制，从零实现了登录、退出、路由，具体到组件，从零实现了表格的翻页，动态设置每页显示数量，全选和单选的逻辑关系，即时响应的搜索栏等，这些过程加深了理解，提炼了思路。由于Karax的立即模式，这些经验也直接可用于开发GUI组件。
 
 ### 一、Karax的立即模式
     立即模式（immediate mode）是GUI的概念，和立即模式相对的是保留模式（retained mode）,
