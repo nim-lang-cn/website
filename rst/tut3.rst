@@ -253,7 +253,7 @@ Strformat
 
 在Nim标准库中， ``strformat`` 库提供了一个在编译时解析字符串字面值的宏。通常不建议像这样在宏中解析字符串。
 解析的AST不能具有类型信息，并且在VM上实现的解析通常不是非常快。在AST节点上操作几乎总是推荐的方式。
-但 ``strformat``仍然是宏的实际使用的一个很好的例子，它比 ``assert`` 宏稍微复杂一些。
+但 ``strformat`` 仍然是宏的实际使用的一个很好的例子，它比 ``assert`` 宏稍微复杂一些。
 
 `Strformat <https://github.com/nim-lang/Nim/blob/5845716df8c96157a047c2bd6bcdd795a7a2b9b1/lib/pure/strformat.nim#L280>`_
 

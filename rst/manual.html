@@ -1118,7 +1118,7 @@ stmt = IND{&gt;} stmt ^+ IND{=} DED  # list of statements
      / simpleStmt                 # or a simple statement</pre>
 </p>
 
-<h2><a class="toc-backref" id="词汇分析-注释" href="#词汇分析-注释">注释</a></h2><p>注释从字符串或字符字面值外的任何地方开始，并带有哈希字符 <tt class="docutils literal"><span class="pre">#</span></tt> 。 注释包含 <tt class="docutils literal"><span class="pre">注释片段</span></tt> 的连接:idx: 。 评论文章以 <tt class="docutils literal"><span class="pre">#</span></tt> 开头，​​一直运行到行尾。 行尾字符属于该片段。 如果下一行只包含一个注释片段，而它与前一个片段之间没有其他符号，则它不会启动新注释：</p>
+<h2><a class="toc-backref" id="词汇分析-注释" href="#词汇分析-注释">注释</a></h2><p>注释从字符串或字符字面值外的任何地方开始，并带有哈希字符 <tt class="docutils literal"><span class="pre">#</span></tt> 。 注释包含 <span id="注释片段_1">注释片段</span> 的连接。 评论文章以 <tt class="docutils literal"><span class="pre">#</span></tt> 开头，​​一直运行到行尾。 行尾字符属于该片段。 如果下一行只包含一个注释片段，而它与前一个片段之间没有其他符号，则它不会启动新注释：</p>
 <pre class="listing"><span class="Identifier">i</span> <span class="Operator">=</span> <span class="DecNumber">0</span>     <span class="Comment"># 这是跨行的单个注释。</span>
   <span class="Comment"># 扫描器合并这个块。</span>
   <span class="Comment"># 注释从这里继续。</span></pre><p><span id="文档注释_1">文档注释</span> 由两个开始 <tt class="docutils literal"><span class="pre">##</span></tt> 。 文档注释是符号；它们仅允许出现在输入文件的某个地方，因为它们属于语法树。</p>
@@ -1891,7 +1891,7 @@ ord(Direction.west) == 3</pre>
 <span class="Identifier">assert</span><span class="Punctuation">(</span><span class="Identifier">student</span> <span class="Keyword">of</span> <span class="Identifier">Student</span><span class="Punctuation">)</span> <span class="Comment"># is true</span>
 <span class="Identifier">assert</span><span class="Punctuation">(</span><span class="Identifier">student</span> <span class="Keyword">of</span> <span class="Identifier">Person</span><span class="Punctuation">)</span> <span class="Comment"># also true</span></pre><p>应该从定义模块外部可见的对象字段必须用 <tt class="docutils literal"><span class="pre">*</span></tt> 标记。 与元组相反，不同的对象类型永远不会 <em>等价</em> 。 没有祖先的对象是隐式的 <tt class="docutils literal"><span class="pre">final</span></tt> ，因此没有隐藏的类型字段。 可以使用 <tt class="docutils literal"><span class="pre">inheritable</span></tt> pragma来引入除 <tt class="docutils literal"><span class="pre">system.RootObj</span></tt> 之外的新根对象。</p>
 
-<h2><a class="toc-backref" id="类型-对象构造" href="#类型-对象构造">对象构造</a></h2><p>对象也可以使用 <tt class="docutils literal"><span class="pre">对象构造表达式</span></tt> 创建:idx:, 具有语法 <tt class="docutils literal"><span class="pre">T（fieldA：valueA，fieldB：valueB，...）</span></tt> 其中 <tt class="docutils literal"><span class="pre">T</span></tt> 是 <tt class="docutils literal"><span class="pre">object</span></tt> 类型或 <tt class="docutils literal"><span class="pre">ref object</span></tt> 类型：</p>
+<h2><a class="toc-backref" id="类型-对象构造" href="#类型-对象构造">对象构造</a></h2><p>对象也可以使用 <span id="对象构造表达式_1">对象构造表达式</span> 创建, 具有语法 <tt class="docutils literal"><span class="pre">T（fieldA：valueA，fieldB：valueB，...）</span></tt> 其中 <tt class="docutils literal"><span class="pre">T</span></tt> 是 <tt class="docutils literal"><span class="pre">object</span></tt> 类型或 <tt class="docutils literal"><span class="pre">ref object</span></tt> 类型：</p>
 <pre class="listing"><span class="Keyword">var</span> <span class="Identifier">student</span> <span class="Operator">=</span> <span class="Identifier">Student</span><span class="Punctuation">(</span><span class="Identifier">name</span><span class="Punctuation">:</span> <span class="StringLit">&quot;Anton&quot;</span><span class="Punctuation">,</span> <span class="Identifier">age</span><span class="Punctuation">:</span> <span class="DecNumber">5</span><span class="Punctuation">,</span> <span class="Identifier">id</span><span class="Punctuation">:</span> <span class="DecNumber">3</span><span class="Punctuation">)</span></pre><p>请注意，与元组不同，对象需要字段名称及其值。 对于 <tt class="docutils literal"><span class="pre">ref object</span></tt> 类型， <tt class="docutils literal"><span class="pre">system.new</span></tt> 是隐式调用的。</p>
 
 <h2><a class="toc-backref" id="类型-对象变体" href="#类型-对象变体">对象变体</a></h2><p>在需要简单变体类型的某些情况下，对象层次结构通常有点过了。 对象变体是通过用于运行时类型灵活性的枚举类型区分的标记联合，对照如在其他语言中找到的 <em>sum类型</em> 和 <em>代数数据类型(ADT)</em> 的概念。</p>
@@ -2001,7 +2001,7 @@ ord(Direction.west) == 3</pre>
 <p>如果和C一起使用枚举和集合，使用distinct cint。</p>
 <p>为了和C互通见 <a class="reference external" href="#implementation-specific-pragmas-bitsize-pragma">bitsize pragma</a> 。</p>
 
-<h2><a class="toc-backref" id="类型-引用和指针类型" href="#类型-引用和指针类型">引用和指针类型</a></h2><p>引用（类似于其他编程语言中的指针）是引入多对一关系的一种方式。 这意味着不同的引用可以指向并修改内存中的相同位置（也称为 <tt class="docutils literal"><span class="pre">别名</span></tt>:idx:)。</p>
+<h2><a class="toc-backref" id="类型-引用和指针类型" href="#类型-引用和指针类型">引用和指针类型</a></h2><p>引用（类似于其他编程语言中的指针）是引入多对一关系的一种方式。 这意味着不同的引用可以指向并修改内存中的相同位置（也称为 <span id="别名_1">别名</span> )。</p>
 <p>Nim区分 <span id="追踪_1">追踪</span>和 <span id="未追踪_1">未追踪</span> 引用。 未追踪引用也叫 <em>指针</em> 。 追踪引用指向垃圾回收堆中的对象，未追踪引用指向手动分配对象或内存中其它位置的对象。 因此，未追踪引用是 <em>不安全</em> 的。 然而，对于某些低级操作（访问硬件），未追踪引用是不可避免的。</p>
 <p>使用 <strong>ref</strong> 关键字声明追踪引用，使用 <strong>ptr</strong> 关键字声明未追踪引用。 通常，`ptr T` 可以隐式转换为 <tt class="docutils literal"><span class="pre">pointer</span></tt> 类型。</p>
 <p>空的下标 <tt class="docutils literal"><span class="pre">[]</span></tt> 表示法可以用来取代引用， <tt class="docutils literal"><span class="pre">addr</span></tt> 程序返回一个对象的地址。 地址始终是未经过引用的参考。 因此， <tt class="docutils literal"><span class="pre">addr</span></tt> 的使用是 <em>不安全的</em> 功能。</p>
@@ -2119,7 +2119,7 @@ ord(Direction.west) == 3</pre>
 <h2><a class="toc-backref" id="类型-distinct类型" href="#类型-distinct类型">Distinct类型</a></h2><p><tt class="docutils literal"><span class="pre">distinct</span></tt> 类型是从 <span id="基类型_1">基类型</span>  派生的新类型与它的基类型不兼容。 特别是，它是一种不同类型的基本属性，它 <em>并不</em> 意味着它和基本类型之间的子类型关系。 允许从不同类型到其基本类型的显式类型转换，反之亦然。另请参阅 <tt class="docutils literal"><span class="pre">distinctBase</span></tt> 以获得逆操作。</p>
 <p>如果基类型是序数类型，则不同类型是序数类型。</p>
 
-<h3><a class="toc-backref" id="distinct类型-模拟货币" href="#distinct类型-模拟货币">模拟货币</a></h3><p>可以使用不同的类型来模拟不同的物理 <tt class="docutils literal"><span class="pre">单位</span></tt>:idx: 比如具有数字基类型。 以下示例模拟货币。</p>
+<h3><a class="toc-backref" id="distinct类型-模拟货币" href="#distinct类型-模拟货币">模拟货币</a></h3><p>可以使用不同的类型来模拟不同的物理 <span id="单位_1">单位</span> 比如具有数字基类型。 以下示例模拟货币。</p>
 <p>货币计算中不应混合不同的货币。 不同类型是模拟不同货币的完美工具：</p>
 <pre class="listing"><span class="Keyword">type</span>
   <span class="Identifier">Dollar</span> <span class="Operator">=</span> <span class="Keyword">distinct</span> <span class="Identifier">int</span>
@@ -3244,7 +3244,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
   <span class="Comment"># 不能编译! 可能引发IOError!</span>
   <span class="Identifier">noRaise</span><span class="Punctuation">(</span><span class="Identifier">doRaise</span><span class="Punctuation">)</span></pre><p>因此，在许多情况下，回调不会导致编译器在其效果分析中过于保守。</p>
 
-<h2><a class="toc-backref" id="效应系统-tag跟踪" href="#效应系统-tag跟踪">Tag跟踪</a></h2><p>异常跟踪是Nim <tt class="docutils literal"><span class="pre">效应系统</span></tt>:idx: 的一部分。 引发异常是 <em>效应</em> 。 其他效应也可以定义。 用户定义的效应是 <em>标记</em> 例程并对此标记执行检查的方法：</p>
+<h2><a class="toc-backref" id="效应系统-tag跟踪" href="#效应系统-tag跟踪">Tag跟踪</a></h2><p>异常跟踪是Nim <span id="效应系统_1">效应系统</span> 的一部分。 引发异常是 <em>效应</em> 。 其他效应也可以定义。 用户定义的效应是 <em>标记</em> 例程并对此标记执行检查的方法：</p>
 <pre class="listing"><span class="Keyword">type</span> <span class="Identifier">IO</span> <span class="Operator">=</span> <span class="Keyword">object</span> <span class="Comment">## input/output effect</span>
 <span class="Keyword">proc</span> <span class="Identifier">readLine</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">string</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">tags</span><span class="Punctuation">:</span> <span class="Punctuation">[</span><span class="Identifier">IO</span><span class="Punctuation">]</span><span class="Operator">.</span><span class="Punctuation">}</span> <span class="Operator">=</span> <span class="Keyword">discard</span>
 
@@ -3312,7 +3312,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
 <span class="Identifier">add</span><span class="Punctuation">(</span><span class="Identifier">root</span><span class="Punctuation">,</span> <span class="Identifier">newNode</span><span class="Punctuation">(</span><span class="StringLit">&quot;hello&quot;</span><span class="Punctuation">)</span><span class="Punctuation">)</span> <span class="Comment"># 实例化 ``newNode`` 和 ``add``</span>
 <span class="Identifier">add</span><span class="Punctuation">(</span><span class="Identifier">root</span><span class="Punctuation">,</span> <span class="StringLit">&quot;world&quot;</span><span class="Punctuation">)</span>          <span class="Comment"># 实例化第二个 ``add`` proc</span>
 <span class="Keyword">for</span> <span class="Identifier">str</span> <span class="Keyword">in</span> <span class="Identifier">preorder</span><span class="Punctuation">(</span><span class="Identifier">root</span><span class="Punctuation">)</span><span class="Punctuation">:</span>
-  <span class="Identifier">stdout</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="Identifier">str</span><span class="Punctuation">)</span></pre><p><tt class="docutils literal"><span class="pre">T</span></tt> 被称为 <tt class="docutils literal"><span class="pre">泛型类型形参</span></tt> :idx: 或 <span id="类型变量_1">类型变量</span> 。</p>
+  <span class="Identifier">stdout</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="Identifier">str</span><span class="Punctuation">)</span></pre><p><tt class="docutils literal"><span class="pre">T</span></tt> 被称为 <span id="泛型类型形参_1">泛型类型形参</span> 或 <span id="类型变量_1">类型变量</span> 。</p>
 
 <h2><a class="toc-backref" id="泛型-is操作符" href="#泛型-is操作符">Is操作符</a></h2><p>在语义分析期间评估 <tt class="docutils literal"><span class="pre">is</span></tt> 运算符以检查类型等价。 因此，它对于泛型代码中的类型特化非常有用：</p>
 <pre class="listing"><span class="Keyword">type</span>
@@ -3344,7 +3344,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
 
 <span class="Keyword">proc</span> <span class="Identifier">printFields</span><span class="Punctuation">(</span><span class="Identifier">rec</span><span class="Punctuation">:</span> <span class="Identifier">RecordType</span><span class="Punctuation">)</span> <span class="Operator">=</span>
   <span class="Keyword">for</span> <span class="Identifier">key</span><span class="Punctuation">,</span> <span class="Identifier">value</span> <span class="Keyword">in</span> <span class="Identifier">fieldPairs</span><span class="Punctuation">(</span><span class="Identifier">rec</span><span class="Punctuation">)</span><span class="Punctuation">:</span>
-    <span class="Identifier">echo</span> <span class="Identifier">key</span><span class="Punctuation">,</span> <span class="StringLit">&quot; = &quot;</span><span class="Punctuation">,</span> <span class="Identifier">value</span></pre><p>以这种方式使用类型类的过程被认为是 <tt class="docutils literal"><span class="pre">隐式通用的</span></tt>:idx: 。 对于程序中使用的每个唯一的param类型组合，它们将被实例化一次。</p>
+    <span class="Identifier">echo</span> <span class="Identifier">key</span><span class="Punctuation">,</span> <span class="StringLit">&quot; = &quot;</span><span class="Punctuation">,</span> <span class="Identifier">value</span></pre><p>以这种方式使用类型类的过程被认为是 <span id="隐式通用的_1">隐式通用的</span> 。 对于程序中使用的每个唯一的param类型组合，它们将被实例化一次。</p>
 <p>虽然类型类的语法看起来类似于ML的语言中的ADT /代数数据类型，但应该理解类型类是类型实例化时强制执行的静态约束。 类型类不是真正的类型，而是一个提供通用“检查”的系统，最终将 <em>解析</em> 为某种单一类型。 与对象变体或方法不同，类型类不允许运行时类型动态。</p>
 <p>例如，以下内容无法编译：</p>
 <pre class="listing"><span class="Keyword">type</span> <span class="Identifier">TypeClass</span> <span class="Operator">=</span> <span class="Identifier">int</span> <span class="Operator">|</span> <span class="Identifier">string</span>
@@ -4439,7 +4439,7 @@ using namespace gui;
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-09-02 12:25:54 UTC</small>
+        <small>Made with Nim. Generated: 2019-09-02 15:54:48 UTC</small>
       </div>
     </div>
   </div>
