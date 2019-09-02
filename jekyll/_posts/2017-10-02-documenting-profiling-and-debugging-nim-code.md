@@ -260,14 +260,15 @@ proc diff() =
 
 proc analyse(x: string) =
   var i = 0
-  while i < x.len:
+  while true:
     case x[i] <3>
     of Letters: ab()
     of {'0' .. '9'}: num()
+    of '\0': break <4>
     else: diff()
     i.inc
 
-for i in 0 .. 10000: <4>
+for i in 0 .. 10000: <5>
   analyse("uyguhijkmnbdv44354gasuygiuiolknchyqudsayd12635uha")
 ```
 <1> The `nimprof` module is essential in order for the profiler to work.
@@ -275,7 +276,8 @@ for i in 0 .. 10000: <4>
 <3> Each character in the string `x` is iterated over, if a character is a
     letter then `ab` is called, if it's a number then `num` is called, and
     if it's something else then `diff` is called.
-<4> We perform the analysis 10 thousand times in order to let the profiler
+<4> The `\0` signifies the end of the string, we break out of the loop here.
+<5> We perform the analysis 10 thousand times in order to let the profiler
     measure reliably.
 
 Save it as `main.nim`, then compile it by executing

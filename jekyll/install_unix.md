@@ -74,7 +74,6 @@ curl https://nim-lang.org/choosenim/init.sh -sSf | sh
 ```bash
 sh build.sh
 bin/nim c koch
-./koch boot -d:release
 ./koch tools
 ```
 
@@ -170,36 +169,10 @@ pkg install nim
 brew install nim
 ```
 
-## OpenBSD
-
-```
-pkg_add nim
-```
-
 ## openSUSE
 
 ```
 zypper in nim
-```
-
-## Snap
-
-Get the latest stable release:
-
-```
-snap install nim-lang --classic
-```
-
-Get the latest LTS 1.0.x release:
-
-```
-snap install nim-lang-lts-1 --classic
-```
-
-Get the latest nightly build:
-
-```
-snap install nim-lang-nightly --classic
 ```
 
 ## Void Linux

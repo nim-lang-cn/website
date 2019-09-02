@@ -83,7 +83,7 @@ for person in people:
 {% endhighlight %}
 
         {% highlight nim %}
-# 感谢 Nim 的 'iterator' 和 'yield' 构造，
+# 得益于Nim的“iterator”和“yield”结构，
 # 迭代器和常规方法一样容易编写。
 # 它们会被编译为内联循环。
 iterator oddElements[Idx, T](a: array[Idx, T]): T =
@@ -92,8 +92,8 @@ iterator oddElements[Idx, T](a: array[Idx, T]): T =
     yield a[i]
     i += 2
 
-for odd in oddNumbers([3, 6, 9, 12, 15, 18]):
-  echo odd
+for x in oddElements([10, 20, 30, 40, 50, 60]):
+  echo x
 {% endhighlight %}
 
 
@@ -148,6 +148,63 @@ for o in opcodes:
   </div>
 </section>
 
+<section class="background-faded call-to-action feature-projects">
+  <section class="content">
+    <h1 class="section-heading">特色项目</h1>
+    <div class="pure-g center">
+
+      <div class="pure-u-1-1 pure-u-md-1-2">
+        <div class="project-container">
+          <h2>
+            <a href="https://github.com/pragmagic/karax">Karax</a>
+          </h2>
+          <span class="tag">SPA框架</span>
+          <p>
+            Karax是一个使用Nim开发单页应用的框架。
+            利用Nim的宏系统生成一个框架，允许开发无样板的应用程序。
+          </p>
+        </div>
+      </div>
+
+      <div class="pure-u-1-1 pure-u-md-1-2">
+        <div class="project-container">
+          <h2>
+            <a href="https://github.com/status-im/nimbus">Nimbus</a>
+          </h2>
+          <span class="tag">以太坊客户端</span>
+          <p>
+              Nimbus旨在成为以太坊2.0区块链的分片客户端。
+              以太坊可能会构建在嵌入式系统中，
+              而Nimbus的设计使它将能够在物联网和个人移动设备上也有良好的表现。
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <div class="text-centered">
+      <a class="pure-button pure-button-primary" href="https://github.com/trending/nim">发现更多项目</a>
+    </div>
+  </section>
+</section>
+
+<section class="content center-banner">
+  <h1 class="section-heading">
+    <i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+    从今天开始学习Nim吧
+  </h1>
+  <div class="pure-g center">
+    <div class="pure-u-1-2">
+      <h3>
+        构建命令行应用程序、游戏、Web服务器、内核以及其他所有内容。 
+        Nim不仅学习门槛不高，还能为你提供许多主流编程语言所不具备的强大功能。
+      </h3>
+    </div>
+    <div class="pure-u-1 center">
+      <a class="pure-button" href="{{ site.baseurl }}/learn.html">立即开始</a>
+    </div>
+  </div>
+</section>
+
 <section class="jumbotron" id="book">
   <section class="content">
     <div class="pure-g">
@@ -195,6 +252,29 @@ for o in opcodes:
   </div>
 </section>
 
+<section class="background-faded call-to-action">
+  <section class="content text-centered">
+    <h1>顶级赞助商</h1>
+    <div class="pure-g center">
+      <div class="pure-u-2-3">
+        {% for sponsor in site.data.sponsors %}
+          {% if sponsor.level == "250" %}
+            <div class="sponsor-container">
+              <a href="{{sponsor.url}}">
+                <img src="{{ site.baseurl }}{{sponsor.logo}}"/>
+                <br>
+                <span class="green tag">+${{sponsor.this_month}}/月</span>
+                <p class="title">{{sponsor.name}}</p>
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <a class="pure-button" href="{{ site.baseurl }}/sponsors.html">查看更多</a>
+  </section>
+</section>
+
 <section class="jumbotron" id="community">
   <section class="content">
     <h1>社区</h1>
@@ -229,7 +309,7 @@ for o in opcodes:
           <i class="fa fa-comments" aria-hidden="true"></i>官方论坛</a></p>
         <p><a href="https://reddit.com/r/nim">
           <i class="fab fa-reddit" aria-hidden="true"></i>r/nim</a></p>
-        <p><a href="https://stackoverflow.com/questions/tagged/nim-lang">
+        <p><a href="https://stackoverflow.com/questions/tagged/nim">
           <i class="fab fa-stack-overflow" aria-hidden="true"></i>StackOverflow</a></p>
         
       </div>

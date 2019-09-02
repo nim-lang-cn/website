@@ -143,7 +143,7 @@ get help with their project. Be sure to use the ``nim`` tag when asking
 questions.
 
 <i class="fab fa-stack-overflow" aria-hidden="true"></i>
-[nim](https://stackoverflow.com/questions/tagged/nim-lang)
+[nim](https://stackoverflow.com/questions/tagged/nim)
 
 ## 线下交流会
 

@@ -54,7 +54,6 @@ Nim编译器和库是MIT许可的。
 - QtCreator (4.1+): 通过一个实验性插件进行支持。
 - Scite: 支持
 - Gedit: The [Aporia .lang file](https://github.com/nim-lang/Aporia/blob/master/share/gtksourceview-2.0/language-specs/nim.lang).
-- Geany: Included
 - jEdit: [https://github.com/exhu/nimrod-misc/tree/master/jedit](https://github.com/exhu/nimrod-misc/tree/master/jedit)
 - TextMate: [https://github.com/textmate/nim.tmbundle](https://github.com/textmate/nim.tmbundle)
 - Sublime Text: [https://github.com/Varriount/NimLime](https://github.com/Varriount/NimLime)
