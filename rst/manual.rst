@@ -4294,7 +4294,7 @@ Bind语句
 
   template newException*(exceptn: typedesc, message: string): untyped =
     var
-      e: ref exceptn  # e is implicitly gensym'ed here
+      e: ref exceptn  # e是隐式符号生成
     new(e)
     e.msg = message
     e
@@ -4310,7 +4310,7 @@ Bind语句
 .. code-block:: nim
   template withFile(f, fn, mode: untyped, actions: untyped): untyped =
     block:
-      var f: File  # since 'f' is a template param, it's injected implicitly
+      var f: File  # 因为'f'是模板形参，它被隐式注入
       ...
 
   withFile(txt, "ttempl3.txt", fmWrite):
@@ -4398,19 +4398,18 @@ Debug示例
   import macros
 
   macro debug(args: varargs[untyped]): untyped =
-    # `args` is a collection of `NimNode` values that each contain the
-    # AST for an argument of the macro. A macro always has to
-    # return a `NimNode`. A node of kind `nnkStmtList` is suitable for
-    # this use case.
+    # `args` 是 `NimNode` 值的集合，每个值都包含宏的参数的AST。
+    # 宏总是必须返回一个 `NimNode` 。
+    # 类型为 `nnkStmtList` 的节点适用于此用例。
     result = nnkStmtList.newTree()
-    # iterate over any argument that is passed to this macro:
+    # 迭代传递给此宏的任何参数：
     for n in args:
-      # add a call to the statement list that writes the expression;
-      # `toStrLit` converts an AST to its string representation:
+      # 添加对写入表达式的语句列表的调用;
+      # `toStrLit` 将AST转换为其字符串表示形式：
       result.add newCall("write", newIdentNode("stdout"), newLit(n.repr))
-      # add a call to the statement list that writes ": "
+      # 添加对写入“：”的语句列表的调用
       result.add newCall("write", newIdentNode("stdout"), newLit(": "))
-      # add a call to the statement list that writes the expressions value:
+      # 添加对写入表达式值的语句列表的调用：
       result.add newCall("writeLine", newIdentNode("stdout"), n)
 
   var
@@ -4421,7 +4420,7 @@ Debug示例
 
   debug(a[0], a[1], x)
 
-The macro call expands to:
+宏调用扩展成：
 
 .. code-block:: nim
   write(stdout, "a[0]")
@@ -4456,7 +4455,7 @@ BindSym
   macro debug(n: varargs[typed]): untyped =
     result = newNimNode(nnkStmtList, n)
     for x in n:
-      # we can bind symbols in scope via 'bindSym':
+      # 我们可以在作用域中通过'bindSym'绑定符号:
       add(result, newCall(bindSym"write", bindSym"stdout", toStrLit(x)))
       add(result, newCall(bindSym"write", bindSym"stdout", newStrLitNode(": ")))
       add(result, newCall(bindSym"writeLine", bindSym"stdout", x))
@@ -4499,7 +4498,7 @@ Case-Of宏
   macro case_token(args: varargs[untyped]): untyped =
     echo args.treeRepr
     # 从正则表达式创建词法分析器
-    # ... (implementation is an exercise for the reader ;-)
+    # ... (实现留给读者作为练习 ;-)
     discard
 
   case_token: # 这个冒号告诉解析器它是一个宏语句
@@ -4552,8 +4551,7 @@ For循环宏
 
   macro enumerate(x: ForLoopStmt): untyped =
     expectKind x, nnkForStmt
-    # we strip off the first for loop variable and use
-    # it as an integer counter:
+    # 我们剥离第一个for循环变量并将其用作整数计数器：
     result = newStmtList()
     result.add newVarStmt(x[0], newLit(0))
     var body = x[^1]
@@ -4563,18 +4561,18 @@ For循环宏
     var newFor = newTree(nnkForStmt)
     for i in 1..x.len-3:
       newFor.add x[i]
-    # transform enumerate(X) to 'X'
+    # 将枚举（X）转换为'X'
     newFor.add x[^2][1]
     newFor.add body
     result.add newFor
-    # now wrap the whole macro in a block to create a new scope
+    # 现在将整个宏包装在一个块中以创建一个新的作用域
     result = quote do:
       block: `result`
 
   for a, b in enumerate(items([1, 2, 3])):
     echo a, " ", b
 
-  # 没有将宏包装在一个块中，我们需要在这里为`a`和`b`选择不同的名称以避免重定义错误
+  # 没有将宏包装在一个块中，我们需要在这里为 `a` 和 `b` 选择不同的名称以避免重定义错误
   for a, b in enumerate([1, 2, 3, 5]):
     echo a, " ", b
 
@@ -4617,18 +4615,18 @@ static[T]
   var m1: AffineTransform3D[float]  # 正确
   var m2: AffineTransform2D[string] # 错误 `string`不是`Number`
 
-Please note that ``static T`` is just a syntactic convenience for the underlying generic type ``static[T]``. 
-The type param can be omitted to obtain the type class of all constant expressions. 
-A more specific type class can be created by instantiating ``static`` with another type class.
+请注意，``static T`` 只是底层泛型类型 ``static[T]`` 的语法方便。
+可以省略类型参数以获取所有常量表达式的类型类。
+可以通过使用另一个类型类实例化 ``static`` 来创建更具体的类型类。
 
-You can force an expression to be evaluated at compile time as a constant expression by coercing it to a corresponding ``static`` type:
+您可以通过将表达式强制转换为相应的 ``static`` 类型来强制将表达式在编译时作为常量表达式进行求值：
 
 .. code-block:: nim
   import math
 
   echo static(fac(5)), " ", static[bool](16.isPowerOfTwo)
 
-The complier will report any failure to evaluate the expression or a possible type mismatch error.
+编译器将报告任何未能评估表达式或可能的类型不匹配错误。
 
 typedesc[T]
 -----------
@@ -4682,7 +4680,7 @@ typedesc[T]
   var i = int.maxval
   var f = float.maxval
   when false:
-    var s = string.maxval # error, maxval is not implemented for string
+    var s = string.maxval # 错误，没有为字符串实现maxval
 
   template isNumber(t: typedesc[object]): string = "Don't think so."
   template isNumber(t: typedesc[SomeInteger]): string = "Yes!"
@@ -4700,7 +4698,7 @@ typedesc[T]
   import macros
 
   macro forwardType(arg: typedesc): typedesc =
-    # ``arg`` is of type ``NimNode``
+    # ``arg`` 是 ``NimNode`` 类型
     let tmp: NimNode = arg
     result = tmp
 
@@ -4734,50 +4732,47 @@ typeof操作符
 
 模块
 =======
-Nim supports splitting a program into pieces by a module concept.
-Each module needs to be in its own file and has its own `namespace`:idx:.
-Modules enable `information hiding`:idx: and `separate compilation`:idx:.
-A module may gain access to symbols of another module by the `import`:idx: statement. 
-`Recursive module dependencies`:idx: are allowed, but slightly subtle. 
-Only top-level symbols that are marked with an asterisk (``*``) are exported. 
-A valid module name can only be a valid Nim identifier (and thus its filename is ``identifier.nim``).
+Nim支持通过模块概念将程序拆分为多个部分。
+每个模块都需要在自己的文件中，并且有自己的 `命名空间`:idx: 。
+模块启用 `信息隐藏`:idx: and `分开编译`:idx: 。
+模块可以通过 `import`:idx: 语句访问另一个模块的符号。 
+`递归模块依赖`:idx: 是允许的，但有点微妙。
+仅导出标有星号（``*``）的顶级符号。
+有效的模块名称只能是有效的Nim标识符（因此其文件名为 ``标识符.nim`` ）。
 
-The algorithm for compiling modules is:
+编译模块的算法是：
 
-- compile the whole module as usual, following import statements recursively
+- 像往常一样编译整个模块，递归地执行import语句
 
-- if there is a cycle only import the already parsed symbols (that are
-  exported); if an unknown identifier occurs then abort
+- 如果有一个只导入已解析的（即导出的）符号的环;如果出现未知标识符则中止
 
 这可以通过一个例子来说明：
 
 .. code-block:: nim
-  # Module A
+  # 模块A
   type
-    T1* = int  # Module A exports the type ``T1``
-  import B     # the compiler starts parsing B
+    T1* = int  # 模块A导出类型 ``T1``
+  import B     # 编译器开始解析B
 
   proc main() =
-    var i = p(3) # works because B has been parsed completely here
+    var i = p(3) # 因为B在这里被完全解析了
 
   main()
 
 
 .. code-block:: nim
-  # Module B
-  import A  # A is not parsed here! Only the already known symbols
-            # of A are imported.
+  # 模块 B
+  import A  # 这里没有解析A，仅导入已知的A符号。
 
   proc p*(x: A.T1): A.T1 =
-    # this works because the compiler has already
-    # added T1 to A's interface symbol table
+    # 这是有效的，因为编译器已经将T1添加到A的接口符号表中
     result = x + 1
 
 
 Import语句
 ~~~~~~~~~~~~~~~~
 
-After the ``import`` statement a list of module names can follow or a single module name followed by an ``except`` list to prevent some symbols to be imported:
+在 ``import`` 语句之后，可以跟随模块名称列表或单个模块名称后跟 ``except`` 列表以防止导入某些符号：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4785,18 +4780,19 @@ After the ``import`` statement a list of module names can follow or a single mod
 
   import strutils except `%`, toUpperAscii
 
-  # doesn't work then:
+  # 行不通:
   echo "$1" % "abc".toUpperAscii
 
 
-It is not checked that the ``except`` list is really exported from the module.
-This feature allows to compile against an older version of the module that does not export these identifiers.
+没有检查 ``except`` 列表是否真的从模块中导出。
+此功能允许针对不导出这些标识符的旧版本模块进行编译。
 
 
 Include语句
 ~~~~~~~~~~~~~~~~~
-The ``include`` statement does something fundamentally different than importing a module: it merely includes the contents of a file. 
-The ``include`` statement is useful to split up a large module into several files:
+
+``include`` 语句与导入模块有着根本的不同：​​它只包含文件的内容。
+``include`` 语句对于将大模块拆分为多个文件很有用：
 
 .. code-block:: nim
   include fileA, fileB, fileC
@@ -4806,28 +4802,27 @@ The ``include`` statement is useful to split up a large module into several file
 导入的模块名
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-A module alias can be introduced via the ``as`` keyword:
+可以通过 ``as`` 关键字引入模块别名：
 
 .. code-block:: nim
   import strutils as su, sequtils as qu
 
   echo su.format("$1", "lalelu")
 
-The original module name is then not accessible. The notations
-``path/to/module`` or ``"path/to/module"`` can be used to refer to a module
-in subdirectories:
+
+然后无法访问原始模块名称。
+符号 ``path/to/module`` 或 ``"path/to/module"`` 可用于引用子目录中的模块：
 
 .. code-block:: nim
   import lib/pure/os, "lib/pure/times"
 
-Note that the module name is still ``strutils`` and not ``lib/pure/strutils``
-and so one **cannot** do:
+请注意，模块名称仍然是 ``strutils`` 而不是 ``lib/pure/strutils`` 因此 **无法** 做:
 
 .. code-block:: nim
   import lib/pure/strutils
   echo lib/pure/strutils.toUpperAscii("abc")
 
-Likewise the following does not make sense as the name is ``strutils`` already:
+同样，以下内容没有意义，因为名称已经是 ``strutils`` ：
 
 .. code-block:: nim
   import lib/pure/strutils as strutils
@@ -4836,39 +4831,33 @@ Likewise the following does not make sense as the name is ``strutils`` already:
 从目录中集体导入
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The syntax ``import dir / [moduleA, moduleB]`` can be used to import multiple modules
-from the same directory.
+语法 ``import dir / [moduleA, moduleB]`` 可用于从同一目录导入多个模块。
 
-Path names are syntactically either Nim identifiers or string literals. If the path
-name is not a valid Nim identifier it needs to be a string literal:
+
+路径名在语法上是Nim标识符或字符串文字。如果路径名不是有效的Nim标识符，则它必须是字符串文字：
 
 .. code-block:: nim
-  import "gfx/3d/somemodule" # in quotes because '3d' is not a valid Nim identifier
+  import "gfx/3d/somemodule" # 在引号中因为'3d'不是有效的Nim标识符
 
 
-Pseudo import/include paths
+伪import/include目录
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A directory can also be a so called "pseudo directory". They can be used to
-avoid ambiguity when there are multiple modules with the same path.
+目录也可以是所谓的“伪目录”。当存在多个具有相同路径的模块时，它们可用于避免歧义。
 
-There are two pseudo directories:
+有两个伪目录：
 
-1. ``std``: The ``std`` pseudo directory is the abstract location of Nim's standard
-library. For example, the syntax ``import std / strutils`` is used to unambiguously
-refer to the standard library's ``strutils`` module.
-2. ``pkg``: The ``pkg`` pseudo directory is used to unambiguously refer to a Nimble
-package. However, for technical details that lie outside of the scope of this document
-its semantics are: *Use the search path to look for module name but ignore the standard
-library locations*. In other words, it is the opposite of ``std``.
+1. ``std``: ``std`` 伪目录是Nim标准库的抽象位置。
+例如，语法 ``import std / strutils`` 用于明确地引用标准库的 ``strutils`` 模块。
+2. ``pkg``: ``pkg`` 伪目录用于明确引用Nimble包。 
+但是，对于超出本文档范围的技术细节，其语义为：*使用搜索路径查找模块名称但忽略标准库位置* 。
+换句话说，它与 ``std`` 相反。
 
 
 From import语句
 ~~~~~~~~~~~~~~~~~~~~~
 
-After the ``from`` statement a module name follows followed by
-an ``import`` to list the symbols one likes to use without explicit
-full qualification:
+在 ``from`` 语句之后，一个模块名称后面跟着一个 ``import`` 来列出一个人喜欢使用的符号而没有明确的完全限定：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -4876,26 +4865,23 @@ full qualification:
   from strutils import `%`
 
   echo "$1" % "abc"
-  # always possible: full qualification:
+  # 可能：完全限定：
   echo strutils.replace("abc", "a", "z")
 
-It's also possible to use ``from module import nil`` if one wants to import
-the module but wants to enforce fully qualified access to every symbol
-in ``module``.
+如果想要导入模块但是想要对 ``module`` 中的每个符号进行完全限定访问，也可以使用 ``from module import nil`` 。
 
 
 Export语句
 ~~~~~~~~~~~~~~~~
 
-An ``export`` statement can be used for symbol forwarding so that client
-modules don't need to import a module's dependencies:
+``export`` 语句可用于符号转发，因此客户端模块不需要导入模块的依赖项：
 
 .. code-block:: nim
-  # module B
+  # 模块B
   type MyObject* = object
 
 .. code-block:: nim
-  # module A
+  # 模块A
   import B
   export B.MyObject
 
@@ -4903,17 +4889,16 @@ modules don't need to import a module's dependencies:
 
 
 .. code-block:: nim
-  # module C
+  # 模块C
   import A
 
-  # B.MyObject has been imported implicitly here:
+  # B.MyObject这里已经被隐式导入：
   var x: MyObject
   echo $x
 
-When the exported symbol is another module, all of its definitions will
-be forwarded. You can use an ``except`` list to exclude some of the symbols.
+当导出的符号是另一个模块时，将转发其所有定义。您可以使用 ``except`` 列表来排除某些符号。
 
-Notice that when exporting, you need to specify only the module name:
+请注意，导出时，只需指定模块名称：
 
 .. code-block:: nim
   import foo/bar/baz
@@ -4923,101 +4908,77 @@ Notice that when exporting, you need to specify only the module name:
 
 作用域规则
 -----------
-Identifiers are valid from the point of their declaration until the end of
-the block in which the declaration occurred. The range where the identifier
-is known is the scope of the identifier. The exact scope of an
-identifier depends on the way it was declared.
+标识符从其声明点开始有效，直到声明发生的块结束。
+标识符已知的范围是标识符的范围。
+标识符的确切范围取决于它的声明方式。
 
 块作用域
 ~~~~~~~~~~~
-The *scope* of a variable declared in the declaration part of a block
-is valid from the point of declaration until the end of the block. If a
-block contains a second block, in which the identifier is redeclared,
-then inside this block, the second declaration will be valid. Upon
-leaving the inner block, the first declaration is valid again. An
-identifier cannot be redefined in the same block, except if valid for
-procedure or iterator overloading purposes.
+在块的声明部分中声明的变量的 *作用域* 从声明点到块结束有效。
+如果块包含第二个块，其中标识符被重新声明，则在该块内，第二个声明将是有效的。
+跳出内部区块后，第一个声明再次有效。
+除非对过程或迭代器重载有效，否则不能在同一个块中重新定义标识符。
 
 
 元组或对象作用域
 ~~~~~~~~~~~~~~~~~~~~~
-The field identifiers inside a tuple or object definition are valid in the
-following places:
 
-* To the end of the tuple/object definition.
-* Field designators of a variable of the given tuple/object type.
-* In all descendant types of the object type.
+元组或对象定义中的字段标识符在以下位置有效：
+
+* 到元组/对象定义的结尾。
+* 给定元组/对象类型的变量的字段指示符。
+* 在对象类型的所有后代类型中。
 
 模块作用域
 ~~~~~~~~~~~~
-All identifiers of a module are valid from the point of declaration until
-the end of the module. Identifiers from indirectly dependent modules are *not*
-available. The `system`:idx: module is automatically imported in every module.
+模块的所有标识符从声明点到模块结束都是有效的。
+来自间接依赖模块的标识符 *不* 可用。
+The `system`:idx: 模块自动导入每个模块。
 
-If a module imports an identifier by two different modules, each occurrence of
-the identifier has to be qualified, unless it is an overloaded procedure or
-iterator in which case the overloading resolution takes place:
+如果模块通过两个不同的模块导入标识符，则必须限定每次出现的标识符，除非它是重载过程或迭代器，在这种情况下会发生重载解析：
 
 .. code-block:: nim
-  # Module A
+  # 模块A
   var x*: string
 
 .. code-block:: nim
-  # Module B
+  # 模块B
   var x*: int
 
 .. code-block:: nim
-  # Module C
+  # 模块C
   import A, B
-  write(stdout, x) # error: x is ambiguous
-  write(stdout, A.x) # no error: qualifier used
+  write(stdout, x) # 错误: x有歧义
+  write(stdout, A.x) # 没有错误: 使用限定符
 
   var x = 4
-  write(stdout, x) # not ambiguous: uses the module C's x
+  write(stdout, x) # 没有歧义: 使用模块C的x
 
 代码重排
 ~~~~~~~~~~~~~~~
 
-**Note**: Code reordering is experimental and must be enabled via the``{.experimental.}`` pragma.
 
-The code reordering feature can implicitly rearrange procedure, template, and
-macro definitions along with variable declarations and initializations at the top
-level scope so that, to a large extent, a programmer should not have to worry
-about ordering definitions correctly or be forced to use forward declarations to
-preface definitions inside a module.
+**注意** ：代码重新排序是实验性的，必须通过 ``{.experimental.}`` 启用。
+
+代码重新排序功能可以在顶级范围内隐式重新排列过程，模板和宏定义以及变量声明和初始化，这样在很大程度上，程序员不必担心正确排序定义或被迫使用转发声明前缀模块内的定义。
 
 ..
-   NOTE: The following was documentation for the code reordering precursor,
-   which was {.noForward.}.
+   
+  注意：以下是代码重新排序前体的文档，即 {.noForward.} 。
 
-   In this mode, procedure definitions may appear out of order and the compiler
-   will postpone their semantic analysis and compilation until it actually needs
-   to generate code using the definitions. In this regard, this mode is similar
-   to the modus operandi of dynamic scripting languages, where the function
-   calls are not resolved until the code is executed. Here is the detailed
-   algorithm taken by the compiler:
+   在此模式下，过程定义可能不按顺序出现，编译器将推迟其语义分析和编译，直到它实际需要使用定义生成代码。
+   在这方面，此模式类似于动态脚本语言的操作方式，其中函数调用在代码执行之前不会被解析。
+   以下是编译器采用的详细算法：
 
-   1. When a callable symbol is first encountered, the compiler will only note
-   the symbol callable name and it will add it to the appropriate overload set
-   in the current scope. At this step, it won't try to resolve any of the type
-   expressions used in the signature of the symbol (so they can refer to other
-   not yet defined symbols).
+   1. 次遇到可调用符号时，编译器将只记录符号可调用名称，并将其添加到当前作用域中的相应重载集。
+   在此步骤中，它不会尝试解析符号签名中使用的任何类型表达式（因此它们可以引用其他尚未定义的符号）。
 
-   2. When a top level call is encountered (usually at the very end of the
-   module), the compiler will try to determine the actual types of all of the
-   symbols in the matching overload set. This is a potentially recursive process
-   as the signatures of the symbols may include other call expressions, whose
-   types will be resolved at this point too.
+   2. 当遇到顶级调用时（通常在模块的最末端），编译器将尝试确定匹配的重载集中所有符号的实际类型。
+   这是一个潜在的递归过程，因为符号的签名可能包含其他调用表达式，其类型也将在此时解析。
 
-   3. Finally, after the best overload is picked, the compiler will start
-   compiling the body of the respective symbol. This in turn will lead the
-   compiler to discover more call expressions that need to be resolved and steps
-   2 and 3 will be repeated as necessary.
+   3. 最后，在选择最佳重载之后，编译器将启动编译各自符号的正文。这反过来将导致编译器发现需要解决的更多调用表达式和步骤必要时将重复图2和3。
 
-   Please note that if a callable symbol is never used in this scenario, its
-   body will never be compiled. This is the default behavior leading to best
-   compilation times, but if exhaustive compilation of all definitions is
-   required, using ``nim check`` provides this option as well.
+   请注意，如果在此方案中从未使用过可调用符号，则为身体永远不会编译。这是导致最佳的默认行为编译时间，但如果所有定义都是详尽的汇编必需的，使用 ``nim check`` 也提供此选项。
 
 示例：
 
@@ -5033,10 +4994,8 @@ preface definitions inside a module.
 
   foo(10)
 
-Variables can also be reordered as well. Variables that are *initialized* (i.e.
-variables that have their declaration and assignment combined in a single
-statement) can have their entire initialization statement reordered. Be wary of
-what code is executed at the top level:
+Variables can also be reordered as well. Variables that are *initialized* (i.e. variables that have their declaration and assignment combined in a single statement) can have their entire initialization statement reordered. 
+Be wary of what code is executed at the top level:
 
 .. code-block:: nim
   {.experimental: "codeReordering".}
@@ -5046,16 +5005,13 @@ what code is executed at the top level:
 
   var foo = 5
 
-  a() # outputs: "5"
+  a() # 输出: "5"
 
 ..
-   TODO: Let's table this for now. This is an *experimental feature* and so the
-   specific manner in which ``declared`` operates with it can be decided in
-   eventuality, because right now it works a bit weirdly.
+   TODO: 让我们现在把它列成表格。这是一个*实验性特征* 因此 ``declared`` 与它一起操作的具体方式可以在最终的情况下决定，因为现在它工作的有点奇怪。
 
-   The values of expressions involving ``declared`` are decided *before* the
-   code reordering process, and not after. As an example, the output of this
-   code is the same as it would be with code reordering disabled.
+   涉及 ``declared`` 表达式的值是在代码重新排序过程 *之前* 而不是之后确定的。
+   例如，此代码的输出与禁用代码重新排序时的输出相同。
 
    .. code-block:: nim
      {.experimental: "codeReordering".}
@@ -5067,8 +5023,7 @@ what code is executed at the top level:
 
      x() # "false"
 
-It is important to note that reordering *only* works for symbols at top level
-scope. Therefore, the following will *fail to compile:*
+重要的是要注意，重新排序 *仅* 适用于顶级范围的符号。因此，以下将 *编译失败* ：
 
 .. code-block:: nim
   {.experimental: "codeReordering".}
@@ -5083,61 +5038,50 @@ scope. Therefore, the following will *fail to compile:*
 编译器消息
 =================
 
-The Nim compiler emits different kinds of messages: `hint`:idx:,
-`warning`:idx:, and `error`:idx: messages. An *error* message is emitted if
-the compiler encounters any static error.
+Nim编译器发出不同类型的消息： `hint`:idx:, `warning`:idx:, and `error`:idx: 消息。 如果编译器遇到任何静态错误，则会发出 *error* 消息。
 
 
 
 编译指示
 =======
-
-Pragmas are Nim's method to give the compiler additional information /
-commands without introducing a massive number of new keywords. Pragmas are
-processed on the fly during semantic checking. Pragmas are enclosed in the
-special ``{.`` and ``.}`` curly brackets. Pragmas are also often used as a
-first implementation to play with a language feature before a nicer syntax
-to access the feature becomes available.
+Pragma是Nim的方法，可以在不引入大量新关键字的情况下为编译器提供额外的信息/命令。
+在语义检查期间，语境处理是即时处理的。
+Pragma包含在特殊的 ``{.`` 和 ``.}`` 花括号中。
+在访问该功能的更好的语法变得可用之前，编译指示通常也被用作第一个使用语言功能的实现。
 
 
-deprecated 编译指示
+deprecated编译指示
 -----------------
 
-The deprecated pragma is used to mark a symbol as deprecated:
+deprecated编译指示用于将符号标记为已弃用：
 
 .. code-block:: nim
   proc p() {.deprecated.}
   var x {.deprecated.}: char
 
-This pragma can also take in an optional warning string to relay to developers.
+该编译指示还可以接受一个可选的警告字符串以转发给开发人员。
 
 .. code-block:: nim
   proc thing(x: bool) {.deprecated: "use thong instead".}
 
 
-noSideEffect 编译指示
+noSideEffect编译指示
 -------------------
 
-The ``noSideEffect`` pragma is used to mark a proc/iterator to have no side
-effects. This means that the proc/iterator only changes locations that are
-reachable from its parameters and the return value only depends on the
-arguments. If none of its parameters have the type ``var T``
-or ``ref T`` or ``ptr T`` this means no locations are modified. It is a static
-error to mark a proc/iterator to have no side effect if the compiler cannot
-verify this.
+``noSideEffect`` 编译指示用于标记proc / iterator没有副作用。
+这意味着proc / iterator仅更改可从其参数访问的位置，并且返回值仅取决于参数。
+如果它的参数都没有类型``var T``或``ref T``或``ptr T``，这意味着没有修改位置。
+如果编译器无法验证，则将proc / iterator标记为无副作用是一个静态错误。
 
-As a special semantic rule, the built-in `debugEcho <system.html#debugEcho>`_
-pretends to be free of side effects, so that it can be used for debugging
-routines marked as ``noSideEffect``.
+作为一种特殊的语义规则，内置的 `debugEcho <system.html#debugEcho>`_ 没有副作用，因此它可以用于调试标记为 ``noSideEffect`` 的例程。
 
-``func`` is syntactic sugar for a proc with no side effects:
+``func`` 是proc的语法糖，没有副作用：
 
 .. code-block:: nim
   func `+` (x, y: int): int
 
 
-To override the compiler's side effect analysis a ``{.noSideEffect.}``
-pragma block can be used:
+要覆盖编译器的副作用分析，可以使用 ``{.noSideEffect.}`` 编译指示块:
 
 .. code-block:: nim
 
@@ -5146,52 +5090,48 @@ pragma block can be used:
       echo "test"
 
 
-compileTime 编译指示
+compileTime编译指示
 ------------------
-The ``compileTime`` pragma is used to mark a proc or variable to be used only
-during compile-time execution. No code will be generated for it. Compile-time
-procs are useful as helpers for macros. Since version 0.12.0 of the language, a
-proc that uses ``system.NimNode`` within its parameter types is implicitly
-declared ``compileTime``:
+``compileTime`` pragma用于标记仅在编译时执行期间使用的proc或变量。
+不会为它生成代码。
+编译时触发器可用作宏的帮助器。
+从该语言的0.12.0版开始，在其参数类型中使用 ``system.NimNode`` 的proc被隐式声明为 ``compileTime`` ：
 
 .. code-block:: nim
   proc astHelper(n: NimNode): NimNode =
     result = n
 
-Is the same as:
+同:
 
 .. code-block:: nim
   proc astHelper(n: NimNode): NimNode {.compileTime.} =
     result = n
 
 
-noReturn 编译指示
+noReturn编译指示
 ---------------
-The ``noreturn`` pragma is used to mark a proc that never returns.
+``noreturn`` 编译指示用于标记不返回的过程。
 
 
-acyclic 编译指示
+acyclic编译指示
 --------------
-The ``acyclic`` pragma applies to type declarations. It is deprecated and
-ignored.
+``acyclic`` 编译指示用于类型声明。弃用并忽略。
 
 
-final 编译指示
+final编译指示
 ------------
-The ``final`` pragma can be used for an object type to specify that it
-cannot be inherited from. Note that inheritance is only available for
-objects that inherit from an existing object (via the ``object of SuperType``
-syntax) or that have been marked as ``inheritable``.
+
+``final`` 编译指示可以用于对象类型，以指定它不能从中继承。
+
+请注意，继承仅适用于从现有对象继承的对象（通过 ``超类型对象`` 语法）或已标记为 ``可继承`` 的对象。
 
 
-shallow 编译指示
+shallow编译指示
 --------------
-The ``shallow`` pragma affects the semantics of a type: The compiler is
-allowed to make a shallow copy. This can cause serious semantic issues and
-break memory safety! However, it can speed up assignments considerably,
-because the semantics of Nim require deep copying of sequences and strings.
-This can be expensive, especially if sequences are used to build a tree
-structure:
+``shallow`` 编译指示会影响类型的语义：允许编译器生成浅拷贝。
+这可能会导致严重的语义问题并破坏内存安全。
+但是，它可以大大加快赋值，因为Nim的语义需要深拷贝序列和字符串。
+这可能很昂贵，特别是如果用序列构建树结构：
 
 .. code-block:: nim
   type
@@ -5204,86 +5144,78 @@ structure:
         children: seq[Node]
 
 
-pure 编译指示
+pure编译指示
 -----------
-An object type can be marked with the ``pure`` pragma so that its type field
-which is used for runtime type identification is omitted. This used to be
-necessary for binary compatibility with other compiled languages.
+可以使用 ``pure`` 编译指示标记对象类型，以便省略用于运行时类型标识的类型字段。
+这曾经是与其他编译语言二进制兼容所必需的。
 
-An enum type can be marked as ``pure``. Then access of its fields always
-requires full qualification.
+枚举类型可以标记为 ``纯`` 。然后访问其字段始终需要完全限定。
 
 
-asmNoStackFrame 编译指示
+asmNoStackFrame编译指示
 ----------------------
-A proc can be marked with the ``asmNoStackFrame`` pragma to tell the compiler
-it should not generate a stack frame for the proc. There are also no exit
-statements like ``return result;`` generated and the generated C function is
-declared as ``__declspec(naked)`` or ``__attribute__((naked))`` (depending on
-the used C compiler).
+proc可以使用 ``asmNoStackFrame`` 编译指示标记，告诉编译器它不应该为过程生成堆栈帧。
+也有像 ``return result;`` 生成的没有出口的语句，生成的C函数声明为 ``__declspec(naked)`` 或 ``__attribute__((naked))`` (取决于使用的C编译器)。
 
-**Note**: This pragma should only be used by procs which consist solely of
-assembler statements.
 
-error 编译指示
+**注意** ：此pragma只应由仅包含汇编语句的过程使用。
+
+error编译指示
 ------------
-The ``error`` pragma is used to make the compiler output an error message
-with the given content. Compilation does not necessarily abort after an error
-though.
 
-The ``error`` pragma can also be used to
-annotate a symbol (like an iterator or proc). The *usage* of the symbol then
-triggers a static error. This is especially useful to rule out that some
-operation is valid due to overloading and type conversions:
+``error`` 编译指示用于使编译器输出具有给定内容的错误消息。但是，编译错误后不一定会中止。
+
+``error`` 编译指示也可用于注释符号（如迭代器或proc）。
+然后，符号的 *使用* 会触发静态错误。
+这对于排除由于重载和类型转换而导致某些操作有效特别有用：
 
 .. code-block:: nim
-  ## check that underlying int values are compared and not the pointers:
+  ## 检查是否比较了基础int值而不是指针：
   proc `==`(x, y: ptr int): bool {.error.}
 
 
-fatal 编译指示
+fatal编译指示
 ------------
-The ``fatal`` pragma is used to make the compiler output an error message
-with the given content. In contrast to the ``error`` pragma, compilation
-is guaranteed to be aborted by this pragma. 示例：
+
+``fatal`` 编译指示用于使编译器输出具有给定内容的错误消息。
+与 ``error`` 编译指示相反，编译保证会被此编译指示中止。
+
+示例：
 
 .. code-block:: nim
   when not defined(objc):
     {.fatal: "Compile this program with the objc command!".}
 
-warning 编译指示
+warning编译指示
 --------------
-The ``warning`` pragma is used to make the compiler output a warning message
-with the given content. Compilation continues after the warning.
 
-hint 编译指示
------------
-The ``hint`` pragma is used to make the compiler output a hint message with
-the given content. Compilation continues after the hint.
+``warning`` 编译指示用于使编译器输出具有给定内容的警告消息，警告后继续编译。
 
-line 编译指示
+hint编译指示
 -----------
-The ``line`` pragma can be used to affect line information of the annotated
-statement as seen in stack backtraces:
+
+``hint`` 编译指示用于使编译器输出具有给定内容的提示消息，提示后继续编译。
+
+line编译指示
+-----------
+
+``line`` pragma可用于影响带注释语句的行信息，如堆栈回溯中所示：
 
 .. code-block:: nim
 
   template myassert*(cond: untyped, msg = "") =
     if not cond:
-      # change run-time line information of the 'raise' statement:
+      # 更改'raise'语句的运行时行信息：
       {.line: instantiationInfo().}:
         raise newException(EAssertionFailed, msg)
 
-If the ``line`` pragma is used with a parameter, the parameter needs be a
-``tuple[filename: string, line: int]``. If it is used without a parameter,
-``system.InstantiationInfo()`` is used.
+如果 ``line``编译指示与参数一起使用，则参数需要是 ``tuple[filename: string, line: int]`` 。 如果在没有参数的情况下使用它，则使用 ``system.InstantiationInfo()`` 。
 
 
 linearScanEnd 编译指示
 --------------------
-The ``linearScanEnd`` pragma can be used to tell the compiler how to
-compile a Nim `case`:idx: statement. Syntactically it has to be used as a
-statement:
+
+``linearScanEnd`` 编译指示可以用来告诉编译器如何编译Nim `case`:idx: 语句。 从语法上讲，它必须用作语句：
 
 .. code-block:: nim
   case myInt
@@ -5295,23 +5227,20 @@ statement:
   of 2: echo "unlikely: use branch table"
   else: echo "unlikely too: use branch table for ", myInt
 
-In the example, the case branches ``0`` and ``1`` are much more common than
-the other cases. Therefore the generated assembler code should test for these
-values first, so that the CPU's branch predictor has a good chance to succeed
-(avoiding an expensive CPU pipeline stall). The other cases might be put into a
-jump table for O(1) overhead, but at the cost of a (very likely) pipeline
-stall.
 
-The ``linearScanEnd`` pragma should be put into the last branch that should be
-tested against via linear scanning. If put into the last branch of the
-whole ``case`` statement, the whole ``case`` statement uses linear scanning.
+在这个例子中，case分支 ``0`` 和 ``1`` 比其他情况更常见。
+因此，生成的汇编程序代码应首先测试这些值，以便CPU的分支预测器有很好的成功机会（避免昂贵的CPU管道停顿）。
+其他情况可能会被放入O(1)开销的跳转表中，但代价是（很可能）管道停顿。
+
+应该将 ``linearScanEnd`` 编译指示放入应通过线性扫描进行测试的最后一个分支。
+如果放入整个 ``case`` 语句的最后一个分支，整个 ``case`` 语句使用线性扫描。
 
 
-computedGoto 编译指示
+computedGoto编译指示
 -------------------
-The ``computedGoto`` pragma can be used to tell the compiler how to
-compile a Nim `case`:idx: in a ``while true`` statement.
-Syntactically it has to be used as a statement inside the loop:
+
+``calculateGoto`` 编译指示可用于告诉编译器如何编译在 ``while true`` 语句中中的Nim `case`:idx: 语句。
+从语法上讲，它必须在循环中用作语句：
 
 .. code-block:: nim
 
@@ -5347,15 +5276,15 @@ Syntactically it has to be used as a statement inside the loop:
 
   vm()
 
-As the example shows ``computedGoto`` is mostly useful for interpreters. If
-the underlying backend (C compiler) does not support the computed goto
-extension the pragma is simply ignored.
+
+如示例所示，``computedGoto`` 对解释器最有用。
+如果底层后端（C编译器）不支持计算的goto扩展，则简单地忽略编译指示。
 
 
-unroll 编译指示
+unroll编译指示
 -------------
-The ``unroll`` pragma can be used to tell the compiler that it should unroll
-a `for`:idx: or `while`:idx: loop for execution efficiency:
+
+``unroll`` 编译指示可用于告诉编译器它应该为执行效率展开 `for`:idx: 或 `while`:idx: 循环:
 
 .. code-block:: nim
   proc searchChar(s: string, c: char): int =
@@ -5364,26 +5293,23 @@ a `for`:idx: or `while`:idx: loop for execution efficiency:
       if s[i] == c: return i
     result = -1
 
-In the above example, the search loop is unrolled by a factor 4. The unroll
-factor can be left out too; the compiler then chooses an appropriate unroll
-factor.
 
-**Note**: Currently the compiler recognizes but ignores this pragma.
+在上面的例子中，搜索循环按因子4展开。展开因子也可以省略;然后编译器选择适当的展开因子。
+
+**注意** ：目前编译器会识别但忽略此编译指示。
 
 
-immediate 编译指示
+immediate编译指示
 ----------------
 
-The immediate pragma is obsolete. See `Typed vs untyped parameters`_.
+immediate编译指示已经过时了。请参阅 `类型化和无类型形参`_.
 
 
-compilation option pragmas
+编译选项编译指示
 --------------------------
-The listed pragmas here can be used to override the code generation options
-for a proc/method/converter.
+此处列出的pragma可用于覆盖proc / method / converter的代码生成选项。
 
-The implementation currently provides the following possible options (various
-others may be added later).
+该实现目前提供以下可能的选项（稍后可以添加各种其他选项）。
 
 ===============  ===============  ============================================
 pragma           allowed values   description
@@ -5415,57 +5341,50 @@ callconv         cdecl|...        Specifies the default calling convention for
 
 .. code-block:: nim
   {.checks: off, optimization: speed.}
-  # compile without runtime checks and optimize for speed
+  # 编译时没有运行时检查并优化速度
 
 
-push and pop 编译指示
+push和pop编译指示
 --------------------
-The `push/pop`:idx: pragmas are very similar to the option directive,
-but are used to override the settings temporarily. 示例：
+`push/pop`:idx: 编译指示与option指令非常相似，但用于暂时覆盖设置。 示例：
 
 .. code-block:: nim
   {.push checks: off.}
-  # compile this section without runtime checks as it is
-  # speed critical
+  # 编译本节而不进行运行时检查，因为它对速度至关重要
   # ... some code ...
-  {.pop.} # restore old settings
+  {.pop.} # 恢复堆栈
 
 
-register 编译指示
+register编译指示
 ---------------
-The ``register`` pragma is for variables only. It declares the variable as
-``register``, giving the compiler a hint that the variable should be placed
-in a hardware register for faster access. C compilers usually ignore this
-though and for good reasons: Often they do a better job without it anyway.
 
-In highly specific cases (a dispatch loop of a bytecode interpreter for
-example) it may provide benefits, though.
+``register`` 编译指示仅用于变量。
+它将变量声明为 ``register`` ，给编译器一个提示，即应该将变量放在硬件寄存器中以便更快地访问。
+C编译器通常会忽略这一点，但有充分的理由：无论如何，他们通常会做得更好。
+
+在高度特定的情况下（例如，字节码解释器的调度循环），它可能提供好处。
 
 
-global 编译指示
+global编译指示
 -------------
-The ``global`` pragma can be applied to a variable within a proc to instruct
-the compiler to store it in a global location and initialize it once at program
-startup.
+
+``global`` 编译指示可以应用于proc中的变量，以指示编译器将其存储在全局位置并在程序启动时初始化它。
 
 .. code-block:: nim
   proc isHexNumber(s: string): bool =
     var pattern {.global.} = re"[0-9a-fA-F]+"
     result = s.match(pattern)
 
-When used within a generic proc, a separate unique global variable will be
-created for each instantiation of the proc. The order of initialization of
-the created global variables within a module is not defined, but all of them
-will be initialized after any top-level variables in their originating module
-and before any variable in a module that imports it.
+在泛型proc中使用时，将为proc的每个实例创建一个单独的唯一全局变量。
+未定义模块中创建的全局变量的初始化顺序，但所有这些变量的顺序将在其原始模块中的任何顶级变量之后以及导入模块中的任何变量之前初始化。
 
-pragma 编译指示
+pragma编译指示
 -------------
 
-The ``pragma`` pragma can be used to declare user defined pragmas. This is
-useful because Nim's templates and macros do not affect pragmas. User
-defined pragmas are in a different module-wide scope than all other symbols.
-They cannot be imported from a module.
+``pragma`` 编译指示可用于声明用户定义的编译指示。
+这很有用，因为Nim的模板和宏不会影响编译指示。
+用户定义的编译指示与所有其他符号在不同的模块范围内。
+它们无法从模块导入。
 
 示例：
 
@@ -5478,29 +5397,26 @@ They cannot be imported from a module.
   proc p*(a, b: int): int {.rtl.} =
     result = a+b
 
-In the example a new pragma named ``rtl`` is introduced that either imports
-a symbol from a dynamic library or exports the symbol for dynamic library
-generation.
+在该示例中，引入了名为 ``rtl`` 的新编译指示，该编译指示从动态库导入符号或导出用于动态库生成的符号。
 
-Disabling certain messages
+禁用某些消息
 --------------------------
-Nim generates some warnings and hints ("line too long") that may annoy the
-user. A mechanism for disabling certain messages is provided: Each hint
-and warning message contains a symbol in brackets. This is the message's
-identifier that can be used to enable or disable it:
+Nim会产生一些可能会惹恼用户的警告和提示（“行太长”）。
+提供了一种禁用某些消息的机制：每个提示和警告消息都在括号中包含一个符号。
+这是可用于启用或禁用它的消息标识符：
 
 .. code-block:: Nim
-  {.hint[LineTooLong]: off.} # turn off the hint about too long lines
+  {.hint[LineTooLong]: off.} # 关掉行太长的提示
 
-This is often better than disabling all warnings at once.
+这通常比一次禁用所有警告更好。
 
 
-used 编译指示
+used编译指示
 -----------
 
-Nim produces a warning for symbols that are not exported and not used either.
-The ``used`` pragma can be attached to a symbol to suppress this warning. This
-is particularly useful when the symbol was generated by a macro:
+Nim会对未导出但未使用的符号生成警告。
+``used`` 编译指示可以附加到符号以抑制此警告。
+当符号由宏生成时，这尤其有用：
 
 .. code-block:: nim
   template implementArithOps(T) =
@@ -5509,20 +5425,15 @@ is particularly useful when the symbol was generated by a macro:
     proc echoSub(a, b: T) {.used.} =
       echo a - b
 
-  # no warning produced for the unused 'echoSub'
+  # 没有为未使用的'echoSub'发出警告
   implementArithOps(int)
   echoAdd 3, 5
 
-
-
-experimental 编译指示
+experimental编译指示
 -------------------
 
-The ``experimental`` pragma enables experimental language features. Depending
-on the concrete feature this means that the feature is either considered
-too unstable for an otherwise stable release or that the future of the feature
-is uncertain (it may be removed any time).
-
+``experimental`` 编译指示实现了实验语言功能。
+根据具体特征，这意味着该特征被认为对于其他稳定版本而言太不稳定，或者该特征的未来不确定（可能随时删除）。
 示例：
 
 .. code-block:: nim
@@ -5534,10 +5445,9 @@ is uncertain (it may be removed any time).
         echo "echo in parallel"
 
 
-As a top level statement, the experimental pragma enables a feature for the
-rest of the module it's enabled in. This is problematic for macro and generic
-instantiations that cross a module scope. Currently these usages have to be
-put into a ``.push/pop`` environment:
+作为顶级语句，实验编译指示为其启用的模块的其余部分启用了一项功能。
+这对于跨越模块范围的宏和通用实例化是有问题的。
+目前这些用法必须放在``.push/pop``环境中：
 
 .. code-block:: nim
 
@@ -5561,21 +5471,19 @@ put into a ``.push/pop`` environment:
 特定实现的编译指示
 ===============================
 
-This section describes additional pragmas that the current Nim implementation
-supports but which should not be seen as part of the language specification.
+本节描述了当前Nim实现支持的其他编译指示，但不应将其视为语言规范的一部分。
 
 Bitsize 编译指示
 --------------
 
-The ``bitsize`` 编译指示 is for object field members. It declares the field as
-a bitfield in C/C++.
+``bitsize`` 编译指示用于对象字段成员。它将该字段声明为C/C++中的位字段。
 
 .. code-block:: Nim
   type
     mybitfield = object
       flag {.bitsize:1.}: cuint
 
-generates:
+生成:
 
 .. code-block:: C
   struct mybitfield {
@@ -5583,55 +5491,54 @@ generates:
   };
 
 
-Volatile 编译指示
+Volatile编译指示
 ---------------
-The ``volatile`` pragma is for variables only. It declares the variable as
-``volatile``, whatever that means in C/C++ (its semantics are not well defined
-in C/C++).
 
-**Note**: This pragma will not exist for the LLVM backend.
+``volatile`` 编译指示仅用于变量。
+它将变量声明为 ``volatile`` ，无论C/C++中的含义是什么（它的语义在C/C++中没有很好地定义）。
 
 
-NoDecl 编译指示
+**注意** ：LLVM后端不存在此编译指示。
+
+
+NoDecl编译指示
 -------------
-The ``noDecl`` pragma can be applied to almost any symbol (variable, proc,
-type, etc.) and is sometimes useful for interoperability with C:
-It tells Nim that it should not generate a declaration for the symbol in
-the C code. For 示例：
+``noDecl`` 编译指示几乎可以应用于任何符号（变量，proc，类型等），有时与C的互操作性有用：
+它告诉Nim它不应该在C代码中为符号生成声明。
+
+例如：
 
 .. code-block:: Nim
   var
-    EACCES {.importc, noDecl.}: cint # pretend EACCES was a variable, as
-                                     # Nim does not know its value
+    EACCES {.importc, noDecl.}: cint # EACCES是一个变量，因为Nim不知道它的价值
 
-However, the ``header`` pragma is often the better alternative.
+但是，``header`` 编译指示通常是更好的选择。
 
-**Note**: This will not work for the LLVM backend.
+**注意** ：这不适用于LLVM后端。
 
 
 Header编译指示
 -------------
-The ``header`` pragma is very similar to the ``noDecl`` pragma: It can be
-applied to almost any symbol and specifies that it should not be declared
-and instead the generated code should contain an ``#include``:
+
+``header`` 编译指示与 ``noDecl`` 编译指示非常相似：它几乎可以应用于任何符号并指定不应该声明它，而生成的代码应该包含一个 ``#include`` ：
 
 .. code-block:: Nim
   type
     PFile {.importc: "FILE*", header: "<stdio.h>".} = distinct pointer
-      # import C's FILE* type; Nim will treat it as a new pointer type
+      # 导入C的FILE *类型; Nim会将其视为新的指针类型
 
-The ``header`` pragma always expects a string constant. The string contant
-contains the header file: As usual for C, a system header file is enclosed
-in angle brackets: ``<>``. If no angle brackets are given, Nim
-encloses the header file in ``""`` in the generated C code.
+``header`` 编译指示始终期望字符串不变。
+字符串包含头文件：与C一样，系统头文件包含在尖括号中： ``<>``  。
 
-**Note**: This will not work for the LLVM backend.
+如果没有给出尖括号，Nim将生成的C代码中的头文件包含在 ``""`` 中。
+
+**注意** ：这不适用于LLVM后端。
 
 
-IncompleteStruct 编译指示
+IncompleteStruct编译指示
 -----------------------
-The ``incompleteStruct`` pragma tells the compiler to not use the
-underlying C ``struct`` in a ``sizeof`` expression:
+
+``incompleteStruct`` 编译指示告诉编译器不要在 ``sizeof`` 表达式中使用底层的C ``struct`` ：
 
 .. code-block:: Nim
   type
@@ -5641,20 +5548,19 @@ underlying C ``struct`` in a ``sizeof`` expression:
 
 Compile编译指示
 --------------
-The ``compile`` 编译指示 can be used to compile and link a C/C++ source file
-with the project:
+
+``compile`` 编译指示可用于编译和链接项目的C/C++源文件：
 
 .. code-block:: Nim
   {.compile: "myfile.cpp".}
 
-**Note**: Nim computes a SHA1 checksum and only recompiles the file if it
-has changed. You can use the ``-f`` command line option to force recompilation
-of the file.
+**注意** ：Nim计算SHA1校验和，只有在文件发生变化时才重新编译。
+您可以使用 ``-f`` 命令行选项强制重新编译该文件。
 
 
 Link编译指示
 -----------
-The ``link`` 编译指示 can be used to link an additional file with the project:
+``link`` 编译指示可用于将附加文件与项目链接：
 
 .. code-block:: Nim
   {.link: "myfile.o".}
@@ -5662,28 +5568,26 @@ The ``link`` 编译指示 can be used to link an additional file with the projec
 
 PassC编译指示
 ------------
-The ``passC`` 编译指示 can be used to pass additional parameters to the C
-compiler like you would using the commandline switch ``--passC``:
+
+可以使用 ``passC`` 编译指示将其他参数传递给C编译器，就像使用命令行开关 ``--passC`` 一样：
 
 .. code-block:: Nim
   {.passC: "-Wall -Werror".}
 
-Note that you can use ``gorge`` from the `system module <system.html>`_ to embed parameters from an external command that will be executed during semantic analysis:
+请注意，您可以使用 `system module <system.html>`_ 中的 ``gorge`` 来嵌入将在语义分析期间执行的外部命令的参数：
 
 .. code-block:: Nim
   {.passC: gorge("pkg-config --cflags sdl").}
 
 PassL编译指示
 ------------
-The ``passL`` 编译指示 can be used to pass additional parameters to the linker
-like you would using the commandline switch ``--passL``:
+
+``passL`` 编译指示可用于将其他参数传递给链接器，就像使用命令行开关 ``--passL`` 一样：
 
 .. code-block:: Nim
   {.passL: "-lSDLmain -lSDL".}
 
-Note that you can use ``gorge`` from the `system module <system.html>`_ to
-embed parameters from an external command that will be executed
-during semantic analysis:
+请注意，您可以使用 `system module <system.html>`_ 中的 ``gorge`` 来嵌入将在语义分析期间执行的外部命令的参数：
 
 .. code-block:: Nim
   {.passL: gorge("pkg-config --libs sdl").}
@@ -5691,10 +5595,10 @@ during semantic analysis:
 
 Emit编译指示
 -----------
-The ``emit`` 编译指示 can be used to directly affect the output of the
-compiler's code generator. So it makes your code unportable to other code
-generators/backends. Its usage is highly discouraged! However, it can be
-extremely useful for interfacing with `C++`:idx: or `Objective C`:idx: code.
+
+``emit`` 编译指示可用于直接影响编译器代码生成器的输出。
+因此，它使您的代码无法移植到其他代码生成器/后端。
+它的使用非常不鼓励的！但是，它对于与 `C++`:idx: 或 `Objective C`:idx: 代码非常有用。
 
 示例：
 
@@ -5706,14 +5610,13 @@ extremely useful for interfacing with `C++`:idx: or `Objective C`:idx: code.
   {.push stackTrace:off.}
   proc embedsC() =
     var nimVar = 89
-    # access Nim symbols within an emit section outside of string literals:
+    # 访问字符串文字之外的发送部分中的Nim符号：
     {.emit: ["""fprintf(stdout, "%d\n", cvariable + (int)""", nimVar, ");"].}
   {.pop.}
 
   embedsC()
 
-``nimbase.h`` defines ``NIM_EXTERNC`` C macro that can be used for
-``extern "C"`` code to work with both ``nim c`` and ``nim cpp``, eg:
+``nimbase.h`` 定义了 ``NIM_EXTERNC`` C宏，它可以用于 ``extern "C"``代码，用于 ``nim c`` 和 ``nim cpp`` ，例如：
 
 .. code-block:: Nim
   proc foobar() {.importc:"$1".}
@@ -5723,13 +5626,10 @@ extremely useful for interfacing with `C++`:idx: or `Objective C`:idx: code.
   void fun(){}
   """.}
 
-For backwards compatibility, if the argument to the ``emit`` statement
-is a single string literal, Nim symbols can be referred to via backticks.
-This usage is however deprecated.
+为了向后兼容，如果``emit``语句的参数是单个字符串文字，则可以通过反引号引用Nim符号。
+但是不推荐使用此用法。
 
-For a toplevel emit statement the section where in the generated C/C++ file
-the code should be emitted can be influenced via the
-prefixes ``/*TYPESECTION*/`` or ``/*VARSECTION*/`` or ``/*INCLUDESECTION*/``:
+对于顶级emit语句， 生成的C/C++文件中应该发出代码的部分可以通过前缀 ``/*TYPESECTION*/`` 或 ``/*VARSECTION*/`` 或 ``/*INCLUDESECTION*/`` 来影响:
 
 .. code-block:: Nim
   {.emit: """/*TYPESECTION*/
@@ -5757,10 +5657,10 @@ ImportCpp编译指示
 和 `importc pragma for C <#foreign-function-interface-importc-pragma>`_ 类似, ``importcpp`` 编译指示一般可以用于引入 `C++`:idx: 方法或C++符号。 
 生成的代码会使用C++方法调用的语法: ``obj->method(arg)`` 。
 
-结合 ``header`` 和 ``emit`` 编译指示，这允许与C++库的 *草率* 接口：  
+结合 ``header`` 和 ``emit`` 编译指示，这允许与C++库的 *草率* 接口： 
 
 .. code-block:: Nim
-  # Horrible example of how to interface with a C++ engine ... ;-)
+  # 和C++引擎对接的反例... ;-)
 
   {.link: "/usr/lib/libIrrlicht.so".}
 
@@ -5825,12 +5725,13 @@ ImportCpp编译指示
   var x: ptr CppObj
   cppMethod(x[], 1, 2, 3)
 
-Produces:
+生成:
 
 .. code-block:: C
   x->CppMethod(1, 2, 3)
 
 作为一个特殊的规则来保持与旧版本的 ``importcpp`` 编译指示的向后兼容性，如果没有特殊的模式字符（任何一个 ``#'@`` ），那么认为是C++的点或箭头符号，所以上面的例子也可以写成：
+
 
 .. code-block:: nim
   proc cppMethod(this: CppObj, a, b, c: cint) {.importcpp: "CppMethod".}
@@ -5864,9 +5765,10 @@ Produces:
   x = SystemManager::getSubsystem<System::Input>()
 
 
-- ``#@`` is a special case to support a ``cnew`` operation. 
-  It is required so that the call expression is inlined directly, without going through a temporary location. 
-  This is only required to circumvent a limitation of the current code generator.
+- ``#@`` is a special case to support a ``cnew`` operation. It is required so
+  that the call expression is inlined directly, without going through a
+  temporary location. This is only required to circumvent a limitation of the
+  current code generator.
 
 For example C++'s ``new`` operator can be "imported" like this:
 
@@ -5906,8 +5808,8 @@ This pragma also helps to generate faster C++ code since construction then doesn
 封装析构函数
 ~~~~~~~~~~~~~~~~~~~~
 封装destruct由于Nim直接生成C++，所以任何析构函数都由C++编译器在作用域出口处隐式调用。
-这意味着通常人们可以完全没有包装析构函数！
-但是当需要显式调用它时，需要将其包装起来。
+这意味着通常人们可以完全没有封装析构函数！
+但是当需要显式调用它时，需要将其封装起来。
 模式语言提供了所需的一切：
 
 .. code-block:: nim
@@ -5929,7 +5831,7 @@ This pragma also helps to generate faster C++ code since construction then doesn
   x[6] = 91.4
 
 
-Produces:
+生成:
 
 .. code-block:: C
   std::map<int, double> x;
@@ -6165,59 +6067,57 @@ Importc编译指示
 
 请注意，此pragma有点用词不当：其他后端确实在同一名称下提供相同的功能。
 
-此外，如果一个人正在与C++接口，那么 `ImportCpp pragma <manual.html＃implementation-specific-pragmas-importcpp-pragma>`_ 并与Objective-C连接 `importObjC pragma <manual.html＃implementation-specific-pragmas- importobjc-pragma>`_ 可以使用。
+此外，如果一个人正在与C++或Objective-C对接，可以使用 `ImportCpp pragma <manual.html＃implementation-specific-pragmas-importcpp-pragma>`_ 或 `importObjC pragma <manual.html＃implementation-specific-pragmas- importobjc-pragma>`_ 。
 
-传递给``importc``的字符串字面值可以是格式字符串：
+传递给 ``importc`` 的字符串文字可以是格式字符串：
 
 .. code-block:: Nim
   proc p(s: cstring) {.importc: "prefix$1".}
 
 在示例中，``p`` 的外部名称设置为 ``prefixp`` 。
-只有 ``$1`` 可用，字面值美元符号必须写成 ``$$`` 。
+只有 ``$1`` 可用，文字美元符号必须写成 ``$$`` 。
 
 
 Exportc编译指示
 --------------
-The ``exportc`` pragma provides a means to export a type, a variable, or a procedure to C. 
-Enums and constants can't be exported. 
-The optional argument is a string containing the C identifier.  
-If the argument is missing, the C name is the Nim identifier *exactly as spelled*:
+
+``exportc`` 编译指示提供了一种将类型，变量或过程导出到C的方法。
+枚举和常量无法导出。
+可选参数是包含C标识符的字符串。
+如果缺少参数，则C名称是Nim标识符 *与拼写完全相同* ：
 
 .. code-block:: Nim
   proc callme(formatstr: cstring) {.exportc: "callMe", varargs.}
 
-Note that this pragma is somewhat of a misnomer: Other backends do provide
-the same feature under the same name.
+请注意，此pragma有点用词不当：其他后端确实在同一名称下提供相同的功能。
 
-The string literal passed to ``exportc`` can be a format string:
+传递给 ``exportc`` 的字符串文字可以是格式字符串：
 
 .. code-block:: Nim
   proc p(s: string) {.exportc: "prefix$1".} =
     echo s
 
-In the example the external name of ``p`` is set to ``prefixp``. 
-Only ``$1`` is available and a literal dollar sign must be written as ``$$``.
+在示例中，``p`` 的外部名称设置为 ``prefixp`` 。
+只有 ``$1`` 可用，文字美元符号必须写成 ``$$`` 。
 
 
 
 Extern编译指示
 -------------
-Like ``exportc`` or ``importc``, the ``extern`` pragma affects name
-mangling. The string literal passed to ``extern`` can be a format string:
+就像 ``exportc`` 或 ``importc`` 一样， ``extern`` 编译指示会影响名称修改。传递给 ``extern`` 的字符串文字可以是格式字符串：
 
 .. code-block:: Nim
   proc p(s: string) {.extern: "prefix$1".} =
     echo s
 
-In the example the external name of ``p`` is set to ``prefixp``. Only ``$1``
-is available and a literal dollar sign must be written as ``$$``.
+在示例中，``p`` 的外部名称设置为 ``prefixp`` 。只有 ``$1`` 可用，文字美元符号必须写成 ``$$`` 。
 
 
 
 Bycopy编译指示
 -------------
 
-``bycopy`` 编译指示可以应用于对象或元组类型，并指示编译器按类型将类型传递给procs：
+``bycopy`` 编译指示可以应用于对象或元组类型，并指示编译器按类型将类型传递给过程：
 
 .. code-block:: nim
   type
@@ -6228,7 +6128,7 @@ Bycopy编译指示
 Byref编译指示
 ------------
 
-``byref`` 编译指示可以应用于对象或元组类型，并指示编译器通过引用（隐藏指针）将类型传递给procs。
+``byref`` 编译指示可以应用于对象或元组类型，并指示编译器通过引用（隐藏指针）将类型传递给过程。
 
 
 Varargs编译指示
@@ -6278,7 +6178,7 @@ Packed编译指示
   proc Tcl_Eval(interp: pTcl_Interp, script: cstring): int {.cdecl,
     importc, dynlib: "libtcl(|8.5|8.4|8.3).so.(1|0)".}
 
-在运行时，按此顺序搜索动态库
+在运行时，搜索动态库（按此顺序）
 
   libtcl.so.1
   libtcl.so.0
@@ -6305,7 +6205,7 @@ Packed编译指示
 
 **注意**: 形如 ``libtcl(|8.5|8.4).so`` 只支持常量字符串，因为它们需要预编译。
 
-**注意**: 传变量给 ``dynlib`` pragma 在进行时会失败，因为初始化问题的顺序。
+**注意**: 传变量给 ``dynlib`` 编译指示在进行时会失败，因为初始化问题的顺序。
 
 **注意**: ``dynlib`` 导入可以用 ``--dynlibOverride:name`` 命令行选项重写。
 编译器用户指南包括更多信息。
@@ -6325,7 +6225,6 @@ Packed编译指示
 在Windows上，这个编译指示在函数声明中添加了 ``__declspec(dllexport)`` 。
 
 
-
 线程
 =======
 
@@ -6334,33 +6233,33 @@ Packed编译指示
 请参阅低级线程API `threads <threads.html>`_ 和 `channels <channels.html>`_  模块。
 还有高级并行结构可用。见 `spawn <manual_experimental.html#parallel-amp-spawn>`_ 更多细节。
 
-Nim's memory model for threads is quite different than that of other common programming languages (C, Pascal, Java): Each thread has its own (garbage collected) heap and sharing of memory is restricted to global variables. 
-This helps to prevent race conditions. GC efficiency is improved quite a lot, because the GC never has to stop other threads and see what they reference.
+Nim的线程内存模型与其他常见编程语言（C，Pascal，Java）完全不同：每个线程都有自己的（垃圾收集）堆，内存共享仅限于全局变量。
+这有助于防止竞争条件。 GC效率得到了很大提高，因为GC永远不必停止其他线程并看到它们引用的内容。
 
 
 Thread编译指示
 -------------
 
-A proc that is executed as a new thread of execution should be marked by the ``thread`` pragma for reasons of readability. 
-The compiler checks for violations of the `no heap sharing restriction`:idx:\: This restriction implies that it is invalid to construct a data structure that consists of memory allocated from different (thread local) heaps.
+作为新执行线程执行的proc应该由 ``thread`` 编译指示标记，以便于阅读。
+编译器检查是否存在 `无堆共享限制`:dx:\: 的违规。此限制意味着构造一个由不同（线程本地）堆分配的内存组成的数据结构是无效的。
 
-A thread proc is passed to ``createThread`` or ``spawn`` and invoked indirectly; so the ``thread`` pragma implies ``procvar``.
+线程proc被传递给 ``createThread`` 或 ``spawn`` 并间接调用；所以 ``thread`` 编译指示暗示 ``procvar`` 。
 
 
 GC安全
 ---------
-我们称过程 ``p`` `GC安全`:idx: ，当它不通过调用GC不安全的过程直接或间接访问任何含有GC内存的全局变量(``string``, ``seq``, ``ref`` 或闭包)。
+当过程不通过调用GC不安全的过程直接或间接访问任何含有GC内存的全局变量(``string``, ``seq``, ``ref`` 或闭包)时，我们称过程 ``p`` `GC安全`:idx: 。
 
-The `gcsafe`:idx: annotation can be used to mark a proc to be gcsafe, otherwise this property is inferred by the compiler. 
-Note that ``noSideEffect`` implies ``gcsafe``. The only way to create a thread is via ``spawn`` or ``createThread``. 
-The invoked proc must not use ``var`` parameters nor must any of its parameters contain a ``ref`` or ``closure`` type. 
-This enforces the *no heap sharing restriction*.
+`gcsafe`:idx: 可用于将proc标记为gcsafe，否则此属性由编译器推断。
+请注意， ``noSideEffect`` 意味着 ``gcsafe`` 。创建线程的唯一方法是通过 ``spawn`` 或 ``createThread`` 。
+被调用的proc不能使用 ``var`` 参数，也不能使用任何参数包含 ``ref`` 或 ``closure`` 类型。
+这会强制执行 *无堆共享限制* 。
 
-Routines that are imported from C are always assumed to be ``gcsafe``.
-To disable the GC-safety checking the ``--threadAnalysis:off`` command line switch can be used. 
-This is a temporary workaround to ease the porting effort from old code to the new threading model.
+从C导入的例程总是被假定为 ``gcsafe`` 。
+要禁用GC安全检查，可以使用 ``--threadAnalysis:off`` 命令行开关。
+这是一种临时解决方法，可以简化从旧代码到新线程模型的移植工作。
 
-To override the compiler's gcsafety analysis a ``{.gcsafe.}`` pragma block can be used:
+要覆盖编译器的gcsafety分析，可以使用 ``{.gcsafe.}`` 编译指示:
 
 .. code-block:: nim
 
@@ -6373,9 +6272,9 @@ To override the compiler's gcsafety analysis a ``{.gcsafe.}`` pragma block can b
       deepCopy(perThread, someGlobal)
 
 
-Future directions:
+未来的方向:
 
-- A shared GC'ed heap might be provided.
+- 可能会提供一个共享的GC堆内存。
 
 
 Threadvar编译指示
