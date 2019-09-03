@@ -70,7 +70,9 @@ proc echartsInit*(n: Element): EChart {.importc: "echarts.init".}
 proc setOption*(x: EChart; option: JsonNode) {.importcpp.}
 ```
 
-另一个使用的Javascript模块是cryptojs，用于加密从浏览器向后端传输的密码,md5.js中
+另一个使用的Javascript模块是cryptojs，用于加密从浏览器向后端传输的密码。
+
+在crypotojs/components/md5.js中
 
 ```javascript
 (function (Math) {
