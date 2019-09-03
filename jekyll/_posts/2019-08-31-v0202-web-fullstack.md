@@ -34,12 +34,64 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
 ### 一、Karax的立即模式
     立即模式（immediate mode）是GUI的概念，和立即模式相对的是保留模式（retained mode）,
     关于两个模式比较形象的解释：https://blog.csdn.net/cvper/article/details/86568245
-    Karax引入这种概念使得它的虚拟DOM节点成为无状态的(stateless)节点，Karax设置浏览器window对象请求的每一帧回调都将重绘虚拟DOM树，diff算法用来对比新旧两颗树，计算出补丁集，对虚拟DOM树进行部分更新。    
+    Karax引入这种概念使得它的虚拟DOM节点成为无状态的(stateless)节点，设置浏览器window对象请求的每一帧回调都将重绘虚拟DOM树，diff算法用来对比新旧两颗树，计算出补丁集，对虚拟DOM树进行部分更新。    
 
 
 ### 二、Echarts模块函数的导入
-    可以把这些模块写成pure的组件，我们采用直接使用Echarts模块这种最简单的方式，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同Javascript模块类型，导入浏览器全局变量和方法，如Echarts的模块类型组织方式为
+    可以把这些模块写成pure的组件，我们采用偷懒的方式直接使用Echarts，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同Javascript模块类型，导入浏览器全局变量和方法，有文档的直接看API文档会快些，没有文档的库需要看源码，这里主要描述通用方法，如Echarts的模块类型为
 
-        ![]({{ site.baseurl }}/assets/img/posts/2019-08-31-v0202-web-fullstack-1.png)
+```javascript
 
+(function (global, factory) {
+    if (typeof exports === 'object' && typeof module !== 'undefined'){
+        factory(exports) 
+    }else if(typeof define === 'function' && define.amd ){
+        define(['exports'], factory);
+    }else{
+        factory((global.echarts = {}));
+    }
+}(this, (function (exports) { 'use strict';
+//...
+var echartsProto = ECharts.prototype;
+//...
+echartsProto.setOption = function (option, notMerge, lazyUpdate) {...}
+//...
+function init(dom, theme$$1, opts) {...}
+//...
+exports.init = init;
+//...
+})));
+```
+可以将setOption和init导入Karax
+```nim
+type
+      EChart* = ref object
+proc echartsInit*(n: Element): EChart {.importc: "echarts.init".}
+proc setOption*(x: EChart; option: JsonNode) {.importcpp.}
+```
+
+另一个使用的Javascript模块是cryptojs，用于加密从浏览器向后端传输的密码,md5.js中
+
+```javascript
+(function (Math) {
+    var C = CryptoJS;
+    var C_algo = C.algo;
+    //...
+    var MD5 = C_algo.MD5 = Hasher.extend({...})
+
+```
+以及core.js中
+```javascript
+var WordArray = C_lib.WordArray = Base.extend({
+    //...
+    toString: function (encoder) {
+                return (encoder || Hex).stringify(this);
+            },
+```
+得到
+```nim
+var CryptoJS*{.importc.}: JsObject
+proc MD5*(obj: JsObject, message: cstring): JsObject {.importcpp: "#.MD5(#)".}
+proc toString*(obj: JsObject): cstring {.importcpp: "#.toString()".}
+```
 
