@@ -170,7 +170,7 @@ documentation for more information.
 - Added ``readHeaderRow`` and ``rowEntry`` to the ``parsecsv``
   [(doc)](http://nim-lang.org/docs/parsecsv.html) module
   to provide
-  a lightweight alternative to python's ``csv.DictReader``.
+  a lightweight alternative to Python's ``csv.DictReader``.
 
 - Added ``setStdIoUnbuffered`` proc to the ``system`` module to enable
   unbuffered I/O.

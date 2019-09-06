@@ -10,7 +10,7 @@ Windows下 nim v0.20 版本安装，无法运行 finish.exe 的解决方案
     It combines successful concepts from mature languages like Python,Ada and Modula.
 
     Nim是一种静态类型编译的系统编程语言。
-    它结合了来自成熟语言（如PYTHON、ADA和MODULA）的成功概念。
+    它结合了来自成熟语言（如Python、Ada和Modula）的成功概念。
 
 Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
 
