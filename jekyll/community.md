@@ -5,7 +5,6 @@ css_class: community
 ---
 
 <h1 class="text-centered page-title main-heading">社区</h1>
-
 <h2 class="text-centered page-subtitle">
   不管你习惯哪种交流方式
   <br>
@@ -50,6 +49,25 @@ css_class: community
 
 <i class="fa fa-rss" aria-hidden="true"></i>
 [博客RSS源]({{ '/feed.xml' | prepend: site.baseurl }})
+
+## 新浪微博
+
+有关版本发布、线上线下的活动、和项目的最新公告。
+请务必关注 **@Nim中文社区** 官方微博帐户，
+有什么问题可以`@`我们进行反馈。
+记得在发布有关`Nim`和`Nim中文社区`的微博时 **`@`** 我们哦！
+
+<i class="fa fa-weibo" aria-hidden="true"></i>
+[@Nim中文社区](https://weibo.com/nimlangcn)
+
+## 微信公众号
+
+有关版本发布、线上线下的活动、和项目的最新公告。
+请务必搜索关注 **Nim中文社区** 官方微信公众号。
+有什么问题可以直接留言，向我们进行反馈。
+
+<i class="fa fa-weibo" aria-hidden="true"></i>
+Nim中文社区
 
 ## 线下交流会
 
