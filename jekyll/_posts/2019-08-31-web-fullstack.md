@@ -200,7 +200,7 @@ proc init(ev: Event) =
   kxi.renderId = reqFrame(proc () = kxi.dodraw)
 ```
 `init`将`kxi.renderId`设置为浏览器window对象向图形API缓冲区请求一次动画帧返回的句柄，
-并设置请求动画帧的回调为`dodraw`。 如果`kxi.rendId`为零， `redraw`初始化`kxi.rendId`，否则执行`dodraw`。
+并设置请求动画帧的回调为`dodraw`。 如果`kxi.renderId`为零， `redraw`初始化`kxi.renderId`，否则执行`dodraw`。
 
 ```nim
 proc dodraw(kxi: KaraxInstance) =
