@@ -49,13 +49,14 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
 核心的buildHtml宏做的DSL以及虚拟DOM算法，
 对理论知识和解决问题的能力有较高的要求，
 即使花时间掌握了，
-面临的也是机制和组件从零开发。
+面临的也是机制和组件从零开发，
+唯一能够让你坚持下去的是你相信它会带来不一样的东西。
 
 
 ## 技术点
 本文将从理论和实践上分别展开，
 对解决问题过程中使用的方法一一讲解，
-希望能够让大家深入浅出的理解Karax。
+希望能够让大家学会使用Karax。
 
 * 理论上的重点在Karax的立即模式、渲染机制、虚拟DOM与DOM的映射，
 这部分将主要根据Karax中的源码进行梳理；
@@ -73,12 +74,12 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
 Karax引入这种概念使得它的虚拟DOM节点成为无状态的(stateless)节点，
 设置浏览器window对象请求的每一帧回调都将重绘虚拟DOM树，
 Diff算法用来对比新旧两颗树，计算出补丁集，对不同部分进行更新，
-这与React的Diff算法一样，不同的是渲染机制。
+这与React的Diff算法一样。
 
 
 ### 使用Javascript模块
 
-可以把这些模块写成pure的组件，我们采用偷懒的方式直接使用Echarts，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同Javascript模块类型，导入浏览器全局变量和方法，有文档的直接看API文档会快些，没有文档的库需要看源码，这里主要描述通用方法，如Echarts的模块类型为：
+可以把这些模块写成pure的组件，我们采用偷懒的方式直接使用Echarts，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同Javascript模块类型，导入浏览器全局变量和方法，有文档的直接看API文档会快些，没有文档的库需要看源码，这里主要描述通用方法，如Echarts的源码中：
 
 ```javascript
 
@@ -142,7 +143,7 @@ proc MD5*(obj: JsObject, message: cstring): JsObject {.importcpp: "#.MD5(#)".}
 proc toString*(obj: JsObject): cstring {.importcpp: "#.toString()".}
 ```
 
-值得注意的是JsObject对象可以像Javascript使用.操作符访问其导入的公共字段和方法，使用JsObject导入，需要罗列需要用到的每个方法；
+值得注意的是JsObject对象可以像Javascript使用.操作符访问其导入的公共字段，使用JsObject导入需要罗列需要用到的每个过程；
 
 ```nim
 #Nim文件中组成链式表达式
@@ -182,12 +183,24 @@ proc setRenderer*(renderer: proc (data: RouterData): VNode,
 
 ```nim
 proc reqFrame(callback: proc()): int {.importc: "window.requestAnimationFrame".}
-...
+
+proc redraw*(kxi: KaraxInstance = kxi) =
+  # we buffer redraw requests:
+  when false:
+    if drawTimeout != nil:
+      clearTimeout(drawTimeout)
+    drawTimeout = setTimeout(dodraw, 30)
+  elif true:
+    if kxi.renderId == 0:
+      kxi.renderId = reqFrame(proc () = kxi.dodraw)
+  else:
+    dodraw(kxi)
+
 proc init(ev: Event) =
   kxi.renderId = reqFrame(proc () = kxi.dodraw)
 ```
-`init`将`kxi`的渲染Id设置——*浏览器向图形API缓冲区请求一次动画帧的句柄*，
-并设置请求动画帧的回调为`dodraw`。
+`init`将`kxi.renderId`设置为浏览器window对象向图形API缓冲区请求一次动画帧返回的句柄，
+并设置请求动画帧的回调为`dodraw`。 如果`kxi.rendId`为零， `redraw`初始化`kxi.rendId`，否则执行`dodraw`。
 
 ```nim
 proc dodraw(kxi: KaraxInstance) =
@@ -218,11 +231,11 @@ proc dodraw(kxi: KaraxInstance) =
 
 ### Web后端
 
-Nim全栈开发的Web后端可以使用`Jester`框架，
-运行多线程异步，
+Nim的Web后端可以使用`Jester`框架，
+支持多线程异步，
 涉及到websocket的，
 可以使用[niv/websocket.nim](https://github.com/niv/websocket.nim)，
-部署方面https要求websocket也使用`wss`，具体将在后面讲解。
+部署方面https要求websocket使用`wss`，具体将在后面讲解。
 
 
 这里简单介绍了 *如何使用Javascript模块的类型*和*库函数*、*立即模式*，
