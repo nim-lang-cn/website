@@ -827,21 +827,21 @@ function main() {
   <ul class="simple simple-toc" id="toc-list">
 <li><a class="reference" id="关于本文_toc" href="#关于本文">关于本文</a></li>
 <li><a class="reference" id="定义_toc" href="#定义">定义</a></li>
-<li><a class="reference" id="词汇分析_toc" href="#词汇分析">词汇分析</a></li>
-<ul class="simple"><li><a class="reference" id="词汇分析-编码_toc" href="#词汇分析-编码">编码</a></li>
-<li><a class="reference" id="词汇分析-缩进_toc" href="#词汇分析-缩进">缩进</a></li>
-<li><a class="reference" id="词汇分析-注释_toc" href="#词汇分析-注释">注释</a></li>
-<li><a class="reference" id="词汇分析-多行注释_toc" href="#词汇分析-多行注释">多行注释</a></li>
-<li><a class="reference" id="词汇分析-标识符-amp-关键字_toc" href="#词汇分析-标识符-amp-关键字">标识符 &amp; 关键字</a></li>
-<li><a class="reference" id="词汇分析-标识符相等性_toc" href="#词汇分析-标识符相等性">标识符相等性</a></li>
-<li><a class="reference" id="词汇分析-字符串字面值_toc" href="#词汇分析-字符串字面值">字符串字面值</a></li>
-<li><a class="reference" id="词汇分析-三引用字符串字面值_toc" href="#词汇分析-三引用字符串字面值">三引用字符串字面值</a></li>
-<li><a class="reference" id="词汇分析-原始字符串字面值_toc" href="#词汇分析-原始字符串字面值">原始字符串字面值</a></li>
-<li><a class="reference" id="词汇分析-广义原始字符串字面值_toc" href="#词汇分析-广义原始字符串字面值">广义原始字符串字面值</a></li>
-<li><a class="reference" id="词汇分析-字符字面值_toc" href="#词汇分析-字符字面值">字符字面值</a></li>
-<li><a class="reference" id="词汇分析-数值常量_toc" href="#词汇分析-数值常量">数值常量</a></li>
-<li><a class="reference" id="词汇分析-操作符_toc" href="#词汇分析-操作符">操作符</a></li>
-<li><a class="reference" id="词汇分析-其它标记_toc" href="#词汇分析-其它标记">其它标记</a></li>
+<li><a class="reference" id="词法分析_toc" href="#词法分析">词法分析</a></li>
+<ul class="simple"><li><a class="reference" id="词法分析-编码_toc" href="#词法分析-编码">编码</a></li>
+<li><a class="reference" id="词法分析-缩进_toc" href="#词法分析-缩进">缩进</a></li>
+<li><a class="reference" id="词法分析-注释_toc" href="#词法分析-注释">注释</a></li>
+<li><a class="reference" id="词法分析-多行注释_toc" href="#词法分析-多行注释">多行注释</a></li>
+<li><a class="reference" id="词法分析-标识符-amp-关键字_toc" href="#词法分析-标识符-amp-关键字">标识符 &amp; 关键字</a></li>
+<li><a class="reference" id="词法分析-标识符相等性_toc" href="#词法分析-标识符相等性">标识符相等性</a></li>
+<li><a class="reference" id="词法分析-字符串字面值_toc" href="#词法分析-字符串字面值">字符串字面值</a></li>
+<li><a class="reference" id="词法分析-三引用字符串字面值_toc" href="#词法分析-三引用字符串字面值">三引用字符串字面值</a></li>
+<li><a class="reference" id="词法分析-原始字符串字面值_toc" href="#词法分析-原始字符串字面值">原始字符串字面值</a></li>
+<li><a class="reference" id="词法分析-广义原始字符串字面值_toc" href="#词法分析-广义原始字符串字面值">广义原始字符串字面值</a></li>
+<li><a class="reference" id="词法分析-字符字面值_toc" href="#词法分析-字符字面值">字符字面值</a></li>
+<li><a class="reference" id="词法分析-数值常量_toc" href="#词法分析-数值常量">数值常量</a></li>
+<li><a class="reference" id="词法分析-操作符_toc" href="#词法分析-操作符">操作符</a></li>
+<li><a class="reference" id="词法分析-其它标记_toc" href="#词法分析-其它标记">其它标记</a></li>
 </ul><li><a class="reference" id="句法_toc" href="#句法">句法</a></li>
 <ul class="simple"><li><a class="reference" id="句法-结合律_toc" href="#句法-结合律">结合律</a></li>
 <li><a class="reference" id="句法-语法_toc" href="#句法-语法">语法</a></li>
@@ -1101,10 +1101,10 @@ arrayConstructor = '[' expr ^* ',' ']'</pre>
 <p><span id="常量表达式_1">常量表达式</span> 是一个表达式，其值可以在出现的代码的语义分析期间计算。 它不是左值也没有副作用。 常量表达式不仅限于语义分析的功能，例如常量折叠;他们可以使用编译时执行所支持的所有Nim语言功能。 由于常量表达式可以用作语义分析的输入（例如用于定义数组边界），因此这种灵活性要求编译器交错语义分析和编译时代码执行。</p>
 <p>在源代码中从上到下和从左到右进行图像语义分析是非常准确的，在必要时交错编译时代码执行以计算后续语义分析所需的值。 我们将在本文档后面看到，宏调用不仅需要这种交错，而且还会产生语义分析不能完全从上到下，从左到右进行的情况。</p>
 
-<h1><a class="toc-backref" id="词汇分析" href="#词汇分析">词汇分析</a></h1>
-<h2><a class="toc-backref" id="词汇分析-编码" href="#词汇分析-编码">编码</a></h2><p>所有Nim源文件都采用UTF-8编码（或其ASCII子集）。 其他编码不受支持。 可以使用任何标准平台行终端序列 - Unix使用ASCII LF（换行），Windows使用ASCII序列CR LF的（返回后跟换行），老的Macintosh使用ASCII CR（返回）字符。 无论什么平台，使用这些形式的效果是一样的。</p>
+<h1><a class="toc-backref" id="词法分析" href="#词法分析">词法分析</a></h1>
+<h2><a class="toc-backref" id="词法分析-编码" href="#词法分析-编码">编码</a></h2><p>所有Nim源文件都采用UTF-8编码（或其ASCII子集）。 其他编码不受支持。 可以使用任何标准平台行终端序列 - Unix使用ASCII LF（换行），Windows使用ASCII序列CR LF的（返回后跟换行），老的Macintosh使用ASCII CR（返回）字符。 无论什么平台，使用这些形式的效果是一样的。</p>
 
-<h2><a class="toc-backref" id="词汇分析-缩进" href="#词汇分析-缩进">缩进</a></h2><p>Nim的标准语法描述了一个 <span id="缩进敏感_1">缩进敏感</span> 语言。 这意味着所有控制结构都可以通过缩进识别。 缩进仅由空格组成;制表符是不允许的。</p>
+<h2><a class="toc-backref" id="词法分析-缩进" href="#词法分析-缩进">缩进</a></h2><p>Nim的标准语法描述了一个 <span id="缩进敏感_1">缩进敏感</span> 语言。 这意味着所有控制结构都可以通过缩进识别。 缩进仅由空格组成;制表符是不允许的。</p>
 <p>缩进处理按如下方式实现：词法分析器使用前面的空格数注释以下标记;缩进不是一个单独的标记。 这个技巧允许只用1个先行标记解析Nim。</p>
 <p>解析器使用由整数个空格组成的缩进堆栈级别。 缩进信息在解析器重要的位置上查询，否则被忽略：伪终端 <tt class="docutils literal"><span class="pre">IND{&gt;}</span></tt> 表示由比在堆栈顶部更多的空格构成； <tt class="docutils literal"><span class="pre">IND{=}</span></tt> 缩进具有相同数量的空格。 <tt class="docutils literal"><span class="pre">DED</span></tt> 是描述从堆栈弹出一个值的运作的伪代码， <tt class="docutils literal"><span class="pre">IND{&gt;}</span></tt> 意味着推到栈上。</p>
 <p>使用这种表示法，我们现在可以轻松定义语法的核心：一个语句块（简化示例）:<pre>
@@ -1118,12 +1118,12 @@ stmt = IND{&gt;} stmt ^+ IND{=} DED  # list of statements
      / simpleStmt                 # or a simple statement</pre>
 </p>
 
-<h2><a class="toc-backref" id="词汇分析-注释" href="#词汇分析-注释">注释</a></h2><p>注释从字符串或字符字面值外的任何地方开始，并带有哈希字符 <tt class="docutils literal"><span class="pre">#</span></tt> 。 注释包含 <span id="注释片段_1">注释片段</span> 的连接。 评论文章以 <tt class="docutils literal"><span class="pre">#</span></tt> 开头，​​一直运行到行尾。 行尾字符属于该片段。 如果下一行只包含一个注释片段，而它与前一个片段之间没有其他符号，则它不会启动新注释：</p>
+<h2><a class="toc-backref" id="词法分析-注释" href="#词法分析-注释">注释</a></h2><p>注释从字符串或字符字面值外的任何地方开始，并带有哈希字符 <tt class="docutils literal"><span class="pre">#</span></tt> 。 注释包含 <span id="注释片段_1">注释片段</span> 的连接。 评论文章以 <tt class="docutils literal"><span class="pre">#</span></tt> 开头，​​一直运行到行尾。 行尾字符属于该片段。 如果下一行只包含一个注释片段，而它与前一个片段之间没有其他符号，则它不会启动新注释：</p>
 <pre class="listing"><span class="Identifier">i</span> <span class="Operator">=</span> <span class="DecNumber">0</span>     <span class="Comment"># 这是跨行的单个注释。</span>
   <span class="Comment"># 扫描器合并这个块。</span>
   <span class="Comment"># 注释从这里继续。</span></pre><p><span id="文档注释_1">文档注释</span> 由两个开始 <tt class="docutils literal"><span class="pre">##</span></tt> 。 文档注释是符号；它们仅允许出现在输入文件的某个地方，因为它们属于语法树。</p>
 
-<h2><a class="toc-backref" id="词汇分析-多行注释" href="#词汇分析-多行注释">多行注释</a></h2><p>从版本0.13.0开始，Nim支持多行注释。</p>
+<h2><a class="toc-backref" id="词法分析-多行注释" href="#词法分析-多行注释">多行注释</a></h2><p>从版本0.13.0开始，Nim支持多行注释。</p>
 <pre class="listing"><span class="LongComment">#[注释这里.
 多行
 不是问题。]#</span></pre><p>多行注释支持嵌套：</p>
@@ -1133,7 +1133,7 @@ proc p[T](x: T) = discard
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">foo</span> <span class="Operator">=</span>
   <span class="LongComment">##[长文档注释。
   ]##</span></pre>
-<h2><a class="toc-backref" id="词汇分析-标识符-amp-关键字" href="#词汇分析-标识符-amp-关键字">标识符 &amp; 关键字</a></h2><p>Nim中的标识符可以是任何以字母开头的数字、字母和下划线。不允许两个连续的下划线 <tt class="docutils literal"><span class="pre">__</span></tt> :<pre>
+<h2><a class="toc-backref" id="词法分析-标识符-amp-关键字" href="#词法分析-标识符-amp-关键字">标识符 &amp; 关键字</a></h2><p>Nim中的标识符可以是任何以字母开头的数字、字母和下划线。不允许两个连续的下划线 <tt class="docutils literal"><span class="pre">__</span></tt> :<pre>
 letter ::= 'A'..'Z' | 'a'..'z' | '\x80'..'\xff'
 digit ::= '0'..'9'
 IDENTIFIER ::= letter ( ['_'] (letter | digit) )*</pre>
@@ -1161,7 +1161,7 @@ IDENTIFIER ::= letter ( ['_'] (letter | digit) )*</pre>
 <span class="Keyword">xor</span>
 <span class="Keyword">yield</span></pre><p>有些关键字未使用;它们是为语言的未来发展而保留的。</p>
 
-<h2><a class="toc-backref" id="词汇分析-标识符相等性" href="#词汇分析-标识符相等性">标识符相等性</a></h2><p>两个标识符被认为是相等的如果下列算法返回真：</p>
+<h2><a class="toc-backref" id="词法分析-标识符相等性" href="#词法分析-标识符相等性">标识符相等性</a></h2><p>两个标识符被认为是相等的如果下列算法返回真：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">sameIdentifier</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">,</span> <span class="Identifier">b</span><span class="Punctuation">:</span> <span class="Identifier">string</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">bool</span> <span class="Operator">=</span>
   <span class="Identifier">a</span><span class="Punctuation">[</span><span class="DecNumber">0</span><span class="Punctuation">]</span> <span class="Operator">==</span> <span class="Identifier">b</span><span class="Punctuation">[</span><span class="DecNumber">0</span><span class="Punctuation">]</span> <span class="Keyword">and</span>
     <span class="Identifier">a</span><span class="Operator">.</span><span class="Identifier">replace</span><span class="Punctuation">(</span><span class="StringLit">&quot;_&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;&quot;</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Identifier">toLowerAscii</span> <span class="Operator">==</span> <span class="Identifier">b</span><span class="Operator">.</span><span class="Identifier">replace</span><span class="Punctuation">(</span><span class="StringLit">&quot;_&quot;</span><span class="Punctuation">,</span> <span class="StringLit">&quot;&quot;</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Identifier">toLowerAscii</span></pre><p>这意味着只有首字母大小写敏感。 其他字母在ASCII范围内不区分大小写，并且忽略下划线。</p>
@@ -1170,7 +1170,7 @@ IDENTIFIER ::= letter ( ['_'] (letter | digit) )*</pre>
 <p>请注意，此规则也适用于关键字，这意味着 <tt class="docutils literal"><span class="pre">notin</span></tt> 和 <tt class="docutils literal"><span class="pre">notIn</span></tt> 以及 <tt class="docutils literal"><span class="pre">not_in</span></tt> 是相同的， (全小写版本 (<tt class="docutils literal"><span class="pre">notin</span></tt>, <tt class="docutils literal"><span class="pre">isnot</span></tt>) 是写关键字的首选方式)。</p>
 <p>从历史上看，Nim是一种完全 <span id="风格不敏感_1">风格不敏感</span> 语言。 这意味着它不区分大小写并且忽略了下划线，并且 <tt class="docutils literal"><span class="pre">foo</span></tt> 和 <tt class="docutils literal"><span class="pre">Foo</span></tt> 之间甚至没有区别。</p>
 
-<h2><a class="toc-backref" id="词汇分析-字符串字面值" href="#词汇分析-字符串字面值">字符串字面值</a></h2><p>语法中的终端符号: <tt class="docutils literal"><span class="pre">STR_LIT</span></tt> 。</p>
+<h2><a class="toc-backref" id="词法分析-字符串字面值" href="#词法分析-字符串字面值">字符串字面值</a></h2><p>语法中的终端符号: <tt class="docutils literal"><span class="pre">STR_LIT</span></tt> 。</p>
 <p>字符串字面值可以通过匹配双引号来分隔，并且可以包含以下 <span id="转义序列_1">转义序列</span> :</p>
 <table border="1" class="docutils"><tr><th>转义序列</th><th>含义</th></tr>
 <tr><td><tt class="docutils literal"><span class="pre">\p</span></tt></td><td>平台特定的换行: CRLF on Windows, LF on Unix</td></tr>
@@ -1191,13 +1191,13 @@ IDENTIFIER ::= letter ( ['_'] (letter | digit) )*</pre>
 <tr><td><tt class="docutils literal"><span class="pre">\u</span></tt> {H+}</td><td><span id="unicode代码点_1">unicode代码点</span>; 用 <tt class="docutils literal"><span class="pre">{}</span></tt> 括起来的所有十六进制数字都用于代码点</td></tr>
 </table><p>Nim中的字符串可以包含任何8位值，甚至是嵌入的零。 但是，某些操作可能会将第一个二进制零解释为终止符。</p>
 
-<h2><a class="toc-backref" id="词汇分析-三引用字符串字面值" href="#词汇分析-三引用字符串字面值">三引用字符串字面值</a></h2><p>语法中的终端符号: <tt class="docutils literal"><span class="pre">TRIPLESTR_LIT</span></tt>.</p>
+<h2><a class="toc-backref" id="词法分析-三引用字符串字面值" href="#词法分析-三引用字符串字面值">三引用字符串字面值</a></h2><p>语法中的终端符号: <tt class="docutils literal"><span class="pre">TRIPLESTR_LIT</span></tt>.</p>
 <p>字符串字面值也可以用三个双引号分隔 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> ... <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> 。 这种形式的字面值可能会持续几行，可能包含 <tt class="docutils literal"><span class="pre">&quot;</span></tt> 并且不解释任何转义序列。 为方便起见，当开头的 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> 后面跟一个换行符 (开头 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> 和换行符之间可能有空格）时,换行符（和前面的空格）不包含在字符串。 字符串字面值的结尾由模式定义 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;[^&quot;]</span></tt>, 所以:</p>
 <pre class="listing"><span class="LongStringLit">&quot;&quot;&quot;&quot;long string within quotes&quot;&quot;&quot;&quot;</span></pre><p>生成:<pre>
 &quot;long string within quotes&quot;</pre>
 </p>
 
-<h2><a class="toc-backref" id="词汇分析-原始字符串字面值" href="#词汇分析-原始字符串字面值">原始字符串字面值</a></h2><p>语法中的终端符号: <tt class="docutils literal"><span class="pre">RSTR_LIT</span></tt>.</p>
+<h2><a class="toc-backref" id="词法分析-原始字符串字面值" href="#词法分析-原始字符串字面值">原始字符串字面值</a></h2><p>语法中的终端符号: <tt class="docutils literal"><span class="pre">RSTR_LIT</span></tt>.</p>
 <p>还有原始字符串字面值，前面带有字母 <tt class="docutils literal"><span class="pre">r</span></tt> (or <tt class="docutils literal"><span class="pre">R</span></tt>) 并通过匹配双引号（就像普通的字符串字面值一样）分隔并且不解释转义序列。 这对于正则表达式或Windows路径特别方便：</p>
 <pre class="listing"><span class="Keyword">var</span> <span class="Identifier">f</span> <span class="Operator">=</span> <span class="Identifier">openFile</span><span class="Punctuation">(</span><span class="RawData">r&quot;C:\texts\text.txt&quot;</span><span class="Punctuation">)</span> <span class="Comment"># 原始字符串, 所以 ``\t`` 不是制表符。</span></pre><p>为了在原始字符串中生成一个单独的 <tt class="docutils literal"><span class="pre">&quot;</span></tt> , 必须使用两个:</p>
 <pre class="listing"><span class="RawData">r&quot;a&quot;&quot;</span><span class="RawData">b&quot;</span></pre><p>Produces:<pre>
@@ -1205,12 +1205,12 @@ a&quot;b</pre>
 </p>
 <p><tt class="docutils literal"><span class="pre">r&quot;&quot;&quot;&quot;</span></tt> 这个符号是不可能的，因为三个引号引用了三引号字符串字面值。 <tt class="docutils literal"><span class="pre">r&quot;&quot;&quot;</span></tt> 与 <tt class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></tt> 相同，因为三重引用的字符串字面值也不解释转义序列。</p>
 
-<h2><a class="toc-backref" id="词汇分析-广义原始字符串字面值" href="#词汇分析-广义原始字符串字面值">广义原始字符串字面值</a></h2><p>语法中的终端符号: <tt class="docutils literal"><span class="pre">GENERALIZED_STR_LIT</span></tt>, <tt class="docutils literal"><span class="pre">GENERALIZED_TRIPLESTR_LIT</span></tt> 。</p>
+<h2><a class="toc-backref" id="词法分析-广义原始字符串字面值" href="#词法分析-广义原始字符串字面值">广义原始字符串字面值</a></h2><p>语法中的终端符号: <tt class="docutils literal"><span class="pre">GENERALIZED_STR_LIT</span></tt>, <tt class="docutils literal"><span class="pre">GENERALIZED_TRIPLESTR_LIT</span></tt> 。</p>
 <p><tt class="docutils literal"><span class="pre">标识符&quot;字符串字面值&quot;</span></tt> 这种构造(标识符和开始引号之间没有空格)是广义原始字符串。 这是 <tt class="docutils literal"><span class="pre">identifier(r&quot;string literal&quot;)</span></tt> 的缩写， 所以它表示一个过程调用原始字符串字面值作为唯一的参数。</p>
 <p>广义原始字符串字面值特别便于将小型语言直接嵌入到Nim中（例如正则表达式）。</p>
 <p><tt class="docutils literal"><span class="pre">标识符&quot;&quot;&quot;字符串字面值&quot;&quot;&quot;</span></tt> 也存在。它是 <tt class="docutils literal"><span class="pre">标识符(&quot;&quot;&quot;字符串字面值&quot;&quot;&quot;)</span></tt> 的缩写。</p>
 
-<h2><a class="toc-backref" id="词汇分析-字符字面值" href="#词汇分析-字符字面值">字符字面值</a></h2><p>字符字面值用单引号 <tt class="docutils literal"><span class="pre">''</span></tt> 括起来，并且可以包含与字符串相同的转义序列 - 有一个例外：平台依赖的 <span id="newline_1">newline</span> (<tt class="docutils literal"><span class="pre">\p</span></tt>) 是不允许的，因为它可能比一个字符宽（通常是CR / LF对）。 以下是对字符字面值有效的 <span id="转义序列_2">转义序列</span> :</p>
+<h2><a class="toc-backref" id="词法分析-字符字面值" href="#词法分析-字符字面值">字符字面值</a></h2><p>字符字面值用单引号 <tt class="docutils literal"><span class="pre">''</span></tt> 括起来，并且可以包含与字符串相同的转义序列 - 有一个例外：平台依赖的 <span id="newline_1">newline</span> (<tt class="docutils literal"><span class="pre">\p</span></tt>) 是不允许的，因为它可能比一个字符宽（通常是CR / LF对）。 以下是对字符字面值有效的 <span id="转义序列_2">转义序列</span> :</p>
 <table border="1" class="docutils"><tr><th>转义序列</th><th>含义</th></tr>
 <tr><td><tt class="docutils literal"><span class="pre">\r</span></tt>, <tt class="docutils literal"><span class="pre">\c</span></tt></td><td><span id="回车_2">回车</span></td></tr>
 <tr><td><tt class="docutils literal"><span class="pre">\n</span></tt>, <tt class="docutils literal"><span class="pre">\l</span></tt></td><td><span id="换行_2">换行</span></td></tr>
@@ -1228,7 +1228,7 @@ a&quot;b</pre>
 </table><p>字符不是Unicode字符，而是单个字节。</p>
 <p>这样做的原因是效率：对于绝大多数用例，由于UTF-8是专门为此设计的，所得到的程序仍然可以正确处理UTF-8。 另一个原因是Nim因此可以依靠这个特性像其它算法一样有效地支持 <tt class="docutils literal"><span class="pre">array[char, int]</span></tt> 或 <tt class="docutils literal"><span class="pre">set[char]</span></tt> 。 <tt class="docutils literal"><span class="pre">Rune</span></tt> 类型用于Unicode字符，它可以表示任何Unicode字符。 <tt class="docutils literal"><span class="pre">Rune</span></tt> 在 <a class="reference external" href="unicode.html">unicode module</a> 声明。</p>
 
-<h2><a class="toc-backref" id="词汇分析-数值常量" href="#词汇分析-数值常量">数值常量</a></h2><p>数值常量是单一类型，并具有以下形式:<pre>
+<h2><a class="toc-backref" id="词法分析-数值常量" href="#词法分析-数值常量">数值常量</a></h2><p>数值常量是单一类型，并具有以下形式:<pre>
 hexdigit = digit | 'A'..'F' | 'a'..'f'
 octdigit = '0'..'7'
 bindigit = '0'..'1'
@@ -1284,7 +1284,7 @@ FLOAT64_LIT = HEX_LIT '\'' FLOAT64_SUFFIX
 </table><p>浮点字面值也可以是二进制，八进制或十六进制表示法： 根据IEEE浮点标准， <tt class="docutils literal"><span class="pre">0B0_10001110100_0000101001000111101011101111111011000101001101001001'f64</span></tt> 约为 1.72826e35。</p>
 <p>对字面值进行边界检查，以使它们适合数据类型。 非基数10字面值主要用于标志和位模式表示，因此边界检查是在位宽而非值范围上完成的。 如果字面值符合数据类型的位宽，则接受它。 因此：0b10000000'u8 == 0x80'u8 == 128，但是，0b10000000'i8 == 0x80'i8 == -1而不是导致溢出错误。</p>
 
-<h2><a class="toc-backref" id="词汇分析-操作符" href="#词汇分析-操作符">操作符</a></h2><p>Nim允许用户定义的运算符。运算符是以下字符的任意组合</p>
+<h2><a class="toc-backref" id="词法分析-操作符" href="#词法分析-操作符">操作符</a></h2><p>Nim允许用户定义的运算符。运算符是以下字符的任意组合</p>
 <blockquote><p>=     +     -     *     /     &lt;     &gt; @     $     ~     &amp;     %     | !     ?     ^     .     :     
 </p></blockquote>
 <p>这些关键字也是操作符: <tt class="docutils literal"><span class="pre">and or not xor shl shr div mod in notin is isnot of</span></tt>.</p>
@@ -1292,12 +1292,12 @@ FLOAT64_LIT = HEX_LIT '\'' FLOAT64_SUFFIX
 <p><tt class="docutils literal"><span class="pre">*:</span></tt> 是一个特殊情况，被看作是 <span class="tok">*</span> 和 <span class="tok">:</span> 两个标记(为了支持 <tt class="docutils literal"><span class="pre">var v*: T</span></tt>)。</p>
 <p><tt class="docutils literal"><span class="pre">not</span></tt> 关键字是一元操作符， <tt class="docutils literal"><span class="pre">a not b</span></tt> 解析成 <tt class="docutils literal"><span class="pre">a(not b)</span></tt>, 不是 <tt class="docutils literal"><span class="pre">(a) not (b)</span></tt> 。</p>
 
-<h2><a class="toc-backref" id="词汇分析-其它标记" href="#词汇分析-其它标记">其它标记</a></h2><p>以下字符串表示其他标记:<pre>
+<h2><a class="toc-backref" id="词法分析-其它标记" href="#词法分析-其它标记">其它标记</a></h2><p>以下字符串表示其他标记:<pre>
 `   (    )     {    }     [    ]    ,  ;   [.    .]  {.   .}  (.  .)  [:</pre>
 </p>
 <p><span id="切片_1">切片</span> 运算符 <span class="tok">..</span> 优先于包含点的其它标记: <span class="tok">{..}</span> 是三个标记 <span class="tok">{</span>, <span class="tok">..</span>, <span class="tok">}</span> 而不是两个标记 <span class="tok">{.</span>, <span class="tok">.}</span> 。</p>
 
-<h1><a class="toc-backref" id="句法" href="#句法">句法</a></h1><p>本节列出了Nim的标准语法。解析器如何处理缩进已在 <a class="reference external" href="#lexical-analysis">Lexical Analysis</a> 部分中描述。</p>
+<h1><a class="toc-backref" id="句法" href="#句法">句法</a></h1><p>本节列出了Nim的标准语法。解析器如何处理缩进已在 <a class="reference external" href="#词法分析">词法分析</a> 部分中描述。</p>
 <p>Nim允许用户可定义的运算符。二元运算符具有11个不同的优先级。</p>
 
 <h2><a class="toc-backref" id="句法-结合律" href="#句法-结合律">结合律</a></h2><p>第一个字符是 <tt class="docutils literal"><span class="pre">^</span></tt> 的二元运算符是右结合，所有其他二元运算符都是左结合。</p>
@@ -1573,7 +1573,7 @@ stmt = (IND{&gt;} complexOrSimpleStmt^+(IND{=} / ';') DED)
 <li>之前声明的过程除了可能修改编译时变量之外没有任何副作用</li>
 </ul>
 <p>常量表达式可以包含可以在内部使用编译时支持的所有Nim功能的代码块（详见下一节）。 在这样的代码块中，可以声明变量然后稍后读取和更新它们，或者声明变量并将它们传递给修改它们的过程。 但是，此类块中的代码仍必须遵循上面列出的用于引用块外部的值和操作的限制。</p>
-<p>访问和修改编译时变量的能力增加了常量表达式的灵活性。 例如，下面的代码在 <strong>编译时</strong> 打印Fibonacci数列的开头。 （这是对定义常量的灵活性的证明，而不是解决此问题的推荐样式！）</p>
+<p>访问和修改编译时变量的能力增加了常量表达式的灵活性。 例如，下面的代码在 <strong>编译时</strong> 打印Fibonacci数列的开头。 （这是对定义常量的灵活性的证明，而不是解决此问题的推荐样式。）</p>
 <pre class="listing"><span class="Keyword">import</span> <span class="Identifier">strformat</span>
 
 <span class="Keyword">var</span> <span class="Identifier">fib_n</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">compileTime</span><span class="Operator">.</span><span class="Punctuation">}</span><span class="Punctuation">:</span> <span class="Identifier">int</span>
@@ -1666,7 +1666,7 @@ stmt = (IND{&gt;} complexOrSimpleStmt^+(IND{=} / ';') DED)
 <pre class="listing"><span class="Keyword">type</span>
   <span class="Identifier">Subrange</span> <span class="Operator">=</span> <span class="Identifier">range</span><span class="Punctuation">[</span><span class="FloatNumber">0.</span><span class="Operator">.</span><span class="DecNumber">5</span><span class="Punctuation">]</span>
   <span class="Identifier">PositiveFloat</span> <span class="Operator">=</span> <span class="Identifier">range</span><span class="Punctuation">[</span><span class="FloatNumber">0.0</span><span class="Operator">..</span><span class="Identifier">Inf</span><span class="Punctuation">]</span></pre><p><tt class="docutils literal"><span class="pre">Subrange</span></tt> 是整数的子范围，只能保存0到5的值。 <tt class="docutils literal"><span class="pre">PositiveFloat</span></tt> 定义所有正浮点值的子范围。 NaN不属于任何浮点类型的子范围。 将任何其他值分配给类型为 <tt class="docutils literal"><span class="pre">Subrange</span></tt> 的变量是检查的运行时错误（如果可以在语义分析期间确定，则为静态错误）。 允许从基本类型到其子类型之一（反之亦然）的分配。</p>
-<p>子范围类型与其基类型具有相同的大小（Subrange示例中的 <tt class="docutils literal"><span class="pre">int</span></tt> ）。</p>
+<p>子范围类型与其基类型具有相同的大小（子范围示例中的 <tt class="docutils literal"><span class="pre">int</span></tt> ）。</p>
 
 <h2><a class="toc-backref" id="类型-预定义浮点类型" href="#类型-预定义浮点类型">预定义浮点类型</a></h2><p>以下浮点类型是预定义的：</p>
 <dl class="docutils"><dt><tt class="docutils literal"><span class="pre">float</span></tt></dt>
@@ -1932,7 +1932,7 @@ ord(Direction.west) == 3</pre>
 <span class="Comment"># valid：不更改活动对象分支：</span>
 <span class="Identifier">x</span><span class="Operator">.</span><span class="Identifier">kind</span> <span class="Operator">=</span> <span class="Identifier">nkSub</span></pre><p>从示例中可以看出，对象层次结构的优点是不需要在不同对象类型之间进行转换。 但是，访问无效对象字段会引发异常。</p>
 <p>对象声明中 <tt class="docutils literal"><span class="pre">case</span></tt> 的语法紧跟着 <tt class="docutils literal"><span class="pre">case</span></tt> 语句的语法： <tt class="docutils literal"><span class="pre">case</span></tt> 部分中的分支也可以缩进。</p>
-<p>在示例中，``kind`` 字段称为 <span id="鉴别字段_1">鉴别字段</span> : 为安全起见，不能对其进行地址限制，并且对其赋值受到限制：新值不得导致活动对象分支发生变化。 此外，在对象构造期间指定特定分支的字段时，必须将相应的鉴别字段值指定为常量表达式。</p>
+<p>在示例中， <tt class="docutils literal"><span class="pre">kind</span></tt> 字段称为 <span id="鉴别字段_1">鉴别字段</span> : 为安全起见，不能对其进行地址限制，并且对其赋值受到限制：新值不得导致活动对象分支发生变化。 此外，在对象构造期间指定特定分支的字段时，必须将相应的鉴别字段值指定为常量表达式。</p>
 <p>而不是更改活动对象分支，将内存中的旧对象完全替换为新对象：</p>
 <pre class="listing"><span class="Keyword">var</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Identifier">Node</span><span class="Punctuation">(</span><span class="Identifier">kind</span><span class="Punctuation">:</span> <span class="Identifier">nkAdd</span><span class="Punctuation">,</span> <span class="Identifier">leftOp</span><span class="Punctuation">:</span> <span class="Identifier">Node</span><span class="Punctuation">(</span><span class="Identifier">kind</span><span class="Punctuation">:</span> <span class="Identifier">nkInt</span><span class="Punctuation">,</span> <span class="Identifier">intVal</span><span class="Punctuation">:</span> <span class="DecNumber">4</span><span class="Punctuation">)</span><span class="Punctuation">,</span>
                           <span class="Identifier">rightOp</span><span class="Punctuation">:</span> <span class="Identifier">Node</span><span class="Punctuation">(</span><span class="Identifier">kind</span><span class="Punctuation">:</span> <span class="Identifier">nkInt</span><span class="Punctuation">,</span> <span class="Identifier">intVal</span><span class="Punctuation">:</span> <span class="DecNumber">2</span><span class="Punctuation">)</span><span class="Punctuation">)</span>
@@ -2002,8 +2002,8 @@ ord(Direction.west) == 3</pre>
 <p>为了和C互通见 <a class="reference external" href="#implementation-specific-pragmas-bitsize-pragma">bitsize pragma</a> 。</p>
 
 <h2><a class="toc-backref" id="类型-引用和指针类型" href="#类型-引用和指针类型">引用和指针类型</a></h2><p>引用（类似于其他编程语言中的指针）是引入多对一关系的一种方式。 这意味着不同的引用可以指向并修改内存中的相同位置（也称为 <span id="别名_1">别名</span> )。</p>
-<p>Nim区分 <span id="追踪_1">追踪</span>和 <span id="未追踪_1">未追踪</span> 引用。 未追踪引用也叫 <em>指针</em> 。 追踪引用指向垃圾回收堆中的对象，未追踪引用指向手动分配对象或内存中其它位置的对象。 因此，未追踪引用是 <em>不安全</em> 的。 然而，对于某些低级操作（访问硬件），未追踪引用是不可避免的。</p>
-<p>使用 <strong>ref</strong> 关键字声明追踪引用，使用 <strong>ptr</strong> 关键字声明未追踪引用。 通常，`ptr T` 可以隐式转换为 <tt class="docutils literal"><span class="pre">pointer</span></tt> 类型。</p>
+<p>Nim区分 <span id="追踪_1">追踪</span>和 <span id="未追踪_1">未追踪</span> 引用。 未追踪引用也叫 <em>指针</em> 。 追踪引用指向垃圾回收堆中的对象，未追踪引用指向手动分配对象或内存中其它位置的对象。 因此，未追踪引用是 <em>不安全</em> 的。 然而对于某些访问硬件的低级操作，未追踪引用是不可避免的。</p>
+<p>使用 <strong>ref</strong> 关键字声明追踪引用，使用 <strong>ptr</strong> 关键字声明未追踪引用。 通常， <tt class="docutils literal"><span class="pre">ptr T</span></tt> 可以隐式转换为 <tt class="docutils literal"><span class="pre">pointer</span></tt> 类型。</p>
 <p>空的下标 <tt class="docutils literal"><span class="pre">[]</span></tt> 表示法可以用来取代引用， <tt class="docutils literal"><span class="pre">addr</span></tt> 程序返回一个对象的地址。 地址始终是未经过引用的参考。 因此， <tt class="docutils literal"><span class="pre">addr</span></tt> 的使用是 <em>不安全的</em> 功能。</p>
 <p><tt class="docutils literal"><span class="pre">.</span></tt> （访问元组和对象字段运算符）和 <tt class="docutils literal"><span class="pre">[]</span></tt> （数组/字符串/序列索引运算符）运算符对引用类型执行隐式解引用操作：</p>
 <pre class="listing"><span class="Keyword">type</span>
@@ -2016,7 +2016,7 @@ ord(Direction.west) == 3</pre>
   <span class="Identifier">n</span><span class="Punctuation">:</span> <span class="Identifier">Node</span>
 <span class="Identifier">new</span><span class="Punctuation">(</span><span class="Identifier">n</span><span class="Punctuation">)</span>
 <span class="Identifier">n</span><span class="Operator">.</span><span class="Identifier">data</span> <span class="Operator">=</span> <span class="DecNumber">9</span>
-<span class="Comment"># 不必写n[].data; 实际上 n[].data是不推荐的！</span></pre><p>还对过程调用的第一个参数执行自动解引用。 但是目前这个功能只能通过 <tt class="docutils literal"><span class="pre">{.experimental：&quot;implicitDeref&quot;.}</span></tt> 来启用：</p>
+<span class="Comment"># 不必写n[].data; 实际上 n[].data是不鼓励的。</span></pre><p>还对过程调用的第一个参数执行自动解引用。 但是目前这个功能只能通过 <tt class="docutils literal"><span class="pre">{.experimental：&quot;implicitDeref&quot;.}</span></tt> 来启用：</p>
 <pre class="listing"><span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">experimental</span><span class="Punctuation">:</span> <span class="StringLit">&quot;implicitDeref&quot;</span><span class="Operator">.</span><span class="Punctuation">}</span>
 
 <span class="Keyword">proc</span> <span class="Identifier">depth</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">NodeObj</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">int</span> <span class="Operator">=</span> <span class="Operator">...</span>
@@ -2204,7 +2204,7 @@ ord(Direction.west) == 3</pre>
   <span class="Identifier">username</span><span class="Punctuation">:</span> <span class="Identifier">string</span>
 
 <span class="Identifier">db</span><span class="Operator">.</span><span class="Identifier">query</span><span class="Punctuation">(</span><span class="StringLit">&quot;SELECT FROM users WHERE name = '$1'&quot;</span> <span class="Operator">%</span> <span class="Identifier">username</span><span class="Punctuation">)</span>
-<span class="Comment"># 静态错误：`query` 需要一个SQL字符串！</span></pre><p>它是抽象类型的基本属性，它们 <em>并不</em> 意味着抽象类型与其基类型之间的子类型关系。 允许从 <tt class="docutils literal"><span class="pre">string</span></tt> 到 <tt class="docutils literal"><span class="pre">SQL</span></tt> 的显式类型转换：</p>
+<span class="Comment"># 静态错误：`query` 需要一个SQL字符串。</span></pre><p>它是抽象类型的基本属性，它们 <em>并不</em> 意味着抽象类型与其基类型之间的子类型关系。 允许从 <tt class="docutils literal"><span class="pre">string</span></tt> 到 <tt class="docutils literal"><span class="pre">SQL</span></tt> 的显式类型转换：</p>
 <pre class="listing"><span class="Keyword">import</span> <span class="Identifier">strutils</span><span class="Punctuation">,</span> <span class="Identifier">sequtils</span>
 
 <span class="Keyword">proc</span> <span class="Identifier">properQuote</span><span class="Punctuation">(</span><span class="Identifier">s</span><span class="Punctuation">:</span> <span class="Identifier">string</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">SQL</span> <span class="Operator">=</span>
@@ -2363,24 +2363,26 @@ ord(Direction.west) == 3</pre>
 <h1><a class="toc-backref" id="重载解析" href="#重载解析">重载解析</a></h1><p>在调用 <tt class="docutils literal"><span class="pre">p(args)</span></tt> 中选择匹配最佳的例程 <tt class="docutils literal"><span class="pre">p</span></tt> 。 如果多个例程同样匹配，则在语义分析期间报告歧义。</p>
 <p>args中的每个arg都需要匹配。参数可以匹配的方式有多种不同的类别。 设 <tt class="docutils literal"><span class="pre">f</span></tt> 是形式参数的类型， <tt class="docutils literal"><span class="pre">a</span></tt> 是参数的类型。</p>
 <ol class="simple"><li>准确匹配: <tt class="docutils literal"><span class="pre">a</span></tt> 和 <tt class="docutils literal"><span class="pre">f</span></tt> 是相同类型。</li>
-<li>字面匹配: <tt class="docutils literal"><span class="pre">a</span></tt> is an integer literal of value <tt class="docutils literal"><span class="pre">v</span></tt> and <tt class="docutils literal"><span class="pre">f</span></tt> is a signed or unsigned integer type and <tt class="docutils literal"><span class="pre">v</span></tt> is in <tt class="docutils literal"><span class="pre">f</span></tt>'s range. Or:  <tt class="docutils literal"><span class="pre">a</span></tt> is a floating point literal of value <tt class="docutils literal"><span class="pre">v</span></tt> and <tt class="docutils literal"><span class="pre">f</span></tt> is a floating point type and <tt class="docutils literal"><span class="pre">v</span></tt> is in <tt class="docutils literal"><span class="pre">f</span></tt>'s range.</li>
+<li>字面匹配: <tt class="docutils literal"><span class="pre">a</span></tt> 是值为 <tt class="docutils literal"><span class="pre">v</span></tt> 的整型字面值， <tt class="docutils literal"><span class="pre">f</span></tt> 是有符号或无符号整型 <tt class="docutils literal"><span class="pre">v</span></tt> 在 <tt class="docutils literal"><span class="pre">f</span></tt> 的范围里. 或:  <tt class="docutils literal"><span class="pre">a</span></tt> 是值为 <tt class="docutils literal"><span class="pre">v``的浮点字面值， ``f</span></tt> 是浮点类型 <tt class="docutils literal"><span class="pre">v</span></tt> 在 <tt class="docutils literal"><span class="pre">f</span></tt> 的范围里。</li>
 <li>泛型匹配: <tt class="docutils literal"><span class="pre">f</span></tt> 是泛型类型且 <tt class="docutils literal"><span class="pre">a</span></tt> 匹配, 例如 <tt class="docutils literal"><span class="pre">a</span></tt> 是 <tt class="docutils literal"><span class="pre">int</span></tt> 且 <tt class="docutils literal"><span class="pre">f</span></tt> 是泛型限制 (受限) 形参类型 (像 <tt class="docutils literal"><span class="pre">[T]</span></tt> 或 <tt class="docutils literal"><span class="pre">[T: int|char]</span></tt>.</li>
 <li>子范围或子类型匹配： <tt class="docutils literal"><span class="pre">a</span></tt> is a <tt class="docutils literal"><span class="pre">range[T]</span></tt> and <tt class="docutils literal"><span class="pre">T</span></tt> matches <tt class="docutils literal"><span class="pre">f</span></tt> exactly. Or: <tt class="docutils literal"><span class="pre">a</span></tt> is a subtype of <tt class="docutils literal"><span class="pre">f</span></tt>.</li>
 <li>整数转换匹配: <tt class="docutils literal"><span class="pre">a</span></tt> 可转换为 <tt class="docutils literal"><span class="pre">f</span></tt> 且 <tt class="docutils literal"><span class="pre">f</span></tt> 和 <tt class="docutils literal"><span class="pre">a</span></tt> 是同样的整数或浮点类型。</li>
 <li>转换匹配: <tt class="docutils literal"><span class="pre">a</span></tt> 可能通过用户定义的转换器转换为 <tt class="docutils literal"><span class="pre">f</span></tt> 。</li>
 </ol>
 <p>这些匹配类别具有优先级：完全匹配优于字面值匹配，并且优于通用匹配等。 在下面的 <tt class="docutils literal"><span class="pre">count(p, m)</span></tt> 计算 <tt class="docutils literal"><span class="pre">m</span></tt> 匹配过程 <tt class="docutils literal"><span class="pre">p</span></tt> 的匹配数。</p>
-<p>A routine <tt class="docutils literal"><span class="pre">p</span></tt> matches better than a routine <tt class="docutils literal"><span class="pre">q</span></tt> if the following algorithm returns true:<pre>
-for each matching category m in [&quot;exact match&quot;, &quot;literal match&quot;,
-                                &quot;generic match&quot;, &quot;subtype match&quot;,
-                                &quot;integral match&quot;, &quot;conversion match&quot;]:
-  if count(p, m) &gt; count(q, m): return true
-  elif count(p, m) == count(q, m):
-    discard &quot;continue with next category m&quot;
-  else:
-    return false
-return &quot;ambiguous&quot;</pre>
-</p>
+<p>如果下列算法返回真，例程 <tt class="docutils literal"><span class="pre">p</span></tt> 比 <tt class="docutils literal"><span class="pre">q</span></tt> 更匹配：</p>
+<blockquote><p><dl class="docutils"><dt>for each matching category m in [&quot;exact match&quot;, &quot;literal match&quot;,</dt>
+<dd>&quot;generic match&quot;, &quot;subtype match&quot;, &quot;integral match&quot;, &quot;conversion match&quot;]:</dd>
+<dt></dt>
+<dd>if count(p, m) &gt; count(q, m): return true<dl class="docutils"><dt>elif count(p, m) == count(q, m):</dt>
+<dd>discard &quot;continue with next category m&quot;</dd>
+<dt>else:</dt>
+<dd>return false</dd>
+</dl>
+</dd>
+</dl>
+<p>return &quot;ambiguous&quot;</p>
+</p></blockquote>
 <p>一些示例：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">takesInt</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">int</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="Identifier">echo</span> <span class="StringLit">&quot;int&quot;</span>
 <span class="Keyword">proc</span> <span class="Identifier">takesInt</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">T</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="Identifier">echo</span> <span class="StringLit">&quot;T&quot;</span>
@@ -2686,7 +2688,7 @@ return &quot;ambiguous&quot;</pre>
 <h2><a class="toc-backref" id="语句和表达式-using语句" href="#语句和表达式-using语句">Using语句</a></h2><p>using语句在模块中反复使用相同的参数名称和类型提供了语法上的便利。 Instead of:</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">foo</span><span class="Punctuation">(</span><span class="Identifier">c</span><span class="Punctuation">:</span> <span class="Identifier">Context</span><span class="Punctuation">;</span> <span class="Identifier">n</span><span class="Punctuation">:</span> <span class="Identifier">Node</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="Operator">...</span>
 <span class="Keyword">proc</span> <span class="Identifier">bar</span><span class="Punctuation">(</span><span class="Identifier">c</span><span class="Punctuation">:</span> <span class="Identifier">Context</span><span class="Punctuation">;</span> <span class="Identifier">n</span><span class="Punctuation">:</span> <span class="Identifier">Node</span><span class="Punctuation">,</span> <span class="Identifier">counter</span><span class="Punctuation">:</span> <span class="Identifier">int</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="Operator">...</span>
-<span class="Keyword">proc</span> <span class="Identifier">baz</span><span class="Punctuation">(</span><span class="Identifier">c</span><span class="Punctuation">:</span> <span class="Identifier">Context</span><span class="Punctuation">;</span> <span class="Identifier">n</span><span class="Punctuation">:</span> <span class="Identifier">Node</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="Operator">...</span></pre><p>可以告诉编译器关于名称 <tt class="docutils literal"><span class="pre">c</span></tt> 的参数应默认键入 <tt class="docutils literal"><span class="pre">Context</span></tt> ，``n`` 应该默认为 <tt class="docutils literal"><span class="pre">Node</span></tt> 等的约定：</p>
+<span class="Keyword">proc</span> <span class="Identifier">baz</span><span class="Punctuation">(</span><span class="Identifier">c</span><span class="Punctuation">:</span> <span class="Identifier">Context</span><span class="Punctuation">;</span> <span class="Identifier">n</span><span class="Punctuation">:</span> <span class="Identifier">Node</span><span class="Punctuation">)</span> <span class="Operator">=</span> <span class="Operator">...</span></pre><p>可以告诉编译器关于名称 <tt class="docutils literal"><span class="pre">c</span></tt> 的参数应默认键入 <tt class="docutils literal"><span class="pre">Context</span></tt> ， <tt class="docutils literal"><span class="pre">n</span></tt> 应该默认为 <tt class="docutils literal"><span class="pre">Node</span></tt> 等的约定：</p>
 <pre class="listing"><span class="Keyword">using</span>
   <span class="Identifier">c</span><span class="Punctuation">:</span> <span class="Identifier">Context</span>
   <span class="Identifier">n</span><span class="Punctuation">:</span> <span class="Identifier">Node</span>
@@ -2762,7 +2764,7 @@ return &quot;ambiguous&quot;</pre>
 <h2><a class="toc-backref" id="语句和表达式-unsafeaddr操作符" href="#语句和表达式-unsafeaddr操作符">unsafeAddr操作符</a></h2><p>为了更容易与其他编译语言（如C）的互操作性，检索 <tt class="docutils literal"><span class="pre">let</span></tt> 变量的地址，参数或 <tt class="docutils literal"><span class="pre">for</span></tt> 循环变量，可以使用 <tt class="docutils literal"><span class="pre">unsafeAddr</span></tt> 操作：</p>
 <pre class="listing"><span class="Keyword">let</span> <span class="Identifier">myArray</span> <span class="Operator">=</span> <span class="Punctuation">[</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">2</span><span class="Punctuation">,</span> <span class="DecNumber">3</span><span class="Punctuation">]</span>
 <span class="Identifier">foreignProcThatTakesAnAddr</span><span class="Punctuation">(</span><span class="Identifier">unsafeAddr</span> <span class="Identifier">myArray</span><span class="Punctuation">)</span></pre>
-<h1><a class="toc-backref" id="过程" href="#过程">过程</a></h1><p>大多数编程语言称之为 <span id="methods_1">methods</span> 或 <span id="functions_1">functions</span> 在Nim中称为 <span id="过程_1">过程</span> 。 过程声明由标识符，零个或多个形式参数，返回值类型和代码块组成。</p>
+<h1><a class="toc-backref" id="过程" href="#过程">过程</a></h1><p>大多数编程语言称之为 <span id="方法_1">方法</span> 或 <span id="函数_1">函数</span> 在Nim中称为 <span id="过程_1">过程</span> 。 过程声明由标识符，零个或多个形式参数，返回值类型和代码块组成。</p>
 <p>正式参数声明为由逗号或分号分隔的标识符列表。 形参由 <tt class="docutils literal"><span class="pre">: 类型名称</span></tt> 给出一个类型。</p>
 <p>该类型适用于紧接其之前的所有参数，直到达到参数列表的开头，分号分隔符或已经键入的参数。</p>
 <p>分号可用于使类型和后续标识符的分隔更加清晰。</p>
@@ -2931,7 +2933,7 @@ return &quot;ambiguous&quot;</pre>
 <span class="Identifier">assert</span> <span class="Identifier">g</span> <span class="Operator">==</span> <span class="DecNumber">6</span></pre><p>如果隐式引入的指针可用于访问超出其生命周期的位置，则这是一个静态错误：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">writeAccessToG</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">var</span> <span class="Identifier">int</span> <span class="Operator">=</span>
   <span class="Keyword">var</span> <span class="Identifier">g</span> <span class="Operator">=</span> <span class="DecNumber">0</span>
-  <span class="Identifier">result</span> <span class="Operator">=</span> <span class="Identifier">g</span> <span class="Comment"># Error!</span></pre><p>For iterators, a component of a tuple return type can have a <tt class="docutils literal"><span class="pre">var</span></tt> type too:</p>
+  <span class="Identifier">result</span> <span class="Operator">=</span> <span class="Identifier">g</span> <span class="Comment"># 错误!</span></pre><p>For iterators, a component of a tuple return type can have a <tt class="docutils literal"><span class="pre">var</span></tt> type too:</p>
 <pre class="listing"><span class="Keyword">iterator</span> <span class="Identifier">mpairs</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">:</span> <span class="Keyword">var</span> <span class="Identifier">seq</span><span class="Punctuation">[</span><span class="Identifier">string</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">tuple</span><span class="Punctuation">[</span><span class="Identifier">key</span><span class="Punctuation">:</span> <span class="Identifier">int</span><span class="Punctuation">,</span> <span class="Identifier">val</span><span class="Punctuation">:</span> <span class="Keyword">var</span> <span class="Identifier">string</span><span class="Punctuation">]</span> <span class="Operator">=</span>
   <span class="Keyword">for</span> <span class="Identifier">i</span> <span class="Keyword">in</span> <span class="FloatNumber">0.</span><span class="Operator">.</span><span class="Identifier">a</span><span class="Operator">.</span><span class="Identifier">high</span><span class="Punctuation">:</span>
     <span class="Keyword">yield</span> <span class="Punctuation">(</span><span class="Identifier">i</span><span class="Punctuation">,</span> <span class="Identifier">a</span><span class="Punctuation">[</span><span class="Identifier">i</span><span class="Punctuation">]</span><span class="Punctuation">)</span></pre><p>在标准库中，返回 <tt class="docutils literal"><span class="pre">var</span></tt> 类型的例程的每个名称都以每个约定的前缀 <tt class="docutils literal"><span class="pre">m</span></tt> 开头。</p>
@@ -3094,7 +3096,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
 <pre class="listing"><span class="Keyword">var</span> <span class="Identifier">c</span> <span class="Operator">=</span> <span class="Identifier">mycount</span> <span class="Comment"># 实例化迭代器</span>
 <span class="Keyword">while</span> <span class="Identifier">true</span><span class="Punctuation">:</span>
   <span class="Keyword">let</span> <span class="Identifier">value</span> <span class="Operator">=</span> <span class="Identifier">c</span><span class="Punctuation">(</span><span class="DecNumber">1</span><span class="Punctuation">,</span> <span class="DecNumber">3</span><span class="Punctuation">)</span>
-  <span class="Keyword">if</span> <span class="Identifier">finished</span><span class="Punctuation">(</span><span class="Identifier">c</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">break</span> <span class="Comment"># 并且丢弃 'value'!</span>
+  <span class="Keyword">if</span> <span class="Identifier">finished</span><span class="Punctuation">(</span><span class="Identifier">c</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">break</span> <span class="Comment"># 并且丢弃 'value'。</span>
   <span class="Identifier">echo</span> <span class="Identifier">value</span></pre><p>它用于迭代器返回一对 <tt class="docutils literal"><span class="pre">(value，done)</span></tt> 和 <tt class="docutils literal"><span class="pre">finished</span></tt> 用于访问隐藏的 <tt class="docutils literal"><span class="pre">done</span></tt> 字段。</p>
 <p>闭包迭代器是 <em>可恢复函数</em> ，因此必须为每个调用提供参数。 为了解决这个限制，可以捕获外部工厂proc的参数：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">mycount</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">,</span> <span class="Identifier">b</span><span class="Punctuation">:</span> <span class="Identifier">int</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">iterator</span> <span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">int</span> <span class="Operator">=</span>
@@ -3241,7 +3243,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
   <span class="Keyword">raise</span> <span class="Identifier">newException</span><span class="Punctuation">(</span><span class="Identifier">IOError</span><span class="Punctuation">,</span> <span class="StringLit">&quot;IO&quot;</span><span class="Punctuation">)</span>
 
 <span class="Keyword">proc</span> <span class="Identifier">use</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">raises</span><span class="Punctuation">:</span> <span class="Punctuation">[</span><span class="Punctuation">]</span><span class="Operator">.</span><span class="Punctuation">}</span> <span class="Operator">=</span>
-  <span class="Comment"># 不能编译! 可能引发IOError!</span>
+  <span class="Comment"># 不能编译， 可能引发IOError。</span>
   <span class="Identifier">noRaise</span><span class="Punctuation">(</span><span class="Identifier">doRaise</span><span class="Punctuation">)</span></pre><p>因此，在许多情况下，回调不会导致编译器在其效果分析中过于保守。</p>
 
 <h2><a class="toc-backref" id="效应系统-tag跟踪" href="#效应系统-tag跟踪">Tag跟踪</a></h2><p>异常跟踪是Nim <span id="效应系统_1">效应系统</span> 的一部分。 引发异常是 <em>效应</em> 。 其他效应也可以定义。 用户定义的效应是 <em>标记</em> 例程并对此标记执行检查的方法：</p>
@@ -3744,7 +3746,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
 <span class="Identifier">echo</span> <span class="Keyword">static</span><span class="Punctuation">(</span><span class="Identifier">fac</span><span class="Punctuation">(</span><span class="DecNumber">5</span><span class="Punctuation">)</span><span class="Punctuation">)</span><span class="Punctuation">,</span> <span class="StringLit">&quot; &quot;</span><span class="Punctuation">,</span> <span class="Keyword">static</span><span class="Punctuation">[</span><span class="Identifier">bool</span><span class="Punctuation">]</span><span class="Punctuation">(</span><span class="FloatNumber">16.</span><span class="Identifier">isPowerOfTwo</span><span class="Punctuation">)</span></pre><p>The complier will report any failure to evaluate the expression or a possible type mismatch error.</p>
 
 <h2><a class="toc-backref" id="特殊类型-typedesc-t" href="#特殊类型-typedesc-t">typedesc[T]</a></h2><p>在许多情况下，Nim允许您将类型的名称视为常规值。 这些值仅在编译阶段存在，但由于所有值必须具有类型，因此 <tt class="docutils literal"><span class="pre">typedesc</span></tt> 被视为其特殊类型。</p>
-<p><tt class="docutils literal"><span class="pre">typedesc</span></tt> 就像一个通用类型。例如，符号 <tt class="docutils literal"><span class="pre">int</span></tt> 的类型是 <tt class="docutils literal"><span class="pre">typedesc [int]</span></tt> 。 就像常规泛型类型一样，当泛型参数被省略时，``typedesc``表示所有类型的类型类。 作为一种语法方便，您还可以使用``typedesc``作为修饰符。</p>
+<p><tt class="docutils literal"><span class="pre">typedesc</span></tt> 就像一个通用类型。例如，符号 <tt class="docutils literal"><span class="pre">int</span></tt> 的类型是 <tt class="docutils literal"><span class="pre">typedesc [int]</span></tt> 。 就像常规泛型类型一样，当泛型参数被省略时， <tt class="docutils literal"><span class="pre">typedesc</span></tt> 表示所有类型的类型类。 作为一种语法方便，您还可以使用 <tt class="docutils literal"><span class="pre">typedesc</span></tt> 作为修饰符。</p>
 <p>具有 <tt class="docutils literal"><span class="pre">typedesc</span></tt> 参数的过程被认为是隐式通用的。 它们将针对提供的类型的每个唯一组合进行实例化，并且在proc的主体内，每个参数的名称将引用绑定的具体类型：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">new</span><span class="Punctuation">(</span><span class="Identifier">T</span><span class="Punctuation">:</span> <span class="Identifier">typedesc</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">ref</span> <span class="Identifier">T</span> <span class="Operator">=</span>
   <span class="Identifier">echo</span> <span class="StringLit">&quot;allocating &quot;</span><span class="Punctuation">,</span> <span class="Identifier">T</span><span class="Operator">.</span><span class="Identifier">name</span>
@@ -4019,21 +4021,21 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
   <span class="Identifier">result</span> <span class="Operator">=</span> <span class="Operator">-</span><span class="DecNumber">1</span></pre><p>In the above example, the search loop is unrolled by a factor 4. The unroll factor can be left out too; the compiler then chooses an appropriate unroll factor.</p>
 <p><strong>Note</strong>: Currently the compiler recognizes but ignores this pragma.</p>
 
-<h2><a class="toc-backref" id="编译指示-immediate-编译指示" href="#编译指示-immediate-编译指示">immediate 编译指示</a></h2><p>The immediate pragma is obsolete. See <a class="reference external" href="#typed-vs-untyped-parameters">Typed vs untyped parameters</a>.</p>
+<h2><a class="toc-backref" id="编译指示-immediate编译指示" href="#编译指示-immediate编译指示">immediate编译指示</a></h2><p>immediate编译指示已经弃用。请参阅 <a class="reference external" href="#类型化和无类型形参">类型化和无类型形参</a>.</p>
 
 <h2><a class="toc-backref" id="编译指示-编译选项编译指示" href="#编译指示-编译选项编译指示">编译选项编译指示</a></h2><p>此处列出的编译指示可用于覆盖proc/method/converter的代码生成选项。</p>
 <p>该实现目前提供以下可能的选项（稍后可以添加各种其他选项）。</p>
 <table border="1" class="docutils"><tr><th>pragma</th><th>allowed values</th><th>description</th></tr>
-<tr><td>checks</td><td>on|off </td><td>Turns the code generation for all runtime checks on or off.</td></tr>
-<tr><td>boundChecks</td><td>on|off </td><td>Turns the code generation for array bound checks on or off.</td></tr>
-<tr><td>overflowChecks</td><td>on|off </td><td>Turns the code generation for over- or underflow checks on or off.</td></tr>
-<tr><td>nilChecks</td><td>on|off </td><td>Turns the code generation for nil pointer checks on or off.</td></tr>
-<tr><td>assertions</td><td>on|off </td><td>Turns the code generation for assertions on or off.</td></tr>
-<tr><td>warnings</td><td>on|off </td><td>Turns the warning messages of the compiler on or off.</td></tr>
-<tr><td>hints</td><td>on|off </td><td>Turns the hint messages of the compiler on or off.</td></tr>
-<tr><td>optimization</td><td>none|speed|size </td><td>Optimize the code for speed or size, or disable optimization.</td></tr>
-<tr><td>patterns</td><td>on|off </td><td>Turns the term rewriting templates/macros on or off.</td></tr>
-<tr><td>callconv</td><td>cdecl|...</td><td>Specifies the default calling convention for all procedures (and procedure types) that follow.</td></tr>
+<tr><td>checks</td><td>on|off</td><td>打开或关闭所有运行时检查的代码生成。</td></tr>
+<tr><td>boundChecks</td><td>on|off</td><td>打开或关闭数组绑定检查的代码生成。</td></tr>
+<tr><td>overflowChecks</td><td>on|off</td><td>打开或关闭上溢或下溢检查的代码生成。</td></tr>
+<tr><td>nilChecks</td><td>on|off</td><td>打开或关闭nil指针检查的代码生成。</td></tr>
+<tr><td>assertions</td><td>on|off</td><td>打开或关闭断言的代码生成。</td></tr>
+<tr><td>warnings</td><td>on|off</td><td>打开或关闭编译器的警告消息。</td></tr>
+<tr><td>hints</td><td>on|off</td><td>打开或关闭编译器的提示消息。</td></tr>
+<tr><td>optimization</td><td>none|speed|size</td><td>优化代码的速度或大小，或禁用优化。</td></tr>
+<tr><td>patterns</td><td>on|off</td><td>打开或关闭术语重写模板/宏。</td></tr>
+<tr><td>callconv</td><td>cdecl|...</td><td>指定后面的所有过程（和过程类型）的默认调用约定。</td></tr>
 </table><p>示例：</p>
 <pre class="listing"><span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">checks</span><span class="Punctuation">:</span> <span class="Identifier">off</span><span class="Punctuation">,</span> <span class="Identifier">optimization</span><span class="Punctuation">:</span> <span class="Identifier">speed</span><span class="Operator">.</span><span class="Punctuation">}</span>
 <span class="Comment"># compile without runtime checks and optimize for speed</span></pre>
@@ -4131,7 +4133,7 @@ Memory safety for returning by <tt class="docutils literal"><span class="pre">va
 <h2><a class="toc-backref" id="特定实现的编译指示-passl编译指示" href="#特定实现的编译指示-passl编译指示">PassL编译指示</a></h2><p>The <tt class="docutils literal"><span class="pre">passL</span></tt> 编译指示 can be used to pass additional parameters to the linker like you would using the commandline switch <tt class="docutils literal"><span class="pre">--passL</span></tt>:</p>
 <pre class="listing"><span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">passL</span><span class="Punctuation">:</span> <span class="StringLit">&quot;-lSDLmain -lSDL&quot;</span><span class="Operator">.</span><span class="Punctuation">}</span></pre><p>Note that you can use <tt class="docutils literal"><span class="pre">gorge</span></tt> from the <a class="reference external" href="system.html">system module</a> to embed parameters from an external command that will be executed during semantic analysis:</p>
 <pre class="listing"><span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">passL</span><span class="Punctuation">:</span> <span class="Identifier">gorge</span><span class="Punctuation">(</span><span class="StringLit">&quot;pkg-config --libs sdl&quot;</span><span class="Punctuation">)</span><span class="Operator">.</span><span class="Punctuation">}</span></pre>
-<h2><a class="toc-backref" id="特定实现的编译指示-emit编译指示" href="#特定实现的编译指示-emit编译指示">Emit编译指示</a></h2><p>The <tt class="docutils literal"><span class="pre">emit</span></tt> 编译指示 can be used to directly affect the output of the compiler's code generator. So it makes your code unportable to other code generators/backends. Its usage is highly discouraged! However, it can be extremely useful for interfacing with <span id="cplusplus_1">C++</span> or <span id="objective-c_1">Objective C</span> code.</p>
+<h2><a class="toc-backref" id="特定实现的编译指示-emit编译指示" href="#特定实现的编译指示-emit编译指示">Emit编译指示</a></h2><p><tt class="docutils literal"><span class="pre">emit</span></tt> 编译指示可用于直接影响编译器代码生成器的输出。 因此，它使您的代码无法移植到其他代码生成器/后端。 它的使用非常不鼓励的。但是，它对于与 <span id="cplusplus_1">C++</span> 或 <span id="objective-c_1">Objective C</span> 代码非常有用。</p>
 <p>示例：</p>
 <pre class="listing"><span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">emit</span><span class="Punctuation">:</span> <span class="LongStringLit">&quot;&quot;&quot;
 static int cvariable = 420;
@@ -4228,15 +4230,15 @@ using namespace gui;
 <span class="Comment"># constructor of 'Foo':</span>
 <span class="Keyword">proc</span> <span class="Identifier">constructFoo</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">,</span> <span class="Identifier">b</span><span class="Punctuation">:</span> <span class="Identifier">cint</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">Foo</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">importcpp</span><span class="Punctuation">:</span> <span class="StringLit">&quot;Foo(@)&quot;</span><span class="Operator">.</span><span class="Punctuation">}</span>
 
-<span class="Keyword">let</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Identifier">cnew</span> <span class="Identifier">constructFoo</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">4</span><span class="Punctuation">)</span></pre><p>Produces:</p>
-<pre class="listing"><span class="Identifier">x</span> <span class="Operator">=</span> <span class="Identifier">new</span> <span class="Identifier">Foo</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">4</span><span class="Punctuation">)</span></pre><p>However, depending on the use case <tt class="docutils literal"><span class="pre">new Foo</span></tt> can also be wrapped like this instead:</p>
+<span class="Keyword">let</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Identifier">cnew</span> <span class="Identifier">constructFoo</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">4</span><span class="Punctuation">)</span></pre><p>生成:</p>
+<pre class="listing"><span class="Identifier">x</span> <span class="Operator">=</span> <span class="Identifier">new</span> <span class="Identifier">Foo</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">4</span><span class="Punctuation">)</span></pre><p>但是，根据用例， <tt class="docutils literal"><span class="pre">new Foo</span></tt> 也可以这样包装：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">newFoo</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">,</span> <span class="Identifier">b</span><span class="Punctuation">:</span> <span class="Identifier">cint</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Keyword">ptr</span> <span class="Identifier">Foo</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">importcpp</span><span class="Punctuation">:</span> <span class="StringLit">&quot;new Foo(@)&quot;</span><span class="Operator">.</span><span class="Punctuation">}</span>
 
 <span class="Keyword">let</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Identifier">newFoo</span><span class="Punctuation">(</span><span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="DecNumber">4</span><span class="Punctuation">)</span></pre>
 <h3><a class="toc-backref" id="importcpp编译指示-封装构造函数" href="#importcpp编译指示-封装构造函数">封装构造函数</a></h3><p>Sometimes a C++ class has a private copy constructor and so code like <tt class="docutils literal"><span class="pre">Class c = Class(1,2);</span></tt> must not be generated but instead <tt class="docutils literal"><span class="pre">Class c(1,2);</span></tt>. For this purpose the Nim proc that wraps a C++ constructor needs to be annotated with the <span id="constructor_1">constructor</span> pragma. This pragma also helps to generate faster C++ code since construction then doesn't invoke the copy constructor:</p>
 <pre class="listing"><span class="Comment"># 更好的'Foo'构建函数：</span>
 <span class="Keyword">proc</span> <span class="Identifier">constructFoo</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">,</span> <span class="Identifier">b</span><span class="Punctuation">:</span> <span class="Identifier">cint</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">Foo</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">importcpp</span><span class="Punctuation">:</span> <span class="StringLit">&quot;Foo(@)&quot;</span><span class="Punctuation">,</span> <span class="Identifier">constructor</span><span class="Operator">.</span><span class="Punctuation">}</span></pre>
-<h3><a class="toc-backref" id="importcpp编译指示-封装析构函数" href="#importcpp编译指示-封装析构函数">封装析构函数</a></h3><p>封装destruct由于Nim直接生成C++，所以任何析构函数都由C++编译器在作用域出口处隐式调用。 这意味着通常人们可以完全没有包装析构函数！ 但是当需要显式调用它时，需要将其包装起来。 模式语言提供了所需的一切：</p>
+<h3><a class="toc-backref" id="importcpp编译指示-封装析构函数" href="#importcpp编译指示-封装析构函数">封装析构函数</a></h3><p>封装destruct由于Nim直接生成C++，所以任何析构函数都由C++编译器在作用域出口处隐式调用。 这意味着通常人们可以完全没有封装析构函数。 但是当需要显式调用它时，需要将其封装起来。 模式语言提供了所需的一切：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">destroyFoo</span><span class="Punctuation">(</span><span class="Identifier">this</span><span class="Punctuation">:</span> <span class="Keyword">var</span> <span class="Identifier">Foo</span><span class="Punctuation">)</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">importcpp</span><span class="Punctuation">:</span> <span class="StringLit">&quot;#.~Foo()&quot;</span><span class="Operator">.</span><span class="Punctuation">}</span></pre>
 <h3><a class="toc-backref" id="importcpp编译指示-对象的importcpp" href="#importcpp编译指示-对象的importcpp">对象的Importcpp</a></h3><p>泛型 <tt class="docutils literal"><span class="pre">importcpp</span></tt> 的对象映射成C++模板。这意味着您可以轻松导入C++的模板，而无需对象类型的模式语言：</p>
 <pre class="listing"><span class="Keyword">type</span>
@@ -4429,7 +4431,7 @@ using namespace gui;
 <h2><a class="toc-backref" id="线程-threadvar编译指示" href="#线程-threadvar编译指示">Threadvar编译指示</a></h2><p>变量可以用 <tt class="docutils literal"><span class="pre">threadvar</span></tt> 编译指示标记，使它成为 <span id="threadminuslocal_1">thread-local</span> 变量; 另外，这意味着 <tt class="docutils literal"><span class="pre">global</span></tt> 编译指示的所有效果。</p>
 <pre class="listing"><span class="Keyword">var</span> <span class="Identifier">checkpoints</span><span class="Operator">*</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">threadvar</span><span class="Operator">.</span><span class="Punctuation">}</span><span class="Punctuation">:</span> <span class="Identifier">seq</span><span class="Punctuation">[</span><span class="Identifier">string</span><span class="Punctuation">]</span></pre><p>由于实现限制，无法在 <tt class="docutils literal"><span class="pre">var</span></tt> 部分中初始化线程局部变量。 （在创建线程时需要复制每个线程局部变量。）</p>
 
-<h2><a class="toc-backref" id="线程-线程和异常" href="#线程-线程和异常">线程和异常</a></h2><p>线程和异常之间的交互很简单：一个线程中的 <em>处理过的</em> 异常不会影响任何其他线程。但是，一个线程中的 <em>未处理的</em> 异常终止整个 <em>进程</em> ！</p>
+<h2><a class="toc-backref" id="线程-线程和异常" href="#线程-线程和异常">线程和异常</a></h2><p>线程和异常之间的交互很简单：一个线程中的 <em>处理过的</em> 异常不会影响任何其他线程。但是，一个线程中的 <em>未处理的</em> 异常终止整个 <em>进程</em> 。</p>
 </p>
   
   </div>
@@ -4439,7 +4441,7 @@ using namespace gui;
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-09-02 15:54:48 UTC</small>
+        <small>Made with Nim. Generated: 2019-09-06 07:56:32 UTC</small>
       </div>
     </div>
   </div>
