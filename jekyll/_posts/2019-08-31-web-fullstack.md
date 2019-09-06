@@ -186,7 +186,7 @@ proc reqFrame(callback: proc()): int {.importc: "window.requestAnimationFrame".}
 proc init(ev: Event) =
   kxi.renderId = reqFrame(proc () = kxi.dodraw)
 ```
-`init`设置`kxi`的渲染Id为——*浏览器向图形API缓冲区请求一次动画帧的句柄*，
+`init`将`kxi`的渲染Id设置——*浏览器向图形API缓冲区请求一次动画帧的句柄*，
 并设置请求动画帧的回调为`dodraw`。
 
 ```nim
