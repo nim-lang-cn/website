@@ -21,13 +21,13 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
 2. [技术点](#技术点)
     * 2.1 [立即模式](#立即模式)
     * 2.2 [使用Javascript模块](#使用Javascript模块)
+    * 2.3 [Karax的虚拟DOM实现](#Karax的虚拟DOM实现)
+    * 2.4 [Web后端](#Web后端)
 
 ## 背景
     2015年接触到Nim的时候被它既有高级抽象又能编译成C的特性吸引，当时正感到Go操作底层硬件的无力，不能满足软硬兼施，从云端做到底层嵌入式的技术发展需求。那时也没有什么中文文档，有了学习Go语言的经验，拿到Nim源码先从标准库开始看，到了dom.nim，惊觉Nim还可以做Web前端，这样想做的领域就统一了，这成为我跟随Nim四年以来的初衷。
 
     比起没有中文文档，选择从Karax开始是一条硬核之路，没有任何文档，核心的buildHtml宏做的DSL以及虚拟DOM算法，对理论知识和解决问题的能力有较高的要求，即使花时间掌握了，面临的也是机制和组件从零开发。
-
-
 
 
 ## 技术点
@@ -36,6 +36,7 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
     实践上的重点在Javascript原生模块导入；
     机制上，实现登录、退出、路由、页面加载数据、页面间传值；
     组件上，实现表格的翻页，动态设置每页显示数量，全选和单选的逻辑关系，即时响应搜索。
+    
 
 ### 立即模式
     立即模式（immediate mode）是GUI的概念，和立即模式相对的是保留模式（retained mode）,
@@ -111,6 +112,60 @@ proc toString*(obj: JsObject): cstring {.importcpp: "#.toString()".}
 var hash = CryptoJS.MD5(password).toString()
 
 ```
+### Karax的虚拟DOM实现
+
+
+```nim
+# Karax实现虚拟DOM的入口 ,另一个setRenderer是没有RouterData的重载方法
+var
+  kxi*: KaraxInstance
+  ...
+proc setRenderer*(renderer: proc (data: RouterData): VNode,
+                  root: cstring = "ROOT",
+                  clientPostRenderCallback:
+                    proc (data: RouterData) = nil): KaraxInstance {.
+                    discardable.} = 
+...
+  kxi = result
+  window.onload = init
+  onhashChange = proc() = redraw()
+...
+```
+该方法从renderer返回的VNode创建一个虚拟DOM树，与id为ROOT的DOM节点相对应，并提供一个渲染后的回调过程，用于例如Echarts节点先渲染再填充的场景，返回KaraxInstance，它是Karax虚拟DOM与浏览器DOM之间的桥梁，用全局变量kxi导出，设置浏览器window对象加载时的方法为init, 并设置哈希改变的回调为redraw()。
+
+```nim
+proc reqFrame(callback: proc()): int {.importc: "window.requestAnimationFrame".}
+...
+proc init(ev: Event) =
+  kxi.renderId = reqFrame(proc () = kxi.dodraw)
+```
+init设置kxi的渲染Id为浏览器向图形API缓冲区请求一次动画帧的句柄，并设置请求动画帧的回调为dodraw。
+
+```nim
+proc dodraw(kxi: KaraxInstance) =
+  if kxi.renderer.isNil: return
+  let rdata = RouterData(hashPart: hashPart)
+  let newtree = kxi.renderer(rdata)
+  inc kxi.runCount
+  newtree.id = kxi.rootId
+  kxi.toFocus = nil
+  if kxi.currentTree == nil:
+    let asdom = toDom(newtree, useAttachedNode = true, kxi)
+    replaceById(kxi.rootId, asdom)
+  else:
+    doAssert same(kxi.currentTree, document.getElementById(kxi.rootId))
+    let olddom = document.getElementById(kxi.rootId)
+    diff(newtree, kxi.currentTree, nil, olddom, kxi)
+    ...
+```
+如果当前虚拟DOM树还没有创建，则将新树转换为DOM树替换原kxi.rootId的内容；
+如果已经存在，先断言当前虚拟DOM树与浏览器DOM树是相同的，否则发起异常，然后获取kxi.rootId的DOM节点作为旧节点与新的虚拟DOM树进行diff算法，得到补丁集，根据等价、相似、不同三种结果，对节点进行相应更新 。
+
+### Web后端
+Nim全栈开发的Web后端可以使用Jester框架，运行多线程异步，涉及到websocket的，可以使用https://github.com/niv/websocket.nim， 部署方面https要求websocket也使用wss，具体将在后面讲解。
+
+
+这里简单介绍了如何使用Javascript模块的类型和库函数，立即模式，根据源码讲解了Karax虚拟DOM的实现机制等理论知识，后面将讲解这些特性在应用中的实践。
 
 
 
