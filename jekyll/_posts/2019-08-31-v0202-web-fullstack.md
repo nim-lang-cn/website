@@ -139,7 +139,7 @@ proc reqFrame(callback: proc()): int {.importc: "window.requestAnimationFrame".}
 proc init(ev: Event) =
   kxi.renderId = reqFrame(proc () = kxi.dodraw)
 ```
-init设置kxi的渲染Id为浏览器向图形API缓冲区请求一次动画帧的句柄，并设置请求动画帧的回调为dodraw。
+init将kxi的渲染Id设置为浏览器向图形API缓冲区请求一次动画帧的句柄，并设置请求动画帧的回调为dodraw。
 
 ```nim
 proc dodraw(kxi: KaraxInstance) =
