@@ -3,7 +3,7 @@ title: "浅谈Nim Web全栈开发"
 author: sheldon
 ---
 
-浅谈Nim Web全栈开发
+首个 Nim 全栈项目
 
     Nim is a statically typed compiled systems programming language. 
     It combines successful concepts from mature languages like Python,Ada and Modula.
