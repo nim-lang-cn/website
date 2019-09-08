@@ -1,9 +1,9 @@
 ---
-title: "首个Nim全栈项目"
+title: "浅谈Nim Web全栈开发"
 author: sheldon
 ---
 
-首个Nim全栈项目
+浅谈Nim Web全栈开发
 
     Nim is a statically typed compiled systems programming language. 
     It combines successful concepts from mature languages like Python,Ada and Modula.
@@ -39,23 +39,25 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
 拿到Nim源码先从标准库开始看，
 到了`dom.nim`，
 惊觉Nim还可以做Web前端，
-这样想做的领域就统一了，
-这成为我跟随Nim四年以来的初衷。
+这样想做的领域就统一了。
+重写的项目来自于一个layui和ThinkPHP框架的上线产品，
+前端开发使用Karax，
+后端使用Jester做Web服务，
+用Websocket做长连接API通信。
 
 比起没有中文文档，
-选择从Karax开始是一条硬核之路，
+Web前端开发选择从Karax开始是一条硬核之路，
 没有任何文档，
 核心的buildHtml宏做的DSL以及虚拟DOM算法，
 对理论知识和解决问题的能力有较高的要求，
 即使花时间掌握了，
-面临的也是机制和组件从零开发，
+面临的还有机制和组件从零开发，
 唯一能够让你坚持下去的是你相信它会带来不一样的东西。
 
-
 ## 技术点
-本文将从理论和实践上分别展开，
+本系列将从理论和实践上分别展开，
 对解决问题过程中使用的方法一一讲解，
-希望能够让大家学会使用Karax。
+旨在希望能够让大家理解和学会使用Karax。
 
 * 理论上的重点在Karax的立即模式、渲染机制、虚拟DOM与DOM的映射，
 这部分将主要根据Karax中的源码进行梳理；
@@ -70,15 +72,14 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
 关于两个模式比较形象的解释：
 [https://blog.csdn.net/cvper/article/details/86568245](https://blog.csdn.net/cvper/article/details/86568245)
 
-Karax引入这种概念使得它的虚拟DOM节点成为无状态的(stateless)节点，
-设置浏览器window对象请求的每一帧回调都将重绘虚拟DOM树，
-Diff算法用来对比新旧两颗树，计算出补丁集，对不同部分进行更新，
-这与React的Diff算法一样。
+这意味着浏览器渲染的每一帧变化，和你看到的桌面软件、视频、游戏的连续变化等，从操作系统的层面看没有本质区别。在立即模式下虚拟DOM节点成为无状态的(stateless)节点，使用diff算法更新，这与React是一致的。Web前端是GUI的一种表现形式，可以借助Nim的特性和立即模式思想的指导下扩展到GUI开发，加深对计算机底层的理解。对这方面感兴趣的同学，可以研究下[https://github.com/yglukhov/nimx](https://github.com/yglukhov/nimx)
+
+Nim在GUI上的最终目标是实现Web端、移动端、桌面端三端统一的框架。
 
 
 ### 使用Javascript模块
 
-可以把这些模块写成pure的组件，我们采用偷懒的方式直接使用Echarts，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同Javascript模块类型，导入浏览器全局变量和方法，有文档的直接看API文档会快些，没有文档的库需要看源码，这里主要描述通用方法，如Echarts的源码中：
+可以把这些模块写成pure的组件，我们采用简单的方式直接使用Echarts的函数，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同的Javascript模块类型，导入浏览器全局变量和方法，看文档和源码。开始建议要看源码，以熟悉不同的模块函数的组织方式，在熟练之后可以直接通过文档导入需要用的函数。这里主要讲如何通过看Javascript模块源码将需要使用的函数导入Karax。如Echarts的源码中：
 
 ```javascript
 
@@ -149,7 +150,9 @@ proc toString*(obj: JsObject): cstring {.importcpp: "#.toString()".}
 var hash = CryptoJS.MD5(password).toString()
 
 ```
-
+Nim编译成的Javascript符合ECMAScript3规范，新规范不被支持。
+Karax将所有Nim代码编译成一个js文件，通过
+`<script src="xxx.js"></script>`，引入到index.html中。
 
 ### Karax的虚拟DOM实现
 
@@ -223,10 +226,10 @@ proc dodraw(kxi: KaraxInstance) =
 如果已经存在，
 先断言当前虚拟DOM树与浏览器DOM树是相同的，
 否则发起异常，
-然后获取`kxi.rootId`的DOM节点作为旧节点与新的虚拟DOM树进行diff算法，
+然后获取`kxi.rootId`的DOM节点作为旧DOM树与新的虚拟DOM树进行diff算法，
 得到补丁集，
 根据等价、相似、不同三种结果，
-对节点进行相应更新 。
+对节点进行相应更新。
 
 ### Web后端
 
