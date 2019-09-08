@@ -79,7 +79,7 @@ Nim在GUI上的最终目标是实现Web端、移动端、桌面端三端统一�
 
 ### 使用Javascript模块
 
-可以把这些模块写成pure的组件，我们采用简单的方式直接使用Echarts的函数，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同的Javascript模块类型，导入浏览器全局变量和方法，看文档和源码。开始建议要看源码，以熟悉不同的模块函数的组织方式，在熟练之后可以直接通过文档导入需要用的函数。这里主要讲如何通过看Javascript模块源码将需要使用的函数导入Karax。如Echarts的源码中：
+可以把这些模块写成pure的组件，我们采用简单的方式直接使用Echarts的函数，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同的Javascript模块类型，导入浏览器全局变量和方法。开始建议要从源码看起，以熟悉不同的模块函数的组织方式，熟手可以直接通过文档导入需要用的函数。这里主要讲如何通过Javascript模块源码将需要使用的函数导入Karax。如Echarts的源码中：
 
 ```javascript
 
@@ -113,7 +113,7 @@ proc echartsInit*(n: Element): EChart {.importc: "echarts.init".}
 proc setOption*(x: EChart; option: JsonNode) {.importcpp.}
 ```
 
-另一个使用的Javascript模块是`cryptojs`，用于加密从浏览器向后端传输的密码。
+项目中使用的另一个Javascript模块是`cryptojs`，用于加密从浏览器向后端传输的敏感信息。
 
 在`crypotojs/components/md5.js`中：
 
@@ -142,8 +142,7 @@ var CryptoJS*{.importc.}: JsObject
 proc MD5*(obj: JsObject, message: cstring): JsObject {.importcpp: "#.MD5(#)".}
 proc toString*(obj: JsObject): cstring {.importcpp: "#.toString()".}
 ```
-
-值得注意的是JsObject对象可以像Javascript使用.操作符访问其导入的公共字段，使用JsObject导入需要罗列需要用到的每个过程；
+一切Javascript对象在Nim中都可以用JsObject表示，JsObject对象可以像Javascript一样使用.操作符访问其字段和函数，使用到的函数需要导入为Nim过程；
 
 ```nim
 #Nim文件中组成链式表达式
@@ -157,7 +156,7 @@ Karax将所有Nim代码编译成一个js文件，通过
 ### Karax的虚拟DOM实现
 
 ```nim
-# Karax实现虚拟DOM的入口 ,另一个setRenderer是没有RouterData的重载方法
+# Karax虚拟DOM的实现入口 ,另一个setRenderer是没有RouterData的重载方法
 var
   kxi*: KaraxInstance
   ...
