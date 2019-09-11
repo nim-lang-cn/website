@@ -4,29 +4,28 @@ author: ch4o5
 ---
 
 自从在开源中国发了资讯之后，群里来了好多人啊😊
-
 赶紧开始准备个目前版本(v0.20.2)的系列教程，帮助大家上手~
 
 ## 目录
 
-​	[Windows下的下载安装](#Windows)
+   [Windows下的下载安装](#Windows)
 
-​		[一、 64位环境常规安装](#一、64位环境常规安装)
+​      [一、 64位环境常规安装](#一、64位环境常规安装)
 
-​		[二、32位使用choosenim安装](#二、32位使用choosenim安装)
+​      [二、32位使用choosenim安装](#二、32位使用choosenim安装)
 
-​		[三、常规安装步骤](#三、常规安装步骤)
+​      [三、常规安装步骤](#三、常规安装步骤)
 
-​	[类Unix环境下的下载安装](#Unix)
+​   [类Unix环境下的下载安装](#Unix)
 
-​	[MacOS系统下的下载安装](#MacOS)
+​   [MacOS系统下的下载安装](#MacOS)
 
-​	[从源码编译](#从源码编译)
+​   [从源码编译](#从源码编译)
 
 
 ## Windows
 
-### 一、 64位环境常规安装
+### 一、64位环境常规安装
 
 1. 访问[Nim中文社区](https://nim-lang-cn.org)中的[在Windows下安装Nim](https://nim-lang-cn.org/install_windows.html)页面
 
@@ -101,7 +100,7 @@ author: ch4o5
 
 类Unix环境下，墙裂推荐使用`choosenim`进行版本控制，高效方便，省电低碳，省下时间做大事~
 
-### 一、 使用choosenim进行安装
+### 一、使用choosenim进行安装
 
 使用`choosenim`安装Nim最新的稳定版本， 只需要在你的终端中运行下方的命令，然后根据屏幕上的说明操作即可：
 
@@ -111,7 +110,7 @@ curl https://nim-lang.org/choosenim/init.sh -sSf | sh
 
 *注：可能需要root权限*
 
-### 二、 常规方式安装
+### 二、常规方式安装
 
 再次说明，Linux环境中建议优先选择使用`choosenim`进行安装，此安装方式没有使用`choosenim`方式灵活和方便。
 
