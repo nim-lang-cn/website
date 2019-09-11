@@ -34,36 +34,36 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
 当时正感到Go操作底层硬件的无力，
 不能满足软硬兼施，
 从云端做到底层嵌入式的技术发展需求。
-那时也没有什么中文文档，
 有了学习Go语言的经验，
 拿到Nim源码先从标准库开始看，
 到了`dom.nim`，
-惊觉Nim还可以做Web前端，
+发现Nim可以做Web前端，
 这样想做的领域就统一了。
+直到Karax的诞生，
+Web开发的场景被全面覆盖，
+在有一些预见之后，我们开始了对Karax的尝试。
+
 重写的项目来自于一个layui和ThinkPHP框架的上线产品，
 前端开发使用Karax，
 后端使用Jester做Web服务，
 用Websocket做长连接API通信。
 
-比起没有中文文档，
-Web前端开发选择从Karax开始是一条硬核之路，
-没有任何文档，
-核心的buildHtml宏做的DSL以及虚拟DOM算法，
-对理论知识和解决问题的能力有较高的要求，
-即使花时间掌握了，
-面临的还有机制和组件从零开发，
-唯一能够让你坚持下去的是你相信它会带来不一样的东西。
+没有Karax的文档，
+仅从example和源码中一点点理解buildHtml和虚拟DOM的实现，
+Karax和它的代码一样轻量，机制、组件、生态需要从零构建，
+让我坚持下来的是相信它会带来不一样的Web开发体验，
+而且这些体验和经验对于Nim GUI在三端的统一至关重要。
 
 ## 技术点
 本系列将从理论和实践上分别展开，
 对解决问题过程中使用的方法一一讲解，
 旨在希望能够让大家理解和学会使用Karax。
 
-* 理论上的重点在Karax的立即模式、渲染机制、虚拟DOM与DOM的映射，
+* 理论上的重点在立即模式、渲染机制、虚拟DOM与DOM的映射，
 这部分将主要根据Karax中的源码进行梳理；
 * 实践上的重点在Javascript原生模块导入；
-* 机制上，实现登录、退出、路由、页面加载数据、页面间传值；
-* 组件上，实现表格的翻页，动态设置每页显示数量，全选和单选的逻辑关系，即时响应搜索。
+* 机制上，实现登录、退出、路由、页面加载数据、页面间传值、工作流、必选字段；
+* 组件上，实现表格的翻页，动态设置每页显示数量，全选和单选的逻辑关系，即时响应搜索，日历。
     
 
 ### 立即模式
@@ -72,14 +72,13 @@ Web前端开发选择从Karax开始是一条硬核之路，
 关于两个模式比较形象的解释：
 [https://blog.csdn.net/cvper/article/details/86568245](https://blog.csdn.net/cvper/article/details/86568245)
 
-这意味着浏览器渲染的每一帧变化，和你看到的桌面软件、视频、游戏的连续变化等，从操作系统的层面看没有本质区别。在立即模式下虚拟DOM节点成为无状态的(stateless)节点，使用diff算法更新，这与React是一致的。Web前端是GUI的一种表现形式，可以借助Nim的特性和立即模式思想的指导下扩展到GUI开发，加深对计算机底层的理解。对这方面感兴趣的同学，可以研究下[https://github.com/yglukhov/nimx](https://github.com/yglukhov/nimx)
+这意味着浏览器渲染的每一帧变化，和你看到的桌面软件、视频、游戏的连续变化等，从操作系统的层面看没有什么不同。在立即模式下虚拟DOM节点成为无状态的(stateless)节点，使用diff算法更新，这与React的diff算法一致。Web前端是GUI的一种表现形式，可以借助Nim的特性和立即模式思想的指导下扩展到GUI开发，加深对计算机底层的理解。对这方面感兴趣的同学，可以研究下[https://github.com/yglukhov/nimx](https://github.com/yglukhov/nimx)
 
-Nim在GUI上的最终目标是实现Web端、移动端、桌面端三端统一的框架。
 
 
 ### 使用Javascript模块
 
-可以把这些模块写成pure的组件，我们采用简单的方式直接使用Echarts的函数，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同的Javascript模块类型，导入浏览器全局变量和方法。开始建议要从源码看起，以熟悉不同的模块函数的组织方式，熟手可以直接通过文档导入需要用的函数。这里主要讲如何通过Javascript模块源码将需要使用的函数导入Karax。如Echarts的源码中：
+可以把这些模块写成pure的组件，我们采用简单的方式直接使用Echarts的函数，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同的Javascript模块类型，导入浏览器全局变量和方法。文档和源码看起，这里主要描述如何通过Javascript模块源码将需要使用的函数导入Karax。如根据Echarts的源码：
 
 ```javascript
 
@@ -103,19 +102,18 @@ exports.init = init;
 //...
 })));
 ```
-
-可以将`setOption`和`init`导入Karax
+得出
 
 ```nim
 type
       EChart* = ref object
-proc echartsInit*(n: Element): EChart {.importc: "echarts.init".}
 proc setOption*(x: EChart; option: JsonNode) {.importcpp.}
+proc echartsInit*(n: Element): EChart {.importc: "echarts.init".}
 ```
 
 项目中使用的另一个Javascript模块是`cryptojs`，用于加密从浏览器向后端传输的敏感信息。
 
-在`crypotojs/components/md5.js`中：
+从`crypotojs/components/md5.js`中：
 
 ```javascript
 (function (Math) {
@@ -125,7 +123,7 @@ proc setOption*(x: EChart; option: JsonNode) {.importcpp.}
     var MD5 = C_algo.MD5 = Hasher.extend({...})
 ```
 
-以及`core.js`中：
+和`core.js`中：
 
 ```javascript
 var WordArray = C_lib.WordArray = Base.extend({
@@ -142,7 +140,7 @@ var CryptoJS*{.importc.}: JsObject
 proc MD5*(obj: JsObject, message: cstring): JsObject {.importcpp: "#.MD5(#)".}
 proc toString*(obj: JsObject): cstring {.importcpp: "#.toString()".}
 ```
-一切Javascript对象在Nim中都可以用JsObject表示，JsObject对象可以像Javascript一样使用.操作符访问其字段和函数，使用到的函数需要导入为Nim过程；
+Javascript对象在Nim中用JsObject表示，可以使用.操作符访问其字段和函数，函数需要导入为Nim过程；
 
 ```nim
 #Nim文件中组成链式表达式
@@ -172,11 +170,11 @@ proc setRenderer*(renderer: proc (data: RouterData): VNode,
 ...
 ```
 
-该方法从`renderer`返回的`VNode`创建一个虚拟DOM树，
+该过程从`renderer`返回的`VNode`创建一个虚拟DOM树，
 与id为`ROOT`的DOM节点相对应，
 并提供一个渲染后的回调过程，
 用于例如Echarts节点先渲染再填充的场景，
-返回`KaraxInstance`，
+过程返回`KaraxInstance`，
 它是Karax虚拟DOM与浏览器DOM之间的桥梁，
 用全局变量`kxi`导出，
 设置浏览器`window`对象加载时的方法为`init`,
@@ -200,7 +198,7 @@ proc redraw*(kxi: KaraxInstance = kxi) =
 proc init(ev: Event) =
   kxi.renderId = reqFrame(proc () = kxi.dodraw)
 ```
-`init`将`kxi.renderId`设置为浏览器window对象向图形API缓冲区请求一次动画帧返回的句柄，
+`init`将`kxi.renderId`设置为浏览器window对象请求一次动画帧返回的句柄，
 并设置请求动画帧的回调为`dodraw`。 如果`kxi.renderId`为零， `redraw`初始化`kxi.renderId`，否则执行`dodraw`。
 
 ```nim
