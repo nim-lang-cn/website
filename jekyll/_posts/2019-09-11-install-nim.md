@@ -18,11 +18,17 @@ author: ch4o5
 
 ​      [三、常规安装步骤](#三、常规安装步骤)
 
-​   [类Unix环境下的下载安装](#Unix)
+   [类Unix环境下的下载安装](#Unix)
 
-​   [MacOS系统下的下载安装](#MacOS)
+​		[一、使用choosenim进行安装](一、使用choosenim进行安装)
 
-​   [从源码编译](#从源码编译)
+​		[二、常规方式安装](#二、常规方式安装)
+
+​		[三、脚本一键安装](#三、脚本一键安装)
+
+   [MacOS系统下的下载安装](#MacOS)
+
+   [从源码编译](#从源码编译)
 
 
 ## Windows
@@ -106,7 +112,7 @@ author: ch4o5
 
 使用`choosenim`安装Nim最新的稳定版本， 只需要在你的终端中运行下方的命令，然后根据屏幕上的说明操作即可：
 
-```sh
+```bash
 curl https://nim-lang.org/choosenim/init.sh -sSf | sh
 ```
 
