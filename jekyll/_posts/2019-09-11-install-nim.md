@@ -1,5 +1,5 @@
 ---
-title: "实战Nim入门系列（二）——下载安装Nim环境"
+title: "实战Nim入门系列（一）——下载安装Nim环境"
 author: ch4o5
 ---
 
