@@ -852,14 +852,14 @@ function main() {
   <div id="tocRoot"></div>
   
   <p class="module-desc"><table class="docinfo" frame="void" rules="none"><col class="docinfo-name" /><col class="docinfo-content" /><tbody valign="top"><tr><th class="docinfo-name">Author:</th><td> Andreas Rumpf</td></tr>
-<tr><th class="docinfo-name">Version:</th><td> 0.20.3</td></tr>
+<tr><th class="docinfo-name">Version:</th><td> 0.20.0</td></tr>
 </tbody></table>
-<h1><a class="toc-backref" id="引言" href="#引言">引言</a></h1><blockquote><p>&quot;重复使得荒谬合理。&quot; -- Norman Wildberger</p></blockquote>
+<h1><a class="toc-backref" id="引言" href="#引言">引言</a></h1><blockquote><p>&quot;重复让荒谬合理。&quot; -- Norman Wildberger</p></blockquote>
 <p>本文档是 <em>Nim</em> 编程语言的高级构造部分。 <strong>注意本文档有些过时</strong> 因为 <a class="reference external" href="manual.html">manual</a>  <strong>包含更多高级语言特性的样例</strong> 。</p>
 
-<h1><a class="toc-backref" id="编译指示（pragmas）" href="#编译指示（pragmas）">编译指示（Pragmas）</a></h1><p>编译指示是Nim中不用引用大量新关键字，给编译器附加信息、命令的方法。编译指示用特殊的 <tt class="docutils literal"><span class="pre">{.</span></tt> 和 <tt class="docutils literal"><span class="pre">.}</span></tt> 花括号括起来。本教程没有讲pragmas。 可用编译指示的描述见 <a class="reference external" href="manual.html#pragmas">manual</a> 或 <a class="reference external" href="nimc.html#additional-features">user guide</a> .</p>
+<h1><a class="toc-backref" id="编译指示（pragmas）" href="#编译指示（pragmas）">编译指示（Pragmas）</a></h1><p>编译指示是Nim中不用引用大量新关键字，给编译器附加信息、命令的方法。编译指示用特殊的 <tt class="docutils literal"><span class="pre">{.</span></tt> 和 <tt class="docutils literal"><span class="pre">.}</span></tt> 花括号括起来。本教程不讲pragmas。 可用编译指示的描述见 <a class="reference external" href="manual.html#pragmas">manual</a> 或 <a class="reference external" href="nimc.html#additional-features">user guide</a> .</p>
 
-<h1><a class="toc-backref" id="面向对象编程" href="#面向对象编程">面向对象编程</a></h1><p>虽然Nim对面向对象编程（OOP）的支持很简单，但可以使用强大的OOP技术。OOP看作 <em>一种</em> 程序设计方式，不是 <em>唯一</em> 方式。通常过程的解决方法有更简单和高效的代码。 特别是，更喜欢组合而不是继承通常是更好的设计。</p>
+<h1><a class="toc-backref" id="面向对象编程" href="#面向对象编程">面向对象编程</a></h1><p>虽然Nim对面向对象编程（OOP）的支持很简单，但可以使用强大的OOP技术。OOP看作 <em>一种</em> 程序设计方式，不是 <em>唯一</em> 方式。通常过程的解决方法有更简单和高效的代码。 特别是，首选组合是比继承更好的设计。</p>
 
 <h2><a class="toc-backref" id="面向对象编程-继承" href="#面向对象编程-继承">继承</a></h2><p>继承在Nim中是完全可选的。对象需要用运行时类型信息使用继承 要使用运行时类型信息启用继承，对象需要从 <tt class="docutils literal"><span class="pre">RootObj</span></tt> 继承。 这可以直接完成，也可以通过从继承自 <tt class="docutils literal"><span class="pre">RootObj</span></tt>  的对象继承来间接完成。 通常，具有继承的类型也被标记为“ref”类型，即使这不是严格执行的。要在运行时检查某个对象是否属于某种类型，可以使用 <tt class="docutils literal"><span class="pre">of</span></tt> 运算符。</p>
 <pre class="listing"><span class="Keyword">type</span>
@@ -874,13 +874,13 @@ function main() {
   <span class="Identifier">student</span><span class="Punctuation">:</span> <span class="Identifier">Student</span>
   <span class="Identifier">person</span><span class="Punctuation">:</span> <span class="Identifier">Person</span>
 <span class="Identifier">assert</span><span class="Punctuation">(</span><span class="Identifier">student</span> <span class="Keyword">of</span> <span class="Identifier">Student</span><span class="Punctuation">)</span> <span class="Comment"># is true</span>
-<span class="Comment"># object construction:</span>
+<span class="Comment"># 对象构造:</span>
 <span class="Identifier">student</span> <span class="Operator">=</span> <span class="Identifier">Student</span><span class="Punctuation">(</span><span class="Identifier">name</span><span class="Punctuation">:</span> <span class="StringLit">&quot;Anton&quot;</span><span class="Punctuation">,</span> <span class="Identifier">age</span><span class="Punctuation">:</span> <span class="DecNumber">5</span><span class="Punctuation">,</span> <span class="Identifier">id</span><span class="Punctuation">:</span> <span class="DecNumber">2</span><span class="Punctuation">)</span>
-<span class="Identifier">echo</span> <span class="Identifier">student</span><span class="Punctuation">[</span><span class="Punctuation">]</span></pre><p>继承是使用 <tt class="docutils literal"><span class="pre">object of</span></tt> 语法完成的。目前不支持多重继承。如果一个对象类型没有合适的祖先， <tt class="docutils literal"><span class="pre">RootObj</span></tt> 可以用作它的祖先，但这只是一个约定。 没有祖先的对象隐含地是“final”。你可以使用 <tt class="docutils literal"><span class="pre">inheritable</span></tt> pragma来引入除 <tt class="docutils literal"><span class="pre">system.RootObj</span></tt> 之外的新对象根。 （例如，这在GTK包装器中使用。）</p>
+<span class="Identifier">echo</span> <span class="Identifier">student</span><span class="Punctuation">[</span><span class="Punctuation">]</span></pre><p>继承是使用 <tt class="docutils literal"><span class="pre">object of</span></tt> 语法完成的。目前不支持多重继承。如果一个对象类型没有合适的祖先， <tt class="docutils literal"><span class="pre">RootObj</span></tt> 可以用作它的祖先，但这只是一个约定。 没有祖先的对象是隐式的“final”。你可以使用 <tt class="docutils literal"><span class="pre">inheritable</span></tt> 编译指示来引入除 <tt class="docutils literal"><span class="pre">system.RootObj</span></tt> 之外的新对象根。 （例如，GTK封装使用了这种方法。）</p>
 <p>只要使用继承，就应该使用Ref对象。它不是必须的，但是对于非ref对象赋值，例如 <tt class="docutils literal"><span class="pre">let person：Person = Student（id：123）</span></tt> 将截断子类字段。</p>
 <p><strong>注意</strong> ：对于简单的代码重用，组合（*has-a* 关系）通常优于继承（*is-a* 关系）。由于对象是Nim中的值类型，因此组合与继承一样有效。</p>
 
-<h2><a class="toc-backref" id="面向对象编程-相互递归类型" href="#面向对象编程-相互递归类型">相互递归类型</a></h2><p>对象，元组和引用可以模拟相互依赖的非常复杂的数据结构; 它们是 <em>相互递归的</em> 。在Nim中，这些类型只能在单个类型部分中声明。（任何其他东西都需要任意符号查询，这会减慢编译速度。）</p>
+<h2><a class="toc-backref" id="面向对象编程-相互递归类型" href="#面向对象编程-相互递归类型">相互递归类型</a></h2><p>对象、元组和引用可以模拟相互依赖的非常复杂的数据结构; 它们是 <em>相互递归的</em> 。在Nim中，这些类型只能在单个类型部分中声明。（即任何其他因为需要任意符号先行减慢编译速度的类型。）</p>
 <p>示例：</p>
 <pre class="listing"><span class="Keyword">type</span>
   <span class="Identifier">Node</span> <span class="Operator">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>  <span class="Comment"># 对具有以下字段的对象的引用：</span>
@@ -901,13 +901,13 @@ function main() {
 <p>一个示例:</p>
 <pre class="listing"><span class="Comment"># 这是一个如何在Nim中建模抽象语法树的示例</span>
 <span class="Keyword">type</span>
-  <span class="Identifier">NodeKind</span> <span class="Operator">=</span> <span class="Keyword">enum</span>  <span class="Comment"># the different node types</span>
-    <span class="Identifier">nkInt</span><span class="Punctuation">,</span>          <span class="Comment"># a leaf with an integer value</span>
-    <span class="Identifier">nkFloat</span><span class="Punctuation">,</span>        <span class="Comment"># a leaf with a float value</span>
-    <span class="Identifier">nkString</span><span class="Punctuation">,</span>       <span class="Comment"># a leaf with a string value</span>
-    <span class="Identifier">nkAdd</span><span class="Punctuation">,</span>          <span class="Comment"># an addition</span>
-    <span class="Identifier">nkSub</span><span class="Punctuation">,</span>          <span class="Comment"># a subtraction</span>
-    <span class="Identifier">nkIf</span>            <span class="Comment"># an if statement</span>
+  <span class="Identifier">NodeKind</span> <span class="Operator">=</span> <span class="Keyword">enum</span>  <span class="Comment"># 不同节点类型</span>
+    <span class="Identifier">nkInt</span><span class="Punctuation">,</span>          <span class="Comment"># 整型值叶节点</span>
+    <span class="Identifier">nkFloat</span><span class="Punctuation">,</span>        <span class="Comment"># 浮点型叶节点</span>
+    <span class="Identifier">nkString</span><span class="Punctuation">,</span>       <span class="Comment"># 字符串叶节点</span>
+    <span class="Identifier">nkAdd</span><span class="Punctuation">,</span>          <span class="Comment"># 加法</span>
+    <span class="Identifier">nkSub</span><span class="Punctuation">,</span>          <span class="Comment"># 减法</span>
+    <span class="Identifier">nkIf</span>            <span class="Comment"># if语句</span>
   <span class="Identifier">Node</span> <span class="Operator">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
     <span class="Keyword">case</span> <span class="Identifier">kind</span><span class="Punctuation">:</span> <span class="Identifier">NodeKind</span>  <span class="Comment"># ``kind`` 字段是鉴别字段</span>
     <span class="Keyword">of</span> <span class="Identifier">nkInt</span><span class="Punctuation">:</span> <span class="Identifier">intVal</span><span class="Punctuation">:</span> <span class="Identifier">int</span>
@@ -971,7 +971,7 @@ function main() {
   <span class="Keyword">of</span> <span class="DecNumber">0</span><span class="Punctuation">:</span> <span class="Identifier">result</span> <span class="Operator">=</span> <span class="Identifier">v</span><span class="Operator">.</span><span class="Identifier">x</span>
   <span class="Keyword">of</span> <span class="DecNumber">1</span><span class="Punctuation">:</span> <span class="Identifier">result</span> <span class="Operator">=</span> <span class="Identifier">v</span><span class="Operator">.</span><span class="Identifier">y</span>
   <span class="Keyword">of</span> <span class="DecNumber">2</span><span class="Punctuation">:</span> <span class="Identifier">result</span> <span class="Operator">=</span> <span class="Identifier">v</span><span class="Operator">.</span><span class="Identifier">z</span>
-  <span class="Keyword">else</span><span class="Punctuation">:</span> <span class="Identifier">assert</span><span class="Punctuation">(</span><span class="Identifier">false</span><span class="Punctuation">)</span></pre><p>这个例子很愚蠢，因为矢量更好地由一个已经提供 <tt class="docutils literal"><span class="pre">v []</span></tt> 访问的元组建模。</p>
+  <span class="Keyword">else</span><span class="Punctuation">:</span> <span class="Identifier">assert</span><span class="Punctuation">(</span><span class="Identifier">false</span><span class="Punctuation">)</span></pre><p>这个例子可以更好的用元组展示，元组提供 <tt class="docutils literal"><span class="pre">v[]</span></tt> 访问。</p>
 
 <h2><a class="toc-backref" id="面向对象编程-动态分发" href="#面向对象编程-动态分发">动态分发</a></h2><p>程序总是使用静态调度。对于动态调度，用 <tt class="docutils literal"><span class="pre">method</span></tt> 替换 <tt class="docutils literal"><span class="pre">proc</span></tt> 关键字：</p>
 <pre class="listing"><span class="Keyword">type</span>
@@ -994,7 +994,7 @@ function main() {
 
 <span class="Identifier">echo</span> <span class="Identifier">eval</span><span class="Punctuation">(</span><span class="Identifier">newPlus</span><span class="Punctuation">(</span><span class="Identifier">newPlus</span><span class="Punctuation">(</span><span class="Identifier">newLit</span><span class="Punctuation">(</span><span class="DecNumber">1</span><span class="Punctuation">)</span><span class="Punctuation">,</span> <span class="Identifier">newLit</span><span class="Punctuation">(</span><span class="DecNumber">2</span><span class="Punctuation">)</span><span class="Punctuation">)</span><span class="Punctuation">,</span> <span class="Identifier">newLit</span><span class="Punctuation">(</span><span class="DecNumber">4</span><span class="Punctuation">)</span><span class="Punctuation">)</span><span class="Punctuation">)</span></pre><p>请注意，在示例中，构造函数 <tt class="docutils literal"><span class="pre">newLit</span></tt> 和 <tt class="docutils literal"><span class="pre">newPlus</span></tt> 是procs，因为它们使用静态绑定更有意义，但 <tt class="docutils literal"><span class="pre">eval</span></tt> 是一种方法，因为它需要动态绑定。</p>
 <p><strong>注意：</strong> 从Nim 0.20开始，要使用多方法，必须在编译时明确传递 <tt class="docutils literal"><span class="pre">--multimethods：on</span></tt> 。</p>
-<p>在多方法中，具有对象类型的所有参数都用于分发：</p>
+<p>在多方法中，所有具有对象类型的参数都用于分发：</p>
 <pre class="listing"><span class="Keyword">type</span>
   <span class="Identifier">Thing</span> <span class="Operator">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">Unit</span> <span class="Operator">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">Thing</span>
@@ -1012,12 +1012,12 @@ function main() {
 <span class="Keyword">var</span> <span class="Identifier">a</span><span class="Punctuation">,</span> <span class="Identifier">b</span><span class="Punctuation">:</span> <span class="Identifier">Unit</span>
 <span class="Identifier">new</span> <span class="Identifier">a</span>
 <span class="Identifier">new</span> <span class="Identifier">b</span>
-<span class="Identifier">collide</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">,</span> <span class="Identifier">b</span><span class="Punctuation">)</span> <span class="Comment"># output: 2</span></pre><p>如示例所示，多方法的调用不能模糊：碰撞2比碰撞1更受欢迎，因为分辨率从左到右工作。因此 <tt class="docutils literal"><span class="pre">Unit，Thing</span></tt> 比 <tt class="docutils literal"><span class="pre">Thing，Unit</span></tt> 更受欢迎。</p>
-<p><strong>性能说明</strong>: Nim不会生成虚方法表，但会生成调度树。这避免了方法调用的昂贵间接分支并启用内联。但是，其他优化（如编译时评估或死代码消除）不适用于方法。</p>
+<span class="Identifier">collide</span><span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">,</span> <span class="Identifier">b</span><span class="Punctuation">)</span> <span class="Comment"># output: 2</span></pre><p>如示例所示，多方法的调用不能有歧义：collide2比collide1更受欢迎，因为解析是从左到右的。因此 <tt class="docutils literal"><span class="pre">Unit，Thing</span></tt> 比 <tt class="docutils literal"><span class="pre">Thing，Unit</span></tt> 更准确。</p>
+<p><strong>性能说明</strong>: Nim不会生成虚函数表，但会生成调度树。这避免了方法调用的昂贵间接分支并启用内联。但是，其他优化（如编译时评估或死代码消除）不适用于方法。</p>
 
-<h1><a class="toc-backref" id="异常" href="#异常">异常</a></h1><p>在Nim中，异常是对象。按照惯例，异常类型后缀为“Error”。 <a class="reference external" href="system.html">system</a> 模块定义了一个您可能想要坚持的异常层次结构。异常来自 <tt class="docutils literal"><span class="pre">system.Exception</span></tt> ，它提供了通用接口。</p>
-<p>必须在堆上分配异常，因为它们的生命周期是未知的。编译器将阻止您引发在堆栈上创建的异常。所有引发的异常应该至少指定在 <tt class="docutils literal"><span class="pre">msg</span></tt> 字段中引发的原因。</p>
-<p>一个约定是在异常情况下应该引发异常：例如，如果无法打开文件，则不应引发异常，因为这很常见（文件可能不存在）。</p>
+<h1><a class="toc-backref" id="异常" href="#异常">异常</a></h1><p>在Nim中，异常是对象。按照惯例，异常类型后缀为“Error”。 <a class="reference external" href="system.html">system</a> 模块定义了异常层次结构。异常来自 <tt class="docutils literal"><span class="pre">system.Exception</span></tt> ，它提供了通用接口。</p>
+<p>必须在堆上分配异常，因为它们的生命周期是未知的。编译器将阻止您引发在栈上创建的异常。所有引发的异常应该至少指定在 <tt class="docutils literal"><span class="pre">msg</span></tt> 字段中引发的原因。</p>
+<p>一个约定是只在异常情况下应该引发异常：例如，如果无法打开文件，不应引发异常，这很常见（文件可能不存在）。</p>
 
 <h2><a class="toc-backref" id="异常-raise语句" href="#异常-raise语句">Raise语句</a></h2><p>发起一个异常用 <tt class="docutils literal"><span class="pre">raise</span></tt> 语句：</p>
 <pre class="listing"><span class="Keyword">var</span>
@@ -1067,19 +1067,19 @@ function main() {
 </dd>
 </dl>
 
-<h2><a class="toc-backref" id="异常-引发异常的procs注释" href="#异常-引发异常的procs注释">引发异常的procs注释</a></h2><p>通过使用可选的 <tt class="docutils literal"><span class="pre">{.raises.}</span></tt> pragma，你可以指定proc是为了引发一组特定的异常，或者根本没有异常。如果使用 <tt class="docutils literal"><span class="pre">{.raises.}</span></tt> pragma，编译器将验证这是否为真。例如，如果指定proc引发 <tt class="docutils literal"><span class="pre">IOError</span></tt> ，并且在某些时候它（或它调用的一个proc）开始引发一个新的异常，编译器将阻止该proc进行编译。用法示例：</p>
+<h2><a class="toc-backref" id="异常-引发异常的procs注释" href="#异常-引发异常的procs注释">引发异常的procs注释</a></h2><p>通过使用可选的 <tt class="docutils literal"><span class="pre">{.raises.}</span></tt> pragma，你可以指定过程是为了引发一组特定的异常，或者根本没有异常。如果使用 <tt class="docutils literal"><span class="pre">{.raises.}</span></tt> 编译指示，编译器将验证这是否为真。例如，如果指定过程引发 <tt class="docutils literal"><span class="pre">IOError</span></tt> ，并且在某些时候它（或它调用的一个过程）开始引发一个新的异常，编译器将阻止该过程进行编译。用法示例：</p>
 <pre class="listing"><span class="Keyword">proc</span> <span class="Identifier">complexProc</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">raises</span><span class="Punctuation">:</span> <span class="Punctuation">[</span><span class="Identifier">IOError</span><span class="Punctuation">,</span> <span class="Identifier">ArithmeticError</span><span class="Punctuation">]</span><span class="Operator">.</span><span class="Punctuation">}</span> <span class="Operator">=</span>
   <span class="Operator">...</span>
 
 <span class="Keyword">proc</span> <span class="Identifier">simpleProc</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">raises</span><span class="Punctuation">:</span> <span class="Punctuation">[</span><span class="Punctuation">]</span><span class="Operator">.</span><span class="Punctuation">}</span> <span class="Operator">=</span>
-  <span class="Operator">...</span></pre><p>一旦你有这样的代码，如果引发的异常列表发生了变化，编译器就会停止，并指出proc停止验证pragma的行并且没有捕获引发的异常，以及文件和行所在的行。 正在引发未捕获的异常，这可能有助于您找到已更改的有问题的代码。</p>
-<p>如果你想将 <tt class="docutils literal"><span class="pre">{.raises.}</span></tt> pragma添加到现有代码中，编译器也可以帮助你。你可以在你的proc中添加 <tt class="docutils literal"><span class="pre">{.effects.}</span></tt> pragma语句， 编译器将输出所有推断的效果直到那一点（异常跟踪是Nim效果系统的一部分）。 查找proc引发的异常列表的另一种更迂回的方法是使用Nim <tt class="docutils literal"><span class="pre">doc2</span></tt> 命令，该命令为整个模块生成文档，并使用引发的异常列表来装饰所有过程。 您可以在手册中阅读有关Nim的 <a class="reference external" href="manual.html＃effect-system">效果系统和相关编译指示的更多信息</a> 。</p>
+  <span class="Operator">...</span></pre><p>一旦你有这样的代码，如果引发的异常列表发生了变化，编译器就会停止，并指出过程停止验证编译指示的行，没有捕获的异常和它的行数以及文件。 正在引发未捕获的异常，这可能有助于您找到已更改的有问题的代码。</p>
+<p>如果你想将 <tt class="docutils literal"><span class="pre">{.raises.}</span></tt> 编译指示添加到现有代码中，编译器也可以帮助你。你可以在你的过程中添加 <tt class="docutils literal"><span class="pre">{.effects.}</span></tt> 编译指示语句， 编译器将输出所有推断的效果直到那一点（异常跟踪是Nim效果系统的一部分）。 查找proc引发的异常列表的另一种更迂回的方法是使用Nim <tt class="docutils literal"><span class="pre">doc2</span></tt> 命令，该命令为整个模块生成文档，并使用引发的异常列表来装饰所有过程。 您可以在手册中阅读有关Nim的 <a class="reference external" href="manual.html＃effect-system">效果系统和相关编译指示的更多信息</a> 。</p>
 
-<h1><a class="toc-backref" id="泛型" href="#泛型">泛型</a></h1><p>泛型是Nim用 <span id="类型化参数_1">类型化参数</span> 参数化procs，iterators或类型的方法。它们对于高效型安全容器最有用：</p>
+<h1><a class="toc-backref" id="泛型" href="#泛型">泛型</a></h1><p>泛型是Nim用 <span id="类型化参数_1">类型化参数</span> 参数化过程，迭代器或类型的方法。它们对于高效型安全容器很有用：</p>
 <pre class="listing"><span class="Keyword">type</span>
   <span class="Identifier">BinaryTree</span><span class="Operator">*</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span> <span class="Operator">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Comment"># 二叉树是左右子树用泛型参数 ``T`` 可能nil的泛型</span>
     <span class="Identifier">le</span><span class="Punctuation">,</span> <span class="Identifier">ri</span><span class="Punctuation">:</span> <span class="Identifier">BinaryTree</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span>
-    <span class="Identifier">data</span><span class="Punctuation">:</span> <span class="Identifier">T</span>                   <span class="Comment"># the data stored in a node</span>
+    <span class="Identifier">data</span><span class="Punctuation">:</span> <span class="Identifier">T</span>                   <span class="Comment"># 数据存储在节点</span>
 
 <span class="Keyword">proc</span> <span class="Identifier">newNode</span><span class="Operator">*</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span><span class="Punctuation">(</span><span class="Identifier">data</span><span class="Punctuation">:</span> <span class="Identifier">T</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">BinaryTree</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span> <span class="Operator">=</span>
   <span class="Comment"># 节点构造</span>
@@ -1087,7 +1087,7 @@ function main() {
   <span class="Identifier">result</span><span class="Operator">.</span><span class="Identifier">data</span> <span class="Operator">=</span> <span class="Identifier">data</span>
 
 <span class="Keyword">proc</span> <span class="Identifier">add</span><span class="Operator">*</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span><span class="Punctuation">(</span><span class="Identifier">root</span><span class="Punctuation">:</span> <span class="Keyword">var</span> <span class="Identifier">BinaryTree</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="Identifier">n</span><span class="Punctuation">:</span> <span class="Identifier">BinaryTree</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span><span class="Punctuation">)</span> <span class="Operator">=</span>
-  <span class="Comment"># insert a node into the tree</span>
+  <span class="Comment"># 插入节点</span>
   <span class="Keyword">if</span> <span class="Identifier">root</span> <span class="Operator">==</span> <span class="Keyword">nil</span><span class="Punctuation">:</span>
     <span class="Identifier">root</span> <span class="Operator">=</span> <span class="Identifier">n</span>
   <span class="Keyword">else</span><span class="Punctuation">:</span>
@@ -1126,18 +1126,18 @@ function main() {
 <span class="Identifier">add</span><span class="Punctuation">(</span><span class="Identifier">root</span><span class="Punctuation">,</span> <span class="Identifier">newNode</span><span class="Punctuation">(</span><span class="StringLit">&quot;hello&quot;</span><span class="Punctuation">)</span><span class="Punctuation">)</span> <span class="Comment"># 实例化 ``newNode`` 和 ``add``</span>
 <span class="Identifier">add</span><span class="Punctuation">(</span><span class="Identifier">root</span><span class="Punctuation">,</span> <span class="StringLit">&quot;world&quot;</span><span class="Punctuation">)</span>          <span class="Comment"># 实例化第二个 ``add`` 过程</span>
 <span class="Keyword">for</span> <span class="Identifier">str</span> <span class="Keyword">in</span> <span class="Identifier">preorder</span><span class="Punctuation">(</span><span class="Identifier">root</span><span class="Punctuation">)</span><span class="Punctuation">:</span>
-  <span class="Identifier">stdout</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="Identifier">str</span><span class="Punctuation">)</span></pre><p>该示例显示了通用二叉树。根据上下文，括号用于引入类型参数或实例化通用proc，迭代器或类型。如示例所示，泛型使用重载：使用“add”的最佳匹配。 序列的内置 <tt class="docutils literal"><span class="pre">add</span></tt> 过程不是隐藏的，而是在 <tt class="docutils literal"><span class="pre">preorder</span></tt> 迭代器中使用。</p>
+  <span class="Identifier">stdout</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="Identifier">str</span><span class="Punctuation">)</span></pre><p>该示例显示了通用二叉树。根据上下文，括号用于引入类型参数或实例化通用过程、迭代器或类型。如示例所示，泛型使用重载：使用“add”的最佳匹配。 序列的内置 <tt class="docutils literal"><span class="pre">add</span></tt> 过程没有隐藏，而是在 <tt class="docutils literal"><span class="pre">preorder</span></tt> 迭代器中使用。</p>
 
-<h1><a class="toc-backref" id="模板" href="#模板">模板</a></h1><p>模板是一种简单的替换机制，可以在Nim的抽象语法树上运行。模板在编译器的语义传递中处理。它们与语言的其余部分很好地集成，并且不会共享C的预处理器宏缺陷。</p>
+<h1><a class="toc-backref" id="模板" href="#模板">模板</a></h1><p>模板是一种简单的替换机制，可以在Nim的抽象语法树上运行。模板在编译器的语义传递中处理。它们与语言的其余部分很好地集成，并且没有C的预处理器宏缺陷。</p>
 <p>要 <em>调用</em> 模板，将其作为过程。</p>
 <p>Example:</p>
 <pre class="listing"><span class="Keyword">template</span> <span class="Punctuation">`</span><span class="Operator">!=</span><span class="Punctuation">`</span> <span class="Punctuation">(</span><span class="Identifier">a</span><span class="Punctuation">,</span> <span class="Identifier">b</span><span class="Punctuation">:</span> <span class="Identifier">untyped</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">untyped</span> <span class="Operator">=</span>
   <span class="Comment"># 此定义存在于system模块中</span>
   <span class="Keyword">not</span> <span class="Punctuation">(</span><span class="Identifier">a</span> <span class="Operator">==</span> <span class="Identifier">b</span><span class="Punctuation">)</span>
 
-<span class="Identifier">assert</span><span class="Punctuation">(</span><span class="DecNumber">5</span> <span class="Operator">!=</span> <span class="DecNumber">6</span><span class="Punctuation">)</span> <span class="Comment"># 编译器将其重写为：assert（not（5 == 6））</span></pre><p>The <tt class="docutils literal"><span class="pre">!=</span></tt>, <tt class="docutils literal"><span class="pre">&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&gt;=</span></tt>, <tt class="docutils literal"><span class="pre">in</span></tt>, <tt class="docutils literal"><span class="pre">notin</span></tt>, <tt class="docutils literal"><span class="pre">isnot</span></tt> operators are in fact templates: this has the benefit that if you overload the <tt class="docutils literal"><span class="pre">==</span></tt> operator, the <tt class="docutils literal"><span class="pre">!=</span></tt> operator is available automatically and does the right thing. (Except for IEEE floating point numbers - NaN breaks basic boolean logic.)</p>
-<p><tt class="docutils literal"><span class="pre">a &gt; b</span></tt> 变换成 <tt class="docutils literal"><span class="pre">b &lt; a</span></tt>. <tt class="docutils literal"><span class="pre">a in b</span></tt> 变换成 <tt class="docutils literal"><span class="pre">contains(b, a)</span></tt>. <tt class="docutils literal"><span class="pre">notin</span></tt> 和 <tt class="docutils literal"><span class="pre">isnot</span></tt> 顾名思义。</p>
-<p>模板对于延迟计算特别有用。考虑一个简单的日志记录过程：</p>
+<span class="Identifier">assert</span><span class="Punctuation">(</span><span class="DecNumber">5</span> <span class="Operator">!=</span> <span class="DecNumber">6</span><span class="Punctuation">)</span> <span class="Comment"># 编译器将其重写为：assert（not（5 == 6））</span></pre><p><tt class="docutils literal"><span class="pre">!=</span></tt>, <tt class="docutils literal"><span class="pre">&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&gt;=</span></tt>, <tt class="docutils literal"><span class="pre">in</span></tt>, <tt class="docutils literal"><span class="pre">notin</span></tt>, <tt class="docutils literal"><span class="pre">isnot</span></tt> 操作符实际是模板：这对重载自动可用的 <tt class="docutils literal"><span class="pre">==</span></tt> ,  <tt class="docutils literal"><span class="pre">!=</span></tt> 操作符有好处。 （除了IEEE浮点数 -  NaN打破了基本的布尔逻辑。）</p>
+<p><tt class="docutils literal"><span class="pre">a &gt; b</span></tt> 变换成 <tt class="docutils literal"><span class="pre">b &lt; a</span></tt> 。 <tt class="docutils literal"><span class="pre">a in b</span></tt> 变换成 <tt class="docutils literal"><span class="pre">contains(b, a)</span></tt> 。 <tt class="docutils literal"><span class="pre">notin</span></tt> 和 <tt class="docutils literal"><span class="pre">isnot</span></tt> 顾名思义。</p>
+<p>模板对于延迟计算特别有用。看一个简单的日志记录过程：</p>
 <pre class="listing"><span class="Keyword">const</span>
   <span class="Identifier">debug</span> <span class="Operator">=</span> <span class="Identifier">true</span>
 
@@ -1146,8 +1146,8 @@ function main() {
 
 <span class="Keyword">var</span>
   <span class="Identifier">x</span> <span class="Operator">=</span> <span class="DecNumber">4</span>
-<span class="Identifier">log</span><span class="Punctuation">(</span><span class="StringLit">&quot;x has the value: &quot;</span> <span class="Operator">&amp;</span> <span class="Operator">$</span><span class="Identifier">x</span><span class="Punctuation">)</span></pre><p>这段代码有一个缺点：如果 <tt class="docutils literal"><span class="pre">debug</span></tt> 有一天设置为false，那么仍然会执行相当昂贵的 <tt class="docutils literal"><span class="pre">$</span></tt> 和 <tt class="docutils literal"><span class="pre">&amp;</span></tt> 操作！ （程序的参数求值是 <em>急切</em> ）。</p>
-<p>将 <tt class="docutils literal"><span class="pre">log</span></tt> proc转换为模板解决了这个问题：</p>
+<span class="Identifier">log</span><span class="Punctuation">(</span><span class="StringLit">&quot;x has the value: &quot;</span> <span class="Operator">&amp;</span> <span class="Operator">$</span><span class="Identifier">x</span><span class="Punctuation">)</span></pre><p>这段代码有一个缺点：如果 <tt class="docutils literal"><span class="pre">debug</span></tt> 有一天设置为false，那么仍然会执行 <tt class="docutils literal"><span class="pre">$</span></tt> 和 <tt class="docutils literal"><span class="pre">&amp;</span></tt> 操作！ （程序的参数求值是 <em>急切</em> ）。</p>
+<p>将 <tt class="docutils literal"><span class="pre">log</span></tt> 过程转换为模板解决了这个问题：</p>
 <pre class="listing"><span class="Keyword">const</span>
   <span class="Identifier">debug</span> <span class="Operator">=</span> <span class="Identifier">true</span>
 
@@ -1157,7 +1157,7 @@ function main() {
 <span class="Keyword">var</span>
   <span class="Identifier">x</span> <span class="Operator">=</span> <span class="DecNumber">4</span>
 <span class="Identifier">log</span><span class="Punctuation">(</span><span class="StringLit">&quot;x has the value: &quot;</span> <span class="Operator">&amp;</span> <span class="Operator">$</span><span class="Identifier">x</span><span class="Punctuation">)</span></pre><p>参数的类型可以是普通类型，也可以是元类型 <tt class="docutils literal"><span class="pre">untyped</span></tt> ， <tt class="docutils literal"><span class="pre">typed</span></tt> 或 <tt class="docutils literal"><span class="pre">type</span></tt> 。 <tt class="docutils literal"><span class="pre">type</span></tt> 表示只有一个类型符号可以作为参数给出， <tt class="docutils literal"><span class="pre">untyped</span></tt> 表示符号查找，并且在表达式传递给模板之前不执行类型解析。</p>
-<p>如果模板没有显式返回类型，则使用 <tt class="docutils literal"><span class="pre">void</span></tt> 与proc和方法保持一致。</p>
+<p>如果模板没有显式返回类型，则使用 <tt class="docutils literal"><span class="pre">void</span></tt> 与过程和方法保持一致。</p>
 <p>要将一个语句块传递给模板，请使用 <tt class="docutils literal"><span class="pre">untyped</span></tt> 作为最后一个参数：</p>
 <pre class="listing"><span class="Keyword">template</span> <span class="Identifier">withFile</span><span class="Punctuation">(</span><span class="Identifier">f</span><span class="Punctuation">:</span> <span class="Identifier">untyped</span><span class="Punctuation">,</span> <span class="Identifier">filename</span><span class="Punctuation">:</span> <span class="Identifier">string</span><span class="Punctuation">,</span> <span class="Identifier">mode</span><span class="Punctuation">:</span> <span class="Identifier">FileMode</span><span class="Punctuation">,</span>
                   <span class="Identifier">body</span><span class="Punctuation">:</span> <span class="Identifier">untyped</span><span class="Punctuation">)</span> <span class="Operator">=</span>
@@ -1173,7 +1173,7 @@ function main() {
 
 <span class="Identifier">withFile</span><span class="Punctuation">(</span><span class="Identifier">txt</span><span class="Punctuation">,</span> <span class="StringLit">&quot;ttempl3.txt&quot;</span><span class="Punctuation">,</span> <span class="Identifier">fmWrite</span><span class="Punctuation">)</span><span class="Punctuation">:</span>
   <span class="Identifier">txt</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="StringLit">&quot;line 1&quot;</span><span class="Punctuation">)</span>
-  <span class="Identifier">txt</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="StringLit">&quot;line 2&quot;</span><span class="Punctuation">)</span></pre><p>在示例中，两个 <tt class="docutils literal"><span class="pre">writeLine</span></tt> 语句绑定到 <tt class="docutils literal"><span class="pre">body</span></tt> 参数。 <tt class="docutils literal"><span class="pre">withFile</span></tt> 模板包含样板代码，有助于避免常见错误：忘记关闭文件。 注意 <tt class="docutils literal"><span class="pre">let fn = filename</span></tt> 语句如何确保 <tt class="docutils literal"><span class="pre">filename</span></tt> 只被求值一次。</p>
+  <span class="Identifier">txt</span><span class="Operator">.</span><span class="Identifier">writeLine</span><span class="Punctuation">(</span><span class="StringLit">&quot;line 2&quot;</span><span class="Punctuation">)</span></pre><p>在示例中，两个 <tt class="docutils literal"><span class="pre">writeLine</span></tt> 语句绑定到 <tt class="docutils literal"><span class="pre">body</span></tt> 参数。 <tt class="docutils literal"><span class="pre">withFile</span></tt> 模板包含样板代码，有助于避免忘记关闭文件的常见错误。 注意 <tt class="docutils literal"><span class="pre">let fn = filename</span></tt> 语句如何确保 <tt class="docutils literal"><span class="pre">filename</span></tt> 只被求值一次。</p>
 
 <h2><a class="toc-backref" id="模板-示例colon-提升过程" href="#模板-示例colon-提升过程">示例: 提升过程</a></h2><pre class="listing"><span class="Keyword">import</span> <span class="Identifier">math</span>
 
@@ -1184,7 +1184,7 @@ function main() {
   <span class="Comment">##</span>
   <span class="Comment">## .. code-block:: Nim</span>
   <span class="Comment">##  liftScalarProc(abs)</span>
-  <span class="Comment">##  # 现在 abs(@[@[1,-2], @[-2,-3]]) == @[@[1,2], @[2,3]]</span>
+  <span class="Comment">##  现在 abs(@[@[1,-2], @[-2,-3]]) == @[@[1,2], @[2,3]]</span>
   <span class="Keyword">proc</span> <span class="Identifier">fname</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span><span class="Punctuation">(</span><span class="Identifier">x</span><span class="Punctuation">:</span> <span class="Identifier">openarray</span><span class="Punctuation">[</span><span class="Identifier">T</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">:</span> <span class="Identifier">auto</span> <span class="Operator">=</span>
     <span class="Keyword">var</span> <span class="Identifier">temp</span><span class="Punctuation">:</span> <span class="Identifier">T</span>
     <span class="Keyword">type</span> <span class="Identifier">outType</span> <span class="Operator">=</span> <span class="Keyword">type</span><span class="Punctuation">(</span><span class="Identifier">fname</span><span class="Punctuation">(</span><span class="Identifier">temp</span><span class="Punctuation">)</span><span class="Punctuation">)</span>
@@ -1210,7 +1210,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2019-08-09 11:46:33 UTC</small>
+        <small>Made with Nim. Generated: 2019-09-13 03:14:46 UTC</small>
       </div>
     </div>
   </div>

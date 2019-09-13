@@ -11,7 +11,7 @@ Nim教程 (II)
 引言
 ============
 
-  "重复使得荒谬合理。" -- Norman Wildberger
+  "重复让荒谬合理。" -- Norman Wildberger
 
 本文档是 *Nim* 编程语言的高级构造部分。 **注意本文档有些过时** 因为 `manual <manual.html>`_  **包含更多高级语言特性的样例** 。
 
@@ -19,7 +19,7 @@ Nim教程 (II)
 编译指示（Pragmas）
 =======
 
-编译指示是Nim中不用引用大量新关键字，给编译器附加信息、命令的方法。编译指示用特殊的 ``{.`` 和 ``.}`` 花括号括起来。本教程没有讲pragmas。
+编译指示是Nim中不用引用大量新关键字，给编译器附加信息、命令的方法。编译指示用特殊的 ``{.`` 和 ``.}`` 花括号括起来。本教程不讲pragmas。
 可用编译指示的描述见 `manual <manual.html#pragmas>`_ 或 `user guide <nimc.html#additional-features>`_ .
 
 
@@ -27,7 +27,7 @@ Nim教程 (II)
 ===========================
 
 虽然Nim对面向对象编程（OOP）的支持很简单，但可以使用强大的OOP技术。OOP看作 *一种* 程序设计方式，不是 *唯一* 方式。通常过程的解决方法有更简单和高效的代码。
-特别是，更喜欢组合而不是继承通常是更好的设计。
+特别是，首选组合是比继承更好的设计。
 
 
 继承
@@ -52,13 +52,13 @@ Nim教程 (II)
     student: Student
     person: Person
   assert(student of Student) # is true
-  # object construction:
+  # 对象构造:
   student = Student(name: "Anton", age: 5, id: 2)
   echo student[]
 
 
 继承是使用 ``object of`` 语法完成的。目前不支持多重继承。如果一个对象类型没有合适的祖先， ``RootObj`` 可以用作它的祖先，但这只是一个约定。
-没有祖先的对象隐含地是“final”。你可以使用 ``inheritable`` pragma来引入除 ``system.RootObj`` 之外的新对象根。 （例如，这在GTK包装器中使用。）
+没有祖先的对象是隐式的“final”。你可以使用 ``inheritable`` 编译指示来引入除 ``system.RootObj`` 之外的新对象根。 （例如，GTK封装使用了这种方法。）
 
 只要使用继承，就应该使用Ref对象。它不是必须的，但是对于非ref对象赋值，例如 ``let person：Person = Student（id：123）`` 将截断子类字段。
 
@@ -111,13 +111,13 @@ Nim区分 `type casts`:idx: 和 `type conversions`:idx: 。使用 ``cast`` 运�
 
   # 这是一个如何在Nim中建模抽象语法树的示例
   type
-    NodeKind = enum  # the different node types
-      nkInt,          # a leaf with an integer value
-      nkFloat,        # a leaf with a float value
-      nkString,       # a leaf with a string value
-      nkAdd,          # an addition
-      nkSub,          # a subtraction
-      nkIf            # an if statement
+    NodeKind = enum  # 不同节点类型
+      nkInt,          # 整型值叶节点
+      nkFloat,        # 浮点型叶节点
+      nkString,       # 字符串叶节点
+      nkAdd,          # 加法
+      nkSub,          # 减法
+      nkIf            # if语句
     Node = ref object
       case kind: NodeKind  # ``kind`` 字段是鉴别字段
       of nkInt: intVal: int
@@ -216,7 +216,7 @@ Nim区分 `type casts`:idx: 和 `type conversions`:idx: 。使用 ``cast`` 运�
     of 2: result = v.z
     else: assert(false)
 
-这个例子很愚蠢，因为矢量更好地由一个已经提供 ``v []`` 访问的元组建模。
+这个例子可以更好的用元组展示，元组提供 ``v[]`` 访问。
 
 
 动态分发
@@ -250,7 +250,7 @@ Nim区分 `type casts`:idx: 和 `type conversions`:idx: 。使用 ``cast`` 运�
 
 **注意：** 从Nim 0.20开始，要使用多方法，必须在编译时明确传递 ``--multimethods：on`` 。
 
-在多方法中，具有对象类型的所有参数都用于分发：
+在多方法中，所有具有对象类型的参数都用于分发：
 
 .. code-block:: nim
     :test: "nim c --multiMethods:on $1"
@@ -275,21 +275,21 @@ Nim区分 `type casts`:idx: 和 `type conversions`:idx: 。使用 ``cast`` 运�
   collide(a, b) # output: 2
 
 
-如示例所示，多方法的调用不能模糊：碰撞2比碰撞1更受欢迎，因为分辨率从左到右工作。因此 ``Unit，Thing`` 比 ``Thing，Unit`` 更受欢迎。
+如示例所示，多方法的调用不能有歧义：collide2比collide1更受欢迎，因为解析是从左到右的。因此 ``Unit，Thing`` 比 ``Thing，Unit`` 更准确。
 
-**性能说明**: Nim不会生成虚方法表，但会生成调度树。这避免了方法调用的昂贵间接分支并启用内联。但是，其他优化（如编译时评估或死代码消除）不适用于方法。
+**性能说明**: Nim不会生成虚函数表，但会生成调度树。这避免了方法调用的昂贵间接分支并启用内联。但是，其他优化（如编译时评估或死代码消除）不适用于方法。
 
 
 异常
 ==========
 
-在Nim中，异常是对象。按照惯例，异常类型后缀为“Error”。 `system <system.html>`_ 模块定义了一个您可能想要坚持的异常层次结构。异常来自 ``system.Exception`` ，它提供了通用接口。
+在Nim中，异常是对象。按照惯例，异常类型后缀为“Error”。 `system <system.html>`_ 模块定义了异常层次结构。异常来自 ``system.Exception`` ，它提供了通用接口。
 
 
-必须在堆上分配异常，因为它们的生命周期是未知的。编译器将阻止您引发在堆栈上创建的异常。所有引发的异常应该至少指定在 ``msg`` 字段中引发的原因。
+必须在堆上分配异常，因为它们的生命周期是未知的。编译器将阻止您引发在栈上创建的异常。所有引发的异常应该至少指定在 ``msg`` 字段中引发的原因。
 
 
-一个约定是在异常情况下应该引发异常：例如，如果无法打开文件，则不应引发异常，因为这很常见（文件可能不存在）。
+一个约定是只在异常情况下应该引发异常：例如，如果无法打开文件，不应引发异常，这很常见（文件可能不存在）。
 
 Raise语句
 ---------------
@@ -364,8 +364,8 @@ Try语句
 引发异常的procs注释
 ---------------------------------------
 
-通过使用可选的 ``{.raises.}`` pragma，你可以指定proc是为了引发一组特定的异常，或者根本没有异常。如果使用 ``{.raises.}`` pragma，编译器将验证这是否为真。例如，如果指定proc引发
-``IOError`` ，并且在某些时候它（或它调用的一个proc）开始引发一个新的异常，编译器将阻止该proc进行编译。用法示例：
+通过使用可选的 ``{.raises.}`` pragma，你可以指定过程是为了引发一组特定的异常，或者根本没有异常。如果使用 ``{.raises.}`` 编译指示，编译器将验证这是否为真。例如，如果指定过程引发
+``IOError`` ，并且在某些时候它（或它调用的一个过程）开始引发一个新的异常，编译器将阻止该过程进行编译。用法示例：
 
 
 .. code-block:: nim
@@ -375,10 +375,10 @@ Try语句
   proc simpleProc() {.raises: [].} =
     ...
 
-一旦你有这样的代码，如果引发的异常列表发生了变化，编译器就会停止，并指出proc停止验证pragma的行并且没有捕获引发的异常，以及文件和行所在的行。
+一旦你有这样的代码，如果引发的异常列表发生了变化，编译器就会停止，并指出过程停止验证编译指示的行，没有捕获的异常和它的行数以及文件。
 正在引发未捕获的异常，这可能有助于您找到已更改的有问题的代码。
 
-如果你想将 ``{.raises.}`` pragma添加到现有代码中，编译器也可以帮助你。你可以在你的proc中添加 ``{.effects.}`` pragma语句，
+如果你想将 ``{.raises.}`` 编译指示添加到现有代码中，编译器也可以帮助你。你可以在你的过程中添加 ``{.effects.}`` 编译指示语句，
 编译器将输出所有推断的效果直到那一点（异常跟踪是Nim效果系统的一部分）。
 查找proc引发的异常列表的另一种更迂回的方法是使用Nim ``doc2`` 命令，该命令为整个模块生成文档，并使用引发的异常列表来装饰所有过程。
 您可以在手册中阅读有关Nim的 `效果系统和相关编译指示的更多信息<manual.html＃effect-system>`_ 。
@@ -386,14 +386,14 @@ Try语句
 泛型
 ========
 
-泛型是Nim用 `类型化参数`:idx: 参数化procs，iterators或类型的方法。它们对于高效型安全容器最有用：
+泛型是Nim用 `类型化参数`:idx: 参数化过程，迭代器或类型的方法。它们对于高效型安全容器很有用：
 
 .. code-block:: nim
     :test: "nim c $1"
   type
     BinaryTree*[T] = ref object # 二叉树是左右子树用泛型参数 ``T`` 可能nil的泛型
       le, ri: BinaryTree[T]     
-      data: T                   # the data stored in a node
+      data: T                   # 数据存储在节点
 
   proc newNode*[T](data: T): BinaryTree[T] =
     # 节点构造
@@ -401,7 +401,7 @@ Try语句
     result.data = data
 
   proc add*[T](root: var BinaryTree[T], n: BinaryTree[T]) =
-    # insert a node into the tree
+    # 插入节点
     if root == nil:
       root = n
     else:
@@ -442,14 +442,14 @@ Try语句
   for str in preorder(root):
     stdout.writeLine(str)
 
-该示例显示了通用二叉树。根据上下文，括号用于引入类型参数或实例化通用proc，迭代器或类型。如示例所示，泛型使用重载：使用“add”的最佳匹配。
-序列的内置 ``add`` 过程不是隐藏的，而是在 ``preorder`` 迭代器中使用。
+该示例显示了通用二叉树。根据上下文，括号用于引入类型参数或实例化通用过程、迭代器或类型。如示例所示，泛型使用重载：使用“add”的最佳匹配。
+序列的内置 ``add`` 过程没有隐藏，而是在 ``preorder`` 迭代器中使用。
 
 
 模板
 =========
 
-模板是一种简单的替换机制，可以在Nim的抽象语法树上运行。模板在编译器的语义传递中处理。它们与语言的其余部分很好地集成，并且不会共享C的预处理器宏缺陷。
+模板是一种简单的替换机制，可以在Nim的抽象语法树上运行。模板在编译器的语义传递中处理。它们与语言的其余部分很好地集成，并且没有C的预处理器宏缺陷。
 
 要 *调用* 模板，将其作为过程。
 
@@ -463,14 +463,15 @@ Example:
 
   assert(5 != 6) # 编译器将其重写为：assert（not（5 == 6））
 
-The ``!=``, ``>``, ``>=``, ``in``, ``notin``, ``isnot`` operators are in fact templates: this has the benefit that if you overload the ``==`` operator, the ``!=`` operator is available automatically and does the right thing. (Except for IEEE floating point numbers - NaN breaks basic boolean logic.)
+``!=``, ``>``, ``>=``, ``in``, ``notin``, ``isnot`` 操作符实际是模板：这对重载自动可用的 ``==`` ,  ``!=`` 操作符有好处。 
+（除了IEEE浮点数 -  NaN打破了基本的布尔逻辑。）
 
-``a > b`` 变换成 ``b < a``.
-``a in b`` 变换成 ``contains(b, a)``.
+``a > b`` 变换成 ``b < a`` 。
+``a in b`` 变换成 ``contains(b, a)`` 。
 ``notin`` 和 ``isnot`` 顾名思义。
 
 
-模板对于延迟计算特别有用。考虑一个简单的日志记录过程：
+模板对于延迟计算特别有用。看一个简单的日志记录过程：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -484,9 +485,9 @@ The ``!=``, ``>``, ``>=``, ``in``, ``notin``, ``isnot`` operators are in fact te
     x = 4
   log("x has the value: " & $x)
 
-这段代码有一个缺点：如果 ``debug`` 有一天设置为false，那么仍然会执行相当昂贵的 ``$`` 和 ``&`` 操作！ （程序的参数求值是 *急切* ）。
+这段代码有一个缺点：如果 ``debug`` 有一天设置为false，那么仍然会执行 ``$`` 和 ``&`` 操作！ （程序的参数求值是 *急切* ）。
 
-将 ``log`` proc转换为模板解决了这个问题：
+将 ``log`` 过程转换为模板解决了这个问题：
 
 .. code-block:: nim
     :test: "nim c $1"
@@ -503,7 +504,7 @@ The ``!=``, ``>``, ``>=``, ``in``, ``notin``, ``isnot`` operators are in fact te
 参数的类型可以是普通类型，也可以是元类型 ``untyped`` ， ``typed`` 或 ``type`` 。 ``type`` 表示只有一个类型符号可以作为参数给出， 
 ``untyped`` 表示符号查找，并且在表达式传递给模板之前不执行类型解析。
 
-如果模板没有显式返回类型，则使用 ``void`` 与proc和方法保持一致。
+如果模板没有显式返回类型，则使用 ``void`` 与过程和方法保持一致。
 
 要将一个语句块传递给模板，请使用 ``untyped`` 作为最后一个参数：
 
@@ -526,7 +527,7 @@ The ``!=``, ``>``, ``>=``, ``in``, ``notin``, ``isnot`` operators are in fact te
     txt.writeLine("line 1")
     txt.writeLine("line 2")
 
-在示例中，两个 ``writeLine`` 语句绑定到 ``body`` 参数。 ``withFile`` 模板包含样板代码，有助于避免常见错误：忘记关闭文件。
+在示例中，两个 ``writeLine`` 语句绑定到 ``body`` 参数。 ``withFile`` 模板包含样板代码，有助于避免忘记关闭文件的常见错误。
 注意 ``let fn = filename`` 语句如何确保 ``filename`` 只被求值一次。
 
 示例: 提升过程
@@ -543,7 +544,7 @@ The ``!=``, ``>``, ``>=``, ``in``, ``notin``, ``isnot`` operators are in fact te
     ##
     ## .. code-block:: Nim
     ##  liftScalarProc(abs)
-    ##  # 现在 abs(@[@[1,-2], @[-2,-3]]) == @[@[1,2], @[2,3]]
+    ##  现在 abs(@[@[1,-2], @[-2,-3]]) == @[@[1,2], @[2,3]]
     proc fname[T](x: openarray[T]): auto =
       var temp: T
       type outType = type(fname(temp))
