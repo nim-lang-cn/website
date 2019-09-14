@@ -61,7 +61,7 @@ css_class: community
 有什么问题可以`@`我们进行反馈。
 记得在发布有关`Nim`和`Nim中文社区`的微博时 **`@`** 我们哦！
 
-<i class="fa fa-weibo" aria-hidden="true"></i>
+<i class="fab fa-weibo" aria-hidden="true"></i>
 [@Nim中文社区](https://weibo.com/nimlangcn)
 
 ## 微信公众号
@@ -70,7 +70,7 @@ css_class: community
 请务必搜索关注 **Nim中文社区** 官方微信公众号。
 有什么问题可以直接留言，向我们进行反馈。
 
-<i class="fa fa-weixin" aria-hidden="true"></i>
+<i class="fab fa-weixin" aria-hidden="true"></i>
 Nim中文社区
 
 ## 邮件组
@@ -79,9 +79,9 @@ Nim中文社区
 或者有更好的社区发展建议？
 欢迎骚扰我们~
 
-<i class="fab fa-envelope" aria-hidden="true"></i>[ch4o5@nim-lang-cn.org](mailto:ch4o5@nim-lang-cn.org)
-<i class="fab fa-envelope" aria-hidden="true"></i>[sheldon@nim-lang-cn.org](mailto:sheldon@nim-lang-cn.org)
-<i class="fab fa-envelope" aria-hidden="true"></i>[ch4o5@nim-lang-cn.org](mailto:flywind@nim-lang-cn.org@nim-lang-cn.org)
+<i class="fa fa-envelope" aria-hidden="true"></i>[ch4o5@nim-lang-cn.org](mailto:ch4o5@nim-lang-cn.org)
+<i class="fa fa-envelope" aria-hidden="true"></i>[sheldon@nim-lang-cn.org](mailto:sheldon@nim-lang-cn.org)
+<i class="fa fa-envelope" aria-hidden="true"></i>[ch4o5@nim-lang-cn.org](mailto:flywind@nim-lang-cn.org@nim-lang-cn.org)
 
 ## 线下交流会
 
