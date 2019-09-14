@@ -80,7 +80,9 @@ Nim中文社区
 欢迎骚扰我们~
 
 <i class="fa fa-envelope" aria-hidden="true"></i>[ch4o5@nim-lang-cn.org](mailto:ch4o5@nim-lang-cn.org)
+
 <i class="fa fa-envelope" aria-hidden="true"></i>[sheldon@nim-lang-cn.org](mailto:sheldon@nim-lang-cn.org)
+
 <i class="fa fa-envelope" aria-hidden="true"></i>[ch4o5@nim-lang-cn.org](mailto:flywind@nim-lang-cn.org@nim-lang-cn.org)
 
 ## 线下交流会
