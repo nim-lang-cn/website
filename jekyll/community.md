@@ -19,7 +19,11 @@ css_class: community
 有问题可以立刻寻求帮助，没事也可以灌水吹牛交朋友。
 
 <i class="fab fa-qq black li" aria-hidden="true"></i>
-点击加入[ Nim中文社区 的QQ群](https://jq.qq.com/?_wv=1027&k=50EQ6eZ)，和群友们随时随地不间断沟通。
+点击加入[Nim中文社区](//shang.qq.com/wpa/qunwpa?idkey=5b713c470506775a2250d98918a6120f3fc87dccc1e202e4a182b5c3196807e1)官方QQ群，
+和群友们随时随地不间断沟通。
+
+<i class="fab fa-qq black li" aria-hidden="true"></i>
+点击加入[Nim开发集中营](https://jq.qq.com/?_wv=1027&k=50EQ6eZ)，和群友们随时随地不间断沟通。
 
 如果你有即时性要求低的问题、想法或心得，更适合整理在[论坛](#论坛)上。
 
@@ -66,8 +70,18 @@ css_class: community
 请务必搜索关注 **Nim中文社区** 官方微信公众号。
 有什么问题可以直接留言，向我们进行反馈。
 
-<i class="fa fa-weibo" aria-hidden="true"></i>
+<i class="fa fa-weixin" aria-hidden="true"></i>
 Nim中文社区
+
+## 邮件组
+
+有问题需要反馈？
+或者有更好的社区发展建议？
+欢迎骚扰我们~
+
+<i class="fab fa-envelope" aria-hidden="true"></i>[ch4o5@nim-lang-cn.org](mailto:ch4o5@nim-lang-cn.org)
+<i class="fab fa-envelope" aria-hidden="true"></i>[sheldon@nim-lang-cn.org](mailto:sheldon@nim-lang-cn.org)
+<i class="fab fa-envelope" aria-hidden="true"></i>[ch4o5@nim-lang-cn.org](mailto:flywind@nim-lang-cn.org@nim-lang-cn.org)
 
 ## 线下交流会
 
