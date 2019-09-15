@@ -85,8 +85,6 @@ Nim中文社区
 
 <i class="fa fa-envelope" aria-hidden="true"></i>[flywind@nim-lang-cn.org](mailto:flywind@nim-lang-cn.org)
 
-<i class="fa fa-envelope" aria-hidden="true"></i>[tulayang@nim-lang-cn.org](mailto:tulayang@nim-lang-cn.org)
-
 ## 线下交流会
 
 如果你准备组织一个线下交流会，请务必告诉我们，
