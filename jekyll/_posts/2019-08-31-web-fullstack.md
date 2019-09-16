@@ -151,7 +151,7 @@ Nim编译成的Javascript符合ECMAScript3规范，新规范不被支持。
 Karax将所有Nim代码编译成一个js文件，通过
 `<script src="xxx.js"></script>`，引入到index.html中。
 
-### Karax的虚拟DOM实现
+### karax的虚拟DOM实现
 
 ```nim
 # Karax虚拟DOM的实现入口，另一个setRenderer是没有RouterData的重载方法
@@ -228,7 +228,7 @@ proc dodraw(kxi: KaraxInstance) =
 根据等价、相似、不同三种结果，
 对节点进行相应更新。
 
-### Web后端
+### web后端
 
 Nim的Web后端可以使用`Jester`框架，
 支持多线程异步，
