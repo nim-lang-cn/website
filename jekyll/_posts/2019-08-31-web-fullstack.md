@@ -25,9 +25,9 @@ Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
     
     2.2 [使用Javascript模块](#使用Javascript模块)
     
-    2.3 [Karax的虚拟DOM实现](#Karax的虚拟DOM实现)
+    2.3 [Karax的虚拟DOM实现](#karax的虚拟DOM实现)
     
-    2.4 [Web后端](#Web后端)
+    2.4 [Web后端](#web后端)
 
 ## 背景
 2015年接触到Nim的时候被它既有高级抽象又能编译成C的特性吸引，
@@ -154,7 +154,7 @@ Karax将所有Nim代码编译成一个js文件，通过
 ### Karax的虚拟DOM实现
 
 ```nim
-# Karax虚拟DOM的实现入口 ,另一个setRenderer是没有RouterData的重载方法
+# Karax虚拟DOM的实现入口，另一个setRenderer是没有RouterData的重载方法
 var
   kxi*: KaraxInstance
   ...
