@@ -83,7 +83,9 @@ Nim中文社区
 
 <i class="fa fa-envelope" aria-hidden="true"></i>[sheldon@nim-lang-cn.org](mailto:sheldon@nim-lang-cn.org)
 
-<i class="fa fa-envelope" aria-hidden="true"></i>[ch4o5@nim-lang-cn.org](mailto:flywind@nim-lang-cn.org@nim-lang-cn.org)
+<i class="fa fa-envelope" aria-hidden="true"></i>[flywind@nim-lang-cn.org](mailto:flywind@nim-lang-cn.org)
+
+<i class="fa fa-envelope" aria-hidden="true"></i>[tulayang@nim-lang-cn.org](mailto:tulayang@nim-lang-cn.org)
 
 ## 线下交流会
 
