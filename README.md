@@ -13,7 +13,7 @@
 ## Contributors
 
 This project exists thanks to all the people who contribute.
-<a href="https://github.com/nim-lang/Nim/graphs/contributors"><img src="https://opencollective.com/Nim/contributors.svg?width=890" /></a>
+<a href="https://github.com/nim-lang-cn/website/graphs/contributors"><img src="https://opencollective.com/Nim/contributors.svg?width=890" /></a>
 
 
 ## 许可
