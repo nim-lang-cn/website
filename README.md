@@ -10,10 +10,10 @@
 之后就可以通过使用`bundle exec jekyll serve`命令来启动一个本地WEB服务器进行开发， 
 启动之后可以访问`http://localhost:4000/`来访问首页
 
-## Contributors
+## 贡献者
 
-This project exists thanks to all the people who contribute.
-<a href="https://github.com/nim-lang-cn/website/graphs/contributors">
+感谢所有的贡献者，没有[你们](https://github.com/nim-lang-cn/website/graphs/contributors)，就没有本项目的今天。
+
 
 ## 许可
 
