@@ -29,7 +29,7 @@ Included as well is the latest release of Nimble, v0.11.0, the changelog for whi
 [here](https://github.com/nim-lang/nimble/blob/master/changelog.markdown#0110---22092019).
 
 
-# The stability guarantee
+## 稳定保证
 
 Version 1.0 is now a long-term supported stable release that will only
 receive bug fixes and new features in the future, as long as they don't
@@ -43,7 +43,7 @@ Our goal is to make sure that code which compiled under Nim 1.0 continues to
 compile under any stable Nim 1.x version in the future.
 
 
-## What is included under the stability guarantee?
+### 稳定性保证包含哪些？
 
 Backwards compatibility covers only the stable fragment of the language,
 as defined by the [manual](https://nim-lang.org/docs/manual.html).
@@ -62,22 +62,19 @@ these are not as fleshed out as we would like them to be.
 
 ## Exceptions to the rule
 
-We of course have to concede that there are exceptions.
-In certain serious cases, for example if a security vulnerability is
-discovered in the standard library, we reserve the right to break code which
-uses it.
+### 例外情况
 
 
 
-# Installing Nim 1.0
+## 安装 Nim *1.0*
 
-## New users
+### 新手
 
 Check out if the package manager of your OS already ships version 1.0 or
 install it as described [here](https://nim-lang.org/install.html).
 
 
-## Existing users
+### 安装了之前版本的老用户
 
 如果有使用 `choosenim` 安装了之前 `Nim` 版本的用户，
 简单如下：
@@ -88,7 +85,7 @@ $ choosenim update stable
 
 
 
-# 贡献者们
+## 贡献者们
 
 Over the years, more than 500 people contributed to the Nim codebase,
 implementing new features, fixing bugs and issues, writing documentation, and
