@@ -79,8 +79,8 @@ install it as described [here](https://nim-lang.org/install.html).
 
 ## Existing users
 
-If you have installed a previous version of Nim using `choosenim`,
-getting Nim 1.0 is as easy as:
+如果有使用 `choosenim` 安装了之前 `Nim` 版本的用户，
+简单如下：
 
 ```bash
 $ choosenim update stable
@@ -88,7 +88,7 @@ $ choosenim update stable
 
 
 
-# Contributors
+# 贡献者们
 
 Over the years, more than 500 people contributed to the Nim codebase,
 implementing new features, fixing bugs and issues, writing documentation, and
