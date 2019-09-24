@@ -1,6 +1,7 @@
 ---
 title: "浅谈Nim Web开发"
 author: sheldon
+excerpt: "浅谈Nim Web开发"
 ---
 
 浅谈Nim Web开发

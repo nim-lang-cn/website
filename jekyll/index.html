@@ -80,7 +80,7 @@ for person in people:
   # 类型安全的字符串插值,
   # 会在编译时检查。
   echo(fmt"{person.name} is {person.age} years old")
-{% endhighlight %}
+        {% endhighlight %}
 
         {% highlight nim %}
 # 得益于Nim的“iterator”和“yield”结构，
@@ -94,10 +94,10 @@ iterator oddElements[Idx, T](a: array[Idx, T]): T =
 
 for x in oddElements([10, 20, 30, 40, 50, 60]):
   echo x
-{% endhighlight %}
+        {% endhighlight %}
 
 
-          {% highlight nim %}
+        {% highlight nim %}
 # 使用Nim的宏系统
 # 将密集的以数据为中心的x86指令描述
 # 转换为汇编程序和JIT所使用的查找表。
@@ -114,7 +114,7 @@ const
 
 for o in opcodes:
   echo o
-{% endhighlight %}
+        {% endhighlight %}
 
         <div class="text-centered">
           <a href="http://rosettacode.org/wiki/Category:Nim">更多的示例可访问RosettaCode……</a>
