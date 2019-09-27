@@ -3,3 +3,4 @@ _site
 .jekyll-metadata
 .vscode/
 *.lock
+/jekyll/.jekyll-cache
