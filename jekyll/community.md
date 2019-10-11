@@ -25,6 +25,9 @@ css_class: community
 <i class="fab fa-qq black li" aria-hidden="true"></i>
 点击加入[Nim开发集中营](https://jq.qq.com/?_wv=1027&k=50EQ6eZ)，和群友们随时随地不间断沟通。
 
+<i class="fab fa-qq black li" aria-hidden="true"></i>
+点击加入[Expert Nim](https://jq.qq.com/?_wv=1027&k=5UuqDYg)，和群友们随时随地不间断沟通。
+
 如果你有即时性要求低的问题、想法或心得，更适合整理在[论坛](#论坛)上。
 
 如果你有正式的功能请求和问题报告，请参阅[Issue和RFC](#issue和rfc)部分。
