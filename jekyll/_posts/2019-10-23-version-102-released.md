@@ -23,10 +23,11 @@ getting Nim 1.0.2 is as easy as:
 $ choosenim update stable
 ```
 
-If you don't have it already, you can get ``choosenim`` by following
-[these instructions](https://github.com/dom96/choosenim) or you can install
-Nim by following the instructions on our
-[install](https://nim-lang.org/install.html) page.
+如果你还没有，你可以通过
+[这里的介绍](https://github.com/dom96/choosenim)
+来获取 ``choosenim``，
+当然你也可以通过我们的
+[安装](https://nim-cn.com/install.html) 页面直接安装。
 
 
 ## Changelog

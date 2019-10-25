@@ -12,9 +12,9 @@ Windows下 nim v0.20 版本安装，无法运行 finish.exe 的解决方案
     Nim是一种静态类型编译的系统编程语言。
     它结合了来自成熟语言（如Python、Ada和Modula）的成功概念。
 
-Nim中文网站：[https://nim-lang-cn.org/](https://nim-lang-cn.org/)
+Nim中文网站：[https://nim-cn.com/](https://nim-cn.com/)
 
-下载页：[https://nim-lang-cn.org/install.html](https://nim-lang-cn.org/install.html)
+下载页：[https://nim-cn.com/install.html](https://nim-cn.com/install.html)
 
 ## 目录
 

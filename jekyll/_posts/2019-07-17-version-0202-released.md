@@ -53,7 +53,7 @@ $ choosenim update stable
 
 如果你之前并没有使用它，你可以通过
 [这篇介绍](https://github.com/dom96/choosenim)来获取``choosenim``。
-当然你也可以直接根据我们的[安装](https://nim-lang-cn.org/install.html)页面，
+当然你也可以直接根据我们的[安装](https://nim-cn.com/install.html)页面，
 单独安装Nim。 
 
 （译者注：在Windows下的choosenim只支持32位的下载，

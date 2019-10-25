@@ -35,7 +35,7 @@ excerpt: "这是当前版本 (v1.0) 的系列教程，希望能帮助大家快�
 
 ### 一、64位环境常规安装
 
-1. 访问[Nim中文社区](https://nim-lang-cn.org)中的[在Windows下安装Nim](https://nim-lang-cn.org/install_windows.html)页面
+1. 访问[Nim中文社区](https://nim-cn.com)中的[在Windows下安装Nim](https://nim-cn.com/install_windows.html)页面
 
 2. 点击 **下载x86版本的zip包** 下载最新版本的Nim
 
@@ -43,7 +43,7 @@ excerpt: "这是当前版本 (v1.0) 的系列教程，希望能帮助大家快�
 
 4. 运行目录下的 `finish.exe` 
 
-   *点击无响应的话，可以参考我发在中文社区的 [这篇文章](https://nim-lang-cn.org/blog/2019/08/25/v0202-windows-cannot-install.html)*
+   *点击无响应的话，可以参考我发在中文社区的 [这篇文章](https://nim-cn.com/blog/2019/08/25/v0202-windows-cannot-install.html)*
 
 5. 之后按照 `finish.exe` 的提示，逐步进行
 
@@ -79,7 +79,7 @@ excerpt: "这是当前版本 (v1.0) 的系列教程，希望能帮助大家快�
 
 本安装步骤为Windows系统通用安装步骤，但是较为复杂，建议有一定的基础的使用者尝试，或者作为`finish.exe`无法正确安装的替代方案。
 
-1. 在[Nim中文社区](https://nim-lang-cn.org)中的[在Windows下安装Nim](https://nim-lang-cn.org/install_windows.html)页面，下载你的系统对应版本的压缩包
+1. 在[Nim中文社区](https://nim-cn.com)中的[在Windows下安装Nim](https://nim-cn.com/install_windows.html)页面，下载你的系统对应版本的压缩包
 2. 在解压完成后**配置环境变量**，添加以下两个目录：
    1. 你刚才解压出来的文件夹里的`bin/`目录
    2. `%USERPROFILE%\.nimble\bin` （`%USERPROFILE%`指的是你的HOME目录，Win7以下是`我的文档`，也可能叫做`Administrator`之类的用户名）
@@ -124,7 +124,7 @@ curl https://nim-lang.org/choosenim/init.sh -sSf | sh
 
 和楼上的Windows常规方法安装类似，只不过由于c编译器都已经系统自带了，所以省了一步
 
-1. 在[Nim中文社区](https://nim-lang-cn.org)中的[在Unix下安装Nim](https://nim-lang-cn.org/install_unix.html)页面，下载你的系统对应版本的预构建二进制文件压缩包
+1. 在[Nim中文社区](https://nim-cn.com)中的[在Unix下安装Nim](https://nim-cn.com/install_unix.html)页面，下载你的系统对应版本的预构建二进制文件压缩包
 
 2. 手动配置`PATH`环境变量
 
@@ -155,11 +155,11 @@ source ~/.bashrc
 
 原谅我穷。。并没有Mac。。
 
-不过你可以去[中文社区](https://nim-lang-cn.org/install_unix.html)看看关于Mac安装的部分。
+不过你可以去[中文社区](https://nim-cn.com/install_unix.html)看看关于Mac安装的部分。
 
 ## 从源码编译
 
 很惊讶你竟然选择了这么 Cooooooooool 的安装方式！！
 
-我觉得你这么极客的人也不需要我带着你弄了，你还是去[中文社区](https://nim-lang-cn.org/install.html)看看吧~
+我觉得你这么极客的人也不需要我带着你弄了，你还是去[中文社区](https://nim-cn.com/install.html)看看吧~
 

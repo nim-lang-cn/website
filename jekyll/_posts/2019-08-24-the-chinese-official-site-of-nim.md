@@ -3,8 +3,8 @@ title: "Nim中文官网现已上线！"
 author: Nim中文社区
 ---
 
-[Nim中文官网](https://nim-lang-cn.org)现已上线！
-大家可以通过[https://nim-lang-cn.org](https://nim-lang-cn.org)来访问。
+[Nim中文官网](https://nim-cn.com)现已上线！
+大家可以通过[https://nim-cn.com](https://nim-cn.com)来访问。
 
 
 ## 足下
@@ -38,31 +38,31 @@ author: Nim中文社区
 以官网为**核心**，
 让Nim开发者们把注意力集中到这里：
 
-* 官网上有很多[**论坛**的索引](https://nim-lang-cn.org/community.html#%E8%AE%BA%E5%9D%9B)，有问题可以去论坛问，便于存档；
+* 官网上有很多[**论坛**的索引](https://nim-cn.com/community.html#%E8%AE%BA%E5%9D%9B)，有问题可以去论坛问，便于存档；
 
-* 官网上也尽量多地整理了[**QQ、微信群**](https://nim-lang-cn.org/community.html#%E5%8D%B3%E6%97%B6%E8%81%8A%E5%A4%A9)，
+* 官网上也尽量多地整理了[**QQ、微信群**](https://nim-cn.com/community.html#%E5%8D%B3%E6%97%B6%E8%81%8A%E5%A4%A9)，
 有紧急的问题可以去聊天工具上问，能够及时得到回复；
 
-* 也可以通过[学习](https://nim-lang-cn.org/learn.html)页面上的【**社区资源**】模块，
+* 也可以通过[学习](https://nim-cn.com/learn.html)页面上的【**社区资源**】模块，
 获取到国内主流媒体上先行者的问题、解答或者一些心得体会的博文；
 
 * 也可能会有线下的交流见面会，或者论坛、QQ群、微信群的一些活动，
 让我们的社区有爱又团结，发挥出**社区**的力量。
 
-而这些都可以从[社区](https://nim-lang-cn.org/community.html)中查看，
-我们也会将活动进行[博客](https://nim-lang-cn.org/blog.html)的推送，
-你可以订阅[RSS](https://nim-lang-cn.org/feed.xml)以及时获取这些令人振奋的消息。
+而这些都可以从[社区](https://nim-cn.com/community.html)中查看，
+我们也会将活动进行[博客](https://nim-cn.com/blog.html)的推送，
+你可以订阅[RSS](https://nim-cn.com/feed.xml)以及时获取这些令人振奋的消息。
 
 ## 修远
 * 目前官网中最关键的——**文档**，还没有能够完全翻译完，
-    [学习](https://nim-lang-cn.org/learn.html)和[文档](https://nim-lang-cn.org/documentation.html)两个模块中的中文文档还在由[@sheldon](https://github.com/gogolxdong)紧锣密鼓地翻译中，
+    [学习](https://nim-cn.com/learn.html)和[文档](https://nim-cn.com/documentation.html)两个模块中的中文文档还在由[@sheldon](https://github.com/gogolxdong)紧锣密鼓地翻译中，
     但是大家都是通过业余时间以非盈利的方式参与进来的，
     难免工作之余精力优先，
     所以也欢迎大家加入[我们](https://github.com/nim-lang-cn)来贡献自己的力量。
 
 * 我们也欢迎你**把自己的Nim博客推荐给我们**！
     我们欢迎各种方向，各种优质、高产的Nim博客，
-    我们会在[学习](https://nim-lang-cn.org/learn.html)页面的社区资源栏将你的博客挂上，
+    我们会在[学习](https://nim-cn.com/learn.html)页面的社区资源栏将你的博客挂上，
     供大家学习。
 
 -----

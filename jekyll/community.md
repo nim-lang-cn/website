@@ -42,7 +42,7 @@ css_class: community
 [**coderplanets的nim子社区**](https://coderplanets.com/nim)（推荐）
 
 <i class="fa fa-comments" aria-hidden="true"></i>
-[Nim中文社区](https://forum.nim-lang-cn.org)（开发中）
+[Nim中文社区](https://forum.nim-cn.com)（开发中）
 
 
 ## 博客
@@ -82,11 +82,13 @@ Nim中文社区
 或者有更好的社区发展建议？
 欢迎骚扰我们~
 
-<i class="fa fa-envelope" aria-hidden="true"></i>[ch4o5@nim-lang-cn.org](mailto:ch4o5@nim-lang-cn.org)
+<i class="fa fa-envelope" aria-hidden="true"></i>[ch4o5@nim-cn.com](mailto:ch4o5@nim-cn.com)
 
-<i class="fa fa-envelope" aria-hidden="true"></i>[sheldon@nim-lang-cn.org](mailto:sheldon@nim-lang-cn.org)
+<i class="fa fa-envelope" aria-hidden="true"></i>[sheldon@nim-cn.com](mailto:sheldon@nim-cn.com)
 
-<i class="fa fa-envelope" aria-hidden="true"></i>[flywind@nim-lang-cn.org](mailto:flywind@nim-lang-cn.org)
+<i class="fa fa-envelope" aria-hidden="true"></i>[flywind@nim-cn.com](mailto:flywind@nim-cn.com)
+
+<i class="fa fa-envelope" aria-hidden="true"></i>[tulayang@nim-cn.com](mailto:tulayang@nim-cn.com)
 
 ## 线下交流会
 
