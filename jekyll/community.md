@@ -44,6 +44,12 @@ css_class: community
 <i class="fa fa-comments" aria-hidden="true"></i>
 [Nim中文社区](https://forum.nim-cn.com)（开发中）
 
+## 每日早茶
+
+每天十分钟，为你提供最酷最好玩的 Nim 应用
+
+<i class="fa fa-coffee" aria-hidden="true"></i>
+[ Nim 早茶](http://tea.nim-cn.com)
 
 ## 博客
 
