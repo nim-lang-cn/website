@@ -22,9 +22,11 @@ defaults:
     values:
       layout: post
       is_post: true
-      title: "Nim博客"
+      title: "Nim 博客"
 
 navigation:
+  - title: 每日早茶
+    url: http://tea.nim-cn.com/
   - title: 博客
     url: /blog.html
   - title: 特点
