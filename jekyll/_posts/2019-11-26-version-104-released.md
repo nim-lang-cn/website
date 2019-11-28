@@ -1,10 +1,11 @@
 ---
-title: "Version 1.0.4 released"
-author: The Nim Team
+title: "1.0.4 版本现已发布！"
+author: Nim 开发团队
+excerpt: "Nim 团队很高兴为大家带来 1.0.4 版本发布的消息！这是我们在 Nim 1.0.0 之后发布的第二个补丁版本。"
 ---
 
-The Nim team is happy to announce version 1.0.4, our second patch release following
-Nim 1.0.0.
+Nim 团队很高兴为大家带来 1.0.4 版本发布的消息，
+这是我们在 Nim 1.0.0 之后发布的第二个补丁版本。
 
 To read more about version 1.0.0, take a look at our
 [release article](https://nim-lang.org/blog/2019/09/23/version-100-released.html)
