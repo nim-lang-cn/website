@@ -1,0 +1,20 @@
+language: ruby
+rvm:
+  - stable
+script:
+  - bundle install
+  - bundle exec jekyll build
+after_success:
+  - cd ./jekyll/_site
+  - git init
+  - git config user.name "DongyunLee"
+  - git config user.email "dongyunli619@gmail.com"
+  - git add .
+  - git commit -m "Update"
+  - git push --force --quiet "https://${GH_TOKEN}@github.com/nim-lang-cn/website.git" gh-pages:gh-pages
+branches:
+  only:
+  - master
+env:
+  global:
+  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
