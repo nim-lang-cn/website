@@ -5,14 +5,12 @@ before_script:
   - git clone https://github.com/nim-lang/Nim.git
   - cd Nim
   - sh build_all.sh
-  - cat << EOF >> ~/.bashrc
-  - export NIM=/root/Nim/bin
-  - export NIMBLE_DIR=/root/.nimble
-  - export PATH=$PATH:$NIM:$NIMBLE
-  - EOF
+  - echo "export NIM=/root/Nim/bin"  >> ~/.bashrc
+  - echo "export NIMBLE_DIR=/root/.nimble"  >> ~/.bashrc
+  - echo "export PATH=$PATH:$NIM:$NIMBLE"  >> ~/.bashrc
   - source ~/.bashrc  - gem install bundler
 script:
-  - cd ./jekyll
+  - cd ../jekyll
   - bundle exec jekyll build
 after_success:
   - cd ./_site
@@ -36,4 +34,6 @@ addons:
 
 sudo: true # route your build to the container-based infrastructure for a faster build
 
-cache: bundler # caching bundler gem packages will speed up build
+cache: 
+  - bundler # caching bundler gem packages will speed up build
+  - Nim
