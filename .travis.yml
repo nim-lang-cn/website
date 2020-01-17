@@ -1,9 +1,8 @@
 language: ruby
 rvm:
-  - 2.7.0
+  - 2.5.3
 script:
-  - gem install bundler
-  - bundle exec jekyll build
+  - jekyll build
 after_success:
   - cd ./jekyll/_site
   - git init

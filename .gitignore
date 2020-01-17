@@ -4,3 +4,4 @@ _site
 .vscode/
 *.lock
 /jekyll/.jekyll-cache
+.Gemfile.lock
