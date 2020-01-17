@@ -3,7 +3,7 @@ rvm:
   - 2.5.3
 before_script:
 #  - git clone https://github.com/nim-lang/Nim.git
-#  - cd Nim
+  - cd Nim
 #  - sh build_all.sh
   - echo "export NIM=/root/Nim/bin"  >> ~/.bashrc
   - echo "export NIMBLE_DIR=/root/.nimble"  >> ~/.bashrc
