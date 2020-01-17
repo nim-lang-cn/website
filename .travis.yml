@@ -8,7 +8,9 @@ before_script:
   - echo "export NIM=/root/Nim/bin"  >> ~/.bashrc
   - echo "export NIMBLE_DIR=/root/.nimble"  >> ~/.bashrc
   - echo "export PATH=$PATH:$NIM:$NIMBLE"  >> ~/.bashrc
-  - source ~/.bashrc  - gem install bundler
+  - source ~/.bashrc 
+  - nim -v
+  - gem install bundler
 script:
   - cd ../jekyll
   - bundle exec jekyll build
