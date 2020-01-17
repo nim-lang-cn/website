@@ -13,7 +13,7 @@ after_success:
   - git config user.email "dongyunli619@gmail.com"
   - git add .
   - git commit -m "Update"
-  - git push --force --quiet "https://${GH_TOKEN}@github.com/nim-lang-cn/website.git" gh-pages:gh-pages
+  - git push --force --quiet "https://${GH_TOKEN}@github.com/nim-lang-cn/website.git" master:gh-pages
 branches:
   only:
   - master
