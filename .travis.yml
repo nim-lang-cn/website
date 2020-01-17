@@ -4,6 +4,7 @@ rvm:
 before_script:
   - gem install bundler
 script:
+  - cd ./jekyll
   - bundle exec jekyll build
 after_success:
   - cd ./jekyll/_site
