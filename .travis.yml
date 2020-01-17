@@ -5,9 +5,9 @@ before_script:
   - git clone https://github.com/nim-lang/Nim.git
   - cd Nim
   - sh build_all.sh
-  - echo "export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin"  >> ~/.bashrc
-  - echo "export NIMBLE_DIR=/home/travis/.nimble"  >> ~/.bashrc
-  - echo "export PATH=$PATH:$NIM:$NIMBLE"  >> ~/.bashrc
+  - export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin
+  - export NIMBLE_DIR=/home/travis/.nimble
+  - export PATH=$PATH:$NIM:$NIMBLE
   - source ~/.bashrc 
   - cat ~/.bashrc
   - nim -v
