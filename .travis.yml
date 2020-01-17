@@ -2,9 +2,15 @@ language: ruby
 rvm:
   - 2.5.3
 before_script:
-  - curl https://nim-lang.org/choosenim/init.sh -sSf | sh
-  - n
-  - gem install bundler
+  - git clone https://github.com/nim-lang/Nim.git
+  - cd Nim
+  - sh build_all.sh
+  - cat << EOF >> ~/.bashrc
+  - export NIM=/root/Nim/bin
+  - export NIMBLE_DIR=/root/.nimble
+  - export PATH=$PATH:$NIM:$NIMBLE
+  - EOF
+  - source ~/.bashrc  - gem install bundler
 script:
   - cd ./jekyll
   - bundle exec jekyll build
