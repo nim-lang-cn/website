@@ -1,5 +1,7 @@
 # Nim中文官网开发代码库
 
+[![Build Status](https://travis-ci.com/nim-lang-cn/website.svg?branch=master)](https://travis-ci.com/nim-lang-cn/website)
+
 > 已将服务迁移到Github-Pages进行托管，使用travis-ci持续集成。
 
 当前仓库是nim中文官网的代码库，
