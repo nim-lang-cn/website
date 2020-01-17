@@ -9,7 +9,7 @@ before_script:
   - echo "export NIMBLE_DIR=/root/.nimble"  >> ~/.bashrc
   - echo "export PATH=$PATH:$NIM:$NIMBLE"  >> ~/.bashrc
   - source ~/.bashrc 
-  - nim -v
+#  - nim -v
   - gem install bundler
 script:
   - cd ../jekyll
@@ -28,14 +28,14 @@ branches:
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-exclude: [vendor,Nim]
+exclude: [vendor]
 addons:
   apt:
     packages:
     - libcurl4-openssl-dev
+    - nim
 
 sudo: true # route your build to the container-based infrastructure for a faster build
 
 cache: 
   - bundler # caching bundler gem packages will speed up build
-  - Nim
