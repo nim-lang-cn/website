@@ -2,16 +2,15 @@ language: ruby
 rvm:
   - 2.5.3
 before_script:
-  - pwd
   - git clone https://github.com/nim-lang/Nim.git
   - cd Nim
-#  - sh build_all.sh
-  - echo "export NIM=//Nim/bin"  >> ~/.bashrc
+  - sh build_all.sh
+  - echo "export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin"  >> ~/.bashrc
   - echo "export NIMBLE_DIR=/home/travis/.nimble"  >> ~/.bashrc
   - echo "export PATH=$PATH:$NIM:$NIMBLE"  >> ~/.bashrc
   - source ~/.bashrc 
   - cat ~/.bashrc
-#  - nim -v
+  - nim -v
   - gem install bundler
 script:
   - cd ../jekyll
@@ -30,7 +29,7 @@ branches:
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-exclude: [vendor]
+exclude: [vendor,Nim]
 addons:
   apt:
     packages:
