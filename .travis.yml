@@ -26,7 +26,7 @@ branches:
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-exclude: [vendor]
+exclude: [vendor,Nim]
 addons:
   apt:
     packages:
