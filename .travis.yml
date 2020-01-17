@@ -3,6 +3,7 @@ rvm:
   - 2.5.3
 before_script:
   - curl https://nim-lang.org/choosenim/init.sh -sSf | sh
+  - n
   - gem install bundler
 script:
   - cd ./jekyll
