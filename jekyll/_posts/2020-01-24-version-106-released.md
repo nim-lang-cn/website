@@ -1,49 +1,45 @@
 ---
-title: "Version 1.0.6 released"
-author: The Nim Team
+title: "V1.0.6 发布！"
+author: Nim 团队
 ---
 
-The Nim team is happy to announce version 1.0.6, our third patch release following
-Nim 1.0.0.
+Nim 团队很高兴为大家带来 1.0.6 版本发布的消息！这是我们在 Nim 1.0.0 之后带来的第三个补丁。
 
-To read more about version 1.0.0, take a look at our
-[v1.0 release article](https://nim-lang.org/blog/2019/09/23/version-100-released.html).
+想了解更多关于 1.0.0 版本的信息，可以查阅
+[v1.0 发布说明](https://nim-cn.com/blog/2019/09/23/version-100-released.html).
 
-This release comes two months after a previous release,
-and it has almost [60 new commits](https://github.com/nim-lang/Nim/compare/v1.0.4...v1.0.6),
-containing fixes for another 15 reported issues, several other bug fixes and documentation
-improvements, making our 1.0 release even better.
+本次的版本发布于前一个版本发布两个月之后，
+包含了将近 [60 次提交](https://github.com/nim-lang/Nim/compare/v1.0.4...v1.0.6)，
+新修复了 15 个已知的错误、一些其他的 bug 修复、和文档优化，
+这些都让我们的 1.0 发行版变得更好。
 
-There were no security-related problems, but we are trying to release 1.0.x versions
-on a regular bi-monthly basis.
+没有安全性相关的问题，但我们正努力保证每两个月发布一个新 1.0.x 版本的稳定周期。
 
 
 <div class="sidebarblock">
   <div class="content">
     <div class="paragraph">
-      Reminder: If you haven't already, now's the perfect time to participate in <a href="https://nim-lang.org/blog/2019/12/20/community-survey-2019.html">Nim Community Survey</a>. We would love to hear your opinions!
+      提个醒：如果你还没有参加我们的 
+      <a href="https://nim-lang.org/blog/2019/12/20/community-survey-2019.html">Nim 社区调研</a>，就赶紧来参加吧！我们非常希望能听到您的意见！
     </div>
   </div>
 </div>
 
 
 
-## Installing 1.0.6
+## 安装 1.0.6
 
-If you have installed a previous version of Nim using ``choosenim``,
-getting Nim 1.0.6 is as easy as:
+如果你已经使用 ``choosenim`` 安装了之前版本的 Nim ，升级到 1.0.6 版本会非常简单：
 
 ```bash
 $ choosenim update stable
 ```
 
-If you don't have it already, you can get ``choosenim`` by following
-[these instructions](https://github.com/dom96/choosenim) or you can install
-Nim by following the instructions on our
-[install](https://nim-lang.org/install.html) page.
+如果没有的话，你可以通过
+[这些教程](https://github.com/dom96/choosenim)来安装 ``choosenim``，
+当然你也可以根据网站 [安装页](https://nim-cn.com/install.html) 的说明直接安装 Nim 。
 
 
-## Changelog
+## 更新日志
 
-Find this release's changelog together with the rest of Nim's source code
-[in our GitHub repository](https://github.com/nim-lang/Nim/blob/version-1-0/changelogs/changelog_1_0_6.md).
+你可以 [在我们的 GitHub 代码库](https://github.com/nim-lang/Nim/blob/version-1-0/changelogs/changelog_1_0_6.md) 中找到本次版本发布的相关更新日志。
