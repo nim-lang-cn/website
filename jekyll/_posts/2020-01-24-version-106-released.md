@@ -20,7 +20,7 @@ Nim 团队很高兴为大家带来 1.0.6 版本发布的消息！这是我们在
   <div class="content">
     <div class="paragraph">
       提个醒：如果你还没有参加我们的 
-      <a href="https://nim-lang.org/blog/2019/12/20/community-survey-2019.html">Nim 社区调研</a>，就赶紧来参加吧！我们非常希望能听到您的意见！
+      <a href="https://nim-lang.org/blog/2019/12/20/community-survey-2019.html">Nim 社区调研</a>或者<a href="https://nim-cn.com/blog/2019/12/24/china-community-survey-2019.html">Nim 中文社区调研</a>，就赶紧来参加吧！我们非常希望能听到您的意见！
     </div>
   </div>
 </div>
