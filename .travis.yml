@@ -17,6 +17,7 @@ script:
   - bundle exec jekyll build
 after_success:
   - cd ./_site
+  - echo "nim-cn.com" > CNAME
   - git init
   - git config user.name "DongyunLee"
   - git config user.email "dongyunli619@gmail.com"
