@@ -8,29 +8,28 @@ current: Install
 
 <h1 class="text-centered page-title main-heading">在Windows下安装Nim</h1>
 
-# Installation using ``choosenim``
+# 使用 ``choosenim`` 进行安装
 
-[``choosenim``](https://github.com/dom96/choosenim#choosenim) is an
-installer for the Nim programming language. It allows you
-to easily switch between versions of Nim, whether that is the latest stable
-release or the latest development version.
+[``choosenim``](https://github.com/dom96/choosenim#choosenim) 是一个 Nim 语言的安装器。
+它能帮你更简单地切换 Nim 版本，
+无论你想要最新稳定版还是最新开发版。
 
-# Install Nim using Scoop
-[Scoop](https://scoop.sh/) is a command-line installer for Windows.
-It can install Nim with following command line that also automatically install gcc and set PATH.
+# 使用 Scoop 安装 Nim 
+[Scoop](https://scoop.sh/) 是一个 Windows 的命令行安装器。
+使用下面的命令，你可以在安装 Nim 的同时，自动安装 gcc 并配置 PATH 。
 
 ```
 scoop install nim
 ```
 
-Update Nim:
+更新 Nim:
 
 ```
 scoop update
 scoop update nim
 ```
 
-# Manual installation
+# 手动安装
 
 <div class="center">
   <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}_x32.zip"
@@ -85,8 +84,8 @@ Nim编译器编译软件时需要一个C编译器，
 
 <!-- TODO: Instructions on what to do with these 7z files? -->
 
-* 32位 - [mingw32-6.3.0.7z]({{ site.official_baseurl }}/download/mingw32-6.3.0.7z)
-* 64位 - [mingw64-6.3.0.7z]({{ site.official_baseurl }}/download/mingw64-6.3.0.7z)
+* 32位 - [mingw32.7z]({{ site.official_baseurl }}/download/mingw32.7z)
+* 64位 - [mingw64.7z]({{ site.official_baseurl }}/download/mingw64.7z)
 
 # 其他依赖
 
