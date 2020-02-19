@@ -18,6 +18,8 @@ script:
 after_success:
   - cd ./_site
   - echo "nim-cn.com" > CNAME
+  - mkdir docs
+  - cp ../../../rst/*.html ./docs
   - git init
   - git config user.name "DongyunLee"
   - git config user.email "dongyunli619@gmail.com"
