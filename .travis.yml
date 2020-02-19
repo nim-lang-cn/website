@@ -2,30 +2,13 @@ language: ruby
 rvm:
   - 2.5.3
 before_script:
-  - git clone https://github.com/nim-lang/Nim.git
-  - cd Nim
-  - sh build_all.sh
-  - export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin
-  - export NIMBLE_DIR=/home/travis/.nimble
-  - export PATH=$PATH:$NIM:$NIMBLE
-  - source ~/.bashrc 
-  - cat ~/.bashrc
-  - nim -v
+  - sh ./script/install_nim.sh
   - gem install bundler
 script:
   - cd ../jekyll
   - bundle exec jekyll build
 after_success:
-  - cd ./_site
-  - echo "nim-cn.com" > CNAME
-  - mkdir docs
-  - cp ../../rst/*.html ./docs
-  - git init
-  - git config user.name "DongyunLee"
-  - git config user.email "dongyunli619@gmail.com"
-  - git add .
-  - git commit -m "Update"
-  - git push --force --quiet "https://${GH_TOKEN}@github.com/nim-lang-cn/website.git" master:gh-pages
+  - sh ./publish_gh-pages.sh
 branches:
   only:
   - master
