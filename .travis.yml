@@ -10,7 +10,7 @@ script:
   - bundle exec jekyll build
 after_success:
   # - chmod +x ./scripts/publish_gh-pages.sh
-  - ./scripts/publish_gh-pages.sh
+  - ../scripts/publish_gh-pages.sh
 branches:
   only:
   - master
