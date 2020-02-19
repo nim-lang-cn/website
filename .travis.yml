@@ -2,13 +2,15 @@ language: ruby
 rvm:
   - 2.5.3
 before_script:
-  - sh ./script/install_nim.sh
+  - chmod +x ./script/install_nim.sh
+  - ./script/install_nim.sh
   - gem install bundler
 script:
   - cd ../jekyll
   - bundle exec jekyll build
 after_success:
-  - sh ./publish_gh-pages.sh
+  - chmod +x ./script/publish_gh-pages.sh
+  - ./script/publish_gh-pages.sh
 branches:
   only:
   - master
