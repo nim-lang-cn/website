@@ -1,39 +1,35 @@
 The documentation consists of several documents:
 
-- | `Tutorial (part I) <tut1.html>`_
-  | The Nim tutorial part one deals with the basics.
+- | `教程 (第一部分) <tut1.html>`_
+  | Nim 教程的第一部分，涉及了基础部分。
 
-- | `Tutorial (part II) <tut2.html>`_
-  | The Nim tutorial part two deals with the advanced language constructs.
+- | `教程 (第二部分) <tut2.html>`_
+  | Nim 教程的第二部分，涉及了高级语言结构。
 
-- | `Tutorial (part III) <tut3.html>`_
-  | The Nim tutorial part three about Nim's macro system.
+- | `教程 (第三部分) <tut3.html>`_
+  | Nim 教程的第三部分，关于 Nim 的宏系统。
 
-- | `Language Manual <manual.html>`_
-  | The Nim manual is a draft that will evolve into a proper specification.
+- | `语言手册 <manual.html>`_
+  | Nim 手册还是一个草案，但她正在变成完善的规范。
 
-- | `Library documentation <lib.html>`_
-  | This document describes Nim's standard library.
+- | `库文档 <lib.html>`_
+  | 这篇文档描述了 Nim 的标准库。
 
-- | `Compiler user guide <nimc.html>`_
-  | The user guide lists command line arguments, special features of the
-    compiler, etc.
+- | `编译器用户指南 <nimc.html>`_
+  | 用户指南列出了命令行参数、编译器的特殊功能等。
 
-- | `Tools documentation <tools.html>`_
-  | Description of some tools that come with the standard distribution.
+- | `工具文档 <tools.html>`_
+  | 标准发行版一些附带工具的描述。
 
 - | `GC <gc.html>`_
-  | Additional documentation about Nim's GC and how to operate it in a
-  | realtime setting.
+  | 有关 Nim 的 GC 以及如何在实时设置中操作它的附加文档。
 
-- | `Source code filters <filters.html>`_
-  | The Nim compiler supports source code filters as a simple yet powerful
-    builtin templating system.
+- | `源码过滤器 <filters.html>`_
+  | Nim 编译器提供了一个简单而强大的内置模板系统——源码过滤器。
 
-- | `Internal documentation <intern.html>`_
-  | The internal documentation describes how the compiler is implemented. Read
-    this if you want to hack the compiler.
+- | `内部文档 <intern.html>`_
+  | 内部文档描述如何实现编译器。如果要破解编译器，请阅读此篇。
 
-- | `Index <theindex.html>`_
-  | The generated index. **Index + (Ctrl+F) == Joy**
+- | `索引 <theindex.html>`_
+  | The generated index. **索引 + (Ctrl+F) == 美滋滋**
 
