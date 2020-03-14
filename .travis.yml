@@ -19,10 +19,9 @@ after_success:
   - cd ./_site
   - echo "nim-cn.com" > CNAME
   - mkdir docs
-  - cd ../../scripts/
-  - sh ./rst2html.sh
-  - cd ../jekyll/_site
-  - cp ../../rst/*.html ./docs
+  - cd /home/travis/build/nim-lang-cn/website/Nim/doc
+  - sh /home/travis/build/nim-lang-cn/website/scripts/rst2html.sh
+  - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
   - git init
   - git config user.name "DongyunLee"
   - git config user.email "dongyunli619@gmail.com"

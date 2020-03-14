@@ -1,5 +1,5 @@
 ========================
-Tools available with Nim
+可用的 Nim 工具
 ========================
 
 The standard distribution ships with the following tools:
