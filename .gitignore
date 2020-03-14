@@ -5,3 +5,4 @@ _site
 *.lock
 /jekyll/.jekyll-cache
 .Gemfile.lock
+/rst/*.html
