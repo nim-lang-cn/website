@@ -20,6 +20,8 @@ after_success:
   - echo "nim-cn.com" > CNAME
   - mkdir docs
   - cd /home/travis/build/nim-lang-cn/website/Nim/doc
+  - cp ./nimdoc.css /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/nimdoc.out.css
+  - cp ./*.js /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/
   - sh /home/travis/build/nim-lang-cn/website/scripts/rst2html.sh
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
   - git init
