@@ -24,6 +24,8 @@ after_success:
   - cp ./nimdoc.css /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/nimdoc.out.css
   - cp ./*.js /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/
   - sh /home/travis/build/nim-lang-cn/website/scripts/rst2html.sh
+  - cd ../lib
+  - sh /home/travis/build/nim-lang-cn/website/scripts/nim_doc_lib.sh
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
   - git init
   - git config user.name "DongyunLee"
