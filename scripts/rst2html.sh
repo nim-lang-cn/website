@@ -5,6 +5,7 @@ target="/home/travis/build/nim-lang-cn/website"
 
 # 将已翻译的部分
 cp -r ${target}/rst/* .
+cp ./html/*.js ${target}/jekyll/_site/docs/
 
 rst2html_generator(){
     for file in `ls $1|grep .rst` #注意此处这是两个反引号，表示运行系统命令
