@@ -8,7 +8,7 @@ before_script:
   - export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin
   - export NIMBLE_DIR=/home/travis/.nimble
   - export PATH=$PATH:$NIM:$NIMBLE
-  - export NIMVERSION=1.0.6
+  - export nimversion=1.0.6
   - source ~/.bashrc 
   - cat ~/.bashrc
   - nim -v
