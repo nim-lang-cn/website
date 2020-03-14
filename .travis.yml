@@ -19,6 +19,7 @@ after_success:
   - cd ./_site
   - echo "nim-cn.com" > CNAME
   - mkdir docs
+  - sh ../../scripts/rst2html.sh
   - cp ../../rst/*.html ./docs
   - git init
   - git config user.name "DongyunLee"
