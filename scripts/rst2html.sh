@@ -1,6 +1,6 @@
 #!/bin/bash
 
-target="/home/travis/build/nim-lang-cn/website/jekyll"
+target="/home/travis/build/nim-lang-cn/website"
 # target="/tmp"
 
 # 将已翻译的部分
@@ -15,7 +15,7 @@ rst2html_generator(){
             else
                 nim rst2html $file
                 file_name="${file%.*}"
-                cp -f ${file_name}.html ${target}/_site/docs/
+                cp -f ${file_name}.html ${target}/jekyll/_site/docs/
         fi
         done
 } 
