@@ -13,13 +13,12 @@ nim_doc_lib_generator(){
             then
                 nim_doc_lib_generator $1"/"$file
             else
-                if [ ${file%.nim} != ${file} ]
+                if [  ${file##*.} = "nim" ]
                     then 
                         nim doc $file
-                        file_name="${file%.nim}"
-                        echo $file_name
+                        file_name="${file%.*}"
                         cp -f ${file_name}.html ${target}/jekyll/_site/docs/
-                if
+                fi
         fi
         done
 } 
