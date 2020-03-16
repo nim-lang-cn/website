@@ -14,7 +14,8 @@ nim_doc_lib_generator(){
                 nim_doc_lib_generator $1"/"$file
             else
                 nim doc $file
-                file_name="${file%.*}"
+                file_name="${file%.nim}"
+                echo $file_name
                 cp -f ${file_name}.html ${target}/jekyll/_site/docs/
         fi
         done
