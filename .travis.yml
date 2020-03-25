@@ -19,7 +19,7 @@ script:
 after_success:
   - cd ./_site
   - echo "nim-cn.com" > CNAME
-  - mkdir docs
+  - mkdir docs choosenim
   - cd /home/travis/build/nim-lang-cn/website/Nim/doc
   - cp ./nimdoc.css /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/nimdoc.out.css
   - cp ./*.js /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/
@@ -27,6 +27,7 @@ after_success:
   - cd ../lib
   - sh /home/travis/build/nim-lang-cn/website/scripts/nim_doc_lib.sh
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
+  - cd choosenim/ && wget https://nim-lang.org/choosenim/init.sh && cd ..
   - git init
   - git config user.name "DongyunLee"
   - git config user.email "dongyunli619@gmail.com"

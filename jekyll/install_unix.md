@@ -16,7 +16,7 @@ current: Install
 只需要在你的终端中运行下方的命令，然后根据屏幕上的说明操作即可：
 
 ```bash
-curl https://nim-lang.org/choosenim/init.sh -sSf | sh
+curl {{ site.baseurl}}/choosenim/init.sh -sSf | sh
 ```
 
 # 手动安装
