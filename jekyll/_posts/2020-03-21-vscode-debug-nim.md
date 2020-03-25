@@ -1,7 +1,9 @@
 ---
 title: "使用Visual Studio Code调试Nim语言"
 author: 包菜（Nim中文社区）
-expert: "Debug Nim with GDB"
+expert: "由于Nim语言没有官方的IDE，开发程序起来会非常麻烦，
+    虽然也有人喜欢用纯文本编辑器来写程序，但项目大一些的话，还是IDE使用起来更方便。
+    好在Visual Studio Code十分强大，可以满足Nim开发的需求。"
 ---
 
     由于Nim语言没有官方的IDE，开发程序起来会非常麻烦，
