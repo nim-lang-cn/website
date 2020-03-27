@@ -42,14 +42,14 @@ echo("Hello World!")
 
 这是一个最简单的Nim脚本。在这个脚本里面，可以使用Nim的语法写代码（语法跟Python差不多），然后像执行Python一样去执行这个脚本。执行起来性能却跟C语言差不多，这听起来很完美对不对。
 
-NimScript的官方介绍：[https://nim-lang.org/docs/nims.html](https://nim-lang.org/docs/nimscript.html)  
-NimScript直接支持的函数方法介绍：[https://nim-lang.org/docs/nimscript.html](https://nim-lang.org/docs/nimscript.html)
+NimScript的官方介绍：[https://nim-lang-cn.org/docs/nims.html](/docs/nimscript.html)  
+NimScript直接支持的函数方法介绍：[https://nim-lang-cn.org/docs/nimscript.html](/docs/nimscript.html)
 
 ## 遇到的问题
 没有什么是完美的，当我尝试写第一个小Nim脚本的时候就遇到了各种问题。
 
 脚本的目的很简单：遍历一个目录下面的所有文件，然后读取里面的文件。
-按照 [https://nim-lang.org/docs/nimscript.html](https://nim-lang.org/docs/nimscript.html) 的官方介绍，我很快找到了 `listDirs()`函数和`listFiles()`函数。`listDirs()`只能列出指定目录下的“文件夹”，`listFiles()`函数只能列出指定目录下的“文件”。 
+按照 [https://nim-lang-cn.org/docs/nimscript.html](/docs/nimscript.html) 的官方介绍，我很快找到了 `listDirs()`函数和`listFiles()`函数。`listDirs()`只能列出指定目录下的“文件夹”，`listFiles()`函数只能列出指定目录下的“文件”。 
 
 ```
 #!/usr/bin/env nim
