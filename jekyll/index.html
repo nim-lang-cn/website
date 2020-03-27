@@ -60,13 +60,13 @@ use_dark_highlighting: true
         </ul>
 
         <div class="text-centered">
-          <a class="pure-button pure-button-primary" href="{{ site.baseurl }}/install.html">安装</a>
-          <a class="pure-button" href="{{ site.baseurl }}/learn.html">开始学习 Nim</a>
+          <a class="pure-button pure-button-primary" href="/install.html">安装</a>
+          <a class="pure-button" href="/learn.html">开始学习 Nim</a>
         </div>
       </div>
 
       <div class="pure-u-1 pure-u-md-2-5">
-        {% highlight nim %}
+{% highlight nim %}
 import strformat
 
 type
@@ -83,9 +83,9 @@ for person in people:
   # 类型安全的字符串插值,
   # 会在编译时检查。
   echo(fmt"{person.name} is {person.age} years old")
-        {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight nim %}
+{% highlight nim %}
 # 得益于 Nim 的“iterator”和“yield”结构，
 # 迭代器和常规方法一样容易编写。
 # 它们会被编译为内联循环。
@@ -117,7 +117,7 @@ const
 
 for o in opcodes:
   echo o
-        {% endhighlight %}
+{% endhighlight %}
 
         <div class="text-centered">
           <a href="http://rosettacode.org/wiki/Category:Nim">更多的示例可访问 RosettaCode……</a>
@@ -203,7 +203,7 @@ for o in opcodes:
       </h3>
     </div>
     <div class="pure-u-1 center">
-      <a class="pure-button" href="{{ site.baseurl }}/learn.html">立即开始</a>
+      <a class="pure-button" href="/learn.html">立即开始</a>
     </div>
   </div>
 </section>
@@ -212,7 +212,7 @@ for o in opcodes:
   <section class="content">
     <div class="pure-g">
       <div class="pure-u-1 pure-u-md-2-5">
-        <img height="470px" class="pure-img" src="{{ site.baseurl }}/assets/img/nim_in_action_cover.jpg"/>
+        <img height="470px" class="pure-img" src="/assets/img/nim_in_action_cover.jpg"/>
       </div>
       <div class="pure-u-1 pure-u-md-3-5 main-block">
         <h1>Nim in Action</h1>
@@ -238,7 +238,7 @@ for o in opcodes:
 
 <section class="content center-banner">
   <h1 class="section-heading">
-    <img height="100px" src="{{ site.baseurl }}/assets/img/piggy.svg"/>
+    <img height="100px" src="/assets/img/piggy.svg"/>
     支持 Nim
   </h1>
   <div class="pure-g center">
@@ -250,7 +250,7 @@ for o in opcodes:
       </h3>
     </div>
     <div class="pure-u-1 center">
-      <a class="pure-button pure-button-primary" href="{{ site.baseurl }}/donate.html">捐赠</a>
+      <a class="pure-button pure-button-primary" href="/donate.html">捐赠</a>
     </div>
   </div>
 </section>
@@ -264,7 +264,7 @@ for o in opcodes:
           {% if sponsor.level == "250" %}
             <div class="sponsor-container">
               <a href="{{sponsor.url}}">
-                <img src="{{ site.baseurl }}{{sponsor.logo}}"/>
+                <img src="{{sponsor.logo}}"/>
                 <br>
                 <span class="green tag">+${{sponsor.this_month}}/月</span>
                 <p class="title">{{sponsor.name}}</p>
@@ -274,7 +274,7 @@ for o in opcodes:
         {% endfor %}
       </div>
     </div>
-    <a class="pure-button" href="{{ site.baseurl }}/sponsors.html">查看更多</a>
+    <a class="pure-button" href="/sponsors.html">查看更多</a>
   </section>
 </section>
 
@@ -361,7 +361,7 @@ for o in opcodes:
       </div>
 
       <div class="pure-u-1 center">
-        <p><a class="pure-button" href="{{ site.baseurl }}/community.html">通过任何你喜欢的方式加入我们的社区</a></p>
+        <p><a class="pure-button" href="/community.html">通过任何你喜欢的方式加入我们的社区</a></p>
       </div>
     </div>
 

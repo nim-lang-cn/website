@@ -58,10 +58,10 @@ css_class: community
 如果你是一个狂热的RSS用户，我们也为你提供了RSS源来供你了解我们的最新动态。
 
 <i class="fa fa-bullhorn" aria-hidden="true"></i>
-[Nim中文博客]({{ site.baseurl }}/blog.html)
+[Nim中文博客](/blog.html)
 
 <i class="fa fa-rss" aria-hidden="true"></i>
-[博客RSS源]({{ '/feed.xml' | prepend: site.baseurl }})
+[博客RSS源](/feed.xml)
 
 ## 新浪微博
 
@@ -169,7 +169,7 @@ the account when tweeting about Nim!
 [Nim forum]({{ site.official_baseurl }}/blog.html)
 
 <i class="fa fa-rss" aria-hidden="true"></i>
-[博客RSS源]({{ '/feed.xml' | prepend: site.baseurl }})
+[博客RSS源]({{ '/feed.xml' | prepend: site.official_baseurl }})
 
 ## Reddit
 

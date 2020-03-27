@@ -8,7 +8,7 @@ css_class: sponsors
 <h3 class="text-centered page-subtitle">
   本节列出了非常友好的公司和个人，
   他们每月贡献一定的资金来帮助维持Nim的发展。
-  有关更多详细信息，请查看<a href="{{ site.baseurl }}/donate.html">捐赠</a>页面。
+  有关更多详细信息，请查看<a href="/donate.html">捐赠</a>页面。
 
   <p><small>最后更新时间: {{ site.data.sponsors_meta["last_update"] }}</small></p>
 </h3>
@@ -23,7 +23,7 @@ css_class: sponsors
           {% if sponsor.level == "250" %}
             <div class="sponsor-container">
               <a href="{{sponsor.url}}">
-                <img src="{{ site.baseurl }}{{sponsor.logo}}"/>
+                <img src="{{sponsor.logo}}"/>
                 <span class="green tag">+${{sponsor.this_month}}/月</span>
                 <br/>
                 <p class="title">{{sponsor.name}}</p>
