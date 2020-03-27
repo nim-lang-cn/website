@@ -19,7 +19,7 @@ Nim是一种极少见的 _可编程_ 静态类型的，
 每三到六个月会定期发布一次稳定版，让稳定性要求高的系统可以得到保证。
 
 很少出现不向后兼容的更新，
-但每次出现我们都做了详细的[文档记录](https://nim-cn.com/blog/2018/03/01/version-0180-released.html)，
+但每次出现我们都做了详细的[文档记录](/blog/2018/03/01/version-0180-released.html)，
 让你可以轻松地进行管理。
 编译器也会对已弃用的功能进行高亮显示，
 以便为更新提供足够的提示和转换时间。
@@ -28,7 +28,7 @@ Nim是一种极少见的 _可编程_ 静态类型的，
 ## 安全性和内存安全性如何？
 
 Nim通过不执行指针运算、
-可选[检查](https://nim-lang.org/docs/manual.html#pragmas-compilation-option-pragmas)、
+可选[检查](/docs/manual.html#pragmas-compilation-option-pragmas)、
 跟踪和非跟踪引用
 以及可选的非可空类型来保证内存安全性。
 它通过koch工具和污点分析对Valgrind提供支持。
