@@ -26,7 +26,7 @@ defaults:
 
 navigation:
   - title: 每日早茶
-    url: //tea.nim-cn.com/
+    url: https//tea.nim-cn.com/
   - title: 博客
     url: /blog.html
   - title: 特点
