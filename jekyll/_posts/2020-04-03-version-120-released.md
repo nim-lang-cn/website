@@ -1,49 +1,46 @@
 ---
-title: "Version 1.2.0 released"
-author: The Nim Team
+title: "1.2.0 版本现已发布"
+author: Nim 团队
+excerpt: 在持续六个月的开发后，我们骄傲地宣布，Nim 1.2 版本发布了！
 ---
 
-We are very proud to announce Nim version 1.2 after six months of continuous development!
+在持续六个月的开发后，我们骄傲地宣布，Nim 1.2 版本发布了！
 
-This release contains around 600 new commits which have not already been backported to our 1.0.x versions.
-There are several new features and standard library additions compared to 1.0.
-We tried to keep breaking changes to a minimum, but some bugfixes weren't possible
-without making those necessary changes, and we feel that our users will benefit
-from them.
+本发行版包含了超过 600 次的尚未被合并到 1.0.x 版本的提交。
+与 1.0 相比，添加了几个新功能和标准库。
+我们努力将断崖式的改动降至最低，
+但如果不进行这些必要的更改，某些错误是无法被修复的，
+而且我们认为我们的用户将从中受益。
 
-We would recommend to all of our users to upgrade and use version 1.2.
+我们建议所有用户升级和使用 1.2 版本。
 
 
-## Using multiple Nim versions
+## 使用多个版本的 Nim 
 
 ### `useVersion`
 
-If you would like to upgrade to version v1.2, but you are relying on v1.0 behaviour,
-there is a command line switch `--useVersion`, which you can use with the newest
-Nim to simulate previous versions.
+如果你想要更新到 v1.2 版本，但依赖与 v1.0 版本的一些行为，
+你可以使用命令行参数 `--useVersion` 来切换。
+在最新的 Nim 中，你可以用这个参数来模拟之前版本的 Nim 。
 
-For example, Nim v1.2 is more strict about type conversions concerning proc
-types.
-If this breaks your code, pass `--useVersion:1.0`, which will emulate the old
-behaviour.
+举个例子，v1.2 版本的 Nim 对 proc 类型的类型转换变得更加严格。
+如果这个变更无法兼容你的代码，你可以使用 `--useVersion:1.0` 来模拟之前版本的行为。
 
-This is not limited to the above example.
-If you were relying on some edge case and/or buggy behaviour which is now fixed,
-try if `--useVersion:1.0` gives you back the results you expect to see.
-If that doesn't work and you need the old behaviour, please open an issue in
-[our bug tracker](https://github.com/nim-lang/Nim/issues) and we will try to
-make it work in future bugfix releases (1.2.x).
+上面的例子只是个示例。
+如果你依赖于一些边缘案例，或现已修复的错误行为，试试 `--useVersion:1.0` ，他可能返回你想看到的结果。
+
+如果没有得到你想要的之前版本的行为，请打开在 [我们的 bug 追踪器](https://github.com/nim-lang/Nim/issues) 上提个 issue ，
+我们会努力在未来的 bug 修复版本（1.2.x）中进行修复。
 
 
 ### `when declared`
 
-If you are library author and you would like your library to be available both
-for v1.0 and v1.2 users, but you are relying on some new features introduced in
-v1.2 which are not available in v1.0 release, you can use `when declared` to
-your advantage.
+如果你开发了 Nim 的库，而且想让不管是用 v1.0 的还是 v1.2 版本的用户都能使用你的库，
+但却依赖了一些在 v1.0 版本没有，而在 v1.2 版本中才加入的新特性，
+你可以使用 `when declared` 作为你的优势。
 
-For example, `sequtils` module now has the `unzip` proc.
-You can write your code like this:
+举个例子， `sequtils` 模块现在加入了 `unzip` 过程。
+你就可以把你的代码写成下面这样：
 
 ```nim
 import sequtils
@@ -57,64 +54,58 @@ when not declared(unzip):
       result[1][i] = s[i][1]
 
 let a = @[('a', 1), ('b', 2), ('c', 3)]
-let b = unzip(a) # version 1.0 will use the proc declared above
-                 # version 1.2 will use sequtils' proc
+let b = unzip(a) # version 1.0 将会使用上方声明的过程
+                 # version 1.2 会直接使用 sequtils 模块的过程
 
 assert b == (@['a', 'b', 'c'], @[1, 2, 3])
 ```
 
 
-# Installing Nim 1.2
+# 安装 Nim 1.2
 
 
-## New users
+## Nim 的新用户
 
-Check out if the package manager of your OS already ships version 1.2 or
-install it as described [here](https://nim-lang.org/install.html).
+检查你系统的包管理器是否已经装载了 1.2 版本，
+或者按照 [这里](/install.html) 的说明进行安装。
 
 
-## Existing users
+## 老用户
 
-If you have installed a previous version of Nim using `choosenim`,
-getting Nim 1.2 is as easy as:
+如果你之前使用 `choosenim` 安装过老版本的 Nim , 
+升级到 1.2 版本就这么简单:
 
 ```bash
 $ choosenim update stable
 ```
 
 
-# Contributors to v1.2
+# 为 v1.2 贡献力量
 
-Our contributors are amazing, and there is
-[far too many](https://github.com/nim-lang/Nim/graphs/contributors?from=2019-09-23&to=2020-03-20&type=c)
-to list here.
-Big thanks to all of you, we couldn't have pulled off this release without you!
-
+我们的贡献者都是超人，
+我们列举了很多到 [这里](https://github.com/nim-lang/Nim/graphs/contributors?from=2019-09-23&to=2020-03-20&type=c)。
+给你们个大大的么么哒，没有你们就没有这个版本！
 
 
-# New features
+
+# 新特性
 
 ## GC: ARC
 
-`--gc:arc` is our main new feature for this release!
+我们这次版本主要的新特性是 `--gc:arc` !
 
-Instead of going into lots of details and hijacking this release article,
-we would like to point you to
-[this video from FOSDEM](https://www.youtube.com/watch?v=yA32Wxl59wo)
-where Araq explains details behind ARC and shows some benchmarks which show
-the benefits of it.
-
-A more detailed article about ARC might follow in the future.
+为了避免陷入本文中大量的细节，
+我们建议你查看下 [FOSDEM上的这个视频（YouTuBe）](https://www.youtube.com/watch?v=yA32Wxl59wo),
+Araq 在视频中解释了 ARC 背后的详细信息，并展示了一些显示其优点的基准。
+之后可能会更新一篇关于 ARC 详细说明的文章。
 
 
+## 新的宏语法糖
 
-## New sugar macros
+1.2.0 版本介绍了一些新的宏，它们应该可以帮你完成一些通用的任务。
 
-Version 1.2.0 introduces several new macros which should help with writing
-some common tasks.
-
-In the next few sections we will show them and their usages.
-All the examples imply `import sugar`.
+在接下来的一些章节中，我们会给你展示他们和他们的用例。
+所有的示例都意味着 `import sugar`。
 
 
 ### Collect
