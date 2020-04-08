@@ -80,15 +80,15 @@ let people = [
 ]
 
 for person in people:
-  # 类型安全的字符串插值,
-  # 会在编译时检查。
+  # 类型安全的字符串插值
+  # 会在编译时检查
   echo(fmt"{person.name} is {person.age} years old")
 {% endhighlight %}
 
 {% highlight nim %}
-# 得益于 Nim 的“iterator”和“yield”结构，
-# 迭代器和常规方法一样容易编写。
-# 它们会被编译为内联循环。
+# 得益于 Nim 的“iterator”和“yield”结构
+# 迭代器和常规方法一样容易编写
+# 它们会被编译为内联循环
 iterator oddElements[Idx, T](a: array[Idx, T]): T =
   var i = 1
   while i < a.len:
@@ -103,7 +103,7 @@ for x in oddElements([10, 20, 30, 40, 50, 60]):
         {% highlight nim %}
 # 使用 Nim 的宏系统
 # 将密集的以数据为中心的x86指令描述
-# 转换为汇编程序和JIT所使用的查找表。
+# 转换为汇编程序和JIT所使用的查找表
 import macros, strutils
 
 macro toLookupTable(data: static[string]): untyped =
@@ -198,7 +198,7 @@ for o in opcodes:
   <div class="pure-g center">
     <div class="pure-u-1-2">
       <h3>
-        构建命令行应用程序、游戏、Web 服务器、内核以及其他所有内容。 
+        构建命令行应用程序、游戏、Web 服务器、内核以及其他所有内容。
         Nim 不仅学习门槛不高，还能为你提供许多主流编程语言所不具备的强大功能。
       </h3>
     </div>
@@ -284,7 +284,7 @@ for o in opcodes:
     <div class="pure-g">
       <div class="pure-u-1 pure-u-md-1-4">
         <h2>即时聊天</h2>
-        
+
         <!-- 中文 -->
         <p>
           <a href="//shang.qq.com/wpa/qunwpa?idkey=5b713c470506775a2250d98918a6120f3fc87dccc1e202e4a182b5c3196807e1">
@@ -300,14 +300,14 @@ for o in opcodes:
 
       <div class="pure-u-1 pure-u-md-1-4">
         <h2>论坛</h2>
-        
+
         <!-- 中文 -->
         <p>
           <a href="https://forum.nim-cn.com/">
             <i class="fa fa-globe" aria-hidden="true"></i>Nim 中文论坛
           </a>
         </p>
-        
+
       </div>
 
       <div class="pure-u-1 pure-u-md-1-4">
@@ -334,7 +334,7 @@ for o in opcodes:
           <a>
             <i class="fab fa-weixin" aria-hidden="true"></i>Nim中文社区 公众号</a>
         </p>
-      </div> 
+      </div>
 
       <div class="pure-u-1 pure-u-md-1-4">
         <h2>中文社区邮件组</h2>
@@ -377,7 +377,7 @@ for o in opcodes:
     <div class="pure-u-1-2">
       <h3>
         Nim 编译器和工具全部由 Nim 编写，并遵从MIT开源许可，
-        烦请务必对存储库点个 WATCH 以便及时获取 Nim 开发的最新进展，或者点个 Star 来给它提升一些关注。 
+        烦请务必对存储库点个 WATCH 以便及时获取 Nim 开发的最新进展，或者点个 Star 来给它提升一些关注。
       </h3>
     </div>
     <div class="pure-u-1 center">
