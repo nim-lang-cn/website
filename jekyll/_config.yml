@@ -3,7 +3,7 @@ title: "Nim中文社区"
 description: >
   Nim程序设计语言是一种简洁、快速的编程语言，
   可被编译成C、C++甚至JavaScript。
-baseurl: "https://nim-lang-cn.org"
+baseurl: ""
 official_baseurl: "https://nim-lang.org"
 
 nim_version: 1.2.0
