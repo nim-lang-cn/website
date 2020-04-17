@@ -4,7 +4,11 @@ rvm:
 before_script:
   - export nimversion=1.2.0
   - chmod +x ./scripts/*.sh
-  - ./scripts/install_nim.sh
+  - git clone https://github.com/nim-lang/Nim.git
+  - cd Nim 
+  - export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin
+  - export NIMBLE_DIR=/home/travis/.nimble
+  - export PATH=$PATH:$NIM:$NIMBLE
   - nim -v
   - gem install bundler
 script:
