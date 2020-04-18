@@ -39,10 +39,10 @@ css_class: community
 * 后来者可以从你已经遇到的问题中获得启发，你也可以从先行者那里收益；
 
 <i class="fa fa-globe" aria-hidden="true"></i>
-[**coderplanets的nim子社区**](https://coderplanets.com/nim)
+[NimMonster](http://nim-monster.com/)（使用 Nim 开发）
 
-<i class="fa fa-comments" aria-hidden="true"></i>
-[Nim中文社区](https://forum.nim-lang-cn.org)（开发中）
+<i class="fa fa-globe" aria-hidden="true"></i>
+[CoderPlanets 上的子社区](https://coderplanets.com/nim)
 
 ## 每日早茶
 
