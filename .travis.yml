@@ -5,10 +5,12 @@ before_script:
   - export nimversion=1.2.0
   - chmod +x ./scripts/*.sh
   - git clone https://github.com/nim-lang/Nim.git
-  - cd Nim 
+  - cd Nim
   - export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin
   - export NIMBLE_DIR=/home/travis/.nimble
   - export PATH=$PATH:$NIM:$NIMBLE
+  - export nimversion=1.2.0
+  - source ~/.bashrc
   - nim -v
   - gem install bundler
 script:
@@ -34,17 +36,17 @@ after_success:
   - git push --force --quiet "https://${GH_TOKEN}@github.com/nim-lang-cn/website.git" master:gh-pages
 branches:
   only:
-  - master
+    - master
 env:
   global:
-  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-exclude: [vendor,Nim]
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+exclude: [vendor, Nim]
 addons:
   apt:
     packages:
-    - libcurl4-openssl-dev
+      - libcurl4-openssl-dev
 
 sudo: true # route your build to the container-based infrastructure for a faster build
 
-cache: 
+cache:
   - bundler # caching bundler gem packages will speed up build
