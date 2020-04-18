@@ -2,32 +2,47 @@ language: ruby
 rvm:
   - 2.5.3
 before_script:
-  - export nimversion=1.2.0
   - chmod +x ./scripts/*.sh
+
   - git clone https://github.com/nim-lang/Nim.git
   - cd Nim
+  - sh build_all.sh
+
   - export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin
   - export NIMBLE_DIR=/home/travis/.nimble
   - export PATH=$PATH:$NIM:$NIMBLE
   - export nimversion=1.2.0
-  - source ~/.bashrc
+
   - nim -v
+
   - gem install bundler
 script:
   - cd ../jekyll
   - bundle exec jekyll build
 after_success:
   - cd ./_site
+  
+  # 绑定域名
   - echo "nim-lang-cn.org" > CNAME
+
+  # 创建 choosenim 的安装脚本
   - mkdir docs choosenim
+  - cd choosenim/ && wget https://nim-lang.org/choosenim/init.sh && cd ..
+
+  # 创建文档库样式
   - cd /home/travis/build/nim-lang-cn/website/Nim/doc
   - cp ./nimdoc.css /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/nimdoc.out.css
   - cp ./*.js /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/
+
+  # 生成文档、教程、手册
   - sh /home/travis/build/nim-lang-cn/website/scripts/rst2html.sh
+
+  # 根据标准库生成文档
   - cd ../lib
   - sh /home/travis/build/nim-lang-cn/website/scripts/nim_doc_lib.sh
+  
+  # 更新到 GitHub 上的 nim-lang-cn/website 的 gh-pages 分支
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
-  - cd choosenim/ && wget https://nim-lang.org/choosenim/init.sh && cd ..
   - git init
   - git config user.name "DongyunLee"
   - git config user.email "dongyunli619@gmail.com"
@@ -40,7 +55,7 @@ branches:
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-exclude: [vendor, Nim]
+exclude: [vendor]
 addons:
   apt:
     packages:
