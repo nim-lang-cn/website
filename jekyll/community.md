@@ -38,7 +38,7 @@ css_class: community
 * 你可以完整地叙述你的想法和问题，并且通常能够得到一个完整的答案；
 * 后来者可以从你已经遇到的问题中获得启发，你也可以从先行者那里收益；
 
-<i class="fa fa-globe" aria-hidden="true"></i>
+<i class="fab fa-optin-monster" aria-hidden="true"></i>
 [NimMonster](http://nim-monster.com/)（使用 Nim 开发）
 
 <i class="fa fa-globe" aria-hidden="true"></i>
