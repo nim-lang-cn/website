@@ -39,17 +39,17 @@ css_class: community
 * 后来者可以从你已经遇到的问题中获得启发，你也可以从先行者那里收益；
 
 <i class="fa fa-globe" aria-hidden="true"></i>
-[**coderplanets的nim子社区**](https://coderplanets.com/nim)（推荐）
+[**coderplanets的nim子社区**](https://coderplanets.com/nim)
 
 <i class="fa fa-comments" aria-hidden="true"></i>
-[Nim中文社区](https://forum.nim-cn.com)（开发中）
+[Nim中文社区](https://forum.nim-lang-cn.org)（开发中）
 
 ## 每日早茶
 
 每天十分钟，为你提供最酷最好玩的 Nim 应用
 
 <i class="fa fa-coffee" aria-hidden="true"></i>
-[ Nim 早茶](http://tea.nim-cn.com)
+[ Nim 早茶](http://tea.nim-lang-cn.org)
 
 ## 博客
 
@@ -88,13 +88,13 @@ Nim中文社区
 或者有更好的社区发展建议？
 欢迎骚扰我们~
 
-<i class="fa fa-envelope" aria-hidden="true"></i>[ch4o5@nim-cn.com](mailto:ch4o5@nim-cn.com)
+<i class="fa fa-envelope" aria-hidden="true"></i>[ch4o5@nim-lang-cn.org](mailto:ch4o5@nim-lang-cn.org)
 
-<i class="fa fa-envelope" aria-hidden="true"></i>[sheldon@nim-cn.com](mailto:sheldon@nim-cn.com)
+<i class="fa fa-envelope" aria-hidden="true"></i>[sheldon@nim-lang-cn.org](mailto:sheldon@nim-lang-cn.org)
 
-<i class="fa fa-envelope" aria-hidden="true"></i>[flywind@nim-cn.com](mailto:flywind@nim-cn.com)
+<i class="fa fa-envelope" aria-hidden="true"></i>[flywind@nim-lang-cn.org](mailto:flywind@nim-lang-cn.org)
 
-<i class="fa fa-envelope" aria-hidden="true"></i>[tulayang@nim-cn.com](mailto:tulayang@nim-cn.com)
+<i class="fa fa-envelope" aria-hidden="true"></i>[tulayang@nim-lang-cn.org](mailto:tulayang@nim-lang-cn.org)
 
 ## 线下交流会
 
