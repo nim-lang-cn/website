@@ -5,7 +5,7 @@
 > 已将服务迁移到Github-Pages进行托管，使用travis-ci持续集成。
 
 当前仓库是nim中文官网的代码库，
-可通过 [https://nim-cn.com](https://nim-cn.com) 进行访问。
+可通过 [https://nim-lang-cn.org](https://nim-lang-cn.org) 进行访问。
 
 
 ## 进行开发
