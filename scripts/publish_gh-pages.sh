@@ -4,7 +4,7 @@ echo "start publish gh-pages"
 
 cd ./_site
 
-echo "nim-cn.com" > CNAME
+echo "nim-lang-cn.org" > CNAME
 
 
 # copy docs

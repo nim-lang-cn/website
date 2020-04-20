@@ -18,7 +18,7 @@ excerpt: 本指南讨论了一些用于注释和生成文档、分析和调试ni
 <table class="hackytable">
   <tr>
   <td width="200px">
-  <img src="https://nim-cn.com/assets/img/nim_in_action_cover.jpg"/>
+  <img src="https://nim-lang-cn.org/assets/img/nim_in_action_cover.jpg"/>
   </td>
   <td style="padding-left: 10pt;">
 +++
