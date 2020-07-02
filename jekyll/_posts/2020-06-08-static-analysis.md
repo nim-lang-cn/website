@@ -1,7 +1,7 @@
 ---
-title: "Static Analysis"
+title: "静态分析"
 author: Moerm
-excerpt: "Nim is in an excellent position to “get married” with static analysis, and it doesn’t have to be based on some intermediate representation but can achieve a solution more similar to Spark."
+excerpt: "Nim 处于一个绝佳的位置，可以与静态分析“结合”，它不必基于一些中间表示，但可以实现一个更类似于 Spark 的解决方案。"
 ---
 
 <div class="sidebarblock">
