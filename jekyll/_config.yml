@@ -6,7 +6,7 @@ description: >
 baseurl: ""
 official_baseurl: "https://nim-lang.org"
 
-nim_version: 1.2.0
+nim_version: 1.2.4
 
 defaults:
   -
