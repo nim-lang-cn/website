@@ -1,6 +1,6 @@
 ---
-title: "Version 1.2.2 released"
-author: The Nim Team
+title: "1.2.2 版本现已发布"
+author: Nim 团队
 ---
 
 The Nim team is happy to announce version 1.2.2, our first patch release for

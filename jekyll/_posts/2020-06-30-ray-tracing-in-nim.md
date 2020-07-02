@@ -1,7 +1,7 @@
 ---
-title: "Ray tracing in Nim"
+title: "Nim 中的光线追踪"
 author: Mamy Ratsimbazafy (mratsim)
-excerpt: "I am convinced that if you want to start a rendering project from scratch, Nim is the best language to use."
+excerpt: "我相信，如果你想从头开始一个渲染项目，Nim是最好用的语言。"
 ---
 
 <div class="sidebarblock">
@@ -23,7 +23,7 @@ of [Ray Tracing in One Weekend](https://github.com/RayTracing/raytracing.github.
 in the Nim programming language.
 
 <p style="text-align: center;">
-  <img width="256" height="144" src="{{ site.baseurl }}/assets/news/images/mratsim-raytracing/book1_animation.gif">
+  <img width="256" height="144" src="/assets/news/images/mratsim-raytracing/book1_animation.gif">
 </p>
 
 The goals are:
@@ -81,7 +81,7 @@ nim c -d:danger --outdir:build trace_of_radiance.nim
 [SmallPT](https://www.kevinbeason.com/smallpt/) is an even smaller ray tracing project.
 
 <p style="text-align: center;">
-  <img width="640" height="480" src="{{ site.baseurl }}/assets/news/images/mratsim-raytracing/smallpt.jpg">
+  <img width="640" height="480" src="/assets/news/images/mratsim-raytracing/smallpt.jpg">
 </p>
 
 Benchmark from Weave multithreading runtime
