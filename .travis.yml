@@ -15,27 +15,20 @@ addons:
 before_script:
   - chmod +x ./scripts/*.sh
 
-  # - curl 
-
   - git clone https://github.com/nim-lang/Nim.git
   - cd Nim
   - sh build_all.sh
-  # - git clone --depth 1 https://github.com/nim-lang/csources.git
-  # - export PATH="$PWD/bin${PATH:+:$PATH}"
-  # - make -C csources -j 2 LD=$CC ucpu=$CPU
 
   - export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin
   - export NIMBLE_DIR=/home/travis/.nimble
   - export PATH=$PATH:$NIM:$NIMBLE
-  # - export nimversion=1.2.0
-
-  # - export nimversion = `nim -v`
 
   - gem install bundler
 script:
   - cd ../jekyll
   - bundle exec jekyll build
 after_success:
+  - cp ../rst/* /home/travis/build/nim-lang-cn/website/Nim/doc
   - cd ./_site
   
   # 绑定域名
@@ -53,7 +46,7 @@ after_success:
   - rm -f v.nim
   - echo `./v` > version.txt
   - rm -f ./v
-  
+
   # 生成文档、教程、手册 
   - ../../Nim/koch web
   
