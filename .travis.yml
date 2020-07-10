@@ -1,6 +1,17 @@
 language: ruby
 rvm:
   - 2.5.3
+addons:
+  apt:
+    # update the list above if more deps are introduced
+    packages:
+    - gcc
+    - libcurl4-openssl-dev
+    - libsdl1.2-dev
+    - libgc-dev
+    - libsfml-dev
+    - libc6-dbg
+    - valgrind
 before_script:
   - chmod +x ./scripts/*.sh
 
