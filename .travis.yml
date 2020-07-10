@@ -45,31 +45,8 @@ after_success:
   - mkdir docs choosenim
   - cd choosenim/ && wget https://nim-lang.org/choosenim/init.sh && cd ..
 
-  # 创建文档库样式
-  - cd /home/travis/build/nim-lang-cn/website/Nim/doc
-  - ls -la ./html
-  - cp ./nimdoc.css /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/nimdoc.out.css
-  - cp ./*.js /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/
-
-  # 生成文档、教程、手册
-  # - sh /home/travis/build/nim-lang-cn/website/scripts/rst2html.sh
-
-  # 根据标准库生成文档
-  # - cd ../lib
-  # - sh /home/travis/build/nim-lang-cn/website/scripts/nim_doc_lib.sh
-  
-  - cd ..
-  # - echo "travis_fold:start:nim_c_koch"
-  # - nim c koch
-  # - echo "travis_fold:end:nim_c_koch"
-  # - echo "travis_fold:start:koch_boot"
-  # - ./koch boot
-  # - echo "travis_fold:end:koch_boot"
-  - echo "travis_fold:start:koch_doc"
-  - ./koch doc
-  - echo "travis_fold:end:koch_doc"
-
-  - cp -rf /home/travis/build/nim-lang-cn/website/Nim/doc/html/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
+  # 生成文档、教程、手册 
+  - ../koch web
   
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site/
   - echo "import system" > v.nim
