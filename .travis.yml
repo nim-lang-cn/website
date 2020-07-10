@@ -45,10 +45,6 @@ after_success:
   - mkdir docs choosenim
   - cd choosenim/ && wget https://nim-lang.org/choosenim/init.sh && cd ..
 
-  # 生成文档、教程、手册 
-  - ../koch web
-  
-  - cd /home/travis/build/nim-lang-cn/website/jekyll/_site/
   - echo "import system" > v.nim
   - echo "" >> v.nim
   - echo "echo system.NimVersion" >> v.nim
@@ -57,6 +53,10 @@ after_success:
   - rm -f v.nim
   - echo `./v` > version.txt
   - rm -f ./v
+  
+  # 生成文档、教程、手册 
+  - ../../Nim/koch web
+  
   - cp -rf /home/travis/build/nim-lang-cn/website/Nim/web/upload/`cat ./version.txt`/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
 
   # 更新到 GitHub 上的 nim-lang-cn/website 的 gh-pages 分支
