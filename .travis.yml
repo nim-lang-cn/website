@@ -17,10 +17,10 @@ before_script:
 
   - git clone https://github.com/nim-lang/Nim.git
   - cd Nim
-  # - sh build_all.sh
-  - git clone --depth 1 https://github.com/nim-lang/csources.git
-  - export PATH="$PWD/bin${PATH:+:$PATH}"
-  - make -C csources -j 2 LD=$CC ucpu=$CPU
+  - sh build_all.sh
+  # - git clone --depth 1 https://github.com/nim-lang/csources.git
+  # - export PATH="$PWD/bin${PATH:+:$PATH}"
+  # - make -C csources -j 2 LD=$CC ucpu=$CPU
 
   - export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin
   - export NIMBLE_DIR=/home/travis/.nimble
@@ -45,6 +45,7 @@ after_success:
 
   # 创建文档库样式
   - cd /home/travis/build/nim-lang-cn/website/Nim/doc
+  - ls -la ./html
   - cp ./nimdoc.css /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/nimdoc.out.css
   - cp ./*.js /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/
 
