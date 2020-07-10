@@ -57,17 +57,30 @@ after_success:
   # - sh /home/travis/build/nim-lang-cn/website/scripts/nim_doc_lib.sh
   
   - cd ..
-  - echo "travis_fold:start:nim_c_koch"
-  - nim c koch
-  - echo "travis_fold:end:nim_c_koch"
-  - echo "travis_fold:start:koch_boot"
-  - ./koch boot
-  - echo "travis_fold:end:koch_boot"
+  # - echo "travis_fold:start:nim_c_koch"
+  # - nim c koch
+  # - echo "travis_fold:end:nim_c_koch"
+  # - echo "travis_fold:start:koch_boot"
+  # - ./koch boot
+  # - echo "travis_fold:end:koch_boot"
   - echo "travis_fold:start:koch_doc"
   - ./koch doc
   - echo "travis_fold:end:koch_doc"
 
-  - cp ./html/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
+  - cp -rf /home/travis/build/nim-lang-cn/Nim/doc/html/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
+  
+  - cd /home/travis/build/nim-lang-cn/website/jekyll/_site/
+  - cat>v.nim<<EOF
+import system
+echo system.NimVersion
+EOF
+  - nim c -r v.nim
+  - rm -f v.nim
+  - echo `./v` > version
+  - rm -f ./v
+
+  - cp -rf /home/travis/build/nim-lang-cn/Nim/web/upload/`cat ./version`/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
+
 
   # 更新到 GitHub 上的 nim-lang-cn/website 的 gh-pages 分支
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
