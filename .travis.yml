@@ -67,7 +67,7 @@ after_success:
   - ./koch doc
   - echo "travis_fold:end:koch_doc"
 
-  - cp -rf /home/travis/build/nim-lang-cn/Nim/doc/html/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
+  - cp -rf /home/travis/build/nim-lang-cn/website/Nim/doc/html/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
   
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site/
   - echo "import system" > v.nim
@@ -78,7 +78,7 @@ after_success:
   - rm -f v.nim
   - echo `./v` > version
   - rm -f ./v
-  - cp -rf /home/travis/build/nim-lang-cn/Nim/web/upload/`cat ./version`/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
+  - cp -rf /home/travis/build/nim-lang-cn/website/Nim/web/upload/`cat ./version`/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
 
   # 更新到 GitHub 上的 nim-lang-cn/website 的 gh-pages 分支
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
