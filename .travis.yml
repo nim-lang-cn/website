@@ -78,9 +78,7 @@ EOF
   - rm -f v.nim
   - echo `./v` > version
   - rm -f ./v
-
   - cp -rf /home/travis/build/nim-lang-cn/Nim/web/upload/`cat ./version`/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
-
 
   # 更新到 GitHub 上的 nim-lang-cn/website 的 gh-pages 分支
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
