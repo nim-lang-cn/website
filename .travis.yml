@@ -6,14 +6,17 @@ before_script:
 
   - git clone https://github.com/nim-lang/Nim.git
   - cd Nim
-  - sh build_all.sh
+  # - sh build_all.sh
+  - git clone --depth 1 https://github.com/nim-lang/csources.git
+  - export PATH="$PWD/bin${PATH:+:$PATH}"
+  - make -C csources -j 2 LD=$CC ucpu=$CPU
 
   - export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin
   - export NIMBLE_DIR=/home/travis/.nimble
   - export PATH=$PATH:$NIM:$NIMBLE
-  - export nimversion=1.2.0
+  # - export nimversion=1.2.0
 
-  - nim -v
+  # - export nimversion = `nim -v`
 
   - gem install bundler
 script:
@@ -35,12 +38,25 @@ after_success:
   - cp ./*.js /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/
 
   # 生成文档、教程、手册
-  - sh /home/travis/build/nim-lang-cn/website/scripts/rst2html.sh
+  # - sh /home/travis/build/nim-lang-cn/website/scripts/rst2html.sh
 
   # 根据标准库生成文档
-  - cd ../lib
-  - sh /home/travis/build/nim-lang-cn/website/scripts/nim_doc_lib.sh
+  # - cd ../lib
+  # - sh /home/travis/build/nim-lang-cn/website/scripts/nim_doc_lib.sh
   
+  - cd ..
+  - echo "travis_fold:start:nim_c_koch"
+  - nim c koch
+  - echo "travis_fold:end:nim_c_koch"
+  - echo "travis_fold:start:koch_boot"
+  - ./koch boot
+  - echo "travis_fold:end:koch_boot"
+  - echo "travis_fold:start:koch_doc"
+  - ./koch doc
+  - echo "travis_fold:end:koch_doc"
+
+  - cp ./html/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
+
   # 更新到 GitHub 上的 nim-lang-cn/website 的 gh-pages 分支
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
   - git init
