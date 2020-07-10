@@ -70,10 +70,10 @@ after_success:
   - cp -rf /home/travis/build/nim-lang-cn/Nim/doc/html/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
   
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site/
-  - cat>v.nim<<EOF
-import system
-echo system.NimVersion
-EOF
+  - echo "import system" > v.nim
+  - echo "" >> v.nim
+  - echo "echo system.NimVersion" >> v.nim
+
   - nim c -r v.nim
   - rm -f v.nim
   - echo `./v` > version
