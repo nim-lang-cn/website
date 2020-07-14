@@ -48,7 +48,8 @@ after_success:
   - rm -f ./v
 
   # 生成文档、教程、手册 
-  - ../../Nim/koch web
+  - cd /home/travis/build/nim-lang-cn/website/Nim
+  - ./koch web
   
   - cp -rf /home/travis/build/nim-lang-cn/website/Nim/web/upload/`cat ./version.txt`/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
 
