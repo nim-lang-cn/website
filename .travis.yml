@@ -49,7 +49,7 @@ after_success:
 
   # 生成文档、教程、手册 
   - cd /home/travis/build/nim-lang-cn/website/Nim
-  - ./koch docs --stable
+  - ./koch docs
   
   - cp -rf /home/travis/build/nim-lang-cn/website/Nim/web/upload/`cat ./version.txt`/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
 
