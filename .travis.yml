@@ -28,7 +28,7 @@ script:
   - cd ../jekyll
   - bundle exec jekyll build
 after_success:
-  - cp ../rst/* /home/travis/build/nim-lang-cn/website/Nim/doc
+  - cp -rf ../rst/* /home/travis/build/nim-lang-cn/website/Nim/doc
   - cd ./_site
   
   # 绑定域名
@@ -51,7 +51,7 @@ after_success:
   - cd /home/travis/build/nim-lang-cn/website/Nim
   - ./koch docs
   
-  - cp -rf /home/travis/build/nim-lang-cn/website/Nim/web/upload/`cat ./version.txt`/* /home/travis/build/nim-lang-cn/website/jekyll/_site/doc/
+  - cp -rf /home/travis/build/nim-lang-cn/website/Nim/web/upload/`cat /home/travis/build/nim-lang-cn/website/jekyll/_site/version.txt`/* /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/
 
   # 更新到 GitHub 上的 nim-lang-cn/website 的 gh-pages 分支
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
