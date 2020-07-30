@@ -18,12 +18,14 @@ before_script:
   - git clone https://github.com/nim-lang/Nim.git
   - cd Nim
   - sh build_all.sh
+  - ls doc/html/
 
   - export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin
   - export NIMBLE_DIR=/home/travis/.nimble
   - export PATH=$PATH:$NIM:$NIMBLE
 
   - gem install bundler
+  - gem install Jekyll-sitemap
 script:
   - cd ../jekyll
   - bundle exec jekyll build
