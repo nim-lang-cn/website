@@ -1,1 +1,0 @@
-{{ site.nim_version }}
