@@ -13,47 +13,50 @@ addons:
     - libc6-dbg
     - valgrind
 before_script:
-  - export PATH=`pwd`
-
-  # 获取当前稳定版本号
   - wget http://nim-lang.org/channels/stable -O version.txt
-  - export VERSION=`cat version.txt`
+  - wget https://nim-lang.org/download/nim-`cat version.txt`-linux_x64.tar.xz
+  - git clone https://github.com/nim-lang/Nim.git
+  - cd Nim
+  - sh build_all.sh
+  - ls /home/travis/build/nim-lang-cn/website/Nim/doc
 
-  # 安装 Nim 
-  - wget https://nim-lang.org/download/nim-${VERSION}-linux_x64.tar.xz
-  - tar Jxvf nim-${VERSION}-linux_x64.tar.xz
-  - cd nim-${VERSION}/doc/html
-  - export DOC_PATH=`pwd`
-  - export NIM=`pwd`/../../bin
+  - export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin
   - export NIMBLE_DIR=/home/travis/.nimble
   - export PATH=$PATH:$NIM:$NIMBLE
-  
-  # 将已翻译好的文档rst复制过来
-  - cp -rf ${PATH}/rst/* ${DOC_PATH}/../
 
   - gem install bundler
   - gem install jekyll-sitemap
 script:
-  - cd ${PATH}/jekyll
+  - cd ../jekyll
   - bundle exec jekyll build
 after_success:
-  - cd ${PATH}/jekyll/_site
-
-  - echo ${VERSION} > version.txt
+  - cp -rf ../rst/* /home/travis/build/nim-lang-cn/website/Nim/doc
+  - cd ./_site
   
   # 绑定域名
   - echo "nim-lang-cn.org" > CNAME
 
   # 创建 choosenim 的安装脚本
   - mkdir docs choosenim
-  - cd choosenim/ && wget https://nim-lang.org/choosenim/init.sh 
+  - cd choosenim/ && wget https://nim-lang.org/choosenim/init.sh && cd ..
+
+  # 生成记录当前版本的文件
+  - echo "import system" > v.nim
+  - echo "" >> v.nim
+  - echo "echo system.NimVersion" >> v.nim
+
+  - nim c -r v.nim
+  - rm -f v.nim
+  - echo `./v` > version.txt
+  - rm -f ./v
 
   # 生成文档、教程、手册 
-  - cd ${DOC_PATH}/../../
-  - chmod a+x koch
+  - cd /home/travis/build/nim-lang-cn/website/Nim
   - ./koch docs
   
-  - cp -rf ${DOC_PATH}/../../web/upload/${VERSION}/* ${PATH}/jekyll/_site/docs/
+  - ls doc/
+
+  - cp -rf /home/travis/build/nim-lang-cn/website/Nim/web/upload/`cat /home/travis/build/nim-lang-cn/website/jekyll/_site/version.txt`/* /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/
 
   # 更新到 GitHub 上的 nim-lang-cn/website 的 gh-pages 分支
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
