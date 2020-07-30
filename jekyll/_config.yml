@@ -1,8 +1,8 @@
 # Site settings
 title: "Nim中文社区"
 description: >
-  Nim程序设计语言是一种简洁、快速的编程语言，
-  可被编译成C、C++甚至JavaScript。
+  Nim 语言是一种简洁、快速的编程语言，
+  可被编译成 C 、 C++ 甚至 JavaScript 。
 baseurl: "https://nim-lang-cn.org"
 official_baseurl: "https://nim-lang.org"
 
@@ -60,3 +60,6 @@ asciidoctor:
     - icons=font
     - source-highlighter=pygments
     - pygments-css=style
+
+plugins:
+  - jekyll-sitemap    #jekyll的站点地图插件，用于生成站点地图
