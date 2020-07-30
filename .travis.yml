@@ -13,7 +13,7 @@ addons:
     - libc6-dbg
     - valgrind
 before_script:
-  - export PATH=`pwd`
+  - export ROOT_PATH=`pwd`
 
   # 获取当前稳定版本号
   - wget http://nim-lang.org/channels/stable -O version.txt
@@ -29,15 +29,15 @@ before_script:
   - export PATH=$PATH:$NIM:$NIMBLE
   
   # 将已翻译好的文档rst复制过来
-  - cp -rf ${PATH}/rst/* ${DOC_PATH}/../
+  - cp -rf ${ROOT_PATH}/rst/* ${DOC_PATH}/../
 
   - gem install bundler
   - gem install jekyll-sitemap
 script:
-  - cd ${PATH}/jekyll
+  - cd ${ROOT_PATH}/jekyll
   - bundle exec jekyll build
 after_success:
-  - cd ${PATH}/jekyll/_site
+  - cd ${ROOT_PATH}/jekyll/_site
 
   - echo ${VERSION} > version.txt
   
@@ -53,7 +53,7 @@ after_success:
   - chmod a+x koch
   - ./koch docs
   
-  - cp -rf ${DOC_PATH}/../../web/upload/${VERSION}/* ${PATH}/jekyll/_site/docs/
+  - cp -rf ${DOC_PATH}/../../web/upload/${VERSION}/* ${ROOT_PATH}/jekyll/_site/docs/
 
   # 更新到 GitHub 上的 nim-lang-cn/website 的 gh-pages 分支
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
