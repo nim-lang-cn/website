@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - stable
+  - 2.5.3
 addons:
   apt:
     # update the list above if more deps are introduced
