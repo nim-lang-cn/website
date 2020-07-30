@@ -25,7 +25,7 @@ before_script:
   - export PATH=$PATH:$NIM:$NIMBLE
 
   - gem install bundler
-  - gem install Jekyll-sitemap
+  - gem install jekyll-sitemap
 script:
   - cd ../jekyll
   - bundle exec jekyll build
@@ -54,7 +54,7 @@ after_success:
   - cd /home/travis/build/nim-lang-cn/website/Nim
   - ./koch docs
   
-  - ls doc/html/
+  - ls doc/
 
   - cp -rf /home/travis/build/nim-lang-cn/website/Nim/web/upload/`cat /home/travis/build/nim-lang-cn/website/jekyll/_site/version.txt`/* /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/
 
