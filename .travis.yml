@@ -38,6 +38,7 @@ after_success:
   - mkdir docs choosenim
   - cd choosenim/ && wget https://nim-lang.org/choosenim/init.sh && cd ..
 
+  # 生成记录当前版本的文件
   - echo "import system" > v.nim
   - echo "" >> v.nim
   - echo "echo system.NimVersion" >> v.nim
@@ -51,6 +52,8 @@ after_success:
   - cd /home/travis/build/nim-lang-cn/website/Nim
   - ./koch docs
   
+  - ls doc/html/
+
   - cp -rf /home/travis/build/nim-lang-cn/website/Nim/web/upload/`cat /home/travis/build/nim-lang-cn/website/jekyll/_site/version.txt`/* /home/travis/build/nim-lang-cn/website/jekyll/_site/docs/
 
   # 更新到 GitHub 上的 nim-lang-cn/website 的 gh-pages 分支
