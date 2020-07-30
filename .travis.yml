@@ -18,7 +18,7 @@ before_script:
   - git clone https://github.com/nim-lang/Nim.git
   - cd Nim
   - sh build_all.sh
-  - ls /home/travis/build/nim-lang-cn/website/Nim/doc/html/
+  - ls /home/travis/build/nim-lang-cn/website/Nim/doc
 
   - export NIM=/home/travis/build/nim-lang-cn/website/Nim/bin
   - export NIMBLE_DIR=/home/travis/.nimble
