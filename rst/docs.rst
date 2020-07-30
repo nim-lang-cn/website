@@ -31,5 +31,5 @@ The documentation consists of several documents:
   | 内部文档描述如何实现编译器。如果要破解编译器，请阅读此篇。
 
 - | `索引 <theindex.html>`_
-  | The generated index. **索引 + (Ctrl+F) == 美滋滋**
+  | 生成的索引. **索引 + (Ctrl+F) == 美滋滋**
 

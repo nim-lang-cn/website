@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.5.3
+  - stable
 addons:
   apt:
     # update the list above if more deps are introduced
@@ -60,11 +60,15 @@ after_success:
 
   # 更新到 GitHub 上的 nim-lang-cn/website 的 gh-pages 分支
   - cd /home/travis/build/nim-lang-cn/website/jekyll/_site
+
   - git init
+
   - git config user.name "DongyunLee"
   - git config user.email "dongyunli619@gmail.com"
+
   - git add .
   - git commit -m "Update"
+  
   - git push --force --quiet "https://${GH_TOKEN}@github.com/nim-lang-cn/website.git" master:gh-pages
 branches:
   only:
