@@ -7,18 +7,6 @@ current: Install
 
 <h1 class="text-centered page-title main-heading">在类Unix系统中安装Nim</h1>
 
-# 使用``choosenim``安装
-
-[``choosenim``](https://github.com/dom96/choosenim#choosenim)是一个Nim语言安装器。
-它能帮助您轻松地在Nim的各个版本之间切换，无论是最新的稳定版本还是最新的开发版本。
-
-使用``choosenim``安装Nim最新的稳定版本，
-只需要在你的终端中运行下方的命令，然后根据屏幕上的说明操作即可：
-
-```bash
-curl {{ site.baseurl}}/choosenim/init.sh -sSf | sh
-```
-
 # 手动安装
 
 ## Linux的预构建二进制文件
@@ -119,6 +107,18 @@ Nim编译器编译软件时需要一个C编译器。
 
 必要时，可以使用包管理器安装这些依赖项。
 
+# 使用``choosenim``安装
+
+[``choosenim``](https://github.com/dom96/choosenim#choosenim)是一个Nim语言安装器。
+它能帮助您轻松地在Nim的各个版本之间切换，即时支持最新的稳定版本还是最新的开发版本。
+
+使用``choosenim``安装Nim最新的稳定版本，
+只需要在你的终端中运行下方的命令，然后根据屏幕上的说明操作即可：
+
+```bash
+curl {{ site.baseurl}}/choosenim/init.sh -sSf | sh
+```
+
 # 使用包管理器安装
 
 ## Arch Linux
@@ -173,6 +173,26 @@ brew install nim
 
 ```
 zypper in nim
+```
+
+## Snap
+
+获取最新稳定版本:
+
+```
+snap install nim-lang --classic
+```
+
+获取最新长期支持（LTS） 1.0.x 版本:
+
+```
+snap install nim-lang-lts-1 --classic
+```
+
+获取最新每日构建版本:
+
+```
+snap install nim-lang-nightly --classic
 ```
 
 ## Void Linux

@@ -1,77 +1,77 @@
 ---
-title: "Version 1.0 released"
-author: The Nim Team
-excerpt: "The Nim Team is very proud and happy to announce the much-anticipated version 1.0 of the language."
+title: "1.0 版本正式发布"
+author: Nim 团队
+excerpt: "Nim团队非常荣幸地宣布万众期待的1.0语言版本。"
 ---
 
 
-Today is the day. The Nim Team is very proud
-and happy to announce the much-anticipated version 1.0 of the language.
+就在今天，Nim团队非常荣幸地宣布万众期待的1.0语言版本。
 
-Nim has always been focused on providing a compiled statically typed language
-focusing on efficiency, readability and flexibility.
+Nim一直专注于提供高效、可读和灵活的静态编译类语言。
 
-Version 1.0 marks the beginning of a stable base which
-can be used in the coming years, knowing that the future versions of Nim won't
-break the code you have written with the current version.
+1.0版本标志可以在接下来的几年使用Nim的未来版本不会破坏当前版本的代码，开始有稳定的基础。
 
-Nim has built a warm and welcoming [community](https://nim-lang.org/community.html)
-which is ready to help newcomers to the language.
+Nim构建了一个温暖和热情的 [社区](/community.html)，
+准备好了迎接新手们的到来。
 
-If you are one of the new users, check out our
-[learning resources](https://nim-lang.org/learn.html) and try Nim in
-[our playground](https://play.nim-lang.org/).
+如果你是一名新手，
+看看我们的
+[学习资源](/learn.html)
+，在我们的
+[试练场](https://play.nim-lang.org/)
+中试用Nim。
 
-This release includes many changes, including bug fixes and some
-language additions. All changes are documented in the v1.0.0 changelog
-available [here](https://github.com/nim-lang/Nim/blob/devel/changelogs/changelog_1_0_0.md).
-Included as well is the latest release of Nimble, v0.11.0, the changelog for which is available
-[here](https://github.com/nim-lang/nimble/blob/master/changelog.markdown#0110---22092019).
+这个版本包含许多更改，包括错误修复和一些语言本身的新特性。
+所有更改都记录在
+[此处](https://github.com/nim-lang/Nim/blob/devel/changelogs/changelog_1_0_0.md)
+提供的v1.0.0更改日志中。
+还包括最新版本 *（v0.11.0）* 的nimble，其变更日志可在
+[此处](https://github.com/nim-lang/nimble/blob/master/changelog.markdown#0110---22092019)获取。
 
 
 ## 稳定保证
 
-Version 1.0 is now a long-term supported stable release that will only
-receive bug fixes and new features in the future, as long as they don't
-break backwards compatibility.
+1.0版本是长期支持的稳定发布版，
+只接受bug修复和未来新特性，
+前提是它们不破坏向后兼容性。
 
-The 1.0.x branch will receive bug fixes for as long as there is demand for them.
-New features (which do not break backwards compatibility) will continue in
-steadily advancing 1.x branches.
+1.0.x分支将按需接收bug修复。
+不影响向后兼容的新特性将继续稳步进入1.x分支。
 
-Our goal is to make sure that code which compiled under Nim 1.0 continues to
-compile under any stable Nim 1.x version in the future.
+我们的目标是保证Nim1.0编译的代码在未来任何稳定的Nim1.x版本上可持续的编译。
 
 
 ### 稳定性保证包含哪些？
 
-Backwards compatibility covers only the stable fragment of the language,
-as defined by the [manual](https://nim-lang.org/docs/manual.html).
+向后兼容只覆盖语言的稳定部分，这些部分定义在
+[手册](/docs/manual.html)
+上。
 
-The compiler still implements experimental features which are documented in the
-["experimental manual"](https://nim-lang.org/docs/manual_experimental.html).
-These features are subject to changes which may be backwards incompatible;
-some of the features included under this umbrella are concepts,
-the `do` notation and a few others. There are also modules in the stdlib
-which are still considered unstable - these have been marked with an
-"Unstable API" in their docs.
+编译器将实现的实验性特性记载在
+[“实验手册”](/docs/manual_experimental.html)
+中。
+这些特性可能存在向后不兼容；
+包括 `concepts`、 `do` 记号和一些其它特性。
+也有标准库模块仍然不稳定——这些已经在文档中标记为“不稳定API”。
 
-You can use experimental features, even in production, but be aware that
-these are not as fleshed out as we would like them to be.
+你可以使用实验特性，
+即便是产品中，
+但注意这些不像我们期待的那样饱满。
 
-
-## Exceptions to the rule
 
 ### 例外情况
 
+我们当然也必须承认存在例外。在一些严重的情况下，例如标准库的安全漏洞，我们保留使用它的向后不兼容性权利。
 
 
 ## 安装 Nim *1.0*
 
 ### 新手
 
-Check out if the package manager of your OS already ships version 1.0 or
-install it as described [here](https://nim-lang.org/install.html).
+看看你的操作系统包管理器是不是已经构建了 *1.0* 版本，
+或通过
+[这里](/install.html)
+安装
 
 
 ### 安装了之前版本的老用户
@@ -87,18 +87,22 @@ $ choosenim update stable
 
 ## 贡献者们
 
-Over the years, more than 500 people contributed to the Nim codebase,
-implementing new features, fixing bugs and issues, writing documentation, and
-so on.
-The Nim team would like to thank all of you who helped us build Nim to become
-what it is today.
+经年累月，
+有超过500人向Nim的代码贡献过，
+通过实现新特性、
+修复bug和问题、
+写文档等等方式。
+Nim团队感谢所有帮助过我们构建Nim，
+使之能够成为今天这样的贡献者们。
 
-We would also want to thank all people who have created Nimble packages,
-extending what is possible to do with Nim.
-The number of Nimble packages has been steadily growing, and in August 2019 we
-broke the 1000 package milestone!
-We are optimistic that with this release we will see even bigger growth of
-new and exciting packages.
+我们也将感谢所有构建Nimble包、
+扩展Nim生态的贡献者们。
+Nimble包增长稳定，
+2019年8月我们突破了 **1000** 个包的历史大关。
+我们对于发布 *1.0* 将促进生态更长远的发展表示乐观。
 
-If you would like to help Nim grow consider donating via
-[Open Collective](https://opencollective.com/nim) or [other services](https://nim-lang.org/donate.html).
+如果你想帮助nim成长，考虑通过
+[Open Collective](https://opencollective.com/nim)
+或者
+[其他方式](https://nim-lang.org/donate.html)
+捐赠我们。

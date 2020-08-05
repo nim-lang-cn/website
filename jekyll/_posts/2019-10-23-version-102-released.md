@@ -1,23 +1,24 @@
 ---
-title: "Version 1.0.2 released"
-author: The Nim Team
+title: "1.0.2 版本发布"
+author: Nim 团队
 ---
 
-The Nim team is happy to announce version 1.0.2, our first patch release following
-Nim 1.0.0.
+Nim 团队很高兴公布 v1.0.2 版本，
+这是在 1.0.0 之后我们首次发布补丁。
 
-To read more about version 1.0.0, take a look at our
-[release article](https://nim-lang.org/blog/2019/09/23/version-100-released.html)
-from just a month ago.
+想要了解更多关于 v1.0.0 的内容, 
+看一看我们一个月前发的
+[发布说明](/blog/2019/09/23/version-100-released.html)。
 
-Although this release comes only one month after a previous release,
-it has over [60 new commits](https://github.com/nim-lang/Nim/compare/v1.0.0...v1.0.2),
-fixing over 40 reported issues, making our 1.0 release even better.
+尽管距离上个版本只有一个月，
+这个版本也已经经历了超过 [60次新的提交](https://github.com/nim-lang/Nim/compare/v1.0.0...v1.0.2),
+修复了超过40个错误报告，
+让我们的 1.0.0 能够更加健壮。
 
-## Installing 1.0.2
+## 安装 1.0.2
 
-If you have installed a previous version of Nim using ``choosenim``,
-getting Nim 1.0.2 is as easy as:
+如果你已经用 ``choosenim`` 安装了之前版本，
+升级到 Nim 的 1.0.2 版本会非常简单:
 
 ```bash
 $ choosenim update stable
@@ -27,15 +28,16 @@ $ choosenim update stable
 [这里的介绍](https://github.com/dom96/choosenim)
 来获取 ``choosenim``，
 当然你也可以通过我们的
-[安装](https://nim-cn.com/install.html) 页面直接安装。
+[安装](/install.html) 页面直接安装。
 
 
-## Changelog
+## 更新日志
 
 <div class="sidebarblock">
   <div class="content">
     <div class="paragraph">
-      Find this release's changelog together with the rest of Nim's source code <a href="https://github.com/nim-lang/Nim/blob/devel/changelogs/changelog_1_0_2.md">in our GitHub repository</a>.
+      查阅此版本的变更日志以及 Nim 的其余源代码，可访问
+    <a href="https://github.com/nim-lang/Nim/blob/devel/changelogs/changelog_1_0_2.md">我们的 GitHub 仓库</a>。
     </div>
   </div>
 </div>

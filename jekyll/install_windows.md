@@ -8,27 +8,6 @@ current: Install
 
 <h1 class="text-centered page-title main-heading">在Windows下安装Nim</h1>
 
-# 使用 ``choosenim`` 进行安装
-
-[``choosenim``](https://github.com/dom96/choosenim#choosenim) 是一个 Nim 语言的安装器。
-它能帮你更简单地切换 Nim 版本，
-无论你想要最新稳定版还是最新开发版。
-
-# 使用 Scoop 安装 Nim 
-[Scoop](https://scoop.sh/) 是一个 Windows 的命令行安装器。
-使用下面的命令，你可以在安装 Nim 的同时，自动安装 gcc 并配置 PATH 。
-
-```
-scoop install nim
-```
-
-更新 Nim:
-
-```
-scoop update
-scoop update nim
-```
-
 # 手动安装
 
 <div class="center">
@@ -97,3 +76,26 @@ Nim编译器编译软件时需要一个C编译器，
 
 Windows用户可以通过[这个链接]({{ site.official_baseurl }}/download/dlls.zip)一次性下载这些必要的DLL，
 并在`nim.exe`的同级目录下替换他们。
+
+
+# 使用 ``choosenim`` 进行安装
+
+[``choosenim``](https://github.com/dom96/choosenim#choosenim) 是一个 Nim 语言的安装器。
+它能帮你更简单地切换 Nim 版本，
+无论你想要最新稳定版还是最新开发版。
+
+
+# 使用 Scoop 安装 Nim 
+[Scoop](https://scoop.sh/) 是一个 Windows 的命令行安装器。
+使用下面的命令，你可以在安装 Nim 的同时，自动安装 gcc 并配置 PATH 。
+
+```
+scoop install nim
+```
+
+更新 Nim:
+
+```
+scoop update
+scoop update nim
+```
