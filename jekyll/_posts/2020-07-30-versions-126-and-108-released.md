@@ -1,6 +1,6 @@
 ---
-title: "Versions 1.2.6 and 1.0.8 released"
-author: The Nim Team
+title: "1.2.6 版本和 1.0.8 发布"
+author: Nim 团队
 ---
 
 The Nim team is happy to announce this double release of versions 1.2.6 and 1.0.8.
@@ -13,15 +13,15 @@ fixes since versions 1.2.2 and 1.2.4 (the latter was just a hotfix release,
 because 1.2.2 was mistakenly shipped without `nim-gdb`).
 
 
-## Installing Nim 1.2.6
+## 安装 Nim 1.2.6
 
-### New users
+### 新用户
 
 Check out if the package manager of your OS already ships version 1.2.6 or
 install it as described [here](https://nim-lang.org/install.html).
 
 
-### Existing users
+### 老用户
 
 If you have installed a previous version of Nim using `choosenim`,
 getting Nim 1.2.6 is as easy as:
@@ -34,7 +34,7 @@ Alternatively, you can download Nim 1.0.8 from
 [our nightlies builds](https://github.com/nim-lang/nightlies/releases/tag/2020-07-29-version-1-2-bf320ed).
 
 
-## Bugfixes since 1.2.2
+## 1.2.2 以来的 bug 修复
 
 - Fixed "The pegs module doesn't work with generics!"
   ([#14718](https://github.com/nim-lang/Nim/issues/14718))
@@ -67,7 +67,7 @@ Full changelog since v1.2.2 contains [30 commits](https://github.com/nim-lang/Ni
 
 
 
-# Verson 1.0.8
+# 1.0.8 版本
 
 Version 1.0.8 is our fourth patch release for Nim 1.0 for those users who haven't
 yet switched to Nim 1.2, coming 5 months after the release of Nim 1.0.6.
@@ -77,14 +77,14 @@ available in Nim 1.2.x, check out our
 [version 1.2.0 release article](https://nim-lang.org/blog/2020/04/03/version-120-released.html).
 
 
-## Installing Nim 1.0.8
+## 安装 Nim 1.0.8
 
-### New users
+### 新用户
 
 We recommend you to install Nim 1.2, see the instructions above.
 
 
-### Existing users
+### 老用户
 
 If you have installed a previous version of Nim using `choosenim`,
 getting Nim 1.0.8 is as easy as:
@@ -97,7 +97,7 @@ Alternatively, you can download Nim 1.0.8 from
 [our nightlies builds](https://github.com/nim-lang/nightlies/releases/tag/2020-07-29-version-1-0-b5ec602).
 
 
-## Bugfixes since 1.0.6
+## 1.0.6 之后的 bug 修复
 
 - Fixed "write requires conversion to string"
   ([#13182](https://github.com/nim-lang/Nim/issues/13182))
