@@ -4,8 +4,8 @@ source "https://rubygems.org"
 gem 'jekyll', '~> 3.3', '>= 3.3.1'
 gem 'coderay', '~> 1.1.0'
 gem 'pygments.rb'
-+gem 'jekyll-sitemap'
-+gem "kramdown-math-katex"
+gem 'jekyll-sitemap'
+gem "kramdown-parser-gfm"
 
 group :jekyll_plugins do
   gem 'jekyll-asciidoc'
