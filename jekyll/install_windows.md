@@ -50,10 +50,6 @@ current: Install
 * Nim的二进制文件位于你解压的文件夹下的``bin``目录下，所以这个目录在环境变量中是必需的；
 * ``%USERPROFILE%\.nimble\bin`` (``%USERPROFILE%``指的是你的HOME目录，Win7以下是``我的文档``，也可能叫做``Administrator``之类的用户名)
 
-下载的zip文件中包含了一个名为``finish.exe``的文件，
-它会尝试在你的``PATH``中添加上面说的第一个目录，
-此工具还会自动检查你的系统中是否存在C编译器，你可以通过它安装MingW（一个Windows的GNU C编译器集合）。
-
 # 关于编译器依赖的说明
 
 Nim编译器编译软件时需要一个C编译器，
