@@ -33,6 +33,7 @@ before_script:
 
   - gem install bundler
   - gem install jekyll-sitemap
+  - gem install kramdown-parser-gfm
 script:
   - cd ${ROOT_PATH}/jekyll
   - bundle exec jekyll build
