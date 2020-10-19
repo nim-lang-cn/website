@@ -11,6 +11,9 @@ current: Install
 
 ## Linux的预构建二进制文件
 
+If you're not sure which version (64-bit or 32-bit) to pick, it is very likely
+that you want the 64-bit version (x86\_64):
+
 <div class="center">
   <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}-linux_x32.tar.xz"
     class="pure-button pure-button-primary download-button">
@@ -23,6 +26,9 @@ current: Install
     SHA256
   </a>
 </div>
+
+If you know what you're doing and you're sure you need a 32-bit version,
+you can download it below:
 
 <div class="center">
   <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}-linux_x64.tar.xz"

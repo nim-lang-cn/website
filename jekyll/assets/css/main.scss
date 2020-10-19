@@ -108,7 +108,7 @@ footer {
   margin-top: 75px;
   font-size: 70%;
   color: $footer-color;
-  border-top: 4px solid lighten($jumbotron-background-color, 30%);
+  border-top: 2px solid lighten($jumbotron-background-color, 40%);
   background-color: $jumbotron-background-color;
   a {
     color: $a-footer-color;
@@ -347,6 +347,7 @@ a.pure-menu-link.pure-menu-heading {
 .post-meta {
   margin: 5pt 0;
   color: #888;
+  text-align: left;
 
   span {
     display: block;
@@ -904,6 +905,10 @@ div.code-align {
     font-size: 140%;
     width: 100%;
   }
+}
+
+tr > th, tr > td {
+  padding-right: 15pt;
 }
 
 table.tableblock, div.content > table {

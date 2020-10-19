@@ -10,18 +10,10 @@ current: Install
 
 # 手动安装
 
-<div class="center">
-  <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}_x32.zip"
-    class="pure-button pure-button-primary download-button">
-    <i class="fa fa-file-archive-o" aria-hidden="true"></i>
-    下载x86版本的zip包
-  </a>
-  <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}_x32.zip.sha256"
-    class="pure-button">
-    <i class="fa fa-file-text-o" aria-hidden="true"></i>
-    SHA256校验
-  </a>
-</div>
+如果你不确定要使用哪个版本（64 位或 32 位），
+你最好选择 64 位版本（x86\_64）：
+If you're not sure which version (64-bit or 32-bit) to pick, it is very likely
+that you want the 64-bit version (x86\_64):
 
 <div class="center">
   <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}_x64.zip"
@@ -30,6 +22,22 @@ current: Install
     下载x64版本的zip包
   </a>
   <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}_x64.zip.sha256"
+    class="pure-button">
+    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+    SHA256校验
+  </a>
+</div>
+
+如果你知道你在干什么，你就是需要一个 32 位版本的，
+你可以从下面下载：
+
+<div class="center">
+  <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}_x32.zip"
+    class="pure-button pure-button-primary download-button">
+    <i class="fa fa-file-archive-o" aria-hidden="true"></i>
+    下载x86版本的zip包
+  </a>
+  <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}_x32.zip.sha256"
     class="pure-button">
     <i class="fa fa-file-text-o" aria-hidden="true"></i>
     SHA256校验

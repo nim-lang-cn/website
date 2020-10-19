@@ -62,6 +62,9 @@ Nim编译器和库是MIT许可的。
 - Notepad++: [https://github.com/jangko/nppnim/releases](https://github.com/jangko/nppnim/releases)
 - Micro: 支持
 - Atom: [https://atom.io/packages/nim](https://atom.io/packages/nim)
+- JetBrains IDEs: [https://plugins.jetbrains.com/plugin/15128-nim](https://plugins.jetbrains.com/plugin/15128-nim)
+- Kakoune: Included
+- For editors with LSP (Language Server Protocol) support (requires a separate syntax/indenting plugin): [https://github.com/PMunch/nimlsp](https://github.com/PMunch/nimlsp)
 
 ## 语言设计主要受哪些其他语言的影响？
 
@@ -80,13 +83,14 @@ Ada, C++, Python, Lisp, Oberon.
 
 ## 哪个选项编译的可执行文件最快？
 
-对于标配的文件，用``-d:release``就对了。
-当然如果你的编译器支持，你也可以开启链接时优化来构建一个更快的可执行文件: ``--passc:-flto``
+对于标准的配置文件，``-d:danger`` 通过禁用 **所有** 运行时安全检查（包括边界检查、流程检查、空值检查等等），以尽最快速度构建二进制文件。
+更多的情况下用``-d:release``就已经足以应付。
+当然如果你的编译器支持，你也可以开启链接时优化来更快地构建一个可执行文件: 在 Nim 1.4 以上版本使用 ``--passc:-flto`` 或者 `-d:lto`
 
 ## 哪个选项可以构建出最小的可执行文件？
 
-对于标配的文件, ``-d:quick --opt:size``就能得到你想要的。
-当然如果你的编译器支持，你也可以开启链接时优化来构建一个更快的可执行文件: ``--passc:-flto``
+对于标配的文件, ``-d:danger -d:strip --opt:size`` 就能得到你想要的。
+当然如果你的编译器支持，你也可以和上一个问题中描述的相同方式，开启链接时优化来构建一个更快的可执行文件
 
 ## 如何使用与默认编译器不同的C编译器？
 
@@ -95,16 +99,18 @@ Ada, C++, Python, Lisp, Oberon.
 
 | 缩写 | C/C++ 编译器                          |
 | ---------------- | --------------------------------------------|
-|``vcc``           | 微软Visual C++                      |
 |``gcc``           | GNU C编译器                              |
-|``llvm_gcc``      | LLVM-GCC编译器                           |
-|``icc``           | Intel C编译器                            |
 |``clang``         | Clang编译器                              |
+|``vcc``           | 微软Visual C++                      |
+|``icc``           | Intel C编译器                            |
+|``llvm_gcc``      | LLVM-GCC编译器                           |
 |``ucc``           | 通用UNIX C编译器                     |
-
+|``tcc``           | 微型 C 编译器                             |
+|``bcc``           | Borland C 编译器                          |
+|``envcc``         | 你环境中的默认 C 编译器      |
 
 其他的C编译器我们不进行官方支持，但是它可能也能用，大概吧。
 
 如果你的C编译器不在上述列表中，
-可以使用*通用UNIX C编译器* (``ucc``). 
-如果C编译器需要不同的命令行参数，可以尝试使用--passc和--passl进行切换。
+尝试使用 *环境中的默认 C 编译器* （``envcc``） 。
+如果C编译器需要不同的命令行参数，可以尝试使用 ``--passc`` 和 ``--passl`` 进行切换。
