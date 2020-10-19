@@ -1,65 +1,64 @@
 ---
-title: "Version 1.4.0 released"
-author: The Nim Team
+title: "1.4.0版本发布"
+author: Nim团队
 ---
 
-We are very proud to announce Nim version 1.4 after six months of continuous development!
-Other than version 1.0, this is probably the biggest Nim release yet and we're very excited to release it!
+我们非常自豪地宣布，经过六个月的持续开发，Nim 1.4 版本已经发布了！
+除了 1.0 版本之外，这可能是迄今为止最大的 Nim 版本，我们很高兴能够发布它。
 
-It contains exactly 900 new commits which have not already been backported to our previous versions.
-There are several new features and standard library additions compared to 1.2.
-We tried to keep breaking changes to a minimum, but some bugfixes weren't possible
-without making those necessary changes, and we feel that our users will benefit
-from them.
+它包含了 900 个新的提交，这些提交还没有被回传到我们之前的版本。
+与 1.2 版本相比，增加了一些新的功能和标准库。
+我们试图将破坏性的改动保持在最小的范围内，但一些错误的修复是无法避免的。 
+我们认为我们的用户将受益于这些改变。
 
-We would recommend to all of our users to upgrade and use version 1.4.
+我们建议所有用户升级并使用 1.4 版本。
 
-This release also includes the latest version of Nim's package manager Nimble, v0.12.0,
-the changelog for which is available [here](https://github.com/nim-lang/nimble/blob/master/changelog.markdown#0120).
-
+这个版本还包含了最新版本的 Nim 包管理器 Nimble —— v0.12.0。
+变更日志可以在[这里](https://github.com/nim-lang/nimble/blob/master/changelog.markdown#0120)找到。
 
 
-# Installing Nim 1.4
 
-## New users
+# 安装Nim 1.4
 
-Check out if the package manager of your OS already ships version 1.4 or
-install it as described [here](https://nim-lang.org/install.html).
+## 新用户
+
+检查你的操作系统的软件包管理器是否已经发布了1.4或版本。
+或者按照[这里](https://nim-lang-cn.org/install.html)所述进行安装。
 
 
-## Existing users
+## 现有用户
 
-If you have installed a previous version of Nim using `choosenim`,
-getting Nim 1.4 is as easy as:
+如果你使用 `choosenim` 安装了以前的 Nim 版本。
+获取 Nim 1.4 很简单：
 
 ```bash
 $ choosenim update self
 $ choosenim update stable
 ```
 
-If you don't have `choosenim`, you can follow the same
-[install link](https://nim-lang.org/install.html) as above.
+如果你没有 `choosenim`, 你可以按照同上的方法来做：
+[安装链接](https://nim-lang-cn.org/install.html)。
 
 
 
-# Contributors to v1.4
+# v1.4的贡献者
 
-Our contributors are amazing, and there are
-[far too many](https://github.com/nim-lang/Nim/graphs/contributors?from=2020-04-03&to=2020-10-16&type=c)
-to list here.
-Big thanks to all of you, we couldn't have pulled off this release without you!
+我们的贡献者非常了不起，有
+[太多](https://github.com/nim-lang/Nim/graphs/contributors?from=2020-04-03&to=2020-10-16&type=c)
+在此列出。
+非常感谢你们，没有你们，我们不可能完成这个版本。
 
 
 
-# New features
+# 新功能
 
 ## GC: ORC
 
-A new reference counting algorithm called ARC was first shipped with Nim 1.2.
-If you haven't watched it already, we recommend
-[this video](https://www.youtube.com/watch?v=aUJcYTnPWCg) from [NimConf 2020](https://www.youtube.com/playlist?list=PLxLdEZg8DRwTIEzUpfaIcBqhsj09mLWHx)
-where Araq explains details behind ARC and shows some benchmarks that
-illustrate the benefits.
+一种名为 ARC 的新的参考计数算法首次随 Nim 1.2 一起发货。
+如果你还没有看过，我们推荐你看一下以下内容
+[NimConf 2020（外网）](https://www.youtube.com/playlist?list=PLxLdEZg8DRwTIEzUpfaIcBqhsj09mLWHx) 的 
+[这个视频（外网）](https://www.youtube.com/watch?v=aUJcYTnPWCg) 。
+在这里，Araq解释了ARC背后的细节，并展示了一些基准，以说明其好处。
 
 As far as we know, ARC works with the complete standard library except for
 the current implementation of `async`, because that introduces cycles that
@@ -73,7 +72,7 @@ We recommend reading
 to get an idea about ARC/ORC's advantages.
 
 
-### How to use ARC and ORC
+### 如何使用 ARC 和 ORC
 
 If you haven't used ARC already with Nim 1.2, all you have to do is to pass `--gc:arc`
 on the command line:
@@ -101,7 +100,7 @@ To read more about `{.acyclic.}` pragma, please
 
 ### Known incompatibilities and gotchas
 
-#### Deepcopy
+#### 深拷贝
 
 If you use `system.deepCopy` in your code, you need to enable it via
 `--deepCopy:on` on the command line.
