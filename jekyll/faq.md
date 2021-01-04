@@ -45,10 +45,10 @@ Nim编译器和库是MIT许可的。
 因此应该可以创建原生Nim桥接，
 通过Nim强大的元编程功能，可以显式生成所有粘水代码。
 
-## 有哪些编辑器支持Nim呢?
-
-- Aporia (Nim原生编辑器): [https://github.com/nim-lang/Aporia](https://github.com/nim-lang/Aporia)
-- Visual Studio Code: [https://marketplace.visualstudio.com/items?itemName=kosz78.nim](https://marketplace.visualstudio.com/items?itemName=kosz78.nim)
+- Visual Studio Code:
+  - Extension written in Nim [https://marketplace.visualstudio.com/items?itemName=nimsaem.nimvscode](https://marketplace.visualstudio.com/items?itemName=nimsaem.nimvscode)
+  - Original Extension written in TypeScript [https://marketplace.visualstudio.com/items?itemName=kosz78.nim](https://marketplace.visualstudio.com/items?itemName=kosz78.nim)
+- VSCodium/OpenVSX: [https://open-vsx.org/extension/nimsaem/nimvscode](https://open-vsx.org/extension/nimsaem/nimvscode)
 - Emacs: [https://github.com/nim-lang/nim-mode](https://github.com/nim-lang/nim-mode)
 - Vim: [https://github.com/zah/nimrod.vim/](https://github.com/zah/nimrod.vim)
 - QtCreator (4.1+): 通过一个实验性插件进行支持。
