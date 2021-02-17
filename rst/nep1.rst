@@ -1,43 +1,55 @@
-==============================================
-Nim增强建议书 #1 - 标准库风格指南
-==============================================
+==========================================================
+Nim Enhancement Proposal #1 - Standard Library Style Guide
+==========================================================
 :Author: Clay Sweetser, Dominik Picheta
 :Version: |nimversion|
 
 .. contents::
 
 
-序言
+Introduction
 ============
+Although Nim supports a variety of code and formatting styles, it is
+nevertheless beneficial that certain community efforts, such as the standard
+library, should follow a consistent set of style guidelines when suitable.
+This enhancement proposal aims to list a series of guidelines that the standard
+library should follow.
 
-尽管Nim支持多种代码和格式样式，但是社区的努力（例如标准库）在适当时应遵循一套一致的样式准则，这是有好处的。
+Note that there can be exceptions to these rules. Nim being as flexible as it
+is, there will be parts of this style guide that don't make sense in certain
+contexts. Furthermore, just as
+`Python's style guide<http://legacy.python.org/dev/peps/pep-0008/>`_ changes
+over time, this style guide will too.
 
-此增强建议旨在列出标准库应遵循的一系列指南。
-
-请注意，这些规则可能会有例外。 Nim尽可能灵活，该样式指南的某些部分在某些情况下不成立。
-
-此外，就像Python的样式指南 `<http://legacy.python.org/dev/peps/pep-0008/>`_ 随着时间的推移而变化一样，该样式指南也将随之变化。
-
-仅对Nim代码库和官方项目（例如Nim编译器，标准库以及各种官方工具，例如C2Nim）的贡献强制执行这些规则。
+These rules will only be enforced for contributions to the Nim
+codebase and official projects, such as the Nim compiler, the standard library,
+and the various official tools such as C2Nim.
 
 ----------------
-风格指南
+Style Guidelines
 ----------------
 
-空格和空白字符约定
+Spacing and Whitespace Conventions
 -----------------------------------
 
-- 每行不能超过80个字符。限制每一行的信息量将使代码更具可读性-读取需要处理的块较小。
+- Lines should be no longer than 80 characters. Limiting the amount of
+  information present on each line makes for more readable code - the reader
+  has smaller chunks to process.
 
-- 块的缩进应使用两个空格；禁止使用制表符（编译器强制执行此操作）。 
-  使用空格意味着代码的外观在各个编辑器之间更加一致。 
-  与空格不同，制表符宽度在不同的编辑器中都不同，并且并非所有编辑器都提供更改此宽度的方法。
+- Two spaces should be used for indentation of blocks; tabstops are not allowed
+  (the compiler enforces this). Using spaces means that the appearance of code
+  is more consistent across editors. Unlike spaces, tabstop width varies across
+  editors, and not all editors provide means of changing this width.
 
-- 除了指南允许的空白符，实践中应谨慎使用其它空白符。
-  不是所有编辑器支持代码段自动对齐，手动重新对齐长代码段很快变得乏味。
+- Although use of whitespace for stylistic reasons other than the ones endorsed
+  by this guide are allowed, careful thought should be put into such practices.
+  Not all editors support automatic alignment of code sections, and re-aligning
+  long sections of code by hand can quickly become tedious.
 
   .. code-block:: nim
-    # 这不好, 下次有人编辑这个代码块，必须再次重新对齐所有赋值：
+    # This is bad, as the next time someone comes
+    # to edit this code block, they
+    # must re-align all the assignments again:
     type
       WordBool*    = int16
       CalType*     = int
@@ -47,46 +59,58 @@ Nim增强建议书 #1 - 标准库风格指南
       LongLongPtr* = ptr LongLong
 
 
-命名约定
+Naming Conventions
 ------------------
-注意：虽然下面概述的规则是 *当前* 命名约定，但这些约定并非始终存在。
-以前，标识符的命名约定遵循Pascal前缀的传统，后者表示标识符的基本类型-PFoo用于指针和引用类型，TFoo用于值类型，EFoo用于异常，等等。
-尽管此后发生了变化，但标准库中仍有许多地方仍在使用此约定。 
-这种样式纯粹是出于遗留原因而保留，并且将来会更改。
 
-- 类型标识符应使用Pascal命名法。所有其他标识符都应使用驼峰命名法， *可以* 使用Pascal命名法但并非必需的常量除外。
+Note: While the rules outlined below are the *current* naming conventions,
+these conventions have not always been in place. Previously, the naming
+conventions for identifiers followed the Pascal tradition of prefixes which
+indicated the base type of the identifier - PFoo for pointer and reference
+types, TFoo for value types, EFoo for exceptions, etc. Though this has since
+changed, there are many places in the standard library which still use this
+convention. Such style remains in place purely for legacy reasons, and will be
+changed in the future.
+
+- Type identifiers should be in PascalCase. All other identifiers should be in
+  camelCase with the exception of constants which **may** use PascalCase but
+  are not required to.
 
   .. code-block:: nim
-    # 常量可以以小写或大写字母开头。
+    # Constants can start with either a lower case or upper case letter.
     const aConstant = 42
     const FooBar = 4.2
 
-    var aVariable = "Meep" # 变量必须以小写字母开头。
+    var aVariable = "Meep" # Variables must start with a lowercase letter.
 
-    # 类型必须以大写字母开头
+    # Types must start with an uppercase letter.
     type
       FooBar = object
 
-  对C/C++封装的常量，允许全大写，但不好看。
+  For constants coming from a C/C++ wrapper, ALL_UPPERCASE are allowed, but ugly.
+  (Why shout CONSTANT? Constants do no harm, variables do!)
 
-
-- 在命名值、指针、引用类型时, 为最常用的使用常规命名，给其它类型加上 "Obj", "Ref", 或 "Ptr" 后缀。 
-如果没有单个变量用的较多，则仅将后缀添加到指针变量中。 
-同样适用于C/C++封装。
+- When naming types that come in value, pointer, and reference varieties, use a
+  regular name for the variety that is to be used the most, and add a "Obj",
+  "Ref", or "Ptr" suffix for the other varieties. If there is no single variety
+  that will be used the most, add the suffixes to the pointer variants only. The
+  same applies to C/C++ wrappers.
 
   .. code-block:: nim
     type
-      Handle = object # 使用较多
+      Handle = object # Will be used most often
         fd: int64
-      HandleRef = ref Handle # 使用较少
+      HandleRef = ref Handle # Will be used less often
 
-- 异常和错误类型应当有"Error"后缀。
+- Exception and Error types should have the "Error" or "Defect" suffix.
 
   .. code-block:: nim
     type
-      UnluckyError = object of Exception
+      ValueError = object of CatchableError
+      AssertionDefect = object of Defect
+      Foo = object of Exception # bad style, try to inherit CatchableError or Defect
 
-- 除非用 `{.pure.}` 标记，枚举成员应当有标识前缀，比如枚举的名称缩写。
+- Unless marked with the `{.pure.}` pragma, members of enums should have an
+  identifying prefix, such as an abbreviation of the enum's name.
 
   .. code-block:: nim
     type
@@ -96,7 +120,8 @@ Nim增强建议书 #1 - 标准库风格指南
         pcFile
         pcLinkToFile
 
-- 不纯的枚举值应当使用驼峰命名法，纯枚举值应当使用Pascal命名法。
+- Non-pure enum values should use camelCase whereas pure enum values should use
+  PascalCase.
 
   .. code-block:: nim
     type
@@ -106,58 +131,83 @@ Nim增强建议书 #1 - 标准库风格指南
         File
         LinkToFile
 
-- 在HTTP, HTML, FTP, TCP, IP, UTF, WWW年代，全大写来表示特殊含义的做法是愚蠢的。
-把它们当做真实的单词。所以是 ``parseUrl`` 而不是 ``parseURL``, ``checkHttpHeader`` 而不是 ``checkHTTPHeader`` 等等。
+- In the age of HTTP, HTML, FTP, TCP, IP, UTF, WWW it is foolish to pretend
+  these are somewhat special words requiring all uppercase. Instead treat them
+  as what they are: Real words. So it's ``parseUrl`` rather than
+  ``parseURL``, ``checkHttpHeader`` instead of ``checkHTTPHeader`` etc.
 
-- 像 ``mitems`` 或 ``mpairs`` 操作(或现已废弃的 ``mget``) 允许  一些数据结构的 *可修改视图*  应当以 ``m`` 开头。
-- 有原地修改和 '返回变换副本' 时，后者是前者的过去分词:
+- Operations like ``mitems`` or ``mpairs`` (or the now deprecated ``mget``)
+  that allow a *mutating view* into some data structure should start with an ``m``.
+- When both in-place mutation and 'returns transformed copy' are available the latter
+  is a past participle of the former:
 
   - reverse and reversed in algorithm
   - sort and sorted
   - rotate and rotated
 
-- 当 '返回变换副本' 版本已经存在如 ``strutils.replace`` 原地版本应当使用 ``-In`` 后缀 (此例是 ``replaceIn`` ).
+- When the 'returns transformed copy' version already exists like ``strutils.replace``
+  an in-place version should get an ``-In`` suffix (``replaceIn`` for this example).
 
 
-标准库API为 **易于使用** 和一致性设计。易于使用通过实现具体的高级行为的调用次数来衡量。终极目标是程序员可以 *猜到* 命名。
+- Use `subjectVerb`, not `verbSubject`, e.g.: `fileExists`, not `existsFile`.
 
-库使用简单命名方案，利用常用缩写来保持简短但明确的命名。
+The stdlib API is designed to be **easy to use** and consistent. Ease of use is
+measured by the number of calls to achieve a concrete high level action. The
+ultimate goal is that the programmer can *guess* a name.
+
+The library uses a simple naming scheme that makes use of common abbreviations
+to keep the names short but meaningful.
 
 
 -------------------     ------------   --------------------------------------
-英文单词                使用            注释
+English word            To use         Notes
 -------------------     ------------   --------------------------------------
-initialize              initT          ``init`` 用于创建值类型 ``T``
-new                     newP           ``new`` 用于创建引用类型 ``P``
-find                    find           应当返回找到的位置; 对于bool结果用 ``contains``
-contains                contains       ``find() >= 0`` 简写
-append                  add            用 ``add`` 替换 ``append``
-compare                 cmp            应当返回 ``< 0`` ``== 0`` 或 ``> 0`` 语义整型值;
-                                       bool结果使用 ``sameXYZ``
-put                     put, ``[]=``   put考虑重载 ``[]=`` 
-get                     get, ``[]``    get考虑重载 ``[]`` ;
-                                       考虑不使用 ``get`` 作为前缀: ``len`` 代替 ``getLen``
-length                  len            也用于 *元素个数*
-size                    size, len      size应当指字节大小
+initialize              initFoo        initializes a value type ``Foo``
+new                     newFoo         initializes a reference type ``Foo``
+                                       via ``new``
+this or self            self           for method like procs, e.g.:
+                                       `proc fun(self: Foo, a: int)`
+                                       rationale: `self` is more unique in english
+                                       than `this`, and `foo` would not be DRY.
+find                    find           should return the position where
+                                       something was found; for a bool result
+                                       use ``contains``
+contains                contains       often short for ``find() >= 0``
+append                  add            use ``add`` instead of ``append``
+compare                 cmp            should return an int with the
+                                       ``< 0`` ``== 0`` or ``> 0`` semantics;
+                                       for a bool result use ``sameXYZ``
+put                     put, ``[]=``   consider overloading ``[]=`` for put
+get                     get, ``[]``    consider overloading ``[]`` for get;
+                                       consider to not use ``get`` as a
+                                       prefix: ``len`` instead of ``getLen``
+length                  len            also used for *number of elements*
+size                    size, len      size should refer to a byte size
 capacity                cap
-memory                  mem            意味着低级操作
-items                   items          一个集合的默认迭代器
-pairs                   pairs          迭代键值对
-delete                  delete, del    del比delete快, 因为它没有保持顺序; delete会保持顺序
-remove                  delete, del    现在不一致
+memory                  mem            implies a low-level operation
+items                   items          default iterator over a collection
+pairs                   pairs          iterator over (key, value) pairs
+delete                  delete, del    del is supposed to be faster than
+                                       delete, because it does not keep
+                                       the order; delete keeps the order
+remove                  delete, del    inconsistent right now
 include                 incl
 exclude                 excl
 command                 cmd
 execute                 exec
 environment             env
 variable                var
-value                   value, val     首选val, 现在不一致
+value                   value, val     val is preferred, inconsistent right
+                                       now
 executable              exe
 directory               dir
-path                    path           path是字符串 "/usr/bin" (举例), dir是"/usr/bin"的内容; 现在不一致
+path                    path           path is the string "/usr/bin" (for
+                                       example), dir is the content of
+                                       "/usr/bin"; inconsistent right now
 extension               ext
 separator               sep
-column                  col, column    首选col, 现在不一致
+column                  col, column    col is preferred, inconsistent right
+                                       now
 application             app
 configuration           cfg
 message                 msg
@@ -178,10 +228,12 @@ indentation             indent
 -------------------     ------------   --------------------------------------
 
 
-代码约定
+Coding Conventions
 ------------------
 
-- 'return' 语句应当用于使用控制流属性时。尽可能使用过程的隐式'result'变量，改善可读性。
+- The 'return' statement should ideally be used when its control-flow properties
+  are required. Use a procedure's implicit 'result' variable whenever possible.
+  This improves readability.
 
   .. code-block:: nim
     proc repeat(text: string, x: int): string =
@@ -190,34 +242,44 @@ indentation             indent
       for i in 0 .. x:
         result.add($i)
 
-- 尽可能使用 proc，仅在必要时使用强大的宏、模板、迭代器和转换器。
+- Use a proc when possible, only using the more powerful facilities of macros,
+  templates, iterators, and converters when necessary.
 
-- 当声明变量在作用域内不改变时，使用 ``let`` 语句 (不是 ``var`` 语句) 。 使用 ``let`` 语句确保变量不可修改，让读代码的人更清晰地了解代码的目的。
+- Use the ``let`` statement (not the ``var`` statement) when declaring variables that
+  do not change within their scope. Using the ``let`` statement ensures that
+  variables remain immutable, and gives those who read the code a better idea
+  of the code's purpose.
 
 
-多行语句与表达式约定
+Conventions for multi-line statements and expressions
 -----------------------------------------------------
 
-- 超过一行的元组应当对齐上面的形参。
+- Tuples which are longer than one line should indent their parameters to
+  align with the parameters above it.
 
   .. code-block:: nim
     type
       LongTupleA = tuple[wordyTupleMemberOne: int, wordyTupleMemberTwo: string,
                          wordyTupleMemberThree: float]
 
-- 类似地，任何超过一行的过程和过程类型声明应当按照同样的方式对齐。
+- Similarly, any procedure and procedure type declarations that are longer
+  than one line should do the same thing.
 
   .. code-block:: nim
     type
       EventCallback = proc (timeReceived: Time, errorCode: int, event: Event,
                             output: var string)
 
-    proc lotsOfArguments(argOne: string, argTwo: int, argThree: float
+    proc lotsOfArguments(argOne: string, argTwo: int, argThree: float,
                          argFour: proc(), argFive: bool): int
                         {.heyLookALongPragma.} =
 
-- 多行过程调用应当在小括号的同列继续 (如多行过程声明)。
+- Multi-line procedure calls should continue on the same column as the opening
+  parenthesis (like multi-line procedure declarations).
 
   .. code-block:: nim
     startProcess(nimExecutable, currentDirectory, compilerArguments
                  environment, processOptions)
+
+- Use `a..b` instead of `a .. b`, except when `b` contains an operator, for example `a .. -3`.
+  Likewise with `a..<b`, `a..^b` and other operators starting with `..`.
