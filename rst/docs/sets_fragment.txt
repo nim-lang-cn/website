@@ -1,0 +1,75 @@
+集合模拟了数学集合的概念。 集合的基类型只能是固定大小的序数类型，它们是:
+
+* ``int8``-``int16``
+* ``uint8``/``byte``-``uint16``
+* ``char``
+* ``enum``
+
+或等价类型。对有符号整数集合的基类型被定义为在 ``0 .. MaxSetElements-1`` 的范围内， 其中 ``MaxSetElements`` 目前是2^16。
+
+原因是集合被实现为高性能位向量。尝试声明具有更大类型的集将导致错误：
+
+.. code-block:: nim
+
+  var s: set[int64] # 错误: 集合太大
+
+集合可以通过集合构造器来构造： ``{}`` 是空集合。 空集合与其它具体的集合类型兼容。构造器也可以用来包含元素（和元素范围）：
+
+.. code-block:: nim
+  type
+    CharSet = set[char]
+  var
+    x: CharSet
+  x = {'a'..'z', '0'..'9'} # 构造一个包含'a'到'z'和'0'到'9'的集合 
+
+集合支持的操作符：
+
+==================    ========================================================
+操作符                 含义
+==================    ========================================================
+``A + B``             并集
+``A * B``             交集
+``A - B``             差集
+``A == B``            相等
+``A <= B``            子集
+``A < B``             真子集
+``e in A``            元素
+``e notin A``         A不包含元素e
+``contains(A, e)``    包含元素e
+``card(A)``           A的基 (集合A中的元素数量)
+``incl(A, elem)``     同 ``A = A + {elem}``
+``excl(A, elem)``     同 ``A = A - {elem}``
+==================    ========================================================
+
+位字段
+~~~~~~~~~~
+
+集合经常用来定义过程的 *标示* 。这比定义必须或在一起的整数常量清晰并且类型安全。
+
+枚举、集合和强转可以一起用：
+
+.. code-block:: nim
+
+  type
+    MyFlag* {.size: sizeof(cint).} = enum
+      A
+      B
+      C
+      D
+    MyFlags = set[MyFlag]
+
+  proc toNum(f: MyFlags): int = cast[cint](f)
+  proc toFlags(v: int): MyFlags = cast[MyFlags](v)
+
+  assert toNum({}) == 0
+  assert toNum({A}) == 1
+  assert toNum({D}) == 8
+  assert toNum({A, C}) == 5
+  assert toFlags(0) == {}
+  assert toFlags(7) == {A, B, C}
+
+注意集合如何把枚举变成2的指数。
+
+如果和C一起使用枚举和集合，使用distinct cint。
+
+为了和C互通见 `bitsize pragma <#implementation-specific-pragmas-bitsize-pragma>`_ 。
