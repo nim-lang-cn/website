@@ -6,7 +6,7 @@ description: >
 baseurl: "https://nim-lang-cn.org"
 official_baseurl: "https://nim-lang.org"
 
-nim_version: 1.4.4
+nim_version: 1.4.6
 
 defaults:
   -
@@ -31,9 +31,7 @@ navigation:
     url: /features.html
   - title: 下载
     url: /install.html
-  - title: 学习
-    url: /learn.html
-  - title: 文档
+  - title: Documentation
     url: /documentation.html
   - title: 社区
     url: /community.html

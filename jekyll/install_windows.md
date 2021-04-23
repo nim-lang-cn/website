@@ -10,9 +10,7 @@ current: Install
 
 # 手动安装
 
-如果你不确定要使用哪个版本（64 位或 32 位），
-你最好选择 64 位版本（x86\_64）：
-If you're not sure which version (64-bit or 32-bit) to pick, it is very likely
+If you are not sure which version (64-bit or 32-bit) to pick, it is very likely
 that you want the 64-bit version (x86\_64):
 
 <div class="center">
@@ -28,8 +26,8 @@ that you want the 64-bit version (x86\_64):
   </a>
 </div>
 
-如果你知道你在干什么，你就是需要一个 32 位版本的，
-你可以从下面下载：
+If you know what you are doing and you are sure you need a 32-bit version,
+you can download it below:
 
 <div class="center">
   <a href="{{ site.official_baseurl }}/download/nim-{{ site.nim_version }}_x32.zip"
@@ -44,21 +42,21 @@ that you want the 64-bit version (x86\_64):
   </a>
 </div>
 
-# 关于二进制文件安装的说明
-
-使用提供的zip文件的安装应该相当简单。
-只需将文件解压到所需的安装目录，
-然后运行``finish.exe``，跟随指引一步步配置即可。
+The installation using the provided zip files should be fairly
+straightforward. Simply extract the files into the desired installation
+directory, and run ``finish.exe``.
 
 ## 配置``PATH``环境变量
 
 
 要使用Nim进行开发，需要在你的[``PATH``环境变量](https://zh.wikipedia.org/wiki/PATH_(%E5%8F%98%E9%87%8F))中添加以下两个目录：
 
-* Nim的二进制文件位于你解压的文件夹下的``bin``目录下，所以这个目录在环境变量中是必需的；
-* ``%USERPROFILE%\.nimble\bin`` (``%USERPROFILE%``指的是你的HOME目录，Win7以下是``我的文档``，也可能叫做``Administrator``之类的用户名)
+The zip file includes a simple application called ``finish.exe`` that can
+attempt to add both directories to your ``PATH``.
+This tool also checks for the presence of a C compiler and can install ``MingW``,
+the GNU C compiler collection for Windows.
 
-# 关于编译器依赖的说明
+## Compiler dependencies
 
 Nim编译器编译软件时需要一个C编译器，
 你可以使用``finish.exe``来安装MingW。
@@ -70,36 +68,10 @@ Nim编译器编译软件时需要一个C编译器，
 * 32位 - [mingw32.7z]({{ site.official_baseurl }}/download/mingw32.7z)
 * 64位 - [mingw64.7z]({{ site.official_baseurl }}/download/mingw64.7z)
 
-# 其他依赖
-
-下面展示了一个包含了其他依赖的列表，
-你需要先确保安装了这些依赖，才能使用Nim。
-
-* PCRE
-* OpenSSL
-
-Windows用户可以通过[这个链接]({{ site.official_baseurl }}/download/dlls.zip)一次性下载这些必要的DLL，
-并在`nim.exe`的同级目录下替换他们。
-
 
 # 使用 ``choosenim`` 进行安装
 
-[``choosenim``](https://github.com/dom96/choosenim#choosenim) 是一个 Nim 语言的安装器。
-它能帮你更简单地切换 Nim 版本，
-无论你想要最新稳定版还是最新开发版。
-
-
-# 使用 Scoop 安装 Nim 
-[Scoop](https://scoop.sh/) 是一个 Windows 的命令行安装器。
-使用下面的命令，你可以在安装 Nim 的同时，自动安装 gcc 并配置 PATH 。
-
-```
-scoop install nim
-```
-
-更新 Nim:
-
-```
-scoop update
-scoop update nim
-```
+[``choosenim``](https://github.com/dom96/choosenim#choosenim) is an
+installer for the Nim programming language. It allows you
+to easily switch between versions of Nim, whether that is the latest stable
+release or the latest development version.
