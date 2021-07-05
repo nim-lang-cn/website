@@ -1,0 +1,1804 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nim中文社区</title>
+    <description>Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。
+</description>
+    <link>https://nim-lang-cn.org/</link>
+    <atom:link href="https://nim-lang-cn.org/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 05 Jul 2021 06:19:34 +0000</pubDate>
+    <lastBuildDate>Mon, 05 Jul 2021 06:19:34 +0000</lastBuildDate>
+    <generator>Jekyll v3.9.1</generator>
+    
+      <item>
+        <title>A New Home For Our Community</title>
+        <description>&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#nim&lt;/code&gt; channel on Freenode has been a home to our community for the better
+part of a decade. While much of our community has moved to Discord since, aided
+by a bridge which relays messages between IRC and Discord,
+IRC is still an important part of our real-time chat community.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately the multiple decisions
+made by the new owners of Freenode (many of which you can read about
+&lt;a href=&quot;https://gist.github.com/joepie91/df80d8d36cd9d1bde46ba018af497409&quot;&gt;here&lt;/a&gt;) have
+made it untenable for our community to continue its life there.&lt;/p&gt;
+
+&lt;p&gt;Recently we have set up a new home for our IRC channels on Libera and intend
+to continue to house part of our community there. Many of our core services
+(like the public logs of our discussions, available at &lt;a href=&quot;https://irclogs.nim-lang.org/&quot;&gt;https://irclogs.nim-lang.org/&lt;/a&gt;)
+still rely on IRC and are likely to continue for the foreseeable future.&lt;/p&gt;
+
+&lt;p&gt;Our main IRC channel is still &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#nim&lt;/code&gt;, you can connect to it by following the
+&lt;a href=&quot;https://libera.chat/guides/connect&quot;&gt;Libera connection guide&lt;/a&gt;. It continues to
+be bridged to &lt;a href=&quot;https://discord.com/invite/nim&quot;&gt;our Discord&lt;/a&gt; through a service that
+we develop and &lt;a href=&quot;https://github.com/Yardanico/ircord/&quot;&gt;maintain&lt;/a&gt;.
+The equivalent &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#nim&lt;/code&gt; channel on Freenode is no longer our official IRC channel.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nim-lang-cn.org/assets/news/images/new_home/nim_real_time_chat_bridging.png&quot;&gt;
+  &lt;img src=&quot;https://nim-lang-cn.org/assets/news/images/new_home/nim_real_time_chat_bridging.png&quot; alt=&quot;Nim Real Time Chat Bridging&quot; style=&quot;width:100%&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In addition to the Discord/IRC bridge that we run ourselves, we have also
+set up third-party bridges as shown by the dashed line in the image above. This
+means that you can now join the discussion no matter your preferred chat protocol,
+with &lt;a href=&quot;https://matrix.to/#/#nim:envs.net&quot;&gt;Matrix&lt;/a&gt; and
+&lt;a href=&quot;https://t.me/nim_lang&quot;&gt;Telegram&lt;/a&gt; both now being relayed to our Discord. Note however
+that we are still testing the stability of these bridges and because they are
+maintained by a third-party they may be less reliable.&lt;/p&gt;
+
+&lt;p&gt;In addition to our main channel (#main on Discord/#nim on Libera), we also now
+have many Nim-related channels for specific topics, including:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#nim-gamedev&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#nim-webdev&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#nim-science&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#nim-embedded&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#nimble&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#nim-offtopic&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These channels are a place to discuss projects, get help with Nim and offer
+a place to chat about any topic with the wider community. We encourage everyone
+to join and participate in the discussions, we just ask you to remember to
+&lt;a href=&quot;https://boz.com/articles/be-kind&quot;&gt;be kind&lt;/a&gt;. Hope to see you there and thanks
+for reading!&lt;/p&gt;
+</description>
+        <pubDate>Sat, 19 Jun 2021 00:00:00 +0000</pubDate>
+        <link>https://nim-lang-cn.org/blog/2021/06/19/new-community-home.html</link>
+        <guid isPermaLink="true">https://nim-lang-cn.org/blog/2021/06/19/new-community-home.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>NimConf 2021 - Nim Online Conference</title>
+        <description>&lt;p&gt;NimConf 2021 will take place in about two weeks from now – on &lt;strong&gt;June 26th&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;It will have the same format as in 2020, and it will be streamed for free via YouTube.&lt;/p&gt;
+
+&lt;p&gt;We cannot share the details yet, but you can expect &lt;strong&gt;15+ talks&lt;/strong&gt; on various subjects
+and we’re sure you’ll find something interesting for yourself.&lt;/p&gt;
+
+&lt;h2 id=&quot;participating-as-an-audience&quot;&gt;Participating as an audience&lt;/h2&gt;
+
+&lt;p&gt;All talks will be streamed and recorded for later viewing.
+Watching the talks live will allow you to ask questions and participate in the
+discussions.&lt;/p&gt;
+
+&lt;p&gt;The timeline of talks will be published few days before the conference on our
+&lt;a href=&quot;https://conf.nim-lang.org/&quot;&gt;dedicated web page for NimConf 2021&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 11 Jun 2021 00:00:00 +0000</pubDate>
+        <link>https://nim-lang-cn.org/blog/2021/06/11/nim-conference.html</link>
+        <guid isPermaLink="true">https://nim-lang-cn.org/blog/2021/06/11/nim-conference.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>This Month with Nim: May 2021</title>
+        <description>&lt;h2 id=&quot;nim0-a-subset-of-nim-language-with-a-compiler-to-a-32-bits-risc-cpu-and-a-runtime-emulator&quot;&gt;Nim0, a subset of Nim language, with a compiler to a 32-bits RISC CPU and a runtime emulator&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-pierre-métras&quot;&gt;Author: &lt;a href=&quot;https://github.com/pmetras&quot;&gt;Pierre Métras&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Nim0 is a toy language similar to Nim but much more limited (no fancy feature X; replace X by generics, templates, closures, imports, etc.).
+It comes with a one-pass compiler to 32-bit RISC instructions and an emulator, and a few examples to show what you can do with it.&lt;/p&gt;
+
+&lt;p&gt;The interesting part in Nim0 is not the language itself but the &lt;a href=&quot;https://gitlab.com/pmetras/nim0&quot;&gt;compiler source&lt;/a&gt; in less than 4000 lines of commented code, with references to Niklaus Wirth’s &lt;a href=&quot;https://people.inf.ethz.ch/wirth/CompilerConstruction/index.html&quot;&gt;Compiler Construction book&lt;/a&gt; that you can follow while reading the book, even if the book talks about Oberon-0.
+When you have completed the book and added a few features to Nim0 compiler, you’ll be ready to jump into hacking &lt;a href=&quot;https://github.com/nim-lang/Nim&quot;&gt;Nim compiler&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Want to try it? Look at the simple instructions and detailed example at &lt;a href=&quot;https://pmetras.gitlab.io/nim0/&quot;&gt;pmetras.gitlab.io/nim0&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;nimibook&quot;&gt;Nimibook&lt;/h2&gt;
+
+&lt;h4 id=&quot;authors-pietroppeter-clonkk-hugogranstrom-zetashift&quot;&gt;Authors: &lt;a href=&quot;https://github.com/pietroppeter&quot;&gt;@pietroppeter&lt;/a&gt;, &lt;a href=&quot;https://github.com/Clonkk&quot;&gt;@clonkk&lt;/a&gt;, &lt;a href=&quot;https://github.com/HugoGranstrom&quot;&gt;@hugogranstrom&lt;/a&gt;, &lt;a href=&quot;https://github.com/zetashift&quot;&gt;@zetashift&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;This month we collaboratively worked on &lt;a href=&quot;https://pietroppeter.github.io/nimibook/&quot;&gt;nimibook&lt;/a&gt;,
+a port of &lt;a href=&quot;https://rust-lang.github.io/mdBook/index.html&quot;&gt;mdbook&lt;/a&gt; to nim using &lt;a href=&quot;https://pietroppeter.github.io/nimib/&quot;&gt;nimib&lt;/a&gt;.
+Nimibook allows to create a nice looking book from nim code and markdown, making sure that nim code is running correctly and being able to incorporate code outputs in the final book.&lt;/p&gt;
+
+&lt;p&gt;The work started with the goal of using nimib to write &lt;a href=&quot;https://github.com/SciNim/getting-started&quot;&gt;SciNim/getting-started&lt;/a&gt;, a guide for scientific libraries in Nim.
+We are now close (not there yet) to a working version of nimibook and next month
+we plan to start using it in SciNim/getting-started. Join us, we are having fun!&lt;/p&gt;
+
+&lt;h2 id=&quot;kashae&quot;&gt;&lt;a href=&quot;https://github.com/beef331/kashae&quot;&gt;Kashae&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-jason-beetham&quot;&gt;Author: &lt;a href=&quot;https://github.com/beef331&quot;&gt;Jason Beetham&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;After seeing the Python caching annotation, I was enthuised to make a caching library.
+Kashae is the result of that enthusiasm, it has many optional features to change it’s behaviour, though still needs some work and to be submitted to Nimble.
+A small example of using the “unlimited” cache follows:&lt;/p&gt;
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kashae&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;proc &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;susta&quot;&gt;&lt;a href=&quot;https://github.com/ajusa/susta&quot;&gt;Susta&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-ajusa&quot;&gt;Author: &lt;a href=&quot;https://github.com/ajusa&quot;&gt;@ajusa&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Susta is a test runner that aids in print statement based testing.
+You pass it a lists of Nim files to run, and it saves any output from stdout to a file. Then, when you run the tests again, it diffs the output with the saved output and reports any differences.
+If the changes are what you expected, you can simply &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;accept&lt;/code&gt; them to overwrite the old output.
+It is a simple and easy way to write tests when you can’t be bothered to write unit tests.
+It especially shines when you want to catch regressions.&lt;/p&gt;
+
+&lt;p&gt;I plan on making it language agnostic and adding threading support to run tests in parallel in the near future.&lt;/p&gt;
+
+&lt;p&gt;It’s a &lt;a href=&quot;https://github.com/ajusa/susta&quot;&gt;super simple utility&lt;/a&gt;, and I hope folks enjoy using it!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;want-to-see-your-project-here-next-month&quot;&gt;Want to see your project here next month?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/beef331/website#adding-your-project-to-month-with-nim&quot;&gt;Follow this&lt;/a&gt; to add your project to the next month’s blog post.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+        <link>https://nim-lang-cn.org/blog/2021/06/01/this-month-with-nim.html</link>
+        <guid isPermaLink="true">https://nim-lang-cn.org/blog/2021/06/01/this-month-with-nim.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Version 1.4.8 released</title>
+        <description>&lt;p&gt;The Nim team is happy to announce version 1.4.8, our fourth patch release for
+Nim 1.4.&lt;/p&gt;
+
+&lt;p&gt;Version 1.4.8 is a result of one month of hard work, and it contains
+&lt;a href=&quot;https://github.com/nim-lang/Nim/compare/v1.4.6...v1.4.8&quot;&gt;23 commits&lt;/a&gt;,
+fixing the most important bugs and bringing additional improvements to our
+ORC memory management.&lt;/p&gt;
+
+&lt;p&gt;We would recommend to all of our users to upgrade and use version 1.4.8.&lt;/p&gt;
+
+&lt;h2 id=&quot;release-highlights&quot;&gt;Release highlights&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Just like our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;devel&lt;/code&gt; branch, v1.4.8 is built using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;csources_v1&lt;/code&gt;, which means
+you can use it on &lt;strong&gt;Apple M1&lt;/strong&gt; chips.&lt;/li&gt;
+  &lt;li&gt;Version 1.4.6 triggered some false positives with several antivirus softwares.
+Based on our testing, this shouldn’t happen with v1.4.8.&lt;/li&gt;
+  &lt;li&gt;Now you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d:release&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d:danger&lt;/code&gt; in your config files,
+no need to manually write these flags on the command line anymore.&lt;/li&gt;
+  &lt;li&gt;Additional improvements to our ORC memory management.
+Use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--gc:orc&lt;/code&gt; to compile your projects with it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;installing-nim-14&quot;&gt;Installing Nim 1.4&lt;/h1&gt;
+
+&lt;h2 id=&quot;new-users&quot;&gt;New users&lt;/h2&gt;
+
+&lt;p&gt;Check out if the package manager of your OS already ships version 1.4.8 or
+install it as described &lt;a href=&quot;https://nim-lang.org/install.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;existing-users&quot;&gt;Existing users&lt;/h2&gt;
+
+&lt;p&gt;If you have installed a previous version of Nim using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;choosenim&lt;/code&gt;,
+getting Nim 1.4.8 is as easy as:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;choosenim update stable
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Alternatively, you can download Nim 1.4.8 from
+&lt;a href=&quot;https://github.com/nim-lang/nightlies/releases/tag/2021-05-25-version-1-4-44e653a9314e1b8503f0fa4a8a34c3380b26fff3&quot;&gt;our nightlies builds&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;donating-to-nim&quot;&gt;Donating to Nim&lt;/h1&gt;
+
+&lt;p&gt;We would like to encourage you to donate to Nim.&lt;/p&gt;
+
+&lt;p&gt;The donated money will be used to further improve Nim:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Bugs need to be fixed, the documentation can be improved, compiler error
+messages can always be better.&lt;/li&gt;
+  &lt;li&gt;The most exciting upcoming feature, that has the greatest impact to all
+of our users, is &lt;a href=&quot;https://github.com/nim-lang/RFCs/issues/46&quot;&gt;incremental compilation&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Incremental compilation will also be the foundation for further tooling
+improvements like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nimsuggest&lt;/code&gt; (autocompletion, find usages).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can donate via:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://opencollective.com/nim&quot;&gt;Open Collective&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.patreon.com/araq&quot;&gt;Patreon&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.paypal.com/donate/?cmd=_s-xclick&amp;amp;hosted_button_id=FLWX5V2PMAXAU&quot;&gt;PayPal&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are a company, we also offer commercial support.
+Please get in touch with us via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;support@nim-lang.org&lt;/code&gt;.
+As a commercial backer, you can decide what features and bugfixes should
+be prioritized.&lt;/p&gt;
+
+&lt;h1 id=&quot;bugfixes&quot;&gt;Bugfixes&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fixed “Asynchttpserver example doesn’t work”
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/issues/16506&quot;&gt;#16506&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Fixed “AsyncHttpClient doesn’t handle errors”
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/issues/16436&quot;&gt;#16436&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Fixed “OpenSSL 1.0.x library naming issue on windows “
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/issues/17755&quot;&gt;#17755&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Fixed “Compiler warning on mismatching case/spelling”
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/issues/15848&quot;&gt;#15848&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Fixed “&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;db_postgres&lt;/code&gt; does not sanitize &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%00&lt;/code&gt; resulting in crash”
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/issues/17925&quot;&gt;#17925&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Full changelog since v1.4.6 contains &lt;a href=&quot;https://github.com/nim-lang/Nim/compare/v1.4.6...v1.4.8&quot;&gt;23 commits&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 25 May 2021 00:00:00 +0000</pubDate>
+        <link>https://nim-lang-cn.org/blog/2021/05/25/version-148-released.html</link>
+        <guid isPermaLink="true">https://nim-lang-cn.org/blog/2021/05/25/version-148-released.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>This Month with Nim: April 2021</title>
+        <description>&lt;h2 id=&quot;nimjl&quot;&gt;Nimjl&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-regis-caillaud-clonkk&quot;&gt;Author: Regis Caillaud (&lt;a href=&quot;https://github.com/Clonkk/&quot;&gt;Clonkk&lt;/a&gt;)&lt;/h4&gt;
+
+&lt;p&gt;Nimjl is a bridge to call Julia code from Nim. It is to Julia what Nimpy is to Python.&lt;/p&gt;
+
+&lt;p&gt;Useful to leverage Julia’s powerful ecosystem in Numerical computing.
+Practical for integrating Julia code in Nim application without rewriting everything.&lt;/p&gt;
+
+&lt;p&gt;And for those who prefers code to word here’s a small example of sorting a Nim sequence using Julia’s sort function !&lt;/p&gt;
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nimjl&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sequtils&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sugar&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;jlVmInit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seqRand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newSeqWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seqRand&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;discard&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jlCall&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sort!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seqRand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seqRand&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;jlVmExit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Did that pique your curiosity ? You can check-it out &lt;a href=&quot;https://github.com/Clonkk/nimjl&quot;&gt;here&lt;/a&gt; or read more &lt;a href=&quot;https://github.com/Clonkk/nimjl/tree/master/examples&quot;&gt;examples&lt;/a&gt; !&lt;/p&gt;
+
+&lt;h2 id=&quot;datarray&quot;&gt;&lt;a href=&quot;https://github.com/liquidev/datarray&quot;&gt;Datarray&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-liquidev&quot;&gt;Author: &lt;a href=&quot;https://github.com/liquidev&quot;&gt;liquidev&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Datarray aims to make data oriented design easy, by abstracting away the common struct of arrays pattern that exhibits much better cache efficiency than the usual, object oriented-style array of structs.
+The creation of this library was inspired by &lt;a href=&quot;https://blog.royalsloth.eu/posts/the-compiler-will-optimize-that-away/&quot;&gt;this blog post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example of how to use a datarray to manipulate data efficiently:&lt;/p&gt;
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datarray&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# declare a struct with fields that should be transformed into arrays&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;type&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Ant&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;object&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;isWarrior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int32&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# create and initialize the datarray with some data to operate on&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;antColony&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Datarray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ant&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;randomize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ant&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;antColony&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# `ant` is of a special type - `VarElement[Ant]`, which holds a pointer to the&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# datarray's memory, its length, and the relevant index of the element we're&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# operating on. there also exists an `Element[T]` for non-var datarrays that&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# prohibits assignment to fields.&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# the special . and .= operators can be used to access or modify the fields:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;joe&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;josh&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;dave&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;red&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;black&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;brown&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isWarrior&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int32&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# {} and {}= can also be used if you prefer to avoid using experimental&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# language features, but to get stabilized, experimental features need testing&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# so it's your choice ;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# query the data using the `select` macro&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numChosen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;antColony&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# this macro invocation creates two templates inside of the loop,&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# `age` and `color`, which desugar to something like this:&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# antColony.ith(index, age)&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# to save typing.&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;red&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;inc&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numChosen&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;found &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numChosen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; red ants older than 1 year&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Because a datarray is quite a generic and flexible container, it can be used to implement a variety of different things, eg. an ECS framework, or a simple and fast database.
+A dynamically allocated variant, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DynDatarray&lt;/code&gt;, is also available, if the size needs to be determined at runtime, but I’ve yet to implement a dynamically &lt;em&gt;resizable&lt;/em&gt; datarray as of writing this.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/liquidev/datarray#benchmarks&quot;&gt;Benchmarks&lt;/a&gt; show that using an struct of arrays is about 2-3x faster than using an array of structs, so if you want to write fast programs that take full advantage of your CPU, start using datarrays now!&lt;/p&gt;
+
+&lt;p&gt;The library is still growing and lacks many useful features, so suggestions are welcome.&lt;/p&gt;
+
+&lt;h2 id=&quot;loki&quot;&gt;&lt;a href=&quot;https://github.com/beshrkayali/loki&quot;&gt;Loki&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-beshr-kayali&quot;&gt;Author: &lt;a href=&quot;https://github.com/beshrkayali&quot;&gt;Beshr Kayali&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;Loki is a small library for writing line-oriented command interpreters (or cli programs) in Nim that is inspired by Python’s cmd lib.&lt;/p&gt;
+
+&lt;p&gt;Version 0.3 is released this month, and it adds the functionality of automatically generating a TOC and “help” command.&lt;/p&gt;
+
+&lt;p&gt;Quick example:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loki&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strutils&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sequtils&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zip&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;loki&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;do_greet&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+   &lt;span class=&quot;sd&quot;&gt;## Get a nice greeting!&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSome&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello there!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;do_add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSome&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSome&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Result is &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Provide two numbers to add them&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;do_EOF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Bye!&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;*** Unknown syntax: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; ***&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;myCmd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newLoki&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;intro&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Welcome to my CLI!&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;myCmd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cmdLoop&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And  an example run: https://asciinema.org/a/iMA7pIq2f7sy8X44pkCPhNmOt&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;want-to-see-your-project-here-next-month&quot;&gt;Want to see your project here next month?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/beef331/website#adding-your-project-to-month-with-nim&quot;&gt;Follow this&lt;/a&gt; to add your project to the next month’s blog post.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
+        <link>https://nim-lang-cn.org/blog/2021/05/01/this-month-with-nim.html</link>
+        <guid isPermaLink="true">https://nim-lang-cn.org/blog/2021/05/01/this-month-with-nim.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Versions 1.4.6 and 1.2.12 released</title>
+        <description>&lt;p&gt;The Nim team is happy to announce the double patch release of versions 1.2.12 and 1.4.6.&lt;/p&gt;
+
+&lt;p&gt;Version 1.4.6 is our main release, which brings several improvements over
+1.4.4, released a month ago.
+As our &lt;a href=&quot;https://nim-lang.org/blog/2021/01/20/community-survey-results-2020.html&quot;&gt;Community Survey&lt;/a&gt;
+has shown, most of our users use 1.4.x version, and this release is for them
+and for all newcomers: we recommend you to install version 1.4.6.&lt;/p&gt;
+
+&lt;p&gt;We didn’t forget the users who are still on the older versions and cannot
+update to the latest stable version.
+Version 1.2.12 is for them, and contains mostly just security fixes.
+You can find more information about this version at the bottom of the article.&lt;/p&gt;
+
+&lt;p&gt;If you are still on Nim 1.2.x, and would like to know about new features
+available in Nim 1.4, check out our
+&lt;a href=&quot;https://nim-lang.org/blog/2020/10/16/version-140-released.html&quot;&gt;version 1.4.0 release article&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;version-146&quot;&gt;Version 1.4.6&lt;/h1&gt;
+
+&lt;p&gt;Version 1.4.6 is our third patch release for Nim 1.4 and it brings several
+fixes since version 1.4.4, released two month ago.&lt;/p&gt;
+
+&lt;h2 id=&quot;installing-nim-146&quot;&gt;Installing Nim 1.4.6&lt;/h2&gt;
+
+&lt;h3 id=&quot;new-users&quot;&gt;New users&lt;/h3&gt;
+
+&lt;p&gt;Check out if the package manager of your OS already ships version 1.4.6 or
+install it as described &lt;a href=&quot;https://nim-lang.org/install.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;existing-users&quot;&gt;Existing users&lt;/h3&gt;
+
+&lt;p&gt;If you have installed a previous version of Nim using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;choosenim&lt;/code&gt;,
+getting Nim 1.4.6 is as easy as:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;choosenim update stable
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Alternatively, you can download Nim 1.4.6 from
+&lt;a href=&quot;https://github.com/nim-lang/nightlies/releases/tag/2021-04-15-version-1-4-2b6b08032348939e5d355a6cb4faa0169306c17f&quot;&gt;our nightlies builds&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;bugfixes-since-144&quot;&gt;Bugfixes since 1.4.4&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fixed GC crash resulting from inlining of the memory allocation procs
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/pull/17709&quot;&gt;link&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Fixed “isolate doesn’t work”
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/issues/17264&quot;&gt;#17264&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Fixed “regression since 1.4.2: vm crash with lists.SinglyLinkedRing”
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/issues/16384&quot;&gt;#16384&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Fixed “Generics “sandwiched” between two modules don’t mixin their scope symbols properly”
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/issues/11225&quot;&gt;#11225&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Fixed “json.&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%&lt;/code&gt; raises &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Defect&lt;/code&gt; for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;uint64&lt;/code&gt;”
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/issues/17383&quot;&gt;#17383&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Fixed “memory allocation during {.global.} init breaks GC”
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/issues/17085&quot;&gt;#17085&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Fixed “incorrect raises effect for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$&lt;/code&gt;(NimNode)”
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/issues/17454&quot;&gt;#17454&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Full changelog since v1.4.4 contains &lt;a href=&quot;https://github.com/nim-lang/Nim/compare/v1.4.4...v1.4.6&quot;&gt;19 commits&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;donating-to-nim&quot;&gt;Donating to Nim&lt;/h1&gt;
+
+&lt;p&gt;We would like to encourage you to donate to Nim.&lt;/p&gt;
+
+&lt;p&gt;The donated money will be used to further improve Nim:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Bugs need to be fixed, the documentation can be improved, compiler error
+messages can always be better.&lt;/li&gt;
+  &lt;li&gt;The most exciting upcoming feature, that has the greatest impact to all
+of our users, is &lt;a href=&quot;https://github.com/nim-lang/RFCs/issues/46&quot;&gt;incremental compilation&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Incremental compilation will also be the foundation for further tooling
+improvements like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nimsuggest&lt;/code&gt; (autocompletion, find usages).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can donate via:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://opencollective.com/nim&quot;&gt;Open Collective&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.patreon.com/araq&quot;&gt;Patreon&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.paypal.com/donate/?cmd=_s-xclick&amp;amp;hosted_button_id=FLWX5V2PMAXAU&quot;&gt;PayPal&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are a company, we also offer commercial support.
+Please get in touch with us via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;support@nim-lang.org&lt;/code&gt;.
+As a commercial backer, you can decide what features and bugfixes should
+be prioritized.&lt;/p&gt;
+
+&lt;h1 id=&quot;version-1212&quot;&gt;Version 1.2.12&lt;/h1&gt;
+
+&lt;p&gt;Version 1.2.12 is our sixth patch release for Nim 1.2 and it brings a couple of
+new fixes since version 1.2.10, released two month ago.&lt;/p&gt;
+
+&lt;h2 id=&quot;installing-nim-1212&quot;&gt;Installing Nim 1.2.12&lt;/h2&gt;
+
+&lt;h3 id=&quot;new-users-1&quot;&gt;New users&lt;/h3&gt;
+
+&lt;p&gt;We recommend you to install the newest Nim version (at the time of writing: 1.4.6, see above).
+Check out if the package manager of your OS already ships Nim 1.4 or
+install it as described &lt;a href=&quot;https://nim-lang.org/install.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;existing-users-1&quot;&gt;Existing users&lt;/h3&gt;
+
+&lt;p&gt;If you have installed a previous version of Nim using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;choosenim&lt;/code&gt; and you
+cannot switch to 1.4.x yet, getting Nim 1.2.12 is as easy as:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;choosenim 1.2.12
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Alternatively, you can download Nim 1.2.12 from
+&lt;a href=&quot;https://github.com/nim-lang/nightlies/releases/tag/2021-04-15-version-1-2-fb03c4b937ec4d96ca7b54c5527640f1ea8a9ad8&quot;&gt;our nightlies builds&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;bugfixes-since-1210&quot;&gt;Bugfixes since 1.2.10&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fixed GC crash resulting from inlining of the memory allocation procs
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/pull/17709&quot;&gt;link&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Fixed “incorrect raises effect for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$&lt;/code&gt;(NimNode)”
+(&lt;a href=&quot;https://github.com/nim-lang/Nim/issues/17454&quot;&gt;#17454&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Full changelog since v1.2.10 contains &lt;a href=&quot;https://github.com/nim-lang/Nim/compare/v1.2.10...v1.2.12&quot;&gt;14 commits&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate>
+        <link>https://nim-lang-cn.org/blog/2021/04/15/versions-146-and-1212-released.html</link>
+        <guid isPermaLink="true">https://nim-lang-cn.org/blog/2021/04/15/versions-146-and-1212-released.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>This Month with Nim: March 2021</title>
+        <description>&lt;h2 id=&quot;nimcloudflaredyndns&quot;&gt;&lt;a href=&quot;https://github.com/enthus1ast/nimCloudflareDynDns&quot;&gt;nimCloudflareDynDns&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-david-krause-enthus1ast&quot;&gt;Author: David Krause (&lt;a href=&quot;https://github.com/enthus1ast/&quot;&gt;enthus1ast&lt;/a&gt;)&lt;/h4&gt;
+
+&lt;p&gt;If you live in Germany you most likely have a dynamic IP address.
+So every time your router restarts, or after a certain time, your router gets a
+new IP address from your ISP.&lt;/p&gt;
+
+&lt;p&gt;When you want to host services from home, or just want to have SSH access,
+you normally use one of the big dynamic DNS providers (dyn.com, no-ip.com, afraid.org, etc.).
+To have a DNS entry that always points to your routers external IP address.&lt;/p&gt;
+
+&lt;p&gt;If your domain is managed by cloudflare’s DNS servers, this tool is for you!&lt;/p&gt;
+
+&lt;p&gt;The idea:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Acquire your public IP address by crawling several “what is my IP address” websites.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Assume that the most often ‘seen’ IP address is your router’s external IP address.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use the cloudflare API to change ‘A’ records of some of the configured subdomains
+to point to your router’s IP address.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;By running this tool periodically, you effectively use cloudflare as your dynamic
+DNS provider!&lt;/p&gt;
+
+&lt;p&gt;We use this tool for years without major issues and I wanted to share this with you :)&lt;/p&gt;
+
+&lt;p&gt;“Go and host all the things!”&lt;/p&gt;
+
+&lt;p&gt;P.S. Even if you do not plan to use cloudflare as your dynDNS provider, this
+project includes a “from (text) soup IPv4 parser” which can extract IPv4 addresses from any text.
+Maybe this is helpful!&lt;/p&gt;
+
+&lt;h2 id=&quot;nimib&quot;&gt;nimib&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-pietro-peterlongo-pietroppeter&quot;&gt;Author: Pietro Peterlongo (&lt;a href=&quot;https://github.com/pietroppeter/&quot;&gt;pietroppeter&lt;/a&gt;)&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/pietroppeter/nimib&quot;&gt;nimib&lt;/a&gt; provides an API to convert your
+Nim code and its outputs (text, images, …) to html documents, similar to
+the notebooks produced by tools like Jupyter or RMarkdown.&lt;/p&gt;
+
+&lt;p&gt;For example the following code:&lt;/p&gt;
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nimib&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;nbInit&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;nbText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;### A random 8-color palette with [pixie](https://github.com/treeform/pixie)&quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;nbCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pixie&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;proc &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;randomColor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ColorRGB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uint8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uint8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uint8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;radius&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;space&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;radius&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;space&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;radius&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;center&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vec2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;radius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;radius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ColorRGB&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;palette&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ColorRGB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;randomColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;palette&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fillCircle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;radius&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;center&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vec2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;radius&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;space&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;writeFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;palette.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;nbImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;palette.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;nbCode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;palette&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;nbShow&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Produces an &lt;a href=&quot;https://pietroppeter.github.io/nblog/drafts/random_palette.html&quot;&gt;html document&lt;/a&gt;
+that looks like this:&lt;/p&gt;
+&lt;p style=&quot;text-align: center;&quot;&gt;
+  &lt;img width=&quot;auto&quot; height=&quot;400&quot; src=&quot;https://nim-lang-cn.org/assets/thismonthwithnim/2021-04/nimib.png&quot; /&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&quot;raspberry-pi-pico-sdk&quot;&gt;Raspberry Pi Pico-sdk&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-jason-beetham-beef331&quot;&gt;Author: Jason Beetham (&lt;a href=&quot;https://github.com/beef331/&quot;&gt;beef331&lt;/a&gt;)&lt;/h4&gt;
+
+&lt;p&gt;The Raspberry Pi Pico is a micro-controller which runs C code, and you know what
+that means: throw Nim on it!&lt;/p&gt;
+
+&lt;p&gt;I’ve started making idiomatic bindings for the Pico which makes it rather simple
+to get going with Nim on the Pico.
+Currently supporting GPIO, ADC, and PWM.&lt;/p&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://github.com/beef331/picotemplate&quot;&gt;template repo&lt;/a&gt; with
+the examples and the explanation on how to make the project.&lt;/p&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://github.com/beef331/picostdlib&quot;&gt;Pico-SDK&lt;/a&gt; for the bindings.&lt;/p&gt;
+
+&lt;h2 id=&quot;cosmonim-an-example-of-using-cosmopolitan-libc-with-nim&quot;&gt;Cosmonim: an example of using &lt;a href=&quot;https://justine.lol/cosmopolitan/index.html&quot;&gt;Cosmopolitan Libc&lt;/a&gt; with Nim&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-danil-yarantsev-yardanico&quot;&gt;Author: Danil Yarantsev (&lt;a href=&quot;https://github.com/Yardanico&quot;&gt;Yardanico&lt;/a&gt;)&lt;/h4&gt;
+
+&lt;p&gt;Cosmopolitan is a project that allows one to compile C programs into
+&lt;a href=&quot;https://justine.lol/ape.html&quot;&gt;portable binaries&lt;/a&gt; that can run on multiple OSes at the same time.
+Cosmonim shows how to properly set up the Nim compiler to use Cosmopolitan;
+provides a few example programs and stubs (empty headers) so that the C compiler
+would not complain about missing headers.&lt;/p&gt;
+
+&lt;p&gt;With &lt;a href=&quot;https://github.com/Yardanico/cosmonim&quot;&gt;Cosmonim&lt;/a&gt; you can make CLI applications
+with Nim and distribute them as a single binary for multiple platforms!&lt;/p&gt;
+
+&lt;h2 id=&quot;blog-post-amalgamating-nim-programs&quot;&gt;&lt;a href=&quot;https://zen.su/posts/amalgamating-nim-programs/&quot;&gt;Blog post: Amalgamating Nim programs&lt;/a&gt;&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-danil-yarantsev-yardanico-1&quot;&gt;Author: Danil Yarantsev (&lt;a href=&quot;https://github.com/Yardanico&quot;&gt;Yardanico&lt;/a&gt;)&lt;/h4&gt;
+
+&lt;p&gt;In this blog post I talk about amalgamating Nim programs with &lt;a href=&quot;https://github.com/cil-project/cil&quot;&gt;CIL&lt;/a&gt;.
+Amalgamation is a process (popularised and used by the widely known SQLite project)
+of combining multiple source files into a single file.
+We can use that to compile Nim programs into single-file C programs that can be
+distributed more easily, or used in contexts where using Nim directly is not possible.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;want-to-see-your-project-here-next-month&quot;&gt;Want to see your project here next month?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/beef331/website&quot;&gt;Follow this&lt;/a&gt; to add your project to the next month’s blog post.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 02 Apr 2021 00:00:00 +0000</pubDate>
+        <link>https://nim-lang-cn.org/blog/2021/04/02/this-month-with-nim.html</link>
+        <guid isPermaLink="true">https://nim-lang-cn.org/blog/2021/04/02/this-month-with-nim.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Pattern matching in Nim</title>
+        <description>&lt;div class=&quot;sidebarblock&quot;&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;div class=&quot;title&quot;&gt;Guest post&lt;/div&gt;
+    &lt;div class=&quot;paragraph&quot;&gt;
+      This is a guest post by haxscramper.
+      If you would like to publish articles as a guest author on nim-lang.org then get in touch with us via
+      &lt;a href=&quot;https://twitter.com/nim_lang&quot;&gt;Twitter&lt;/a&gt; or &lt;a href=&quot;https://nim-lang.org/community.html&quot;&gt;otherwise&lt;/a&gt;.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;nim-fusion&quot;&gt;Nim fusion&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/nim-lang/fusion&quot;&gt;Fusion&lt;/a&gt; contains Nim modules that are meant to
+be treated as an extension to the stdlib.
+Currently, the following modules are present:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fusion/smartptrs&lt;/code&gt; - C++-like unique/shared pointers&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fusion/btreetables&lt;/code&gt; - sorted associative containers&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fusion/matching&lt;/code&gt; - pattern matching implementation using Nim macros - the main focus of this article&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fusion/htmlparser&lt;/code&gt; - HTML parser&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fusion/astdsl&lt;/code&gt; - karax-style DSL for constructing an AST&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fusion/filepermissions&lt;/code&gt; - convenience functions for working with file permissions.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The documentation index can be found &lt;a href=&quot;https://nim-lang.github.io/fusion/theindex.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fusion&lt;/code&gt; simply run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nimble install fusion&lt;/code&gt;.
+To try it out without installing, use the &lt;a href=&quot;https://play.nim-lang.org/#ix=2Qzc&quot;&gt;Nim playground&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fusion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matching&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;{.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;experimental&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;caseStmtMacros&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;_]:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Match failed&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;pattern-matching-introduction&quot;&gt;Pattern matching introduction&lt;/h1&gt;
+
+&lt;p&gt;The new pattern matching library introduces support for two very useful concepts:
+&lt;strong&gt;pattern matching&lt;/strong&gt; and &lt;strong&gt;object destructuring&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Pattern matching is a mechanism that allows you to check a particular object against
+a pattern — you could think of it mainly as a way to reduce boilerplate code when
+comparing objects for equality, checking if a value is within range, checking if a
+particular key is present in a table and so on.&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fusion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matching&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;{.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;experimental&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;caseStmtMacros&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# JSON is very simple data format, but illustrates a lot of useful features&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# of pattern matching&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parseJson&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;{ &quot;key&quot; : &quot;value&quot; }&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# No longer necessary to check if key is present - it is done&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# automatically&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;key&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;discard&lt;/span&gt;
+
+  &lt;span class=&quot;c&quot;&gt;# Extracting values from nested data structures also becomes much easier.&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;key&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;value
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Object destructuring allows you to extract values from particular
+fields in an object.
+It is very common in dynamic programming languages such as Python.
+The simplest form of destructuring is already supported by Nim — tuple unpacking:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;some&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And with pattern matching you can now unpack sequences, tables and custom objects:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;33&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;33&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;second&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trail&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;12, 3, @[(33, 4), (12, 33)]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;using-pattern-matching-in-regular-code&quot;&gt;Using pattern matching in regular code&lt;/h1&gt;
+
+&lt;p&gt;The main purpose of pattern matching is a simplification of conditions and
+consecutive checks.
+It is especially useful when paired with
+&lt;a href=&quot;https://nim-lang.org/docs/tut2.html#object-oriented-programming-object-variants&quot;&gt;object variants&lt;/a&gt;,
+but can also be used to do a lot of other things, such as
+&lt;a href=&quot;https://nim-lang.github.io/fusion/src/fusion/matching.html#matching-different-things-kvminuspairs-matching&quot;&gt;key-value pairs matching&lt;/a&gt;
+and extensive support for
+&lt;a href=&quot;https://nim-lang.github.io/fusion/src/fusion/matching.html#matching-different-things-sequence-matching&quot;&gt;sequence matching&lt;/a&gt;.
+A special syntactic sugar is provided for very common use cases, such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Option[T]&lt;/code&gt;
+checking (similar to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if let&lt;/code&gt; in Rust):&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Some&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;some&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;. Is string? &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hello. Is string? true
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And matching tree structures of case objects (such as an AST).
+For &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;enum&lt;/code&gt;, conforming to the &lt;a href=&quot;https://nim-lang.org/docs/nep1.html#introduction-naming-conventions&quot;&gt;NEP1 style guide&lt;/a&gt;
+naming conventions, you can omit the prefix entirely, leading to code that looks
+roughly like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AST&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# Node kind is `nnkIdent`, but it is possible to omit `nnk`&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strVal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Found ident: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+
+  &lt;span class=&quot;c&quot;&gt;# Extracting subnodes from infix expression.&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;InfixExpr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strVal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;+&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lhs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rhs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+
+  &lt;span class=&quot;c&quot;&gt;# Matching if statements with *exactly* two branches.&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# No need to worry about indexing exceptions - `len` is checked accordingly&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# during pattern matching.&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IfStmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ElifBranch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cond1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;_], ElifBranch[@cond2, _]]:&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;using-pattern-matching-for-writing-macros&quot;&gt;Using pattern matching for writing macros&lt;/h1&gt;
+
+&lt;p&gt;Nim macros are one of the most powerful parts of the language, but they might
+seem a little intimidating for newcomers, especially when it comes to implementing
+a macro for solving a particular problem at hand.&lt;/p&gt;
+
+&lt;p&gt;This article gives an example on how one can easily create a relatively complex macro
+using the new pattern matching library.&lt;/p&gt;
+
+&lt;p&gt;We will be creating a macro for dataflow programming, with support for some operations
+from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;std/sequtils&lt;/code&gt; module (map/filter/each).
+The macro won’t be covering all possible combinations and use cases as it would make
+the implementation significantly more complicated.&lt;/p&gt;
+
+&lt;h2 id=&quot;first-step---design-the-dsl&quot;&gt;First step - design the DSL&lt;/h2&gt;
+
+&lt;p&gt;When writing a macro, it is very useful to just write DSL code (as if you already
+had the macro) and what you expect it to generate.
+Decide &lt;em&gt;what you want to do&lt;/em&gt; and &lt;em&gt;how it should look like&lt;/em&gt;.
+In our case, the input could look roughly like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;flow lines(&quot;/etc/passwd&quot;):
+  map[_, seq[string]]:
+    it.split(&quot;:&quot;)
+  keepIf:
+    it.len &amp;gt; 1 and
+    it.matches [_.startsWith(&quot;systemd&quot;), .._]
+  each:
+    echo it
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And it should generate a loop that looks like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ResType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/etc/passwd&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matches&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;_.startsWith(&quot;systemd&quot;), .._]:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;analyze-the-dsl-parse-tree&quot;&gt;Analyze the DSL parse tree&lt;/h2&gt;
+
+&lt;p&gt;Now the question is - how to transform the first into the second?
+We will start by first looking at the output for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dumpTree&lt;/code&gt; on the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flow&lt;/code&gt; macro:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dumpTree:
+  flow lines(&quot;/etc/passwd&quot;):
+    map[_, seq[string]]:
+      it.split(&quot;:&quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;StmtList&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;Command&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;flow&quot;&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;Call&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;lines&quot;&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;StrLit&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/etc/passwd&quot;&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;StmtList&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;Call&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;          &lt;span class=&quot;n&quot;&gt;BracketExpr&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;map&quot;&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;_&quot;&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;BracketExpr&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt;              &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;seq&quot;&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;              &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;string&quot;&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;          &lt;span class=&quot;n&quot;&gt;StmtList&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;Call&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt;              &lt;span class=&quot;n&quot;&gt;DotExpr&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;                &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;it&quot;&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt;                &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;split&quot;&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;              &lt;span class=&quot;n&quot;&gt;StrLit&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;:&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This load of text might seem a little confusing at first, but in the end it can be
+taken apart quite easily (and that is exactly what we will be doing).
+First, on line 3, we see the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flow&lt;/code&gt; identifier (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ident &quot;flow&quot;&lt;/code&gt;) - this is the start of our macro.
+Then, on the next line is a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lines(&quot;/etc/passwd&quot;)&lt;/code&gt; argument. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StmtList&lt;/code&gt; on lines
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;7-20&lt;/code&gt; is the actual body of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flow&lt;/code&gt; macro - the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; section etc.
+We will get into their internal structure a little later.&lt;/p&gt;
+
+&lt;h2 id=&quot;intermediate-representation&quot;&gt;Intermediate representation&lt;/h2&gt;
+
+&lt;p&gt;After we a have rough outline of the input AST, it is time to decide on how this
+particular macro can be implemented.&lt;/p&gt;
+
+&lt;p&gt;I usually try to introduce some kind of intermediate representation for the DSL in
+order to make things more organized and decouple the parsing stage from code generation.
+This might make the implementation a little longer, but more extensible and robust.
+You can, without a doubt, just go directly to code generation, but for a more complex
+DSL I would still recommend using some kind of IR.&lt;/p&gt;
+
+&lt;p&gt;In this particular case, the DSL structure for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flow&lt;/code&gt; macro can be described as:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;type&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;FlowStageKind&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;enum&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;fskMap&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Stage for element conversion&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;fskFilter&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Filter elements&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;fskEach&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Execute action without returning value&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;FlowStage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;object&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;outputType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Option&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NimNode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Assert result type&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FlowStageKind&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Type of the stage&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NimNode&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Stage body&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It directly maps on the input DSL.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; should create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fskMap&lt;/code&gt; stage, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;filter&lt;/code&gt; creates &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fskFilter&lt;/code&gt; and so on.
+Optionally you can specify the output type like this: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map [ExpectedOutput]&lt;/code&gt;.
+The macro will work in two stages: first it will convert the input representation into
+an intermediate representation, and then it will generate the resulting AST.&lt;/p&gt;
+
+&lt;h2 id=&quot;pattern-matching&quot;&gt;Pattern matching&lt;/h2&gt;
+
+&lt;p&gt;Now, after we have good understanding of what exactly we want to do - the question is ‘how?’.
+That’s where &lt;a href=&quot;https://nim-lang.github.io/fusion/src/fusion/matching.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fusion/matching&lt;/code&gt;&lt;/a&gt;
+comes particularly handy - we already identified all patterns, and now it is only a matter
+of writing this down in code.&lt;/p&gt;
+
+&lt;p&gt;Without pattern matching, you’d be left with a long series of repeating &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[0][0][0]&lt;/code&gt;
+and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if kind == nnkBracketExpr&lt;/code&gt; in order to retrieve parts from the DSL and validate input.&lt;/p&gt;
+
+&lt;p&gt;Before we proceed to writing patterns for the whole DSL, it is important to consider
+the three possible cases of writing a stage.
+The first once is very simple - no type specified, only a stage identifier:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;dumpTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;StmtList
+  Call
+    Ident &quot;map&quot;
+    StmtList
+      Ident &quot;body&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;But a single stage with a type parameter can be written using two different ways - both
+are &lt;strong&gt;syntactically correct&lt;/strong&gt;, but have different parse trees:&lt;/p&gt;
+
+&lt;p&gt;With space between &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[a]&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;dumpTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;StmtList
+  Command
+    Ident &quot;map&quot;
+    Bracket
+      Ident &quot;a&quot;
+    StmtList
+      Ident &quot;body&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Without space between &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[a]&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;dumpTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;StmtList
+  Call
+    BracketExpr
+      Ident &quot;map&quot;
+      Ident &quot;a&quot;
+    StmtList
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The difference is due to the
+&lt;a href=&quot;https://nim-lang.org/docs/manual.html#procedures-method-call-syntax&quot;&gt;method call syntax&lt;/a&gt; -
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map[a]&lt;/code&gt; is treated as a bracket expression (like array subscript), but &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map [a]&lt;/code&gt;
+is parsed as a procedure &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; call, with argument &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[a]&lt;/code&gt; (passing an array to a
+function).&lt;/p&gt;
+
+&lt;h2 id=&quot;fusionmatching&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fusion/matching&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;Let’s make a small digression in order to better understand how the new pattern
+matching library can help us here.&lt;/p&gt;
+
+&lt;p&gt;We will be focusing on the parts that are relevant to our task - for more details you
+can read the &lt;a href=&quot;https://nim-lang.github.io/fusion/src/fusion/matching.html&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When writing Nim macros you are mostly dealing with
+&lt;a href=&quot;https://nim-lang.org/docs/macros.html#the-ast-in-nim&quot;&gt;NimNode&lt;/a&gt; objects - first to
+process input AST, and then to generate new code.
+The AST is comprised of &lt;a href=&quot;https://nim-lang.org/docs/manual.html#types-object-variants&quot;&gt;case objects&lt;/a&gt;.
+Usually, the first part of the macro involves lots of checks for the correct node kind,
+followed by iteration over the subnodes to extract the input data.
+Pattern matching simplifies this, allowing to directly write expected patterns
+for the AST, with syntax closely matching that of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dumpTree&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;For example - if we have code like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map[string]&lt;/code&gt; it has the following tree representation:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;dumpTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;StmtList
+  BracketExpr
+    Ident &quot;map&quot;
+    Ident &quot;string&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And can be matched using the following pattern:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;assertMatch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;BracketExpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;typeParam&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Notice the similarity between the AST and a pattern for matching - each node has &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kind&lt;/code&gt; field,
+which describes what kind of node this is.
+In this case we are interested in the first and second subnodes of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BracketExpr&lt;/code&gt;
+node - flow stage kind and type parameter respectively.&lt;/p&gt;
+
+&lt;p&gt;As we have already seen earlier, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map [string]&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map[string]&lt;/code&gt; are parsed
+differently - the first one is handled as one-element array passed to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; as function
+argument, and the second is a bracket expression.
+&lt;a href=&quot;https://nim-lang.org/docs/manual.html#procedures-method-call-syntax&quot;&gt;Method call syntax&lt;/a&gt;
+usually makes programming a DSL a little harder - you need to check for both
+alternatives, remember which index each capture should be in, etc.&lt;/p&gt;
+
+&lt;p&gt;With pattern matching though it becomes quite easy to do - adding a second
+alternative will be enough.&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# More compact way of writing `BracketExpr`&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;BracketExpr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;typeParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Command&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Bracket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;typeParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It should also be possible to omit type parameters from the DSL entirely - they are
+quite nice and would allow for better type checking, but could become quite annoying to write.
+So, we should also expect someone to just write &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; - without any type qualifications.
+To handle this case we add a third alternative for pattern:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;BracketExpr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;typeParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Command&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Bracket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;typeParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This brings one important change: The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;typeParam&lt;/code&gt; capture is no longer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NimNode&lt;/code&gt; - the type
+has changed to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Option[NimNode]&lt;/code&gt;, because not all alternatives have this variable.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;head&lt;/code&gt; is still a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NimNode&lt;/code&gt; just as before - all possible alternatives contain
+this variable, so it would be set if the input matches.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;This example shows really well how pattern matching can help to handle different
+alternative syntaxes.
+Another very powerful feature is sequence matching - sadly in this particular
+example we had no need for it, but I decided to still showcase it.
+Consider a &lt;a href=&quot;https://nim-lang.org/docs/macros.html#statements-procedure-declaration&quot;&gt;procedure declaration&lt;/a&gt;
+AST - suppose we need to match name, arguments, and return type.
+Usually, part of a case statement would look similar to this:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nnkProcDef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;returnType&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;..&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This is not particularly complicated, but with pattern matching it all becomes:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ProcDef[@name, _, _, [@returnType, all @arguments], .._]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;flow-macro-implementation&quot;&gt;Flow macro implementation&lt;/h2&gt;
+
+&lt;p&gt;Our first stage would be processing the input into a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FlowStage&lt;/code&gt;.
+We already have a way to extract the data from the input AST - using pattern matching.&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;macro&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;untyped&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;untyped&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FlowStage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elem&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Call&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BracketExpr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;opt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# `map[string]:`&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Command&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Bracket&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# `map [string]:`&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Call&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# just `map:`, without type argument&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FlowStage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;identToKind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;outputType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After that, we have all necessary information for generating the result code.
+If the last stage is not &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;each&lt;/code&gt;, i.e. there is a return value after each iteration,
+we need to determine the type of the result sequence and then append to it on
+each iteration.&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;notin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fskEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}:&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# If last stage has return type (not `each`) then we need to&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# accumulate results in temporary variable.&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quote&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#[ Type of the expression ]#]&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.}&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`:&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#[ Expression to evaluate]#&lt;/span&gt;
+
+    &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;c&quot;&gt;# Otherwise just iterate each element&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quote&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.}&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`:&lt;/span&gt;
+      &lt;span class=&quot;c&quot;&gt;#[ Expression to evaluate ]#&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;get-the-result-type&quot;&gt;Get the result type&lt;/h3&gt;
+
+&lt;p&gt;Each stage of the dataflow has a type, and potentially defines variables.
+In addition to that - each stage uses the special variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;it&lt;/code&gt; - that has to be
+injected separately for each stage, &lt;strong&gt;but&lt;/strong&gt; at the same time it is used for
+communicating values between stages.&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;is equivalent to:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#[ Type of the expression ]#]&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can clearly see, such code would not even compile due to the redefinition
+errors.
+There are two possible ways to solve this problem - kind of obvious, and not-all-that-obvious.
+Let’s start with the first one - since each variable can be redefined in the new
+scope we can just do:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Add result - &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Add result - 2
+Add result - 4
+Add result - 6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And it would compile and work perfectly fine.
+But now we have a problem of getting the type of the expression itself - everything
+is fine as long as you only use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; - after all &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;block:&lt;/code&gt; is an expression,
+and we can have something like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;typeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+               &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+               &lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+                 &lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;string
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Not the prettiest code in the world, by all means - but it will become even worse
+when we have to deal with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;filter&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;each&lt;/code&gt;, injected variables and iterators.&lt;/p&gt;
+
+&lt;p&gt;The second alternative is to use declare a proc with an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auto&lt;/code&gt; return type and
+assign the result of the expression to it.
+In that case, the compiler will figure out the return type for us.&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;proc &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;ee&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;som&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;ee&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;proc (a: int): (int, string, string, int) {.noSideEffect, gcsafe, locks: 0.}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now we only need to write code generation for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#[ Expression to evaluate ]#&lt;/code&gt; and
+substitute &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;result =&lt;/code&gt; when necessary.&lt;/p&gt;
+
+&lt;h3 id=&quot;create-the-evaluation-expression&quot;&gt;Create the evaluation expression&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Body rewrite&lt;/p&gt;
+
+    &lt;p&gt;Each stage in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flow&lt;/code&gt; injects an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;it&lt;/code&gt; variable - the result of the evaluation from 
+the previous stage.
+To avoid getting redefinition errors from multiple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;let it = &amp;lt;expression&amp;gt;&lt;/code&gt; on
+each stage, we will replace each occurrence of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;it&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;it&amp;lt;stage-index&amp;gt;&lt;/code&gt;.
+For the first stage it would be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;it -&amp;gt; it1&lt;/code&gt;, the second one is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;it -&amp;gt; it2&lt;/code&gt; and so on.&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rewrite&lt;/code&gt; takes an input &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NimNode&lt;/code&gt; and either returns it as-is (if no rewriting is necessary)
+or, in case of the identifier &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;it&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ident(strVal: &quot;it&quot;)&lt;/code&gt;), converts it into a new
+one with the corresponding index.&lt;/p&gt;
+
+    &lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;proc &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rewrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NimNode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NimNode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strVal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;it&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;it&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nnkTokenKinds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# `nnkTokenKinds` is a set of node&lt;/span&gt;
+                                 &lt;span class=&quot;c&quot;&gt;# kinds that don't have subnodes.&lt;/span&gt;
+                                 &lt;span class=&quot;c&quot;&gt;# These ones are returned without any&lt;/span&gt;
+                                 &lt;span class=&quot;c&quot;&gt;# modifications.&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;c&quot;&gt;# For node kinds with subnodes, rewriting must be done&lt;/span&gt;
+      &lt;span class=&quot;c&quot;&gt;# recursively&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subn&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rewrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create eval expression&lt;/p&gt;
+
+    &lt;p&gt;For each stage, we rewrite the body and then append a new chunk of generated code
+to the result.&lt;/p&gt;
+
+    &lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evalExprFromStages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FlowStage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NimNode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newStmtList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stage&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# Rewrite body&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rewrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;c&quot;&gt;# If stage is a filter it is converted into `if` expression&lt;/span&gt;
+      &lt;span class=&quot;c&quot;&gt;# and new new variables are injected.&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fskFilter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quote&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stageOk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`))&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stageOk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
+
+      &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fskEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# `each` has no variables or special formatting - just&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# rewrite body and paste it back to resulting code&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fskMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# Create new identifier for injected node and assign&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# result of `body` to it.&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;it&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quote&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;
+
+        &lt;span class=&quot;c&quot;&gt;# If output type for stage needs to be explicitly checked&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# create type assertion.&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Some&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outputType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;makeTypeAssert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;itId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;result-type-implementation&quot;&gt;Result type implementation&lt;/h3&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;typeExprFromStages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FlowStage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NimNode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NimNode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evalExpr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evalExprFromStages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;resTuple&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nnkPar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;it0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stage&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;st&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;notin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fskFilter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}:&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;resTuple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;it&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lastId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newLit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quote&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;proc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# `auto` annotation allows to derive type&lt;/span&gt;
+                       &lt;span class=&quot;c&quot;&gt;# of the proc from any assignment within the&lt;/span&gt;
+                       &lt;span class=&quot;c&quot;&gt;# proc body - we take advantage of this,&lt;/span&gt;
+                       &lt;span class=&quot;c&quot;&gt;# and avoid building type expression&lt;/span&gt;
+                       &lt;span class=&quot;c&quot;&gt;# manually.&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.}&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`:&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;evalExpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resTuple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#           ^^^^^^^^^^^^^^^^^^^&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#           |&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#           Type of the return will be derived from this assignment.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#           Even though it is placed within loop body, it will still&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#           derive necessary return type&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;)()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lastId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#      ^^^^^^^^^^^^&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#      | |&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#      | Get last element from proc return type&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#      |&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#      After proc is declared we call it immediately&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;final-flow-implementation&quot;&gt;Final &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flow&lt;/code&gt; implementation&lt;/h3&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;macro&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;untyped&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;untyped&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FlowStage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elem&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matches&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Call&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BracketExpr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;opt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# `map[string]:`&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Command&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Bracket&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# `map [string]:`&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Call&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;# just `map:`, without type argument&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FlowStage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;identToKind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;outputType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evalExpr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;evalExprFromStages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kind&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;notin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fskEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}:&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# If last stage has return type (not `each`) then we need to&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# accumulate results in temporary variable.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resExpr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;typeExprFromStages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lastId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;it&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ident&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;res&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quote&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;typeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resExpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+
+      &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.}&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`:&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;evalExpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lastid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;
+
+      &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quote&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.}&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`:&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;evalExpr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;
+
+
+  &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newBlockStmt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;An example of the macro in action:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/etc/passwd&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shell&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;bash&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;shell&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Generated code:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;typeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# largely duplicated code for getting type of the expression.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;proc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auto&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/etc/passwd&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stageOk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gensym10271&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shell&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BackwardsIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+          &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;endsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;bash&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stageOk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gensym10271&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shell&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+
+  &lt;span class=&quot;c&quot;&gt;# Actual implementation&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/etc/passwd&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stageOk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gensym10267&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shell&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BackwardsIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;endsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;bash&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stageOk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gensym10267&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shell&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;An example of a flow state mismatch error:&lt;/p&gt;
+
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/etc/passwd&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error:
+
+Expected type seq[char], but expression it.split(&quot;:&quot;) has type of seq[string]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;notes&quot;&gt;Notes&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Implementation of this macro was largely inspired by
+&lt;a href=&quot;https://github.com/zero-functional/zero-functional&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zero_functional&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Full flow macro implementation can be seen
+&lt;a href=&quot;https://github.com/nim-lang/fusion/blob/ea18f8559c514b227b148300a2900b3e2a282b0d/tests/tmatching.nim#L1878&quot;&gt;here&lt;/a&gt; -
+it is a part of the test suite for the library, but a lot of comments from the article are still present.&lt;/li&gt;
+  &lt;li&gt;I tried to write the &lt;a href=&quot;https://github.com/nim-lang/fusion/blob/master/tests/tmatching.nim&quot;&gt;test suite&lt;/a&gt;
+in a way that would make it easier to use as an example as well, and while for the most part it
+does not have such level of implementation comments, it could still be treated as an example on how to use this library.&lt;/li&gt;
+  &lt;li&gt;This library is still being developed - some minor bugs and inconsistencies could be expected, as
+well as ergonomics improvements.
+Consequently, some internal implementation details (mutability of captured variables for example)
+can change in the future.
+When &lt;a href=&quot;https://nim-lang.org/docs/manual_experimental.html#view-types&quot;&gt;view types&lt;/a&gt; implementation
+would become a non-experimental feature, captures would be done using immutable views instead.&lt;/li&gt;
+  &lt;li&gt;I personally see this library as a stepping stone for adding pattern matching support in Nim core -
+thanks to unparalleled metaprogramming capabilities, even features like that can be tested in external
+libraries before being included in the language itself (instead of making almost irreversible additions
+and dealing with fallback/bad design choices later).
+This means, first and foremost, that DSL usability and ergonomics feedback is welcome, as well as
+discussions about parts that don’t seem particularly useful overall (and might potentially be deleted).
+    &lt;ul&gt;
+      &lt;li&gt;For initial discussion about this library implementation you can see &lt;a href=&quot;https://github.com/nim-lang/RFCs/issues/245&quot;&gt;RFC #245&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;First implementation &lt;a href=&quot;https://github.com/nim-lang/fusion/pull/33&quot;&gt;PR&lt;/a&gt; also has some discussions
+that led to partial implementation change.&lt;/li&gt;
+      &lt;li&gt;Current implementation does not require changing language syntax &lt;strong&gt;at all&lt;/strong&gt;, but a suggestion was
+made to make &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;let&lt;/code&gt; usable in contexts other than direct variable declaration, making it possible for syntaxes like
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;let [all elems] = @[1, 2, 3, 4]&lt;/code&gt; as opposed to current &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[all @elems] := @[1, 2, 3, 4]&lt;/code&gt;.
+Latter one, while not particularly different, creates new way of introducing variables, which might be unwanted.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 10 Mar 2021 00:00:00 +0000</pubDate>
+        <link>https://nim-lang-cn.org/blog/2021/03/10/fusion-and-pattern-matching.html</link>
+        <guid isPermaLink="true">https://nim-lang-cn.org/blog/2021/03/10/fusion-and-pattern-matching.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>This Month with Nim: Feburary 2021</title>
+        <description>&lt;h2 id=&quot;suber&quot;&gt;Suber&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-allin&quot;&gt;Author: Allin&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/olliNiinivaara/Suber&quot;&gt;Suber&lt;/a&gt; is an in-process topic-based &lt;a href=&quot;https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern&quot;&gt;publish/subscribe&lt;/a&gt; engine with an in-memory cache.
+It is primarily aimed for situations where a server is pushing messages to clients but connections may occasionally fail, and therefore a fast method for redelivering missed messages comes in handy.
+Probably also other valid use cases exist.&lt;/p&gt;
+
+&lt;h2 id=&quot;prologue-web-framework&quot;&gt;&lt;a href=&quot;https://github.com/planety/prologue&quot;&gt;Prologue&lt;/a&gt; web framework&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-xflywind&quot;&gt;Author: xflywind&lt;/h4&gt;
+
+&lt;p&gt;Prologue is a powerful web framework written in Nim.
+It is ideal for building elegant and high performance web services.&lt;/p&gt;
+&lt;div class=&quot;language-nim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prologue&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;proc &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;async&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;resp&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;h1&amp;gt;Hello, Prologue!&amp;lt;/h1&amp;gt;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newApp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;nim-sdl2-game-development-tutorial&quot;&gt;Nim SDL2 Game Development Tutorial&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-kiloneie&quot;&gt;Author: Kiloneie&lt;/h4&gt;
+
+&lt;p&gt;An entry level &lt;a href=&quot;https://www.youtube.com/watch?v=x76fT8GG0Pk&quot;&gt;SDL2 tutorial&lt;/a&gt; aimed at teaching the basics of SDL and the Nim bindings.&lt;/p&gt;
+
+&lt;h2 id=&quot;pixie&quot;&gt;Pixie&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-treeform-and-guzba&quot;&gt;Author: treeform and guzba&lt;/h4&gt;
+
+&lt;p style=&quot;text-align: center;&quot;&gt;
+  &lt;img width=&quot;auto&quot; height=&quot;400&quot; src=&quot;https://nim-lang-cn.org/assets/thismonthwithnim/2021-03/pixie.png&quot; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/treeform/pixie&quot;&gt;Pixie&lt;/a&gt; is a 2D graphics library similar to &lt;a href=&quot;https://www.cairographics.org/&quot;&gt;Cairo&lt;/a&gt; and &lt;a href=&quot;https://skia.org/&quot;&gt;Skia&lt;/a&gt; written almost entirely in Nim.&lt;/p&gt;
+
+&lt;h2 id=&quot;spacy&quot;&gt;Spacy&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-treeform-and-guzba-1&quot;&gt;Author: treeform and guzba&lt;/h4&gt;
+
+&lt;p&gt;Spatial algorithms are used to find the “closest” things faster than simple brute force iteration would.
+They make your code run faster using smarter data structures.
+&lt;a href=&quot;https://github.com/treeform/spacy&quot;&gt;Spacy&lt;/a&gt; has different “Spaces” that you can use to speed up games and graphical applications.&lt;/p&gt;
+
+&lt;h2 id=&quot;nim-vs-codecodium-extension&quot;&gt;Nim VS Code/Codium Extension&lt;/h2&gt;
+
+&lt;h4 id=&quot;author-saem&quot;&gt;Author: saem&lt;/h4&gt;
+
+&lt;p&gt;If you’d like to write programs in Nim and be certain that you’re on Nim while doing it, well then the &lt;a href=&quot;https://github.com/saem/vscode-nim&quot;&gt;Nim Extension&lt;/a&gt; for VS Code/Codium is for you!&lt;/p&gt;
+
+&lt;p&gt;Originally started as a port of an extension written in TypeScript, this one is written in straight Nim and compiled to JS – yes, Nim can do that!
+The port started as a project to learn Nim itself and make it easier for Nimions or even new Nimlets to be productive using the language and be empowered to make changes to the extension directly.
+Imagine, being able to improve your tools as you go, it’s like macros, but your IDE or something.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;want-to-see-your-project-here-next-month&quot;&gt;Want to see your project here next month?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/beef331/website&quot;&gt;Follow this&lt;/a&gt; to add your project to the next month’s blog post.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 01 Mar 2021 00:00:00 +0000</pubDate>
+        <link>https://nim-lang-cn.org/blog/2021/03/01/this-month-with-nim.html</link>
+        <guid isPermaLink="true">https://nim-lang-cn.org/blog/2021/03/01/this-month-with-nim.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Multithreading flavors: Choosing the right scheduler for the right job</title>
+        <description>&lt;div class=&quot;sidebarblock&quot;&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;div class=&quot;title&quot;&gt;Guest post&lt;/div&gt;
+    &lt;div class=&quot;paragraph&quot;&gt;
+      This is a guest post by Mamy Ratsimbazafy (mratsim). If you would like to publish articles as a guest author on nim-lang.org then get in touch with us via
+      &lt;a href=&quot;https://twitter.com/nim_lang&quot;&gt;Twitter&lt;/a&gt; or &lt;a href=&quot;https://nim-lang.org/community.html&quot;&gt;otherwise&lt;/a&gt;.
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;Disclaimer: This post represent my current understanding as of December 2020 and might not age well.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;With the advent of multicores CPU, developers are urge to blast through performance bottlenecks by exploiting more cores. Hence we are attracted to multithreading solutions like light is attracted by a black hole.&lt;/p&gt;
+
+&lt;p&gt;What is often missed is that there is no one size fits all and that your application ‘tasks’ come in varying flavors that require specific approaches to multithreading. I hope after this post that you will be at ease with IO tasks and Compute tasks and the tradeoff between latency and throughput and why those differences are critical for choosing how to distribute your tasks on multiple cores.&lt;/p&gt;
+
+&lt;h2 id=&quot;anatomy-of-tasking&quot;&gt;Anatomy of tasking&lt;/h2&gt;
+
+&lt;p&gt;Through this document, we call a ‘task’ a standalone unit of work.
+Tasks are scheduled by a ‘scheduler’ and executed on execution resources managed by an ‘executor’.&lt;/p&gt;
+
+&lt;p&gt;Tasks are said to be standalone because they carry both their function and the complete ‘execution environment’ needed to execute that function. So at minimum a task is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Nim&quot;&gt;type TaskTyped[Params] = object
+  fn: proc(env: Params) {.nimcall.} # a function pointer
+  env: Params
+
+type TaskTypeErased[EnvSize: static int] = object
+  fn: proc(env: pointer) {.nimcall.} # a function pointer
+  env: array[EnvSize, byte] # type erased environment
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Astute readers will think, what’s the difference with a closure? Well, a task often carries more metadata to help the scheduler manage execution resources efficiently.&lt;/p&gt;
+
+&lt;p&gt;‘Execution resources’ are threads, GPUs, clusters abstracted away by an ‘executor’ like a threadpool or a GPU driver.
+The resource can also be a single hardware thread with tasks interleaved by the means of coroutines, fibers or in the case of Nim, closure iterators.&lt;/p&gt;
+
+&lt;p&gt;The role of a ‘scheduler’ is to multiplex M tasks on N hardware resources.
+A scheduler can be:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;as simple as a FIFO task queue on top of a threadpool,&lt;/li&gt;
+  &lt;li&gt;as delegated as the kernel event queues,&lt;/li&gt;
+  &lt;li&gt;or as complex as &lt;a href=&quot;https://github.com/mratsim/weave&quot;&gt;Weave&lt;/a&gt;’s per-thread deques with support for nested parallelism, adaptative work stealing, fine-grained task dependencies and lazy parallel for-loop splitting.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;introducing-task-flavors-io-tasks-and-compute-tasks&quot;&gt;Introducing task flavors: IO tasks and Compute tasks&lt;/h2&gt;
+
+&lt;p&gt;Now that we have the foundations and the vocabulary to talk about tasking, let’s look into what kind of work we want to execute.&lt;/p&gt;
+
+&lt;p&gt;I distinguish between ‘IO tasks’ and ‘compute tasks’. IO tasks are tasks that depend on IO to make progress, usually either the disk or the network but also the console or peripherals like mouse or keyboards.&lt;/p&gt;
+
+&lt;p&gt;A compute task is likely very familiar to people in:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;scientific computing (solvers, linear algebra, physics, biology, statistics, …)&lt;/li&gt;
+  &lt;li&gt;rendering and image processing&lt;/li&gt;
+  &lt;li&gt;games: physics, path finding, animation, rendering, AI&lt;/li&gt;
+  &lt;li&gt;finance: Monte-Carlo simulation for pricing&lt;/li&gt;
+  &lt;li&gt;cryptography&lt;/li&gt;
+  &lt;li&gt;compression&lt;/li&gt;
+  &lt;li&gt;video encoding&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Compute tasks need the CPU to work to make progress.
+We can even distinguish compute tasks that are ‘CPU-bound’ like raytracing or cryptography those that are memory-bound like copying or adding matrices
+and the hybrid: those that are ‘memory-bound’ unless data layout has been carefully done so that the CPU is always kept busy
+like optimized matrix multiplication or games’ Entity Component System.&lt;/p&gt;
+
+&lt;p&gt;An IO task would be:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;waiting for or initiating a remote connection&lt;/li&gt;
+  &lt;li&gt;serving or loading web pages&lt;/li&gt;
+  &lt;li&gt;sending or receiving a message&lt;/li&gt;
+  &lt;li&gt;sending or receiving a RPC or REST query&lt;/li&gt;
+  &lt;li&gt;waiting for keyboard, mouse or joystick inputs&lt;/li&gt;
+  &lt;li&gt;logging to disk or console&lt;/li&gt;
+  &lt;li&gt;creating or deleting a file&lt;/li&gt;
+  &lt;li&gt;downloading a file&lt;/li&gt;
+  &lt;li&gt;flushing changes to disk&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;IO tasks are bottlenecked by IO which is orders of magnitude slower than the CPU and its memory.
+See &lt;a href=&quot;https://gist.github.com/hellerbarde/2843375&quot;&gt;Latency numbers every programmer should know&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    L1 cache reference ......................... 0.5 ns
+    Branch mispredict ............................ 5 ns
+    L2 cache reference ........................... 7 ns
+    Mutex lock/unlock ........................... 25 ns
+    Main memory reference ...................... 100 ns
+    Compress 1K bytes with Zippy ............. 3,000 ns  =   3 µs
+    Send 2K bytes over 1 Gbps network ....... 20,000 ns  =  20 µs
+    SSD random read ........................ 150,000 ns  = 150 µs
+    Read 1 MB sequentially from memory ..... 250,000 ns  = 250 µs
+    Round trip within same datacenter ...... 500,000 ns  = 0.5 ms
+    Read 1 MB sequentially from SSD* ..... 1,000,000 ns  =   1 ms
+    Disk seek ........................... 10,000,000 ns  =  10 ms
+    Read 1 MB sequentially from disk .... 20,000,000 ns  =  20 ms
+    Send packet CA-&amp;gt;Netherlands-&amp;gt;CA .... 150,000,000 ns  = 150 ms
+
+And in a more human scale (x1 billion)
+
+### Minute:
+    L1 cache reference                  0.5 s         One heart beat (0.5 s)
+    Branch mispredict                   5 s           Yawn
+    L2 cache reference                  7 s           Long yawn
+    Mutex lock/unlock                   25 s          Making a coffee
+
+### Hour:
+    Main memory reference               100 s         Brushing your teeth
+    Compress 1K bytes with Zippy        50 min        One episode of a TV show (including ad breaks)
+
+### Day:
+    Send 2K bytes over 1 Gbps network   5.5 hr        From lunch to end of work day
+
+### Week
+    SSD random read                     1.7 days      A normal weekend
+    Read 1 MB sequentially from memory  2.9 days      A long weekend
+    Round trip within same datacenter   5.8 days      A medium vacation
+    Read 1 MB sequentially from SSD    11.6 days      Waiting for almost 2 weeks for a delivery
+
+### Year
+    Disk seek                           16.5 weeks    A semester in university
+    Read 1 MB sequentially from disk    7.8 months    Almost producing a new human being
+    The above 2 together                1 year
+
+### Decade
+    Send packet CA-&amp;gt;Netherlands-&amp;gt;CA     4.8 years     Average time it takes to complete a bachelor's degree
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;On a 3GHz CPU, a simple instruction like addition would be 0.33 ns, unfortunately
+while CPU have greatly improved over the years and can be parallelized, memory, disk and network didn’t enjoy the same growth and are now way slower.&lt;/p&gt;
+
+&lt;p&gt;What does this all means?&lt;/p&gt;
+
+&lt;p&gt;Remember, to make progress a compute task needs execution resources and IO tasks can make progress without execution resources (you don’t need the CPU to do something to make a user type faster on the keyboard and your message won’t be sent faster by having a beefier CPU)&lt;/p&gt;
+
+&lt;p&gt;It means that compute tasks are all about having your CPU cores work efficiently together while IO tasks are all about having your CPU wait efficiently for requests and completion events.&lt;/p&gt;
+
+&lt;h2 id=&quot;improving-performance&quot;&gt;Improving performance&lt;/h2&gt;
+
+&lt;p&gt;Now that we know the difference between IO tasks and Compute tasks we want to improve performance of our applications.
+So how do we work more efficiently or how do we wait more efficiently? Actually what is performance for a compute task and an IO task?&lt;/p&gt;
+
+&lt;p&gt;As you likely suspect, performance for compute task and IO task is different in the vast majority of cases.&lt;/p&gt;
+
+&lt;p&gt;For compute task, say processing an image, what is important is processing the whole image as fast as possible, it doesn’t matter if we start processing the upper left corner first but finish processing last. Hence a compute task performance is often measured in terms of throughput: how fast can you process the total work.&lt;/p&gt;
+
+&lt;p&gt;For an IO task, say serving a web page to multiple users or handling keyboard key presses, what is important is answering individual queries as early as possible, a query requested first should be resolved before those that came after. Hence an IO task performance is often measured in terms of latency: how long do you have to wait until the specific work you requested is done.&lt;/p&gt;
+
+&lt;h3 id=&quot;optimizing-compute-tasks&quot;&gt;Optimizing compute tasks&lt;/h3&gt;
+
+&lt;p&gt;So how do you improve performance of compute tasks?
+You need to keep your CPU busy and maximize working time, this implies:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;having information on task dependencies or the lack thereof to enable parallelism.&lt;/li&gt;
+  &lt;li&gt;minimizing context switching.&lt;/li&gt;
+  &lt;li&gt;keep data in fast memory cache and avoid polluting your cache with irrelevant data.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;optimizing-io-tasks&quot;&gt;Optimizing IO tasks&lt;/h3&gt;
+
+&lt;p&gt;IO tasks require tight integration with the kernel to know when an IO task is completed since IO like networking, disk, peripherals all depend on the kernel. For optimization this means:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Scheduling a task as soon as the IO event is completed/ready.&lt;/li&gt;
+  &lt;li&gt;Batching: wait on multiple events to minimize overhead and overlap waits.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;A note on multithreading:&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Just like having N students working toward a degree doesn’t divide the time to get it by N, multithreading IO doesn’t help you process them faster, but you can process more of them.
+Also, multithreading for IO is often in the context of a web server, it is very likely that each connection is using both cryptography and compression which are compute task that might hinder scalability on a single-threaded IO executor. It’s worth noticing that the only reason compression is valuable is because transferring more data (IO) takes more time than compressing/decompressing it (Compute).&lt;/p&gt;
+
+&lt;h3 id=&quot;no-one-size-fits-all&quot;&gt;No one size fits all&lt;/h3&gt;
+
+&lt;p&gt;Unfortunately, a single scheduler would be hard-pressed to please the needs of both compute and IO tasks.&lt;/p&gt;
+
+&lt;p&gt;Dealing with IO tasks require syscalls, syscalls have a high overhead compared to basic compute operation (about 150x more costly than an addition at minimum) and they also pollute the CPU caches with kernel data potentially flushing user data from memory, significantly affecting compute tasks.&lt;/p&gt;
+
+&lt;p&gt;Optimizing Compute tasks requires keeping it and its data hot in cache for as long as necessary but to ensure fairness and low latency, an IO scheduler need to keep track of task budgets and deschedule them when they go over.&lt;/p&gt;
+
+&lt;p&gt;Furthermore, IO tasks require First-In First-Out ordering, but the most efficient scheduling for Compute is often LIFO because the latest in is the most likely task to have the data still hot in caches.&lt;/p&gt;
+
+&lt;p&gt;Consequently don’t use Weave or OpenMP (yes Nim can use OpenMP with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;||&lt;/code&gt; operator) for IO tasks, it’s made for compute. And don’t use asyncdispatch for compute.&lt;/p&gt;
+
+&lt;h2 id=&quot;basic-multithreading-designs&quot;&gt;Basic multithreading designs&lt;/h2&gt;
+
+&lt;p&gt;So you decided to introduce multiple threads in your program, you know what you want to optimize between total workload/throughput or invidual requests fairness/latency.&lt;/p&gt;
+
+&lt;p&gt;Here are 2 simple multithreading designs for your application, with and without a scheduler.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Reminder:&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The only components necessary for multithreading are tasks (function + environment) and execution resources, a scheduler is an optional component to optimize multiplexing M tasks on N hardware resources but besides introducing complexity certain workload might not need it at all.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-the-producer-consumer-design&quot;&gt;1. The Producer-Consumer design&lt;/h3&gt;
+
+&lt;p&gt;With this design, you separate your application into functional modules. From some inputs tasks are produced sent to the corresponding modules which in turn do their processing and create new tasks for modules downstream until all tasks are done.
+A typical example is for a game would be:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;An UI thread listening to network and keyboard/mouse/controller inputs&lt;/li&gt;
+  &lt;li&gt;A rendering thread in charge of graphics&lt;/li&gt;
+  &lt;li&gt;A physics and animation thread&lt;/li&gt;
+  &lt;li&gt;An AI thread&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Adding a scheduler to a producer-consumer design would make an actor framework.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-the-executor-design&quot;&gt;2. The Executor design&lt;/h3&gt;
+
+&lt;p&gt;With this design you have an executor that is in charge of managing your hardware resources.
+The executor is typically for IO tasks either coroutines or an async/await abstraction over the kernel event queues. For compute task, it’s a naive threadpool or a GPU.&lt;/p&gt;
+
+&lt;p&gt;An executor design with a scheduler would:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;likely use work-stealing to optimize load balancing&lt;/li&gt;
+  &lt;li&gt;For IO: implement a task budget system to optimize fairness&lt;/li&gt;
+  &lt;li&gt;For compute: use Weave techniques to optimize parallelism opportunities&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-hybrid&quot;&gt;3. Hybrid&lt;/h3&gt;
+
+&lt;p&gt;We can mix the 2 models, i.e. have producer-consumer modules and have some having a threadpool to handle compute tasks.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusions--takeaways&quot;&gt;Conclusions &amp;amp; Takeaways&lt;/h2&gt;
+
+&lt;p&gt;The work that has to be dispatched on multiple cores come in two flavors, IO and compute.
+The low-level representation (Task = function + environment) and the high-level ergonomics (async/await vs spawn/sync) are very similar if not the same. However what we want to optimize is very different between IO and compute tasks, hence the scheduler is different.&lt;/p&gt;
+
+&lt;h2 id=&quot;rabbit-holes&quot;&gt;Rabbit holes&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;When one door closes, another opens.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;As I closed the door to your multithreading flavors confusion, let me open some new ones:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Preemptive vs cooperative scheduling&lt;/li&gt;
+  &lt;li&gt;stackful vs stackless&lt;/li&gt;
+  &lt;li&gt;Readiness vs Completion (async IO / network programming)&lt;/li&gt;
+  &lt;li&gt;Data Parallelism vs Task Parallelism vs Dataflow parallelism&lt;/li&gt;
+  &lt;li&gt;Work sharing vs work stealing vs work requesting&lt;/li&gt;
+  &lt;li&gt;Child stealing vs continuation stealing (help-first vs work-first)&lt;/li&gt;
+  &lt;li&gt;Model of Computation: Kahn Process networks, Petri Nets, Communicating Sequential Processes, …&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 26 Feb 2021 00:00:00 +0000</pubDate>
+        <link>https://nim-lang-cn.org/blog/2021/02/26/multithreading-flavors.html</link>
+        <guid isPermaLink="true">https://nim-lang-cn.org/blog/2021/02/26/multithreading-flavors.html</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
