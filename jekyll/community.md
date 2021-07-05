@@ -10,7 +10,7 @@ css_class: community
   <br>
   我们都希望能在社区中看到你的态度
   <br>
-  别忘了保持友善:)<a href="https://boz.com/articles/be-kind">
+  别忘了保持<a href="https://boz.com/articles/be-kind">友善</a>:)
 </h2>
 
 # 中文社群
