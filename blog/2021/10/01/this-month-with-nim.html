@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>This Month with Nim: September 2021 - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="This Month with Nim: September 2021"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Four interesting projects our users worked on in September"> -->
+  <meta property="og:description" content="Four interesting projects our users worked on in September">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="This Month with Nim: September 2021" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            This Month with Nim: September 2021
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              01 October 2021
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              The Nim Community
+            </span>
+            
+          </h3>
+          <h2 id="kombinator"><a href="https://gitlab.com/ArMour85/kombinator">Kombinator</a></h2>
+
+<h4 id="author-armour85">Author: <a href="https://gitlab.com/ArMour85">ArMour85</a></h4>
+
+<p>Application to run a command line with lot of combinations of values.</p>
+
+<p>Kombinator parses a TOML configuration file in and generate combinations of
+commandline invocations.</p>
+
+<p>An example configuration file is as follows:</p>
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">cmd</span> <span class="p">=</span> <span class="s">"ffmpeg -i $here/../ForBiggerFun.mp4 -s $heightx$width -c:v $codec -ab $audio_bitrate output-$audio_bitrate-$heightx$width-$codec.mp4"</span>
+<span class="py">height</span> <span class="p">=</span> <span class="p">[</span><span class="mi">640</span><span class="p">,</span> <span class="mi">800</span><span class="p">]</span>
+<span class="py">width</span> <span class="p">=</span> <span class="p">[</span><span class="mi">480</span><span class="p">,</span> <span class="mi">600</span><span class="p">]</span>
+<span class="py">codec</span> <span class="p">=</span> <span class="p">[</span><span class="s">"libx264"</span><span class="p">,</span> <span class="s">"libxvid"</span><span class="p">]</span>
+<span class="nn">audio_bitrate</span> <span class="o">=</span> <span class="p">{</span><span class="py">min</span> <span class="p">=</span> <span class="mi">128</span><span class="p">,</span> <span class="py">max</span> <span class="p">=</span> <span class="mi">192</span><span class="p">,</span> <span class="py">step</span> <span class="p">=</span> <span class="mi">32</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>Explanation of its usage can be seen <a href="https://gitlab.com/ArMour85/kombinator#configuration-file">here</a>.</p>
+
+<h2 id="drawim"><a href="https://github.com/GabrielLasso/drawim">Drawim</a></h2>
+
+<h4 id="authors-gabriel-lasso">Authors: <a href="https://github.com/GabrielLasso">Gabriel Lasso</a></h4>
+
+<p>A drawing library in Nim, inspired by p5js. Builds to native, using OpenGL, and
+to JavaScript, using HTML5 Canvas.</p>
+
+<p>It allows you to create simulations, visualize structures, make 2D plots and even
+prototype 2D games with an easy and intuitive syntax.</p>
+
+<p>Example to draw a recursive tree:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">drawim</span><span class="p">,</span> <span class="n">std</span><span class="o">/</span><span class="n">math</span>
+
+<span class="k">proc </span><span class="nf">branch</span><span class="p">(</span><span class="n">len</span><span class="p">:</span> <span class="kt">int</span><span class="p">)</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">len</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span>
+  <span class="n">line</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">len</span><span class="p">)</span>
+
+  <span class="n">push</span><span class="p">()</span>
+  <span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">len</span><span class="p">)</span>
+  <span class="n">rotate</span><span class="p">(</span><span class="n">PI</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span>
+  <span class="n">branch</span><span class="p">(</span><span class="kt">int</span><span class="p">(</span><span class="kt">float</span><span class="p">(</span><span class="n">len</span><span class="p">)</span><span class="o">*</span><span class="mf">0.7</span><span class="p">))</span>
+  <span class="n">pop</span><span class="p">()</span>
+
+  <span class="n">push</span><span class="p">()</span>
+  <span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">len</span><span class="p">)</span>
+  <span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="n">PI</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span>
+  <span class="n">branch</span><span class="p">(</span><span class="kt">int</span><span class="p">(</span><span class="kt">float</span><span class="p">(</span><span class="n">len</span><span class="p">)</span><span class="o">*</span><span class="mf">0.7</span><span class="p">))</span>
+  <span class="n">pop</span><span class="p">()</span>
+
+<span class="k">proc </span><span class="nf">draw</span><span class="p">()</span> <span class="o">=</span>
+  <span class="n">background</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+  <span class="n">stroke</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+  <span class="n">translate</span><span class="p">(</span><span class="kt">int</span><span class="p">(</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="n">height</span><span class="p">)</span>
+  <span class="n">rotate</span><span class="p">(</span><span class="n">PI</span><span class="p">)</span>
+
+  <span class="n">branch</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">run</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="n">draw</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Result:</p>
+<p style="text-align: center;">
+  <img width="auto" height="400" src="https://nim-lang-cn.org/assets/thismonthwithnim/2021-10/drawim.png" />
+</p>
+
+<p>More examples:</p>
+<ul>
+  <li><a href="https://github.com/GabrielLasso/drawim/tree/master/examples/snake">Snake game</a></li>
+  <li><a href="https://github.com/GabrielLasso/drawim/blob/master/examples/orbits.nim">Orbits simulation</a></li>
+  <li><a href="https://github.com/GabrielLasso/drawim/blob/master/examples/sierpinski.nim">Sierpinski triangle</a></li>
+  <li><a href="https://github.com/GabrielLasso/drawim/blob/master/examples/xcubed.nim">Plotting a function</a></li>
+  <li><a href="https://github.com/GabrielLasso/drawim/blob/master/examples/gameoflife.nim">Game of life</a></li>
+  <li><a href="https://github.com/GabrielLasso/drawim/tree/master/examples">And more</a></li>
+</ul>
+
+<h2 id="nim-for-beginners-26-reference-objects"><a href="https://youtu.be/kkSAVKKIoVc">Nim for Beginners #26 Reference Objects</a></h2>
+
+<h4 id="author-kiloneie">Author: <a href="https://github.com/Kiloneie">Kiloneie</a></h4>
+
+<p>In this video I talk about Reference Objects, what they are, their use cases and
+a brief talk about Nim’s memory management model.</p>
+
+<p>Chapters/sub chapters of this video:</p>
+
+<ul>
+  <li>What are reference objects ?
+    <ul>
+      <li>Reference object definition</li>
+      <li>“repr” procedure for outputting advanced data types</li>
+      <li>Dereferencing a reference object</li>
+      <li>Reference objects are passed by reference</li>
+      <li>new() procedure for reference types</li>
+    </ul>
+  </li>
+  <li>Reference object use cases
+    <ul>
+      <li>Shared ownership</li>
+    </ul>
+  </li>
+  <li>Nim’s memory management
+    <ul>
+      <li>Values created on the stack</li>
+      <li>Values created on the heap</li>
+      <li>.acyclic and .cursor annotations for optimization(just a mention)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="loony"><a href="https://github.com/nim-works/loony">Loony</a></h2>
+
+<h4 id="author-cabboose-disruptek">Author: <a href="https://github.com/shayanhabibi">cabboose</a>, <a href="https://github.com/disruptek">disruptek</a></h4>
+
+<p>Multi-threading can be a headache.
+Especially when it’s so difficult to organise and efficiently communicate between your worker threads.
+Most of the time you end up with a data-racey unsafe hot mess.
+Why does it have to be so difficult to safely pass reference objects between threads
+with some level of determinism?
+Locks are cumbersome; you have to consider all the possibilities of dead-locking and friends!</p>
+
+<p>Do you wish there was some <strong>simple</strong> and <strong>flexible</strong> solution to your multi-threaded nightmare?</p>
+
+<p>Say hello to this loo-natic: Loony.
+Loony is a lock-free (no dead locks!) multi-producer multi-consumer leak-free FIFO queue!
+Don’t be concerned by the details of having to distribute work between threads using
+multiple queues when you can use loony.</p>
+
+<p>Loony can handle up to <strong>32,255</strong> consumer and <strong>64,610</strong> producer threads lock-free
+(default is 512/1025; see <a href="https://github.com/nim-works/loony/blob/main/README.md">README</a> for details).</p>
+
+<p>Any ref object can be passed through loony. The API? Dead simple:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">loony</span>
+
+<span class="k">type</span>
+  <span class="n">YourRefObjectHere</span> <span class="o">=</span> <span class="k">ref</span> <span class="k">object</span>
+<span class="k">var</span> <span class="n">ruhroh</span> <span class="o">=</span> <span class="n">new</span> <span class="n">YourRefObjectHere</span>
+
+<span class="k">var</span> <span class="n">lqueue</span> <span class="o">=</span> <span class="n">newLoonyQueue</span><span class="o">[</span><span class="n">YourRefObjectHere</span><span class="o">]</span><span class="p">()</span>
+<span class="c"># Setting up your loony queue is as simple as this!</span>
+
+<span class="n">lqueue</span><span class="p">.</span><span class="n">push</span> <span class="n">ruhroh</span>
+<span class="c"># Don’t be concerned with having to get Consumer/Producer permissions!</span>
+<span class="c"># Do what you were born to do and ~move it move it ~ move it move it</span>
+
+<span class="k">var</span> <span class="n">scooby</span> <span class="o">=</span> <span class="n">lqueue</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Are you worried about memory validity? Don’t be!
+If you’re not too savvy, the standard <code class="language-plaintext highlighter-rouge">push</code> and <code class="language-plaintext highlighter-rouge">pop</code> API use atomic thread fences
+to ensure your CPU caches are synchronised.</p>
+
+<p>Does this have performance costs though?
+Sure does; however this will be removed with future iterations of the project in
+conjunction with development of CPS.</p>
+
+<p>You can always use <code class="language-plaintext highlighter-rouge">unsafePush</code> and <code class="language-plaintext highlighter-rouge">unsafePop</code> if you can handle the memory
+synchronisation yourself!
+The only difference is that we don’t call atomic thread fences for you!</p>
+
+<hr />
+
+<h2 id="want-to-see-your-project-here-next-month">Want to see your project here next month?</h2>
+
+<p><a href="https://github.com/beef331/website#adding-your-project-to-month-with-nim">Follow this</a>
+to add your project to the next month’s blog post.</p>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

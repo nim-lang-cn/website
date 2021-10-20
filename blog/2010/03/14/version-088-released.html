@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.8.8 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.8.8 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Bugfixes The Posix version of os.copyFile has better error handling. Fixed bug #502670 (underscores in identifiers). Fixed a bug in the parsexml module concerning the parsing of &lt;tag attr="value" /&gt;. Fixed a bug in the parsexml module concerning the parsing of enities like &amp;ltXX. system.write(f: TFile, s: string) now works even if s contains binary zeros. Fixed a bug in os.setFilePermissions for Windows. An overloadable symbol can now have the same name as an imported module. Fixed a serious bug in strutils.cmpIgnoreCase. Fixed unicode.toUTF8. The compiler now rejects '\n' (use "\n" instead). times.getStartMilsecs() now works on Mac OS X. Fixed a bug in pegs.match concerning start offsets. Lots of other little bugfixes. Additions Added system.cstringArrayToSeq. Added system.lines(f: TFile) iterator. Added system.delete, system.del and system.insert for sequences. Added system./ for int. Exported system.newException template. Added cgi.decodeData(data: string): tuple[key, value: string]. Added strutils.insertSep. Added math.trunc. Added ropes module. Added sockets module. Added browsers module. Added httpserver module. Added httpclient module. Added parseutils module. Added unidecode module. Added xmldom module. Added xmldomparser module. Added xmltree module. Added xmlparser module. Added htmlparser module. Added re module. Added graphics module. Added colors module. Many wrappers now do not contain redundant name prefixes (like GTK_, lua). The old wrappers are still available in lib/oldwrappers. You can change your configuration file to use these. Triple quoted strings allow for " in more contexts. "" within raw string literals stands for a single quotation mark. Arguments to openArray parameters can be left out. More extensive subscript operator overloading. (To be documented.) The documentation generator supports the .. raw:: html directive. The Pegs module supports back references via the notation $capture_index. Changes affecting backwards compatibility Overloading of the subscript operator only works if the type does not provide a built-in one. The search order for libraries which is affected by the path option has been reversed, so that the project’s path is searched before the standard library’s path. The compiler does not include a Pascal parser for bootstrapping purposes any more. Instead there is a pas2nim tool that contains the old functionality. The procs os.copyFile and os.moveFile have been deprecated temporarily, so that the compiler warns about their usage. Use them with named arguments only, because the parameter order will change the next version! atomic and let are now keywords. The \w character class for pegs now includes the digits '0'..'9'. Many wrappers now do not contain redundant name prefixes (like GTK_, lua) anymore. Arguments to openArray parameters can be left out."> -->
+  <meta property="og:description" content="Bugfixes The Posix version of os.copyFile has better error handling. Fixed bug #502670 (underscores in identifiers). Fixed a bug in the parsexml module concerning the parsing of &lt;tag attr="value" /&gt;. Fixed a bug in the parsexml module concerning the parsing of enities like &amp;ltXX. system.write(f: TFile, s: string) now works even if s contains binary zeros. Fixed a bug in os.setFilePermissions for Windows. An overloadable symbol can now have the same name as an imported module. Fixed a serious bug in strutils.cmpIgnoreCase. Fixed unicode.toUTF8. The compiler now rejects '\n' (use "\n" instead). times.getStartMilsecs() now works on Mac OS X. Fixed a bug in pegs.match concerning start offsets. Lots of other little bugfixes. Additions Added system.cstringArrayToSeq. Added system.lines(f: TFile) iterator. Added system.delete, system.del and system.insert for sequences. Added system./ for int. Exported system.newException template. Added cgi.decodeData(data: string): tuple[key, value: string]. Added strutils.insertSep. Added math.trunc. Added ropes module. Added sockets module. Added browsers module. Added httpserver module. Added httpclient module. Added parseutils module. Added unidecode module. Added xmldom module. Added xmldomparser module. Added xmltree module. Added xmlparser module. Added htmlparser module. Added re module. Added graphics module. Added colors module. Many wrappers now do not contain redundant name prefixes (like GTK_, lua). The old wrappers are still available in lib/oldwrappers. You can change your configuration file to use these. Triple quoted strings allow for " in more contexts. "" within raw string literals stands for a single quotation mark. Arguments to openArray parameters can be left out. More extensive subscript operator overloading. (To be documented.) The documentation generator supports the .. raw:: html directive. The Pegs module supports back references via the notation $capture_index. Changes affecting backwards compatibility Overloading of the subscript operator only works if the type does not provide a built-in one. The search order for libraries which is affected by the path option has been reversed, so that the project’s path is searched before the standard library’s path. The compiler does not include a Pascal parser for bootstrapping purposes any more. Instead there is a pas2nim tool that contains the old functionality. The procs os.copyFile and os.moveFile have been deprecated temporarily, so that the compiler warns about their usage. Use them with named arguments only, because the parameter order will change the next version! atomic and let are now keywords. The \w character class for pegs now includes the digits '0'..'9'. Many wrappers now do not contain redundant name prefixes (like GTK_, lua) anymore. Arguments to openArray parameters can be left out.">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.8.8 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.8.8 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              14 March 2010
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Andreas Rumpf
+            </span>
+            
+          </h3>
+          <h2 id="bugfixes">Bugfixes</h2>
+<ul>
+  <li>The Posix version of <code class="language-plaintext highlighter-rouge">os.copyFile</code> has better error handling.</li>
+  <li>Fixed bug #502670 (underscores in identifiers).</li>
+  <li>Fixed a bug in the <code class="language-plaintext highlighter-rouge">parsexml</code> module concerning the parsing of
+<code class="language-plaintext highlighter-rouge">&lt;tag attr="value" /&gt;</code>.</li>
+  <li>Fixed a bug in the <code class="language-plaintext highlighter-rouge">parsexml</code> module concerning the parsing of
+enities like <code class="language-plaintext highlighter-rouge">&amp;ltXX</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">system.write(f: TFile, s: string)</code> now works even if <code class="language-plaintext highlighter-rouge">s</code> contains binary
+zeros.</li>
+  <li>Fixed a bug in <code class="language-plaintext highlighter-rouge">os.setFilePermissions</code> for Windows.</li>
+  <li>An overloadable symbol can now have the same name as an imported module.</li>
+  <li>Fixed a serious bug in <code class="language-plaintext highlighter-rouge">strutils.cmpIgnoreCase</code>.</li>
+  <li>Fixed <code class="language-plaintext highlighter-rouge">unicode.toUTF8</code>.</li>
+  <li>The compiler now rejects <code class="language-plaintext highlighter-rouge">'\n'</code> (use <code class="language-plaintext highlighter-rouge">"\n"</code> instead).</li>
+  <li><code class="language-plaintext highlighter-rouge">times.getStartMilsecs()</code> now works on Mac OS X.</li>
+  <li>Fixed a bug in <code class="language-plaintext highlighter-rouge">pegs.match</code> concerning start offsets.</li>
+  <li>Lots of other little bugfixes.</li>
+</ul>
+
+<h2 id="additions">Additions</h2>
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.cstringArrayToSeq</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.lines(f: TFile)</code> iterator.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.delete</code>, <code class="language-plaintext highlighter-rouge">system.del</code> and <code class="language-plaintext highlighter-rouge">system.insert</code> for sequences.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system./</code> for int.</li>
+  <li>Exported <code class="language-plaintext highlighter-rouge">system.newException</code> template.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">cgi.decodeData(data: string): tuple[key, value: string]</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">strutils.insertSep</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">math.trunc</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">ropes</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">sockets</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">browsers</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">httpserver</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">httpclient</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">parseutils</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">unidecode</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">xmldom</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">xmldomparser</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">xmltree</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">xmlparser</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">htmlparser</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">re</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">graphics</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">colors</code> module.</li>
+  <li>Many wrappers now do not contain redundant name prefixes (like <code class="language-plaintext highlighter-rouge">GTK_</code>,
+<code class="language-plaintext highlighter-rouge">lua</code>). The old wrappers are still available in <code class="language-plaintext highlighter-rouge">lib/oldwrappers</code>.
+You can change your configuration file to use these.</li>
+  <li>Triple quoted strings allow for <code class="language-plaintext highlighter-rouge">"</code> in more contexts.</li>
+  <li><code class="language-plaintext highlighter-rouge">""</code> within raw string literals stands for a single quotation mark.</li>
+  <li>Arguments to <code class="language-plaintext highlighter-rouge">openArray</code> parameters can be left out.</li>
+  <li>More extensive subscript operator overloading. (To be documented.)</li>
+  <li>The documentation generator supports the <code class="language-plaintext highlighter-rouge">.. raw:: html</code> directive.</li>
+  <li>The Pegs module supports back references via the notation <code class="language-plaintext highlighter-rouge">$capture_index</code>.</li>
+</ul>
+
+<h2 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h2>
+
+<ul>
+  <li>Overloading of the subscript operator only works if the type does not provide
+a built-in one.</li>
+  <li>The search order for libraries which is affected by the <code class="language-plaintext highlighter-rouge">path</code> option
+has been reversed, so that the project’s path is searched before
+the standard library’s path.</li>
+  <li>The compiler does not include a Pascal parser for bootstrapping purposes any
+more. Instead there is a <code class="language-plaintext highlighter-rouge">pas2nim</code> tool that contains the old functionality.</li>
+  <li>The procs <code class="language-plaintext highlighter-rouge">os.copyFile</code> and <code class="language-plaintext highlighter-rouge">os.moveFile</code> have been deprecated
+temporarily, so that the compiler warns about their usage. Use them with
+named arguments only, because the parameter order will change the next
+version!</li>
+  <li><code class="language-plaintext highlighter-rouge">atomic</code> and <code class="language-plaintext highlighter-rouge">let</code> are now keywords.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">\w</code> character class for pegs now includes the digits <code class="language-plaintext highlighter-rouge">'0'..'9'</code>.</li>
+  <li>Many wrappers now do not contain redundant name prefixes (like <code class="language-plaintext highlighter-rouge">GTK_</code>,
+<code class="language-plaintext highlighter-rouge">lua</code>) anymore.</li>
+  <li>Arguments to <code class="language-plaintext highlighter-rouge">openArray</code> parameters can be left out.</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

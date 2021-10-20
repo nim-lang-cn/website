@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>This Month with Nim: June 2021 - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="This Month with Nim: June 2021"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Three interesting projects our users worked on in June"> -->
+  <meta property="og:description" content="Three interesting projects our users worked on in June">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="This Month with Nim: June 2021" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            This Month with Nim: June 2021
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              01 July 2021
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              The Nim Community
+            </span>
+            
+          </h3>
+          <h2 id="cps"><a href="https://github.com/disruptek/cps">CPS</a></h2>
+
+<h4 id="authors-leorize-disruptek-zevv-and-saem">Authors: <a href="https://github.com/alaviss">@Leorize</a>, <a href="https://github.com/disruptek">@disruptek</a>, <a href="https://github.com/zevv">@Zevv</a> and <a href="https://github.com/saem">@saem</a></h4>
+
+<p>The project brings Continuation-Passing Style to Nim. CPS is an elegant approach to writing control-flow which is rooted in musty programming language theory. Now Nim’s macro system allows you the advantages of CPS without having to introduce any syntax.</p>
+
+<p>A short demonstration of implementing <code class="language-plaintext highlighter-rouge">goto</code> in Nim with CPS:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="o">/</span><span class="n">tables</span>
+<span class="k">import</span> <span class="n">cps</span>
+
+<span class="k">type</span>
+  <span class="n">Count</span> <span class="o">=</span> <span class="k">ref</span> <span class="k">object</span> <span class="k">of</span> <span class="n">Continuation</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">Table</span><span class="o">[</span><span class="kt">string</span><span class="p">,</span> <span class="n">Continuation</span><span class="p">.</span><span class="n">fn</span><span class="o">]</span>
+
+<span class="k">proc </span><span class="nf">label</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="n">Count</span><span class="p">;</span> <span class="n">name</span><span class="p">:</span> <span class="kt">string</span><span class="p">):</span> <span class="n">Count</span> <span class="p">{.</span><span class="n">cpsMagic</span><span class="p">.}</span> <span class="o">=</span>
+  <span class="n">c</span><span class="p">.</span><span class="n">labels</span><span class="o">[</span><span class="n">name</span><span class="o">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">fn</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">c</span>
+
+<span class="k">proc </span><span class="nf">goto</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="n">Count</span><span class="p">;</span> <span class="n">name</span><span class="p">:</span> <span class="kt">string</span><span class="p">):</span> <span class="n">Count</span> <span class="p">{.</span><span class="n">cpsMagic</span><span class="p">.}</span> <span class="o">=</span>
+  <span class="n">c</span><span class="p">.</span><span class="n">fn</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">labels</span><span class="o">[</span><span class="n">name</span><span class="o">]</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">c</span>
+
+<span class="k">proc </span><span class="nf">count</span><span class="p">(</span><span class="n">upto</span><span class="p">:</span> <span class="kt">int</span><span class="p">):</span> <span class="kt">int</span> <span class="p">{.</span><span class="n">cps</span><span class="p">:</span> <span class="n">Count</span><span class="p">.}</span> <span class="o">=</span>
+  <span class="sd">## deploy the Count to make counting fun again;</span>
+  <span class="sd">## this continuation returns the number of trips through the goto</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">label</span><span class="p">:</span> <span class="s">"again!"</span>
+  <span class="n">inc</span> <span class="n">result</span>
+  <span class="n">echo</span> <span class="n">result</span><span class="p">,</span> <span class="s">"!"</span>
+  <span class="n">echo</span> <span class="n">result</span><span class="p">,</span> <span class="s">" loops, ah ah ah!"</span>
+  <span class="k">if</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="n">upto</span><span class="p">:</span>
+    <span class="n">goto</span> <span class="s">"again!"</span>
+  <span class="n">echo</span> <span class="s">"whew!"</span>
+
+<span class="k">const</span> <span class="n">many</span> <span class="o">=</span> <span class="mi">1_000</span>
+<span class="n">assert</span> <span class="n">many</span> <span class="o">==</span> <span class="n">count</span><span class="p">(</span><span class="n">many</span><span class="p">)</span> <span class="c"># This might take awhile to run</span>
+</code></pre></div></div>
+
+<p>If you are interested, see Zevv’s excellent <a href="https://github.com/zevv/cpsdoc">write up on CPS</a>.
+Come join us at <a href="https://matrix.to/#/#cps:matrix.org">#cps:matrix.org</a> or <a href="https://web.libera.chat/#cps">#cps on libera.chat</a>.</p>
+
+<h2 id="whoisnim"><a href="https://gitea.com/Thisago/whois.nim">Whois.nim</a></h2>
+
+<h4 id="author-thisago">Author: <a href="https://github.com/thisago">@Thisago</a></h4>
+
+<p>The Whois.nim is a simple whois client.
+With cache!</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">whois</span>
+
+<span class="n">echo</span> <span class="n">whois</span><span class="p">(</span><span class="s">"duckduckgo.com"</span><span class="p">)</span>
+
+<span class="c"># or</span>
+
+<span class="k">var</span> <span class="n">domain</span> <span class="o">=</span> <span class="s">"metager.org"</span><span class="p">.</span><span class="n">toDomain</span> <span class="c"># convert to a `Domain` instance</span>
+<span class="n">domain</span><span class="p">.</span><span class="n">update</span><span class="p">()</span> <span class="c"># Get data from API</span>
+
+<span class="n">echo</span> <span class="n">domain</span>
+</code></pre></div></div>
+
+<h2 id="libfuzzer"><a href="https://github.com/planetis-m/libfuzzer">libFuzzer</a></h2>
+
+<h4 id="author-planetis-m">Author: <a href="https://github.com/planetis-m">@planetis-m</a></h4>
+
+<p>Thin interface for LLVM/Clang libFuzzer, an in-process, coverage-guided, evolutionary fuzzing engine.
+Fuzzing is an automated bug finding technique, where randomized inputs are fed to a target program in order to get it to crash.
+With fuzzing, you can increase your test coverage to find edge cases and trigger bugs more effectively.</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">proc </span><span class="nf">fuzzMe</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">openarray</span><span class="o">[</span><span class="n">byte</span><span class="o">]</span><span class="p">):</span> <span class="kt">bool</span> <span class="o">=</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">len</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="ow">and</span>
+    <span class="n">data</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="kt">char</span> <span class="o">==</span> <span class="sc">'F'</span> <span class="ow">and</span>
+    <span class="n">data</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">.</span><span class="kt">char</span> <span class="o">==</span> <span class="sc">'U'</span> <span class="ow">and</span>
+    <span class="n">data</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">.</span><span class="kt">char</span> <span class="o">==</span> <span class="sc">'Z'</span> <span class="ow">and</span>
+    <span class="n">data</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">.</span><span class="kt">char</span> <span class="o">==</span> <span class="sc">'Z'</span> <span class="c"># :‑&lt;</span>
+
+<span class="k">proc </span><span class="nf">initialize</span><span class="p">():</span> <span class="n">cint</span> <span class="p">{.</span><span class="n">exportc</span><span class="p">:</span> <span class="s">"LLVMFuzzerInitialize"</span><span class="p">.}</span> <span class="o">=</span>
+  <span class="p">{.</span><span class="n">emit</span><span class="p">:</span> <span class="s">"N_CDECL(void, NimMain)(void); NimMain();"</span><span class="p">.}</span>
+
+<span class="k">proc </span><span class="nf">testOneInput</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="k">ptr</span> <span class="n">UncheckedArray</span><span class="o">[</span><span class="n">byte</span><span class="o">]</span><span class="p">,</span> <span class="n">len</span><span class="p">:</span> <span class="kt">int</span><span class="p">):</span> <span class="n">cint</span> <span class="p">{.</span>
+    <span class="n">exportc</span><span class="p">:</span> <span class="s">"LLVMFuzzerTestOneInput"</span><span class="p">,</span> <span class="n">raises</span><span class="p">:</span> <span class="o">[]</span><span class="p">.}</span> <span class="o">=</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">discard</span> <span class="n">fuzzMe</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">toOpenArray</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>It takes a split second for libFuzzer to perform ~40.000 runs.
+Behind the scenes it uses value profiling to guide the fuzzer past these comparisons much more efficiently than simply hoping to stumble on the exact sequence of bytes by chance.</p>
+
+<h2 id="dik"><a href="https://github.com/juancarlospaco/dik">Dik</a></h2>
+
+<h4 id="author-juan-carlos">Author: <a href="https://github.com/juancarlospaco">Juan Carlos</a></h4>
+
+<p>Dik is a dictionary implemented as <code class="language-plaintext highlighter-rouge">{ array[char]: Option[T] }</code></p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Dik-dik">Cute pet.</a></li>
+  <li>Destructors.</li>
+  <li>Resize in-place.</li>
+  <li>Sorted and hashed.</li>
+  <li>Same size as Table.</li>
+  <li>Dollar and <code class="language-plaintext highlighter-rouge">pretty</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">toSeq</code> and <code class="language-plaintext highlighter-rouge">toDik</code>.</li>
+  <li>Tests for everything.</li>
+  <li>Documentation with examples.</li>
+  <li>Same size and speed as <code class="language-plaintext highlighter-rouge">Table</code>.</li>
+  <li>1 file, 300 lines, 0 dependencies.</li>
+  <li><code class="language-plaintext highlighter-rouge">newDikOfCap</code> for custom capacity.</li>
+  <li>Keys are stored as <code class="language-plaintext highlighter-rouge">array</code> of <code class="language-plaintext highlighter-rouge">char</code>.</li>
+  <li>Values are stored as <code class="language-plaintext highlighter-rouge">seq</code> of <code class="language-plaintext highlighter-rouge">Option[T]</code>.</li>
+  <li>Can be used like <code class="language-plaintext highlighter-rouge">seq</code> or like <code class="language-plaintext highlighter-rouge">Table</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">len</code> for lenght and <code class="language-plaintext highlighter-rouge">cap</code> for capacity.</li>
+  <li>Get items by <code class="language-plaintext highlighter-rouge">string</code> or <code class="language-plaintext highlighter-rouge">openArray[char]</code>.</li>
+  <li>Get items by index or <code class="language-plaintext highlighter-rouge">BackwardsIndex</code> or <code class="language-plaintext highlighter-rouge">Slice[int]</code>.</li>
+  <li>Iterators, including <code class="language-plaintext highlighter-rouge">enumerated</code> yields <code class="language-plaintext highlighter-rouge">(index, key, value)</code>.</li>
+  <li>From stdlib uses only <code class="language-plaintext highlighter-rouge">options</code> for <code class="language-plaintext highlighter-rouge">Option[T]</code>, <code class="language-plaintext highlighter-rouge">hashes</code> for <code class="language-plaintext highlighter-rouge">hash(T)</code>.</li>
+</ul>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="o">/</span><span class="n">options</span> <span class="sd">## For Option[T] ops.</span>
+<span class="k">import</span> <span class="n">std</span><span class="o">/</span><span class="n">json</span>    <span class="sd">## For heterogeneous values.</span>
+<span class="k">import</span> <span class="n">dik</span>
+
+<span class="k">var</span> <span class="n">myDik</span> <span class="o">=</span> <span class="p">{</span><span class="s">"key0"</span><span class="p">:</span> <span class="o">%*</span><span class="p">{</span><span class="s">"foo"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s">"bar"</span><span class="p">:</span> <span class="mf">3.14</span><span class="p">},</span> <span class="s">"key1"</span><span class="p">:</span> <span class="o">%*[</span><span class="s">"baz"</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span><span class="p">}.</span><span class="n">toDik</span>
+
+<span class="n">doAssert</span> <span class="n">myDik</span><span class="p">.</span><span class="n">len</span> <span class="o">==</span> <span class="mi">2</span>                        <span class="c"># Length</span>
+<span class="n">doAssert</span> <span class="n">myDik</span><span class="p">.</span><span class="n">cap</span> <span class="o">==</span> <span class="mi">2</span>                        <span class="c"># Capacity</span>
+<span class="n">doAssert</span> <span class="n">sizeOf</span><span class="p">(</span><span class="n">myDik</span><span class="p">)</span> <span class="o">==</span> <span class="mi">32</span>
+
+<span class="n">doAssert</span> <span class="n">myDik</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">.</span><span class="n">get</span> <span class="o">==</span> <span class="o">%*[</span><span class="s">"baz"</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span>       <span class="c"># Get by index</span>
+<span class="n">doAssert</span> <span class="n">myDik</span><span class="o">[</span><span class="p">^</span><span class="mi">1</span><span class="o">]</span><span class="p">.</span><span class="n">get</span> <span class="o">==</span> <span class="o">%*[</span><span class="s">"baz"</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span>      <span class="c"># Get by BackwardsIndex</span>
+<span class="n">doAssert</span> <span class="n">myDik</span><span class="o">[</span><span class="s">"key1"</span><span class="o">]</span><span class="p">.</span><span class="n">get</span> <span class="o">==</span> <span class="o">%*[</span><span class="s">"baz"</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span>  <span class="c"># Get by key</span>
+<span class="n">doAssert</span> <span class="n">myDik</span><span class="o">[</span><span class="mf">1</span><span class="p">..</span><span class="mi">1</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="n">get</span> <span class="o">==</span> <span class="o">%*[</span><span class="s">"baz"</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span> <span class="c"># Get by Slice[int]</span>
+
+<span class="n">echo</span> <span class="n">myDik</span><span class="p">.</span><span class="n">pretty</span>                              <span class="c"># Pretty-print</span>
+<span class="n">doAssert</span> <span class="n">myDik</span><span class="p">.</span><span class="n">toSeq</span> <span class="ow">is</span> <span class="kt">seq</span><span class="o">[</span><span class="n">Option</span><span class="o">[</span><span class="n">JsonNode</span><span class="o">]]</span>  <span class="c"># Dik to seq</span>
+<span class="n">doAssert</span> <span class="s">"key0"</span> <span class="ow">in</span> <span class="n">myDik</span>                       <span class="c"># contains(key)</span>
+<span class="n">myDik</span><span class="p">.</span><span class="n">del</span> <span class="s">"key1"</span>                               <span class="c"># Delete an item</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">myDik</span><span class="p">.</span><span class="n">enumerated</span><span class="p">:</span>   <span class="c"># Iterators</span>
+  <span class="n">doAssert</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span>
+  <span class="n">doAssert</span> <span class="n">key</span> <span class="o">==</span> <span class="s">"key0"</span>
+  <span class="n">doAssert</span> <span class="n">value</span><span class="p">.</span><span class="n">get</span> <span class="o">==</span> <span class="o">%*</span><span class="p">{</span><span class="s">"foo"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s">"bar"</span><span class="p">:</span> <span class="mf">3.14</span><span class="p">}</span>
+
+<span class="c"># Can store the lack of a value, without using "nil".</span>
+<span class="n">myDik</span><span class="o">[</span><span class="s">"key1"</span><span class="o">]</span> <span class="o">=</span> <span class="n">none</span> <span class="n">JsonNode</span>
+<span class="n">doAssert</span> <span class="ow">not</span><span class="p">(</span><span class="n">myDik</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">.</span><span class="n">isSome</span><span class="p">)</span>
+<span class="n">doAssert</span> <span class="n">myDik</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="n">myDik</span><span class="o">[</span><span class="s">"key1"</span><span class="o">]</span>
+
+<span class="n">clear</span> <span class="n">myDik</span>
+<span class="n">doAssert</span> <span class="n">myDik</span><span class="p">.</span><span class="n">len</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="n">doAssert</span> <span class="o">$</span><span class="n">myDik</span> <span class="o">==</span> <span class="s">"{:}"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="want-to-see-your-project-here-next-month">Want to see your project here next month?</h2>
+
+<p><a href="https://github.com/beef331/website#adding-your-project-to-month-with-nim">Follow this</a> to add your project to the next month’s blog post.</p>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

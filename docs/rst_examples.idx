@@ -1,0 +1,47 @@
+Not a Nim Manual	rst_examples.html
+About this document	rst_examples.html#about-this-document	 About this document	
+compile-time	rst_examples.html#compileminustime_1	About this document	
+runtime	rst_examples.html#runtime_1	About this document	
+Encoding	rst_examples.html#about-this-document-encoding	  Encoding	
+Indentation	rst_examples.html#about-this-document-indentation	  Indentation	
+indentation sensitive	rst_examples.html#indentation-sensitive_1	Indentation	
+escape sequences	rst_examples.html#escape-sequences_1	Indentation	
+carriage return	rst_examples.html#carriage-return_1	Indentation	
+line feed	rst_examples.html#line-feed_1	Indentation	
+newline	rst_examples.html#newline_1	Indentation	
+form feed	rst_examples.html#form-feed_1	Indentation	
+tabulator	rst_examples.html#tabulator_1	Indentation	
+vertical tabulator	rst_examples.html#vertical-tabulator_1	Indentation	
+backslash	rst_examples.html#backslash_1	Indentation	
+quotation mark	rst_examples.html#quotation-mark_1	Indentation	
+apostrophe	rst_examples.html#apostrophe_1	Indentation	
+character with decimal value d	rst_examples.html#character-with-decimal-value-d_1	Indentation	
+alert	rst_examples.html#alert_1	Indentation	
+backspace	rst_examples.html#backspace_1	Indentation	
+escape	rst_examples.html#escape_1	Indentation	
+[ESC]	rst_examples.html#esc_1	Indentation	
+character with hex value HH	rst_examples.html#character-with-hex-value-hh_1	Indentation	
+unicode codepoint with hex value HHHH	rst_examples.html#unicode-codepoint-with-hex-value-hhhh_1	Indentation	
+unicode codepoint	rst_examples.html#unicode-codepoint_1	Indentation	
+Operators	rst_examples.html#about-this-document-operators	  Operators	
+Constants and Constant Expressions	rst_examples.html#constants-and-constant-expressions	 Constants and Constant Expressions	
+constant	rst_examples.html#constant_1	Constants and Constant Expressions	
+unsigned integer	rst_examples.html#unsigned-integer_1	Constants and Constant Expressions	
+immediate	rst_examples.html#immediate_1	Constants and Constant Expressions	
+Symbol lookup in generics	rst_examples.html#constants-and-constant-expressions-symbol-lookup-in-generics	  Symbol lookup in generics	
+Open and Closed symbols	rst_examples.html#symbol-lookup-in-generics-open-and-closed-symbols	   Open and Closed symbols	
+Collective imports from a directory	rst_examples.html#symbol-lookup-in-generics-collective-imports-from-a-directory	   Collective imports from a directory	
+Pragmas	rst_examples.html#pragmas	 Pragmas	
+deprecated pragma	rst_examples.html#pragmas-deprecated-pragma	  deprecated pragma	
+Pure libraries	rst_examples.html#pure-libraries	 Pure libraries	
+Automatic imports	rst_examples.html#pure-libraries-automatic-imports	  Automatic imports	
+Code reordering	rst_examples.html#code-reordering	 Code reordering	
+Parameter constraints	rst_examples.html#code-reordering-parameter-constraints	  Parameter constraints	
+parameter constraint	rst_examples.html#parameter-constraint_1	Parameter constraints	
+The ~ operator	rst_examples.html#parameter-constraints-the-tilde-operator	   The <tt class="docutils literal"><span class="pre">~</span></tt> operator	
+The ** operator	rst_examples.html#parameter-constraints-the-starstar-operator	   The <tt class="docutils literal"><span class="pre">**</span></tt> operator	
+guard	rst_examples.html#guard_1	The <tt class="docutils literal"><span class="pre">**</span></tt> operator	
+locks	rst_examples.html#locks_1	The <tt class="docutils literal"><span class="pre">**</span></tt> operator	
+lock levels	rst_examples.html#lock-levels_1	The <tt class="docutils literal"><span class="pre">**</span></tt> operator	
+Time measurement with garbage collectors	rst_examples.html#code-reordering-time-measurement-with-garbage-collectors	  Time measurement with garbage collectors	
+Introduction	rst_examples.html#introduction	 Introduction	

@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Nim in 2017: A short recap - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Nim in 2017: A short recap"> -->
+
+  
+  <!-- <meta name="twitter:description" content="This year has been filled with some pretty major achievements for us, because of this I decided to write a little article summarising what we’ve accomplished in 2017 and to give a bit of a preview of what’s in store for 2018. The first Nim book Nim in Action, the first Nim programming language book, went into production in late 2016 and I received the first printed copies in the following summer. Of course, being the author, I am incredibly proud of this. This book is considered “canon” for Nim v1. This means that we will do our best to not break anything that is contained within it for version 1.0. So don’t be afraid to buy a copy thinking that it will be out of date by the time 1.0 is released. Nim at FOSDEM Nim is coming to FOSDEM! We are very happy to say that we have been allocated a stand at FOSDEM 2018 in Brussels. A lot of Nim folks (including the Nim creator Andreas Rumpf and myself) will be there to sell t-shirts, books and to promote Nim. Join us on 3 &amp; 4 February 2018 in Brussels! Nim in production Reel Valley, a game by Onset Game, written 100% in Nim has been released on Facebook and more recently on Android. We now have a wiki page listing multiple companies using Nim in production. Companies are searching for Nim programmers. Work towards v1.0 3 releases this year: 0.16.0, 0.17.0 and 0.17.2 Upcoming release 0.18.0 contains many bug fixes and improvements, in particular a lot of stdlib changes. See the current changelog here. “Upcoming” async has finally been merged. A large revamp of the times module, with more to come. (Thanks @GULPF) Multiple modules have been moved out of the stdlib to Nimble packages. (Thanks @lcrees) Fixes to our handling of SSL certificate checks. (Thanks @FedericoCeratto) The memory manager now implements the TLSF algorithm with the benefit that alloc and dealloc are now O(1) operations. Many more changes by our awesome and devoted community. Version 1.0 will mark the end of breaking changes to Nim. This won’t mean that Nim development will cease, many improvements will continue to be made and your source won’t require any changes to compile with each Nim release. There will be some caveats to this which we will outline in the future. We are already very good at exercising restraint when creating breaking changes, often creating a deprecation path to ease the pain of our users. This isn’t always the case though, after v1 is release it will be. Nim livestreams We wanted to attract more developers to Nim by hosting live coding streams on Twitch. Araq hosted livestreams where he worked on the compiler. You might find these useful if you’re interested in compiler development. Pointer free programming Thinking about destructors Pretty printing Random bug fixing dom96 hosted livestreams where he fixed stdlib bugs, created Nimble packages, and enhanced the Nim IRC bot. You might find these useful if you want to learn how to develop Nim software or fix stdlib bugs. Enhancing the Nim programming language IRC bot Creating a web driver package and fixing stdlib bugs Extending web driver package, stock notifier and Nimble Fixing stdlib bugs in the Nim programming language As always, I’d like to invite you to join our community to give us feedback or just to chill out with us, all the information you need to do so is available on our community page. Thank you all for your incredible support so far, and have a happy new year!"> -->
+  <meta property="og:description" content="This year has been filled with some pretty major achievements for us, because of this I decided to write a little article summarising what we’ve accomplished in 2017 and to give a bit of a preview of what’s in store for 2018. The first Nim book Nim in Action, the first Nim programming language book, went into production in late 2016 and I received the first printed copies in the following summer. Of course, being the author, I am incredibly proud of this. This book is considered “canon” for Nim v1. This means that we will do our best to not break anything that is contained within it for version 1.0. So don’t be afraid to buy a copy thinking that it will be out of date by the time 1.0 is released. Nim at FOSDEM Nim is coming to FOSDEM! We are very happy to say that we have been allocated a stand at FOSDEM 2018 in Brussels. A lot of Nim folks (including the Nim creator Andreas Rumpf and myself) will be there to sell t-shirts, books and to promote Nim. Join us on 3 &amp; 4 February 2018 in Brussels! Nim in production Reel Valley, a game by Onset Game, written 100% in Nim has been released on Facebook and more recently on Android. We now have a wiki page listing multiple companies using Nim in production. Companies are searching for Nim programmers. Work towards v1.0 3 releases this year: 0.16.0, 0.17.0 and 0.17.2 Upcoming release 0.18.0 contains many bug fixes and improvements, in particular a lot of stdlib changes. See the current changelog here. “Upcoming” async has finally been merged. A large revamp of the times module, with more to come. (Thanks @GULPF) Multiple modules have been moved out of the stdlib to Nimble packages. (Thanks @lcrees) Fixes to our handling of SSL certificate checks. (Thanks @FedericoCeratto) The memory manager now implements the TLSF algorithm with the benefit that alloc and dealloc are now O(1) operations. Many more changes by our awesome and devoted community. Version 1.0 will mark the end of breaking changes to Nim. This won’t mean that Nim development will cease, many improvements will continue to be made and your source won’t require any changes to compile with each Nim release. There will be some caveats to this which we will outline in the future. We are already very good at exercising restraint when creating breaking changes, often creating a deprecation path to ease the pain of our users. This isn’t always the case though, after v1 is release it will be. Nim livestreams We wanted to attract more developers to Nim by hosting live coding streams on Twitch. Araq hosted livestreams where he worked on the compiler. You might find these useful if you’re interested in compiler development. Pointer free programming Thinking about destructors Pretty printing Random bug fixing dom96 hosted livestreams where he fixed stdlib bugs, created Nimble packages, and enhanced the Nim IRC bot. You might find these useful if you want to learn how to develop Nim software or fix stdlib bugs. Enhancing the Nim programming language IRC bot Creating a web driver package and fixing stdlib bugs Extending web driver package, stock notifier and Nimble Fixing stdlib bugs in the Nim programming language As always, I’d like to invite you to join our community to give us feedback or just to chill out with us, all the information you need to do so is available on our community page. Thank you all for your incredible support so far, and have a happy new year!">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Nim in 2017: A short recap" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Nim in 2017: A short recap
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              28 December 2017
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Dominik Picheta
+            </span>
+            
+          </h3>
+          <p>This year has been filled with some pretty major achievements for us, because
+of this I decided to write a little article summarising what we’ve accomplished
+in 2017 and to give a bit of a preview of what’s in store for 2018.</p>
+
+<h2 id="the-first-nim-book">The first Nim book</h2>
+
+<div class="center">
+  <a href="https://book.picheta.me/">
+    <img src="https://pbs.twimg.com/media/DHI3ogxXsAAvrRE.jpg:large" alt="Three Nim in Action books, fanned out" width="400" />
+  </a>
+</div>
+
+<ul>
+  <li>Nim in Action, the first Nim programming language book, went into production
+in late 2016 and I received the first printed copies in the following summer.</li>
+  <li>Of course, being the author, I am incredibly proud of this.</li>
+  <li>This book is considered <a href="https://en.wikipedia.org/wiki/Canon_(fiction)">“canon”</a>
+for Nim v1. This means that we will do our
+best to not break anything that is contained within it for version 1.0.
+So don’t be
+afraid to buy a copy thinking that it will be out of date by the time 1.0
+is released.</li>
+</ul>
+
+<h2 id="nim-at-fosdem">Nim at FOSDEM</h2>
+
+<div class="center">
+  <a href="https://fosdem.org/2018/stands/">
+    <img src="https://fosdem.org/2018/support/promote/wide.png" alt="FOSDEM 2018" width="500" />
+  </a>
+</div>
+
+<ul>
+  <li>Nim is coming to FOSDEM!</li>
+  <li>We are very happy to say that we have been allocated a stand at FOSDEM 2018
+in Brussels. A lot of Nim folks (including the Nim creator Andreas Rumpf and
+myself) will be there to sell t-shirts, books and to promote Nim.</li>
+  <li>Join us on 3 &amp; 4 February 2018 in Brussels!</li>
+</ul>
+
+<h2 id="nim-in-production">Nim in production</h2>
+
+<ul>
+  <li>Reel Valley, a game by <a href="https://onsetgame.com/">Onset Game</a>, written 100%
+in Nim has been released on
+<a href="https://apps.facebook.com/reelvalley/?utm_source=nim_2017">Facebook</a> and
+more recently on
+<a href="https://play.google.com/store/apps/details?id=com.onsetgame.reelvalley">Android</a>.</li>
+  <li>We now have a wiki page listing multiple companies using
+<a href="https://github.com/nim-lang/Nim/wiki/Companies-using-Nim">Nim in production</a>.</li>
+  <li>Companies are <a href="https://forum.nim-lang.org/t/3402">searching for Nim programmers</a>.</li>
+</ul>
+
+<h2 id="work-towards-v10">Work towards v1.0</h2>
+
+<ul>
+  <li>3 releases this year: 0.16.0, 0.17.0 and 0.17.2</li>
+  <li>Upcoming release 0.18.0 contains many bug fixes and improvements, in particular
+a lot of stdlib changes.
+See the current changelog <a href="https://github.com/nim-lang/Nim/blob/devel/changelog.md#v0180---ddmmyyyy">here</a>.
+    <ul>
+      <li>“Upcoming” async has finally been merged.</li>
+      <li>A large revamp of the <code class="language-plaintext highlighter-rouge">times</code> module, with more to come.
+(Thanks <a href="https://github.com/GULPF">@GULPF</a>)</li>
+      <li>Multiple modules have been moved out of the stdlib to Nimble packages.
+(Thanks <a href="https://github.com/lcrees/">@lcrees</a>)</li>
+      <li>Fixes to our handling of SSL certificate checks.
+(Thanks <a href="https://github.com/FedericoCeratto">@FedericoCeratto</a>)</li>
+      <li>The memory manager now implements the TLSF algorithm with the benefit that
+<code class="language-plaintext highlighter-rouge">alloc</code> and <code class="language-plaintext highlighter-rouge">dealloc</code> are now O(1) operations.</li>
+      <li>Many more changes by our awesome and devoted community.</li>
+    </ul>
+  </li>
+  <li>Version 1.0 will mark the end of breaking changes to Nim.
+This won’t mean that Nim development will cease, many improvements will
+continue to be made and your source won’t require any changes to compile
+with each Nim release.
+    <ul>
+      <li>There will be some caveats to this which we will outline in the future.</li>
+      <li>We are already very good at exercising restraint when creating breaking
+ changes, often creating a deprecation path to ease the pain of our users.
+ This isn’t always the case though, after v1 is release it will be.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="nim-livestreams">Nim livestreams</h2>
+
+<ul>
+  <li>We wanted to attract more developers to Nim by hosting live coding streams on Twitch.</li>
+  <li><a href="https://go.twitch.tv/araq4k">Araq</a> hosted livestreams where he worked on the compiler. You might find
+ these useful if you’re interested in compiler development.
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=EC9zCXlvY2k">Pointer free programming</a></li>
+      <li><a href="https://www.youtube.com/watch?v=KNUDGZuqfQM">Thinking about destructors</a></li>
+      <li><a href="https://www.youtube.com/watch?v=UV38gQfcb9c">Pretty printing</a></li>
+      <li><a href="https://www.youtube.com/watch?v=E2qlDKm_WzE">Random bug fixing</a></li>
+    </ul>
+  </li>
+  <li><a href="https://go.twitch.tv/d0m96">dom96</a> hosted livestreams where he fixed stdlib bugs, created Nimble packages,
+and enhanced the Nim IRC bot. You might find these useful if you want to
+learn how to develop Nim software or fix stdlib bugs.
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=CkXZjjWD8EI">Enhancing the Nim programming language IRC bot</a></li>
+      <li><a href="https://www.youtube.com/watch?v=583BwZ7uSro">Creating a web driver package and fixing stdlib bugs</a></li>
+      <li><a href="https://www.youtube.com/watch?v=UQ4RvUlXIDI">Extending web driver package, stock notifier and Nimble</a></li>
+      <li><a href="https://www.youtube.com/watch?v=RggcZEXZA-g">Fixing stdlib bugs in the Nim programming language</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>As always, I’d like to invite
+you to join our community to give us feedback or just to chill out with us,
+all the information you need to do so is available on our
+<a href="https://nim-lang.org/community.html">community</a> page.</p>
+
+<p>Thank you all for your incredible support so far, and have a happy new year!</p>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

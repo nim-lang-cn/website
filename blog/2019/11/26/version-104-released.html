@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>1.0.4 版本现已发布！ - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="1.0.4 版本现已发布！"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Nim 团队很高兴为大家带来 1.0.4 版本发布的消息！这是我们在 Nim 1.0.0 之后发布的第二个补丁版本。"> -->
+  <meta property="og:description" content="Nim 团队很高兴为大家带来 1.0.4 版本发布的消息！这是我们在 Nim 1.0.0 之后发布的第二个补丁版本。">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="1.0.4 版本现已发布！" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            1.0.4 版本现已发布！
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              26 November 2019
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Nim 开发团队
+            </span>
+            
+          </h3>
+          <blockquote>
+  <p>以下由中文社区翻译，能力有限，如有翻译错误，欢迎加入 QQ 群指正！</p>
+</blockquote>
+
+<p>Nim 团队很高兴为大家带来 1.0.4 版本发布的消息，
+这是我们在 Nim 1.0.0 之后发布的第二个补丁版本。</p>
+
+<p>想要了解更多关于 1.0.0 版本的细节，可以查看我们两个月前
+<a href="/blog/2019/09/23/version-100-released.html">版本发布说明</a>。</p>
+
+<p>距离前一个版本的发布尽管只是过去了一个月的时间，
+但这次的版本已经包含了超过 <a href="https://github.com/nim-lang/Nim/compare/v1.0.2...v1.0.4">70 次新的提交</a>,
+新修复了 20 个问题，
+让我们的 1.0 版本变成了更好的样子。</p>
+
+<h2 id="安装-104">安装 1.0.4</h2>
+
+<p>如果你已经用 <code class="language-plaintext highlighter-rouge">choosenim</code> 安装了之前版本的 Nim ，
+升级到 Nim 的 1.0.4 版本会非常简单:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>choosenim update stable
+</code></pre></div></div>
+
+<p>如果你还没有安装 <code class="language-plaintext highlighter-rouge">choosenim</code> ，
+你可以通过
+<a href="https://github.com/dom96/choosenim">这些说明</a> 来下载和安装 <code class="language-plaintext highlighter-rouge">choosenim</code>，
+当然你也可以按照我们的
+<a href="/install.html">安装</a> 页面直接安装。</p>
+
+<h2 id="更新日志">更新日志</h2>
+
+<p>你可以
+<a href="https://github.com/nim-lang/Nim/blob/version-1-0/changelogs/changelog_1_0_4.md">在我们的 GitHub 仓库中</a>
+查阅此版本的变更日志以及 Nim 的其余源码。</p>
+
+<hr />
+<p>附《更新日志》</p>
+<h2 id="语言层面的变更">语言层面的变更</h2>
+
+<ul>
+  <li>模仿早期版本的 Nim ，在运行时取消了对无符号整数转换的检查。
+文档中已针对这一改进做出了说明。查看 <a href="">https://github.com/nim-lang/RFCs/issues/175</a> 了解更多细节 (#12688)</li>
+  <li>添加了 <code class="language-plaintext highlighter-rouge">or detectOs(Manjaro)</code>，这样当检测到系统为 Manjaro 时，调用原生的包管理器会使用 <code class="language-plaintext highlighter-rouge">pacman</code> 进行包管理 (<a href="https://github.com/nim-lang/Nim/pull/12587">#12587</a>)</li>
+  <li><code class="language-plaintext highlighter-rouge">--os:ios</code> 编译指令现在也代表了 macosx (<a href="https://github.com/nim-lang/Nim/pull/12585">#12585</a>)</li>
+  <li>导出了 nim.cfg 解析器，现在其他工具也可以调用 <code class="language-plaintext highlighter-rouge">readConfigFile</code> 了 (<a href="https://github.com/nim-lang/Nim/pull/12602">#12602</a>)</li>
+</ul>
+
+<h2 id="bug-修复">BUG 修复</h2>
+
+<ul>
+  <li>修复了 “在 OSX 上多次调用后，<code class="language-plaintext highlighter-rouge">gorgeEx()</code> 失败”的问题 (<a href="https://github.com/nim-lang/Nim/issues/12337">#12337</a>)</li>
+  <li>优化和加强了 posix 模块 （<a href="https://github.com/nim-lang/Nim/issues/10723">#10723</a>）</li>
+  <li>修复了 “Nim 的语法检查 允许使用 <code class="language-plaintext highlighter-rouge">gorgeEx()</code>，但不允许 <code class="language-plaintext highlighter-rouge">writeFile()</code>” 的问题，现在这两个都被提示 <em>don’t run staticExec for ‘nim suggest</em> 了 (<a href="https://github.com/nim-lang/Nim/issues/12491">#12491</a>)</li>
+  <li>修复了 “一个算数的低级错误： -3 mod 7 == 3” （<a href="https://github.com/nim-lang/Nim/issues/12514">#12514</a>）</li>
+  <li>修复了 “后端集成文档中 c2nim 链接失效” 的问题（<a href="https://github.com/nim-lang/Nim/issues/12537">#12537</a>）</li>
+  <li>修复了 “‎具有默认值的泛型参数会导致不正确的泛型类型解析‎” 的问题 （<a href="https://github.com/nim-lang/Nim/issues/12528">#12528</a>）</li>
+  <li>修复了 “再次出现的问题: compiler/vmgen.nim(354, 20) <code class="language-plaintext highlighter-rouge">false</code> leaking temporary 10 slotTempInt [AssertionError] 
+(<a href="https://github.com/nim-lang/Nim/issues/12547">#12547</a>)</li>
+  <li>修复了 “Windows 上的 64 位(只有在 64 位上有问题) nim 编译/链接断开” (<a href="https://github.com/nim-lang/Nim/issues/12536">#12536</a>)</li>
+  <li>修复了 “除了最新的 devel 版本No =destroy for elements of closure environments other than for latest devel –gc:destructors” (<a href="https://github.com/nim-lang/Nim/issues/12577">#12577</a>)</li>
+  <li>修复了 “[1.0.0] 无法使用 –cpu:avr 进行编译” (<a href="https://github.com/nim-lang/Nim/issues/12395">#12395</a>)</li>
+  <li>修复了 “使用无效的对象变体会导致编译器崩溃” (<a href="https://github.com/nim-lang/Nim/issues/12379">#12379</a>)</li>
+  <li>修复了 “import 之前写的编译指示会被静默忽略” (<a href="https://github.com/nim-lang/Nim/issues/5050">#5050</a>)</li>
+  <li>修复了 “ strformat + asyncdispatch + const 同时使用会报错” 的问题 (<a href="https://github.com/nim-lang/Nim/issues/12612">#12612</a>)</li>
+  <li>修复了 “<code class="language-plaintext highlighter-rouge">--nimblePath</code> 是附加的，需要一个无痛的解决方案” (<a href="https://github.com/nim-lang/Nim/issues/12601">#12601</a>)</li>
+  <li>修复了 “nim.cfg 中 –define:FOO:VAL 的语法没有文档或者缺失” (<a href="https://github.com/nim-lang/Nim/issues/12367">#12367</a>)</li>
+  <li>修复了 “使用宏生成的 vm 字符串无法正常使用” (<a href="https://github.com/nim-lang/Nim/issues/12670">#12670</a>)</li>
+  <li>修复了 “<code class="language-plaintext highlighter-rouge">staticRead()</code> 引入的静态文件变更时，会强制触发重新编译。” (#12663)</li>
+  <li>修复了终止处理程序中调用 <code class="language-plaintext highlighter-rouge">throw</code> 引发的崩溃 (<a href="https://github.com/nim-lang/Nim/pull/12572">#12572</a>)</li>
+  <li>修复了用于 具有字符串字段的对象 的 newLit (<a href="https://github.com/nim-lang/Nim/pull/12542">#12542</a>)</li>
+</ul>
+
+<h2 id="文档更新">文档更新</h2>
+<ul>
+  <li>给 Math 模块添加了文档 (<a href="https://github.com/nim-lang/Nim/pull/12460">#12460</a>)</li>
+  <li>修复了许多无效的链接，尽量将链接替换为了链接到文档内部 (<a href="https://github.com/nim-lang/Nim/pull/12463">#12463</a>)</li>
+  <li>sequtils：在示例中替换掉了已经遗弃的 ‘random’ 用法 (<a href="https://github.com/nim-lang/Nim/pull/12515">#12515</a>)</li>
+  <li>给整型添加了文档 (<a href="https://github.com/nim-lang/Nim/pull/12513">#12513</a>)</li>
+  <li>修复了代码风格的错误 (<a href="https://github.com/nim-lang/Nim/pull/12545">#12545</a>)</li>
+  <li>修正文档和注释中的几个错误 (<a href="https://github.com/nim-lang/Nim/pull/12553">#12553</a>)</li>
+  <li>添加文档以更好地区分 <code class="language-plaintext highlighter-rouge">getProjectPath</code>, <code class="language-plaintext highlighter-rouge">getCurrentDir</code> 和 <code class="language-plaintext highlighter-rouge">currentSourcePath</code> (#12565)</li>
+  <li>doc/tut3.rst: 修复了介绍中的错别字 (<a href="https://github.com/nim-lang/Nim/pull/12607">#12607</a>)</li>
+  <li>添加了指向 <code class="language-plaintext highlighter-rouge">packaging</code> 和 <code class="language-plaintext highlighter-rouge">distro</code> 页面的链接 (<a href="https://github.com/nim-lang/Nim/pull/12603">#12603</a>)</li>
+  <li>修复了 <code class="language-plaintext highlighter-rouge">$</code>*(dt: DateTime) 的说明 (<a href="https://github.com/nim-lang/Nim/pull/12660/files">#12660</a>)</li>
+  <li>在 manual.rst 中对 <code class="language-plaintext highlighter-rouge">experimental</code> / <code class="language-plaintext highlighter-rouge">parallel</code> 加入了示例以明确区别  (<a href="https://github.com/nim-lang/Nim/pull/12472">#12472</a>)</li>
+  <li>修复手册中错误的章节层级关系 (<a href="https://github.com/nim-lang/Nim/pull/12724">#12724</a>)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

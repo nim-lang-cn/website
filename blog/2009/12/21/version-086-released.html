@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.8.6 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.8.6 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="The version jump from 0.8.2 to 0.8.6 acknowledges the fact that all development of the compiler is now done in Nimrod. Bugfixes The pragmas hint[X]:off and warning[X]:off now work. Method call syntax for iterators works again (for x in lines.split()). Fixed a typo in removeDir for POSIX that lead to an infinite recursion. The compiler now checks that module filenames are valid identifiers. Empty patterns for the dynlib pragma are now possible. os.parseCmdLine returned wrong results for trailing whitespace. Inconsequent tuple usage (using the same tuple with and without named fields) does not crash the code generator anymore. A better error message is provided when the loading of a proc within a dynamic lib fails. Additions Added system.contains for open arrays. The PEG module now supports the search loop operator @. Grammar/parser: SAD|IND is allowed before any kind of closing bracket. This allows for more flexible source code formatting. The compiler now uses a bind table for symbol lookup within a bind context. (See manual.html#templates for details.) discard """my long comment""" is now optimized away. New --floatChecks: on|off switches and pragmas for better debugging of floating point operations. (See manual.html#types-pre-defined-floating-point-types for details.) The manual has been improved. (Many thanks to Philippe Lhoste!) Changes affecting backwards compatibility The compiler does not skip the linking step anymore even if no file has changed. os.splitFile(".xyz") now returns ("", ".xyz", "") instead of ("", "", ".xyz"). So filenames starting with a dot are handled differently. strutils.split(s: string, seps: set[char]) never yields the empty string anymore. This behaviour is probably more appropriate for whitespace splitting. The compiler now stops after the --version command line switch. Removed support for enum inheritance in the parser; enum inheritance has never been documented anyway. The msg field of system.E_base has now the type string, instead of cstring. This improves memory safety."> -->
+  <meta property="og:description" content="The version jump from 0.8.2 to 0.8.6 acknowledges the fact that all development of the compiler is now done in Nimrod. Bugfixes The pragmas hint[X]:off and warning[X]:off now work. Method call syntax for iterators works again (for x in lines.split()). Fixed a typo in removeDir for POSIX that lead to an infinite recursion. The compiler now checks that module filenames are valid identifiers. Empty patterns for the dynlib pragma are now possible. os.parseCmdLine returned wrong results for trailing whitespace. Inconsequent tuple usage (using the same tuple with and without named fields) does not crash the code generator anymore. A better error message is provided when the loading of a proc within a dynamic lib fails. Additions Added system.contains for open arrays. The PEG module now supports the search loop operator @. Grammar/parser: SAD|IND is allowed before any kind of closing bracket. This allows for more flexible source code formatting. The compiler now uses a bind table for symbol lookup within a bind context. (See manual.html#templates for details.) discard """my long comment""" is now optimized away. New --floatChecks: on|off switches and pragmas for better debugging of floating point operations. (See manual.html#types-pre-defined-floating-point-types for details.) The manual has been improved. (Many thanks to Philippe Lhoste!) Changes affecting backwards compatibility The compiler does not skip the linking step anymore even if no file has changed. os.splitFile(".xyz") now returns ("", ".xyz", "") instead of ("", "", ".xyz"). So filenames starting with a dot are handled differently. strutils.split(s: string, seps: set[char]) never yields the empty string anymore. This behaviour is probably more appropriate for whitespace splitting. The compiler now stops after the --version command line switch. Removed support for enum inheritance in the parser; enum inheritance has never been documented anyway. The msg field of system.E_base has now the type string, instead of cstring. This improves memory safety.">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.8.6 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.8.6 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              21 December 2009
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Andreas Rumpf
+            </span>
+            
+          </h3>
+          <p>The version jump from 0.8.2 to 0.8.6 acknowledges the fact that all development
+of the compiler is now done in Nimrod.</p>
+
+<h2 id="bugfixes">Bugfixes</h2>
+<ul>
+  <li>The pragmas <code class="language-plaintext highlighter-rouge">hint[X]:off</code> and <code class="language-plaintext highlighter-rouge">warning[X]:off</code> now work.</li>
+  <li>Method call syntax for iterators works again (<code class="language-plaintext highlighter-rouge">for x in lines.split()</code>).</li>
+  <li>Fixed a typo in <code class="language-plaintext highlighter-rouge">removeDir</code> for POSIX that lead to an infinite recursion.</li>
+  <li>The compiler now checks that module filenames are valid identifiers.</li>
+  <li>Empty patterns for the <code class="language-plaintext highlighter-rouge">dynlib</code> pragma are now possible.</li>
+  <li><code class="language-plaintext highlighter-rouge">os.parseCmdLine</code> returned wrong results for trailing whitespace.</li>
+  <li>Inconsequent tuple usage (using the same tuple with and without named fields)
+does not crash the code generator anymore.</li>
+  <li>A better error message is provided when the loading of a proc within a
+dynamic lib fails.</li>
+</ul>
+
+<h2 id="additions">Additions</h2>
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.contains</code> for open arrays.</li>
+  <li>The PEG module now supports the <em>search loop operator</em> <code class="language-plaintext highlighter-rouge">@</code>.</li>
+  <li>Grammar/parser: <code class="language-plaintext highlighter-rouge">SAD|IND</code> is allowed before any kind of closing bracket.
+This allows for more flexible source code formatting.</li>
+  <li>The compiler now uses a <em>bind</em> table for symbol lookup within a <code class="language-plaintext highlighter-rouge">bind</code>
+context. (See <a href="https://nim-lang.org/docs/manual.html#templates">manual.html#templates</a> for details.)</li>
+  <li><code class="language-plaintext highlighter-rouge">discard """my long comment"""</code> is now optimized away.</li>
+  <li>New <code class="language-plaintext highlighter-rouge">--floatChecks: on|off</code> switches and pragmas for better debugging
+of floating point operations. (See
+<a href="https://nim-lang.org/docs/manual.html#types-pre-defined-floating-point-types">manual.html#types-pre-defined-floating-point-types</a> for details.)</li>
+  <li>The manual has been improved. (Many thanks to Philippe Lhoste!)</li>
+</ul>
+
+<h2 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h2>
+<ul>
+  <li>The compiler does not skip the linking step anymore even if no file
+has changed.</li>
+  <li><code class="language-plaintext highlighter-rouge">os.splitFile(".xyz")</code> now returns <code class="language-plaintext highlighter-rouge">("", ".xyz", "")</code> instead of
+<code class="language-plaintext highlighter-rouge">("", "", ".xyz")</code>. So filenames starting with a dot are handled
+differently.</li>
+  <li><code class="language-plaintext highlighter-rouge">strutils.split(s: string, seps: set[char])</code> never yields the empty string
+anymore. This behaviour is probably more appropriate for whitespace splitting.</li>
+  <li>The compiler now stops after the <code class="language-plaintext highlighter-rouge">--version</code> command line switch.</li>
+  <li>Removed support for enum inheritance in the parser; enum inheritance has
+never been documented anyway.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">msg</code> field of <code class="language-plaintext highlighter-rouge">system.E_base</code> has now the type <code class="language-plaintext highlighter-rouge">string</code>, instead
+of <code class="language-plaintext highlighter-rouge">cstring</code>. This improves memory safety.</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

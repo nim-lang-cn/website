@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Benchmarking the Beast - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Benchmarking the Beast"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Benchmarking with the Sieve of Eratosthenes with efficient cache use"> -->
+  <meta property="og:description" content="Benchmarking with the Sieve of Eratosthenes with efficient cache use">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Benchmarking the Beast" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Benchmarking the Beast
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              28 July 2021
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              W. Gordon Goodsman (GordonBGood)
+            </span>
+            
+          </h3>
+          <div class="sidebarblock">
+  <div class="content">
+    <div class="title">Guest post</div>
+    <div class="paragraph">
+      This is a guest post by W. Gordon Goodsman (GordonBGood).
+      If you would like to publish articles as a guest author on nim-lang.org then get in touch with us via
+      <a href="https://twitter.com/nim_lang">Twitter</a> or <a href="https://nim-lang.org/community.html">otherwise</a>.
+    </div>
+  </div>
+</div>
+
+<h1 id="nim-efficient-expressive-elegant---comparing-these-aspects">Nim: Efficient, Expressive, Elegant - Comparing these Aspects</h1>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This will be a series of blog posts showing what makes Nim such a great general purpose language that is true to its goals of being efficient, expressive, and elegant.  This first article of the series develops a benchmark program that demonstrates all three.  Further articles in the series will, first, move into a more ambitious application developed from the benchmark, then show that Nim has overcome many/most of the reasons programmers may not have taken to it in its earlier years, using more modern features to further advance the application, and finally look at new experimental features and examine how those features may make Nim competitive to any computer language in the wild, at least in the general sense as in not being specialized to any one niche.</p>
+
+<p>Other than highlighting the good points of Nim, part of the reason this post is timely is that it explains the intricacies of efficient Sieve of Eratosthenes composite number culling as used in a <a href="https://www.youtube.com/channel/UCNzszbnvQeFzObW0ghk0Ckw">“Dave’s Garage Software Drag Racing”</a> competition <a href="https://github.com/PlummersSoftwareLLC/Primes">hosted on GitHub</a>.  This cross-referenced blog post should help explain why the Nim entry solution 3 is so fast using the technique of Extreme Loop Unrolling.</p>
+
+<h2 id="history-of-using-the-sieve-of-eratosthenes-as-a-benchmark">History of using the Sieve of Eratosthenes as a benchmark</h2>
+
+<p>In the Dawns of Time (much previous to the start of Nimrod/Nim development), there was an article published in <a href="https://archive.org/details/byte-magazine-1981-09/page/n3/mode/2up" title="downloadable archive link">Byte magazine, July 1980 issue, page 180</a> on benchmarking computers and computer languages using an Odds-Only Sieve of Eratosthenes (sieving only the odd numbers, as two is the only even prime).  Of course, back then computers and computer languages were no where near the sophistication of today, and the author of the article wasn’t all that experienced either, so the program listing in that article shows some flaws, but the idea was sound as I am going to show in this article.  A couple of the basic ideas that the author, Jim Gilbreath, missed were that composite number culling can start at the square of each base prime as earlier composites will have already been culled by lower value base primes, and culling can stop when the base prime value reaches the square root of the sieving range, but that would not impact the implementation’s use as a benchmark - it would just make the task slower than it needed to be.</p>
+
+<p>In the Beginning of Time (not long after the start of Nimrod/Nim development), our own Dennis Felsing (@def or def-) published a blog post “What is Special about Nim” in which <a href="https://hookrace.net/blog/what-is-special-about-nim/#nim-runtime-26-s">he used a version of the Sieve of Eratosthenes to use as a benchmark</a> to try to show that Nim was at least as fast as most languages.  That version is reproduced here as follows:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">math</span>
+
+<span class="k">proc </span><span class="nf">eratosthenes</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="kt">int</span><span class="p">):</span> <span class="n">auto</span> <span class="o">=</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">newSeq</span><span class="o">[</span><span class="kt">int8</span><span class="o">]</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="n">result</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">result</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">0</span> <span class="p">..</span> <span class="kt">int</span> <span class="n">sqrt</span><span class="p">(</span><span class="kt">float</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">result</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">countup</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">discard</span> <span class="n">eratosthenes</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>As one can see, that version fixes the problems I mentioned about the old Byte magazine version in that culling starts at the square of the base primes found and stops when the base primes reach the square root of the range, but now he no longer sieves odd numbers only, meaning that there are almost two and a half million culling operations up to a hundred million rather than just under a hundred million for odds-only culling; again, that doesn’t matter for use as a benchmark, but it still means as an application, it is about two and a half times slower than necessary.</p>
+
+<p>However, as a benchmark, it does suffer from some major problems in what the timing actually indicates, as follows:</p>
+
+<ol>
+  <li>The program uses a hundred million bytes of storage, which means that the algorithm isn’t very expandable for larger ranges as one might like to test.  Use of one byte to represent each possible composite number is very wasteful since each eight bits then represent just one state of being a composite number or not.</li>
+  <li>Use of the one-huge-memory-array algorithm means that the storage and the culling loops run well beyond the range of the CPU cache sizes which are generally about 16 Kilobytes for the L1 cache and about 128 Kilobytes for the L2 cache.  Memory access time for the L1 cache is generally about one CPU clock cycle, it is something about eight clock cycles for the L2 cache, and it is up to many tens of cycles for the main RAM memory access to which this algorithm would have to often resort.</li>
+</ol>
+
+<p>So the blog post finds that the benchmark runs the same speed as the C version, but that isn’t very meaningful as both are bottle-necked by the speed of RAM memory access and of course that is the same since the benchmark was run on the same machine; the fact that it shows that these are over ten times faster than the Python equivalent code isn’t surprising considering that the Python code was interpreted, and if these weren’t bottle-necked, the difference could be up to something closer to a hundred times faster.</p>
+
+<h1 id="goals-of-a-new-sieve-of-eratosthenes-soe-benchmark">Goals of a new Sieve of Eratosthenes (SoE) Benchmark</h1>
+
+<p>In order to be better able to reveal the speed of the generated code from compiled languages such as C, Rust, and Nim, an improved SoE algorithm needs to be used that by its design leads to fast execution.  The design elements then are as follows:</p>
+
+<ol>
+  <li>Although it isn’t important for a benchmark, in order to use this work for a later more sophisticated application, odds-only culling may as well be used.  This simple form of wheel factorization reduces the memory use by a factor of two at no cost in time per culling operation.  This is a simple form of wheel factorization because every other bit in a representation of all numbers represents even numbers that will be culled on the first pass with a base prime of two, so organizing the bits into two “bit planes” with one containing all the evens and the other the odds, it is readily apparent that the evens bit plane can be discarded.  The odds bit plane is then said to contain the residuals of a modulo two operation, and culling across it is still by the base prime value per cull.</li>
+  <li>As many composite number representations as possible should be packed into a given CPU l1 cache size, which means that only one bit is used for each.  Along with using odds-only sieving, this will allow a reasonable size of culling range much larger than the eight or sixteen thousand range that were used in the Byte magazine article.  For some implementations, this will mean some extra CPU instructions spent “bit-twiddling”, but even for those, there will be a net gain due to the better use of cache, and as will be seen, use of “Extreme Loop Unrolling” can even avoid the run time “bit-twiddling”.  Memory use is now reduced by a further factor of eight for a total reduction of sixteen times.</li>
+  <li>Rather than using some of the “bit-twiddling” operations involving bit shifts in order to produce a mask for the indexed bit position, one can use an eight element Look-Up-Table (LUT) that is easier and thus faster for the compiler to use.</li>
+  <li>Finally, one can develop the mentioned “Extreme Loop Unrolling” algorithm, which works as follows:
+    <ol>
+      <li>The base primes have been reduced to only odd values.</li>
+      <li>Culling across bytes means that culling is across even values since bytes have eight bits.</li>
+      <li>Doing this, a repeating modulo pattern occurs where the same indexed bit position will be marked for every eight culls and the byte masked will be exactly the base prime value away from when that bit position was last marked as culled.</li>
+      <li>The above means that each repeating pattern for a given base prime value only differs by the bit position at which it starts, for eight possibilities.</li>
+      <li>Due to modulo mathematics, there are only differing patterns for the base prime values modulo eight, and since all base prime values are odd means that the least significant bit is always a one, there are only four varieties of culling pattern.  These four patterns times the eight possible starting positions means there are only 32 total culling patterns.</li>
+      <li>Because each of these possible culling patterns is fixed for a given pattern possibility, one can use constant (immediate) masking values for the eight-pattern culling positions, meaning “bit-twiddling” isn’t necessary.</li>
+      <li>For a given possible culling pattern for a given base prime value, each byte index is a constant offset developed from the base prime value from the first byte index in the eight pattern, which means that if one causes the compiler to use register indexing from a base register (which most efficient C-type compilers automatically do), if eight registers are available then the whole loop can be done using register operations, and if there are two more registers available to hold the base prime value and the loop ending limit value, then the whole culling for a given range can be done entirely using register operations other than the read/modify/write operation that actually marks a bit as culled.</li>
+      <li>The above technique only works efficiently for smaller values of base prime where the culling span does not exceed the number of bytes in the CPU L1 cache, and actually less than that as there is a significant setup time for the loop and also a loss of time for the extra branch-prediction miss caused by the computed pattern selection of one of the 32 patterns, as this selection appears to be random to the CPU and thus can’t be efficiently predicted.</li>
+    </ol>
+  </li>
+</ol>
+
+<p>The above algorithm may appear to be incomprehensible when first encountered, but it is actually quite simple when one sees it implemented further down this post.</p>
+
+<h2 id="implementation-not-including-loop-unrolling">Implementation not including loop unrolling</h2>
+
+<p>The following SoE benchmark uses all of the techniques from above except for extreme loop unrolling and includes multiple culling pass loops so that the number of culling operations is about the same as for the naive version above:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="o">/</span><span class="n">monotimes</span>
+<span class="k">from</span> <span class="n">times</span> <span class="k">import</span> <span class="n">inMilliseconds</span>
+
+<span class="k">const</span> <span class="n">cLOOPS</span> <span class="p">{.</span><span class="n">intdefine</span><span class="p">.}</span> <span class="o">=</span> <span class="mi">1225</span>
+
+<span class="c"># avoids some "bit-twiddling" for better speed...</span>
+<span class="k">const</span> <span class="n">cBITMSK</span> <span class="o">=</span> <span class="o">[</span> <span class="mi">1'u8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span> <span class="o">]</span>
+
+<span class="k">proc </span><span class="nf">benchSoE</span><span class="p">():</span> <span class="k">iterator</span><span class="p">():</span> <span class="kt">int</span> <span class="p">{.</span><span class="n">closure</span><span class="p">.}</span> <span class="o">=</span>
+  <span class="c"># represents primes up to 262146</span>
+  <span class="k">var</span> <span class="n">cmpsts</span> <span class="o">=</span> <span class="n">newSeq</span><span class="o">[</span><span class="n">uint8</span><span class="o">]</span><span class="p">(</span><span class="mi">16384</span><span class="p">)</span> <span class="c"># starts at zero -&gt; all prime</span>
+  <span class="k">let</span> <span class="n">cmpstsa</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="kt">int</span><span class="o">]</span><span class="p">(</span><span class="n">cmpsts</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="k">addr</span><span class="p">)</span>
+  <span class="k">for</span> <span class="err">_ in 0 ..&lt; cLOOPS: </span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">0</span> <span class="p">..</span> <span class="mi">254</span><span class="p">:</span> <span class="c"># to (sqrt(262146) - 3) / 2 index</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">cmpsts</span><span class="o">[</span><span class="n">i</span> <span class="ow">shr</span> <span class="mi">3</span><span class="o">]</span> <span class="ow">and</span> <span class="n">cBITMSK</span><span class="o">[</span><span class="n">i</span> <span class="ow">and</span> <span class="mi">7</span><span class="o">]</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0'u8</span><span class="p">:</span> <span class="c"># for base prime</span>
+        <span class="k">let</span> <span class="n">bp</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+%</span> <span class="n">i</span> <span class="o">+%</span> <span class="mi">3</span> <span class="c"># for start index of bp squared...</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">countup</span><span class="p">((</span><span class="n">i</span> <span class="o">+%</span> <span class="n">i</span><span class="p">)</span> <span class="o">*%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+%</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+%</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">131071</span><span class="p">,</span> <span class="n">bp</span><span class="p">):</span>
+          <span class="k">let</span> <span class="n">cp</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="k">ptr</span> <span class="n">uint8</span><span class="o">]</span><span class="p">(</span><span class="n">cmpstsa</span> <span class="o">+</span> <span class="p">(</span><span class="n">c</span> <span class="ow">shr</span> <span class="mi">3</span><span class="p">))</span>
+          <span class="n">cp</span><span class="o">[]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">[]</span> <span class="ow">or</span> <span class="n">cBITMSK</span><span class="o">[</span><span class="n">c</span> <span class="ow">and</span> <span class="mi">7</span><span class="o">]</span> <span class="c"># pointer is 10% faster</span>
+  <span class="k">return</span> <span class="k">iterator</span><span class="p">():</span> <span class="kt">int</span> <span class="p">{.</span><span class="n">closure</span><span class="p">.}</span> <span class="o">=</span>
+    <span class="k">yield</span> <span class="mi">2</span> <span class="c"># the only even prime</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">0</span> <span class="p">..</span> <span class="mi">131071</span><span class="p">:</span> <span class="c"># separate iteration over results</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">cmpsts</span><span class="o">[</span><span class="n">i</span> <span class="ow">shr</span> <span class="mi">3</span><span class="o">]</span> <span class="ow">and</span> <span class="n">cBITMSK</span><span class="o">[</span><span class="n">i</span> <span class="ow">and</span> <span class="mi">7</span><span class="o">]</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0'u8</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">i</span> <span class="o">+%</span> <span class="n">i</span> <span class="o">+%</span> <span class="mi">3</span>
+
+<span class="k">let</span> <span class="n">strt</span> <span class="o">=</span> <span class="n">getMonotime</span><span class="p">()</span>
+<span class="k">let</span> <span class="n">answr</span> <span class="o">=</span> <span class="n">benchSoE</span><span class="p">()</span>
+<span class="k">let</span> <span class="n">elpsd</span> <span class="o">=</span> <span class="p">(</span><span class="n">getMonotime</span><span class="p">()</span> <span class="o">-</span> <span class="n">strt</span><span class="p">).</span><span class="n">inMilliseconds</span>
+<span class="k">var</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="k">for</span> <span class="err">_ in answr(): cnt += 1</span>
+<span class="n">echo</span> <span class="s">"Found "</span><span class="p">,</span> <span class="n">cnt</span><span class="p">,</span> <span class="s">" primes to 262146 for "</span><span class="p">,</span> <span class="n">cLOOPS</span><span class="p">,</span>
+     <span class="s">" loops in "</span><span class="p">,</span> <span class="n">elpsd</span><span class="p">,</span> <span class="s">" milliseconds."</span>
+</code></pre></div></div>
+
+<p>Where Dennis’s program takes about 1.4 seconds to run at 2.9 GHz, this new version runs about the same number of culling operations in about 0.27 seconds on the same machine with both compiled using  the “-d:release -d:danger” compiler command line definitions to turn off all checking (checking is done in the code itself), meaning it is about five times faster per culling operation in spite of bit-packing, and takes about 3.5 CPU clock cycles per culling operation (or less on more modern CPU’s) instead of about 17.  But we aren’t finished; there is still Extreme Loop Unrolling.</p>
+
+<h2 id="implementation-including-extreme-loop-unrolling">Implementation including Extreme Loop Unrolling</h2>
+
+<p>Now comes where features of Nim, especially the macro facility, comes into play in writing a short implementation of the 32 cases of the Extreme Loop Unrolling algorithm.  Following is the promised explanation of how it works:</p>
+
+<p>First, for each loop the pattern needs to be set, so for example for the cases where the base prime ends in a 3 when modulo 8 (3, 11, 19, etc.) and culling starts at bit position zero, the loop code needs to be as follows:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">while</span> <span class="n">culla</span> <span class="o">&lt;</span> <span class="n">endalmt</span><span class="p">:</span>
+    <span class="k">let</span> <span class="n">cptr0</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="k">ptr</span> <span class="n">uint8</span><span class="o">]</span><span class="p">(</span><span class="n">culla</span><span class="p">)</span>
+    <span class="n">cptr0</span><span class="o">[]</span> <span class="o">=</span> <span class="n">cptr0</span><span class="o">[]</span> <span class="ow">or</span> <span class="mi">1'u8</span>
+    <span class="k">let</span> <span class="n">cptr1</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="k">ptr</span> <span class="n">uint8</span><span class="o">]</span><span class="p">(</span><span class="n">culla</span> <span class="o">+</span> <span class="n">strt1</span><span class="p">)</span>
+    <span class="n">cptr1</span><span class="o">[]</span> <span class="o">=</span> <span class="n">cptr1</span><span class="o">[]</span> <span class="ow">or</span> <span class="mi">8'u8</span>
+    <span class="k">let</span> <span class="n">cptr2</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="k">ptr</span> <span class="n">uint8</span><span class="o">]</span><span class="p">(</span><span class="n">culla</span> <span class="o">+</span> <span class="n">strt2</span><span class="p">)</span>
+    <span class="n">cptr2</span><span class="o">[]</span> <span class="o">=</span> <span class="n">cptr2</span><span class="o">[]</span> <span class="ow">or</span> <span class="mi">64'u8</span>
+    <span class="k">let</span> <span class="n">cptr3</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="k">ptr</span> <span class="n">uint8</span><span class="o">]</span><span class="p">(</span><span class="n">culla</span> <span class="o">+</span> <span class="n">strt3</span><span class="p">)</span>
+    <span class="n">cptr3</span><span class="o">[]</span> <span class="o">=</span> <span class="n">cptr3</span><span class="o">[]</span> <span class="ow">or</span> <span class="mi">2'u8</span>
+    <span class="k">let</span> <span class="n">cptr4</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="k">ptr</span> <span class="n">uint8</span><span class="o">]</span><span class="p">(</span><span class="n">culla</span> <span class="o">+</span> <span class="n">strt4</span><span class="p">)</span>
+    <span class="n">cptr4</span><span class="o">[]</span> <span class="o">=</span> <span class="n">cptr4</span><span class="o">[]</span> <span class="ow">or</span> <span class="mi">16'u8</span>
+    <span class="k">let</span> <span class="n">cptr5</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="k">ptr</span> <span class="n">uint8</span><span class="o">]</span><span class="p">(</span><span class="n">culla</span> <span class="o">+</span> <span class="n">strt5</span><span class="p">)</span>
+    <span class="n">cptr5</span><span class="o">[]</span> <span class="o">=</span> <span class="n">cptr5</span><span class="o">[]</span> <span class="ow">or</span> <span class="mi">128'u8</span>
+    <span class="k">let</span> <span class="n">cptr6</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="k">ptr</span> <span class="n">uint8</span><span class="o">]</span><span class="p">(</span><span class="n">culla</span> <span class="o">+</span> <span class="n">strt6</span><span class="p">)</span>
+    <span class="n">cptr6</span><span class="o">[]</span> <span class="o">=</span> <span class="n">cptr6</span><span class="o">[]</span> <span class="ow">or</span> <span class="mi">4'u8</span>
+    <span class="k">let</span> <span class="n">cptr7</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="k">ptr</span> <span class="n">uint8</span><span class="o">]</span><span class="p">(</span><span class="n">culla</span> <span class="o">+</span> <span class="n">strt7</span><span class="p">)</span>
+    <span class="n">cptr7</span><span class="o">[]</span> <span class="o">=</span> <span class="n">cptr7</span><span class="o">[]</span> <span class="ow">or</span> <span class="mi">32'u8</span>
+    <span class="n">culla</span> <span class="o">+=</span> <span class="n">bpint</span>
+</code></pre></div></div>
+
+<p>where <code class="language-plaintext highlighter-rouge">cptr0</code>/<code class="language-plaintext highlighter-rouge">culla</code>, <code class="language-plaintext highlighter-rouge">cptr1..7</code>, <code class="language-plaintext highlighter-rouge">endalmt</code>, and <code class="language-plaintext highlighter-rouge">bpint</code> should each be a CPU register.  It can be seen that this eight-loop has very little loop overhead.  When compiled to x86_64 code using gcc/c, the following assembly code is produced:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.L271:
+  or	BYTE PTR [rax], 1
+  or	BYTE PTR [rdi+rax], 8
+  or	BYTE PTR [r8+rax], 64
+  or	BYTE PTR [r9+rax], 2
+  or	BYTE PTR [r10+rax], 16
+  or	BYTE PTR [r11+rax], 128
+  or	BYTE PTR [rbx+rax], 4
+  or	BYTE PTR [rcx+rax], 32
+  add	rax, rsi
+  cmp	r12, rax
+  jg	.L271
+</code></pre></div></div>
+<p>In it, one can see that there are just the eight marking as composite <code class="language-plaintext highlighter-rouge">or</code> indexed read/modify/write instructions and the loop overhead of adding the base prime value to the base register and looping if it tests as less than the limit.  In modern CPU’s, the loop overhead is mostly elided away for multiple repeated loops leaving the eight single clock cycle marking instructions per loop.</p>
+
+<p>The 32 varieties of these loops are prefixed by code initializing all of the registers, and each of the above variety of loop includes a conventional culling loop to handle the case where the eight-loop limit can’t cull the entire buffer, leaving a remainder averaging 3.5 loops (zero to seven single-cull loops).</p>
+
+<p>The Nim manual cautions against using unnecessary macros, but for this application, a macro is completely appropriate instead of having to invoke a template 32 times as we can use the macro to cause the repetition to produce the 1943 lines of Nim code with just a 70-line macro.  If one enables one of the last commented lines at the end of the following macro, the compiler will show the generated Abstract Syntax Tree (AST) with the <code class="language-plaintext highlighter-rouge">astGenRepr</code> function or the actual Nim code output with the <code class="language-plaintext highlighter-rouge">toStrLit</code> function, which might be applied to show just one of the 32 cases as produced the above (element 9) or the entire almost two thousand lines by showing the entire result.  The following code, including the macro, can replace the <code class="language-plaintext highlighter-rouge">benchSoE</code> proc in the above code (also adding <code class="language-plaintext highlighter-rouge">import macros</code> at the head of the file):</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">macro</span> <span class="n">unrollLoops</span><span class="p">(</span><span class="n">ca</span><span class="p">,</span> <span class="n">sz</span><span class="p">,</span> <span class="n">strtndx</span><span class="p">,</span> <span class="n">bp</span><span class="p">:</span> <span class="n">untyped</span><span class="p">)</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">cmpstsalmtid</span> <span class="o">=</span> <span class="s">"cmpstsalmt"</span><span class="p">.</span><span class="n">newIdentNode</span>
+  <span class="k">let</span> <span class="n">szbitsid</span> <span class="o">=</span> <span class="s">"szbits"</span><span class="p">.</span><span class="n">newIdentNode</span>
+  <span class="k">let</span> <span class="n">strtndx0id</span> <span class="o">=</span> <span class="s">"strtndx0"</span><span class="p">.</span><span class="n">newIdentNode</span>
+  <span class="k">let</span> <span class="n">strt0id</span> <span class="o">=</span> <span class="s">"strt0"</span><span class="p">.</span><span class="n">newIdentNode</span>
+  <span class="k">let</span> <span class="n">strt7id</span> <span class="o">=</span> <span class="s">"strt7"</span><span class="p">.</span><span class="n">newIdentNode</span>
+  <span class="k">let</span> <span class="n">endalmtid</span> <span class="o">=</span> <span class="s">"endalmt"</span><span class="p">.</span><span class="n">newIdentNode</span>
+  <span class="k">let</span> <span class="n">bpintid</span> <span class="o">=</span> <span class="s">"bpint"</span><span class="p">.</span><span class="n">newIdentNode</span>
+  <span class="k">let</span> <span class="n">cullaid</span> <span class="o">=</span> <span class="s">"culla"</span><span class="p">.</span><span class="n">newIdentNode</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+    <span class="k">let</span> <span class="p">`</span><span class="n">szbitsid</span><span class="p">`</span> <span class="o">=</span> <span class="p">`</span><span class="n">sz</span><span class="p">`</span> <span class="ow">shl</span> <span class="mi">3</span>
+    <span class="k">let</span> <span class="p">`</span><span class="n">cmpstsalmtid</span><span class="p">`</span> <span class="o">=</span> <span class="p">`</span><span class="n">ca</span><span class="p">`</span> <span class="o">+</span> <span class="p">`</span><span class="n">sz</span><span class="p">`</span>
+    <span class="k">let</span> <span class="p">`</span><span class="n">bpintid</span><span class="p">`</span> <span class="o">=</span> <span class="p">`</span><span class="n">bp</span><span class="p">`.</span><span class="kt">int</span>
+    <span class="k">let</span> <span class="p">`</span><span class="n">strtndx0id</span><span class="p">`</span> <span class="o">=</span> <span class="p">`</span><span class="n">strtndx</span><span class="p">`</span>
+    <span class="k">let</span> <span class="p">`</span><span class="n">strt0id</span><span class="p">`</span> <span class="o">=</span> <span class="p">`</span><span class="n">strtndx0id</span><span class="p">`</span> <span class="ow">shr</span> <span class="mi">3</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">1</span> <span class="p">..</span> <span class="mi">7</span><span class="p">:</span>
+    <span class="k">let</span> <span class="n">strtndxido</span> <span class="o">=</span> <span class="n">newIdentNode</span><span class="p">(</span><span class="s">"strtndx"</span> <span class="o">&amp;</span> <span class="o">$</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">let</span> <span class="n">strtndxidn</span> <span class="o">=</span> <span class="n">newIdentNode</span><span class="p">(</span><span class="s">"strtndx"</span> <span class="o">&amp;</span> <span class="o">$</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">let</span> <span class="n">strtid</span> <span class="o">=</span> <span class="n">newIdentNode</span><span class="p">(</span><span class="s">"strt"</span> <span class="o">&amp;</span> <span class="o">$</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">result</span><span class="p">.</span><span class="n">add</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+      <span class="k">let</span> <span class="p">`</span><span class="n">strtndxidn</span><span class="p">`</span> <span class="o">=</span> <span class="p">`</span><span class="n">strtndxido</span><span class="p">`</span> <span class="o">+</span> <span class="p">`</span><span class="n">bp</span><span class="p">`</span>
+      <span class="k">let</span> <span class="p">`</span><span class="n">strtid</span><span class="p">`</span> <span class="o">=</span> <span class="p">(`</span><span class="n">strtndxidn</span><span class="p">`</span> <span class="ow">shr</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="p">`</span><span class="n">strt0id</span><span class="p">`</span>
+  <span class="k">let</span> <span class="n">csstmnt</span> <span class="o">=</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+    <span class="k">case</span> <span class="p">(((`</span><span class="n">bpintid</span><span class="p">`</span> <span class="ow">and</span> <span class="mh">0x6</span><span class="p">)</span> <span class="ow">shl</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(`</span><span class="n">strtndx0id</span><span class="p">`</span> <span class="ow">and</span> <span class="mi">7</span><span class="p">)).</span><span class="n">uint8</span>
+    <span class="k">of</span> <span class="mi">0'u8</span><span class="p">:</span> <span class="k">break</span>
+  <span class="n">csstmnt</span><span class="p">.</span><span class="n">del</span> <span class="mi">1</span> <span class="c"># delete last dummy "of"</span>
+  <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="mi">0'u8</span> <span class="p">..</span> <span class="mh">0x3F</span><span class="mi">'u8</span><span class="p">:</span> <span class="c"># actually used cases...</span>
+    <span class="k">let</span> <span class="n">pn</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="ow">shr</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">1'u8</span>
+    <span class="k">let</span> <span class="n">cn</span> <span class="o">=</span> <span class="n">n</span> <span class="ow">and</span> <span class="mi">7'u8</span>
+    <span class="k">let</span> <span class="n">mod0id</span> <span class="o">=</span> <span class="n">newLit</span><span class="p">(</span><span class="n">cn</span><span class="p">)</span>
+    <span class="k">let</span> <span class="n">cptr0id</span> <span class="o">=</span> <span class="s">"cptr0"</span><span class="p">.</span><span class="n">newIdentNode</span>
+    <span class="k">let</span> <span class="n">loopstmnts</span> <span class="o">=</span> <span class="n">nnkStmtList</span><span class="p">.</span><span class="n">newTree</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">0'u8</span> <span class="p">..</span> <span class="mi">7'u8</span><span class="p">:</span>
+      <span class="k">let</span> <span class="n">mskid</span> <span class="o">=</span> <span class="n">newLit</span><span class="p">(</span><span class="mi">1'u8</span> <span class="ow">shl</span> <span class="p">((</span><span class="n">cn</span> <span class="o">+</span> <span class="n">pn</span> <span class="o">*</span> <span class="n">i</span><span class="p">.</span><span class="n">uint8</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">7</span><span class="p">).</span><span class="kt">int</span><span class="p">)</span>
+      <span class="k">let</span> <span class="n">cptrid</span> <span class="o">=</span> <span class="p">(</span><span class="s">"cptr"</span> <span class="o">&amp;</span> <span class="o">$</span><span class="n">i</span><span class="p">).</span><span class="n">newIdentNode</span>
+      <span class="k">let</span> <span class="n">strtid</span> <span class="o">=</span> <span class="p">(</span><span class="s">"strt"</span> <span class="o">&amp;</span> <span class="o">$</span><span class="n">i</span><span class="p">).</span><span class="n">newIdentNode</span>
+      <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0'u8</span><span class="p">:</span>
+        <span class="n">loopstmnts</span><span class="p">.</span><span class="n">add</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+          <span class="k">let</span> <span class="p">`</span><span class="n">cptrid</span><span class="p">`</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="k">ptr</span> <span class="n">uint8</span><span class="o">]</span><span class="p">(`</span><span class="n">cullaid</span><span class="p">`)</span>
+      <span class="k">else</span><span class="p">:</span>      
+        <span class="n">loopstmnts</span><span class="p">.</span><span class="n">add</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+          <span class="k">let</span> <span class="p">`</span><span class="n">cptrid</span><span class="p">`</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="k">ptr</span> <span class="n">uint8</span><span class="o">]</span><span class="p">(`</span><span class="n">cullaid</span><span class="p">`</span> <span class="o">+</span> <span class="p">`</span><span class="n">strtid</span><span class="p">`)</span>
+      <span class="n">loopstmnts</span><span class="p">.</span><span class="n">add</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+        <span class="p">`</span><span class="n">cptrid</span><span class="p">`</span><span class="o">[]</span> <span class="o">=</span> <span class="p">`</span><span class="n">cptrid</span><span class="p">`</span><span class="o">[]</span> <span class="ow">or</span> <span class="p">`</span><span class="n">mskid</span><span class="p">`</span>
+    <span class="n">loopstmnts</span><span class="p">.</span><span class="n">add</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+      <span class="p">`</span><span class="n">cullaid</span><span class="p">`</span> <span class="o">+=</span> <span class="p">`</span><span class="n">bpintid</span><span class="p">`</span>
+    <span class="k">let</span> <span class="n">ofbrstmnts</span> <span class="o">=</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+      <span class="k">while</span> <span class="p">`</span><span class="n">cullaid</span><span class="p">`</span> <span class="o">&lt;</span> <span class="p">`</span><span class="n">endalmtid</span><span class="p">`:</span>
+        <span class="p">`</span><span class="n">loopstmnts</span><span class="p">`</span>
+      <span class="p">`</span><span class="n">cullaid</span><span class="p">`</span> <span class="o">=</span> <span class="p">((`</span><span class="n">cullaid</span><span class="p">`</span> <span class="o">-</span> <span class="p">`</span><span class="n">ca</span><span class="p">`)</span> <span class="ow">shl</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">or</span> <span class="p">`</span><span class="n">mod0id</span><span class="p">`.</span><span class="kt">int</span>
+      <span class="k">while</span> <span class="p">`</span><span class="n">cullaid</span><span class="p">`</span> <span class="o">&lt;</span> <span class="p">`</span><span class="n">szbitsid</span><span class="p">`:</span>        
+        <span class="k">let</span> <span class="p">`</span><span class="n">cptr0id</span><span class="p">`</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="k">ptr</span> <span class="n">uint8</span><span class="o">]</span><span class="p">(`</span><span class="n">ca</span><span class="p">`</span> <span class="o">+</span> <span class="p">(`</span><span class="n">cullaid</span><span class="p">`</span> <span class="ow">shr</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="p">`</span><span class="n">cptr0id</span><span class="p">`</span><span class="o">[]</span> <span class="o">=</span> <span class="p">`</span><span class="n">cptr0id</span><span class="p">`</span><span class="o">[]</span> <span class="ow">or</span> <span class="n">cBITMSK</span><span class="o">[</span><span class="p">`</span><span class="n">cullaid</span><span class="p">`</span> <span class="ow">and</span> <span class="mi">7</span><span class="o">]</span>
+        <span class="p">`</span><span class="n">cullaid</span><span class="p">`</span> <span class="o">+=</span> <span class="p">`</span><span class="n">bpintid</span><span class="p">`</span>
+    <span class="n">csstmnt</span><span class="p">.</span><span class="n">add</span> <span class="n">nnkOfBranch</span><span class="p">.</span><span class="n">newTree</span><span class="p">(</span>
+      <span class="n">newLit</span><span class="p">(</span><span class="n">n</span><span class="p">),</span>
+      <span class="n">ofbrstmnts</span>
+    <span class="p">)</span>
+  <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="mh">0x40</span><span class="mi">'u8</span> <span class="p">..</span> <span class="mi">255'u8</span><span class="p">:</span> <span class="c"># fill in defaults for remaining possibilities</span>
+    <span class="n">csstmnt</span><span class="p">.</span><span class="n">add</span> <span class="n">nnkOfBranch</span><span class="p">.</span><span class="n">newTree</span><span class="p">(</span>
+      <span class="n">newLit</span><span class="p">(</span><span class="n">n</span><span class="p">),</span>
+      <span class="n">nnkStmtList</span><span class="p">.</span><span class="n">newTree</span><span class="p">(</span>
+        <span class="n">nnkBreakStmt</span><span class="p">.</span><span class="n">newTree</span><span class="p">(</span>
+          <span class="n">newEmptyNode</span><span class="p">()</span>
+        <span class="p">)</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+  <span class="n">result</span><span class="p">.</span><span class="n">add</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+    <span class="k">let</span> <span class="p">`</span><span class="n">endalmtid</span><span class="p">`</span> <span class="o">=</span> <span class="p">`</span><span class="n">cmpstsalmtid</span><span class="p">`</span> <span class="o">-</span> <span class="p">`</span><span class="n">strt7id</span><span class="p">`</span>
+    <span class="k">var</span> <span class="p">`</span><span class="n">cullaid</span><span class="p">`</span> <span class="o">=</span> <span class="p">`</span><span class="n">ca</span><span class="p">`</span> <span class="o">+</span> <span class="p">`</span><span class="n">strt0id</span><span class="p">`</span>
+    <span class="p">`</span><span class="n">csstmnt</span><span class="p">`</span>
+<span class="c">#  echo csstmnt[9].astGenRepr # see AST for a given case</span>
+<span class="c">#  echo csstmnt[9].toStrLit # see code for a given case</span>
+<span class="c">#  echo result.toStrLit # see entire produced code at compile time</span>
+
+<span class="k">proc </span><span class="nf">benchSoE</span><span class="p">():</span> <span class="k">iterator</span><span class="p">():</span> <span class="kt">int</span> <span class="p">{.</span><span class="n">closure</span><span class="p">.}</span> <span class="o">=</span>
+  <span class="k">var</span> <span class="n">cmpsts</span> <span class="o">=</span> <span class="n">newSeq</span><span class="o">[</span><span class="n">byte</span><span class="o">]</span><span class="p">(</span><span class="mi">16384</span><span class="p">)</span>
+  <span class="k">let</span> <span class="n">cmpstsa</span> <span class="o">=</span> <span class="k">cast</span><span class="o">[</span><span class="kt">int</span><span class="o">]</span><span class="p">(</span><span class="n">cmpsts</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="k">addr</span><span class="p">)</span>
+  <span class="k">for</span> <span class="err">_ in 0 ..&lt; cLOOPS:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">0</span> <span class="p">..</span> <span class="mi">254</span><span class="p">:</span> <span class="c"># cull to square root of limit</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">cmpsts</span><span class="o">[</span><span class="n">i</span> <span class="ow">shr</span> <span class="mi">3</span><span class="o">]</span> <span class="ow">and</span> <span class="n">cBITMSK</span><span class="o">[</span><span class="n">i</span> <span class="ow">and</span> <span class="mi">7</span><span class="o">]</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0'u8</span><span class="p">:</span> <span class="c"># if prime -&gt; cull its composites</span>
+        <span class="k">let</span> <span class="n">bp</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+%</span> <span class="n">i</span> <span class="o">+%</span> <span class="mi">3</span>
+        <span class="k">let</span> <span class="n">swi</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+%</span> <span class="n">i</span><span class="p">)</span> <span class="o">*%</span> <span class="p">(</span><span class="n">i</span> <span class="o">+%</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+%</span> <span class="mi">3</span>
+        <span class="n">unrollLoops</span><span class="p">(</span><span class="n">cmpstsa</span><span class="p">,</span> <span class="mi">16384</span><span class="p">,</span> <span class="n">swi</span><span class="p">,</span> <span class="n">bp</span><span class="p">)</span>
+  <span class="k">return</span> <span class="k">iterator</span><span class="p">():</span> <span class="kt">int</span> <span class="p">{.</span><span class="n">closure</span><span class="p">.}</span> <span class="o">=</span>
+    <span class="k">yield</span> <span class="mi">2</span> <span class="c"># the only even prime</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">0</span> <span class="p">..</span> <span class="mi">131071</span><span class="p">:</span> <span class="c"># separate iteration over results</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">cmpsts</span><span class="o">[</span><span class="n">i</span> <span class="ow">shr</span> <span class="mi">3</span><span class="o">]</span> <span class="ow">and</span> <span class="n">cBITMSK</span><span class="o">[</span><span class="n">i</span> <span class="ow">and</span> <span class="mi">7</span><span class="o">]</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0'u8</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">i</span> <span class="o">+%</span> <span class="n">i</span> <span class="o">+%</span> <span class="mi">3</span>
+</code></pre></div></div>
+<p>Running the code with the above substitution in the same non-checking release mode as before results in a run time that is about 2.5 times faster than the previous version and over ten times faster than the naive implementation, meaning that the culling operation time is this ratio faster per operation.  For a modern CPU, one can calculate that it uses just over one CPU clock cycle per cull operation (198273 culling operations per loop).</p>
+
+<p>Now, this speed can’t quite be maintained for a real application with larger ranges and thus larger base prime values as there will come a point where the overheads of the loop unrolling overcomes its benefit, but that is for quite large ranges of about a hundred million; as well, the loss above that point increases slowly since the base prime values only grow as the square root of the entire sieved range and also the base primes density becomes more sparse with increasing range such that using a page segmented implementation to count the primes up to ten’s of billions only increases the time per culling operation to about two CPU clock cycles each, meaning that the average is still much less than pure “bit-twiddling”.</p>
+
+<h2 id="analysis-as-compared-to-other-languages">Analysis as compared to other languages</h2>
+
+<p>So in order to be able to assert that Nim is “Efficient, Expressive, and Elegant”, one needs to compare it to something; since Nim’s design goals are in that order, languages that aren’t as efficient will be rejected from the outset.  This means the following:</p>
+
+<ol>
+  <li>Languages such as Python and R are not comparable in the context of performance/efficiency because their default implementations are interpreted and thus much slower. As well, almost all languages in this same category are dynamically typed (which contributes to their lack of competitive performance), which make them ineffective if applied to the many of the kinds of programming tasks to which Nim can be applied. Among the host of other languages in this category are all of the Lisp-based languages such as Scheme/Racket/Common Lisp and also Clojure, which is both a dynamically typed language and a Just In Time compiled language that also fits into the next section.</li>
+  <li>Languages which are Just-In-Time (JIT) compiled are generally less efficient because the generated JIT code is generally about three times slower due to the limitations of being “safe” placed on their runtime and less optimizations being possible in time-limited JIT compilation; such languages include Java, Kotlin, C#, and F#.  An interesting exception is Julia which uses the LLVM IR system to entirely compile a program when it is run; once this significant pre-compilation time is lost, the rest of the program can run extremely fast.  Julia has powerful macros and pointer operations and runs the conventional “bit-twiddling” algorithm about as fast as Nim or other compiled languages.  Where Julia loses is in general effectiveness as it is a dynamically typed language and also loses in elegance in its syntax with required code block <code class="language-plaintext highlighter-rouge">end</code> keywords reminds one of writing Fortran code.  As for “Extreme Loop Unrolling”, Julia requires a “PointerArithmetic” package to do this which, like most of the other languages in this category, isn’t as efficient as the native pointers available in other compiled languages so can’t match the macro combined with pointer manipulation as can be implemented in Nim.</li>
+  <li>Haskell actually does have AST macros using “Template Haskell” and if using the optional LLVM backend along with GHC Haskell primitives can produce very efficient code for even the Extreme Loop Unrolling algorithm, which does not depend on memory management/Garbage Collection since just one fixed <code class="language-plaintext highlighter-rouge">seq</code>/(unboxed primitive)Array is used.  The Haskell source code is very elegant, but where it might lose out in effectiveness is due to its steep learning curve in using it effectively with its very different functional programming paradigms including Monadic code and non-strictness (laziness).  Nim doesn’t really compete directly with Haskell as they are two entirely different programming paradigms.  One disadvantage that Haskell has for this algorithm is that “Template Haskell” code needs to be run from a separate source code file.</li>
+  <li>Languages competitive as to efficiency and general programming paradigm are the fully compiled languages such as C/C++, Chapel, and Rust, all of which can perform the loop unrolling algorithm at about the speed as the above Nim program.  C/C++ and Chapel lose out as to elegance and somewhat as to effectiveness as they don’t have proper macros (C/C++ so-called preprocessor “macros” are really just text substitution templates), and Rust, which does have proper AST macros and pointer operations but loses out to being somewhat more verbose (although it gains in safety, which is not yet one of Nim’s primary goals as it is for Rust; however, Nim’s future goals do include “safety” about equivalent to that of Rust, which will be discussed in depth in a later article) also currently need to be compiled from a separate source file just as for Haskell’s “Template Haskell”, thus if one were to want to use them for this algorithm, the result would not be quite as effective nor as elegant as the Nim solution.  The “macro_rules” types of macro are more like what Nim would call templates, and can be used but require invoking the template for each of the 32 varieties of pattern, so neither as effective nor as elegant.</li>
+</ol>
+
+<p>For reference’s sake, following is Rust code that implements the Extreme Loop Unrolling algorithm, which is just a tiny amount slower than the Nim code:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// compile with `-O` for full optimization</span>
+
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">time</span><span class="p">::</span><span class="n">Instant</span><span class="p">;</span>
+
+<span class="c">// do it 1225 times to get a reasonable execution time span...</span>
+<span class="k">const</span> <span class="n">NUMLOOPS</span><span class="p">:</span> <span class="nb">usize</span> <span class="o">=</span> <span class="mi">1225</span><span class="p">;</span>
+
+<span class="c">// bit position mask LUT faster than "bit-twiddling"...</span>
+<span class="k">static</span> <span class="n">BITMASK</span><span class="p">:</span> <span class="p">[</span><span class="nb">u8</span><span class="p">;</span> <span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span> <span class="p">];</span>
+
+<span class="nd">macro_rules!</span> <span class="n">unrollfnc</span> <span class="p">{</span>
+    <span class="p">(</span> <span class="nv">$x:expr</span> <span class="p">)</span> <span class="k">=&gt;</span> <span class="p">({</span>
+        <span class="k">fn</span> <span class="nf">f</span><span class="p">(</span><span class="n">cmpsts</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">bp</span><span class="p">:</span> <span class="nb">usize</span><span class="p">,</span> <span class="n">cullpos</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="nb">usize</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="n">cp1</span> <span class="o">=</span> <span class="o">*</span><span class="n">cullpos</span> <span class="o">+</span> <span class="n">bp</span><span class="p">;</span> <span class="k">let</span> <span class="n">cp2</span> <span class="o">=</span> <span class="n">cp1</span> <span class="o">+</span> <span class="n">bp</span><span class="p">;</span> <span class="k">let</span> <span class="n">cp3</span> <span class="o">=</span> <span class="n">cp2</span> <span class="o">+</span> <span class="n">bp</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">cp4</span> <span class="o">=</span> <span class="n">cp3</span> <span class="o">+</span> <span class="n">bp</span><span class="p">;</span> <span class="k">let</span> <span class="n">cp5</span> <span class="o">=</span> <span class="n">cp4</span> <span class="o">+</span> <span class="n">bp</span><span class="p">;</span> <span class="k">let</span> <span class="n">cp6</span> <span class="o">=</span> <span class="n">cp5</span> <span class="o">+</span> <span class="n">bp</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">r7</span> <span class="o">=</span> <span class="p">(((</span><span class="n">cp6</span> <span class="o">+</span> <span class="n">bp</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="o">*</span><span class="n">cullpos</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">))</span> <span class="k">as</span> <span class="nb">isize</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">r6</span> <span class="o">=</span> <span class="p">((</span><span class="n">cp6</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="o">*</span><span class="n">cullpos</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">))</span> <span class="k">as</span> <span class="nb">isize</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">r5</span> <span class="o">=</span> <span class="p">((</span><span class="n">cp5</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="o">*</span><span class="n">cullpos</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">))</span> <span class="k">as</span> <span class="nb">isize</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">r4</span> <span class="o">=</span> <span class="p">((</span><span class="n">cp4</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="o">*</span><span class="n">cullpos</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">))</span> <span class="k">as</span> <span class="nb">isize</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">r3</span> <span class="o">=</span> <span class="p">((</span><span class="n">cp3</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="o">*</span><span class="n">cullpos</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">))</span> <span class="k">as</span> <span class="nb">isize</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">r2</span> <span class="o">=</span> <span class="p">((</span><span class="n">cp2</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="o">*</span><span class="n">cullpos</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">))</span> <span class="k">as</span> <span class="nb">isize</span><span class="p">;</span>
+            <span class="k">let</span> <span class="n">r1</span> <span class="o">=</span> <span class="p">((</span><span class="n">cp1</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="o">*</span><span class="n">cullpos</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">))</span> <span class="k">as</span> <span class="nb">isize</span><span class="p">;</span>
+            <span class="k">unsafe</span> <span class="p">{</span>
+                <span class="nd">#[allow(unused_mut)]</span> <span class="c">// mut so can be offset from</span>
+                <span class="k">let</span> <span class="k">mut</span> <span class="n">cmpstsp</span><span class="p">:</span> <span class="o">*</span><span class="k">mut</span> <span class="nb">u8</span> <span class="o">=</span> <span class="n">cmpsts</span><span class="nf">.get_unchecked_mut</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+                <span class="k">let</span> <span class="k">mut</span> <span class="n">r0p</span><span class="p">:</span> <span class="o">*</span><span class="k">mut</span> <span class="nb">u8</span> <span class="o">=</span> <span class="n">cmpsts</span><span class="nf">.get_unchecked_mut</span><span class="p">(</span><span class="o">*</span><span class="n">cullpos</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">);</span>
+                <span class="nd">#[allow(unused_mut)]</span> <span class="c">// mut so can be compared with mut r0p</span>
+                <span class="k">let</span> <span class="k">mut</span> <span class="n">rlmtp</span><span class="p">:</span> <span class="o">*</span><span class="k">mut</span> <span class="nb">u8</span> <span class="o">=</span> <span class="n">cmpstsp</span><span class="nf">.offset</span><span class="p">(</span><span class="n">cmpsts</span><span class="nf">.len</span><span class="p">()</span> <span class="k">as</span> <span class="nb">isize</span> <span class="o">-</span> <span class="n">r7</span><span class="p">);</span>
+                <span class="k">while</span> <span class="n">r0p</span> <span class="o">&lt;</span> <span class="n">rlmtp</span> <span class="p">{</span>
+                    <span class="o">*</span><span class="n">r0p</span> <span class="p">|</span><span class="o">=</span> <span class="p">(</span><span class="mi">1u8</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">));</span>
+                    <span class="o">*</span><span class="p">(</span><span class="n">r0p</span><span class="nf">.offset</span><span class="p">(</span><span class="n">r1</span><span class="p">))</span> <span class="p">|</span><span class="o">=</span> <span class="mi">1u8</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">+</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">|</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">);</span>
+                    <span class="o">*</span><span class="p">(</span><span class="n">r0p</span><span class="nf">.offset</span><span class="p">(</span><span class="n">r2</span><span class="p">))</span> <span class="p">|</span><span class="o">=</span> <span class="mi">1u8</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">|</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">);</span>
+                    <span class="o">*</span><span class="p">(</span><span class="n">r0p</span><span class="nf">.offset</span><span class="p">(</span><span class="n">r3</span><span class="p">))</span> <span class="p">|</span><span class="o">=</span> <span class="mi">1u8</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">+</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">|</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">);</span>
+                    <span class="o">*</span><span class="p">(</span><span class="n">r0p</span><span class="nf">.offset</span><span class="p">(</span><span class="n">r4</span><span class="p">))</span> <span class="p">|</span><span class="o">=</span> <span class="mi">1u8</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">+</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">|</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">);</span>
+                    <span class="o">*</span><span class="p">(</span><span class="n">r0p</span><span class="nf">.offset</span><span class="p">(</span><span class="n">r5</span><span class="p">))</span> <span class="p">|</span><span class="o">=</span> <span class="mi">1u8</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">+</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">|</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">);</span>
+                    <span class="o">*</span><span class="p">(</span><span class="n">r0p</span><span class="nf">.offset</span><span class="p">(</span><span class="n">r6</span><span class="p">))</span> <span class="p">|</span><span class="o">=</span> <span class="mi">1u8</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">+</span> <span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">|</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">);</span>
+                    <span class="o">*</span><span class="p">(</span><span class="n">r0p</span><span class="nf">.offset</span><span class="p">(</span><span class="n">r7</span><span class="p">))</span> <span class="p">|</span><span class="o">=</span> <span class="mi">1u8</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">+</span> <span class="p">(</span><span class="mi">7</span> <span class="o">*</span> <span class="p">((</span><span class="nv">$x</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">|</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">);</span>
+                    <span class="n">r0p</span> <span class="o">=</span> <span class="n">r0p</span><span class="nf">.offset</span><span class="p">(</span><span class="n">bp</span> <span class="k">as</span> <span class="nb">isize</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="o">*</span><span class="n">cullpos</span> <span class="o">=</span> <span class="p">((</span><span class="n">r0p</span><span class="nf">.offset_from</span><span class="p">(</span><span class="n">cmpstsp</span><span class="p">)</span> <span class="k">as</span> <span class="nb">usize</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nv">$x</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">f</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="n">UNROLLED</span><span class="p">:</span> <span class="p">[</span><span class="k">fn</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">u8</span><span class="o">&gt;</span><span class="p">,</span> <span class="nb">usize</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="nb">usize</span><span class="p">);</span> <span class="mi">32</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+    <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span>
+    <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">11</span><span class="p">),</span>
+    <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">13</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">14</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span>
+    <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">17</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">18</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">19</span><span class="p">),</span>
+    <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">21</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">22</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">23</span><span class="p">),</span>
+    <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">24</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">26</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">27</span><span class="p">),</span>
+    <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">28</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">29</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="nd">unrollfnc!</span><span class="p">(</span><span class="mi">31</span><span class="p">)</span> <span class="p">];</span>
+
+<span class="k">fn</span> <span class="nf">soe_bench</span><span class="p">(</span><span class="n">loops</span><span class="p">:</span> <span class="nb">usize</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Box</span><span class="o">&lt;</span><span class="n">dyn</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Item</span> <span class="o">=</span> <span class="nb">usize</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">ndxlmt</span> <span class="o">=</span> <span class="mi">131071</span><span class="p">;</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">cmpsts</span> <span class="o">=</span> <span class="nd">vec!</span><span class="p">[</span><span class="mi">0u8</span><span class="p">;</span> <span class="mi">16384</span><span class="p">];</span>
+ 
+    <span class="k">for</span> <span class="mi">_</span> <span class="n">in</span> <span class="mi">1</span> <span class="o">..</span> <span class="n">loops</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="n">ndx</span> <span class="n">in</span> <span class="mi">0</span> <span class="o">..</span> <span class="mi">254</span> <span class="p">{</span> <span class="c">// to index of square root of range</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">cmpsts</span><span class="p">[</span><span class="n">ndx</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">BITMASK</span><span class="p">[</span><span class="n">ndx</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+                <span class="k">let</span> <span class="n">bp</span> <span class="o">=</span> <span class="n">ndx</span> <span class="o">+</span> <span class="n">ndx</span> <span class="o">+</span> <span class="mi">3</span><span class="p">;</span> <span class="c">// common setup code...</span>
+                <span class="k">let</span> <span class="k">mut</span> <span class="n">cullpos</span> <span class="o">=</span> <span class="p">(</span><span class="n">ndx</span> <span class="o">+</span> <span class="n">ndx</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">ndx</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="p">;</span>
+                <span class="k">unsafe</span> <span class="p">{</span>
+                    <span class="k">let</span> <span class="n">cullfnc</span> <span class="o">=</span> <span class="n">UNROLLED</span><span class="nf">.get_unchecked</span><span class="p">(</span>
+                                    <span class="p">((</span><span class="n">bp</span> <span class="o">&amp;</span> <span class="mi">6</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">|</span> <span class="p">(</span><span class="n">cullpos</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">));</span>
+                    <span class="nf">cullfnc</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">cmpsts</span><span class="p">,</span> <span class="n">bp</span><span class="p">,</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">cullpos</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">while</span> <span class="n">cullpos</span> <span class="o">&lt;</span> <span class="n">ndxlmt</span> <span class="p">{</span>
+                    <span class="k">unsafe</span> <span class="p">{</span> <span class="c">// avoids array bounds check, which is already done above</span>
+    	                <span class="k">let</span> <span class="n">cptr</span> <span class="o">=</span> <span class="n">cmpsts</span><span class="nf">.get_unchecked_mut</span><span class="p">(</span><span class="n">cullpos</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">);</span>
+    	                <span class="o">*</span><span class="n">cptr</span> <span class="p">|</span><span class="o">=</span> <span class="n">BITMASK</span><span class="p">[</span><span class="n">cullpos</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">];</span>
+                    <span class="p">}</span>
+                    <span class="n">cullpos</span> <span class="o">+=</span> <span class="n">bp</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+ 
+    <span class="nn">Box</span><span class="p">::</span><span class="nf">new</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span> <span class="o">..</span> <span class="n">ndxlmt</span> <span class="k">as</span> <span class="nb">isize</span><span class="p">)</span><span class="nf">.into_iter</span><span class="p">()</span><span class="nf">.filter_map</span><span class="p">(</span><span class="k">move</span> <span class="p">|</span><span class="n">i</span><span class="p">|</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">{</span> <span class="nf">Some</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="n">cmpsts</span><span class="p">[</span><span class="n">i</span> <span class="k">as</span> <span class="nb">usize</span> <span class="o">&gt;&gt;</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">BITMASK</span><span class="p">[</span><span class="n">i</span> <span class="k">as</span> <span class="nb">usize</span> <span class="o">&amp;</span> <span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+                        <span class="nf">Some</span><span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="k">as</span> <span class="nb">usize</span><span class="p">)</span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="nb">None</span> <span class="p">}</span> <span class="p">}</span>
+    <span class="p">}))</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">strt</span> <span class="o">=</span> <span class="nn">Instant</span><span class="p">::</span><span class="nf">now</span><span class="p">();</span> 
+    <span class="k">let</span> <span class="n">rslt</span> <span class="o">=</span> <span class="nf">soe_bench</span><span class="p">(</span><span class="n">NUMLOOPS</span><span class="p">);</span> 
+    <span class="k">let</span> <span class="n">elpsd</span> <span class="o">=</span> <span class="n">strt</span><span class="nf">.elapsed</span><span class="p">();</span>
+ 
+    <span class="k">let</span> <span class="n">count</span> <span class="o">=</span> <span class="n">rslt</span><span class="nf">.count</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">secs</span> <span class="o">=</span> <span class="n">elpsd</span><span class="nf">.as_secs</span><span class="p">();</span>
+    <span class="k">let</span> <span class="n">millis</span> <span class="o">=</span> <span class="p">(</span><span class="n">elpsd</span><span class="nf">.subsec_nanos</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000000</span><span class="p">)</span> <span class="k">as</span> <span class="nb">u64</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">dur</span> <span class="o">=</span> <span class="n">secs</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">+</span> <span class="n">millis</span><span class="p">;</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"Found {} primes up to 262146 for {} loops in {} milliseconds."</span><span class="p">,</span>
+             <span class="n">count</span><span class="p">,</span> <span class="n">NUMLOOPS</span><span class="p">,</span> <span class="n">dur</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The above Rust version with identical algorithm is not quite as fast as the Nim version; upon inspection of the produced assembler code, one sees that it is missing a Extreme Loop Unrolling loop optimization for the loop overhead (or has reversed an optimization due to Loop Strength Reduction, which is a known issue with the current LLVM backend).  Thus, is is adding some fraction of a CPU clock cycle per eight-cull loop.</p>
+
+<p>Which language one finds most elegant is partly due to bias or willingness to adapt of an “offside rule” whitespace-significant language like Nim or the somewhat dated curly bracket code block designators/semicolon statement separators type of language such as Rust.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This implementation of a mini CPU benchmark shows that Nim does fully accomplish its design goals for this application and is perhaps better for this or similar tasks than any other current language.  Of the modern compiled “system programming” type of languages, it compares most closely with Rust, with Rust currently having better built-in code safety but Nim having a better template/macro system.  As well, Nim offers more memory management options, including several implementations of garbage collection, reference counting, an even now reference counting with cyclic reference breaker which is unique to Nim.</p>
+
+<p>As to the resulting mini benchmark, when fully optimized it is just measuring the compiler’s ability to reduce the culling operations to the single read/modify/write <code class="language-plaintext highlighter-rouge">or</code> instruction and minimum loop overhead, but when comparing the relative results across different CPU’s, it is amazing how well the results correlate to results from the major benchmarking suites such as Geekbench or Passmark for their CPU-only assessments.</p>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

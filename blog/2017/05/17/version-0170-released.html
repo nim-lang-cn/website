@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.17.0 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.17.0 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="The Nim team is happy to announce that the latest release of Nim, version 0.17.0, is now available. Nim is a systems programming language that focuses on performance, portability and expressiveness. This release fixes the most important regressions introduced in version 0.16.0. In particular memory manager and channel bugs have been fixed. There was also many significant improvements to the language, in particular a lot of work was put into concepts. Zahary has been leading this effort and we thank him for his hard work. Be sure to check out the changelog below for a comprehensive list of changes. The NSIS based installer is not provided anymore as the Nim website moved to https and this caused NSIS downloads to fail. The latest version of Nim for Windows can still be downloaded as a zip archive from the downloads page. We would also like to invite you to test a brand new tool that aims to make the installation and management of multiple Nim versions much easier. This tool is called choosenim and allows you to install the latest version of Nim with a single command. Check out the installation instructions on GitHub to give it a go, but keep in mind that this tool is still experimental. This release also includes version 0.8.6 of the Nimble package manager, be sure to check out its changelog for a list of changes since its last release. Changelog Changes affecting backwards compatibility There are now two different HTTP response types, Response and AsyncResponse. AsyncResponse’s body accessor returns a Future[string]! Due to this change you may need to add another await in your code. httpclient.request now respects the maxRedirects option. Previously redirects were handled only by get and post procs. The IO routines now raise EOFError for the “end of file” condition. EOFError is a subtype of IOError and so it’s easier to distinguish between “error during read” and “error due to EOF”. A hash procedure has been added for cstring type in hashes module. Previously, hash of a cstring would be calculated as a hash of the pointer. Now the hash is calculated from the contents of the string, assuming cstring is a null-terminated string. Equal string and cstring values produce an equal hash value. Macros accepting varargs arguments will now receive a node having the nkArgList node kind. Previous code expecting the node kind to be nkBracket may have to be updated. memfiles.open now closes file handles/fds by default. Passing allowRemap=true to memfiles.open recovers the old behavior. The old behavior is only needed to call mapMem on the resulting MemFile. posix.nim: For better C++ interop the field sa_sigaction*: proc (x: cint, y: var SigInfo, z: pointer) {.noconv.} was changed to sa_sigaction*: proc (x: cint, y: ptr SigInfo, z: pointer) {.noconv.}. The compiler doesn’t infer effects for .base methods anymore. This means you need to annotate them with .gcsafe or similar to clearly declare upfront every implementation needs to fulfill these contracts. system.getAst templateCall(x, y) now typechecks the templateCall properly. You need to patch your code accordingly. macros.getType and macros.getTypeImpl for an enum will now return an AST that is the same as what is used to define an enum. Previously the AST returned had a repeated EnumTy node and was missing the initial pragma node (which is currently empty for an enum). macros.getTypeImpl now correctly returns the implementation for a symbol of type tyGenericBody. If the dispatcher parameter’s value used in multi method is nil, a NilError exception is raised. The old behavior was that the method would be a nop then. posix.nim: the family of ntohs procs now takes unsigned integers instead of signed integers. In Nim identifiers en-dash (Unicode point U+2013) is not an alias for the underscore anymore. Use underscores instead. When the requiresInit pragma is applied to a record type, future versions of Nim will also require you to initialize all the fields of the type during object construction. For now, only a warning will be produced. The Object construction syntax now performs a number of additional safety checks. When fields within case objects are initialized, the compiler will now demand that the respective discriminator field has a matching known compile-time value. On posix, the results of waitForExit, peekExitCode, execCmd will return 128 + signal number if the application terminates via signal. ospaths.getConfigDir now conforms to the XDG Base Directory specification on non-Windows OSs. It returns the value of the XDG_CONFIG_DIR environment variable if it is set, and returns the default configuration directory, “~/.config/”, otherwise. Renamed the line info node parameter for newNimNode procedure. The parsing rules of do changed. foo bar do: baz Used to be parsed as: foo(bar(do: baz)) Now it is parsed as: foo(bar, do: baz) Library Additions Added system.onThreadDestruction. Added dial procedure to networking modules: net, asyncdispatch, asyncnet. It merges socket creation, address resolution, and connection into single step. When using dial, you don’t have to worry about the IPv4 vs IPv6 problem. httpclient now supports IPv6. Added to macro which allows JSON to be unmarshalled into a type. import json type Person = object name: string age: int let data = """ { "name": "Amy", "age": 4 } """ let node = parseJson(data) let obj = node.to(Person) echo(obj) Tool Additions The finish tool can now download MingW for you should it not find a working MingW installation. Compiler Additions The name mangling rules used by the C code generator changed. Most of the time local variables and parameters are not mangled at all anymore. This improves the debugging experience. The compiler produces explicit name mangling files when --debugger:native is enabled. Debuggers can read these .ndi files in order to improve debugging Nim code. Language Additions The try statement’s except branches now support the binding of a caught exception to a variable: try: raise newException(Exception, "Hello World") except Exception as exc: echo(exc.msg) This replaces the getCurrentException and getCurrentExceptionMsg() procedures, although these procedures will remain in the stdlib for the foreseeable future. This new language feature is actually implemented using these procedures. In the near future we will be converting all exception types to refs to remove the need for the newException template. A new pragma .used can be used for symbols to prevent the “declared but not used” warning. More details can be found here. The popular “colon block of statements” syntax is now also supported for let and var statements and assignments: template ve(value, effect): untyped = effect value let x = ve(4): echo "welcome to Nim!" This is particularly useful for DSLs that help in tree construction. Language changes The .procvar annotation is not required anymore. That doesn’t mean you can pass system.$ to map just yet though. Bugfixes The list below has been generated based on the commits in Nim’s git repository. As such it lists only the issues which have been closed via a commit, for a full list see this link on Github. Fixed “Weird compilation bug” (#4884) Fixed “Return by arg optimization does not set result to default value” (#5098) Fixed “upcoming asyncdispatch doesn’t remove recv callback if remote side closed socket” (#5128) Fixed “compiler bug, executable writes into wrong memory” (#5218) Fixed “Module aliasing fails when multiple modules have the same original name” (#5112) Fixed “JS: var argument + case expr with arg = bad codegen” (#5244) Fixed “compiler reject proc’s param shadowing inside template” (#5225) Fixed “const value not accessible in proc” (#3434) Fixed “Compilation regression 0.13.0 vs 0.16.0 in compile-time evaluation” (#5237) Fixed “Regression: JS: wrong field-access codegen” (#5234) Fixed “fixes #5234” (#5240) Fixed “JS Codegen: duplicated fields in object constructor” (#5271) Fixed “RFC: improving JavaScript FFI” (#4873) Fixed “Wrong result type when using bitwise and” (#5216) Fixed “upcoming.asyncdispatch is prone to memory leaks” (#5290) Fixed “Using threadvars leads to crash on Windows when threads are created/destroyed” (#5301) Fixed “Type inferring templates do not work with non-ref types.” (#4973) Fixed “Nimble package list no longer works on lib.html” (#5318) Fixed “Missing file name and line number in error message” (#4992) Fixed “ref type can’t be converted to var parameter in VM” (#5327) Fixed “nimweb ignores the value of –parallelBuild” (#5328) Fixed “Cannot unregister/close AsyncEvent from within its handler” (#5331) Fixed “name collision with template instanciated generic inline function with inlined iterator specialization used from different modules” (#5285) Fixed “object in VM does not have value semantic” (#5269) Fixed “Unstable tuple destructuring behavior in Nim VM” (#5221) Fixed “nre module breaks os templates” (#4996) Fixed “Cannot implement distinct seq with setLen” (#5090) Fixed “await inside array/dict literal produces invalid code” (#5314) Fixed “asyncdispatch.accept() can raise exception inside poll() instead of failing future on Windows” (#5279) Fixed “VM: A crash report should be more informative” (#5352) Fixed “IO routines are poor at handling errors” (#5349) Fixed “new import syntax doesn’t work?” (#5185) Fixed “Seq of object literals skips unmentioned fields” (#5339) Fixed “sym is not accessible in compile time” (#5354) Fixed “the matching is broken in re.nim” (#5382) Fixed “development branch breaks in my c wrapper” (#5392) Fixed “Bad codegen: toSeq + tuples + generics” (#5383) Fixed “Bad codegen: toSeq + tuples + generics” (#5383) Fixed “Codegen error when using container of containers” (#5402) Fixed “sizeof(RangeType) is not available in static context” (#5399) Fixed “Regression: ICE: expr: var not init ex_263713” (#5405) Fixed “Stack trace is wrong when assignment operator fails with template” (#5400) Fixed “SIGSEGV in compiler” (#5391) Fixed “Compiler regression with struct member names” (#5404) Fixed “Regression: compiler segfault” (#5419) Fixed “The compilation of jester routes is broken on devel” (#5417) Fixed “Non-generic return type produces “method is not a base”” (#5432) Fixed “Confusing error behavior when calling slice[T].random” (#5430) Fixed “Wrong method called” (#5439) Fixed “Attempt to document the strscans.scansp macro” (#5154) Fixed “[Regression] Invalid C code for _ symbol inside jester routes” (#5452) Fixed “StdLib base64 encodeInternal crashes with out of bound exception” (#5457) Fixed “Nim hangs forever in infinite loop in nre library” (#5444) Fixed “Tester passes test although individual test in suite fails” (#5472) Fixed “terminal.nim documentation” (#5483) Fixed “Codegen error - expected identifier before ‘)’ token (probably regression)” (#5481) Fixed “mixin not works inside generic proc generated by template” (#5478) Fixed “var not init (converter + template + macro)” (#5467) Fixed “== for OrderedTable should consider equal content but different size as equal.” (#5487) Fixed “Fixed tests/tester.nim” (#45) Fixed “template instanciation crashes compiler” (#5428) Fixed “Internal compiler error in handleGenericInvocation” (#5167) Fixed “compiler crash in forwarding template” (#5455) Fixed “Doc query re public/private + suggestion re deprecated” (#5529) Fixed “inheritance not work for generic object whose parent is parameterized” (#5264) Fixed “weird inheritance rule restriction” (#5231) Fixed “Enum with holes broken in JS” (#5062) Fixed “enum type and aliased enum type inequality when tested with operator is involving template” (#5360) Fixed “logging: problem with console logger caused by the latest changes in sysio” (#5546) Fixed “Crash if proc and caller doesn’t define seq type - HEAD” (#4756) Fixed “path config option doesn’t work when compilation is invoked from a different directory” (#5228) Fixed “segfaults module doesn’t compile with C++ backend” (#5550) Fixed “Improve joinThreads for windows” (#4972) Fixed “Compiling in release mode prevents valid code execution.” (#5296) Fixed “Forward declaration of generic procs or iterators doesn’t work” (#4104) Fixed “cant create thread after join” (#4719) Fixed “can’t compile with var name “near” and –threads:on” (#5598) Fixed “inconsistent behavior when calling parent’s proc of generic object” (#5241) Fixed “The problem with import order of asyncdispatch and unittest modules” (#5597) Fixed “Generic code fails to compile in unexpected ways” (#976) Fixed “Another ‘User defined type class’ issue” (#1128) Fixed “compiler fails to compile user defined typeclass” (#1147) Fixed “Type class membership testing doesn’t work on instances of generic object types” (#1570) Fixed “Strange overload resolution behavior for procedures with typeclass arguments” (#1991) Fixed “The same UDTC can’t constrain two type parameters in the same procedure” (#2018) Fixed “More trait/concept issues” (#2423) Fixed “Bugs with concepts?” (#2882) Fixed “Improve error messages for concepts” (#3330) Fixed “Dynamic dispatch is not working correctly” (#5599) Fixed “asynchttpserver may consume unbounded memory reading headers” (#3847) Fixed “nim check crash due to missing var keyword” (#5618) Fixed “Unexpected template resolution” (#5625) Fixed “Installer fails to download mingw.zip” (#5422) Fixed “Exception name and parent get lost after reraising” (#5628) Fixed “generic ref object typeRel problem” (#5621) Fixed “typedesc typeRel regression” (#5632) Fixed “http client respects only one “Set-Cookie” header” (#5611) Fixed “Internal assert when using compiles” (#5638) Fixed “Compiler crash for variant type.” (#4556) Fixed “MultipartData in httpclient.Post appears to break header” (#5710) Fixed “setCookie incorrect timestamp format” (#5718) Fixed “[Regression] strdefine consts cannot be passed to a procvar” (#5729) Fixed “Nim’s –nimblepaths picks 1.0 over #head” (#5752) Fixed “Async writes are not queued up on Windows” (#5532) Fixed “float32 literals are translated to double literals in C” (#5821) Fixed “LibreSSL isn’t recognized as legit SSL library” (#4893) Fixed “exception when using json “to” proc” (#5761)"> -->
+  <meta property="og:description" content="The Nim team is happy to announce that the latest release of Nim, version 0.17.0, is now available. Nim is a systems programming language that focuses on performance, portability and expressiveness. This release fixes the most important regressions introduced in version 0.16.0. In particular memory manager and channel bugs have been fixed. There was also many significant improvements to the language, in particular a lot of work was put into concepts. Zahary has been leading this effort and we thank him for his hard work. Be sure to check out the changelog below for a comprehensive list of changes. The NSIS based installer is not provided anymore as the Nim website moved to https and this caused NSIS downloads to fail. The latest version of Nim for Windows can still be downloaded as a zip archive from the downloads page. We would also like to invite you to test a brand new tool that aims to make the installation and management of multiple Nim versions much easier. This tool is called choosenim and allows you to install the latest version of Nim with a single command. Check out the installation instructions on GitHub to give it a go, but keep in mind that this tool is still experimental. This release also includes version 0.8.6 of the Nimble package manager, be sure to check out its changelog for a list of changes since its last release. Changelog Changes affecting backwards compatibility There are now two different HTTP response types, Response and AsyncResponse. AsyncResponse’s body accessor returns a Future[string]! Due to this change you may need to add another await in your code. httpclient.request now respects the maxRedirects option. Previously redirects were handled only by get and post procs. The IO routines now raise EOFError for the “end of file” condition. EOFError is a subtype of IOError and so it’s easier to distinguish between “error during read” and “error due to EOF”. A hash procedure has been added for cstring type in hashes module. Previously, hash of a cstring would be calculated as a hash of the pointer. Now the hash is calculated from the contents of the string, assuming cstring is a null-terminated string. Equal string and cstring values produce an equal hash value. Macros accepting varargs arguments will now receive a node having the nkArgList node kind. Previous code expecting the node kind to be nkBracket may have to be updated. memfiles.open now closes file handles/fds by default. Passing allowRemap=true to memfiles.open recovers the old behavior. The old behavior is only needed to call mapMem on the resulting MemFile. posix.nim: For better C++ interop the field sa_sigaction*: proc (x: cint, y: var SigInfo, z: pointer) {.noconv.} was changed to sa_sigaction*: proc (x: cint, y: ptr SigInfo, z: pointer) {.noconv.}. The compiler doesn’t infer effects for .base methods anymore. This means you need to annotate them with .gcsafe or similar to clearly declare upfront every implementation needs to fulfill these contracts. system.getAst templateCall(x, y) now typechecks the templateCall properly. You need to patch your code accordingly. macros.getType and macros.getTypeImpl for an enum will now return an AST that is the same as what is used to define an enum. Previously the AST returned had a repeated EnumTy node and was missing the initial pragma node (which is currently empty for an enum). macros.getTypeImpl now correctly returns the implementation for a symbol of type tyGenericBody. If the dispatcher parameter’s value used in multi method is nil, a NilError exception is raised. The old behavior was that the method would be a nop then. posix.nim: the family of ntohs procs now takes unsigned integers instead of signed integers. In Nim identifiers en-dash (Unicode point U+2013) is not an alias for the underscore anymore. Use underscores instead. When the requiresInit pragma is applied to a record type, future versions of Nim will also require you to initialize all the fields of the type during object construction. For now, only a warning will be produced. The Object construction syntax now performs a number of additional safety checks. When fields within case objects are initialized, the compiler will now demand that the respective discriminator field has a matching known compile-time value. On posix, the results of waitForExit, peekExitCode, execCmd will return 128 + signal number if the application terminates via signal. ospaths.getConfigDir now conforms to the XDG Base Directory specification on non-Windows OSs. It returns the value of the XDG_CONFIG_DIR environment variable if it is set, and returns the default configuration directory, “~/.config/”, otherwise. Renamed the line info node parameter for newNimNode procedure. The parsing rules of do changed. foo bar do: baz Used to be parsed as: foo(bar(do: baz)) Now it is parsed as: foo(bar, do: baz) Library Additions Added system.onThreadDestruction. Added dial procedure to networking modules: net, asyncdispatch, asyncnet. It merges socket creation, address resolution, and connection into single step. When using dial, you don’t have to worry about the IPv4 vs IPv6 problem. httpclient now supports IPv6. Added to macro which allows JSON to be unmarshalled into a type. import json type Person = object name: string age: int let data = """ { "name": "Amy", "age": 4 } """ let node = parseJson(data) let obj = node.to(Person) echo(obj) Tool Additions The finish tool can now download MingW for you should it not find a working MingW installation. Compiler Additions The name mangling rules used by the C code generator changed. Most of the time local variables and parameters are not mangled at all anymore. This improves the debugging experience. The compiler produces explicit name mangling files when --debugger:native is enabled. Debuggers can read these .ndi files in order to improve debugging Nim code. Language Additions The try statement’s except branches now support the binding of a caught exception to a variable: try: raise newException(Exception, "Hello World") except Exception as exc: echo(exc.msg) This replaces the getCurrentException and getCurrentExceptionMsg() procedures, although these procedures will remain in the stdlib for the foreseeable future. This new language feature is actually implemented using these procedures. In the near future we will be converting all exception types to refs to remove the need for the newException template. A new pragma .used can be used for symbols to prevent the “declared but not used” warning. More details can be found here. The popular “colon block of statements” syntax is now also supported for let and var statements and assignments: template ve(value, effect): untyped = effect value let x = ve(4): echo "welcome to Nim!" This is particularly useful for DSLs that help in tree construction. Language changes The .procvar annotation is not required anymore. That doesn’t mean you can pass system.$ to map just yet though. Bugfixes The list below has been generated based on the commits in Nim’s git repository. As such it lists only the issues which have been closed via a commit, for a full list see this link on Github. Fixed “Weird compilation bug” (#4884) Fixed “Return by arg optimization does not set result to default value” (#5098) Fixed “upcoming asyncdispatch doesn’t remove recv callback if remote side closed socket” (#5128) Fixed “compiler bug, executable writes into wrong memory” (#5218) Fixed “Module aliasing fails when multiple modules have the same original name” (#5112) Fixed “JS: var argument + case expr with arg = bad codegen” (#5244) Fixed “compiler reject proc’s param shadowing inside template” (#5225) Fixed “const value not accessible in proc” (#3434) Fixed “Compilation regression 0.13.0 vs 0.16.0 in compile-time evaluation” (#5237) Fixed “Regression: JS: wrong field-access codegen” (#5234) Fixed “fixes #5234” (#5240) Fixed “JS Codegen: duplicated fields in object constructor” (#5271) Fixed “RFC: improving JavaScript FFI” (#4873) Fixed “Wrong result type when using bitwise and” (#5216) Fixed “upcoming.asyncdispatch is prone to memory leaks” (#5290) Fixed “Using threadvars leads to crash on Windows when threads are created/destroyed” (#5301) Fixed “Type inferring templates do not work with non-ref types.” (#4973) Fixed “Nimble package list no longer works on lib.html” (#5318) Fixed “Missing file name and line number in error message” (#4992) Fixed “ref type can’t be converted to var parameter in VM” (#5327) Fixed “nimweb ignores the value of –parallelBuild” (#5328) Fixed “Cannot unregister/close AsyncEvent from within its handler” (#5331) Fixed “name collision with template instanciated generic inline function with inlined iterator specialization used from different modules” (#5285) Fixed “object in VM does not have value semantic” (#5269) Fixed “Unstable tuple destructuring behavior in Nim VM” (#5221) Fixed “nre module breaks os templates” (#4996) Fixed “Cannot implement distinct seq with setLen” (#5090) Fixed “await inside array/dict literal produces invalid code” (#5314) Fixed “asyncdispatch.accept() can raise exception inside poll() instead of failing future on Windows” (#5279) Fixed “VM: A crash report should be more informative” (#5352) Fixed “IO routines are poor at handling errors” (#5349) Fixed “new import syntax doesn’t work?” (#5185) Fixed “Seq of object literals skips unmentioned fields” (#5339) Fixed “sym is not accessible in compile time” (#5354) Fixed “the matching is broken in re.nim” (#5382) Fixed “development branch breaks in my c wrapper” (#5392) Fixed “Bad codegen: toSeq + tuples + generics” (#5383) Fixed “Bad codegen: toSeq + tuples + generics” (#5383) Fixed “Codegen error when using container of containers” (#5402) Fixed “sizeof(RangeType) is not available in static context” (#5399) Fixed “Regression: ICE: expr: var not init ex_263713” (#5405) Fixed “Stack trace is wrong when assignment operator fails with template” (#5400) Fixed “SIGSEGV in compiler” (#5391) Fixed “Compiler regression with struct member names” (#5404) Fixed “Regression: compiler segfault” (#5419) Fixed “The compilation of jester routes is broken on devel” (#5417) Fixed “Non-generic return type produces “method is not a base”” (#5432) Fixed “Confusing error behavior when calling slice[T].random” (#5430) Fixed “Wrong method called” (#5439) Fixed “Attempt to document the strscans.scansp macro” (#5154) Fixed “[Regression] Invalid C code for _ symbol inside jester routes” (#5452) Fixed “StdLib base64 encodeInternal crashes with out of bound exception” (#5457) Fixed “Nim hangs forever in infinite loop in nre library” (#5444) Fixed “Tester passes test although individual test in suite fails” (#5472) Fixed “terminal.nim documentation” (#5483) Fixed “Codegen error - expected identifier before ‘)’ token (probably regression)” (#5481) Fixed “mixin not works inside generic proc generated by template” (#5478) Fixed “var not init (converter + template + macro)” (#5467) Fixed “== for OrderedTable should consider equal content but different size as equal.” (#5487) Fixed “Fixed tests/tester.nim” (#45) Fixed “template instanciation crashes compiler” (#5428) Fixed “Internal compiler error in handleGenericInvocation” (#5167) Fixed “compiler crash in forwarding template” (#5455) Fixed “Doc query re public/private + suggestion re deprecated” (#5529) Fixed “inheritance not work for generic object whose parent is parameterized” (#5264) Fixed “weird inheritance rule restriction” (#5231) Fixed “Enum with holes broken in JS” (#5062) Fixed “enum type and aliased enum type inequality when tested with operator is involving template” (#5360) Fixed “logging: problem with console logger caused by the latest changes in sysio” (#5546) Fixed “Crash if proc and caller doesn’t define seq type - HEAD” (#4756) Fixed “path config option doesn’t work when compilation is invoked from a different directory” (#5228) Fixed “segfaults module doesn’t compile with C++ backend” (#5550) Fixed “Improve joinThreads for windows” (#4972) Fixed “Compiling in release mode prevents valid code execution.” (#5296) Fixed “Forward declaration of generic procs or iterators doesn’t work” (#4104) Fixed “cant create thread after join” (#4719) Fixed “can’t compile with var name “near” and –threads:on” (#5598) Fixed “inconsistent behavior when calling parent’s proc of generic object” (#5241) Fixed “The problem with import order of asyncdispatch and unittest modules” (#5597) Fixed “Generic code fails to compile in unexpected ways” (#976) Fixed “Another ‘User defined type class’ issue” (#1128) Fixed “compiler fails to compile user defined typeclass” (#1147) Fixed “Type class membership testing doesn’t work on instances of generic object types” (#1570) Fixed “Strange overload resolution behavior for procedures with typeclass arguments” (#1991) Fixed “The same UDTC can’t constrain two type parameters in the same procedure” (#2018) Fixed “More trait/concept issues” (#2423) Fixed “Bugs with concepts?” (#2882) Fixed “Improve error messages for concepts” (#3330) Fixed “Dynamic dispatch is not working correctly” (#5599) Fixed “asynchttpserver may consume unbounded memory reading headers” (#3847) Fixed “nim check crash due to missing var keyword” (#5618) Fixed “Unexpected template resolution” (#5625) Fixed “Installer fails to download mingw.zip” (#5422) Fixed “Exception name and parent get lost after reraising” (#5628) Fixed “generic ref object typeRel problem” (#5621) Fixed “typedesc typeRel regression” (#5632) Fixed “http client respects only one “Set-Cookie” header” (#5611) Fixed “Internal assert when using compiles” (#5638) Fixed “Compiler crash for variant type.” (#4556) Fixed “MultipartData in httpclient.Post appears to break header” (#5710) Fixed “setCookie incorrect timestamp format” (#5718) Fixed “[Regression] strdefine consts cannot be passed to a procvar” (#5729) Fixed “Nim’s –nimblepaths picks 1.0 over #head” (#5752) Fixed “Async writes are not queued up on Windows” (#5532) Fixed “float32 literals are translated to double literals in C” (#5821) Fixed “LibreSSL isn’t recognized as legit SSL library” (#4893) Fixed “exception when using json “to” proc” (#5761)">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.17.0 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.17.0 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              17 May 2017
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              The Nim Team
+            </span>
+            
+          </h3>
+          <p>The Nim team is happy to announce that the latest release of Nim,
+version 0.17.0, is now available. Nim is a systems programming language that
+focuses on performance, portability and expressiveness.</p>
+
+<p>This release fixes the most important regressions introduced in version 0.16.0.
+In particular memory manager and channel bugs have been fixed. There was also
+many significant improvements to the language, in particular a lot of work was
+put into concepts. Zahary has been leading this effort and we thank him for
+his hard work. Be sure to check out the changelog <a href="#changelog">below</a> for
+a comprehensive list of changes.</p>
+
+<p>The NSIS based
+installer is not provided anymore as the Nim website moved to <code class="language-plaintext highlighter-rouge">https</code> and
+this caused NSIS downloads to fail. The latest version of Nim for Windows can
+still be downloaded as a zip archive from the
+<a href="https://nim-lang-cn.org/install.html">downloads page</a>.</p>
+
+<p>We would also like to invite you to test a brand new tool that aims to make
+the installation and management of multiple Nim versions much easier. This tool
+is called <code class="language-plaintext highlighter-rouge">choosenim</code> and allows you to install the latest version of Nim
+with a single command.
+Check out the
+<a href="https://github.com/dom96/choosenim#installation">installation instructions</a>
+on GitHub to give it a go, but keep in mind that this tool is still
+experimental.</p>
+
+<p>This release also includes version 0.8.6 of the Nimble package manager,
+be sure to check out its
+<a href="https://github.com/nim-lang/nimble/blob/master/changelog.markdown">changelog</a>
+for a list of changes since its last release.</p>
+
+<h1 id="changelog">Changelog</h1>
+
+<h2 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h2>
+
+<ul>
+  <li>
+    <p>There are now two different HTTP response types, <code class="language-plaintext highlighter-rouge">Response</code> and
+<code class="language-plaintext highlighter-rouge">AsyncResponse</code>. <code class="language-plaintext highlighter-rouge">AsyncResponse</code>’s <code class="language-plaintext highlighter-rouge">body</code> accessor returns a
+<code class="language-plaintext highlighter-rouge">Future[string]</code>!</p>
+
+    <p>Due to this change you may need to add another <code class="language-plaintext highlighter-rouge">await</code> in your code.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">httpclient.request</code> now respects the <code class="language-plaintext highlighter-rouge">maxRedirects</code> option. Previously
+redirects were handled only by <code class="language-plaintext highlighter-rouge">get</code> and <code class="language-plaintext highlighter-rouge">post</code> procs.</li>
+  <li>The IO routines now raise <code class="language-plaintext highlighter-rouge">EOFError</code> for the “end of file” condition.
+<code class="language-plaintext highlighter-rouge">EOFError</code> is a subtype of <code class="language-plaintext highlighter-rouge">IOError</code> and so it’s easier to distinguish
+between “error during read” and “error due to EOF”.</li>
+  <li>A hash procedure has been added for <code class="language-plaintext highlighter-rouge">cstring</code> type in <code class="language-plaintext highlighter-rouge">hashes</code> module.
+Previously, hash of a <code class="language-plaintext highlighter-rouge">cstring</code> would be calculated as a hash of the
+pointer. Now the hash is calculated from the contents of the string, assuming
+<code class="language-plaintext highlighter-rouge">cstring</code> is a null-terminated string. Equal <code class="language-plaintext highlighter-rouge">string</code> and <code class="language-plaintext highlighter-rouge">cstring</code>
+values produce an equal hash value.</li>
+  <li>Macros accepting <code class="language-plaintext highlighter-rouge">varargs</code> arguments will now receive a node having the
+<code class="language-plaintext highlighter-rouge">nkArgList</code> node kind. Previous code expecting the node kind to be <code class="language-plaintext highlighter-rouge">nkBracket</code>
+may have to be updated.</li>
+  <li><code class="language-plaintext highlighter-rouge">memfiles.open</code> now closes file handles/fds by default.  Passing
+<code class="language-plaintext highlighter-rouge">allowRemap=true</code> to <code class="language-plaintext highlighter-rouge">memfiles.open</code> recovers the old behavior.  The old
+behavior is only needed to call <code class="language-plaintext highlighter-rouge">mapMem</code> on the resulting <code class="language-plaintext highlighter-rouge">MemFile</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">posix.nim</code>: For better C++ interop the field
+<code class="language-plaintext highlighter-rouge">sa_sigaction*: proc (x: cint, y: var SigInfo, z: pointer) {.noconv.}</code> was
+changed
+to <code class="language-plaintext highlighter-rouge">sa_sigaction*: proc (x: cint, y: ptr SigInfo, z: pointer) {.noconv.}</code>.</li>
+  <li>The compiler doesn’t infer effects for <code class="language-plaintext highlighter-rouge">.base</code> methods anymore. This means
+you need to annotate them with <code class="language-plaintext highlighter-rouge">.gcsafe</code> or similar to clearly declare
+upfront every implementation needs to fulfill these contracts.</li>
+  <li><code class="language-plaintext highlighter-rouge">system.getAst templateCall(x, y)</code> now typechecks the <code class="language-plaintext highlighter-rouge">templateCall</code>
+properly. You need to patch your code accordingly.</li>
+  <li><code class="language-plaintext highlighter-rouge">macros.getType</code> and <code class="language-plaintext highlighter-rouge">macros.getTypeImpl</code> for an enum will now return an
+AST that is the same as what is used to define an enum.  Previously the AST
+returned had a repeated <code class="language-plaintext highlighter-rouge">EnumTy</code> node and was missing the initial pragma
+node (which is currently empty for an enum).</li>
+  <li><code class="language-plaintext highlighter-rouge">macros.getTypeImpl</code> now correctly returns the implementation for a symbol
+of type <code class="language-plaintext highlighter-rouge">tyGenericBody</code>.</li>
+  <li>If the dispatcher parameter’s value used in multi method is <code class="language-plaintext highlighter-rouge">nil</code>,
+a <code class="language-plaintext highlighter-rouge">NilError</code> exception is raised. The old behavior was that the method
+would be a <code class="language-plaintext highlighter-rouge">nop</code> then.</li>
+  <li><code class="language-plaintext highlighter-rouge">posix.nim</code>: the family of <code class="language-plaintext highlighter-rouge">ntohs</code> procs now takes unsigned integers
+instead of signed integers.</li>
+  <li>In Nim identifiers en-dash (Unicode point U+2013) is not an alias for the
+underscore anymore. Use underscores instead.</li>
+  <li>When the <code class="language-plaintext highlighter-rouge">requiresInit</code> pragma is applied to a record type, future versions
+of Nim will also require you to initialize all the fields of the type during
+object construction. For now, only a warning will be produced.</li>
+  <li>The Object construction syntax now performs a number of additional safety
+checks. When fields within case objects are initialized, the compiler will
+now demand that the respective discriminator field has a matching known
+compile-time value.</li>
+  <li>On posix, the results of <code class="language-plaintext highlighter-rouge">waitForExit</code>, <code class="language-plaintext highlighter-rouge">peekExitCode</code>, <code class="language-plaintext highlighter-rouge">execCmd</code> will return
+128 + signal number if the application terminates via signal.</li>
+  <li><code class="language-plaintext highlighter-rouge">ospaths.getConfigDir</code> now conforms to the XDG Base Directory specification
+on non-Windows OSs. It returns the value of the <code class="language-plaintext highlighter-rouge">XDG_CONFIG_DIR</code> environment
+variable if it is set, and returns the default configuration directory,
+“~/.config/”, otherwise.</li>
+  <li>Renamed the line info node parameter for <code class="language-plaintext highlighter-rouge">newNimNode</code> procedure.</li>
+  <li>
+    <p>The parsing rules of <code class="language-plaintext highlighter-rouge">do</code> changed.</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">foo</span> <span class="n">bar</span> <span class="k">do</span><span class="p">:</span>
+    <span class="n">baz</span>
+</code></pre></div>    </div>
+
+    <p>Used to be parsed as:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">foo</span><span class="p">(</span><span class="n">bar</span><span class="p">(</span><span class="k">do</span><span class="p">:</span>
+    <span class="n">baz</span><span class="p">))</span>
+</code></pre></div>    </div>
+
+    <p>Now it is parsed as:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">foo</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="k">do</span><span class="p">:</span>
+    <span class="n">baz</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="library-additions">Library Additions</h2>
+
+<ul>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">system.onThreadDestruction</code>.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">dial</code> procedure to networking modules: <code class="language-plaintext highlighter-rouge">net</code>, <code class="language-plaintext highlighter-rouge">asyncdispatch</code>,
+<code class="language-plaintext highlighter-rouge">asyncnet</code>. It merges socket creation, address resolution, and connection
+into single step. When using <code class="language-plaintext highlighter-rouge">dial</code>, you don’t have to worry about the
+IPv4 vs IPv6 problem. <code class="language-plaintext highlighter-rouge">httpclient</code> now supports IPv6.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">to</code> macro which allows JSON to be unmarshalled into a type.</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">import</span> <span class="n">json</span>
+
+  <span class="k">type</span>
+    <span class="n">Person</span> <span class="o">=</span> <span class="k">object</span>
+      <span class="n">name</span><span class="p">:</span> <span class="kt">string</span>
+      <span class="n">age</span><span class="p">:</span> <span class="kt">int</span>
+
+  <span class="k">let</span> <span class="n">data</span> <span class="o">=</span> <span class="s">"""
+    {
+      "name": "Amy",
+      "age": 4
+    }
+  """</span>
+
+  <span class="k">let</span> <span class="n">node</span> <span class="o">=</span> <span class="n">parseJson</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="k">let</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">node</span><span class="p">.</span><span class="n">to</span><span class="p">(</span><span class="n">Person</span><span class="p">)</span>
+  <span class="n">echo</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="tool-additions">Tool Additions</h2>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">finish</code> tool can now download MingW for you should it not find a
+working MingW installation.</li>
+</ul>
+
+<h2 id="compiler-additions">Compiler Additions</h2>
+
+<ul>
+  <li>The name mangling rules used by the C code generator changed. Most of the time
+local variables and parameters are not mangled at all anymore. This improves
+the debugging experience.</li>
+  <li>The compiler produces explicit name mangling files when <code class="language-plaintext highlighter-rouge">--debugger:native</code>
+is enabled. Debuggers can read these <code class="language-plaintext highlighter-rouge">.ndi</code> files in order to improve
+debugging Nim code.</li>
+</ul>
+
+<h2 id="language-additions">Language Additions</h2>
+
+<ul>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">try</code> statement’s <code class="language-plaintext highlighter-rouge">except</code> branches now support the binding of a
+caught exception to a variable:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">try</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="n">newException</span><span class="p">(</span><span class="n">Exception</span><span class="p">,</span> <span class="s">"Hello World"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+      <span class="n">echo</span><span class="p">(</span><span class="n">exc</span><span class="p">.</span><span class="n">msg</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>This replaces the <code class="language-plaintext highlighter-rouge">getCurrentException</code> and <code class="language-plaintext highlighter-rouge">getCurrentExceptionMsg()</code>
+  procedures, although these procedures will remain in the stdlib for the
+  foreseeable future. This new language feature is actually implemented using
+  these procedures.</p>
+
+    <p>In the near future we will be converting all exception types to refs to
+  remove the need for the <code class="language-plaintext highlighter-rouge">newException</code> template.</p>
+  </li>
+  <li>A new pragma <code class="language-plaintext highlighter-rouge">.used</code> can be used for symbols to prevent
+the “declared but not used” warning. More details can be
+found <a href="http://nim-lang.org/docs/manual.html#pragmas-used-pragma">here</a>.</li>
+  <li>
+    <p>The popular “colon block of statements” syntax is now also supported for
+<code class="language-plaintext highlighter-rouge">let</code> and <code class="language-plaintext highlighter-rouge">var</code> statements and assignments:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">template</span> <span class="n">ve</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">effect</span><span class="p">):</span> <span class="n">untyped</span> <span class="o">=</span>
+    <span class="n">effect</span>
+    <span class="n">value</span>
+
+  <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ve</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">echo</span> <span class="s">"welcome to Nim!"</span>
+</code></pre></div>    </div>
+
+    <p>This is particularly useful for DSLs that help in tree construction.</p>
+  </li>
+</ul>
+
+<h2 id="language-changes">Language changes</h2>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">.procvar</code> annotation is not required anymore. That doesn’t mean you
+can pass <code class="language-plaintext highlighter-rouge">system.$</code> to <code class="language-plaintext highlighter-rouge">map</code> just yet though.</li>
+</ul>
+
+<h2 id="bugfixes">Bugfixes</h2>
+
+<p>The list below has been generated based on the commits in Nim’s git
+repository. As such it lists only the issues which have been closed
+via a commit, for a full list see
+<a href="https://github.com/nim-lang/Nim/issues?utf8=%E2%9C%93&amp;q=is%3Aissue+closed%3A%222017-01-07+..+2017-05-16%22+">this link on Github</a>.</p>
+
+<ul>
+  <li>Fixed “Weird compilation bug”
+(<a href="https://github.com/nim-lang/Nim/issues/4884">#4884</a>)</li>
+  <li>Fixed “Return by arg optimization does not set result to default value”
+(<a href="https://github.com/nim-lang/Nim/issues/5098">#5098</a>)</li>
+  <li>Fixed “upcoming asyncdispatch doesn’t remove recv callback if remote side closed socket”
+(<a href="https://github.com/nim-lang/Nim/issues/5128">#5128</a>)</li>
+  <li>Fixed “compiler bug, executable writes into wrong memory”
+(<a href="https://github.com/nim-lang/Nim/issues/5218">#5218</a>)</li>
+  <li>Fixed “Module aliasing fails when multiple modules have the same original name”
+(<a href="https://github.com/nim-lang/Nim/issues/5112">#5112</a>)</li>
+  <li>Fixed “JS: var argument + case expr with arg = bad codegen”
+(<a href="https://github.com/nim-lang/Nim/issues/5244">#5244</a>)</li>
+  <li>Fixed “compiler reject proc’s param shadowing inside template”
+(<a href="https://github.com/nim-lang/Nim/issues/5225">#5225</a>)</li>
+  <li>Fixed “const value not accessible in proc”
+(<a href="https://github.com/nim-lang/Nim/issues/3434">#3434</a>)</li>
+  <li>Fixed “Compilation regression 0.13.0 vs 0.16.0 in compile-time evaluation”
+(<a href="https://github.com/nim-lang/Nim/issues/5237">#5237</a>)</li>
+  <li>Fixed “Regression: JS: wrong field-access codegen”
+(<a href="https://github.com/nim-lang/Nim/issues/5234">#5234</a>)</li>
+  <li>Fixed “fixes #5234”
+(<a href="https://github.com/nim-lang/Nim/issues/5240">#5240</a>)</li>
+  <li>Fixed “JS Codegen: duplicated fields in object constructor”
+(<a href="https://github.com/nim-lang/Nim/issues/5271">#5271</a>)</li>
+  <li>Fixed “RFC: improving JavaScript FFI”
+(<a href="https://github.com/nim-lang/Nim/issues/4873">#4873</a>)</li>
+  <li>Fixed “Wrong result type when using bitwise and”
+(<a href="https://github.com/nim-lang/Nim/issues/5216">#5216</a>)</li>
+  <li>Fixed “upcoming.asyncdispatch is prone to memory leaks”
+(<a href="https://github.com/nim-lang/Nim/issues/5290">#5290</a>)</li>
+  <li>Fixed “Using threadvars leads to crash on Windows when threads are created/destroyed”
+(<a href="https://github.com/nim-lang/Nim/issues/5301">#5301</a>)</li>
+  <li>Fixed “Type inferring templates do not work with non-ref types.”
+(<a href="https://github.com/nim-lang/Nim/issues/4973">#4973</a>)</li>
+  <li>Fixed “Nimble package list no longer works on lib.html”
+(<a href="https://github.com/nim-lang/Nim/issues/5318">#5318</a>)</li>
+  <li>Fixed “Missing file name and line number in error message”
+(<a href="https://github.com/nim-lang/Nim/issues/4992">#4992</a>)</li>
+  <li>Fixed “ref type can’t be converted to var parameter in VM”
+(<a href="https://github.com/nim-lang/Nim/issues/5327">#5327</a>)</li>
+  <li>Fixed “nimweb ignores the value of –parallelBuild”
+(<a href="https://github.com/nim-lang/Nim/issues/5328">#5328</a>)</li>
+  <li>Fixed “Cannot unregister/close AsyncEvent from within its handler”
+(<a href="https://github.com/nim-lang/Nim/issues/5331">#5331</a>)</li>
+  <li>Fixed “name collision with template instanciated generic inline function with inlined iterator specialization used from different modules”
+(<a href="https://github.com/nim-lang/Nim/issues/5285">#5285</a>)</li>
+  <li>Fixed “object in VM does not have value semantic”
+(<a href="https://github.com/nim-lang/Nim/issues/5269">#5269</a>)</li>
+  <li>Fixed “Unstable tuple destructuring behavior in Nim VM”
+(<a href="https://github.com/nim-lang/Nim/issues/5221">#5221</a>)</li>
+  <li>Fixed “nre module breaks os templates”
+(<a href="https://github.com/nim-lang/Nim/issues/4996">#4996</a>)</li>
+  <li>Fixed “Cannot implement distinct seq with setLen”
+(<a href="https://github.com/nim-lang/Nim/issues/5090">#5090</a>)</li>
+  <li>
+    <p>Fixed “await inside array/dict literal produces invalid code”
+(<a href="https://github.com/nim-lang/Nim/issues/5314">#5314</a>)</p>
+  </li>
+  <li>Fixed “asyncdispatch.accept() can raise exception inside poll() instead of failing future on Windows”
+(<a href="https://github.com/nim-lang/Nim/issues/5279">#5279</a>)</li>
+  <li>Fixed “VM: A crash report should be more informative”
+(<a href="https://github.com/nim-lang/Nim/issues/5352">#5352</a>)</li>
+  <li>Fixed “IO routines are poor at handling errors”
+(<a href="https://github.com/nim-lang/Nim/issues/5349">#5349</a>)</li>
+  <li>Fixed “new import syntax doesn’t work?”
+(<a href="https://github.com/nim-lang/Nim/issues/5185">#5185</a>)</li>
+  <li>Fixed “Seq of object literals skips unmentioned fields”
+(<a href="https://github.com/nim-lang/Nim/issues/5339">#5339</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">sym is not accessible</code> in compile time”
+(<a href="https://github.com/nim-lang/Nim/issues/5354">#5354</a>)</li>
+  <li>Fixed “the matching is broken in re.nim”
+(<a href="https://github.com/nim-lang/Nim/issues/5382">#5382</a>)</li>
+  <li>Fixed “development branch breaks in my c wrapper”
+(<a href="https://github.com/nim-lang/Nim/issues/5392">#5392</a>)</li>
+  <li>Fixed “Bad codegen: toSeq + tuples + generics”
+(<a href="https://github.com/nim-lang/Nim/issues/5383">#5383</a>)</li>
+  <li>Fixed “Bad codegen: toSeq + tuples + generics”
+(<a href="https://github.com/nim-lang/Nim/issues/5383">#5383</a>)</li>
+  <li>Fixed “Codegen error when using container of containers”
+(<a href="https://github.com/nim-lang/Nim/issues/5402">#5402</a>)</li>
+  <li>Fixed “sizeof(RangeType) is not available in static context”
+(<a href="https://github.com/nim-lang/Nim/issues/5399">#5399</a>)</li>
+  <li>Fixed “Regression: ICE: expr: var not init ex_263713”
+(<a href="https://github.com/nim-lang/Nim/issues/5405">#5405</a>)</li>
+  <li>Fixed “Stack trace is wrong when assignment operator fails with template”
+(<a href="https://github.com/nim-lang/Nim/issues/5400">#5400</a>)</li>
+  <li>Fixed “SIGSEGV in compiler”
+(<a href="https://github.com/nim-lang/Nim/issues/5391">#5391</a>)</li>
+  <li>Fixed “Compiler regression with struct member names”
+(<a href="https://github.com/nim-lang/Nim/issues/5404">#5404</a>)</li>
+  <li>Fixed “Regression: compiler segfault”
+(<a href="https://github.com/nim-lang/Nim/issues/5419">#5419</a>)</li>
+  <li>Fixed “The compilation of jester routes is broken on devel”
+(<a href="https://github.com/nim-lang/Nim/issues/5417">#5417</a>)</li>
+  <li>Fixed “Non-generic return type produces “method is not a base””
+(<a href="https://github.com/nim-lang/Nim/issues/5432">#5432</a>)</li>
+  <li>Fixed “Confusing error behavior when calling slice[T].random”
+(<a href="https://github.com/nim-lang/Nim/issues/5430">#5430</a>)</li>
+  <li>Fixed “Wrong method called”
+(<a href="https://github.com/nim-lang/Nim/issues/5439">#5439</a>)</li>
+  <li>Fixed “Attempt to document the strscans.scansp macro”
+(<a href="https://github.com/nim-lang/Nim/issues/5154">#5154</a>)</li>
+  <li>Fixed “[Regression] Invalid C code for _ symbol inside jester routes”
+(<a href="https://github.com/nim-lang/Nim/issues/5452">#5452</a>)</li>
+  <li>Fixed “StdLib base64 encodeInternal crashes with out of bound exception”
+(<a href="https://github.com/nim-lang/Nim/issues/5457">#5457</a>)</li>
+  <li>
+    <p>Fixed “Nim hangs forever in infinite loop in nre library”
+(<a href="https://github.com/nim-lang/Nim/issues/5444">#5444</a>)</p>
+  </li>
+  <li>Fixed “Tester passes test although individual test in suite fails”
+(<a href="https://github.com/nim-lang/Nim/issues/5472">#5472</a>)</li>
+  <li>Fixed “terminal.nim documentation”
+(<a href="https://github.com/nim-lang/Nim/issues/5483">#5483</a>)</li>
+  <li>Fixed “Codegen error - expected identifier before ‘)’ token (probably regression)”
+(<a href="https://github.com/nim-lang/Nim/issues/5481">#5481</a>)</li>
+  <li>Fixed “mixin not works inside generic proc generated by template”
+(<a href="https://github.com/nim-lang/Nim/issues/5478">#5478</a>)</li>
+  <li>Fixed “var not init (converter + template + macro)”
+(<a href="https://github.com/nim-lang/Nim/issues/5467">#5467</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">==</code> for OrderedTable should consider equal content but different size as equal.”
+(<a href="https://github.com/nim-lang/Nim/issues/5487">#5487</a>)</li>
+  <li>Fixed “Fixed tests/tester.nim”
+(<a href="https://github.com/nim-lang/Nim/issues/45">#45</a>)</li>
+  <li>Fixed “template instanciation crashes compiler”
+(<a href="https://github.com/nim-lang/Nim/issues/5428">#5428</a>)</li>
+  <li>Fixed “Internal compiler error in handleGenericInvocation”
+(<a href="https://github.com/nim-lang/Nim/issues/5167">#5167</a>)</li>
+  <li>Fixed “compiler crash in forwarding template”
+(<a href="https://github.com/nim-lang/Nim/issues/5455">#5455</a>)</li>
+  <li>Fixed “Doc query re public/private + suggestion re deprecated”
+(<a href="https://github.com/nim-lang/Nim/issues/5529">#5529</a>)</li>
+  <li>Fixed “inheritance not work for generic object whose parent is parameterized”
+(<a href="https://github.com/nim-lang/Nim/issues/5264">#5264</a>)</li>
+  <li>Fixed “weird inheritance rule restriction”
+(<a href="https://github.com/nim-lang/Nim/issues/5231">#5231</a>)</li>
+  <li>Fixed “Enum with holes broken in JS”
+(<a href="https://github.com/nim-lang/Nim/issues/5062">#5062</a>)</li>
+  <li>Fixed “enum type and aliased enum type inequality when tested with operator <code class="language-plaintext highlighter-rouge">is</code> involving template”
+(<a href="https://github.com/nim-lang/Nim/issues/5360">#5360</a>)</li>
+  <li>Fixed “logging: problem with console logger caused by the latest changes in sysio”
+(<a href="https://github.com/nim-lang/Nim/issues/5546">#5546</a>)</li>
+  <li>Fixed “Crash if proc and caller doesn’t define seq type - HEAD”
+(<a href="https://github.com/nim-lang/Nim/issues/4756">#4756</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">path</code> config option doesn’t work when compilation is invoked from a different directory”
+(<a href="https://github.com/nim-lang/Nim/issues/5228">#5228</a>)</li>
+  <li>Fixed “segfaults module doesn’t compile with C++ backend”
+(<a href="https://github.com/nim-lang/Nim/issues/5550">#5550</a>)</li>
+  <li>Fixed “Improve <code class="language-plaintext highlighter-rouge">joinThreads</code> for windows”
+(<a href="https://github.com/nim-lang/Nim/issues/4972">#4972</a>)</li>
+  <li>Fixed “Compiling in release mode prevents valid code execution.”
+(<a href="https://github.com/nim-lang/Nim/issues/5296">#5296</a>)</li>
+  <li>Fixed “Forward declaration of generic procs or iterators doesn’t work”
+(<a href="https://github.com/nim-lang/Nim/issues/4104">#4104</a>)</li>
+  <li>Fixed “cant create thread after join”
+(<a href="https://github.com/nim-lang/Nim/issues/4719">#4719</a>)</li>
+  <li>Fixed “can’t compile with var name “near” and –threads:on”
+(<a href="https://github.com/nim-lang/Nim/issues/5598">#5598</a>)</li>
+  <li>Fixed “inconsistent behavior when calling parent’s proc of generic object”
+(<a href="https://github.com/nim-lang/Nim/issues/5241">#5241</a>)</li>
+  <li>Fixed “The problem with import order of asyncdispatch and unittest modules”
+(<a href="https://github.com/nim-lang/Nim/issues/5597">#5597</a>)</li>
+  <li>Fixed “Generic code fails to compile in unexpected ways”
+(<a href="https://github.com/nim-lang/Nim/issues/976">#976</a>)</li>
+  <li>Fixed “Another ‘User defined type class’ issue”
+(<a href="https://github.com/nim-lang/Nim/issues/1128">#1128</a>)</li>
+  <li>Fixed “compiler fails to compile user defined typeclass”
+(<a href="https://github.com/nim-lang/Nim/issues/1147">#1147</a>)</li>
+  <li>Fixed “Type class membership testing doesn’t work on instances of generic object types”
+(<a href="https://github.com/nim-lang/Nim/issues/1570">#1570</a>)</li>
+  <li>Fixed “Strange overload resolution behavior for procedures with typeclass arguments”
+(<a href="https://github.com/nim-lang/Nim/issues/1991">#1991</a>)</li>
+  <li>Fixed “The same UDTC can’t constrain two type parameters in the same procedure”
+(<a href="https://github.com/nim-lang/Nim/issues/2018">#2018</a>)</li>
+  <li>Fixed “More trait/concept issues”
+(<a href="https://github.com/nim-lang/Nim/issues/2423">#2423</a>)</li>
+  <li>
+    <p>Fixed “Bugs with concepts?”
+(<a href="https://github.com/nim-lang/Nim/issues/2882">#2882</a>)</p>
+  </li>
+  <li>Fixed “Improve error messages for concepts”
+  (<a href="https://github.com/nim-lang/Nim/issues/3330">#3330</a>)</li>
+  <li>Fixed “Dynamic dispatch is not working correctly”
+  (<a href="https://github.com/nim-lang/Nim/issues/5599">#5599</a>)</li>
+  <li>Fixed “asynchttpserver may consume unbounded memory reading headers”
+  (<a href="https://github.com/nim-lang/Nim/issues/3847">#3847</a>)</li>
+  <li>Fixed “nim check crash due to missing var keyword”
+  (<a href="https://github.com/nim-lang/Nim/issues/5618">#5618</a>)</li>
+  <li>Fixed “Unexpected template resolution”
+  (<a href="https://github.com/nim-lang/Nim/issues/5625">#5625</a>)</li>
+  <li>Fixed “Installer fails to download mingw.zip”
+  (<a href="https://github.com/nim-lang/Nim/issues/5422">#5422</a>)</li>
+  <li>Fixed “Exception name and parent get lost after reraising”
+  (<a href="https://github.com/nim-lang/Nim/issues/5628">#5628</a>)</li>
+  <li>Fixed “generic ref object typeRel problem”
+  (<a href="https://github.com/nim-lang/Nim/issues/5621">#5621</a>)</li>
+  <li>Fixed “typedesc typeRel regression”
+  (<a href="https://github.com/nim-lang/Nim/issues/5632">#5632</a>)</li>
+  <li>Fixed “http client respects only one “Set-Cookie” header”
+  (<a href="https://github.com/nim-lang/Nim/issues/5611">#5611</a>)</li>
+  <li>Fixed “Internal assert when using <code class="language-plaintext highlighter-rouge">compiles</code>”
+  (<a href="https://github.com/nim-lang/Nim/issues/5638">#5638</a>)</li>
+  <li>Fixed “Compiler crash for variant type.”
+  (<a href="https://github.com/nim-lang/Nim/issues/4556">#4556</a>)</li>
+  <li>
+    <p>Fixed “MultipartData in httpclient.Post appears to break header”
+  (<a href="https://github.com/nim-lang/Nim/issues/5710">#5710</a>)</p>
+  </li>
+  <li>Fixed “setCookie incorrect timestamp format”
+  (<a href="https://github.com/nim-lang/Nim/issues/5718">#5718</a>)</li>
+  <li>Fixed “[Regression] strdefine consts cannot be passed to a procvar”
+  (<a href="https://github.com/nim-lang/Nim/issues/5729">#5729</a>)</li>
+  <li>Fixed “Nim’s –nimblepaths picks 1.0 over #head”
+  (<a href="https://github.com/nim-lang/Nim/issues/5752">#5752</a>)</li>
+  <li>Fixed “Async writes are not queued up on Windows”
+  (<a href="https://github.com/nim-lang/Nim/issues/5532">#5532</a>)</li>
+  <li>Fixed “float32 literals are translated to double literals in C”
+(<a href="https://github.com/nim-lang/Nim/issues/5821">#5821</a>)</li>
+  <li>Fixed “LibreSSL isn’t recognized as legit SSL library”
+(<a href="https://github.com/nim-lang/Nim/issues/4893">#4893</a>)</li>
+  <li>Fixed “exception when using json “to” proc”
+(<a href="https://github.com/nim-lang/Nim/issues/5761">#5761</a>)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

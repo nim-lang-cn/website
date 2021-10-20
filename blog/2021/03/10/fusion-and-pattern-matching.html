@@ -1,0 +1,1022 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Pattern matching in Nim - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Pattern matching in Nim"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Nim fusion and pattern matching"> -->
+  <meta property="og:description" content="Nim fusion and pattern matching">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Pattern matching in Nim" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Pattern matching in Nim
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              10 March 2021
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              haxscramper
+            </span>
+            
+          </h3>
+          <div class="sidebarblock">
+  <div class="content">
+    <div class="title">Guest post</div>
+    <div class="paragraph">
+      This is a guest post by haxscramper.
+      If you would like to publish articles as a guest author on nim-lang.org then get in touch with us via
+      <a href="https://twitter.com/nim_lang">Twitter</a> or <a href="https://nim-lang.org/community.html">otherwise</a>.
+    </div>
+  </div>
+</div>
+
+<h1 id="nim-fusion">Nim fusion</h1>
+
+<p><a href="https://github.com/nim-lang/fusion">Fusion</a> contains Nim modules that are meant to
+be treated as an extension to the stdlib.
+Currently, the following modules are present:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">fusion/smartptrs</code> - C++-like unique/shared pointers</li>
+  <li><code class="language-plaintext highlighter-rouge">fusion/btreetables</code> - sorted associative containers</li>
+  <li><code class="language-plaintext highlighter-rouge">fusion/matching</code> - pattern matching implementation using Nim macros - the main focus of this article</li>
+  <li><code class="language-plaintext highlighter-rouge">fusion/htmlparser</code> - HTML parser</li>
+  <li><code class="language-plaintext highlighter-rouge">fusion/astdsl</code> - karax-style DSL for constructing an AST</li>
+  <li><code class="language-plaintext highlighter-rouge">fusion/filepermissions</code> - convenience functions for working with file permissions.</li>
+</ul>
+
+<p>The documentation index can be found <a href="https://nim-lang.github.io/fusion/theindex.html">here</a>.</p>
+
+<p>To install <code class="language-plaintext highlighter-rouge">fusion</code> simply run <code class="language-plaintext highlighter-rouge">nimble install fusion</code>.
+To try it out without installing, use the <a href="https://play.nim-lang.org/#ix=2Qzc">Nim playground</a>.</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">fusion</span><span class="o">/</span><span class="n">matching</span>
+
+<span class="p">{.</span><span class="n">experimental</span><span class="p">:</span> <span class="s">"caseStmtMacros"</span><span class="p">.}</span>
+
+<span class="k">case</span> <span class="o">[</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">]</span><span class="p">:</span>
+  <span class="k">of</span> <span class="o">[</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">@</span><span class="n">a</span><span class="p">),</span> <span class="err">_]:</span>
+    <span class="n">echo</span> <span class="n">a</span>
+
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">echo</span> <span class="s">"Match failed"</span>
+</code></pre></div></div>
+
+<h1 id="pattern-matching-introduction">Pattern matching introduction</h1>
+
+<p>The new pattern matching library introduces support for two very useful concepts:
+<strong>pattern matching</strong> and <strong>object destructuring</strong>.</p>
+
+<p>Pattern matching is a mechanism that allows you to check a particular object against
+a pattern — you could think of it mainly as a way to reduce boilerplate code when
+comparing objects for equality, checking if a value is within range, checking if a
+particular key is present in a table and so on.</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="o">/</span><span class="n">json</span><span class="p">,</span> <span class="n">fusion</span><span class="o">/</span><span class="n">matching</span>
+
+<span class="p">{.</span><span class="n">experimental</span><span class="p">:</span> <span class="s">"caseStmtMacros"</span><span class="p">.}</span>
+
+<span class="c"># JSON is very simple data format, but illustrates a lot of useful features</span>
+<span class="c"># of pattern matching</span>
+<span class="k">case</span> <span class="n">parseJson</span><span class="p">(</span><span class="s">"""{ "key" : "value" }"""</span><span class="p">):</span>
+  <span class="c"># No longer necessary to check if key is present - it is done</span>
+  <span class="c"># automatically</span>
+  <span class="k">of</span> <span class="p">{</span> <span class="s">"key"</span> <span class="p">:</span> <span class="n">JInt</span><span class="p">()</span> <span class="p">}:</span>
+    <span class="k">discard</span>
+
+  <span class="c"># Extracting values from nested data structures also becomes much easier.</span>
+  <span class="k">of</span> <span class="p">{</span> <span class="s">"key"</span> <span class="p">:</span> <span class="p">(</span><span class="n">getStr</span><span class="p">:</span> <span class="o">@</span><span class="n">val</span><span class="p">)</span> <span class="p">}:</span>
+    <span class="n">echo</span> <span class="n">val</span>
+    <span class="n">assert</span> <span class="n">val</span> <span class="ow">is</span> <span class="kt">string</span>
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>value
+</code></pre></div></div>
+
+<p>Object destructuring allows you to extract values from particular
+fields in an object.
+It is very common in dynamic programming languages such as Python.
+The simplest form of destructuring is already supported by Nim — tuple unpacking:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="p">(</span><span class="n">val1</span><span class="p">,</span> <span class="n">val2</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="s">"some"</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And with pattern matching you can now unpack sequences, tables and custom objects:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="p">(</span><span class="o">@</span><span class="n">first</span><span class="p">,</span> <span class="o">@</span><span class="n">second</span><span class="p">),</span> <span class="n">all</span> <span class="o">@</span><span class="n">trail</span><span class="o">]</span> <span class="p">:</span><span class="o">=</span> <span class="o">[</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span><span class="o">]</span>
+<span class="n">echo</span> <span class="n">first</span><span class="p">,</span> <span class="s">", "</span><span class="p">,</span> <span class="n">second</span><span class="p">,</span> <span class="s">", "</span><span class="p">,</span> <span class="n">trail</span>
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>12, 3, @[(33, 4), (12, 33)]
+</code></pre></div></div>
+
+<h1 id="using-pattern-matching-in-regular-code">Using pattern matching in regular code</h1>
+
+<p>The main purpose of pattern matching is a simplification of conditions and
+consecutive checks.
+It is especially useful when paired with
+<a href="https://nim-lang.org/docs/tut2.html#object-oriented-programming-object-variants">object variants</a>,
+but can also be used to do a lot of other things, such as
+<a href="https://nim-lang.github.io/fusion/src/fusion/matching.html#matching-different-things-kvminuspairs-matching">key-value pairs matching</a>
+and extensive support for
+<a href="https://nim-lang.github.io/fusion/src/fusion/matching.html#matching-different-things-sequence-matching">sequence matching</a>.
+A special syntactic sugar is provided for very common use cases, such as <code class="language-plaintext highlighter-rouge">Option[T]</code>
+checking (similar to <code class="language-plaintext highlighter-rouge">if let</code> in Rust):</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="o">/</span><span class="n">options</span>
+
+<span class="k">if</span> <span class="n">Some</span><span class="p">(</span><span class="o">@</span><span class="n">val</span><span class="p">)</span> <span class="o">?=</span> <span class="n">some</span><span class="p">(</span><span class="s">"hello"</span><span class="p">):</span>
+  <span class="n">echo</span> <span class="n">val</span><span class="p">,</span> <span class="s">". Is string? "</span><span class="p">,</span> <span class="n">val</span> <span class="ow">is</span> <span class="kt">string</span>
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello. Is string? true
+</code></pre></div></div>
+
+<p>And matching tree structures of case objects (such as an AST).
+For <code class="language-plaintext highlighter-rouge">enum</code>, conforming to the <a href="https://nim-lang.org/docs/nep1.html#introduction-naming-conventions">NEP1 style guide</a>
+naming conventions, you can omit the prefix entirely, leading to code that looks
+roughly like this:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="o">&lt;</span><span class="n">some</span> <span class="n">AST</span> <span class="n">node</span><span class="o">&gt;</span><span class="p">:</span>
+  <span class="c"># Node kind is `nnkIdent`, but it is possible to omit `nnk`</span>
+  <span class="k">of</span> <span class="n">Ident</span><span class="p">(</span><span class="n">strVal</span><span class="p">:</span> <span class="o">@</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">echo</span> <span class="s">"Found ident: "</span><span class="p">,</span> <span class="n">name</span>
+
+  <span class="c"># Extracting subnodes from infix expression.</span>
+  <span class="k">of</span> <span class="n">InfixExpr</span><span class="o">[</span><span class="n">Ident</span><span class="p">(</span><span class="n">strVal</span><span class="p">:</span> <span class="s">"+"</span><span class="p">),</span> <span class="o">@</span><span class="n">lhs</span><span class="p">,</span> <span class="o">@</span><span class="n">rhs</span><span class="o">]</span><span class="p">:</span>
+    <span class="p">...</span>
+
+  <span class="c"># Matching if statements with *exactly* two branches.</span>
+  <span class="c"># No need to worry about indexing exceptions - `len` is checked accordingly</span>
+  <span class="c"># during pattern matching.</span>
+  <span class="k">of</span> <span class="n">IfStmt</span><span class="o">[</span><span class="n">ElifBranch</span><span class="o">[@</span><span class="n">cond1</span><span class="p">,</span> <span class="err">_], ElifBranch[@cond2, _]]:</span>
+    <span class="p">...</span>
+</code></pre></div></div>
+
+<h1 id="using-pattern-matching-for-writing-macros">Using pattern matching for writing macros</h1>
+
+<p>Nim macros are one of the most powerful parts of the language, but they might
+seem a little intimidating for newcomers, especially when it comes to implementing
+a macro for solving a particular problem at hand.</p>
+
+<p>This article gives an example on how one can easily create a relatively complex macro
+using the new pattern matching library.</p>
+
+<p>We will be creating a macro for dataflow programming, with support for some operations
+from the <code class="language-plaintext highlighter-rouge">std/sequtils</code> module (map/filter/each).
+The macro won’t be covering all possible combinations and use cases as it would make
+the implementation significantly more complicated.</p>
+
+<h2 id="first-step---design-the-dsl">First step - design the DSL</h2>
+
+<p>When writing a macro, it is very useful to just write DSL code (as if you already
+had the macro) and what you expect it to generate.
+Decide <em>what you want to do</em> and <em>how it should look like</em>.
+In our case, the input could look roughly like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flow lines("/etc/passwd"):
+  map[_, seq[string]]:
+    it.split(":")
+  keepIf:
+    it.len &gt; 1 and
+    it.matches [_.startsWith("systemd"), .._]
+  each:
+    echo it
+</code></pre></div></div>
+
+<p>And it should generate a loop that looks like this:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">res</span> <span class="o">=</span> <span class="kt">seq</span><span class="o">[</span><span class="n">ResType</span><span class="o">]</span>
+<span class="k">for</span> <span class="n">it0</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">(</span><span class="s">"/etc/passwd"</span><span class="p">):</span>
+  <span class="k">let</span> <span class="n">it1</span> <span class="o">=</span> <span class="n">it0</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">":"</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">it1</span><span class="p">.</span><span class="n">len</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">it1</span><span class="p">.</span><span class="n">matches</span> <span class="o">[</span><span class="err">_.startsWith("systemd"), .._]:</span>
+    <span class="n">echo</span> <span class="n">it1</span>
+</code></pre></div></div>
+
+<h2 id="analyze-the-dsl-parse-tree">Analyze the DSL parse tree</h2>
+
+<p>Now the question is - how to transform the first into the second?
+We will start by first looking at the output for <code class="language-plaintext highlighter-rouge">dumpTree</code> on the <code class="language-plaintext highlighter-rouge">flow</code> macro:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dumpTree:
+  flow lines("/etc/passwd"):
+    map[_, seq[string]]:
+      it.split(":")
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="mi">1</span>  <span class="n">StmtList</span>
+ <span class="mi">2</span>    <span class="n">Command</span>
+ <span class="mi">3</span>      <span class="n">Ident</span> <span class="s">"flow"</span>
+ <span class="mi">4</span>      <span class="n">Call</span>
+ <span class="mi">5</span>        <span class="n">Ident</span> <span class="s">"lines"</span>
+ <span class="mi">6</span>        <span class="n">StrLit</span> <span class="s">"/etc/passwd"</span>
+ <span class="mi">7</span>      <span class="n">StmtList</span>
+ <span class="mi">8</span>        <span class="n">Call</span>
+ <span class="mi">9</span>          <span class="n">BracketExpr</span>
+<span class="mi">10</span>            <span class="n">Ident</span> <span class="s">"map"</span>
+<span class="mi">11</span>            <span class="n">Ident</span> <span class="s">"_"</span>
+<span class="mi">12</span>            <span class="n">BracketExpr</span>
+<span class="mi">13</span>              <span class="n">Ident</span> <span class="s">"seq"</span>
+<span class="mi">14</span>              <span class="n">Ident</span> <span class="s">"string"</span>
+<span class="mi">15</span>          <span class="n">StmtList</span>
+<span class="mi">16</span>            <span class="n">Call</span>
+<span class="mi">17</span>              <span class="n">DotExpr</span>
+<span class="mi">18</span>                <span class="n">Ident</span> <span class="s">"it"</span>
+<span class="mi">19</span>                <span class="n">Ident</span> <span class="s">"split"</span>
+<span class="mi">20</span>              <span class="n">StrLit</span> <span class="s">":"</span>
+</code></pre></div></div>
+
+<p>This load of text might seem a little confusing at first, but in the end it can be
+taken apart quite easily (and that is exactly what we will be doing).
+First, on line 3, we see the <code class="language-plaintext highlighter-rouge">flow</code> identifier (<code class="language-plaintext highlighter-rouge">Ident "flow"</code>) - this is the start of our macro.
+Then, on the next line is a <code class="language-plaintext highlighter-rouge">lines("/etc/passwd")</code> argument. <code class="language-plaintext highlighter-rouge">StmtList</code> on lines
+<code class="language-plaintext highlighter-rouge">7-20</code> is the actual body of the <code class="language-plaintext highlighter-rouge">flow</code> macro - the <code class="language-plaintext highlighter-rouge">map</code> section etc.
+We will get into their internal structure a little later.</p>
+
+<h2 id="intermediate-representation">Intermediate representation</h2>
+
+<p>After we a have rough outline of the input AST, it is time to decide on how this
+particular macro can be implemented.</p>
+
+<p>I usually try to introduce some kind of intermediate representation for the DSL in
+order to make things more organized and decouple the parsing stage from code generation.
+This might make the implementation a little longer, but more extensible and robust.
+You can, without a doubt, just go directly to code generation, but for a more complex
+DSL I would still recommend using some kind of IR.</p>
+
+<p>In this particular case, the DSL structure for the <code class="language-plaintext highlighter-rouge">flow</code> macro can be described as:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span>
+  <span class="n">FlowStageKind</span> <span class="o">=</span> <span class="k">enum</span>
+    <span class="n">fskMap</span> <span class="c"># Stage for element conversion</span>
+    <span class="n">fskFilter</span> <span class="c"># Filter elements</span>
+    <span class="n">fskEach</span> <span class="c"># Execute action without returning value</span>
+
+  <span class="n">FlowStage</span> <span class="o">=</span> <span class="k">object</span>
+    <span class="n">outputType</span><span class="p">:</span> <span class="n">Option</span><span class="o">[</span><span class="n">NimNode</span><span class="o">]</span> <span class="c"># Assert result type</span>
+    <span class="n">kind</span><span class="p">:</span> <span class="n">FlowStageKind</span> <span class="c"># Type of the stage</span>
+    <span class="n">body</span><span class="p">:</span> <span class="n">NimNode</span> <span class="c"># Stage body</span>
+</code></pre></div></div>
+
+<p>It directly maps on the input DSL.
+<code class="language-plaintext highlighter-rouge">map</code> should create a <code class="language-plaintext highlighter-rouge">fskMap</code> stage, <code class="language-plaintext highlighter-rouge">filter</code> creates <code class="language-plaintext highlighter-rouge">fskFilter</code> and so on.
+Optionally you can specify the output type like this: <code class="language-plaintext highlighter-rouge">map [ExpectedOutput]</code>.
+The macro will work in two stages: first it will convert the input representation into
+an intermediate representation, and then it will generate the resulting AST.</p>
+
+<h2 id="pattern-matching">Pattern matching</h2>
+
+<p>Now, after we have good understanding of what exactly we want to do - the question is ‘how?’.
+That’s where <a href="https://nim-lang.github.io/fusion/src/fusion/matching.html"><code class="language-plaintext highlighter-rouge">fusion/matching</code></a>
+comes particularly handy - we already identified all patterns, and now it is only a matter
+of writing this down in code.</p>
+
+<p>Without pattern matching, you’d be left with a long series of repeating <code class="language-plaintext highlighter-rouge">[0][0][0]</code>
+and <code class="language-plaintext highlighter-rouge">if kind == nnkBracketExpr</code> in order to retrieve parts from the DSL and validate input.</p>
+
+<p>Before we proceed to writing patterns for the whole DSL, it is important to consider
+the three possible cases of writing a stage.
+The first once is very simple - no type specified, only a stage identifier:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dumpTree</span><span class="p">:</span>
+  <span class="n">map</span><span class="p">:</span>
+    <span class="n">body</span>
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>StmtList
+  Call
+    Ident "map"
+    StmtList
+      Ident "body"
+</code></pre></div></div>
+
+<p>But a single stage with a type parameter can be written using two different ways - both
+are <strong>syntactically correct</strong>, but have different parse trees:</p>
+
+<p>With space between <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">[a]</code>:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dumpTree</span><span class="p">:</span>
+  <span class="n">map</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span><span class="p">:</span>
+    <span class="n">body</span>
+</code></pre></div></div>
+
+<p>Output:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>StmtList
+  Command
+    Ident "map"
+    Bracket
+      Ident "a"
+    StmtList
+      Ident "body"
+</code></pre></div></div>
+
+<p>Without space between <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">[a]</code>:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dumpTree</span><span class="p">:</span>
+  <span class="n">map</span><span class="o">[</span><span class="n">a</span><span class="o">]</span><span class="p">:</span>
+    <span class="n">body</span>
+</code></pre></div></div>
+
+<p>Output:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>StmtList
+  Call
+    BracketExpr
+      Ident "map"
+      Ident "a"
+    StmtList
+</code></pre></div></div>
+
+<p>The difference is due to the
+<a href="https://nim-lang.org/docs/manual.html#procedures-method-call-syntax">method call syntax</a> -
+<code class="language-plaintext highlighter-rouge">map[a]</code> is treated as a bracket expression (like array subscript), but <code class="language-plaintext highlighter-rouge">map [a]</code>
+is parsed as a procedure <code class="language-plaintext highlighter-rouge">map</code> call, with argument <code class="language-plaintext highlighter-rouge">[a]</code> (passing an array to a
+function).</p>
+
+<h2 id="fusionmatching"><code class="language-plaintext highlighter-rouge">fusion/matching</code></h2>
+
+<p>Let’s make a small digression in order to better understand how the new pattern
+matching library can help us here.</p>
+
+<p>We will be focusing on the parts that are relevant to our task - for more details you
+can read the <a href="https://nim-lang.github.io/fusion/src/fusion/matching.html">documentation</a>.</p>
+
+<p>When writing Nim macros you are mostly dealing with
+<a href="https://nim-lang.org/docs/macros.html#the-ast-in-nim">NimNode</a> objects - first to
+process input AST, and then to generate new code.
+The AST is comprised of <a href="https://nim-lang.org/docs/manual.html#types-object-variants">case objects</a>.
+Usually, the first part of the macro involves lots of checks for the correct node kind,
+followed by iteration over the subnodes to extract the input data.
+Pattern matching simplifies this, allowing to directly write expected patterns
+for the AST, with syntax closely matching that of <code class="language-plaintext highlighter-rouge">dumpTree</code>.</p>
+
+<p>For example - if we have code like <code class="language-plaintext highlighter-rouge">map[string]</code> it has the following tree representation:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dumpTree</span><span class="p">:</span>
+  <span class="n">map</span><span class="o">[</span><span class="kt">string</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>StmtList
+  BracketExpr
+    Ident "map"
+    Ident "string"
+</code></pre></div></div>
+
+<p>And can be matched using the following pattern:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">body</span><span class="p">.</span><span class="n">assertMatch</span><span class="p">:</span>
+  <span class="n">BracketExpr</span><span class="p">:</span>
+    <span class="o">@</span><span class="n">head</span>
+    <span class="o">@</span><span class="n">typeParam</span>
+</code></pre></div></div>
+
+<p>Notice the similarity between the AST and a pattern for matching - each node has <code class="language-plaintext highlighter-rouge">kind</code> field,
+which describes what kind of node this is.
+In this case we are interested in the first and second subnodes of the <code class="language-plaintext highlighter-rouge">BracketExpr</code>
+node - flow stage kind and type parameter respectively.</p>
+
+<p>As we have already seen earlier, <code class="language-plaintext highlighter-rouge">map [string]</code> and <code class="language-plaintext highlighter-rouge">map[string]</code> are parsed
+differently - the first one is handled as one-element array passed to <code class="language-plaintext highlighter-rouge">map</code> as function
+argument, and the second is a bracket expression.
+<a href="https://nim-lang.org/docs/manual.html#procedures-method-call-syntax">Method call syntax</a>
+usually makes programming a DSL a little harder - you need to check for both
+alternatives, remember which index each capture should be in, etc.</p>
+
+<p>With pattern matching though it becomes quite easy to do - adding a second
+alternative will be enough.</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">body</span><span class="p">.</span><span class="n">matches</span><span class="p">:</span>
+  <span class="c"># More compact way of writing `BracketExpr`</span>
+  <span class="n">BracketExpr</span><span class="o">[@</span><span class="n">head</span><span class="p">,</span> <span class="o">@</span><span class="n">typeParam</span><span class="o">]</span> <span class="o">|</span>
+  <span class="n">Command</span><span class="o">[@</span><span class="n">head</span><span class="p">,</span> <span class="n">Bracket</span><span class="o">[@</span><span class="n">typeParam</span><span class="o">]]</span>
+</code></pre></div></div>
+
+<p>It should also be possible to omit type parameters from the DSL entirely - they are
+quite nice and would allow for better type checking, but could become quite annoying to write.
+So, we should also expect someone to just write <code class="language-plaintext highlighter-rouge">map</code> - without any type qualifications.
+To handle this case we add a third alternative for pattern:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">body</span><span class="p">.</span><span class="n">matches</span><span class="p">:</span>
+  <span class="n">BracketExpr</span><span class="o">[@</span><span class="n">head</span><span class="p">,</span> <span class="o">@</span><span class="n">typeParam</span><span class="o">]</span> <span class="o">|</span>
+  <span class="n">Command</span><span class="o">[@</span><span class="n">head</span><span class="p">,</span> <span class="n">Bracket</span><span class="o">[@</span><span class="n">typeParam</span><span class="o">]]</span> <span class="o">|</span>
+  <span class="p">(</span><span class="o">@</span><span class="n">head</span> <span class="ow">is</span> <span class="n">Ident</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>This brings one important change: The <code class="language-plaintext highlighter-rouge">typeParam</code> capture is no longer <code class="language-plaintext highlighter-rouge">NimNode</code> - the type
+has changed to <code class="language-plaintext highlighter-rouge">Option[NimNode]</code>, because not all alternatives have this variable.
+<code class="language-plaintext highlighter-rouge">head</code> is still a <code class="language-plaintext highlighter-rouge">NimNode</code> just as before - all possible alternatives contain
+this variable, so it would be set if the input matches.</p>
+
+<hr />
+
+<p>This example shows really well how pattern matching can help to handle different
+alternative syntaxes.
+Another very powerful feature is sequence matching - sadly in this particular
+example we had no need for it, but I decided to still showcase it.
+Consider a <a href="https://nim-lang.org/docs/macros.html#statements-procedure-declaration">procedure declaration</a>
+AST - suppose we need to match name, arguments, and return type.
+Usually, part of a case statement would look similar to this:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">of</span> <span class="n">nnkProcDef</span><span class="p">:</span>
+  <span class="k">let</span> <span class="n">name</span> <span class="o">=</span> <span class="n">arg</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+  <span class="k">let</span> <span class="n">returnType</span> <span class="o">=</span> <span class="n">arg</span><span class="o">[</span><span class="mi">3</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span>
+  <span class="k">let</span> <span class="n">arguments</span> <span class="o">=</span> <span class="n">arg</span><span class="o">[</span><span class="mi">3</span><span class="o">][</span><span class="mi">1</span> <span class="p">..</span> <span class="p">^</span><span class="mi">1</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>This is not particularly complicated, but with pattern matching it all becomes:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ProcDef[@name, _, _, [@returnType, all @arguments], .._]
+</code></pre></div></div>
+
+<h2 id="flow-macro-implementation">Flow macro implementation</h2>
+
+<p>Our first stage would be processing the input into a <code class="language-plaintext highlighter-rouge">FlowStage</code>.
+We already have a way to extract the data from the input AST - using pattern matching.</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">macro</span> <span class="n">flow</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">untyped</span><span class="p">):</span> <span class="n">untyped</span> <span class="o">=</span>
+  <span class="k">var</span> <span class="n">stages</span><span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="n">FlowStage</span><span class="o">]</span>
+  <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">body</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">elem</span><span class="p">.</span><span class="n">matches</span><span class="p">(</span>
+        <span class="n">Call</span><span class="o">[</span><span class="n">BracketExpr</span><span class="o">[@</span><span class="n">ident</span><span class="p">,</span> <span class="n">opt</span> <span class="o">@</span><span class="n">outType</span><span class="o">]</span><span class="p">,</span> <span class="o">@</span><span class="n">body</span><span class="o">]</span> <span class="o">|</span>
+        <span class="c"># `map[string]:`</span>
+        <span class="n">Command</span><span class="o">[@</span><span class="n">ident</span> <span class="ow">is</span> <span class="n">Ident</span><span class="p">(),</span> <span class="n">Bracket</span> <span class="o">[@</span><span class="n">outType</span><span class="o">]</span><span class="p">,</span> <span class="o">@</span><span class="n">body</span><span class="o">]</span> <span class="o">|</span>
+        <span class="c"># `map [string]:`</span>
+        <span class="n">Call</span><span class="o">[@</span><span class="n">ident</span> <span class="ow">is</span> <span class="n">Ident</span><span class="p">(),</span> <span class="o">@</span><span class="n">body</span><span class="o">]</span>
+        <span class="c"># just `map:`, without type argument</span>
+      <span class="p">):</span>
+        <span class="n">stages</span><span class="p">.</span><span class="n">add</span> <span class="n">FlowStage</span><span class="p">(</span>
+          <span class="n">kind</span><span class="p">:</span> <span class="n">identToKind</span><span class="p">(</span><span class="n">ident</span><span class="p">),</span>
+          <span class="n">outputType</span><span class="p">:</span> <span class="n">outType</span><span class="p">,</span>
+          <span class="n">body</span><span class="p">:</span> <span class="n">body</span>
+        <span class="p">)</span>
+</code></pre></div></div>
+
+<p>After that, we have all necessary information for generating the result code.
+If the last stage is not <code class="language-plaintext highlighter-rouge">each</code>, i.e. there is a return value after each iteration,
+we need to determine the type of the result sequence and then append to it on
+each iteration.</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">stages</span><span class="o">[</span><span class="p">^</span><span class="mi">1</span><span class="o">]</span><span class="p">.</span><span class="n">kind</span> <span class="ow">notin</span> <span class="p">{</span><span class="n">fskEach</span><span class="p">}:</span>
+  <span class="c"># If last stage has return type (not `each`) then we need to</span>
+  <span class="c"># accumulate results in temporary variable.</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+    <span class="k">var</span> <span class="p">`</span><span class="n">resId</span><span class="p">`:</span> <span class="kt">seq</span><span class="o">[</span><span class="c">#[ Type of the expression ]#]</span>
+
+    <span class="k">for</span> <span class="n">it0</span> <span class="p">{.</span><span class="n">inject</span><span class="p">.}</span> <span class="ow">in</span> <span class="p">`</span><span class="n">arg</span><span class="p">`:</span>
+      <span class="p">`</span><span class="n">resId</span><span class="p">`.</span><span class="n">add</span> <span class="c">#[ Expression to evaluate]#</span>
+
+    <span class="p">`</span><span class="n">resId</span><span class="p">`</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="c"># Otherwise just iterate each element</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">it0</span> <span class="p">{.</span><span class="n">inject</span><span class="p">.}</span> <span class="ow">in</span> <span class="p">`</span><span class="n">arg</span><span class="p">`:</span>
+      <span class="c">#[ Expression to evaluate ]#</span>
+</code></pre></div></div>
+
+<h3 id="get-the-result-type">Get the result type</h3>
+
+<p>Each stage of the dataflow has a type, and potentially defines variables.
+In addition to that - each stage uses the special variable <code class="language-plaintext highlighter-rouge">it</code> - that has to be
+injected separately for each stage, <strong>but</strong> at the same time it is used for
+communicating values between stages.</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">flow</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">]</span><span class="p">:</span>
+  <span class="n">map</span><span class="p">:</span>
+    <span class="n">it</span> <span class="o">*</span> <span class="mi">2</span>
+  <span class="n">map</span><span class="p">:</span>
+    <span class="o">$</span><span class="n">it</span>
+</code></pre></div></div>
+
+<p>is equivalent to:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">res</span><span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="c">#[ Type of the expression ]#]</span>
+
+<span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span><span class="p">:</span>
+  <span class="k">let</span> <span class="n">it</span> <span class="o">=</span> <span class="n">it</span> <span class="o">*</span> <span class="mi">2</span>
+  <span class="k">let</span> <span class="n">it</span> <span class="o">=</span> <span class="o">$</span><span class="n">it</span>
+  <span class="n">res</span><span class="p">.</span><span class="n">add</span> <span class="n">it</span>
+
+<span class="n">res</span>
+</code></pre></div></div>
+
+<p>As you can clearly see, such code would not even compile due to the redefinition
+errors.
+There are two possible ways to solve this problem - kind of obvious, and not-all-that-obvious.
+Let’s start with the first one - since each variable can be redefined in the new
+scope we can just do:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span><span class="p">:</span>
+  <span class="k">block</span><span class="p">:</span>
+    <span class="k">let</span> <span class="n">it</span> <span class="o">=</span> <span class="n">it</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="k">block</span><span class="p">:</span>
+      <span class="k">let</span> <span class="n">it</span> <span class="o">=</span> <span class="o">$</span><span class="n">it</span>
+      <span class="n">echo</span> <span class="s">"Add result - "</span><span class="p">,</span> <span class="n">it</span>
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Add result - 2
+Add result - 4
+Add result - 6
+</code></pre></div></div>
+
+<p>And it would compile and work perfectly fine.
+But now we have a problem of getting the type of the expression itself - everything
+is fine as long as you only use <code class="language-plaintext highlighter-rouge">map</code> - after all <code class="language-plaintext highlighter-rouge">block:</code> is an expression,
+and we can have something like this:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">echo</span> <span class="n">typeof</span><span class="p">((</span><span class="k">block</span><span class="p">:</span>
+               <span class="k">let</span> <span class="n">it</span> <span class="o">=</span> <span class="mi">1</span>
+               <span class="k">block</span><span class="p">:</span>
+                 <span class="k">let</span> <span class="n">it</span> <span class="o">=</span> <span class="n">it</span> <span class="o">*</span> <span class="mi">2</span>
+                 <span class="k">block</span><span class="p">:</span> <span class="o">$</span><span class="n">it</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string
+</code></pre></div></div>
+
+<p>Not the prettiest code in the world, by all means - but it will become even worse
+when we have to deal with <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">each</code>, injected variables and iterators.</p>
+
+<p>The second alternative is to use declare a proc with an <code class="language-plaintext highlighter-rouge">auto</code> return type and
+assign the result of the expression to it.
+In that case, the compiler will figure out the return type for us.</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">proc </span><span class="nf">hello</span><span class="o">[</span><span class="n">T</span><span class="o">]</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="n">auto</span> <span class="o">=</span>
+  <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">"ee"</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="s">"som"</span><span class="p">,</span> <span class="s">"ee"</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="n">echo</span> <span class="n">typeof</span> <span class="n">hello</span><span class="o">[</span><span class="kt">int</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>proc (a: int): (int, string, string, int) {.noSideEffect, gcsafe, locks: 0.}
+</code></pre></div></div>
+
+<p>Now we only need to write code generation for <code class="language-plaintext highlighter-rouge">#[ Expression to evaluate ]#</code> and
+substitute <code class="language-plaintext highlighter-rouge">result =</code> when necessary.</p>
+
+<h3 id="create-the-evaluation-expression">Create the evaluation expression</h3>
+
+<ol>
+  <li>
+    <p>Body rewrite</p>
+
+    <p>Each stage in <code class="language-plaintext highlighter-rouge">flow</code> injects an <code class="language-plaintext highlighter-rouge">it</code> variable - the result of the evaluation from 
+the previous stage.
+To avoid getting redefinition errors from multiple <code class="language-plaintext highlighter-rouge">let it = &lt;expression&gt;</code> on
+each stage, we will replace each occurrence of <code class="language-plaintext highlighter-rouge">it</code> with <code class="language-plaintext highlighter-rouge">it&lt;stage-index&gt;</code>.
+For the first stage it would be <code class="language-plaintext highlighter-rouge">it -&gt; it1</code>, the second one is <code class="language-plaintext highlighter-rouge">it -&gt; it2</code> and so on.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">rewrite</code> takes an input <code class="language-plaintext highlighter-rouge">NimNode</code> and either returns it as-is (if no rewriting is necessary)
+or, in case of the identifier <code class="language-plaintext highlighter-rouge">it</code> (<code class="language-plaintext highlighter-rouge">Ident(strVal: "it")</code>), converts it into a new
+one with the corresponding index.</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">proc </span><span class="nf">rewrite</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">NimNode</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="kt">int</span><span class="p">):</span> <span class="n">NimNode</span> <span class="o">=</span>
+  <span class="k">case</span> <span class="n">node</span><span class="p">:</span>
+    <span class="k">of</span> <span class="n">Ident</span><span class="p">(</span><span class="n">strVal</span><span class="p">:</span> <span class="s">"it"</span><span class="p">):</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">ident</span><span class="p">(</span><span class="s">"it"</span> <span class="o">&amp;</span> <span class="o">$</span><span class="n">idx</span><span class="p">)</span>
+    <span class="k">of</span> <span class="p">(</span><span class="n">kind</span><span class="p">:</span> <span class="ow">in</span> <span class="n">nnkTokenKinds</span><span class="p">):</span> <span class="c"># `nnkTokenKinds` is a set of node</span>
+                                 <span class="c"># kinds that don't have subnodes.</span>
+                                 <span class="c"># These ones are returned without any</span>
+                                 <span class="c"># modifications.</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">node</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="c"># For node kinds with subnodes, rewriting must be done</span>
+      <span class="c"># recursively</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">newTree</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">kind</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">subn</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">.</span><span class="n">add</span> <span class="n">subn</span><span class="p">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create eval expression</p>
+
+    <p>For each stage, we rewrite the body and then append a new chunk of generated code
+to the result.</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">evalExprFromStages</span><span class="p">(</span><span class="n">stages</span><span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="n">FlowStage</span><span class="o">]</span><span class="p">):</span> <span class="n">NimNode</span> <span class="o">=</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">newStmtList</span><span class="p">()</span>
+  <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">stage</span> <span class="ow">in</span> <span class="n">stages</span><span class="p">:</span>
+    <span class="c"># Rewrite body</span>
+    <span class="k">let</span> <span class="n">body</span> <span class="o">=</span> <span class="n">stage</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+
+    <span class="k">case</span> <span class="n">stage</span><span class="p">.</span><span class="n">kind</span><span class="p">:</span>
+      <span class="c"># If stage is a filter it is converted into `if` expression</span>
+      <span class="c"># and new new variables are injected.</span>
+      <span class="k">of</span> <span class="n">fskFilter</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">.</span><span class="n">add</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+          <span class="k">let</span> <span class="n">stageOk</span> <span class="o">=</span> <span class="p">((`</span><span class="n">body</span><span class="p">`))</span>
+          <span class="k">if</span> <span class="ow">not</span> <span class="n">stageOk</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+      <span class="k">of</span> <span class="n">fskEach</span><span class="p">:</span>
+        <span class="c"># `each` has no variables or special formatting - just</span>
+        <span class="c"># rewrite body and paste it back to resulting code</span>
+        <span class="n">result</span><span class="p">.</span><span class="n">add</span> <span class="n">body</span>
+      <span class="k">of</span> <span class="n">fskMap</span><span class="p">:</span>
+        <span class="c"># Create new identifier for injected node and assign</span>
+        <span class="c"># result of `body` to it.</span>
+        <span class="k">let</span> <span class="n">itId</span> <span class="o">=</span> <span class="n">ident</span><span class="p">(</span><span class="s">"it"</span> <span class="o">&amp;</span> <span class="o">$</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">result</span><span class="p">.</span><span class="n">add</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+          <span class="k">let</span> <span class="p">`</span><span class="n">itId</span><span class="p">`</span> <span class="o">=</span> <span class="p">`</span><span class="n">body</span><span class="p">`</span>
+
+        <span class="c"># If output type for stage needs to be explicitly checked</span>
+        <span class="c"># create type assertion.</span>
+        <span class="k">if</span> <span class="n">Some</span><span class="p">(</span><span class="o">@</span><span class="n">expType</span><span class="p">)</span> <span class="o">?=</span> <span class="n">stage</span><span class="p">.</span><span class="n">outputType</span><span class="p">:</span>
+          <span class="n">result</span><span class="p">.</span><span class="n">add</span> <span class="n">makeTypeAssert</span><span class="p">(</span><span class="n">expType</span><span class="p">,</span> <span class="n">stage</span><span class="p">.</span><span class="n">body</span><span class="p">,</span> <span class="n">itId</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="result-type-implementation">Result type implementation</h3>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">typeExprFromStages</span><span class="p">(</span><span class="n">stages</span><span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="n">FlowStage</span><span class="o">]</span><span class="p">,</span> <span class="n">arg</span><span class="p">:</span> <span class="n">NimNode</span><span class="p">):</span> <span class="n">NimNode</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">evalExpr</span> <span class="o">=</span> <span class="n">evalExprFromStages</span><span class="p">(</span><span class="n">stages</span><span class="p">)</span>
+  <span class="k">var</span>
+    <span class="n">resTuple</span> <span class="o">=</span> <span class="n">nnkPar</span><span class="p">.</span><span class="n">newTree</span><span class="p">(</span><span class="n">ident</span> <span class="s">"it0"</span><span class="p">)</span>
+
+  <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">stage</span> <span class="ow">in</span> <span class="n">stages</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">st</span><span class="p">.</span><span class="n">kind</span> <span class="ow">notin</span> <span class="p">{</span><span class="n">fskFilter</span><span class="p">}:</span>
+      <span class="n">resTuple</span><span class="p">.</span><span class="n">add</span> <span class="n">ident</span><span class="p">(</span><span class="s">"it"</span> <span class="o">&amp;</span> <span class="o">$</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+  <span class="k">let</span> <span class="n">lastId</span> <span class="o">=</span> <span class="n">newLit</span><span class="p">(</span><span class="n">stages</span><span class="p">.</span><span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+  <span class="n">result</span> <span class="o">=</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+    <span class="k">block</span><span class="p">:</span>
+      <span class="p">(</span>
+        <span class="k">proc</span><span class="p">():</span> <span class="n">auto</span> <span class="o">=</span> <span class="c"># `auto` annotation allows to derive type</span>
+                       <span class="c"># of the proc from any assignment within the</span>
+                       <span class="c"># proc body - we take advantage of this,</span>
+                       <span class="c"># and avoid building type expression</span>
+                       <span class="c"># manually.</span>
+          <span class="k">for</span> <span class="n">it0</span> <span class="p">{.</span><span class="n">inject</span><span class="p">.}</span> <span class="ow">in</span> <span class="p">`</span><span class="n">arg</span><span class="p">`:</span>
+            <span class="p">`</span><span class="n">evalExpr</span><span class="p">`</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">`</span><span class="n">resTuple</span><span class="p">`</span>
+<span class="c">#           ^^^^^^^^^^^^^^^^^^^</span>
+<span class="c">#           |</span>
+<span class="c">#           Type of the return will be derived from this assignment.</span>
+<span class="c">#           Even though it is placed within loop body, it will still</span>
+<span class="c">#           derive necessary return type</span>
+      <span class="p">)()</span><span class="o">[</span><span class="p">`</span><span class="n">lastId</span><span class="p">`</span><span class="o">]</span>
+<span class="c">#      ^^^^^^^^^^^^</span>
+<span class="c">#      | |</span>
+<span class="c">#      | Get last element from proc return type</span>
+<span class="c">#      |</span>
+<span class="c">#      After proc is declared we call it immediately</span>
+</code></pre></div></div>
+
+<h3 id="final-flow-implementation">Final <code class="language-plaintext highlighter-rouge">flow</code> implementation</h3>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">macro</span> <span class="n">flow</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">untyped</span><span class="p">):</span> <span class="n">untyped</span> <span class="o">=</span>
+  <span class="k">var</span> <span class="n">stages</span><span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="n">FlowStage</span><span class="o">]</span>
+  <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">body</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">elem</span><span class="p">.</span><span class="n">matches</span><span class="p">(</span>
+        <span class="n">Call</span><span class="o">[</span><span class="n">BracketExpr</span><span class="o">[@</span><span class="n">ident</span><span class="p">,</span> <span class="n">opt</span> <span class="o">@</span><span class="n">outType</span><span class="o">]</span><span class="p">,</span> <span class="o">@</span><span class="n">body</span><span class="o">]</span> <span class="o">|</span>
+        <span class="c"># `map[string]:`</span>
+        <span class="n">Command</span><span class="o">[@</span><span class="n">ident</span> <span class="ow">is</span> <span class="n">Ident</span><span class="p">(),</span> <span class="n">Bracket</span> <span class="o">[@</span><span class="n">outType</span><span class="o">]</span><span class="p">,</span> <span class="o">@</span><span class="n">body</span><span class="o">]</span> <span class="o">|</span>
+        <span class="c"># `map [string]:`</span>
+        <span class="n">Call</span><span class="o">[@</span><span class="n">ident</span> <span class="ow">is</span> <span class="n">Ident</span><span class="p">(),</span> <span class="o">@</span><span class="n">body</span><span class="o">]</span>
+        <span class="c"># just `map:`, without type argument</span>
+      <span class="p">):</span>
+        <span class="n">stages</span><span class="p">.</span><span class="n">add</span> <span class="n">FlowStage</span><span class="p">(</span>
+          <span class="n">kind</span><span class="p">:</span> <span class="n">identToKind</span><span class="p">(</span><span class="n">ident</span><span class="p">),</span>
+          <span class="n">outputType</span><span class="p">:</span> <span class="n">outType</span><span class="p">,</span>
+          <span class="n">body</span><span class="p">:</span> <span class="n">body</span>
+        <span class="p">)</span>
+
+  <span class="k">let</span> <span class="n">evalExpr</span> <span class="o">=</span> <span class="n">evalExprFromStages</span><span class="p">(</span><span class="n">stages</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">stages</span><span class="o">[</span><span class="p">^</span><span class="mi">1</span><span class="o">]</span><span class="p">.</span><span class="n">kind</span> <span class="ow">notin</span> <span class="p">{</span><span class="n">fskEach</span><span class="p">}:</span>
+    <span class="c"># If last stage has return type (not `each`) then we need to</span>
+    <span class="c"># accumulate results in temporary variable.</span>
+    <span class="k">let</span> <span class="n">resExpr</span> <span class="o">=</span> <span class="n">typeExprFromStages</span><span class="p">(</span><span class="n">stages</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+    <span class="k">let</span> <span class="n">lastId</span> <span class="o">=</span> <span class="n">ident</span><span class="p">(</span><span class="s">"it"</span> <span class="o">&amp;</span> <span class="o">$</span><span class="n">stages</span><span class="p">.</span><span class="n">len</span><span class="p">)</span>
+    <span class="k">let</span> <span class="n">resId</span> <span class="o">=</span> <span class="n">ident</span><span class="p">(</span><span class="s">"res"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+      <span class="k">var</span> <span class="p">`</span><span class="n">resId</span><span class="p">`:</span> <span class="kt">seq</span><span class="o">[</span><span class="n">typeof</span><span class="p">(`</span><span class="n">resExpr</span><span class="p">`)</span><span class="o">]</span>
+
+      <span class="k">for</span> <span class="n">it0</span> <span class="p">{.</span><span class="n">inject</span><span class="p">.}</span> <span class="ow">in</span> <span class="p">`</span><span class="n">arg</span><span class="p">`:</span>
+        <span class="p">`</span><span class="n">evalExpr</span><span class="p">`</span>
+        <span class="p">`</span><span class="n">resId</span><span class="p">`.</span><span class="n">add</span> <span class="p">`</span><span class="n">lastid</span><span class="p">`</span>
+
+      <span class="p">`</span><span class="n">resId</span><span class="p">`</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">quote</span> <span class="k">do</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">it0</span> <span class="p">{.</span><span class="n">inject</span><span class="p">.}</span> <span class="ow">in</span> <span class="p">`</span><span class="n">arg</span><span class="p">`:</span>
+        <span class="p">`</span><span class="n">evalExpr</span><span class="p">`</span>
+
+
+  <span class="n">result</span> <span class="o">=</span> <span class="n">newBlockStmt</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>An example of the macro in action:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">res</span> <span class="o">=</span> <span class="n">flow</span> <span class="n">lines</span><span class="p">(</span><span class="s">"/etc/passwd"</span><span class="p">):</span>
+  <span class="n">map</span><span class="o">[</span><span class="kt">seq</span><span class="o">[</span><span class="kt">string</span><span class="o">]]</span><span class="p">:</span>
+    <span class="n">it</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">":"</span><span class="p">)</span>
+  <span class="n">filter</span><span class="p">:</span>
+    <span class="k">let</span> <span class="n">shell</span> <span class="o">=</span> <span class="n">it</span><span class="o">[</span><span class="p">^</span><span class="mi">1</span><span class="o">]</span>
+    <span class="n">it</span><span class="p">.</span><span class="n">len</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">shell</span><span class="p">.</span><span class="n">endsWith</span><span class="p">(</span><span class="s">"bash"</span><span class="p">)</span>
+  <span class="n">map</span><span class="p">:</span>
+    <span class="n">shell</span>
+</code></pre></div></div>
+
+<p>Generated code:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">res</span> <span class="o">=</span> <span class="k">block</span><span class="p">:</span>
+  <span class="k">var</span> <span class="n">res</span><span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="n">typeof</span><span class="p">(</span><span class="k">block</span><span class="p">:</span>
+    <span class="c"># largely duplicated code for getting type of the expression.</span>
+    <span class="k">proc</span> <span class="p">():</span> <span class="n">auto</span> <span class="o">=</span> <span class="k">for</span> <span class="n">it0</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">(</span><span class="s">"/etc/passwd"</span><span class="p">):</span>
+      <span class="k">let</span> <span class="n">it1</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">it0</span><span class="p">,</span> <span class="s">":"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+      <span class="k">let</span> <span class="n">stageOk</span><span class="p">`</span><span class="n">gensym10271</span> <span class="o">=</span>
+        <span class="k">let</span> <span class="n">shell</span> <span class="o">=</span> <span class="n">it1</span><span class="o">[</span><span class="n">BackwardsIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">]</span>
+          <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">(</span><span class="n">it1</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="n">endsWith</span><span class="p">(</span><span class="n">shell</span><span class="p">,</span> <span class="s">"bash"</span><span class="p">)</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">stageOk</span><span class="p">`</span><span class="n">gensym10271</span><span class="p">:</span>
+        <span class="k">continue</span>
+      <span class="k">let</span> <span class="n">it3</span> <span class="o">=</span> <span class="n">shell</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">it0</span><span class="p">,</span> <span class="n">it1</span><span class="p">,</span> <span class="n">it3</span><span class="p">)()</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span>
+  <span class="p">)</span><span class="o">]</span>
+
+  <span class="c"># Actual implementation</span>
+  <span class="k">for</span> <span class="n">it0</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">(</span><span class="s">"/etc/passwd"</span><span class="p">):</span>
+    <span class="k">let</span> <span class="n">it1</span> <span class="o">=</span> <span class="n">split</span><span class="p">(</span><span class="n">it0</span><span class="p">,</span> <span class="s">":"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">let</span> <span class="n">stageOk</span><span class="p">`</span><span class="n">gensym10267</span> <span class="o">=</span>
+      <span class="k">let</span> <span class="n">shell</span> <span class="o">=</span> <span class="n">it1</span><span class="o">[</span><span class="n">BackwardsIndex</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">]</span>
+        <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">(</span><span class="n">it1</span><span class="p">)</span> <span class="ow">and</span>
+          <span class="n">endsWith</span><span class="p">(</span><span class="n">shell</span><span class="p">,</span> <span class="s">"bash"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">stageOk</span><span class="p">`</span><span class="n">gensym10267</span><span class="p">:</span>
+      <span class="k">continue</span>
+    <span class="k">let</span> <span class="n">it3</span> <span class="o">=</span> <span class="n">shell</span>
+    <span class="n">add</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">it3</span><span class="p">)</span>
+  <span class="n">res</span>
+</code></pre></div></div>
+
+<p>An example of a flow state mismatch error:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">res</span> <span class="o">=</span> <span class="n">flow</span> <span class="n">lines</span><span class="p">(</span><span class="s">"/etc/passwd"</span><span class="p">):</span>
+  <span class="n">map</span><span class="o">[</span><span class="kt">seq</span><span class="o">[</span><span class="kt">char</span><span class="o">]]</span><span class="p">:</span>
+    <span class="n">it</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">":"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Output:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error:
+
+Expected type seq[char], but expression it.split(":") has type of seq[string]
+</code></pre></div></div>
+
+<h2 id="notes">Notes</h2>
+
+<ul>
+  <li>Implementation of this macro was largely inspired by
+<a href="https://github.com/zero-functional/zero-functional"><code class="language-plaintext highlighter-rouge">zero_functional</code></a>.</li>
+  <li>Full flow macro implementation can be seen
+<a href="https://github.com/nim-lang/fusion/blob/ea18f8559c514b227b148300a2900b3e2a282b0d/tests/tmatching.nim#L1878">here</a> -
+it is a part of the test suite for the library, but a lot of comments from the article are still present.</li>
+  <li>I tried to write the <a href="https://github.com/nim-lang/fusion/blob/master/tests/tmatching.nim">test suite</a>
+in a way that would make it easier to use as an example as well, and while for the most part it
+does not have such level of implementation comments, it could still be treated as an example on how to use this library.</li>
+  <li>This library is still being developed - some minor bugs and inconsistencies could be expected, as
+well as ergonomics improvements.
+Consequently, some internal implementation details (mutability of captured variables for example)
+can change in the future.
+When <a href="https://nim-lang.org/docs/manual_experimental.html#view-types">view types</a> implementation
+would become a non-experimental feature, captures would be done using immutable views instead.</li>
+  <li>I personally see this library as a stepping stone for adding pattern matching support in Nim core -
+thanks to unparalleled metaprogramming capabilities, even features like that can be tested in external
+libraries before being included in the language itself (instead of making almost irreversible additions
+and dealing with fallback/bad design choices later).
+This means, first and foremost, that DSL usability and ergonomics feedback is welcome, as well as
+discussions about parts that don’t seem particularly useful overall (and might potentially be deleted).
+    <ul>
+      <li>For initial discussion about this library implementation you can see <a href="https://github.com/nim-lang/RFCs/issues/245">RFC #245</a></li>
+      <li>First implementation <a href="https://github.com/nim-lang/fusion/pull/33">PR</a> also has some discussions
+that led to partial implementation change.</li>
+      <li>Current implementation does not require changing language syntax <strong>at all</strong>, but a suggestion was
+made to make <code class="language-plaintext highlighter-rouge">let</code> usable in contexts other than direct variable declaration, making it possible for syntaxes like
+<code class="language-plaintext highlighter-rouge">let [all elems] = @[1, 2, 3, 4]</code> as opposed to current <code class="language-plaintext highlighter-rouge">[all @elems] := @[1, 2, 3, 4]</code>.
+Latter one, while not particularly different, creates new way of introducing variables, which might be unwanted.</li>
+    </ul>
+  </li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

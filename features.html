@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>特性 - Nim中文社区</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="特性"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。"> -->
+  <meta property="og:description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="特性" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content features">
+      <h1 class="text-centered page-title main-heading">特点</h1>
+
+<section class="content">
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <h1>直观、干净的语法</h1>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 code-align">
+      <h2>
+        Nim从多种语言中汲取了灵感，所以语法很容易被理解，
+        你可以轻易写出可读性和可维护性很高的代码。
+      </h2>
+      <ul>
+        <li>缩进优先的语法</li>
+        <li>以Python为灵感的多重结构</li>
+        <li>多行的lambda表达式</li>
+        <li>源于Oberon的可视化标记</li>
+        <li>用于精简声明的类型节则来自Pascal</li>
+      </ul>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 center">
+<figure class="highlight"><pre><code class="language-nim" data-lang="nim"><span class="k">import</span> <span class="n">strformat</span>
+<span class="k">type</span>
+  <span class="n">Person</span> <span class="o">=</span> <span class="k">object</span>
+    <span class="n">name</span><span class="o">*</span><span class="p">:</span> <span class="kt">string</span> <span class="c"># 字段通过`*`导出。</span>
+    <span class="n">age</span><span class="p">:</span> <span class="n">Natural</span> <span class="c"># 自然数类型确保年龄是正确的。</span>
+
+<span class="k">var</span> <span class="n">people</span> <span class="o">=</span> <span class="o">[</span>
+  <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">"John"</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span> <span class="mi">45</span><span class="p">),</span>
+  <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">"Kate"</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span> <span class="mi">30</span><span class="p">)</span>
+<span class="o">]</span>
+
+<span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">people</span><span class="p">:</span>
+  <span class="c"># 类型安全的字符串中变量赋值</span>
+  <span class="n">echo</span><span class="p">(</span><span class="s">fmt"{person.name} is {person.age} years old"</span><span class="p">)</span></code></pre></figure>
+    </div>
+  </div>
+</section>
+
+
+<section class="background-faded call-to-action">
+  <section class="content text-centered">
+    <h2>多操作系统支持</h2>
+    <div class="pure-g center">
+      <div class="pure-u-1">
+        <i class="fab fa-windows fa-5x" aria-hidden="true"></i>
+        <i class="fab fa-apple fa-5x" aria-hidden="true"></i>
+        <i class="fab fa-linux fa-5x" aria-hidden="true"></i>
+      </div>
+      <div class="pure-u-1-2">
+        <p>
+          Nim支持所有主流的操作系统，以及多个小众系统。
+          <br>
+          我们为完美支持这三个主流操作系统而感到自豪。
+        </p>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="content">
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <h1 id="javascript-compilation">编译为JavaScript</h1>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 code-align">
+      <h2>
+        Nim包含了一个一流的JavaScript后端，
+        这样您就可以毫不费力地同时开发客户端和服务器。
+      </h2>
+      <div class="center">
+        <script type="text/javascript" src="https://picheta.me/snake/snake.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="https://picheta.me/snake/snake.css">
+        <style>
+          #snake_center {
+            width: 402px;
+            margin-top: 30pt;
+            height: 400px;
+          }
+
+          #snake_center>p {
+            width: 100%;
+            margin-bottom: 0;
+          }
+        </style>
+        <div id="snake_center">
+          <div id="snake">
+            <canvas id="snake_canvas"></canvas>
+            <div id="snake_controls">
+              <span><b>New Game:</b> N</span>
+              <span><b>Play/Pause: </b> P</span>
+              <span><b>Controls: </b> ← → ↑ ↓</span>
+            </div>
+          </div>
+          <p>
+            上面的游戏就是用Nim写成的，
+            使用JavaScript后端编译，
+            使用canvas API进行绘制。
+          </p>
+          <p>
+            <b>源码: </b>
+            <a href="https://github.com/dom96/snake">https://github.com/dom96/snake</a>
+          </p>
+          <p>
+            <b>体验网站: </b>
+            <a href="http://picheta.me/snake">http://picheta.me/snake</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 center">
+<figure class="highlight"><pre><code class="language-nim" data-lang="nim"><span class="k">import</span> <span class="n">dom</span>
+
+<span class="k">proc </span><span class="nf">onLoad</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">Event</span><span class="p">)</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="n">createElement</span><span class="p">(</span><span class="s">"p"</span><span class="p">)</span>
+  <span class="n">p</span><span class="p">.</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="s">"Click me!"</span>
+  <span class="n">p</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">fontFamily</span> <span class="o">=</span> <span class="s">"Helvetica"</span>
+  <span class="n">p</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="s">"red"</span>
+
+  <span class="n">p</span><span class="p">.</span><span class="n">addEventListener</span><span class="p">(</span><span class="s">"click"</span><span class="p">,</span>
+    <span class="k">proc</span> <span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">Event</span><span class="p">)</span> <span class="o">=</span>
+      <span class="n">window</span><span class="p">.</span><span class="n">alert</span><span class="p">(</span><span class="s">"Hello World!"</span><span class="p">)</span>
+  <span class="p">)</span>
+
+  <span class="n">document</span><span class="p">.</span><span class="n">body</span><span class="p">.</span><span class="n">appendChild</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="n">window</span><span class="p">.</span><span class="n">onload</span> <span class="o">=</span> <span class="n">onLoad</span></code></pre></figure>
+    </div>
+  </div>
+</section>
+
+<section class="background-faded call-to-action">
+  <section class="content metaprogramming">
+    <div class="pure-g">
+      <div class="pure-u-1">
+        <h2 id="small-core-with-extensibility">核心更小，可扩展性更高</h2>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2">
+        <p>
+          通过提供强大的元编程功能，Nim语言实现了更小的核心。
+        </p>
+        <p>
+          Nim中的元编程功能包括了对泛型、模板和宏的支持。
+          这使得Nim可以扩展和支持各种编程范例，并避免了开发人员使用样板。
+          通过使用这些元编程功能，标准库实现异步等待。
+          Nim社区还开发了各种实现不同编程范式的包。
+        </p>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2 center">
+        <figure class="highlight"><pre><code class="language-nim" data-lang="nim">        <span class="k">import</span> <span class="n">macros</span><span class="p">,</span> <span class="n">strutils</span>
+
+        <span class="k">macro</span> <span class="n">toEnum</span><span class="p">(</span><span class="n">words</span><span class="p">:</span> <span class="k">static</span><span class="o">[</span><span class="kt">string</span><span class="o">]</span><span class="p">):</span> <span class="n">untyped</span> <span class="o">=</span>
+          <span class="n">result</span> <span class="o">=</span> <span class="n">newTree</span><span class="p">(</span><span class="n">nnkEnumTy</span><span class="p">,</span> <span class="n">newEmptyNode</span><span class="p">())</span>
+
+          <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">splitWhitespace</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+            <span class="n">result</span><span class="p">.</span><span class="n">add</span> <span class="n">ident</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+        <span class="k">type</span>
+          <span class="n">Color</span> <span class="o">=</span> <span class="s">toEnum"Red Green Blue Indigo"</span>
+
+        <span class="k">var</span> <span class="n">color</span> <span class="o">=</span> <span class="n">Indigo</span></code></pre></figure>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="content nimble">
+  <div class="pure-g">
+    <div class="pure-u-1 center">
+      <h1 id="decentralised-package-management">提供对零散的包进行管理</h1>
+    </div>
+    <div class="pure-u-1 center">
+      <img height="150px" src="/assets/img/nimble.svg" />
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 code-align">
+      <h2>
+        Nim的包管理器叫做Nimble。
+        通过Git和Mercurial存储库来分发软件包，
+        通过远程查询标签来确定版本信息。
+      </h2>
+      <p>
+        包名和仓库URL在<code>packages.json</code>中声明，并存储于GitHub中。
+      </p>
+      <p>
+        软件包使用特殊的<code>.nimble</code>文件格式进行定义，.nimble格式会被Nim编译器评估。
+        这意味着它支持Nim编程语言的大部分子集，
+        支持各种强大的功能，包括能够指定操作系统和外部依赖项。 
+      </p>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 center">
+<figure class="highlight"><pre><code class="language-nim" data-lang="nim"><span class="c"># 包</span>
+
+<span class="n">version</span> <span class="o">=</span> <span class="s">"v0.1.0"</span>
+<span class="n">author</span> <span class="o">=</span> <span class="s">"Benedict Cumberbatch"</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">"Sample package."</span>
+<span class="n">license</span> <span class="o">=</span> <span class="s">"MIT"</span>
+
+<span class="c"># 依赖</span>
+<span class="n">requires</span> <span class="s">"nim &gt;= 0.13.0"</span><span class="p">,</span> <span class="s">"jester &gt;= 0.1.0"</span>
+
+<span class="k">import</span> <span class="n">distros</span>
+<span class="k">if</span> <span class="n">detectOs</span><span class="p">(</span><span class="n">Ubuntu</span><span class="p">):</span>
+  <span class="n">foreignDep</span> <span class="s">"libssl-dev"</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">foreignDep</span> <span class="s">"openssl"</span>
+
+<span class="n">task</span> <span class="n">test</span><span class="p">,</span> <span class="s">"Run the tester!"</span><span class="p">:</span>
+  <span class="n">withDir</span> <span class="s">"tests"</span><span class="p">:</span>
+    <span class="n">exec</span> <span class="s">"nim c -r tester"</span></code></pre></figure>
+    </div>
+    <div class="pure-u-1 center">
+      <a class="pure-button pure-button-primary" href="https://github.com/nim-lang/nimble#readme">了解更多</a>
+    </div>
+  </div>
+</section>
+
+<section class="background-faded call-to-action">
+  <section class="content ffi">
+    <div class="pure-g center">
+      <div class="pure-u-1 center">
+        <h2 id="easy-c-obj-c-wrapping">简便地对C、C++<b>和</b>Objective C进行交互</h2>
+      </div>
+      <div class="pure-u-1 center">
+<figure class="highlight"><pre><code class="language-nim" data-lang="nim"><span class="p">{.</span><span class="n">passL</span><span class="p">:</span> <span class="s">"-lsfml-graphics -lsfml-system -lsfml-window"</span><span class="p">.}</span>
+
+<span class="k">type</span>
+  <span class="n">VideoMode</span><span class="o">*</span> <span class="p">{.</span><span class="n">importcpp</span><span class="p">:</span> <span class="s">"sf::VideoMode"</span><span class="p">.}</span> <span class="o">=</span> <span class="k">object</span>
+  <span class="n">RenderWindowObj</span> <span class="p">{.</span><span class="n">importcpp</span><span class="p">:</span> <span class="s">"sf::RenderWindow"</span><span class="p">.}</span> <span class="o">=</span> <span class="k">object</span>
+  <span class="n">RenderWindow</span><span class="o">*</span> <span class="o">=</span> <span class="k">ptr</span> <span class="n">RenderWindowObj</span>
+  <span class="n">Color</span><span class="o">*</span> <span class="p">{.</span><span class="n">importcpp</span><span class="p">:</span> <span class="s">"sf::Color"</span><span class="p">.}</span> <span class="o">=</span> <span class="k">object</span>
+  <span class="n">Event</span><span class="o">*</span> <span class="p">{.</span><span class="n">importcpp</span><span class="p">:</span> <span class="s">"sf::Event"</span><span class="p">.}</span> <span class="o">=</span> <span class="k">object</span>
+
+<span class="p">{.</span><span class="n">push</span> <span class="n">cdecl</span><span class="p">,</span> <span class="n">header</span><span class="p">:</span> <span class="s">"&lt;SFML/Graphics.hpp&gt;"</span><span class="p">.}</span> 
+<span class="p">{.</span><span class="n">push</span> <span class="n">importcpp</span><span class="p">.}</span> 
+<span class="k">proc </span><span class="nf">videoMode</span><span class="o">*</span><span class="p">(</span><span class="n">modeWidth</span><span class="p">,</span> <span class="n">modeHeight</span><span class="p">:</span> <span class="n">cuint</span><span class="p">,</span>
+                <span class="n">modeBitsPerPixel</span><span class="p">:</span> <span class="n">cuint</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span> <span class="n">VideoMode</span>
+<span class="k">proc </span><span class="nf">newRenderWindow</span><span class="o">*</span><span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">VideoMode</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="n">cstring</span><span class="p">):</span> <span class="n">RenderWindow</span>
+<span class="k">proc </span><span class="nf">pollEvent</span><span class="o">*</span><span class="p">(</span><span class="n">window</span><span class="p">:</span> <span class="n">RenderWindow</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="k">var</span> <span class="n">Event</span><span class="p">):</span> <span class="kt">bool</span>
+<span class="k">proc </span><span class="nf">newColor</span><span class="o">*</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="n">uint8</span><span class="p">):</span><span class="n">Color</span> 
+<span class="k">proc </span><span class="nf">clear</span><span class="o">*</span><span class="p">(</span><span class="n">window</span><span class="p">:</span> <span class="n">RenderWindow</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">Color</span><span class="p">)</span> 
+<span class="k">proc </span><span class="nf">display</span><span class="o">*</span><span class="p">(</span><span class="n">window</span><span class="p">:</span> <span class="n">RenderWindow</span><span class="p">)</span> </code></pre></figure>
+          </div> <div class="pure-u-1 pure-u-md-1-2 center">
+          <p>
+            Nim可以轻松绑定到C、C++和Objective C库。
+            开发者可以轻松访问由成熟且功能强大的库组成的大型生态系统。
+          </p>
+      </div>
+      <div class="pure-u-1 center">
+        <a class="pure-button pure-button-primary"
+          href="/docs/manual.html#特定实现的编译指示-importcpp编译指示">了解更多</a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="content">
+  <div class="pure-g">
+    <div class="pure-u-1">
+      <h1 id="helpful-tracebacks">实用的报错信息</h1>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 code-align">
+      <h2>
+        灵感来源于Python。
+      </h2>
+      <p>
+        当Nim应用程序因异常而崩溃时
+        它会在终止之前输出堆栈跟踪。
+        Nim的堆栈跟踪格式非常易于掌握，
+        因为它包含了调试异常所需的所有信息。
+      </p>
+    </div>
+    <div class="pure-u-1 pure-u-md-1-2 center">
+<figure class="highlight"><pre><code class="language-plain" data-lang="plain">Traceback (most recent call last)
+module.nim(10) module
+module.nim(8) readData
+strutils.nim parseInt
+Error: unhandled exception:
+        invalid integer: Hello World [ValueError]</code></pre></figure>
+    </div>
+  </div>
+</section>
+
+<section class="background-faded call-to-action">
+  <section class="content text-centered">
+    <h2>更多问题，请参阅
+      <a href="/faq.html">常见问题</a>
+    </h2>
+  </section>
+</section>
+
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

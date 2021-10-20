@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>This Month with Nim: April 2021 - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="This Month with Nim: April 2021"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Three interesting packages our users worked on in April"> -->
+  <meta property="og:description" content="Three interesting packages our users worked on in April">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="This Month with Nim: April 2021" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            This Month with Nim: April 2021
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              01 May 2021
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              The Nim Community
+            </span>
+            
+          </h3>
+          <h2 id="nimjl">Nimjl</h2>
+
+<h4 id="author-regis-caillaud-clonkk">Author: Regis Caillaud (<a href="https://github.com/Clonkk/">Clonkk</a>)</h4>
+
+<p>Nimjl is a bridge to call Julia code from Nim. It is to Julia what Nimpy is to Python.</p>
+
+<p>Useful to leverage Julia’s powerful ecosystem in Numerical computing.
+Practical for integrating Julia code in Nim application without rewriting everything.</p>
+
+<p>And for those who prefers code to word here’s a small example of sorting a Nim sequence using Julia’s sort function !</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">nimjl</span>
+<span class="k">import</span> <span class="n">random</span>
+<span class="k">import</span> <span class="n">sequtils</span>
+<span class="k">import</span> <span class="n">sugar</span>
+
+<span class="n">jlVmInit</span><span class="p">()</span> 
+<span class="k">var</span> <span class="n">seqRand</span><span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="kt">int64</span><span class="o">]</span> <span class="o">=</span> <span class="n">newSeqWith</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">)).</span><span class="n">map</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="kt">int64</span><span class="p">)</span>
+<span class="n">echo</span> <span class="n">seqRand</span>
+<span class="k">discard</span> <span class="n">jlCall</span><span class="p">(</span><span class="s">"sort!"</span><span class="p">,</span> <span class="n">seqRand</span><span class="p">)</span>
+<span class="n">echo</span> <span class="n">seqRand</span>
+<span class="n">jlVmExit</span><span class="p">()</span> 
+</code></pre></div></div>
+<p>Did that pique your curiosity ? You can check-it out <a href="https://github.com/Clonkk/nimjl">here</a> or read more <a href="https://github.com/Clonkk/nimjl/tree/master/examples">examples</a> !</p>
+
+<h2 id="datarray"><a href="https://github.com/liquidev/datarray">Datarray</a></h2>
+
+<h4 id="author-liquidev">Author: <a href="https://github.com/liquidev">liquidev</a></h4>
+
+<p>Datarray aims to make data oriented design easy, by abstracting away the common struct of arrays pattern that exhibits much better cache efficiency than the usual, object oriented-style array of structs.
+The creation of this library was inspired by <a href="https://blog.royalsloth.eu/posts/the-compiler-will-optimize-that-away/">this blog post</a>.</p>
+
+<p>Here’s an example of how to use a datarray to manipulate data efficiently:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="o">/</span><span class="n">random</span>
+<span class="k">import</span> <span class="n">datarray</span>
+
+<span class="c"># declare a struct with fields that should be transformed into arrays</span>
+<span class="k">type</span>
+  <span class="n">Ant</span> <span class="o">=</span> <span class="k">object</span>
+    <span class="n">name</span><span class="p">:</span> <span class="kt">string</span>
+    <span class="n">color</span><span class="p">:</span> <span class="kt">string</span>
+    <span class="n">isWarrior</span><span class="p">:</span> <span class="kt">bool</span>
+    <span class="n">age</span><span class="p">:</span> <span class="kt">int32</span>
+
+<span class="c"># create and initialize the datarray with some data to operate on</span>
+<span class="k">var</span> <span class="n">antColony</span><span class="p">:</span> <span class="n">Datarray</span><span class="o">[</span><span class="mi">1000</span><span class="p">,</span> <span class="n">Ant</span><span class="o">]</span>
+<span class="n">randomize</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">ant</span> <span class="ow">in</span> <span class="n">antColony</span><span class="p">:</span>
+  <span class="c"># `ant` is of a special type - `VarElement[Ant]`, which holds a pointer to the</span>
+  <span class="c"># datarray's memory, its length, and the relevant index of the element we're</span>
+  <span class="c"># operating on. there also exists an `Element[T]` for non-var datarrays that</span>
+  <span class="c"># prohibits assignment to fields.</span>
+  <span class="c"># the special . and .= operators can be used to access or modify the fields:</span>
+  <span class="n">ant</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">sample</span> <span class="o">[</span><span class="s">"joe"</span><span class="p">,</span> <span class="s">"josh"</span><span class="p">,</span> <span class="s">"dave"</span><span class="o">]</span>
+  <span class="n">ant</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">sample</span> <span class="o">[</span><span class="s">"red"</span><span class="p">,</span> <span class="s">"black"</span><span class="p">,</span> <span class="s">"brown"</span><span class="o">]</span>
+  <span class="n">ant</span><span class="p">.</span><span class="n">isWarrior</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.5</span>
+  <span class="n">ant</span><span class="p">.</span><span class="n">age</span> <span class="o">=</span> <span class="kt">int32</span> <span class="n">rand</span><span class="p">(</span><span class="mi">1</span> <span class="p">..</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="c"># {} and {}= can also be used if you prefer to avoid using experimental</span>
+  <span class="c"># language features, but to get stabilized, experimental features need testing</span>
+  <span class="c"># so it's your choice ;)</span>
+
+<span class="c"># query the data using the `select` macro</span>
+<span class="k">var</span> <span class="n">numChosen</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span> <span class="ow">in</span> <span class="n">select</span> <span class="n">antColony</span><span class="p">:</span>
+  <span class="c"># this macro invocation creates two templates inside of the loop,</span>
+  <span class="c"># `age` and `color`, which desugar to something like this:</span>
+  <span class="c"># antColony.ith(index, age)</span>
+  <span class="c"># to save typing.</span>
+  <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">color</span> <span class="o">==</span> <span class="s">"red"</span><span class="p">:</span>
+    <span class="n">inc</span> <span class="n">numChosen</span>
+<span class="n">echo</span> <span class="s">"found "</span><span class="p">,</span> <span class="n">numChosen</span><span class="p">,</span> <span class="s">" red ants older than 1 year"</span>
+</code></pre></div></div>
+
+<p>Because a datarray is quite a generic and flexible container, it can be used to implement a variety of different things, eg. an ECS framework, or a simple and fast database.
+A dynamically allocated variant, <code class="language-plaintext highlighter-rouge">DynDatarray</code>, is also available, if the size needs to be determined at runtime, but I’ve yet to implement a dynamically <em>resizable</em> datarray as of writing this.</p>
+
+<p><a href="https://github.com/liquidev/datarray#benchmarks">Benchmarks</a> show that using an struct of arrays is about 2-3x faster than using an array of structs, so if you want to write fast programs that take full advantage of your CPU, start using datarrays now!</p>
+
+<p>The library is still growing and lacks many useful features, so suggestions are welcome.</p>
+
+<h2 id="loki"><a href="https://github.com/beshrkayali/loki">Loki</a></h2>
+
+<h4 id="author-beshr-kayali">Author: <a href="https://github.com/beshrkayali">Beshr Kayali</a></h4>
+
+<p>Loki is a small library for writing line-oriented command interpreters (or cli programs) in Nim that is inspired by Python’s cmd lib.</p>
+
+<p>Version 0.3 is released this month, and it adds the functionality of automatically generating a TOC and “help” command.</p>
+
+<p>Quick example:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">loki</span><span class="p">,</span> <span class="n">strutils</span><span class="p">,</span> <span class="n">options</span>
+<span class="k">from</span> <span class="n">sequtils</span> <span class="k">import</span> <span class="n">zip</span>
+
+<span class="n">loki</span><span class="p">(</span><span class="n">myHandler</span><span class="p">,</span> <span class="n">input</span><span class="p">):</span>
+  <span class="n">do_greet</span> <span class="n">name</span><span class="p">:</span>
+   <span class="sd">## Get a nice greeting!</span>
+   <span class="k">if</span> <span class="n">isSome</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">echo</span><span class="p">(</span><span class="s">"Hello "</span><span class="p">,</span> <span class="n">name</span><span class="p">.</span><span class="n">get</span><span class="p">,</span> <span class="s">"!"</span><span class="p">)</span>
+   <span class="k">else</span><span class="p">:</span>
+    <span class="n">echo</span><span class="p">(</span><span class="s">"Hello there!"</span><span class="p">)</span>
+  <span class="n">do_add</span> <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">isSome</span><span class="p">(</span><span class="n">num1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">isSome</span><span class="p">(</span><span class="n">num2</span><span class="p">):</span>
+      <span class="n">echo</span><span class="p">(</span><span class="s">"Result is "</span><span class="p">,</span> <span class="n">parseInt</span><span class="p">(</span><span class="n">num1</span><span class="p">.</span><span class="n">get</span><span class="p">)</span> <span class="o">+</span> <span class="n">parseInt</span><span class="p">(</span><span class="n">num2</span><span class="p">.</span><span class="n">get</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">echo</span><span class="p">(</span><span class="s">"Provide two numbers to add them"</span><span class="p">)</span>
+  <span class="n">do_EOF</span><span class="p">:</span>
+    <span class="n">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">"Bye!</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kp">true</span>
+  <span class="n">default</span><span class="p">:</span>
+    <span class="n">write</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">"*** Unknown syntax: "</span><span class="p">,</span> <span class="n">input</span><span class="p">.</span><span class="n">text</span> <span class="p">,</span> <span class="s">" ***</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="n">myCmd</span> <span class="o">=</span> <span class="n">newLoki</span><span class="p">(</span>
+  <span class="n">handler</span><span class="o">=</span><span class="n">myHandler</span><span class="p">,</span>
+  <span class="n">intro</span><span class="o">=</span><span class="s">"Welcome to my CLI!</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">myCmd</span><span class="p">.</span><span class="n">cmdLoop</span>
+</code></pre></div></div>
+
+<p>And  an example run: https://asciinema.org/a/iMA7pIq2f7sy8X44pkCPhNmOt</p>
+
+<hr />
+
+<h2 id="want-to-see-your-project-here-next-month">Want to see your project here next month?</h2>
+
+<p><a href="https://github.com/beef331/website#adding-your-project-to-month-with-nim">Follow this</a> to add your project to the next month’s blog post.</p>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

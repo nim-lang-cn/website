@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>1.2.2 版本现已发布 - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="1.2.2 版本现已发布"> -->
+
+  
+  <!-- <meta name="twitter:description" content="The Nim team is happy to announce version 1.2.2, our first patch release for Nim 1.2."> -->
+  <meta property="og:description" content="The Nim team is happy to announce version 1.2.2, our first patch release for Nim 1.2.">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="1.2.2 版本现已发布" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            1.2.2 版本现已发布
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              17 June 2020
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Nim 团队
+            </span>
+            
+          </h3>
+          <p>The Nim team is happy to announce version 1.2.2, our first patch release for
+Nim 1.2.</p>
+
+<p>Version 1.2.2 is a result of two months of work, and it contains
+<a href="https://github.com/nim-lang/Nim/compare/v1.2.0...v1.2.2">70 commits</a>,
+fixing more than 30 reported issues.</p>
+
+<p>This release doesn’t bring any new features compared to Nim 1.2.0.
+If you are still on Nim 1.0.x, and would like to know about new features
+available in Nim 1.2.x, check out our
+<a href="https://nim-lang.org/blog/2020/04/03/version-120-released.html">version 1.2.0 release article</a>.</p>
+
+<h1 id="installing-nim-12">Installing Nim 1.2</h1>
+
+<h2 id="new-users">New users</h2>
+
+<p>Check out if the package manager of your OS already ships version 1.2.2 or
+install it as described <a href="https://nim-lang.org/install.html">here</a>.</p>
+
+<h2 id="existing-users">Existing users</h2>
+
+<p>If you have installed a previous version of Nim using <code class="language-plaintext highlighter-rouge">choosenim</code>,
+getting Nim 1.2.2 is as easy as:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>choosenim update stable
+</code></pre></div></div>
+
+<h1 id="bugfixes">Bugfixes</h1>
+
+<ul>
+  <li>Fixed “Critical: 1 completed Future, multiple await: Only 1 await will be awakened (the last one)”
+(<a href="https://github.com/nim-lang/Nim/issues/13889">#13889</a>)</li>
+  <li>Fixed ““distinct uint64” type corruption on 32-bit, when using {.borrow.} operators”
+(<a href="https://github.com/nim-lang/Nim/issues/13902">#13902</a>)</li>
+  <li>Fixed “Regression: impossible to use typed pragmas with proc types”
+(<a href="https://github.com/nim-lang/Nim/issues/13909">#13909</a>)</li>
+  <li>Fixed “openssl wrapper corrupts stack on OpenSSL 1.1.1f + Android”
+(<a href="https://github.com/nim-lang/Nim/issues/13903">#13903</a>)</li>
+  <li>Fixed “add nimExe to nim dump”
+(<a href="https://github.com/nim-lang/Nim/issues/13876">#13876</a>)</li>
+  <li>Fixed “simple ‘var openarray[char]’ assignment crash when the openarray source is a local string and using gc:arc”
+(<a href="https://github.com/nim-lang/Nim/issues/14003">#14003</a>)</li>
+  <li>Fixed “Cant use expressions with <code class="language-plaintext highlighter-rouge">when</code> in <code class="language-plaintext highlighter-rouge">type</code> sections.”
+(<a href="https://github.com/nim-lang/Nim/issues/14007">#14007</a>)</li>
+  <li>Fixed “Annoying warning: inherit from a more precise exception type like ValueError, IOError or OSError [InheritFromException]”
+(<a href="https://github.com/nim-lang/Nim/issues/14052">#14052</a>)</li>
+  <li>Fixed “Incorrect escape sequence for example in jsffi library documentation”
+(<a href="https://github.com/nim-lang/Nim/issues/14110">#14110</a>)</li>
+  <li>Fixed “macOS: dsymutil should not be called on static libraries”
+(<a href="https://github.com/nim-lang/Nim/issues/14132">#14132</a>)</li>
+  <li>Fixed “Fix single match output”
+(<a href="https://github.com/nim-lang/Nim/issues/12920">#12920</a>)</li>
+  <li>Fixed “algorithm.sortedByIt template corrupts tuple input under –gc:arc”
+(<a href="https://github.com/nim-lang/Nim/issues/14079">#14079</a>)</li>
+  <li>Fixed “strformat: doc example fails”
+(<a href="https://github.com/nim-lang/Nim/issues/14054">#14054</a>)</li>
+  <li>Fixed “Nim doc fail to run for nim 1.2.0 (nim 1.0.4 is ok)”
+(<a href="https://github.com/nim-lang/Nim/issues/13986">#13986</a>)</li>
+  <li>Fixed “Exception when converting csize to clong”
+(<a href="https://github.com/nim-lang/Nim/issues/13698">#13698</a>)</li>
+  <li>Fixed “[ARC] Segfault with cyclic references (?)”
+(<a href="https://github.com/nim-lang/Nim/issues/14159">#14159</a>)</li>
+  <li>Fixed “cas is wrong for tcc”
+(<a href="https://github.com/nim-lang/Nim/issues/14151">#14151</a>)</li>
+  <li>Fixed “Use -d:nimEmulateOverflowChecks by default?”
+(<a href="https://github.com/nim-lang/Nim/issues/14209">#14209</a>)</li>
+  <li>Fixed “Invalid return value of openProcess is <code class="language-plaintext highlighter-rouge">NULL</code> rather than <code class="language-plaintext highlighter-rouge">INVALID_HANDLE_VALUE(-1)</code> in windows”
+(<a href="https://github.com/nim-lang/Nim/issues/14289">#14289</a>)</li>
+  <li>Fixed “nim-gdb is missing from all released packages”
+(<a href="https://github.com/nim-lang/Nim/issues/13104">#13104</a>)</li>
+  <li>Fixed “compiler error with inline async proc and pragma”
+(<a href="https://github.com/nim-lang/Nim/issues/13998">#13998</a>)</li>
+  <li>Fixed “Linker error with closures”
+(<a href="https://github.com/nim-lang/Nim/issues/209">#209</a>)</li>
+  <li>Fixed “ARC codegen bug with inline iterators”
+(<a href="https://github.com/nim-lang/Nim/issues/14219">#14219</a>)</li>
+  <li>Fixed “[ARC] implicit move on last use happening on non-last use”
+(<a href="https://github.com/nim-lang/Nim/issues/14269">#14269</a>)</li>
+  <li>Fixed “Boehm GC does not scan thread-local storage”
+(<a href="https://github.com/nim-lang/Nim/issues/14364">#14364</a>)</li>
+  <li>Fixed “RVO not exception safe”
+(<a href="https://github.com/nim-lang/Nim/issues/14126">#14126</a>)</li>
+  <li>Fixed “ARC: unreliable setLen “
+(<a href="https://github.com/nim-lang/Nim/issues/14495">#14495</a>)</li>
+  <li>Fixed “lent is unsafe: after #14447 you can modify variables with “items” loop for sequences”
+(<a href="https://github.com/nim-lang/Nim/issues/14498">#14498</a>)</li>
+  <li>Fixed “moveFile does not overwrite destination file”
+(<a href="https://github.com/nim-lang/Nim/issues/14057">#14057</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">var op = fn()</code> wrongly gives warning <code class="language-plaintext highlighter-rouge">ObservableStores</code> with <code class="language-plaintext highlighter-rouge">object of RootObj</code> type”
+(<a href="https://github.com/nim-lang/Nim/issues/14514">#14514</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">wrapWords</code> seems to ignore linebreaks when wrapping, leaving breaks in the wrong place”
+(<a href="https://github.com/nim-lang/Nim/issues/14579">#14579</a>)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

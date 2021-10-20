@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.17.2 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.17.2 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="The Nim team is happy to announce that the latest release of Nim, version 0.17.2, is now available. Nim is a systems programming language that focuses on performance, portability and expressiveness. The major new feature in this release is the support for .nimble-link files. This has been added in order to support the latest Nimble version with its “develop” feature. For more information, see nimble. This is however primarily a bug fix release, with the most important bugfixes including the long standing codegen bugs that triggered GC crashes. Updating is recommended! Be sure to check out the changelog below for a comprehensive list of changes. This release also includes version 0.8.8 of the Nimble package manager, be sure to check out its changelog for a list of changes since its last release. You can download the latest release of Nim from the download page. If you’re using choosenim then you can easily update to the latest version by running the following: $ choosenim update stable Changelog Changes affecting backwards compatibility The changes made to the do notation parsing rules in v0.17.0 have been reverted. Bugfixes The list below has been generated based on the commits in Nim’s git repository. As such it lists only the issues which have been closed via a commit, for a full list see this link on Github. Fixed “Fixed syslocks for ios” (#5804) Fixed “OpenBSD pthread issue” (#5920) Fixed “JS backend doesn’t copy ‘object’ when adding to ‘seq’” (#4139) Fixed “sequtils insert produces wrong result in a case of sequence of objects in JS” (#5933) Fixed “Index out of bounds error while using sets with cstring in JS” (#5969) Fixed “Compiler crash when a proc marked as gcsafe moves around non-gcsafe closures” (#5959) Fixed “type with packed pragma is not properly packed” (#5824) Fixed “httpclient Docs Wrong” (#5863) Fixed “{.async.} doesn’t work with do notation” (#5995) Fixed “Sigmatch error in fitting anonymous tuples to generic types” (#5890) Fixed “Nested array alias type leads to compile-time and run-time bugs” (#5962) Fixed “Static - Default value for static arg - Cannot instantiate” (#5864) Fixed “constant of generic type becomes all zero when assigning to a local value” (#5756) Fixed “User defined arithemetic in generic types” (#5106) Fixed “Overloading with static[] leads to strange error” (#5017) Fixed “Compiler crash” (#2730) Fixed “Compiler segfaults on non-recursive code” (#4524) Fixed “static[T] generic type cause invalid type” (#3784) Fixed “Using static generic params on procs often fails to compile” (#1017) Fixed “Inferring nested static[T] “ (#3153) Fixed “another static_t problem” (#3152) Fixed “Generic code can cause attempts to use constructors for unrelated types to fail” (#1051) Fixed “Internal Error with with static generic parameters” (#1082) Fixed “Internal error with enumerable concept and map proc” (#5968) Fixed “Concept - strange behaviour” (#4020) Fixed “Compiler crash while wrapping concepts” (#5127) Fixed “Using generic concept parameter causes stack overflow” (#4737) Fixed “About ambiguous concept” (#5888) Fixed “Concepts don’t play well with distinct primitive types, e.g. distinct float or string” (#5983) Fixed “Error with generic concepts” (#5084) Fixed “the ^ operator fails on floats” (#5966) Fixed “Documentation: times.nim” (#6010) Fixed “[Regression] Nim js crashes” (#5946) Fixed “Times module compiled in JS failed to compare values” (#6021) Fixed “JS: tables assignment breaks with importcpp’s in scope (internal error: genAddr: nkDerefExpr)” (#5846) Fixed “Object constructor violates copy semantics, allows modifying immutable [js only]” (#4703) Fixed “No bounds checking in JS target?” (#5563) Fixed “js: genDeref compiler crash” (#5974) Fixed “JS: internal error in genDeref” (#5379) Fixed “JS: compiler internal error” (#5517) Fixed “JS codegen produces circular structure” (#6035) Fixed ““nim doc” SIGSEGV when foo*(a: proc)” (#6030) Fixed “Value redefinition not detected in {.pure.} enum” (#6008) Fixed “unexpected option : ‘-o’” (#6069) Fixed “Nimsuggest crashes in sempass2.useVar” (#6067) Fixed “Nim compiler generates variables for discarded proc return values” (#6037) Fixed “js target bug with operator +=” (#5608) Fixed “Nim Tutorial (Part I) need update” (#6062) Fixed “Error after codegen when shadowing template arg” (#4898) Fixed “Threadpool doesn’t work after sync” (#6090) Fixed “parsecfg silently fails to store and retrieve negative integers” (#6046) Fixed “async + threads:on + globals = error” (#5738) Fixed “Strange behaviour when importing locks for use in a generic type” (#6049) Fixed “js backend failed to compile try…except new syntax” (#5986) Fixed “Different handling of .emit with and without native debugger” (#5989) Fixed “Structure packing and alignment issue on Windows.” (#4763) Fixed “ICE on discard seq.len” (#6118) Fixed “ICE: genRecordField 3” (#5892) Fixed “JS exportc regression?” (#6096) Fixed “ReraiseError when using try/except within finally block” (#5871) Fixed “Inconsistent os:standalone behavior” (#6131) Fixed “.cfg files (, parsecfg) and quoting” (#499) Fixed “SIGSEGV: Illegal storage access. (Attempt to read from nil?)” (#6127) Fixed “Nim Tutorial doc bugs” (#6125) Fixed “union type compile error..” (#6016) Fixed “Failure to compile stdlib/system with VCC, C++ and threads:on on i386” (#6196) Fixed “GC bug resulting in random crashes” (#6234) Fixed “deque.nim: Doc says removeLast proc, but not defined “ (#6110) Fixed “Nim crashes when instancing with incorrect arg sintax” (#5965) Fixed “Equality of OrderedTable is incorrect” (#6250) Fixed “0.17.0 Regression: Statement macro from tutorial does not compile anymore” (#5918) Fixed “httpclient crash when performing get request” (#6284) Fixed “GC bug” (#6279) Fixed “Minor typo in system.nim” (#6288) Fixed “Incorrect render of GenericParams” (#6295) Fixed “Wrong [XDeclaredButNotUsed] hint” (#3583) Fixed “Segfault when using reorder pragma” (#6306) Fixed “execvpe not available on older linux versions” (#1734) Fixed “tables.[]=A should support val = 0” (#4366) Fixed “nimble and koch executables in win32 distribution are x64, not x86” (#6147) Fixed “nim-0.17.0_x32.zip contains some 64-bit binaries” (#6028) Fixed “Inherited fields are not set in some cases, using object literals” (#6294) Fixed “existsEnv declared twice in develop branch ospaths and nimscript” (#6327)"> -->
+  <meta property="og:description" content="The Nim team is happy to announce that the latest release of Nim, version 0.17.2, is now available. Nim is a systems programming language that focuses on performance, portability and expressiveness. The major new feature in this release is the support for .nimble-link files. This has been added in order to support the latest Nimble version with its “develop” feature. For more information, see nimble. This is however primarily a bug fix release, with the most important bugfixes including the long standing codegen bugs that triggered GC crashes. Updating is recommended! Be sure to check out the changelog below for a comprehensive list of changes. This release also includes version 0.8.8 of the Nimble package manager, be sure to check out its changelog for a list of changes since its last release. You can download the latest release of Nim from the download page. If you’re using choosenim then you can easily update to the latest version by running the following: $ choosenim update stable Changelog Changes affecting backwards compatibility The changes made to the do notation parsing rules in v0.17.0 have been reverted. Bugfixes The list below has been generated based on the commits in Nim’s git repository. As such it lists only the issues which have been closed via a commit, for a full list see this link on Github. Fixed “Fixed syslocks for ios” (#5804) Fixed “OpenBSD pthread issue” (#5920) Fixed “JS backend doesn’t copy ‘object’ when adding to ‘seq’” (#4139) Fixed “sequtils insert produces wrong result in a case of sequence of objects in JS” (#5933) Fixed “Index out of bounds error while using sets with cstring in JS” (#5969) Fixed “Compiler crash when a proc marked as gcsafe moves around non-gcsafe closures” (#5959) Fixed “type with packed pragma is not properly packed” (#5824) Fixed “httpclient Docs Wrong” (#5863) Fixed “{.async.} doesn’t work with do notation” (#5995) Fixed “Sigmatch error in fitting anonymous tuples to generic types” (#5890) Fixed “Nested array alias type leads to compile-time and run-time bugs” (#5962) Fixed “Static - Default value for static arg - Cannot instantiate” (#5864) Fixed “constant of generic type becomes all zero when assigning to a local value” (#5756) Fixed “User defined arithemetic in generic types” (#5106) Fixed “Overloading with static[] leads to strange error” (#5017) Fixed “Compiler crash” (#2730) Fixed “Compiler segfaults on non-recursive code” (#4524) Fixed “static[T] generic type cause invalid type” (#3784) Fixed “Using static generic params on procs often fails to compile” (#1017) Fixed “Inferring nested static[T] “ (#3153) Fixed “another static_t problem” (#3152) Fixed “Generic code can cause attempts to use constructors for unrelated types to fail” (#1051) Fixed “Internal Error with with static generic parameters” (#1082) Fixed “Internal error with enumerable concept and map proc” (#5968) Fixed “Concept - strange behaviour” (#4020) Fixed “Compiler crash while wrapping concepts” (#5127) Fixed “Using generic concept parameter causes stack overflow” (#4737) Fixed “About ambiguous concept” (#5888) Fixed “Concepts don’t play well with distinct primitive types, e.g. distinct float or string” (#5983) Fixed “Error with generic concepts” (#5084) Fixed “the ^ operator fails on floats” (#5966) Fixed “Documentation: times.nim” (#6010) Fixed “[Regression] Nim js crashes” (#5946) Fixed “Times module compiled in JS failed to compare values” (#6021) Fixed “JS: tables assignment breaks with importcpp’s in scope (internal error: genAddr: nkDerefExpr)” (#5846) Fixed “Object constructor violates copy semantics, allows modifying immutable [js only]” (#4703) Fixed “No bounds checking in JS target?” (#5563) Fixed “js: genDeref compiler crash” (#5974) Fixed “JS: internal error in genDeref” (#5379) Fixed “JS: compiler internal error” (#5517) Fixed “JS codegen produces circular structure” (#6035) Fixed ““nim doc” SIGSEGV when foo*(a: proc)” (#6030) Fixed “Value redefinition not detected in {.pure.} enum” (#6008) Fixed “unexpected option : ‘-o’” (#6069) Fixed “Nimsuggest crashes in sempass2.useVar” (#6067) Fixed “Nim compiler generates variables for discarded proc return values” (#6037) Fixed “js target bug with operator +=” (#5608) Fixed “Nim Tutorial (Part I) need update” (#6062) Fixed “Error after codegen when shadowing template arg” (#4898) Fixed “Threadpool doesn’t work after sync” (#6090) Fixed “parsecfg silently fails to store and retrieve negative integers” (#6046) Fixed “async + threads:on + globals = error” (#5738) Fixed “Strange behaviour when importing locks for use in a generic type” (#6049) Fixed “js backend failed to compile try…except new syntax” (#5986) Fixed “Different handling of .emit with and without native debugger” (#5989) Fixed “Structure packing and alignment issue on Windows.” (#4763) Fixed “ICE on discard seq.len” (#6118) Fixed “ICE: genRecordField 3” (#5892) Fixed “JS exportc regression?” (#6096) Fixed “ReraiseError when using try/except within finally block” (#5871) Fixed “Inconsistent os:standalone behavior” (#6131) Fixed “.cfg files (, parsecfg) and quoting” (#499) Fixed “SIGSEGV: Illegal storage access. (Attempt to read from nil?)” (#6127) Fixed “Nim Tutorial doc bugs” (#6125) Fixed “union type compile error..” (#6016) Fixed “Failure to compile stdlib/system with VCC, C++ and threads:on on i386” (#6196) Fixed “GC bug resulting in random crashes” (#6234) Fixed “deque.nim: Doc says removeLast proc, but not defined “ (#6110) Fixed “Nim crashes when instancing with incorrect arg sintax” (#5965) Fixed “Equality of OrderedTable is incorrect” (#6250) Fixed “0.17.0 Regression: Statement macro from tutorial does not compile anymore” (#5918) Fixed “httpclient crash when performing get request” (#6284) Fixed “GC bug” (#6279) Fixed “Minor typo in system.nim” (#6288) Fixed “Incorrect render of GenericParams” (#6295) Fixed “Wrong [XDeclaredButNotUsed] hint” (#3583) Fixed “Segfault when using reorder pragma” (#6306) Fixed “execvpe not available on older linux versions” (#1734) Fixed “tables.[]=A should support val = 0” (#4366) Fixed “nimble and koch executables in win32 distribution are x64, not x86” (#6147) Fixed “nim-0.17.0_x32.zip contains some 64-bit binaries” (#6028) Fixed “Inherited fields are not set in some cases, using object literals” (#6294) Fixed “existsEnv declared twice in develop branch ospaths and nimscript” (#6327)">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.17.2 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.17.2 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              07 September 2017
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              The Nim Team
+            </span>
+            
+          </h3>
+          <p>The Nim team is happy to announce that the latest release of Nim,
+version 0.17.2, is now available. Nim is a systems programming language that
+focuses on performance, portability and expressiveness.</p>
+
+<p>The major new feature in this release is the support for <code class="language-plaintext highlighter-rouge">.nimble-link</code> files.
+This has been added in order to support the latest Nimble version with its “develop” feature. For more information, see <a href="https://github.com/nim-lang/nimble#nimble-develop"><code class="language-plaintext highlighter-rouge">nimble</code></a>.</p>
+
+<p>This is however primarily a bug fix release, with the most important bugfixes
+including the long standing codegen bugs that triggered GC crashes.
+Updating is recommended!</p>
+
+<p>Be sure to check out the changelog <a href="#changelog">below</a> for
+a comprehensive list of changes.</p>
+
+<p>This release also includes version 0.8.8 of the Nimble package manager,
+be sure to check out its
+<a href="https://github.com/nim-lang/nimble/blob/master/changelog.markdown">changelog</a>
+for a list of changes since its last release.</p>
+
+<p>You can download the latest release of Nim from the <a href="download.html">download</a>
+page. If you’re using <a href="https://github.com/dom96/choosenim"><code class="language-plaintext highlighter-rouge">choosenim</code></a>
+then you can easily update to the latest version by running the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ choosenim update stable
+</code></pre></div></div>
+
+<h1 id="changelog">Changelog</h1>
+
+<h2 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h2>
+
+<ul>
+  <li>The changes made to the <code class="language-plaintext highlighter-rouge">do</code> notation parsing rules in v0.17.0 have been
+reverted.</li>
+</ul>
+
+<h2 id="bugfixes">Bugfixes</h2>
+
+<p>The list below has been generated based on the commits in Nim’s git
+repository. As such it lists only the issues which have been closed
+via a commit, for a full list see
+<a href="https://github.com/nim-lang/Nim/issues?utf8=%E2%9C%93&amp;q=is%3Aissue+closed%3A%222017-05-16+..+2017-09-10%22+">this link on Github</a>.</p>
+
+<ul>
+  <li>Fixed “Fixed syslocks for ios”
+(<a href="https://github.com/nim-lang/Nim/issues/5804">#5804</a>)</li>
+  <li>Fixed “OpenBSD pthread issue”
+(<a href="https://github.com/nim-lang/Nim/issues/5920">#5920</a>)</li>
+  <li>Fixed “JS backend doesn’t copy ‘object’ when adding to ‘seq’”
+(<a href="https://github.com/nim-lang/Nim/issues/4139">#4139</a>)</li>
+  <li>Fixed “sequtils insert produces wrong result in a case of sequence of objects in JS”
+(<a href="https://github.com/nim-lang/Nim/issues/5933">#5933</a>)</li>
+  <li>Fixed “Index out of bounds error while using sets with cstring in JS”
+(<a href="https://github.com/nim-lang/Nim/issues/5969">#5969</a>)</li>
+  <li>Fixed “Compiler crash when a proc marked as gcsafe moves around non-gcsafe closures”
+(<a href="https://github.com/nim-lang/Nim/issues/5959">#5959</a>)</li>
+  <li>Fixed “type with packed pragma is not properly packed”
+(<a href="https://github.com/nim-lang/Nim/issues/5824">#5824</a>)</li>
+  <li>Fixed “httpclient Docs Wrong”
+(<a href="https://github.com/nim-lang/Nim/issues/5863">#5863</a>)</li>
+  <li>Fixed “{.async.} doesn’t work with do notation”
+(<a href="https://github.com/nim-lang/Nim/issues/5995">#5995</a>)</li>
+  <li>Fixed “Sigmatch error in fitting anonymous tuples to generic types”
+(<a href="https://github.com/nim-lang/Nim/issues/5890">#5890</a>)</li>
+  <li>Fixed “Nested array alias type leads to compile-time and run-time bugs”
+(<a href="https://github.com/nim-lang/Nim/issues/5962">#5962</a>)</li>
+  <li>Fixed “Static - Default value for static arg - Cannot instantiate”
+(<a href="https://github.com/nim-lang/Nim/issues/5864">#5864</a>)</li>
+  <li>Fixed “constant of generic type becomes all zero when assigning to a local value”
+(<a href="https://github.com/nim-lang/Nim/issues/5756">#5756</a>)</li>
+  <li>Fixed “User defined arithemetic in generic types”
+(<a href="https://github.com/nim-lang/Nim/issues/5106">#5106</a>)</li>
+  <li>Fixed “Overloading with static[] leads to strange error”
+(<a href="https://github.com/nim-lang/Nim/issues/5017">#5017</a>)</li>
+  <li>Fixed “Compiler crash”
+(<a href="https://github.com/nim-lang/Nim/issues/2730">#2730</a>)</li>
+  <li>Fixed “Compiler segfaults on non-recursive code”
+(<a href="https://github.com/nim-lang/Nim/issues/4524">#4524</a>)</li>
+  <li>Fixed “static[T] generic type cause <code class="language-plaintext highlighter-rouge">invalid type</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/3784">#3784</a>)</li>
+  <li>Fixed “Using static generic params on procs often fails to compile”
+(<a href="https://github.com/nim-lang/Nim/issues/1017">#1017</a>)</li>
+  <li>Fixed “Inferring nested <code class="language-plaintext highlighter-rouge">static[T]</code> “
+(<a href="https://github.com/nim-lang/Nim/issues/3153">#3153</a>)</li>
+  <li>Fixed “another static_t problem”
+(<a href="https://github.com/nim-lang/Nim/issues/3152">#3152</a>)</li>
+  <li>Fixed “Generic code can cause attempts to use constructors for unrelated types to fail”
+(<a href="https://github.com/nim-lang/Nim/issues/1051">#1051</a>)</li>
+  <li>Fixed “Internal Error with with static generic parameters”
+(<a href="https://github.com/nim-lang/Nim/issues/1082">#1082</a>)</li>
+  <li>Fixed “Internal error with enumerable concept and map proc”
+(<a href="https://github.com/nim-lang/Nim/issues/5968">#5968</a>)</li>
+  <li>Fixed “Concept - strange behaviour”
+(<a href="https://github.com/nim-lang/Nim/issues/4020">#4020</a>)</li>
+  <li>Fixed “Compiler crash while wrapping concepts”
+(<a href="https://github.com/nim-lang/Nim/issues/5127">#5127</a>)</li>
+  <li>Fixed “Using generic concept parameter causes stack overflow”
+(<a href="https://github.com/nim-lang/Nim/issues/4737">#4737</a>)</li>
+  <li>Fixed “About ambiguous <code class="language-plaintext highlighter-rouge">concept</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/5888">#5888</a>)</li>
+  <li>Fixed “Concepts don’t play well with distinct primitive types, e.g. distinct float or string”
+(<a href="https://github.com/nim-lang/Nim/issues/5983">#5983</a>)</li>
+  <li>Fixed “Error with generic concepts”
+(<a href="https://github.com/nim-lang/Nim/issues/5084">#5084</a>)</li>
+  <li>Fixed “the <code class="language-plaintext highlighter-rouge">^</code> operator fails on floats”
+(<a href="https://github.com/nim-lang/Nim/issues/5966">#5966</a>)</li>
+  <li>Fixed “Documentation: times.nim”
+(<a href="https://github.com/nim-lang/Nim/issues/6010">#6010</a>)</li>
+  <li>Fixed “[Regression] Nim js crashes”
+(<a href="https://github.com/nim-lang/Nim/issues/5946">#5946</a>)</li>
+  <li>Fixed “Times module compiled in JS failed to compare values”
+(<a href="https://github.com/nim-lang/Nim/issues/6021">#6021</a>)</li>
+  <li>Fixed “JS: tables assignment breaks with importcpp’s in scope (internal error: genAddr: nkDerefExpr)”
+(<a href="https://github.com/nim-lang/Nim/issues/5846">#5846</a>)</li>
+  <li>Fixed “Object constructor violates copy semantics, allows modifying immutable [js only]”
+(<a href="https://github.com/nim-lang/Nim/issues/4703">#4703</a>)</li>
+  <li>Fixed “No bounds checking in JS target?”
+(<a href="https://github.com/nim-lang/Nim/issues/5563">#5563</a>)</li>
+  <li>Fixed “js: genDeref compiler crash”
+(<a href="https://github.com/nim-lang/Nim/issues/5974">#5974</a>)</li>
+  <li>Fixed “JS: internal error in genDeref”
+(<a href="https://github.com/nim-lang/Nim/issues/5379">#5379</a>)</li>
+  <li>Fixed “JS: compiler internal error”
+(<a href="https://github.com/nim-lang/Nim/issues/5517">#5517</a>)</li>
+  <li>Fixed “JS codegen produces circular structure”
+(<a href="https://github.com/nim-lang/Nim/issues/6035">#6035</a>)</li>
+  <li>Fixed ““nim doc” SIGSEGV when foo*(a: proc)”
+(<a href="https://github.com/nim-lang/Nim/issues/6030">#6030</a>)</li>
+  <li>Fixed “Value redefinition not detected in {.pure.} enum”
+(<a href="https://github.com/nim-lang/Nim/issues/6008">#6008</a>)</li>
+  <li>Fixed “unexpected option : ‘-o’”
+(<a href="https://github.com/nim-lang/Nim/issues/6069">#6069</a>)</li>
+  <li>Fixed “Nimsuggest crashes in sempass2.useVar”
+(<a href="https://github.com/nim-lang/Nim/issues/6067">#6067</a>)</li>
+  <li>Fixed “Nim compiler generates variables for discarded proc return values”
+(<a href="https://github.com/nim-lang/Nim/issues/6037">#6037</a>)</li>
+  <li>Fixed “js target bug with operator +=”
+(<a href="https://github.com/nim-lang/Nim/issues/5608">#5608</a>)</li>
+  <li>Fixed “Nim Tutorial (Part I) need update”
+(<a href="https://github.com/nim-lang/Nim/issues/6062">#6062</a>)</li>
+  <li>Fixed “Error after codegen when shadowing template arg”
+(<a href="https://github.com/nim-lang/Nim/issues/4898">#4898</a>)</li>
+  <li>Fixed “Threadpool doesn’t work after sync”
+(<a href="https://github.com/nim-lang/Nim/issues/6090">#6090</a>)</li>
+  <li>Fixed “parsecfg silently fails to store and retrieve negative integers”
+(<a href="https://github.com/nim-lang/Nim/issues/6046">#6046</a>)</li>
+  <li>Fixed “async + threads:on + globals = error”
+(<a href="https://github.com/nim-lang/Nim/issues/5738">#5738</a>)</li>
+  <li>Fixed “Strange behaviour when importing <code class="language-plaintext highlighter-rouge">locks</code> for use in a generic type”
+(<a href="https://github.com/nim-lang/Nim/issues/6049">#6049</a>)</li>
+  <li>Fixed “js backend failed to compile try…except new syntax”
+(<a href="https://github.com/nim-lang/Nim/issues/5986">#5986</a>)</li>
+  <li>Fixed “Different handling of .emit with and without native debugger”
+(<a href="https://github.com/nim-lang/Nim/issues/5989">#5989</a>)</li>
+  <li>Fixed “Structure packing and alignment issue on Windows.”
+(<a href="https://github.com/nim-lang/Nim/issues/4763">#4763</a>)</li>
+  <li>Fixed “ICE on discard seq.len”
+(<a href="https://github.com/nim-lang/Nim/issues/6118">#6118</a>)</li>
+  <li>Fixed “ICE: genRecordField 3”
+(<a href="https://github.com/nim-lang/Nim/issues/5892">#5892</a>)</li>
+  <li>Fixed “JS exportc regression?”
+(<a href="https://github.com/nim-lang/Nim/issues/6096">#6096</a>)</li>
+  <li>
+    <p>Fixed “ReraiseError when using try/except within finally block”
+(<a href="https://github.com/nim-lang/Nim/issues/5871">#5871</a>)</p>
+  </li>
+  <li>Fixed “Inconsistent os:standalone behavior”
+(<a href="https://github.com/nim-lang/Nim/issues/6131">#6131</a>)</li>
+  <li>Fixed “.cfg files (, parsecfg) and quoting”
+(<a href="https://github.com/nim-lang/Nim/issues/499">#499</a>)</li>
+  <li>Fixed “SIGSEGV: Illegal storage access. (Attempt to read from nil?)”
+(<a href="https://github.com/nim-lang/Nim/issues/6127">#6127</a>)</li>
+  <li>
+    <p>Fixed “Nim Tutorial doc bugs”
+(<a href="https://github.com/nim-lang/Nim/issues/6125">#6125</a>)</p>
+  </li>
+  <li>Fixed “union type compile error..”
+(<a href="https://github.com/nim-lang/Nim/issues/6016">#6016</a>)</li>
+  <li>Fixed “Failure to compile stdlib/system with VCC, C++ and threads:on on i386”
+(<a href="https://github.com/nim-lang/Nim/issues/6196">#6196</a>)</li>
+  <li>Fixed “GC bug resulting in random crashes”
+(<a href="https://github.com/nim-lang/Nim/issues/6234">#6234</a>)</li>
+  <li>Fixed “deque.nim: Doc says removeLast proc, but not defined “
+(<a href="https://github.com/nim-lang/Nim/issues/6110">#6110</a>)</li>
+  <li>Fixed “Nim crashes when instancing with incorrect arg sintax”
+(<a href="https://github.com/nim-lang/Nim/issues/5965">#5965</a>)</li>
+  <li>Fixed “Equality of OrderedTable is incorrect”
+(<a href="https://github.com/nim-lang/Nim/issues/6250">#6250</a>)</li>
+  <li>
+    <p>Fixed “0.17.0 Regression: Statement macro from tutorial does not compile anymore”
+(<a href="https://github.com/nim-lang/Nim/issues/5918">#5918</a>)</p>
+  </li>
+  <li>Fixed “httpclient crash when performing get request”
+(<a href="https://github.com/nim-lang/Nim/issues/6284">#6284</a>)</li>
+  <li>Fixed “GC bug”
+(<a href="https://github.com/nim-lang/Nim/issues/6279">#6279</a>)</li>
+  <li>Fixed “Minor typo in system.nim”
+(<a href="https://github.com/nim-lang/Nim/issues/6288">#6288</a>)</li>
+  <li>Fixed “Incorrect render of GenericParams”
+(<a href="https://github.com/nim-lang/Nim/issues/6295">#6295</a>)</li>
+  <li>Fixed “Wrong [XDeclaredButNotUsed] hint”
+(<a href="https://github.com/nim-lang/Nim/issues/3583">#3583</a>)</li>
+  <li>Fixed “Segfault when using reorder pragma”
+(<a href="https://github.com/nim-lang/Nim/issues/6306">#6306</a>)</li>
+  <li>Fixed “execvpe not available on older linux versions”
+(<a href="https://github.com/nim-lang/Nim/issues/1734">#1734</a>)</li>
+  <li>Fixed “tables.<code class="language-plaintext highlighter-rouge">[]=</code><a href="t: var CountTable[A]; key: A; val: int">A</a> should support val = 0”
+(<a href="https://github.com/nim-lang/Nim/issues/4366">#4366</a>)</li>
+  <li>Fixed “nimble and koch executables in win32 distribution are x64, not x86”
+(<a href="https://github.com/nim-lang/Nim/issues/6147">#6147</a>)</li>
+  <li>Fixed “nim-0.17.0_x32.zip contains some 64-bit binaries”
+(<a href="https://github.com/nim-lang/Nim/issues/6028">#6028</a>)</li>
+  <li>Fixed “Inherited fields are not set in some cases, using object literals”
+(<a href="https://github.com/nim-lang/Nim/issues/6294">#6294</a>)</li>
+  <li>Fixed “existsEnv declared twice in develop branch ospaths and nimscript”
+(<a href="https://github.com/nim-lang/Nim/issues/6327">#6327</a>)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

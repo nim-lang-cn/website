@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>BountySource Update: The Road to v1.0 - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="BountySource Update: The Road to v1.0"> -->
+
+  
+  <!-- <meta name="twitter:description" content="This was cross-posted from update #4 on BountySource. We are now in the fourth month of the Nim BountySource fundraiser and here is this month’s update[1]. Once again this month, we have beat our previous donation record of $1280 having raised over $1600 over the course of July! That’s now 4 months in a row that your monthly donations have been increasing. As always we are absolutely blown away by your contributions, myself and the rest of the Nim team are extremely thankful for them. It’s not only helping us pay for the necessary expenses (like for example the server that http://nim-lang.org runs on) but it also inspires us to keep going and to make Nim the best programming language that it can be. As mentioned in last month’s update, we have begun the process of engaging with the Nim community through a survey. This survey has now been open for more than a month and will be closing very soon (in about 2 days), so if you haven’t answered it yet, now would be a perfect time to do so. You can find the survey here: http://nim-lang.org/survey. The survey itself has been designed for three types of people: Nim users, ex-Nim users and people who have never used Nim before. This means that you have no excuse not to answer it[2]. There are almost 700 submissions and after the survey is finalised, a blog post will be written with a thorough analysis. It is my hope that the survey analysis will give the Nim team a good idea of what needs to be implemented before version 1.0 can be released. Personally, I hope to make a thorough review of the standard library to ensure that it is ready for the “1.0 backwards compatibility lock”[3]. Although I myself have been very busy lately[4], Araq has been working very hard to fix High Priority issues, ahead of the 1.0 release. And as always, there has also been a lot of pull requests from a wide range of Nim users. Lastly, I would like to mention Nim in Action once again. I have recently finished the final chapter. All that remains now are corrections (based mainly on your feedback, huge thanks to everyone for reading!) and a final review. The book will then be put into production[5] with an estimated print date of around the 20th of January (as usual delays are very much possible). If you have not yet picked up the book, now would be a perfect time to do so. There is still time for you to give feedback about the book, and for me to improve it based on your remarks. It is not often that you can influence a book in this way, and it is my hope that you will help me make this book one of the best resources for learning Nim! As always, many thanks for reading and if you have any questions or feedback feel free to get in touch via email at contact@nim-lang.org or via Twitter. 1 - These updates have so far been fairly regular and it is my hope to write at least one a month. Yep, I am patting myself on the back :) 2 - I joke of course, don’t worry about if you don’t have the time :) 3 - After version 1.0, it is typical for a piece of software (especially a programming language) to ensure that backwards compatibility is not broken between further minor versions until a new major version such as 2.0 is released. 4 - Writing a book, moving to Switzerland to start a new job, and playing Pokemon Go has certainly kept me busy. 5 - Basically the brilliant guys at Manning will process the book so that it looks good in a printed format."> -->
+  <meta property="og:description" content="This was cross-posted from update #4 on BountySource. We are now in the fourth month of the Nim BountySource fundraiser and here is this month’s update[1]. Once again this month, we have beat our previous donation record of $1280 having raised over $1600 over the course of July! That’s now 4 months in a row that your monthly donations have been increasing. As always we are absolutely blown away by your contributions, myself and the rest of the Nim team are extremely thankful for them. It’s not only helping us pay for the necessary expenses (like for example the server that http://nim-lang.org runs on) but it also inspires us to keep going and to make Nim the best programming language that it can be. As mentioned in last month’s update, we have begun the process of engaging with the Nim community through a survey. This survey has now been open for more than a month and will be closing very soon (in about 2 days), so if you haven’t answered it yet, now would be a perfect time to do so. You can find the survey here: http://nim-lang.org/survey. The survey itself has been designed for three types of people: Nim users, ex-Nim users and people who have never used Nim before. This means that you have no excuse not to answer it[2]. There are almost 700 submissions and after the survey is finalised, a blog post will be written with a thorough analysis. It is my hope that the survey analysis will give the Nim team a good idea of what needs to be implemented before version 1.0 can be released. Personally, I hope to make a thorough review of the standard library to ensure that it is ready for the “1.0 backwards compatibility lock”[3]. Although I myself have been very busy lately[4], Araq has been working very hard to fix High Priority issues, ahead of the 1.0 release. And as always, there has also been a lot of pull requests from a wide range of Nim users. Lastly, I would like to mention Nim in Action once again. I have recently finished the final chapter. All that remains now are corrections (based mainly on your feedback, huge thanks to everyone for reading!) and a final review. The book will then be put into production[5] with an estimated print date of around the 20th of January (as usual delays are very much possible). If you have not yet picked up the book, now would be a perfect time to do so. There is still time for you to give feedback about the book, and for me to improve it based on your remarks. It is not often that you can influence a book in this way, and it is my hope that you will help me make this book one of the best resources for learning Nim! As always, many thanks for reading and if you have any questions or feedback feel free to get in touch via email at contact@nim-lang.org or via Twitter. 1 - These updates have so far been fairly regular and it is my hope to write at least one a month. Yep, I am patting myself on the back :) 2 - I joke of course, don’t worry about if you don’t have the time :) 3 - After version 1.0, it is typical for a piece of software (especially a programming language) to ensure that backwards compatibility is not broken between further minor versions until a new major version such as 2.0 is released. 4 - Writing a book, moving to Switzerland to start a new job, and playing Pokemon Go has certainly kept me busy. 5 - Basically the brilliant guys at Manning will process the book so that it looks good in a printed format.">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="BountySource Update: The Road to v1.0" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            BountySource Update: The Road to v1.0
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              06 August 2016
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Dominik Picheta
+            </span>
+            
+          </h3>
+          <p><em>This was cross-posted from <a href="https://salt.bountysource.com/teams/nim/updates/4-the-road-to-v1-0">update #4</a> on BountySource.</em></p>
+
+<p>We are now in the fourth month of the
+<a href="https://salt.bountysource.com/teams/nim">Nim BountySource fundraiser</a> and
+here is
+this month’s update[1]. Once again this month, we have beat our previous
+donation record of $1280 having raised over $1600 over the course of July!
+That’s now 4 months in a row that your monthly donations have been increasing.
+As always we are absolutely blown away by your contributions,
+<a href="https://github.com/dom96">myself</a> and the
+rest of the Nim team are extremely thankful for them. It’s not only helping us
+pay for the necessary expenses (like for example the server that
+http://nim-lang.org runs on) but it also inspires us to keep going and to make
+Nim the best programming language that it can be.</p>
+
+<p>As mentioned in
+<a href="https://salt.bountysource.com/teams/nim/updates/3-engaging-with-our-community">last month’s update</a>, we have begun the process of engaging with
+the Nim community through a survey. This survey has now been open for more than
+a month and will be closing very soon (in about 2 days), so if you haven’t
+answered it yet, now would be a perfect time to do so. You can find the survey
+here: http://nim-lang.org/survey.</p>
+
+<p>The survey itself has been designed for three types of people: Nim users,
+ex-Nim users and people who have never used Nim before. This means that you
+have no excuse not to answer it[2]. There are almost 700 submissions and after
+the survey is finalised, a blog post will be written with a thorough analysis.</p>
+
+<p>It is my hope that the survey analysis will give the Nim team a good idea of
+what needs to be implemented before version 1.0 can be released. Personally, I
+hope to make a thorough review of the standard library to ensure that it is
+ready for the “1.0 backwards compatibility lock”[3]. Although I myself have
+been very busy lately[4], <a href="http://github.com/Araq">Araq</a> has been working very hard to fix
+<a href="https://github.com/nim-lang/Nim/issues?q=is%3Aissue+is%3Aopen+label%3A%22High+Priority%22">High Priority</a>
+issues, ahead of the 1.0 release. And as always, there has also been a
+<a href="https://github.com/nim-lang/Nim/pulse">lot of pull requests</a>
+from a wide range of Nim users.</p>
+
+<p>Lastly, I would like to mention
+<a href="https://manning.com/books/nim-in-action?a_aid=niminaction&amp;a_bid=78a27e81">Nim in Action</a> once again. I have recently
+finished the final chapter. All that remains now are corrections (based mainly
+on your feedback, huge thanks to everyone for reading!) and a final review.
+The book will then be put into production[5] with an estimated print date of
+around the 20th of January (as usual delays are very much possible). If you
+have not yet picked up the book, now would be a perfect time to do so. There
+is still time for you to give feedback about the book, and for me to improve it
+based on your remarks. It is not often that you can influence a book in this
+way, and it is my hope that you will help me make this book one of the best
+resources for learning Nim!</p>
+
+<p>As always, many thanks for reading and if you have any questions or feedback
+feel free to get in touch via email at contact@nim-lang.org or via
+<a href="https://twitter.com/nim_lang">Twitter</a>.</p>
+
+<p>1 - These updates have so far been fairly regular and it is my hope to write
+at least one a month. Yep, I am patting myself on the back :)</p>
+
+<p>2 - I joke of course, don’t worry about if you don’t have the time :)</p>
+
+<p>3 - After version 1.0, it is typical for a piece of software (especially
+a programming language) to ensure that backwards compatibility is not broken
+between further minor versions until a new major version such as 2.0 is released.</p>
+
+<p>4 - Writing a book, moving to Switzerland to start a new job, and playing
+<a href="https://pokemongostatus.org/">Pokemon Go</a> has certainly kept me busy.</p>
+
+<p>5 - Basically the brilliant guys at <a href="https://manning.com">Manning</a> will
+process the book so that it looks good in a printed format.</p>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

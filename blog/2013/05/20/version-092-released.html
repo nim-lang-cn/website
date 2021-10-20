@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.9.2 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.9.2 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="We are pleased to announce that version 0.9.2 of the Nimrod compiler has been released. This release has attracted by far the most contributions in comparison to any other release. This release brings with it many new features and bug fixes, a list of which can be seen later. One of the major new features is the effect system together with exception tracking which allows for checked exceptions and more, for further details check out the manual . Another major new feature is the introduction of statement list expressions, more details on these can be found here. The ability to exclude symbols from modules has also been implemented, this feature can be used like so: import module except symbol. Thanks to all contributors! Bugfixes The old GC never collected cycles correctly. Fixed but it can cause performance regressions. However you can deactivate the cycle collector with GC_disableMarkAndSweep and run it explicitly at an appropriate time or not at all. There is also a new GC you can activate with --gc:markAndSweep which does not have this problem but is slower in general and has no realtime guarantees. cast for floating point types now does the bitcast as specified in the manual. This breaks code that erroneously uses cast to convert different floating point values. SCGI module’s performance has been improved greatly, it will no longer block on many concurrent requests. In total fixed over 70 github issues and merged over 60 pull requests. Library Additions There is a new experimental mark&amp;sweep GC which can be faster (or much slower) than the default GC. Enable with --gc:markAndSweep. Added system.onRaise to support a condition system. Added system.locals that provides access to a proc’s locals. Added macros.quote for AST quasi-quoting. Added system.unsafeNew to support hacky variable length objects. system.fields and system.fieldPairs support object too; they used to only support tuples. Added system.CurrentSourcePath returning the full file-system path of the current source file. The macros module now contains lots of useful helpers for building up abstract syntax trees. Changes affecting backwards compatibility shared is a keyword now. Deprecated sockets.recvLine and asyncio.recvLine, added readLine instead. The way indentation is handled in the parser changed significantly. However, this affects very little (if any) real world code. The expression/statement unification has been implemented. Again this only affects edge cases and no known real world code. Changed the async interface of the scgi module. WideStrings are now garbage collected like other string types. Compiler Additions The doc2 command does not generate output for the whole project anymore. Use the new --project switch to enable this behaviour. The compiler can now warn about shadowed local variables. However, this needs to be turned on explicitly via --warning[ShadowIdent]:on. The compiler now supports almost every pragma in a push pragma. Generic converters have been implemented. Added a highly experimental noforward pragma enabling a special compilation mode that largely eliminates the need for forward declarations. Language Additions case expressions are now supported. Table constructors now mimic more closely the syntax of the case statement. Nimrod can now infer the return type of a proc from its body. Added a mixin declaration to affect symbol binding rules in generics. Exception tracking has been added and the doc2 command annotates possible exceptions for you. User defined effects (“tags”) tracking has been added and the doc2 command annotates possible tags for you. Types can be annotated with the new syntax not nil to explicitly state that nil is not allowed. However currently the compiler performs no advanced static checking for this; for now it’s merely for documentation purposes. An export statement has been added to the language: It can be used for symbol forwarding so client modules don’t have to import a module’s dependencies explicitly. Overloading based on ASTs has been implemented. Generics are now supported for multi methods. Objects can be initialized via an object constructor expression. There is a new syntactic construct (;) unifying expressions and statements. You can now use from module import nil if you want to import the module but want to enforce fully qualified access to every symbol in module. Notes for the future The scope rules of if statements will change in 0.9.4. This affects the =~ pegs/re templates. The sockets module will become a low-level wrapper of OS-specific socket functions. All the high-level features of the current sockets module will be moved to a network module."> -->
+  <meta property="og:description" content="We are pleased to announce that version 0.9.2 of the Nimrod compiler has been released. This release has attracted by far the most contributions in comparison to any other release. This release brings with it many new features and bug fixes, a list of which can be seen later. One of the major new features is the effect system together with exception tracking which allows for checked exceptions and more, for further details check out the manual . Another major new feature is the introduction of statement list expressions, more details on these can be found here. The ability to exclude symbols from modules has also been implemented, this feature can be used like so: import module except symbol. Thanks to all contributors! Bugfixes The old GC never collected cycles correctly. Fixed but it can cause performance regressions. However you can deactivate the cycle collector with GC_disableMarkAndSweep and run it explicitly at an appropriate time or not at all. There is also a new GC you can activate with --gc:markAndSweep which does not have this problem but is slower in general and has no realtime guarantees. cast for floating point types now does the bitcast as specified in the manual. This breaks code that erroneously uses cast to convert different floating point values. SCGI module’s performance has been improved greatly, it will no longer block on many concurrent requests. In total fixed over 70 github issues and merged over 60 pull requests. Library Additions There is a new experimental mark&amp;sweep GC which can be faster (or much slower) than the default GC. Enable with --gc:markAndSweep. Added system.onRaise to support a condition system. Added system.locals that provides access to a proc’s locals. Added macros.quote for AST quasi-quoting. Added system.unsafeNew to support hacky variable length objects. system.fields and system.fieldPairs support object too; they used to only support tuples. Added system.CurrentSourcePath returning the full file-system path of the current source file. The macros module now contains lots of useful helpers for building up abstract syntax trees. Changes affecting backwards compatibility shared is a keyword now. Deprecated sockets.recvLine and asyncio.recvLine, added readLine instead. The way indentation is handled in the parser changed significantly. However, this affects very little (if any) real world code. The expression/statement unification has been implemented. Again this only affects edge cases and no known real world code. Changed the async interface of the scgi module. WideStrings are now garbage collected like other string types. Compiler Additions The doc2 command does not generate output for the whole project anymore. Use the new --project switch to enable this behaviour. The compiler can now warn about shadowed local variables. However, this needs to be turned on explicitly via --warning[ShadowIdent]:on. The compiler now supports almost every pragma in a push pragma. Generic converters have been implemented. Added a highly experimental noforward pragma enabling a special compilation mode that largely eliminates the need for forward declarations. Language Additions case expressions are now supported. Table constructors now mimic more closely the syntax of the case statement. Nimrod can now infer the return type of a proc from its body. Added a mixin declaration to affect symbol binding rules in generics. Exception tracking has been added and the doc2 command annotates possible exceptions for you. User defined effects (“tags”) tracking has been added and the doc2 command annotates possible tags for you. Types can be annotated with the new syntax not nil to explicitly state that nil is not allowed. However currently the compiler performs no advanced static checking for this; for now it’s merely for documentation purposes. An export statement has been added to the language: It can be used for symbol forwarding so client modules don’t have to import a module’s dependencies explicitly. Overloading based on ASTs has been implemented. Generics are now supported for multi methods. Objects can be initialized via an object constructor expression. There is a new syntactic construct (;) unifying expressions and statements. You can now use from module import nil if you want to import the module but want to enforce fully qualified access to every symbol in module. Notes for the future The scope rules of if statements will change in 0.9.4. This affects the =~ pegs/re templates. The sockets module will become a low-level wrapper of OS-specific socket functions. All the high-level features of the current sockets module will be moved to a network module.">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.9.2 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.9.2 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              20 May 2013
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Dominik Picheta
+            </span>
+            
+          </h3>
+          <p>We are pleased to announce that version 0.9.2 of the Nimrod compiler has been
+released. This release has attracted by far the most contributions in comparison
+to any other release.</p>
+
+<p>This release brings with it many new features and bug fixes, a list of which
+can be seen later. One of the major new features is the effect system together
+with exception tracking which allows for checked exceptions and more,
+for further details check out the <a href="manual.html#effect-system">manual </a>.
+Another major new feature is the introduction of statement list expressions,
+more details on these can be found <a href="manual.html#statement-list-expression">here</a>.
+The ability to exclude symbols from modules has also been
+implemented, this feature can be used like so: <code class="language-plaintext highlighter-rouge">import module except symbol</code>.</p>
+
+<p>Thanks to all <a href="https://github.com/Araq/Nimrod/contributors">contributors</a>!</p>
+
+<h2 id="bugfixes">Bugfixes</h2>
+
+<ul>
+  <li>The old GC never collected cycles correctly. Fixed but it can cause
+performance regressions. However you can deactivate the cycle collector
+with <code class="language-plaintext highlighter-rouge">GC_disableMarkAndSweep</code> and run it explicitly at an appropriate time
+or not at all. There is also a new GC you can activate
+with <code class="language-plaintext highlighter-rouge">--gc:markAndSweep</code> which does not have this problem but is slower in
+general and has no realtime guarantees.</li>
+  <li><code class="language-plaintext highlighter-rouge">cast</code> for floating point types now does the bitcast as specified in the
+manual. This breaks code that erroneously uses <code class="language-plaintext highlighter-rouge">cast</code> to convert different
+floating point values.</li>
+  <li>SCGI module’s performance has been improved greatly, it will no longer block
+on many concurrent requests.</li>
+  <li>In total fixed over 70 github issues and merged over 60 pull requests.</li>
+</ul>
+
+<h2 id="library-additions">Library Additions</h2>
+
+<ul>
+  <li>There is a new experimental mark&amp;sweep GC which can be faster (or much
+slower) than the default GC. Enable with <code class="language-plaintext highlighter-rouge">--gc:markAndSweep</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.onRaise</code> to support a condition system.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.locals</code> that provides access to a proc’s locals.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">macros.quote</code> for AST quasi-quoting.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.unsafeNew</code> to support hacky variable length objects.</li>
+  <li><code class="language-plaintext highlighter-rouge">system.fields</code> and <code class="language-plaintext highlighter-rouge">system.fieldPairs</code> support <code class="language-plaintext highlighter-rouge">object</code> too; they
+used to only support tuples.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.CurrentSourcePath</code> returning the full file-system path of
+the current source file.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">macros</code> module now contains lots of useful helpers for building up
+abstract syntax trees.</li>
+</ul>
+
+<h2 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">shared</code> is a keyword now.</li>
+  <li>Deprecated <code class="language-plaintext highlighter-rouge">sockets.recvLine</code> and <code class="language-plaintext highlighter-rouge">asyncio.recvLine</code>, added
+<code class="language-plaintext highlighter-rouge">readLine</code> instead.</li>
+  <li>The way indentation is handled in the parser changed significantly. However,
+this affects very little (if any) real world code.</li>
+  <li>The expression/statement unification has been implemented. Again this
+only affects edge cases and no known real world code.</li>
+  <li>Changed the async interface of the <code class="language-plaintext highlighter-rouge">scgi</code> module.</li>
+  <li>WideStrings are now garbage collected like other string types.</li>
+</ul>
+
+<h2 id="compiler-additions">Compiler Additions</h2>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">doc2</code> command does not generate output for the whole project anymore.
+Use the new <code class="language-plaintext highlighter-rouge">--project</code> switch to enable this behaviour.</li>
+  <li>The compiler can now warn about shadowed local variables. However, this needs
+to be turned on explicitly via <code class="language-plaintext highlighter-rouge">--warning[ShadowIdent]:on</code>.</li>
+  <li>The compiler now supports almost every pragma in a <code class="language-plaintext highlighter-rouge">push</code> pragma.</li>
+  <li>Generic converters have been implemented.</li>
+  <li>Added a <strong>highly experimental</strong> <code class="language-plaintext highlighter-rouge">noforward</code> pragma enabling a special
+compilation mode that largely eliminates the need for forward declarations.</li>
+</ul>
+
+<h2 id="language-additions">Language Additions</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">case expressions</code> are now supported.</li>
+  <li>Table constructors now mimic more closely the syntax of the <code class="language-plaintext highlighter-rouge">case</code>
+statement.</li>
+  <li>Nimrod can now infer the return type of a proc from its body.</li>
+  <li>Added a <code class="language-plaintext highlighter-rouge">mixin</code> declaration to affect symbol binding rules in generics.</li>
+  <li>Exception tracking has been added and the <code class="language-plaintext highlighter-rouge">doc2</code> command annotates possible
+exceptions for you.</li>
+  <li>User defined effects (“tags”) tracking has been added and the <code class="language-plaintext highlighter-rouge">doc2</code>
+command annotates possible tags for you.</li>
+  <li>Types can be annotated with the new syntax <code class="language-plaintext highlighter-rouge">not nil</code> to explicitly state
+that <code class="language-plaintext highlighter-rouge">nil</code> is not allowed. However currently the compiler performs no
+advanced static checking for this; for now it’s merely for documentation
+purposes.</li>
+  <li>An <code class="language-plaintext highlighter-rouge">export</code> statement has been added to the language: It can be used for
+symbol forwarding so client modules don’t have to import a module’s
+dependencies explicitly.</li>
+  <li>Overloading based on ASTs has been implemented.</li>
+  <li>Generics are now supported for multi methods.</li>
+  <li>Objects can be initialized via an <em>object constructor expression</em>.</li>
+  <li>There is a new syntactic construct <code class="language-plaintext highlighter-rouge">(;)</code> unifying expressions and
+statements.</li>
+  <li>You can now use <code class="language-plaintext highlighter-rouge">from module import nil</code> if you want to import the module
+but want to enforce fully qualified access to every symbol in <code class="language-plaintext highlighter-rouge">module</code>.</li>
+</ul>
+
+<h2 id="notes-for-the-future">Notes for the future</h2>
+
+<ul>
+  <li>The scope rules of <code class="language-plaintext highlighter-rouge">if</code> statements will change in 0.9.4. This affects the
+<code class="language-plaintext highlighter-rouge">=~</code> pegs/re templates.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">sockets</code> module will become a low-level wrapper of OS-specific socket
+functions. All the high-level features of the current <code class="language-plaintext highlighter-rouge">sockets</code> module
+will be moved to a <code class="language-plaintext highlighter-rouge">network</code> module.</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

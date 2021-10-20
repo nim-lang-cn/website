@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.10.2 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.10.2 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="This release marks the completion of a very important change to the project: the official renaming from Nimrod to Nim. Version 0.10.2 contains many language changes, some of which may break your existing code. For your convenience, we added a new tool called nimfix that will help you convert your existing projects so that it works with the latest version of the compiler. Progress towards version 1.0 Although Nim is still pre-1.0, we were able to keep the number of breaking changes to a minimum so far. Starting with version 1.0, we will not introduce any breaking changes between major release versions. One of Nim’s goals is to ensure that the compiler is as efficient as possible. Take a look at the latest benchmarks, which show that Nim is consistently near the top and already nearly as fast as C and C++. Recent developments, such as the new asyncdispatch module will allow you to write efficient web server applications using non-blocking code. Nim now also has a built-in thread pool for lightweight threading through the use of spawn. The unpopular “T” and “P” prefixes on types have been deprecated. Nim also became more expressive by weakening the distinction between statements and expressions. We also added a new and searchable forum, a new website, and our documentation generator docgen has seen major improvements. Many thanks to Nick Greenfield for the much more beautiful documentation! What’s left to be done The 1.0 release is actually very close. Apart from bug fixes, there are two major features missing or incomplete: static[T] needs to be defined precisely and the bugs in the implementation need to be fixed. Overloading of the assignment operator is required for some generic containers and needs to be implemented. This means that fancy matrix libraries will finally start to work, which used to be a major point of pain in the language. Nimble and other Nim tools Outside of the language and the compiler itself many Nim tools have seen considerable improvements. Babel the Nim package manager has been renamed to Nimble. Nimble’s purpose is the installation of packages containing libraries and/or applications written in Nim. Even though Nimble is still very young it already is very functional. It can install packages by name, it does so by accessing a packages repository which is hosted on a GitHub repo. Packages can also be installed via a Git repo URL or Mercurial repo URL. The package repository is searchable through Nimble. Anyone is free to add their own packages to the package repository by forking the nim-lang/packages repo and creating a pull request. Nimble is fully cross-platform and should be fully functional on all major operating systems. It is of course completely written in Nim. Changelog Changes affecting backwards compatibility The language has been renamed from Nimrod to Nim. The name of the compiler changed from nimrod to nim too. system.fileHandle has been renamed to system.getFileHandle to prevent name conflicts with the new type FileHandle. Comments are now not part of the AST anymore, as such you cannot use them in place of discard. Large parts of the stdlib got rid of the T/P type prefixes. Instead most types now simply start with an uppercased letter. The so called “partial case sensitivity” rule is now active allowing for code like var foo: Foo in more contexts. String case (or any non-ordinal case) statements without ‘else’ are deprecated. Recursive tuple types are not allowed anymore. Use object instead. The PEGS module returns nil instead of "" when an optional capture fails to match. The re module returns nil instead of "" when an optional capture fails to match. The “symmetric set difference” operator (-+-) never worked and has been removed. defer is a keyword now. func is a keyword now. The using language feature now needs to be activated via the new {.experimental.} pragma that enables experimental language features. Destructors are now officially experimental. Standalone except and finally statements are deprecated now. The standalone finally can be replaced with defer, standalone except requires an explicit try. Operators ending in &gt; are considered as “arrow like” and have their own priority level and are right associative. This means that the =&gt; and -&gt; operators from the future module work better. Field names in tuples are now ignored for type comparisons. This allows for greater interoperability between different modules. Statement lists are not converted to an implicit do block anymore. This means the confusing nnkDo nodes when working with macros are gone for good. Language Additions The new concurrency model has been implemented including locks sections, lock levels and object field guards. The parallel statement has been implemented. deepCopy has been added to the language. The builtin procCall can be used to get super-like functionality for multi methods. There is a new pragma {.experimental.} that enables experimental language features per module, or you can enable these features on a global level with the --experimental command line option. Compiler Additions The compiler now supports mixed Objective C / C++ / C code generation: The modules that use importCpp or importObjc are compiled to C++ or Objective C code, any other module is compiled to C code. This improves interoperability. There is a new parallel statement for safe fork&amp;join parallel computing. guard and lock pragmas have been implemented to support safer concurrent programming. The following procs are now available at compile-time:: math.sqrt, math.ln, math.log10, math.log2, math.exp, math.round, math.arccos, math.arcsin, math.arctan, math.arctan2, math.cos, math.cosh, math.hypot, math.sinh, math.sin, math.tan, math.tanh, math.pow, math.trunc, math.floor, math.ceil, math.fmod, os.getEnv, os.existsEnv, os.dirExists, os.fileExists, system.writeFile Two backticks now produce a single backtick within an emit or asm statement. There is a new tool, nimfix to help you in updating your code from Nimrod to Nim. The compiler’s output has been prettified. Library Additions Added module fenv to control the handling of floating-point rounding and exceptions (overflow, division by zero, etc.). system.setupForeignThreadGc can be used for better interaction with foreign libraries that create threads and run a Nim callback from these foreign threads. List comprehensions have been implemented as a macro in the future module. The new Async module (asyncnet) now supports SSL. The smtp module now has an async implementation. Added module asyncfile which implements asynchronous file reading and writing. osproc.kill has been added. asyncnet and asynchttpserver now support SO_REUSEADDR. Bugfixes nil and NULL are now preserved between Nim and databases in the db_* modules. Fixed issue with OS module in non-unicode mode on Windows. Fixed issue with x.low (#1366). Fixed tuple unpacking issue inside closure iterators (#1067). Fixed ENDB compilation issues. Many asynchttpserver fixes. Macros can now keep global state across macro calls (#903). osproc fixes on Windows. osproc.terminate fixed. Improvements to exception handling in async procedures. (#1487). try now works at compile-time. Fixes T = ref T to be an illegal recursive type. Self imports are now disallowed. Improved effect inference. Fixes for the math module on Windows. User defined pragmas will now work for generics that have been instantiated in different modules. Fixed queue exhaustion bug. Many, many more."> -->
+  <meta property="og:description" content="This release marks the completion of a very important change to the project: the official renaming from Nimrod to Nim. Version 0.10.2 contains many language changes, some of which may break your existing code. For your convenience, we added a new tool called nimfix that will help you convert your existing projects so that it works with the latest version of the compiler. Progress towards version 1.0 Although Nim is still pre-1.0, we were able to keep the number of breaking changes to a minimum so far. Starting with version 1.0, we will not introduce any breaking changes between major release versions. One of Nim’s goals is to ensure that the compiler is as efficient as possible. Take a look at the latest benchmarks, which show that Nim is consistently near the top and already nearly as fast as C and C++. Recent developments, such as the new asyncdispatch module will allow you to write efficient web server applications using non-blocking code. Nim now also has a built-in thread pool for lightweight threading through the use of spawn. The unpopular “T” and “P” prefixes on types have been deprecated. Nim also became more expressive by weakening the distinction between statements and expressions. We also added a new and searchable forum, a new website, and our documentation generator docgen has seen major improvements. Many thanks to Nick Greenfield for the much more beautiful documentation! What’s left to be done The 1.0 release is actually very close. Apart from bug fixes, there are two major features missing or incomplete: static[T] needs to be defined precisely and the bugs in the implementation need to be fixed. Overloading of the assignment operator is required for some generic containers and needs to be implemented. This means that fancy matrix libraries will finally start to work, which used to be a major point of pain in the language. Nimble and other Nim tools Outside of the language and the compiler itself many Nim tools have seen considerable improvements. Babel the Nim package manager has been renamed to Nimble. Nimble’s purpose is the installation of packages containing libraries and/or applications written in Nim. Even though Nimble is still very young it already is very functional. It can install packages by name, it does so by accessing a packages repository which is hosted on a GitHub repo. Packages can also be installed via a Git repo URL or Mercurial repo URL. The package repository is searchable through Nimble. Anyone is free to add their own packages to the package repository by forking the nim-lang/packages repo and creating a pull request. Nimble is fully cross-platform and should be fully functional on all major operating systems. It is of course completely written in Nim. Changelog Changes affecting backwards compatibility The language has been renamed from Nimrod to Nim. The name of the compiler changed from nimrod to nim too. system.fileHandle has been renamed to system.getFileHandle to prevent name conflicts with the new type FileHandle. Comments are now not part of the AST anymore, as such you cannot use them in place of discard. Large parts of the stdlib got rid of the T/P type prefixes. Instead most types now simply start with an uppercased letter. The so called “partial case sensitivity” rule is now active allowing for code like var foo: Foo in more contexts. String case (or any non-ordinal case) statements without ‘else’ are deprecated. Recursive tuple types are not allowed anymore. Use object instead. The PEGS module returns nil instead of "" when an optional capture fails to match. The re module returns nil instead of "" when an optional capture fails to match. The “symmetric set difference” operator (-+-) never worked and has been removed. defer is a keyword now. func is a keyword now. The using language feature now needs to be activated via the new {.experimental.} pragma that enables experimental language features. Destructors are now officially experimental. Standalone except and finally statements are deprecated now. The standalone finally can be replaced with defer, standalone except requires an explicit try. Operators ending in &gt; are considered as “arrow like” and have their own priority level and are right associative. This means that the =&gt; and -&gt; operators from the future module work better. Field names in tuples are now ignored for type comparisons. This allows for greater interoperability between different modules. Statement lists are not converted to an implicit do block anymore. This means the confusing nnkDo nodes when working with macros are gone for good. Language Additions The new concurrency model has been implemented including locks sections, lock levels and object field guards. The parallel statement has been implemented. deepCopy has been added to the language. The builtin procCall can be used to get super-like functionality for multi methods. There is a new pragma {.experimental.} that enables experimental language features per module, or you can enable these features on a global level with the --experimental command line option. Compiler Additions The compiler now supports mixed Objective C / C++ / C code generation: The modules that use importCpp or importObjc are compiled to C++ or Objective C code, any other module is compiled to C code. This improves interoperability. There is a new parallel statement for safe fork&amp;join parallel computing. guard and lock pragmas have been implemented to support safer concurrent programming. The following procs are now available at compile-time:: math.sqrt, math.ln, math.log10, math.log2, math.exp, math.round, math.arccos, math.arcsin, math.arctan, math.arctan2, math.cos, math.cosh, math.hypot, math.sinh, math.sin, math.tan, math.tanh, math.pow, math.trunc, math.floor, math.ceil, math.fmod, os.getEnv, os.existsEnv, os.dirExists, os.fileExists, system.writeFile Two backticks now produce a single backtick within an emit or asm statement. There is a new tool, nimfix to help you in updating your code from Nimrod to Nim. The compiler’s output has been prettified. Library Additions Added module fenv to control the handling of floating-point rounding and exceptions (overflow, division by zero, etc.). system.setupForeignThreadGc can be used for better interaction with foreign libraries that create threads and run a Nim callback from these foreign threads. List comprehensions have been implemented as a macro in the future module. The new Async module (asyncnet) now supports SSL. The smtp module now has an async implementation. Added module asyncfile which implements asynchronous file reading and writing. osproc.kill has been added. asyncnet and asynchttpserver now support SO_REUSEADDR. Bugfixes nil and NULL are now preserved between Nim and databases in the db_* modules. Fixed issue with OS module in non-unicode mode on Windows. Fixed issue with x.low (#1366). Fixed tuple unpacking issue inside closure iterators (#1067). Fixed ENDB compilation issues. Many asynchttpserver fixes. Macros can now keep global state across macro calls (#903). osproc fixes on Windows. osproc.terminate fixed. Improvements to exception handling in async procedures. (#1487). try now works at compile-time. Fixes T = ref T to be an illegal recursive type. Self imports are now disallowed. Improved effect inference. Fixes for the math module on Windows. User defined pragmas will now work for generics that have been instantiated in different modules. Fixed queue exhaustion bug. Many, many more.">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.10.2 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.10.2 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              29 December 2014
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Dominik Picheta
+            </span>
+            
+          </h3>
+          <p>This release marks the completion of a very important change to the project:
+the official renaming from Nimrod to Nim. Version 0.10.2 contains many language
+changes, some of which may break your existing code. For your convenience, we
+added a new tool called <a href="https://nim-lang-cn.org/docs/nimfix.html">nimfix</a> that will help you convert your
+existing projects so that it works with the latest version of the compiler.</p>
+
+<h2 id="progress-towards-version-10">Progress towards version 1.0</h2>
+
+<p>Although Nim is still pre-1.0, we were able to keep the number of breaking
+changes to a minimum so far. Starting with version 1.0, we will not introduce
+any breaking changes between major release versions.
+One of Nim’s goals is to ensure that the compiler is as efficient as possible.
+Take a look at the
+<a href="https://github.com/logicchains/LPATHBench/blob/master/writeup.md">latest benchmarks</a>,
+which show that Nim is consistently near
+the top and already nearly as fast as C and C++. Recent developments, such as
+the new <code class="language-plaintext highlighter-rouge">asyncdispatch</code> module will allow you to write efficient web server
+applications using non-blocking code. Nim now also has a built-in thread pool
+for lightweight threading through the use of <code class="language-plaintext highlighter-rouge">spawn</code>.</p>
+
+<p>The unpopular “T” and “P” prefixes on types have been deprecated. Nim also
+became more expressive by weakening the distinction between statements and
+expressions. We also added a new and searchable forum, a new website, and our
+documentation generator <code class="language-plaintext highlighter-rouge">docgen</code> has seen major improvements. Many thanks to
+Nick Greenfield for the much more beautiful documentation!</p>
+
+<h2 id="whats-left-to-be-done">What’s left to be done</h2>
+
+<p>The 1.0 release is actually very close. Apart from bug fixes, there are
+two major features missing or incomplete:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">static[T]</code> needs to be defined precisely and the bugs in the
+implementation need to be fixed.</li>
+  <li>Overloading of the assignment operator is required for some generic
+containers and needs to be implemented.</li>
+</ul>
+
+<p>This means that fancy matrix libraries will finally start to work, which used
+to be a major point of pain in the language.</p>
+
+<h2 id="nimble-and-other-nim-tools">Nimble and other Nim tools</h2>
+
+<p>Outside of the language and the compiler itself many Nim tools have seen
+considerable improvements.</p>
+
+<p>Babel the Nim package manager has been renamed to Nimble. Nimble’s purpose
+is the installation of packages containing libraries and/or applications
+written in Nim.
+Even though Nimble is still very young it already is very
+functional. It can install packages by name, it does so by accessing a
+packages repository which is hosted on a GitHub repo. Packages can also be
+installed via a Git repo URL or Mercurial repo URL. The package repository
+is searchable through Nimble. Anyone is free to add their own packages to
+the package repository by forking the
+<a href="https://github.com/nim-lang/packages">nim-lang/packages</a> repo and creating
+a pull request. Nimble is fully cross-platform and should be fully functional
+on all major operating systems.
+It is of course completely written in Nim.</p>
+
+<h2 id="changelog">Changelog</h2>
+
+<h2 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h2>
+
+<ul>
+  <li><strong>The language has been renamed from Nimrod to Nim.</strong> The name of the
+compiler changed from <code class="language-plaintext highlighter-rouge">nimrod</code> to <code class="language-plaintext highlighter-rouge">nim</code> too.</li>
+  <li><code class="language-plaintext highlighter-rouge">system.fileHandle</code> has been renamed to <code class="language-plaintext highlighter-rouge">system.getFileHandle</code> to
+prevent name conflicts with the new type <code class="language-plaintext highlighter-rouge">FileHandle</code>.</li>
+  <li>Comments are now not part of the AST anymore, as such you cannot use them
+in place of <code class="language-plaintext highlighter-rouge">discard</code>.</li>
+  <li>Large parts of the stdlib got rid of the T/P type prefixes. Instead most
+types now simply start with an uppercased letter. The
+so called “partial case sensitivity” rule is now active allowing for code
+like <code class="language-plaintext highlighter-rouge">var foo: Foo</code> in more contexts.</li>
+  <li>String case (or any non-ordinal case) statements
+without ‘else’ are deprecated.</li>
+  <li>Recursive tuple types are not allowed anymore. Use <code class="language-plaintext highlighter-rouge">object</code> instead.</li>
+  <li>The PEGS module returns <code class="language-plaintext highlighter-rouge">nil</code> instead of <code class="language-plaintext highlighter-rouge">""</code> when an optional capture
+fails to match.</li>
+  <li>The re module returns <code class="language-plaintext highlighter-rouge">nil</code> instead of <code class="language-plaintext highlighter-rouge">""</code> when an optional capture
+fails to match.</li>
+  <li>The “symmetric set difference” operator (<code class="language-plaintext highlighter-rouge">-+-</code>) never worked and has been
+removed.</li>
+  <li><code class="language-plaintext highlighter-rouge">defer</code> is a keyword now.</li>
+  <li><code class="language-plaintext highlighter-rouge">func</code> is a keyword now.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">using</code> language feature now needs to be activated via the new
+<code class="language-plaintext highlighter-rouge">{.experimental.}</code> pragma that enables experimental language features.</li>
+  <li>Destructors are now officially <em>experimental</em>.</li>
+  <li>Standalone <code class="language-plaintext highlighter-rouge">except</code> and <code class="language-plaintext highlighter-rouge">finally</code> statements are deprecated now.
+The standalone <code class="language-plaintext highlighter-rouge">finally</code> can be replaced with <code class="language-plaintext highlighter-rouge">defer</code>,
+standalone <code class="language-plaintext highlighter-rouge">except</code> requires an explicit <code class="language-plaintext highlighter-rouge">try</code>.</li>
+  <li>Operators ending in <code class="language-plaintext highlighter-rouge">&gt;</code> are considered as “arrow like” and have their
+own priority level and are right associative. This means that
+the <code class="language-plaintext highlighter-rouge">=&gt;</code> and <code class="language-plaintext highlighter-rouge">-&gt;</code> operators from the
+<a href="https://nim-lang.org/docs/future.html">future</a> module
+work better.</li>
+  <li>Field names in tuples are now ignored for type comparisons. This allows
+for greater interoperability between different modules.</li>
+  <li>Statement lists are not converted to an implicit <code class="language-plaintext highlighter-rouge">do</code> block anymore. This
+means the confusing <code class="language-plaintext highlighter-rouge">nnkDo</code> nodes when working with macros are gone for
+good.</li>
+</ul>
+
+<h2 id="language-additions">Language Additions</h2>
+
+<ul>
+  <li>The new concurrency model has been implemented including <code class="language-plaintext highlighter-rouge">locks</code> sections,
+lock levels and object field <code class="language-plaintext highlighter-rouge">guards</code>.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">parallel</code> statement has been implemented.</li>
+  <li><code class="language-plaintext highlighter-rouge">deepCopy</code> has been added to the language.</li>
+  <li>The builtin <code class="language-plaintext highlighter-rouge">procCall</code> can be used to get <code class="language-plaintext highlighter-rouge">super</code>-like functionality
+for multi methods.</li>
+  <li>There is a new pragma <code class="language-plaintext highlighter-rouge">{.experimental.}</code> that enables experimental
+language features per module, or you can enable these features on a global
+level with the <code class="language-plaintext highlighter-rouge">--experimental</code> command line option.</li>
+</ul>
+
+<h2 id="compiler-additions">Compiler Additions</h2>
+
+<ul>
+  <li>The compiler now supports <em>mixed</em> Objective C / C++ / C code generation:
+The modules that use <code class="language-plaintext highlighter-rouge">importCpp</code> or <code class="language-plaintext highlighter-rouge">importObjc</code> are compiled to C++
+or Objective C code, any other module is compiled to C code. This
+improves interoperability.</li>
+  <li>There is a new <code class="language-plaintext highlighter-rouge">parallel</code> statement for safe fork&amp;join parallel computing.</li>
+  <li><code class="language-plaintext highlighter-rouge">guard</code> and <code class="language-plaintext highlighter-rouge">lock</code> pragmas have been implemented to support safer
+concurrent programming.</li>
+  <li>
+    <p>The following procs are now available at compile-time::</p>
+
+    <p>math.sqrt, math.ln, math.log10, math.log2, math.exp, math.round,
+  math.arccos, math.arcsin, math.arctan, math.arctan2, math.cos,
+  math.cosh, math.hypot, math.sinh, math.sin, math.tan, math.tanh,
+  math.pow, math.trunc, math.floor, math.ceil, math.fmod,
+  os.getEnv, os.existsEnv, os.dirExists, os.fileExists,
+  system.writeFile</p>
+  </li>
+  <li>Two backticks now produce a single backtick within an <code class="language-plaintext highlighter-rouge">emit</code> or <code class="language-plaintext highlighter-rouge">asm</code>
+statement.</li>
+  <li>There is a new tool, <a href="nimfix.html">nimfix</a> to help you in updating your
+code from Nimrod to Nim.</li>
+  <li>The compiler’s output has been prettified.</li>
+</ul>
+
+<h2 id="library-additions">Library Additions</h2>
+
+<ul>
+  <li>Added module <code class="language-plaintext highlighter-rouge">fenv</code> to control the handling of floating-point rounding and
+exceptions (overflow, division by zero, etc.).</li>
+  <li><code class="language-plaintext highlighter-rouge">system.setupForeignThreadGc</code> can be used for better interaction with
+foreign libraries that create threads and run a Nim callback from these
+foreign threads.</li>
+  <li>List comprehensions have been implemented as a macro in the <code class="language-plaintext highlighter-rouge">future</code>
+module.</li>
+  <li>The new Async module (<code class="language-plaintext highlighter-rouge">asyncnet</code>) now supports SSL.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">smtp</code> module now has an async implementation.</li>
+  <li>Added module <code class="language-plaintext highlighter-rouge">asyncfile</code> which implements asynchronous file reading
+and writing.</li>
+  <li><code class="language-plaintext highlighter-rouge">osproc.kill</code> has been added.</li>
+  <li><code class="language-plaintext highlighter-rouge">asyncnet</code> and <code class="language-plaintext highlighter-rouge">asynchttpserver</code> now support <code class="language-plaintext highlighter-rouge">SO_REUSEADDR</code>.</li>
+</ul>
+
+<h2 id="bugfixes">Bugfixes</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nil</code> and <code class="language-plaintext highlighter-rouge">NULL</code> are now preserved between Nim and databases in the
+<code class="language-plaintext highlighter-rouge">db_*</code> modules.</li>
+  <li>Fixed issue with OS module in non-unicode mode on Windows.</li>
+  <li>Fixed issue with <code class="language-plaintext highlighter-rouge">x.low</code>
+(<a href="https://github.com/Araq/Nim/issues/1366">#1366</a>).</li>
+  <li>Fixed tuple unpacking issue inside closure iterators
+(<a href="https://github.com/Araq/Nim/issues/1067">#1067</a>).</li>
+  <li>Fixed ENDB compilation issues.</li>
+  <li>Many <code class="language-plaintext highlighter-rouge">asynchttpserver</code> fixes.</li>
+  <li>Macros can now keep global state across macro calls
+(<a href="https://github.com/Araq/Nim/issues/903">#903</a>).</li>
+  <li><code class="language-plaintext highlighter-rouge">osproc</code> fixes on Windows.</li>
+  <li><code class="language-plaintext highlighter-rouge">osproc.terminate</code> fixed.</li>
+  <li>Improvements to exception handling in async procedures.
+(<a href="https://github.com/Araq/Nim/issues/1487">#1487</a>).</li>
+  <li><code class="language-plaintext highlighter-rouge">try</code> now works at compile-time.</li>
+  <li>Fixes <code class="language-plaintext highlighter-rouge">T = ref T</code> to be an illegal recursive type.</li>
+  <li>Self imports are now disallowed.</li>
+  <li>Improved effect inference.</li>
+  <li>Fixes for the <code class="language-plaintext highlighter-rouge">math</code> module on Windows.</li>
+  <li>User defined pragmas will now work for generics that have
+been instantiated in different modules.</li>
+  <li>Fixed queue exhaustion bug.</li>
+  <li>Many, many more.</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

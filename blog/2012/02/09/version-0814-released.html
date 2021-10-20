@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.8.14 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.8.14 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Version 0.8.14 has been released! Bugfixes Fixed a serious memory corruption concerning message passing. Fixed a serious bug concerning different instantiations of a generic proc. Fixed a newly introduced bug where a wrong EIO exception was raised for the end of file for text files that do not end with a newline. Bugfix c2nim, c2pas: the --out option has never worked properly. Bugfix: forwarding of generic procs never worked. Some more bugfixes for macros and compile-time evaluation. The GC now takes into account interior pointers on the stack which may be introduced by aggressive C optimizers. Nimrod’s native allocator/GC now works on PowerPC. Lots of other bugfixes: Too many to list them all. Changes affecting backwards compatibility Removed deprecated os.AppendFileExt, os.executeShellCommand, os.iterOverEnvironment, os.pcDirectory, os.pcLinkToDirectory, os.SplitPath, os.extractDir, os.SplitFilename, os.extractFileTrunk, os.extractFileExt, osproc.executeProcess, osproc.executeCommand. Removed deprecated parseopt.init, parseopt.getRestOfCommandLine. Moved strutils.validEmailAddress to matchers.validEmailAddress. The pointer dereference operator ^ has been removed, so that ^ can now be a user-defined operator. implies is no keyword anymore. The is operator is now the of operator. The is operator is now used to check type equivalence in generic code. The pure pragma for procs has been renamed to noStackFrame. The threading API has been completely redesigned. The unidecode module is now thread-safe and its interface has changed. The bind expression is deprecated, use a bind declaration instead. system.raiseHook is now split into system.localRaiseHook and system.globalRaiseHook to distinguish between thread local and global raise hooks. Changed exception handling/error reporting for os.removeFile and os.removeDir. The algorithm for searching and loading configuration files has been changed. Operators now have diffent precedence rules: Assignment-like operators (like *=) are now special-cased. The fields in TStream have been renamed to have an Impl suffix because they should not be used directly anymore. Wrapper procs have been created that should be used instead. export is now a keyword. assert is now implemented in pure Nimrod as a template; it’s easy to implement your own assertion templates with system.astToStr. Language Additions Added new is and of operators. The built-in type void can be used to denote the absence of any type. This is useful in generic code. Return types may be of the type var T to return an l-value. The error pragma can now be used to mark symbols whose usage should trigger a compile-time error. There is a new discardable pragma that can be used to mark a routine so that its result can be discarded implicitly. Added a new noinit pragma to prevent automatic initialization to zero of variables. Constants can now have the type seq. There is a new user-definable syntactic construct a{i, ...} that has no semantics yet for built-in types and so can be overloaded to your heart’s content. bind (used for symbol binding in templates and generics) is now a declarative statement. Nimrod now supports single assignment variables via the let statement. Iterators named items and pairs are implicitly invoked when an explicit iterator is missing. The slice assignment a[i..j] = b where a is a sequence or string now supports splicing. Compiler Additions The compiler can generate C++ code for easier interfacing with C++. The compiler can generate Objective C code for easier interfacing with Objective C. The new pragmas importcpp and importobjc make interfacing with C++ and Objective C somewhat easier. Added a new pragma incompleteStruct to deal with incomplete C struct definitions. Added a --nimcache:PATH configuration option for control over the output directory for generated code. The --genScript option now produces different compilation scripts which do not contain absolute paths. Added --cincludes:dir, --clibdir:lib configuration options for modifying the C compiler’s header/library search path in cross-platform way. Added --clib:lib configuration option for specifying additional C libraries to be linked. Added --mainmodule:file configuration options for specifying the main project file. This is intended to be used in project configuration files to allow commands like nimrod c or nimrod check to be executed anywhere within the project’s directory structure. Added a --app:staticlib option for creating static libraries. Added a --tlsEmulation:on|off switch for control over thread local storage emulation. The compiler and standard library now support a taint mode. Input strings are declared with the TaintedString string type. If the taint mode is turned on it is a distinct string type which helps to detect input validation errors. The compiler now supports the compilation cache via --symbolFiles:on. This potentially speeds up compilations by an order of magnitude, but is still highly experimental! Added --import:file and --include:file configuration options for specifying modules that will be automatically imported/incluced. nimrod i can now optionally be given a module to execute. The compiler now performs a simple alias analysis to generate better code. The compiler and ENDB now support watchpoints. The compiler now supports proper compile time expressions of type bool for on|off switches in pragmas. In order to not break existing code, on and off are now aliases for true and false and declared in the system module. The compiler finally supports closures. This is a preliminary implementation, which does not yet support nestings deeper than 1 level and still has many known bugs. Library Additions Added system.allocShared, system.allocShared0, system.deallocShared, system.reallocShared. Slicing as implemented by the system module now supports splicing. Added explicit channels for thread communication. Added matchers module for email address etc. matching. Added strutils.unindent, strutils.countLines, strutils.replaceWord. Added system.slurp for easy resource embedding. Added system.running for threads. Added system.programResult. Added xmltree.innerText. Added os.isAbsolute, os.dynLibFormat, os.isRootDir, os.parentDirs. Added parseutils.interpolatedFragments. Added macros.treeRepr, macros.lispRepr, macros.dumpTree, macros.dumpLisp, macros.parseExpr, macros.parseStmt, macros.getAst. Added locks core module for more flexible locking support. Added irc module. Added ftpclient module. Added memfiles module. Added subexes module. Added critbits module. Added asyncio module. Added actors module. Added algorithm module for generic sort, reverse etc. operations. Added osproc.startCmd, osproc.execCmdEx. The osproc module now uses posix_spawn instead of fork and exec on Posix systems. Define the symbol useFork to revert to the old implementation. Added intsets.assign. Added system.astToStr and system.rand, system.doAssert. Added system.pairs for built-in types like arrays and strings."> -->
+  <meta property="og:description" content="Version 0.8.14 has been released! Bugfixes Fixed a serious memory corruption concerning message passing. Fixed a serious bug concerning different instantiations of a generic proc. Fixed a newly introduced bug where a wrong EIO exception was raised for the end of file for text files that do not end with a newline. Bugfix c2nim, c2pas: the --out option has never worked properly. Bugfix: forwarding of generic procs never worked. Some more bugfixes for macros and compile-time evaluation. The GC now takes into account interior pointers on the stack which may be introduced by aggressive C optimizers. Nimrod’s native allocator/GC now works on PowerPC. Lots of other bugfixes: Too many to list them all. Changes affecting backwards compatibility Removed deprecated os.AppendFileExt, os.executeShellCommand, os.iterOverEnvironment, os.pcDirectory, os.pcLinkToDirectory, os.SplitPath, os.extractDir, os.SplitFilename, os.extractFileTrunk, os.extractFileExt, osproc.executeProcess, osproc.executeCommand. Removed deprecated parseopt.init, parseopt.getRestOfCommandLine. Moved strutils.validEmailAddress to matchers.validEmailAddress. The pointer dereference operator ^ has been removed, so that ^ can now be a user-defined operator. implies is no keyword anymore. The is operator is now the of operator. The is operator is now used to check type equivalence in generic code. The pure pragma for procs has been renamed to noStackFrame. The threading API has been completely redesigned. The unidecode module is now thread-safe and its interface has changed. The bind expression is deprecated, use a bind declaration instead. system.raiseHook is now split into system.localRaiseHook and system.globalRaiseHook to distinguish between thread local and global raise hooks. Changed exception handling/error reporting for os.removeFile and os.removeDir. The algorithm for searching and loading configuration files has been changed. Operators now have diffent precedence rules: Assignment-like operators (like *=) are now special-cased. The fields in TStream have been renamed to have an Impl suffix because they should not be used directly anymore. Wrapper procs have been created that should be used instead. export is now a keyword. assert is now implemented in pure Nimrod as a template; it’s easy to implement your own assertion templates with system.astToStr. Language Additions Added new is and of operators. The built-in type void can be used to denote the absence of any type. This is useful in generic code. Return types may be of the type var T to return an l-value. The error pragma can now be used to mark symbols whose usage should trigger a compile-time error. There is a new discardable pragma that can be used to mark a routine so that its result can be discarded implicitly. Added a new noinit pragma to prevent automatic initialization to zero of variables. Constants can now have the type seq. There is a new user-definable syntactic construct a{i, ...} that has no semantics yet for built-in types and so can be overloaded to your heart’s content. bind (used for symbol binding in templates and generics) is now a declarative statement. Nimrod now supports single assignment variables via the let statement. Iterators named items and pairs are implicitly invoked when an explicit iterator is missing. The slice assignment a[i..j] = b where a is a sequence or string now supports splicing. Compiler Additions The compiler can generate C++ code for easier interfacing with C++. The compiler can generate Objective C code for easier interfacing with Objective C. The new pragmas importcpp and importobjc make interfacing with C++ and Objective C somewhat easier. Added a new pragma incompleteStruct to deal with incomplete C struct definitions. Added a --nimcache:PATH configuration option for control over the output directory for generated code. The --genScript option now produces different compilation scripts which do not contain absolute paths. Added --cincludes:dir, --clibdir:lib configuration options for modifying the C compiler’s header/library search path in cross-platform way. Added --clib:lib configuration option for specifying additional C libraries to be linked. Added --mainmodule:file configuration options for specifying the main project file. This is intended to be used in project configuration files to allow commands like nimrod c or nimrod check to be executed anywhere within the project’s directory structure. Added a --app:staticlib option for creating static libraries. Added a --tlsEmulation:on|off switch for control over thread local storage emulation. The compiler and standard library now support a taint mode. Input strings are declared with the TaintedString string type. If the taint mode is turned on it is a distinct string type which helps to detect input validation errors. The compiler now supports the compilation cache via --symbolFiles:on. This potentially speeds up compilations by an order of magnitude, but is still highly experimental! Added --import:file and --include:file configuration options for specifying modules that will be automatically imported/incluced. nimrod i can now optionally be given a module to execute. The compiler now performs a simple alias analysis to generate better code. The compiler and ENDB now support watchpoints. The compiler now supports proper compile time expressions of type bool for on|off switches in pragmas. In order to not break existing code, on and off are now aliases for true and false and declared in the system module. The compiler finally supports closures. This is a preliminary implementation, which does not yet support nestings deeper than 1 level and still has many known bugs. Library Additions Added system.allocShared, system.allocShared0, system.deallocShared, system.reallocShared. Slicing as implemented by the system module now supports splicing. Added explicit channels for thread communication. Added matchers module for email address etc. matching. Added strutils.unindent, strutils.countLines, strutils.replaceWord. Added system.slurp for easy resource embedding. Added system.running for threads. Added system.programResult. Added xmltree.innerText. Added os.isAbsolute, os.dynLibFormat, os.isRootDir, os.parentDirs. Added parseutils.interpolatedFragments. Added macros.treeRepr, macros.lispRepr, macros.dumpTree, macros.dumpLisp, macros.parseExpr, macros.parseStmt, macros.getAst. Added locks core module for more flexible locking support. Added irc module. Added ftpclient module. Added memfiles module. Added subexes module. Added critbits module. Added asyncio module. Added actors module. Added algorithm module for generic sort, reverse etc. operations. Added osproc.startCmd, osproc.execCmdEx. The osproc module now uses posix_spawn instead of fork and exec on Posix systems. Define the symbol useFork to revert to the old implementation. Added intsets.assign. Added system.astToStr and system.rand, system.doAssert. Added system.pairs for built-in types like arrays and strings.">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.8.14 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.8.14 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              09 February 2012
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Andreas Rumpf
+            </span>
+            
+          </h3>
+          <p>Version 0.8.14 has been released!</p>
+
+<h2 id="bugfixes">Bugfixes</h2>
+
+<ul>
+  <li>Fixed a serious memory corruption concerning message passing.</li>
+  <li>Fixed a serious bug concerning different instantiations of a generic proc.</li>
+  <li>Fixed a newly introduced bug where a wrong <code class="language-plaintext highlighter-rouge">EIO</code> exception was raised for
+the end of file for text files that do not end with a newline.</li>
+  <li>Bugfix c2nim, c2pas: the <code class="language-plaintext highlighter-rouge">--out</code> option has never worked properly.</li>
+  <li>Bugfix: forwarding of generic procs never worked.</li>
+  <li>Some more bugfixes for macros and compile-time evaluation.</li>
+  <li>The GC now takes into account interior pointers on the stack which may be
+introduced by aggressive C optimizers.</li>
+  <li>Nimrod’s native allocator/GC now works on PowerPC.</li>
+  <li>Lots of other bugfixes: Too many to list them all.</li>
+</ul>
+
+<h2 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h2>
+
+<ul>
+  <li>Removed deprecated <code class="language-plaintext highlighter-rouge">os.AppendFileExt</code>, <code class="language-plaintext highlighter-rouge">os.executeShellCommand</code>,
+<code class="language-plaintext highlighter-rouge">os.iterOverEnvironment</code>, <code class="language-plaintext highlighter-rouge">os.pcDirectory</code>, <code class="language-plaintext highlighter-rouge">os.pcLinkToDirectory</code>,
+<code class="language-plaintext highlighter-rouge">os.SplitPath</code>, <code class="language-plaintext highlighter-rouge">os.extractDir</code>, <code class="language-plaintext highlighter-rouge">os.SplitFilename</code>,
+<code class="language-plaintext highlighter-rouge">os.extractFileTrunk</code>, <code class="language-plaintext highlighter-rouge">os.extractFileExt</code>, <code class="language-plaintext highlighter-rouge">osproc.executeProcess</code>,
+<code class="language-plaintext highlighter-rouge">osproc.executeCommand</code>.</li>
+  <li>Removed deprecated <code class="language-plaintext highlighter-rouge">parseopt.init</code>, <code class="language-plaintext highlighter-rouge">parseopt.getRestOfCommandLine</code>.</li>
+  <li>Moved <code class="language-plaintext highlighter-rouge">strutils.validEmailAddress</code> to <code class="language-plaintext highlighter-rouge">matchers.validEmailAddress</code>.</li>
+  <li>The pointer dereference operator <code class="language-plaintext highlighter-rouge">^</code> has been removed, so that <code class="language-plaintext highlighter-rouge">^</code>
+can now be a user-defined operator.</li>
+  <li><code class="language-plaintext highlighter-rouge">implies</code> is no keyword anymore.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">is</code> operator is now the <code class="language-plaintext highlighter-rouge">of</code> operator.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">is</code> operator is now used to check type equivalence in generic code.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">pure</code> pragma for procs has been renamed to <code class="language-plaintext highlighter-rouge">noStackFrame</code>.</li>
+  <li>The threading API has been completely redesigned.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">unidecode</code> module is now thread-safe and its interface has changed.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">bind</code> expression is deprecated, use a <code class="language-plaintext highlighter-rouge">bind</code> declaration instead.</li>
+  <li><code class="language-plaintext highlighter-rouge">system.raiseHook</code> is now split into <code class="language-plaintext highlighter-rouge">system.localRaiseHook</code> and
+<code class="language-plaintext highlighter-rouge">system.globalRaiseHook</code> to distinguish between thread local and global
+raise hooks.</li>
+  <li>Changed exception handling/error reporting for <code class="language-plaintext highlighter-rouge">os.removeFile</code> and
+<code class="language-plaintext highlighter-rouge">os.removeDir</code>.</li>
+  <li>The algorithm for searching and loading configuration files has been changed.</li>
+  <li>Operators now have diffent precedence rules: Assignment-like operators
+(like <code class="language-plaintext highlighter-rouge">*=</code>) are now special-cased.</li>
+  <li>The fields in <code class="language-plaintext highlighter-rouge">TStream</code> have been renamed to have an <code class="language-plaintext highlighter-rouge">Impl</code> suffix
+because they should not be used directly anymore.
+Wrapper procs have been created that should be used instead.</li>
+  <li><code class="language-plaintext highlighter-rouge">export</code> is now a keyword.</li>
+  <li><code class="language-plaintext highlighter-rouge">assert</code> is now implemented in pure Nimrod as a template; it’s easy
+to implement your own assertion templates with <code class="language-plaintext highlighter-rouge">system.astToStr</code>.</li>
+</ul>
+
+<h2 id="language-additions">Language Additions</h2>
+
+<ul>
+  <li>Added new <code class="language-plaintext highlighter-rouge">is</code> and <code class="language-plaintext highlighter-rouge">of</code> operators.</li>
+  <li>The built-in type <code class="language-plaintext highlighter-rouge">void</code> can be used to denote the absence of any type.
+This is useful in generic code.</li>
+  <li>Return types may be of the type <code class="language-plaintext highlighter-rouge">var T</code> to return an l-value.</li>
+  <li>The error pragma can now be used to mark symbols whose <em>usage</em> should trigger
+a compile-time error.</li>
+  <li>There is a new <code class="language-plaintext highlighter-rouge">discardable</code> pragma that can be used to mark a routine
+so that its result can be discarded implicitly.</li>
+  <li>Added a new <code class="language-plaintext highlighter-rouge">noinit</code> pragma to prevent automatic initialization to zero
+of variables.</li>
+  <li>Constants can now have the type <code class="language-plaintext highlighter-rouge">seq</code>.</li>
+  <li>There is a new user-definable syntactic construct <code class="language-plaintext highlighter-rouge">a{i, ...}</code>
+that has no semantics yet for built-in types and so can be overloaded to your
+heart’s content.</li>
+  <li><code class="language-plaintext highlighter-rouge">bind</code> (used for symbol binding in templates and generics) is now a
+declarative statement.</li>
+  <li>Nimrod now supports single assignment variables via the <code class="language-plaintext highlighter-rouge">let</code> statement.</li>
+  <li>Iterators named <code class="language-plaintext highlighter-rouge">items</code> and <code class="language-plaintext highlighter-rouge">pairs</code> are implicitly invoked when
+an explicit iterator is missing.</li>
+  <li>The slice assignment <code class="language-plaintext highlighter-rouge">a[i..j] = b</code> where <code class="language-plaintext highlighter-rouge">a</code> is a sequence or string
+now supports <em>splicing</em>.</li>
+</ul>
+
+<h2 id="compiler-additions">Compiler Additions</h2>
+
+<ul>
+  <li>The compiler can generate C++ code for easier interfacing with C++.</li>
+  <li>The compiler can generate Objective C code for easier interfacing with
+Objective C.</li>
+  <li>The new pragmas <code class="language-plaintext highlighter-rouge">importcpp</code> and <code class="language-plaintext highlighter-rouge">importobjc</code> make interfacing with C++
+and Objective C somewhat easier.</li>
+  <li>Added a new pragma <code class="language-plaintext highlighter-rouge">incompleteStruct</code> to deal with incomplete C struct
+definitions.</li>
+  <li>Added a <code class="language-plaintext highlighter-rouge">--nimcache:PATH</code> configuration option for control over the output
+directory for generated code.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">--genScript</code> option now produces different compilation scripts
+which do not contain absolute paths.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">--cincludes:dir</code>, <code class="language-plaintext highlighter-rouge">--clibdir:lib</code> configuration options for
+modifying the C compiler’s header/library search path in cross-platform way.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">--clib:lib</code> configuration option for specifying additional
+C libraries to be linked.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">--mainmodule:file</code> configuration options for specifying the main
+project file. This is intended to be used in project configuration files to
+allow commands like <code class="language-plaintext highlighter-rouge">nimrod c</code> or <code class="language-plaintext highlighter-rouge">nimrod check</code> to be executed anywhere
+within the project’s directory structure.</li>
+  <li>Added a <code class="language-plaintext highlighter-rouge">--app:staticlib</code> option for creating static libraries.</li>
+  <li>Added a <code class="language-plaintext highlighter-rouge">--tlsEmulation:on|off</code> switch for control over thread local
+storage emulation.</li>
+  <li>The compiler and standard library now support a <em>taint mode</em>. Input strings
+are declared with the <code class="language-plaintext highlighter-rouge">TaintedString</code> string type. If the taint
+mode is turned on it is a distinct string type which helps to detect input
+validation errors.</li>
+  <li>The compiler now supports the compilation cache via <code class="language-plaintext highlighter-rouge">--symbolFiles:on</code>.
+This potentially speeds up compilations by an order of magnitude, but is
+still highly experimental!</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">--import:file</code> and <code class="language-plaintext highlighter-rouge">--include:file</code> configuration options
+for specifying modules that will be automatically imported/incluced.</li>
+  <li><code class="language-plaintext highlighter-rouge">nimrod i</code> can now optionally be given a module to execute.</li>
+  <li>The compiler now performs a simple alias analysis to generate better code.</li>
+  <li>The compiler and ENDB now support <em>watchpoints</em>.</li>
+  <li>The compiler now supports proper compile time expressions of type <code class="language-plaintext highlighter-rouge">bool</code>
+for <code class="language-plaintext highlighter-rouge">on|off</code> switches in pragmas. In order to not break existing code,
+<code class="language-plaintext highlighter-rouge">on</code> and <code class="language-plaintext highlighter-rouge">off</code> are now aliases for <code class="language-plaintext highlighter-rouge">true</code> and <code class="language-plaintext highlighter-rouge">false</code> and declared
+in the system module.</li>
+  <li>The compiler finally supports <strong>closures</strong>. This is a preliminary
+implementation, which does not yet support nestings deeper than 1 level
+and still has many known bugs.</li>
+</ul>
+
+<h2 id="library-additions">Library Additions</h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.allocShared</code>, <code class="language-plaintext highlighter-rouge">system.allocShared0</code>,
+<code class="language-plaintext highlighter-rouge">system.deallocShared</code>, <code class="language-plaintext highlighter-rouge">system.reallocShared</code>.</li>
+  <li>Slicing as implemented by the system module now supports <em>splicing</em>.</li>
+  <li>Added explicit channels for thread communication.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">matchers</code> module for email address etc. matching.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">strutils.unindent</code>, <code class="language-plaintext highlighter-rouge">strutils.countLines</code>,
+<code class="language-plaintext highlighter-rouge">strutils.replaceWord</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.slurp</code> for easy resource embedding.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.running</code> for threads.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.programResult</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">xmltree.innerText</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">os.isAbsolute</code>, <code class="language-plaintext highlighter-rouge">os.dynLibFormat</code>, <code class="language-plaintext highlighter-rouge">os.isRootDir</code>,
+<code class="language-plaintext highlighter-rouge">os.parentDirs</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">parseutils.interpolatedFragments</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">macros.treeRepr</code>, <code class="language-plaintext highlighter-rouge">macros.lispRepr</code>, <code class="language-plaintext highlighter-rouge">macros.dumpTree</code>,
+<code class="language-plaintext highlighter-rouge">macros.dumpLisp</code>, <code class="language-plaintext highlighter-rouge">macros.parseExpr</code>, <code class="language-plaintext highlighter-rouge">macros.parseStmt</code>,
+<code class="language-plaintext highlighter-rouge">macros.getAst</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">locks</code> core module for more flexible locking support.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">irc</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">ftpclient</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">memfiles</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">subexes</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">critbits</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">asyncio</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">actors</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">algorithm</code> module for generic <code class="language-plaintext highlighter-rouge">sort</code>, <code class="language-plaintext highlighter-rouge">reverse</code> etc. operations.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">osproc.startCmd</code>, <code class="language-plaintext highlighter-rouge">osproc.execCmdEx</code>.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">osproc</code> module now uses <code class="language-plaintext highlighter-rouge">posix_spawn</code> instead of <code class="language-plaintext highlighter-rouge">fork</code>
+and <code class="language-plaintext highlighter-rouge">exec</code> on Posix systems. Define the symbol <code class="language-plaintext highlighter-rouge">useFork</code> to revert to
+the old implementation.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">intsets.assign</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.astToStr</code> and <code class="language-plaintext highlighter-rouge">system.rand</code>, <code class="language-plaintext highlighter-rouge">system.doAssert</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.pairs</code> for built-in types like arrays and strings.</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

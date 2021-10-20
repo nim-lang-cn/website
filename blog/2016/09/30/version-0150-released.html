@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.15.0 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.15.0 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="We’re happy to announce that the latest release of Nim, version 0.15.0, is now available! As always, you can grab the latest version from the downloads page. This release includes almost 180 bug fixes and improvements. To see a full list of changes, take a look at the detailed changelog below. Some of the most significant changes in this release include: improvements to the documentation, addition of a new multisync macro, and a new HttpClient implementation. Documentation All pages in the documentation now contain a search box and a drop down to select how procedures should be sorted. This allows you to search for procedures, types, macros and more from any documentation page. Sorting the procedures by type shows a more natural table of contents. This should also help you to find procedures and other identifiers. Multisync macro The multisync macro was implemented to enable you to define both synchronous and asynchronous IO procedures without having to duplicate a lot of code. As an example, consider the recvTwice procedure below: proc recvTwice(socket: Socket | AsyncSocket): Future[string] {.multisync.} = result = "" result.add(await socket.recv(25)) result.add(await socket.recv(20)) The multisync macro will transform this procedure into the following: proc recvTwice(socket: Socket): string = result = "" result.add(socket.recv(25)) result.add(socket.recv(20)) proc recvTwice(socket: AsyncSocket): Future[string] {.async.} = result = "" result.add(await socket.recv(25)) result.add(await socket.recv(20)) Allowing you to use recvTwice with both synchronous and asynchronous sockets. HttpClient Many of the httpclient module’s procedures have been deprecated in favour of a new implementation using the multisync macro. There are now two types: HttpClient and AsyncHttpClient. Both of these implement the same procedures and functionality, the only difference is timeout support and whether they are blocking or not. See the httpclient module documentation for more information. Changelog Changes affecting backwards compatibility The json module now uses an OrderedTable rather than a Table for JSON objects. The split (doc) procedure in the strutils module (with a delimiter of type set[char]) no longer strips and splits characters out of the target string by the entire set of characters. Instead, it now behaves in a similar fashion to split with string and char delimiters. Use splitWhitespace to get the old behaviour. The command invocation syntax will soon apply to open brackets and curlies too. This means that code like a [i] will be interpreted as a([i]) and not as a[i] anymore. Likewise f (a, b) means that the tuple (a, b) is passed to f. The compiler produces a warning for a [i]:: Warning: a [b] will be parsed as command syntax; spacing is deprecated See Issue #3898 for the relevant discussion. Overloading the special operators ., .(), .=, () now needs to be enabled via the {.experimental.} pragma. immediate templates and macros are now deprecated. Use untyped (doc) parameters instead. The metatype expr is deprecated. Use untyped (doc) instead. The metatype stmt is deprecated. Use typed (doc) instead. The compiler is now more picky when it comes to tuple types. The following code used to compile, now it’s rejected: import tables var rocketaims = initOrderedTable[string, Table[tuple[k: int8, v: int8], int64]]() rocketaims["hi"] = {(-1.int8, 0.int8): 0.int64}.toTable() Instead be consistent in your tuple usage and use tuple names for named tuples: import tables var rocketaims = initOrderedTable[string, Table[tuple[k: int8, v: int8], int64]]() rocketaims["hi"] = {(k: -1.int8, v: 0.int8): 0.int64}.toTable() Now when you compile console applications for Windows, console output encoding is automatically set to UTF-8. Unhandled exceptions in JavaScript are now thrown regardless of whether noUnhandledHandler is defined. But the stack traces should be much more readable now. In JavaScript, the system.alert procedure has been deprecated. Use dom.alert instead. De-deprecated re.nim because there is too much code using it and it got the basic API right. The type of headers field in the AsyncHttpClient type (doc) has been changed from a string table to the specialised HttpHeaders type. The httpclient.request (doc) procedure which takes the httpMethod as a string value no longer requires it to be prefixed with "http" (or similar). Converting a HttpMethod (doc) value to a string using the $ operator will give string values without the "Http" prefix now. The Request (doc) object defined in the asynchttpserver module now uses the HttpMethod type for the request method. Library Additions Added readHeaderRow and rowEntry to the parsecsv (doc) module to provide a lightweight alternative to Python’s csv.DictReader. Added setStdIoUnbuffered proc to the system module to enable unbuffered I/O. Added center and rsplit to the strutils (doc) module to provide similar Python functionality for Nim’s strings. Added isTitle, title, swapCase, isUpper, toUpper, isLower, toLower, isAlpha, isSpace, and capitalize to the unicode.nim (doc) module to provide unicode aware case manipulation and case testing. Added a new module strmisc (doc) to hold uncommon string operations. Currently contains partition, rpartition and expandTabs. Split out walkFiles in the os (doc) module to three separate procs in order to make a clear distinction of functionality. walkPattern iterates over both files and directories, while walkFiles now only iterates over files and walkDirs only iterates over directories. Added a synchronous HttpClient in the httpclient (doc) module. The old get, post and similar procedures are now deprecated in favour of it. Added a new macro called multisync allowing you to write procedures for synchronous and asynchronous sockets with no duplication. The async macro will now complete FutureVar[T] parameters automatically unless they have been completed already. Tool Additions The documentation is now searchable and sortable by type. Pragmas are now hidden by default in the documentation to reduce noise. Edit links are now present in the documentation. Compiler Additions The -d/--define flag can now optionally take a value to be used by code at compile time. (doc) Nimscript Additions It’s possible to enable and disable specific hints and warnings in Nimscript via the warning and hint procedures. Nimscript exports a proc named patchFile which can be used to patch modules or include files for different Nimble packages, including the stdlib package. Language Additions Added {.intdefine.} and {.strdefine.} macros to make use of (optional) compile time defines. (doc) If the first statement is an import system statement then system is not imported implicitly anymore. This allows for code like import system except echo or from system import nil. Bugfixes The list below has been generated based on the commits in Nim’s git repository. As such it lists only the issues which have been closed via a commit, for a full list see this link on Github. Fixed “RFC: should startsWith and endsWith work with characters?” (#4252) Fixed “Feature request: unbuffered I/O” (#2146) Fixed “clear() not implemented for CountTableRef” (#4325) Fixed “Cannot close file opened async” (#4334) Fixed “Feature Request: IDNA support” (#3045) Fixed “Async: wrong behavior of boolean operations on futures” (#4333) Fixed “os.walkFiles yields directories” (#4280) Fixed “Fix #4392 and progress on #4170” (#4393) Fixed “Await unable to wait futures from objects fields” (#4390) Fixed “TMP variable name generation should be more stable” (#4364) Fixed “nativesockets doesn’t compile for Android 4.x (API v19 or older) because of gethostbyaddr” (#4376) Fixed “no generic parameters allowed for ref” (#4395) Fixed “split proc in strutils inconsistent for set[char]” (#4305) Fixed “Problem with sets in devel” (#4412) Fixed “Compiler crash when using seq[PNimrodNode] in macros” (#537) Fixed “ospaths should be marked for nimscript use only” (#4249) Fixed “Repeated deepCopy() on a recursive data structure eventually crashes” (#4340) Fixed “Analyzing destructor” (#4371) Fixed “getType does not work anymore on a typedesc” (#4462) Fixed “Error in rendering empty JSON array” (#4399) Fixed “Segmentation fault when using async pragma on generic procs” (#2377) Fixed “Forwarding does not work for generics, | produces an implicit generic” (#3055) Fixed “Inside a macro, the length of the seq data inside a queue does not increase and crashes” (#4422) Fixed “compiler sigsegv while processing varargs” (#4475) Fixed “JS codegen - strings are assigned by reference” (#4471) Fixed “when statement doesn’t verify syntax” (#4301) Fixed “.this pragma doesn’t work with .async procs” (#4358) Fixed “type foo = range(…) crashes compiler” (#4429) Fixed “Compiler crash” (#2730) Fixed “Crash in compiler with static[int]” (#3706) Fixed “Bad error message “could not resolve”” (#3548) Fixed “Roof operator on string in template crashes compiler (Error: unhandled exception: sons is not accessible [FieldError])” (#3545) Fixed “SIGSEGV during compilation with parallel block” (#2758) Fixed “Codegen error with template and implicit dereference” (#4478) Fixed “@ in importcpp should work with no-argument functions” (#4496) Fixed “Regression: findExe raises” (#4497) Fixed “Linking error - repeated symbols when splitting into modules” (#4485) Fixed “Error: method is not a base” (#4428) Fixed “Casting from function returning a tuple fails” (#4345) Fixed “clang error with default nil parameter” (#4328) Fixed “internal compiler error: openArrayLoc” (#888) Fixed “Can’t forward declare async procs” (#1970) Fixed “unittest.check and sequtils.allIt do not work together” (#4494) Fixed “httpclient package can’t make SSL requests over an HTTP proxy” (#4520) Fixed “False positive warning “declared but not used” for enums.” (#4510) Fixed “Explicit conversions not using converters” (#4432) Fixed “Unclear error message when importing” (#4541) Fixed “Change console encoding to UTF-8 by default” (#4417) Fixed “Typedesc ~= Generic notation does not work anymore!” (#4534) Fixed “unittest broken?” (#4555) Fixed “Operator “or” in converter types seems to crash the compiler.” (#4537) Fixed “nimscript failed to compile/run – Error: cannot ‘importc’ variable at compile time” (#4561) Fixed “Regression: identifier expected, but found …” (#4564) Fixed “varargs with transformation that takes var argument creates invalid c code” (#4545) Fixed “Type mismatch when using empty tuple as generic parameter” (#4550) Fixed “strscans” (#4562) Fixed “getTypeImpl crashes (SIGSEGV) on variant types” (#4526) Fixed “Wrong result of sort in VM” (#4065) Fixed “I can’t call the randomT: T” (#4353) Fixed “invalid C code generated (function + block + empty tuple)” (#4505) Fixed “performance issue: const Table make a copy at runtime lookup.” (#4354) Fixed “Compiler issue: libraries without absolute paths cannot be found correctly” (#4568) Fixed “Cannot use math.^ with non-int types.” (#4574) Fixed “C codegen fails when constructing an array using an object constructor.” (#4582) Fixed “Visual Studio 10 unresolved external symbol _trunc(should we support VS2010?)” (#4532) Fixed “Cannot pass generic subtypes to proc for generic supertype” (#4528) Fixed “Lamda-lifting bug leading to crash.” (#4551) Fixed “First-class iterators declared as inline are compiled at Nim side (no error message) and fail at C” (#2094) Fixed “VS2010-warning C4090 : ‘function’ : different ‘const’ qualifiers” (#4590) Fixed “Regression: type mismatch with generics” (#4589) Fixed “„can raise an unlisted exception“ when assigning nil as default value” (#4593) Fixed “upcoming asyncdispatch.closeSocket is not GC-safe” (#4606) Fixed “Visual Studio 10.0 compiler errors, 12.0 warning” (#4459) Fixed “Exception of net.newContext: result.extraInternalIndex == 0 [AssertionError]” (#4406) Fixed “error: redeclaration of ‘result_115076’ with no linkage” (#3221) Fixed “Compiler crashes on conversion from int to float at compile time” (#4619) Fixed “wrong number of arguments regression in devel” (#4600) Fixed “importc $ has broken error message (and is not documented)” (#4579) Fixed “Compiler segfaults on simple importcpp in js mode [regression]” (#4632) Fixed “Critical reference counting codegen problem” (#4653) Fixed “tables.nim needs lots of {.noSideEffect.}” (#4254) Fixed “Capture variable error when using =&gt; macro” (#4658) Fixed “Enum from char: internal error getInt” (#3606) Fixed “Compiler crashes in debug mode (no error in release mode) with Natural discriminant in object variants” (#2865) Fixed “SIGSEGV when access field in const object variants” (#4253) Fixed “varargs cannot be used with template converter.” (#4292) Fixed “Compiler crashes when borrowing $” (#3928) Fixed “internal error: genMagicExpr: mArrPut” (#4491) Fixed “Unhelpful error message on importc namespace collision” (#4580) Fixed “Problem with openarrays and slices” (#4179) Fixed “Removing lines from end of file then rebuilding does not rebuild [js only?]” (#4656) Fixed “getCurrentException and getCurrentExceptionMsg do not work with JS” (#4635) Fixed “generic proc parameter is not inferred if type parameter has specifier” (#4672) Fixed “Cannot instantiate generic parameter when it is parent type parameter” (#4673) Fixed “deepCopy doesn’t work with inheritance after last commit” (#4693) Fixed “Multi-methods don’t work when passing ref to a different thread” (#4689) Fixed “Infinite loop in effect analysis on generics” (#4677) Fixed “SIGSEGV when compiling NimYAML tests” (#4699) Fixed “Closing AsyncEvent now also unregisters it on non-Windows platforms” (#4694) Fixed “Don’t update handle in upcoming/asyncdispatch poll() if it was closed” (#4697) Fixed “generated local variables declared outside block” (#4721) Fixed “Footer Documentation links, &amp; Community link point to the wrong place under news entries” (#4529) Fixed “Jester’s macro magic leads to incorrect C generation” (#4088) Fixed “cas bug in atomics.nim” (#3279) Fixed “nimgrep PEG not capturing the pattern ‘A’” (#4751) Fixed “GC assert triggers when assigning TableRef threadvar” (#4640) Fixed “.this pragma conflicts with experimental ptr dereferencing when names conflict” (#4671) Fixed “Generic procs accepting var .importcpp type do not work [regression]” (#4625) Fixed “C Error on tuple assignment with array” (#4626) Fixed “module securehash not gcsafe” (#4760) Fixed “Nimble installation failed on Windows x86.” (#4764) Fixed “Recent changes to marshal module break old marshalled data” (#4779) Fixed “tnewasyncudp.nim test loops forever” (#4777) Fixed “Wrong poll timeout behavior in asyncdispatch” (#4262) Fixed “Standalone await shouldn’t read future” (#4170) Fixed “Regression: httpclient fails to compile without -d:ssl” (#4797) Fixed “C Error on declaring array of heritable objects with bitfields” (#3567) Fixed “Corruption when using Channels and Threads” (#4776) Fixed “Sometimes Channel tryRecv() erroneously reports no messages available on the first call on Windows” (#4746) Fixed “Improve error message of functions called without parenthesis” (#4813) Fixed “Docgen doesn’t find doc comments in macro generated procs” (#4803) Fixed “asynchttpserver may consume unbounded memory reading headers” (#3847) Fixed “TLS connection to api.clashofclans.com hangs forever.” (#4587)"> -->
+  <meta property="og:description" content="We’re happy to announce that the latest release of Nim, version 0.15.0, is now available! As always, you can grab the latest version from the downloads page. This release includes almost 180 bug fixes and improvements. To see a full list of changes, take a look at the detailed changelog below. Some of the most significant changes in this release include: improvements to the documentation, addition of a new multisync macro, and a new HttpClient implementation. Documentation All pages in the documentation now contain a search box and a drop down to select how procedures should be sorted. This allows you to search for procedures, types, macros and more from any documentation page. Sorting the procedures by type shows a more natural table of contents. This should also help you to find procedures and other identifiers. Multisync macro The multisync macro was implemented to enable you to define both synchronous and asynchronous IO procedures without having to duplicate a lot of code. As an example, consider the recvTwice procedure below: proc recvTwice(socket: Socket | AsyncSocket): Future[string] {.multisync.} = result = "" result.add(await socket.recv(25)) result.add(await socket.recv(20)) The multisync macro will transform this procedure into the following: proc recvTwice(socket: Socket): string = result = "" result.add(socket.recv(25)) result.add(socket.recv(20)) proc recvTwice(socket: AsyncSocket): Future[string] {.async.} = result = "" result.add(await socket.recv(25)) result.add(await socket.recv(20)) Allowing you to use recvTwice with both synchronous and asynchronous sockets. HttpClient Many of the httpclient module’s procedures have been deprecated in favour of a new implementation using the multisync macro. There are now two types: HttpClient and AsyncHttpClient. Both of these implement the same procedures and functionality, the only difference is timeout support and whether they are blocking or not. See the httpclient module documentation for more information. Changelog Changes affecting backwards compatibility The json module now uses an OrderedTable rather than a Table for JSON objects. The split (doc) procedure in the strutils module (with a delimiter of type set[char]) no longer strips and splits characters out of the target string by the entire set of characters. Instead, it now behaves in a similar fashion to split with string and char delimiters. Use splitWhitespace to get the old behaviour. The command invocation syntax will soon apply to open brackets and curlies too. This means that code like a [i] will be interpreted as a([i]) and not as a[i] anymore. Likewise f (a, b) means that the tuple (a, b) is passed to f. The compiler produces a warning for a [i]:: Warning: a [b] will be parsed as command syntax; spacing is deprecated See Issue #3898 for the relevant discussion. Overloading the special operators ., .(), .=, () now needs to be enabled via the {.experimental.} pragma. immediate templates and macros are now deprecated. Use untyped (doc) parameters instead. The metatype expr is deprecated. Use untyped (doc) instead. The metatype stmt is deprecated. Use typed (doc) instead. The compiler is now more picky when it comes to tuple types. The following code used to compile, now it’s rejected: import tables var rocketaims = initOrderedTable[string, Table[tuple[k: int8, v: int8], int64]]() rocketaims["hi"] = {(-1.int8, 0.int8): 0.int64}.toTable() Instead be consistent in your tuple usage and use tuple names for named tuples: import tables var rocketaims = initOrderedTable[string, Table[tuple[k: int8, v: int8], int64]]() rocketaims["hi"] = {(k: -1.int8, v: 0.int8): 0.int64}.toTable() Now when you compile console applications for Windows, console output encoding is automatically set to UTF-8. Unhandled exceptions in JavaScript are now thrown regardless of whether noUnhandledHandler is defined. But the stack traces should be much more readable now. In JavaScript, the system.alert procedure has been deprecated. Use dom.alert instead. De-deprecated re.nim because there is too much code using it and it got the basic API right. The type of headers field in the AsyncHttpClient type (doc) has been changed from a string table to the specialised HttpHeaders type. The httpclient.request (doc) procedure which takes the httpMethod as a string value no longer requires it to be prefixed with "http" (or similar). Converting a HttpMethod (doc) value to a string using the $ operator will give string values without the "Http" prefix now. The Request (doc) object defined in the asynchttpserver module now uses the HttpMethod type for the request method. Library Additions Added readHeaderRow and rowEntry to the parsecsv (doc) module to provide a lightweight alternative to Python’s csv.DictReader. Added setStdIoUnbuffered proc to the system module to enable unbuffered I/O. Added center and rsplit to the strutils (doc) module to provide similar Python functionality for Nim’s strings. Added isTitle, title, swapCase, isUpper, toUpper, isLower, toLower, isAlpha, isSpace, and capitalize to the unicode.nim (doc) module to provide unicode aware case manipulation and case testing. Added a new module strmisc (doc) to hold uncommon string operations. Currently contains partition, rpartition and expandTabs. Split out walkFiles in the os (doc) module to three separate procs in order to make a clear distinction of functionality. walkPattern iterates over both files and directories, while walkFiles now only iterates over files and walkDirs only iterates over directories. Added a synchronous HttpClient in the httpclient (doc) module. The old get, post and similar procedures are now deprecated in favour of it. Added a new macro called multisync allowing you to write procedures for synchronous and asynchronous sockets with no duplication. The async macro will now complete FutureVar[T] parameters automatically unless they have been completed already. Tool Additions The documentation is now searchable and sortable by type. Pragmas are now hidden by default in the documentation to reduce noise. Edit links are now present in the documentation. Compiler Additions The -d/--define flag can now optionally take a value to be used by code at compile time. (doc) Nimscript Additions It’s possible to enable and disable specific hints and warnings in Nimscript via the warning and hint procedures. Nimscript exports a proc named patchFile which can be used to patch modules or include files for different Nimble packages, including the stdlib package. Language Additions Added {.intdefine.} and {.strdefine.} macros to make use of (optional) compile time defines. (doc) If the first statement is an import system statement then system is not imported implicitly anymore. This allows for code like import system except echo or from system import nil. Bugfixes The list below has been generated based on the commits in Nim’s git repository. As such it lists only the issues which have been closed via a commit, for a full list see this link on Github. Fixed “RFC: should startsWith and endsWith work with characters?” (#4252) Fixed “Feature request: unbuffered I/O” (#2146) Fixed “clear() not implemented for CountTableRef” (#4325) Fixed “Cannot close file opened async” (#4334) Fixed “Feature Request: IDNA support” (#3045) Fixed “Async: wrong behavior of boolean operations on futures” (#4333) Fixed “os.walkFiles yields directories” (#4280) Fixed “Fix #4392 and progress on #4170” (#4393) Fixed “Await unable to wait futures from objects fields” (#4390) Fixed “TMP variable name generation should be more stable” (#4364) Fixed “nativesockets doesn’t compile for Android 4.x (API v19 or older) because of gethostbyaddr” (#4376) Fixed “no generic parameters allowed for ref” (#4395) Fixed “split proc in strutils inconsistent for set[char]” (#4305) Fixed “Problem with sets in devel” (#4412) Fixed “Compiler crash when using seq[PNimrodNode] in macros” (#537) Fixed “ospaths should be marked for nimscript use only” (#4249) Fixed “Repeated deepCopy() on a recursive data structure eventually crashes” (#4340) Fixed “Analyzing destructor” (#4371) Fixed “getType does not work anymore on a typedesc” (#4462) Fixed “Error in rendering empty JSON array” (#4399) Fixed “Segmentation fault when using async pragma on generic procs” (#2377) Fixed “Forwarding does not work for generics, | produces an implicit generic” (#3055) Fixed “Inside a macro, the length of the seq data inside a queue does not increase and crashes” (#4422) Fixed “compiler sigsegv while processing varargs” (#4475) Fixed “JS codegen - strings are assigned by reference” (#4471) Fixed “when statement doesn’t verify syntax” (#4301) Fixed “.this pragma doesn’t work with .async procs” (#4358) Fixed “type foo = range(…) crashes compiler” (#4429) Fixed “Compiler crash” (#2730) Fixed “Crash in compiler with static[int]” (#3706) Fixed “Bad error message “could not resolve”” (#3548) Fixed “Roof operator on string in template crashes compiler (Error: unhandled exception: sons is not accessible [FieldError])” (#3545) Fixed “SIGSEGV during compilation with parallel block” (#2758) Fixed “Codegen error with template and implicit dereference” (#4478) Fixed “@ in importcpp should work with no-argument functions” (#4496) Fixed “Regression: findExe raises” (#4497) Fixed “Linking error - repeated symbols when splitting into modules” (#4485) Fixed “Error: method is not a base” (#4428) Fixed “Casting from function returning a tuple fails” (#4345) Fixed “clang error with default nil parameter” (#4328) Fixed “internal compiler error: openArrayLoc” (#888) Fixed “Can’t forward declare async procs” (#1970) Fixed “unittest.check and sequtils.allIt do not work together” (#4494) Fixed “httpclient package can’t make SSL requests over an HTTP proxy” (#4520) Fixed “False positive warning “declared but not used” for enums.” (#4510) Fixed “Explicit conversions not using converters” (#4432) Fixed “Unclear error message when importing” (#4541) Fixed “Change console encoding to UTF-8 by default” (#4417) Fixed “Typedesc ~= Generic notation does not work anymore!” (#4534) Fixed “unittest broken?” (#4555) Fixed “Operator “or” in converter types seems to crash the compiler.” (#4537) Fixed “nimscript failed to compile/run – Error: cannot ‘importc’ variable at compile time” (#4561) Fixed “Regression: identifier expected, but found …” (#4564) Fixed “varargs with transformation that takes var argument creates invalid c code” (#4545) Fixed “Type mismatch when using empty tuple as generic parameter” (#4550) Fixed “strscans” (#4562) Fixed “getTypeImpl crashes (SIGSEGV) on variant types” (#4526) Fixed “Wrong result of sort in VM” (#4065) Fixed “I can’t call the randomT: T” (#4353) Fixed “invalid C code generated (function + block + empty tuple)” (#4505) Fixed “performance issue: const Table make a copy at runtime lookup.” (#4354) Fixed “Compiler issue: libraries without absolute paths cannot be found correctly” (#4568) Fixed “Cannot use math.^ with non-int types.” (#4574) Fixed “C codegen fails when constructing an array using an object constructor.” (#4582) Fixed “Visual Studio 10 unresolved external symbol _trunc(should we support VS2010?)” (#4532) Fixed “Cannot pass generic subtypes to proc for generic supertype” (#4528) Fixed “Lamda-lifting bug leading to crash.” (#4551) Fixed “First-class iterators declared as inline are compiled at Nim side (no error message) and fail at C” (#2094) Fixed “VS2010-warning C4090 : ‘function’ : different ‘const’ qualifiers” (#4590) Fixed “Regression: type mismatch with generics” (#4589) Fixed “„can raise an unlisted exception“ when assigning nil as default value” (#4593) Fixed “upcoming asyncdispatch.closeSocket is not GC-safe” (#4606) Fixed “Visual Studio 10.0 compiler errors, 12.0 warning” (#4459) Fixed “Exception of net.newContext: result.extraInternalIndex == 0 [AssertionError]” (#4406) Fixed “error: redeclaration of ‘result_115076’ with no linkage” (#3221) Fixed “Compiler crashes on conversion from int to float at compile time” (#4619) Fixed “wrong number of arguments regression in devel” (#4600) Fixed “importc $ has broken error message (and is not documented)” (#4579) Fixed “Compiler segfaults on simple importcpp in js mode [regression]” (#4632) Fixed “Critical reference counting codegen problem” (#4653) Fixed “tables.nim needs lots of {.noSideEffect.}” (#4254) Fixed “Capture variable error when using =&gt; macro” (#4658) Fixed “Enum from char: internal error getInt” (#3606) Fixed “Compiler crashes in debug mode (no error in release mode) with Natural discriminant in object variants” (#2865) Fixed “SIGSEGV when access field in const object variants” (#4253) Fixed “varargs cannot be used with template converter.” (#4292) Fixed “Compiler crashes when borrowing $” (#3928) Fixed “internal error: genMagicExpr: mArrPut” (#4491) Fixed “Unhelpful error message on importc namespace collision” (#4580) Fixed “Problem with openarrays and slices” (#4179) Fixed “Removing lines from end of file then rebuilding does not rebuild [js only?]” (#4656) Fixed “getCurrentException and getCurrentExceptionMsg do not work with JS” (#4635) Fixed “generic proc parameter is not inferred if type parameter has specifier” (#4672) Fixed “Cannot instantiate generic parameter when it is parent type parameter” (#4673) Fixed “deepCopy doesn’t work with inheritance after last commit” (#4693) Fixed “Multi-methods don’t work when passing ref to a different thread” (#4689) Fixed “Infinite loop in effect analysis on generics” (#4677) Fixed “SIGSEGV when compiling NimYAML tests” (#4699) Fixed “Closing AsyncEvent now also unregisters it on non-Windows platforms” (#4694) Fixed “Don’t update handle in upcoming/asyncdispatch poll() if it was closed” (#4697) Fixed “generated local variables declared outside block” (#4721) Fixed “Footer Documentation links, &amp; Community link point to the wrong place under news entries” (#4529) Fixed “Jester’s macro magic leads to incorrect C generation” (#4088) Fixed “cas bug in atomics.nim” (#3279) Fixed “nimgrep PEG not capturing the pattern ‘A’” (#4751) Fixed “GC assert triggers when assigning TableRef threadvar” (#4640) Fixed “.this pragma conflicts with experimental ptr dereferencing when names conflict” (#4671) Fixed “Generic procs accepting var .importcpp type do not work [regression]” (#4625) Fixed “C Error on tuple assignment with array” (#4626) Fixed “module securehash not gcsafe” (#4760) Fixed “Nimble installation failed on Windows x86.” (#4764) Fixed “Recent changes to marshal module break old marshalled data” (#4779) Fixed “tnewasyncudp.nim test loops forever” (#4777) Fixed “Wrong poll timeout behavior in asyncdispatch” (#4262) Fixed “Standalone await shouldn’t read future” (#4170) Fixed “Regression: httpclient fails to compile without -d:ssl” (#4797) Fixed “C Error on declaring array of heritable objects with bitfields” (#3567) Fixed “Corruption when using Channels and Threads” (#4776) Fixed “Sometimes Channel tryRecv() erroneously reports no messages available on the first call on Windows” (#4746) Fixed “Improve error message of functions called without parenthesis” (#4813) Fixed “Docgen doesn’t find doc comments in macro generated procs” (#4803) Fixed “asynchttpserver may consume unbounded memory reading headers” (#3847) Fixed “TLS connection to api.clashofclans.com hangs forever.” (#4587)">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.15.0 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.15.0 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              30 September 2016
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Dominik Picheta
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Andreas Rumpf
+            </span>
+            
+          </h3>
+          <p>We’re happy to announce that the latest release of Nim, version 0.15.0, is now
+available!</p>
+
+<p>As always, you can grab the latest version from the
+<a href="https://nim-lang-cn.org/install.html">downloads page</a>.</p>
+
+<p>This release includes almost 180 bug fixes and improvements. To see a full list
+of changes, take a look at the detailed changelog
+<a href="#changelog">below</a>.</p>
+
+<p>Some of the most significant changes in this release include: improvements to
+the documentation, addition of a new <code class="language-plaintext highlighter-rouge">multisync</code> macro, and a new
+<code class="language-plaintext highlighter-rouge">HttpClient</code> implementation.</p>
+
+<h2 id="documentation">Documentation</h2>
+
+<p>All pages in the documentation now contain a search box and a drop down to
+select how procedures should be sorted. This allows you to search for
+procedures, types, macros and more from any documentation page.</p>
+
+<p><a href="https://nim-lang-cn.org/assets/news/images/0.15.0/doc_search.gif">
+  <img src="https://nim-lang-cn.org/assets/news/images/0.15.0/doc_search.gif" alt="Doc search" style="width:100%" />
+</a></p>
+
+<p>Sorting the procedures by type shows a more natural table of contents. This
+should also help you to find procedures and other identifiers.</p>
+
+<p><a href="https://nim-lang-cn.org/assets/news/images/0.15.0/doc_sort.gif">
+  <img src="https://nim-lang-cn.org/assets/news/images/0.15.0/doc_sort.gif" alt="Doc sort" style="width:100%" />
+</a></p>
+
+<h2 id="multisync-macro">Multisync macro</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">multisync</code> macro was implemented to enable you to define both
+synchronous and asynchronous IO procedures without having to duplicate a
+lot of code.</p>
+
+<p>As an example, consider the <code class="language-plaintext highlighter-rouge">recvTwice</code> procedure below:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">proc </span><span class="nf">recvTwice</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">Socket</span> <span class="o">|</span> <span class="n">AsyncSocket</span><span class="p">):</span> <span class="n">Future</span><span class="o">[</span><span class="kt">string</span><span class="o">]</span> <span class="p">{.</span><span class="n">multisync</span><span class="p">.}</span> <span class="o">=</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="s">""</span>
+  <span class="n">result</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">await</span> <span class="n">socket</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">25</span><span class="p">))</span>
+  <span class="n">result</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">await</span> <span class="n">socket</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">multisync</code> macro will transform this procedure into the following:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">proc </span><span class="nf">recvTwice</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">Socket</span><span class="p">):</span> <span class="kt">string</span> <span class="o">=</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="s">""</span>
+  <span class="n">result</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">25</span><span class="p">))</span>
+  <span class="n">result</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+
+<span class="k">proc </span><span class="nf">recvTwice</span><span class="p">(</span><span class="n">socket</span><span class="p">:</span> <span class="n">AsyncSocket</span><span class="p">):</span> <span class="n">Future</span><span class="o">[</span><span class="kt">string</span><span class="o">]</span> <span class="p">{.</span><span class="n">async</span><span class="p">.}</span> <span class="o">=</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="s">""</span>
+  <span class="n">result</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">await</span> <span class="n">socket</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">25</span><span class="p">))</span>
+  <span class="n">result</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">await</span> <span class="n">socket</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Allowing you to use <code class="language-plaintext highlighter-rouge">recvTwice</code> with both synchronous and asynchronous sockets.</p>
+
+<h2 id="httpclient">HttpClient</h2>
+
+<p>Many of the <code class="language-plaintext highlighter-rouge">httpclient</code> module’s procedures have been deprecated in
+favour of a new implementation using the <code class="language-plaintext highlighter-rouge">multisync</code> macro. There are now
+two types: <code class="language-plaintext highlighter-rouge">HttpClient</code> and <code class="language-plaintext highlighter-rouge">AsyncHttpClient</code>. Both of these implement the
+same procedures and functionality, the only difference is timeout support and
+whether they are blocking or not.</p>
+
+<p>See the <a href="http://nim-lang.org/docs/httpclient.html">httpclient</a> module
+documentation for more information.</p>
+
+<h2 id="changelog">Changelog</h2>
+
+<h3 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h3>
+
+<ul>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">json</code> module now uses an <code class="language-plaintext highlighter-rouge">OrderedTable</code> rather than a <code class="language-plaintext highlighter-rouge">Table</code>
+for JSON objects.</p>
+  </li>
+  <li>
+    <p>The <a href="http://nim-lang.org/docs/strutils.html#split,string,set[char],int"><code class="language-plaintext highlighter-rouge">split</code><code class="language-plaintext highlighter-rouge"> </code>(doc)</a>
+procedure in the <code class="language-plaintext highlighter-rouge">strutils</code> module (with a delimiter of type
+<code class="language-plaintext highlighter-rouge">set[char]</code>) no longer strips and splits characters out of the target string
+by the entire set of characters. Instead, it now behaves in a
+similar fashion to <code class="language-plaintext highlighter-rouge">split</code> with <code class="language-plaintext highlighter-rouge">string</code> and <code class="language-plaintext highlighter-rouge">char</code>
+delimiters. Use <code class="language-plaintext highlighter-rouge">splitWhitespace</code> to get the old behaviour.</p>
+  </li>
+  <li>
+    <p>The command invocation syntax will soon apply to open brackets
+and curlies too. This means that code like <code class="language-plaintext highlighter-rouge">a [i]</code> will be
+interpreted as <code class="language-plaintext highlighter-rouge">a([i])</code> and not as <code class="language-plaintext highlighter-rouge">a[i]</code> anymore. Likewise
+<code class="language-plaintext highlighter-rouge">f (a, b)</code> means that the tuple <code class="language-plaintext highlighter-rouge">(a, b)</code> is passed to <code class="language-plaintext highlighter-rouge">f</code>.
+The compiler produces a warning for <code class="language-plaintext highlighter-rouge">a [i]</code>::</p>
+
+    <p>Warning: a [b] will be parsed as command syntax; spacing is deprecated</p>
+
+    <p>See <a href="https://github.com/nim-lang/Nim/issues/3898">Issue #3898</a> for the
+relevant discussion.</p>
+  </li>
+  <li>
+    <p>Overloading the special operators <code class="language-plaintext highlighter-rouge">.</code>, <code class="language-plaintext highlighter-rouge">.()</code>, <code class="language-plaintext highlighter-rouge">.=</code>, <code class="language-plaintext highlighter-rouge">()</code> now
+needs to be enabled via the <code class="language-plaintext highlighter-rouge">{.experimental.}</code> pragma.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">immediate</code> templates and macros are now deprecated.
+Use <code class="language-plaintext highlighter-rouge">untyped</code> <a href="http://nim-lang.org/docs/manual.html#templates-typed-vs-untyped-parameters">(doc)</a>
+parameters instead.</p>
+  </li>
+  <li>
+    <p>The metatype <code class="language-plaintext highlighter-rouge">expr</code> is deprecated. Use <code class="language-plaintext highlighter-rouge">untyped</code>
+<a href="http://nim-lang.org/docs/manual.html#templates-typed-vs-untyped-parameters">(doc)</a> instead.</p>
+  </li>
+  <li>
+    <p>The metatype <code class="language-plaintext highlighter-rouge">stmt</code> is deprecated. Use <code class="language-plaintext highlighter-rouge">typed</code>
+<a href="http://nim-lang.org/docs/manual.html#templates-typed-vs-untyped-parameters">(doc)</a> instead.</p>
+  </li>
+  <li>
+    <p>The compiler is now more picky when it comes to <code class="language-plaintext highlighter-rouge">tuple</code> types. The
+following code used to compile, now it’s rejected:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">tables</span>
+<span class="k">var</span> <span class="n">rocketaims</span> <span class="o">=</span> <span class="n">initOrderedTable</span><span class="o">[</span><span class="kt">string</span><span class="p">,</span> <span class="n">Table</span><span class="o">[</span><span class="k">tuple</span><span class="o">[</span><span class="n">k</span><span class="p">:</span> <span class="kt">int8</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="kt">int8</span><span class="o">]</span><span class="p">,</span> <span class="kt">int64</span><span class="o">]]</span><span class="p">()</span>
+<span class="n">rocketaims</span><span class="o">[</span><span class="s">"hi"</span><span class="o">]</span> <span class="o">=</span> <span class="p">{(</span><span class="o">-</span><span class="mf">1.</span><span class="kt">int8</span><span class="p">,</span> <span class="mf">0.</span><span class="kt">int8</span><span class="p">):</span> <span class="mf">0.</span><span class="kt">int64</span><span class="p">}.</span><span class="n">toTable</span><span class="p">()</span>
+</code></pre></div>    </div>
+
+    <p>Instead be consistent in your tuple usage and use tuple names for named tuples:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">tables</span>
+<span class="k">var</span> <span class="n">rocketaims</span> <span class="o">=</span> <span class="n">initOrderedTable</span><span class="o">[</span><span class="kt">string</span><span class="p">,</span> <span class="n">Table</span><span class="o">[</span><span class="k">tuple</span><span class="o">[</span><span class="n">k</span><span class="p">:</span> <span class="kt">int8</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="kt">int8</span><span class="o">]</span><span class="p">,</span> <span class="kt">int64</span><span class="o">]]</span><span class="p">()</span>
+<span class="n">rocketaims</span><span class="o">[</span><span class="s">"hi"</span><span class="o">]</span> <span class="o">=</span> <span class="p">{(</span><span class="n">k</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.</span><span class="kt">int8</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="mf">0.</span><span class="kt">int8</span><span class="p">):</span> <span class="mf">0.</span><span class="kt">int64</span><span class="p">}.</span><span class="n">toTable</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Now when you compile console applications for Windows, console output
+encoding is automatically set to UTF-8.</p>
+  </li>
+  <li>
+    <p>Unhandled exceptions in JavaScript are now thrown regardless of whether
+<code class="language-plaintext highlighter-rouge">noUnhandledHandler</code> is defined. But the stack traces should be much more
+readable now.</p>
+  </li>
+  <li>
+    <p>In JavaScript, the <code class="language-plaintext highlighter-rouge">system.alert</code> procedure has been deprecated.
+Use <code class="language-plaintext highlighter-rouge">dom.alert</code> instead.</p>
+  </li>
+  <li>
+    <p>De-deprecated <code class="language-plaintext highlighter-rouge">re.nim</code> because there is too much code using it
+and it got the basic API right.</p>
+  </li>
+  <li>
+    <p>The type of <code class="language-plaintext highlighter-rouge">headers</code> field in the <code class="language-plaintext highlighter-rouge">AsyncHttpClient</code> type
+<a href="http://nim-lang.org/docs/httpclient.html#AsyncHttpClient">(doc)</a>
+has been changed
+from a string table to the specialised <code class="language-plaintext highlighter-rouge">HttpHeaders</code> type.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">httpclient.request</code>
+<a href="http://nim-lang.org/docs/httpclient.html#request,AsyncHttpClient,string,string,string">(doc)</a>
+procedure which takes the <code class="language-plaintext highlighter-rouge">httpMethod</code> as a string
+value no longer requires it to be prefixed with <code class="language-plaintext highlighter-rouge">"http"</code>
+(or similar).</p>
+  </li>
+  <li>
+    <p>Converting a <code class="language-plaintext highlighter-rouge">HttpMethod</code>
+<a href="nim-lang.org/docs/httpcore.html#HttpMethod">(doc)</a>
+value to a string using the <code class="language-plaintext highlighter-rouge">$</code> operator will
+give string values without the <code class="language-plaintext highlighter-rouge">"Http"</code> prefix now.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">Request</code>
+<a href="http://nim-lang.org/docs/asynchttpserver.html#Request">(doc)</a>
+object defined in the <code class="language-plaintext highlighter-rouge">asynchttpserver</code> module now uses
+the <code class="language-plaintext highlighter-rouge">HttpMethod</code> type for the request method.</p>
+  </li>
+</ul>
+
+<h3 id="library-additions">Library Additions</h3>
+
+<ul>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">readHeaderRow</code> and <code class="language-plaintext highlighter-rouge">rowEntry</code> to the <code class="language-plaintext highlighter-rouge">parsecsv</code>
+<a href="http://nim-lang.org/docs/parsecsv.html">(doc)</a> module
+to provide
+a lightweight alternative to Python’s <code class="language-plaintext highlighter-rouge">csv.DictReader</code>.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">setStdIoUnbuffered</code> proc to the <code class="language-plaintext highlighter-rouge">system</code> module to enable
+unbuffered I/O.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">center</code> and <code class="language-plaintext highlighter-rouge">rsplit</code> to the <code class="language-plaintext highlighter-rouge">strutils</code>
+<a href="http://nim-lang.org/docs/strutils.html">(doc)</a> module
+to provide similar Python functionality for Nim’s strings.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">isTitle</code>, <code class="language-plaintext highlighter-rouge">title</code>, <code class="language-plaintext highlighter-rouge">swapCase</code>, <code class="language-plaintext highlighter-rouge">isUpper</code>, <code class="language-plaintext highlighter-rouge">toUpper</code>,
+<code class="language-plaintext highlighter-rouge">isLower</code>, <code class="language-plaintext highlighter-rouge">toLower</code>, <code class="language-plaintext highlighter-rouge">isAlpha</code>, <code class="language-plaintext highlighter-rouge">isSpace</code>, and <code class="language-plaintext highlighter-rouge">capitalize</code>
+to the <code class="language-plaintext highlighter-rouge">unicode.nim</code>
+<a href="http://nim-lang.org/docs/unicode.html">(doc)</a> module
+to provide unicode aware case manipulation and case
+testing.</p>
+  </li>
+  <li>
+    <p>Added a new module <code class="language-plaintext highlighter-rouge">strmisc</code>
+<a href="http://nim-lang.org/docs/strmisc.html">(doc)</a>
+to hold uncommon string
+operations. Currently contains <code class="language-plaintext highlighter-rouge">partition</code>, <code class="language-plaintext highlighter-rouge">rpartition</code>
+and <code class="language-plaintext highlighter-rouge">expandTabs</code>.</p>
+  </li>
+  <li>
+    <p>Split out <code class="language-plaintext highlighter-rouge">walkFiles</code> in the <code class="language-plaintext highlighter-rouge">os</code>
+<a href="http://nim-lang.org/docs/os.html">(doc)</a> module to three separate procs
+in order to make a clear distinction of functionality. <code class="language-plaintext highlighter-rouge">walkPattern</code> iterates
+over both files and directories, while <code class="language-plaintext highlighter-rouge">walkFiles</code> now only iterates
+over files and <code class="language-plaintext highlighter-rouge">walkDirs</code> only iterates over directories.</p>
+  </li>
+  <li>
+    <p>Added a synchronous <code class="language-plaintext highlighter-rouge">HttpClient</code> in the <code class="language-plaintext highlighter-rouge">httpclient</code>
+<a href="http://nim-lang.org/docs/httpclient.html">(doc)</a>
+module. The old
+<code class="language-plaintext highlighter-rouge">get</code>, <code class="language-plaintext highlighter-rouge">post</code> and similar procedures are now deprecated in favour of it.</p>
+  </li>
+  <li>
+    <p>Added a new macro called <code class="language-plaintext highlighter-rouge">multisync</code> allowing you to write procedures for
+synchronous and asynchronous sockets with no duplication.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">async</code> macro will now complete <code class="language-plaintext highlighter-rouge">FutureVar[T]</code> parameters
+automatically unless they have been completed already.</p>
+  </li>
+</ul>
+
+<h3 id="tool-additions">Tool Additions</h3>
+
+<ul>
+  <li>The documentation is now searchable and sortable by type.</li>
+  <li>Pragmas are now hidden by default in the documentation to reduce noise.</li>
+  <li>Edit links are now present in the documentation.</li>
+</ul>
+
+<h3 id="compiler-additions">Compiler Additions</h3>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">-d/--define</code> flag can now optionally take a value to be used
+by code at compile time.
+<a href="http://nim-lang.org/docs/manual.html#implementation-specific-pragmas-compile-time-define-pragmas">(doc)</a></li>
+</ul>
+
+<h3 id="nimscript-additions">Nimscript Additions</h3>
+
+<ul>
+  <li>
+    <p>It’s possible to enable and disable specific hints and warnings in
+Nimscript via the <code class="language-plaintext highlighter-rouge">warning</code> and <code class="language-plaintext highlighter-rouge">hint</code> procedures.</p>
+  </li>
+  <li>
+    <p>Nimscript exports  a proc named <code class="language-plaintext highlighter-rouge">patchFile</code> which can be used to
+patch modules or include files for different Nimble packages, including
+the <code class="language-plaintext highlighter-rouge">stdlib</code> package.</p>
+  </li>
+</ul>
+
+<h3 id="language-additions">Language Additions</h3>
+
+<ul>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">{.intdefine.}</code> and <code class="language-plaintext highlighter-rouge">{.strdefine.}</code> macros to make use of
+(optional) compile time defines.
+<a href="http://nim-lang.org/docs/manual.html#implementation-specific-pragmas-compile-time-define-pragmas">(doc)</a></p>
+  </li>
+  <li>
+    <p>If the first statement is an <code class="language-plaintext highlighter-rouge">import system</code> statement then <code class="language-plaintext highlighter-rouge">system</code>
+is not imported implicitly anymore. This allows for code like
+<code class="language-plaintext highlighter-rouge">import system except echo</code> or <code class="language-plaintext highlighter-rouge">from system import nil</code>.</p>
+  </li>
+</ul>
+
+<h3 id="bugfixes">Bugfixes</h3>
+
+<p>The list below has been generated based on the commits in Nim’s git
+repository. As such it lists only the issues which have been closed
+via a commit, for a full list see
+<a href="https://github.com/nim-lang/Nim/issues?utf8=%E2%9C%93&amp;q=is%3Aissue+closed%3A%222016-06-22+..+2016-09-30%22+">this link on Github</a>.</p>
+
+<ul>
+  <li>
+    <p>Fixed “RFC: should startsWith and endsWith work with characters?”
+(<a href="https://github.com/nim-lang/Nim/issues/4252">#4252</a>)</p>
+  </li>
+  <li>Fixed “Feature request: unbuffered I/O”
+(<a href="https://github.com/nim-lang/Nim/issues/2146">#2146</a>)</li>
+  <li>Fixed “clear() not implemented for CountTableRef”
+(<a href="https://github.com/nim-lang/Nim/issues/4325">#4325</a>)</li>
+  <li>Fixed “Cannot close file opened async”
+(<a href="https://github.com/nim-lang/Nim/issues/4334">#4334</a>)</li>
+  <li>Fixed “Feature Request: IDNA support”
+(<a href="https://github.com/nim-lang/Nim/issues/3045">#3045</a>)</li>
+  <li>Fixed “Async: wrong behavior of boolean operations on futures”
+(<a href="https://github.com/nim-lang/Nim/issues/4333">#4333</a>)</li>
+  <li>Fixed “os.walkFiles yields directories”
+(<a href="https://github.com/nim-lang/Nim/issues/4280">#4280</a>)</li>
+  <li>Fixed “Fix #4392 and progress on #4170”
+(<a href="https://github.com/nim-lang/Nim/issues/4393">#4393</a>)</li>
+  <li>Fixed “Await unable to wait futures from objects fields”
+(<a href="https://github.com/nim-lang/Nim/issues/4390">#4390</a>)</li>
+  <li>Fixed “TMP variable name generation should be more stable”
+(<a href="https://github.com/nim-lang/Nim/issues/4364">#4364</a>)</li>
+  <li>Fixed “nativesockets doesn’t compile for Android 4.x (API v19 or older) because of gethostbyaddr”
+(<a href="https://github.com/nim-lang/Nim/issues/4376">#4376</a>)</li>
+  <li>Fixed “no generic parameters allowed for ref”
+(<a href="https://github.com/nim-lang/Nim/issues/4395">#4395</a>)</li>
+  <li>Fixed “split proc in strutils inconsistent for set[char]”
+(<a href="https://github.com/nim-lang/Nim/issues/4305">#4305</a>)</li>
+  <li>Fixed “Problem with sets in devel”
+(<a href="https://github.com/nim-lang/Nim/issues/4412">#4412</a>)</li>
+  <li>Fixed “Compiler crash when using seq[PNimrodNode] in macros”
+(<a href="https://github.com/nim-lang/Nim/issues/537">#537</a>)</li>
+  <li>Fixed “ospaths should be marked for nimscript use only”
+(<a href="https://github.com/nim-lang/Nim/issues/4249">#4249</a>)</li>
+  <li>Fixed “Repeated deepCopy() on a recursive data structure eventually crashes”
+(<a href="https://github.com/nim-lang/Nim/issues/4340">#4340</a>)</li>
+  <li>Fixed “Analyzing destructor”
+(<a href="https://github.com/nim-lang/Nim/issues/4371">#4371</a>)</li>
+  <li>Fixed “getType does not work anymore on a typedesc”
+(<a href="https://github.com/nim-lang/Nim/issues/4462">#4462</a>)</li>
+  <li>Fixed “Error in rendering empty JSON array”
+(<a href="https://github.com/nim-lang/Nim/issues/4399">#4399</a>)</li>
+  <li>Fixed “Segmentation fault when using async pragma on generic procs”
+(<a href="https://github.com/nim-lang/Nim/issues/2377">#2377</a>)</li>
+  <li>Fixed “Forwarding does not work for generics,  | produces an implicit generic”
+(<a href="https://github.com/nim-lang/Nim/issues/3055">#3055</a>)</li>
+  <li>Fixed “Inside a macro, the length of the <code class="language-plaintext highlighter-rouge">seq</code> data inside a <code class="language-plaintext highlighter-rouge">queue</code> does not increase and crashes”
+(<a href="https://github.com/nim-lang/Nim/issues/4422">#4422</a>)</li>
+  <li>Fixed “compiler sigsegv while processing varargs”
+(<a href="https://github.com/nim-lang/Nim/issues/4475">#4475</a>)</li>
+  <li>Fixed “JS codegen - strings are assigned by reference”
+(<a href="https://github.com/nim-lang/Nim/issues/4471">#4471</a>)</li>
+  <li>Fixed “when statement doesn’t verify syntax”
+(<a href="https://github.com/nim-lang/Nim/issues/4301">#4301</a>)</li>
+  <li>Fixed “.this pragma doesn’t work with .async procs”
+(<a href="https://github.com/nim-lang/Nim/issues/4358">#4358</a>)</li>
+  <li>Fixed “type foo = range(…) crashes compiler”
+(<a href="https://github.com/nim-lang/Nim/issues/4429">#4429</a>)</li>
+  <li>Fixed “Compiler crash”
+(<a href="https://github.com/nim-lang/Nim/issues/2730">#2730</a>)</li>
+  <li>Fixed “Crash in compiler with static[int]”
+(<a href="https://github.com/nim-lang/Nim/issues/3706">#3706</a>)</li>
+  <li>Fixed “Bad error message “could not resolve””
+(<a href="https://github.com/nim-lang/Nim/issues/3548">#3548</a>)</li>
+  <li>Fixed “Roof operator on string in template crashes compiler  (Error: unhandled exception: sons is not accessible [FieldError])”
+(<a href="https://github.com/nim-lang/Nim/issues/3545">#3545</a>)</li>
+  <li>Fixed “SIGSEGV during compilation with parallel block”
+(<a href="https://github.com/nim-lang/Nim/issues/2758">#2758</a>)</li>
+  <li>Fixed “Codegen error with template and implicit dereference”
+(<a href="https://github.com/nim-lang/Nim/issues/4478">#4478</a>)</li>
+  <li>Fixed “@ in importcpp should work with no-argument functions”
+(<a href="https://github.com/nim-lang/Nim/issues/4496">#4496</a>)</li>
+  <li>Fixed “Regression: findExe raises”
+(<a href="https://github.com/nim-lang/Nim/issues/4497">#4497</a>)</li>
+  <li>Fixed “Linking error - repeated symbols when splitting into modules”
+(<a href="https://github.com/nim-lang/Nim/issues/4485">#4485</a>)</li>
+  <li>Fixed “Error: method is not a base”
+(<a href="https://github.com/nim-lang/Nim/issues/4428">#4428</a>)</li>
+  <li>Fixed “Casting from function returning a tuple fails”
+(<a href="https://github.com/nim-lang/Nim/issues/4345">#4345</a>)</li>
+  <li>Fixed “clang error with default nil parameter”
+(<a href="https://github.com/nim-lang/Nim/issues/4328">#4328</a>)</li>
+  <li>Fixed “internal compiler error: openArrayLoc”
+(<a href="https://github.com/nim-lang/Nim/issues/888">#888</a>)</li>
+  <li>Fixed “Can’t forward declare async procs”
+(<a href="https://github.com/nim-lang/Nim/issues/1970">#1970</a>)</li>
+  <li>Fixed “unittest.check and sequtils.allIt do not work together”
+(<a href="https://github.com/nim-lang/Nim/issues/4494">#4494</a>)</li>
+  <li>Fixed “httpclient package can’t make SSL requests over an HTTP proxy”
+(<a href="https://github.com/nim-lang/Nim/issues/4520">#4520</a>)</li>
+  <li>Fixed “False positive warning “declared but not used” for enums.”
+(<a href="https://github.com/nim-lang/Nim/issues/4510">#4510</a>)</li>
+  <li>
+    <p>Fixed “Explicit conversions not using converters”
+(<a href="https://github.com/nim-lang/Nim/issues/4432">#4432</a>)</p>
+  </li>
+  <li>Fixed “Unclear error message when importing”
+(<a href="https://github.com/nim-lang/Nim/issues/4541">#4541</a>)</li>
+  <li>
+    <p>Fixed “Change console encoding to UTF-8 by default”
+(<a href="https://github.com/nim-lang/Nim/issues/4417">#4417</a>)</p>
+  </li>
+  <li>Fixed “Typedesc ~= Generic notation does not work anymore!”
+(<a href="https://github.com/nim-lang/Nim/issues/4534">#4534</a>)</li>
+  <li>Fixed “unittest broken?”
+(<a href="https://github.com/nim-lang/Nim/issues/4555">#4555</a>)</li>
+  <li>Fixed “Operator “or” in converter types seems to crash the compiler.”
+(<a href="https://github.com/nim-lang/Nim/issues/4537">#4537</a>)</li>
+  <li>Fixed “nimscript failed to compile/run – Error: cannot ‘importc’ variable at compile time”
+(<a href="https://github.com/nim-lang/Nim/issues/4561">#4561</a>)</li>
+  <li>Fixed “Regression: identifier expected, but found …”
+(<a href="https://github.com/nim-lang/Nim/issues/4564">#4564</a>)</li>
+  <li>Fixed “varargs with transformation that takes var argument creates invalid c code”
+(<a href="https://github.com/nim-lang/Nim/issues/4545">#4545</a>)</li>
+  <li>Fixed “Type mismatch when using empty tuple as generic parameter”
+(<a href="https://github.com/nim-lang/Nim/issues/4550">#4550</a>)</li>
+  <li>Fixed “strscans”
+(<a href="https://github.com/nim-lang/Nim/issues/4562">#4562</a>)</li>
+  <li>Fixed “getTypeImpl crashes (SIGSEGV) on variant types”
+(<a href="https://github.com/nim-lang/Nim/issues/4526">#4526</a>)</li>
+  <li>Fixed “Wrong result of sort in VM”
+(<a href="https://github.com/nim-lang/Nim/issues/4065">#4065</a>)</li>
+  <li>Fixed “I can’t call the random<a href="x: Slice[T]">T</a>: T”
+(<a href="https://github.com/nim-lang/Nim/issues/4353">#4353</a>)</li>
+  <li>
+    <p>Fixed “invalid C code generated (function + block + empty tuple)”
+(<a href="https://github.com/nim-lang/Nim/issues/4505">#4505</a>)</p>
+  </li>
+  <li>Fixed “performance issue: const Table make a copy at runtime lookup.”
+(<a href="https://github.com/nim-lang/Nim/issues/4354">#4354</a>)</li>
+  <li>Fixed “Compiler issue: libraries without absolute paths cannot be found correctly”
+(<a href="https://github.com/nim-lang/Nim/issues/4568">#4568</a>)</li>
+  <li>Fixed “Cannot use math.<code class="language-plaintext highlighter-rouge">^</code> with non-int types.”
+(<a href="https://github.com/nim-lang/Nim/issues/4574">#4574</a>)</li>
+  <li>Fixed “C codegen fails when constructing an array using an object constructor.”
+(<a href="https://github.com/nim-lang/Nim/issues/4582">#4582</a>)</li>
+  <li>Fixed “Visual Studio 10 unresolved external symbol _trunc(should we support VS2010?)”
+(<a href="https://github.com/nim-lang/Nim/issues/4532">#4532</a>)</li>
+  <li>Fixed “Cannot pass generic subtypes to proc for generic supertype”
+(<a href="https://github.com/nim-lang/Nim/issues/4528">#4528</a>)</li>
+  <li>Fixed “Lamda-lifting bug leading to crash.”
+(<a href="https://github.com/nim-lang/Nim/issues/4551">#4551</a>)</li>
+  <li>Fixed “First-class iterators declared as inline are compiled at Nim side (no error message) and fail at C”
+(<a href="https://github.com/nim-lang/Nim/issues/2094">#2094</a>)</li>
+  <li>Fixed “VS2010-warning C4090 : ‘function’ : different ‘const’ qualifiers”
+(<a href="https://github.com/nim-lang/Nim/issues/4590">#4590</a>)</li>
+  <li>Fixed “Regression: type mismatch with generics”
+(<a href="https://github.com/nim-lang/Nim/issues/4589">#4589</a>)</li>
+  <li>Fixed “„can raise an unlisted exception“ when assigning nil as default value”
+(<a href="https://github.com/nim-lang/Nim/issues/4593">#4593</a>)</li>
+  <li>Fixed “upcoming asyncdispatch.closeSocket is not GC-safe”
+(<a href="https://github.com/nim-lang/Nim/issues/4606">#4606</a>)</li>
+  <li>Fixed “Visual Studio 10.0 compiler errors, 12.0 warning”
+(<a href="https://github.com/nim-lang/Nim/issues/4459">#4459</a>)</li>
+  <li>Fixed “Exception of net.newContext: result.extraInternalIndex == 0  [AssertionError]”
+(<a href="https://github.com/nim-lang/Nim/issues/4406">#4406</a>)</li>
+  <li>Fixed “error: redeclaration of ‘result_115076’ with no linkage”
+(<a href="https://github.com/nim-lang/Nim/issues/3221">#3221</a>)</li>
+  <li>Fixed “Compiler crashes on conversion from int to float at compile time”
+(<a href="https://github.com/nim-lang/Nim/issues/4619">#4619</a>)</li>
+  <li>Fixed “wrong number of arguments regression in devel”
+(<a href="https://github.com/nim-lang/Nim/issues/4600">#4600</a>)</li>
+  <li>Fixed “importc $ has broken error message (and is not documented)”
+(<a href="https://github.com/nim-lang/Nim/issues/4579">#4579</a>)</li>
+  <li>Fixed “Compiler segfaults on simple importcpp in js mode [regression]”
+(<a href="https://github.com/nim-lang/Nim/issues/4632">#4632</a>)</li>
+  <li>Fixed “Critical reference counting codegen problem”
+(<a href="https://github.com/nim-lang/Nim/issues/4653">#4653</a>)</li>
+  <li>Fixed “tables.nim needs lots of {.noSideEffect.}”
+(<a href="https://github.com/nim-lang/Nim/issues/4254">#4254</a>)</li>
+  <li>Fixed “Capture variable error when using <code class="language-plaintext highlighter-rouge">=&gt;</code> macro”
+(<a href="https://github.com/nim-lang/Nim/issues/4658">#4658</a>)</li>
+  <li>Fixed “Enum from char: internal error getInt”
+(<a href="https://github.com/nim-lang/Nim/issues/3606">#3606</a>)</li>
+  <li>Fixed “Compiler crashes in debug mode (no error in release mode) with Natural discriminant in object variants”
+(<a href="https://github.com/nim-lang/Nim/issues/2865">#2865</a>)</li>
+  <li>Fixed “SIGSEGV when access field in const object variants”
+(<a href="https://github.com/nim-lang/Nim/issues/4253">#4253</a>)</li>
+  <li>Fixed “varargs cannot be used with template converter.”
+(<a href="https://github.com/nim-lang/Nim/issues/4292">#4292</a>)</li>
+  <li>Fixed “Compiler crashes when borrowing $”
+(<a href="https://github.com/nim-lang/Nim/issues/3928">#3928</a>)</li>
+  <li>Fixed “internal error: genMagicExpr: mArrPut”
+(<a href="https://github.com/nim-lang/Nim/issues/4491">#4491</a>)</li>
+  <li>Fixed “Unhelpful error message on importc namespace collision”
+(<a href="https://github.com/nim-lang/Nim/issues/4580">#4580</a>)</li>
+  <li>Fixed “Problem with openarrays and slices”
+(<a href="https://github.com/nim-lang/Nim/issues/4179">#4179</a>)</li>
+  <li>Fixed “Removing lines from end of file then rebuilding does not rebuild [js only?]”
+(<a href="https://github.com/nim-lang/Nim/issues/4656">#4656</a>)</li>
+  <li>Fixed “getCurrentException and getCurrentExceptionMsg do not work with JS”
+(<a href="https://github.com/nim-lang/Nim/issues/4635">#4635</a>)</li>
+  <li>Fixed “generic proc parameter is not inferred if type parameter has specifier”
+(<a href="https://github.com/nim-lang/Nim/issues/4672">#4672</a>)</li>
+  <li>Fixed “Cannot instantiate generic parameter when it is parent type parameter”
+(<a href="https://github.com/nim-lang/Nim/issues/4673">#4673</a>)</li>
+  <li>Fixed “deepCopy doesn’t work with inheritance after last commit”
+(<a href="https://github.com/nim-lang/Nim/issues/4693">#4693</a>)</li>
+  <li>Fixed “Multi-methods don’t work when passing ref to a different thread”
+(<a href="https://github.com/nim-lang/Nim/issues/4689">#4689</a>)</li>
+  <li>Fixed “Infinite loop in effect analysis on generics”
+(<a href="https://github.com/nim-lang/Nim/issues/4677">#4677</a>)</li>
+  <li>
+    <p>Fixed “SIGSEGV when compiling NimYAML tests”
+(<a href="https://github.com/nim-lang/Nim/issues/4699">#4699</a>)</p>
+  </li>
+  <li>Fixed “Closing AsyncEvent now also unregisters it on non-Windows platforms”
+(<a href="https://github.com/nim-lang/Nim/issues/4694">#4694</a>)</li>
+  <li>Fixed “Don’t update handle in upcoming/asyncdispatch poll() if it was closed”
+(<a href="https://github.com/nim-lang/Nim/issues/4697">#4697</a>)</li>
+  <li>Fixed “generated local variables declared outside block”
+(<a href="https://github.com/nim-lang/Nim/issues/4721">#4721</a>)</li>
+  <li>Fixed “Footer Documentation links, &amp; Community link point to the wrong place under news entries”
+(<a href="https://github.com/nim-lang/Nim/issues/4529">#4529</a>)</li>
+  <li>Fixed “Jester’s macro magic leads to incorrect C generation”
+(<a href="https://github.com/nim-lang/Nim/issues/4088">#4088</a>)</li>
+  <li>Fixed “cas bug in atomics.nim”
+(<a href="https://github.com/nim-lang/Nim/issues/3279">#3279</a>)</li>
+  <li>Fixed “nimgrep PEG not capturing the pattern ‘A’”
+(<a href="https://github.com/nim-lang/Nim/issues/4751">#4751</a>)</li>
+  <li>Fixed “GC assert triggers when assigning TableRef threadvar”
+(<a href="https://github.com/nim-lang/Nim/issues/4640">#4640</a>)</li>
+  <li>Fixed “.this pragma conflicts with experimental ptr dereferencing when names conflict”
+(<a href="https://github.com/nim-lang/Nim/issues/4671">#4671</a>)</li>
+  <li>Fixed “Generic procs accepting var .importcpp type do not work [regression]”
+(<a href="https://github.com/nim-lang/Nim/issues/4625">#4625</a>)</li>
+  <li>Fixed “C Error on tuple assignment with array”
+(<a href="https://github.com/nim-lang/Nim/issues/4626">#4626</a>)</li>
+  <li>
+    <p>Fixed “module securehash not gcsafe”
+(<a href="https://github.com/nim-lang/Nim/issues/4760">#4760</a>)</p>
+  </li>
+  <li>Fixed “Nimble installation failed on Windows x86.”
+(<a href="https://github.com/nim-lang/Nim/issues/4764">#4764</a>)</li>
+  <li>Fixed “Recent changes to marshal module break old marshalled data”
+(<a href="https://github.com/nim-lang/Nim/issues/4779">#4779</a>)</li>
+  <li>Fixed “tnewasyncudp.nim test loops forever”
+(<a href="https://github.com/nim-lang/Nim/issues/4777">#4777</a>)</li>
+  <li>Fixed “Wrong poll timeout behavior in asyncdispatch”
+(<a href="https://github.com/nim-lang/Nim/issues/4262">#4262</a>)</li>
+  <li>Fixed “Standalone await shouldn’t read future”
+(<a href="https://github.com/nim-lang/Nim/issues/4170">#4170</a>)</li>
+  <li>Fixed “Regression: httpclient fails to compile without -d:ssl”
+(<a href="https://github.com/nim-lang/Nim/issues/4797">#4797</a>)</li>
+  <li>Fixed “C Error on declaring array of heritable objects with bitfields”
+(<a href="https://github.com/nim-lang/Nim/issues/3567">#3567</a>)</li>
+  <li>Fixed “Corruption when using Channels and Threads”
+(<a href="https://github.com/nim-lang/Nim/issues/4776">#4776</a>)</li>
+  <li>Fixed “Sometimes Channel tryRecv() erroneously reports no messages available on the first call on Windows”
+(<a href="https://github.com/nim-lang/Nim/issues/4746">#4746</a>)</li>
+  <li>Fixed “Improve error message of functions called without parenthesis”
+(<a href="https://github.com/nim-lang/Nim/issues/4813">#4813</a>)</li>
+  <li>Fixed “Docgen doesn’t find doc comments in macro generated procs”
+(<a href="https://github.com/nim-lang/Nim/issues/4803">#4803</a>)</li>
+  <li>Fixed “asynchttpserver may consume unbounded memory reading headers”
+(<a href="https://github.com/nim-lang/Nim/issues/3847">#3847</a>)</li>
+  <li>Fixed “TLS connection to api.clashofclans.com hangs forever.”
+(<a href="https://github.com/nim-lang/Nim/issues/4587">#4587</a>)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

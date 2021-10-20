@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Nim中文官网现已上线！ - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Nim中文官网现已上线！"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Nim中文官网现已上线！ 大家可以通过https://nim-lang-cn.org来访问。 足下 官网是我们的起点， 它不只是一个官网的中文镜像， 我们更希望它是一个国内Nim圈子的基地， 一个核心。 所有的资源都会围绕这个核心， 所以我们会认真地打磨它： 我们会及时更新和翻译官网的博客和其他更新， 以便大家掌握第一手的Nim资讯 我们会及时将国内的Nim资源整合起来， 让官网可以真正运行起来， 发挥它的作用， 走出一条中国特色的Nim发展道路。 当你需要教程和资料时， 我们希望你第一个想到的是去官网上找， 并且我们会尽全力让你能够在官网上找到你需要的一切。 我们也会在官网上建立论坛上的优秀资源的索引， 定期更新及时、优质的论坛资源， 并推送到思否、CSDN、OSChina、微博等主流媒体上。 生态 我们的初衷是想要建立起国内的Nim开发者生态。 以官网为核心， 让Nim开发者们把注意力集中到这里： 官网上有很多论坛的索引，有问题可以去论坛问，便于存档； 官网上也尽量多地整理了QQ、微信群， 有紧急的问题可以去聊天工具上问，能够及时得到回复； 也可以通过学习页面上的【社区资源】模块， 获取到国内主流媒体上先行者的问题、解答或者一些心得体会的博文； 也可能会有线下的交流见面会，或者论坛、QQ群、微信群的一些活动， 让我们的社区有爱又团结，发挥出社区的力量。 而这些都可以从社区中查看， 我们也会将活动进行博客的推送， 你可以订阅RSS以及时获取这些令人振奋的消息。 修远 目前官网中最关键的——文档，还没有能够完全翻译完， 学习和文档两个模块中的中文文档还在由@sheldon紧锣密鼓地翻译中， 但是大家都是通过业余时间以非盈利的方式参与进来的， 难免工作之余精力优先， 所以也欢迎大家加入我们来贡献自己的力量。 我们也欢迎你把自己的Nim博客推荐给我们！ 我们欢迎各种方向，各种优质、高产的Nim博客， 我们会在学习页面的社区资源栏将你的博客挂上， 供大家学习。 new runtimes完成之日，就是Nim 1.0发布之时！ 特别感谢@sheldon大佬的鼎力支持 和Nim开发集中营各位的帮助。 感谢大家的支持和等待，让我们一起创造Nim中文社区的繁荣，推动Nim的发展。"> -->
+  <meta property="og:description" content="Nim中文官网现已上线！ 大家可以通过https://nim-lang-cn.org来访问。 足下 官网是我们的起点， 它不只是一个官网的中文镜像， 我们更希望它是一个国内Nim圈子的基地， 一个核心。 所有的资源都会围绕这个核心， 所以我们会认真地打磨它： 我们会及时更新和翻译官网的博客和其他更新， 以便大家掌握第一手的Nim资讯 我们会及时将国内的Nim资源整合起来， 让官网可以真正运行起来， 发挥它的作用， 走出一条中国特色的Nim发展道路。 当你需要教程和资料时， 我们希望你第一个想到的是去官网上找， 并且我们会尽全力让你能够在官网上找到你需要的一切。 我们也会在官网上建立论坛上的优秀资源的索引， 定期更新及时、优质的论坛资源， 并推送到思否、CSDN、OSChina、微博等主流媒体上。 生态 我们的初衷是想要建立起国内的Nim开发者生态。 以官网为核心， 让Nim开发者们把注意力集中到这里： 官网上有很多论坛的索引，有问题可以去论坛问，便于存档； 官网上也尽量多地整理了QQ、微信群， 有紧急的问题可以去聊天工具上问，能够及时得到回复； 也可以通过学习页面上的【社区资源】模块， 获取到国内主流媒体上先行者的问题、解答或者一些心得体会的博文； 也可能会有线下的交流见面会，或者论坛、QQ群、微信群的一些活动， 让我们的社区有爱又团结，发挥出社区的力量。 而这些都可以从社区中查看， 我们也会将活动进行博客的推送， 你可以订阅RSS以及时获取这些令人振奋的消息。 修远 目前官网中最关键的——文档，还没有能够完全翻译完， 学习和文档两个模块中的中文文档还在由@sheldon紧锣密鼓地翻译中， 但是大家都是通过业余时间以非盈利的方式参与进来的， 难免工作之余精力优先， 所以也欢迎大家加入我们来贡献自己的力量。 我们也欢迎你把自己的Nim博客推荐给我们！ 我们欢迎各种方向，各种优质、高产的Nim博客， 我们会在学习页面的社区资源栏将你的博客挂上， 供大家学习。 new runtimes完成之日，就是Nim 1.0发布之时！ 特别感谢@sheldon大佬的鼎力支持 和Nim开发集中营各位的帮助。 感谢大家的支持和等待，让我们一起创造Nim中文社区的繁荣，推动Nim的发展。">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Nim中文官网现已上线！" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Nim中文官网现已上线！
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              24 August 2019
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Nim中文社区
+            </span>
+            
+          </h3>
+          <p><a href="https://nim-lang-cn.org">Nim中文官网</a>现已上线！
+大家可以通过<a href="https://nim-lang-cn.org">https://nim-lang-cn.org</a>来访问。</p>
+
+<h2 id="足下">足下</h2>
+<p>官网是我们的起点，
+它不只是一个官网的中文镜像，
+我们更希望它是一个国内Nim圈子的基地，
+一个核心。
+所有的资源都会围绕这个核心，
+所以我们会认真地打磨它：</p>
+
+<ul>
+  <li>
+    <p>我们会及时更新和<strong>翻译</strong>官网的博客和其他更新，
+以便大家掌握第一手的Nim资讯</p>
+  </li>
+  <li>
+    <p>我们会及时将国内的Nim资源<strong>整合</strong>起来，
+  让官网可以真正运行起来，
+  发挥它的作用，
+  走出一条中国特色的Nim发展道路。</p>
+  </li>
+  <li>
+    <p>当你需要<strong>教程</strong>和<strong>资料</strong>时，
+我们希望你第一个想到的是去官网上找，
+并且我们会尽全力让你能够在官网上找到你需要的一切。</p>
+  </li>
+  <li>
+    <p>我们也会在官网上建立论坛上的优秀资源的索引，
+定期更新及时、优质的<strong>论坛资源</strong>，
+并推送到思否、CSDN、OSChina、微博等主流<strong>媒体</strong>上。</p>
+  </li>
+</ul>
+
+<h2 id="生态">生态</h2>
+<p>我们的初衷是想要建立起国内的Nim开发者生态。</p>
+
+<p>以官网为<strong>核心</strong>，
+让Nim开发者们把注意力集中到这里：</p>
+
+<ul>
+  <li>
+    <p>官网上有很多<a href="https://nim-lang-cn.org/community.html#%E8%AE%BA%E5%9D%9B"><strong>论坛</strong>的索引</a>，有问题可以去论坛问，便于存档；</p>
+  </li>
+  <li>
+    <p>官网上也尽量多地整理了<a href="https://nim-lang-cn.org/community.html#%E5%8D%B3%E6%97%B6%E8%81%8A%E5%A4%A9"><strong>QQ、微信群</strong></a>，
+有紧急的问题可以去聊天工具上问，能够及时得到回复；</p>
+  </li>
+  <li>
+    <p>也可以通过<a href="https://nim-lang-cn.org/learn.html">学习</a>页面上的【<strong>社区资源</strong>】模块，
+获取到国内主流媒体上先行者的问题、解答或者一些心得体会的博文；</p>
+  </li>
+  <li>
+    <p>也可能会有线下的交流见面会，或者论坛、QQ群、微信群的一些活动，
+让我们的社区有爱又团结，发挥出<strong>社区</strong>的力量。</p>
+  </li>
+</ul>
+
+<p>而这些都可以从<a href="https://nim-lang-cn.org/community.html">社区</a>中查看，
+我们也会将活动进行<a href="https://nim-lang-cn.org/blog.html">博客</a>的推送，
+你可以订阅<a href="https://nim-lang-cn.org/feed.xml">RSS</a>以及时获取这些令人振奋的消息。</p>
+
+<h2 id="修远">修远</h2>
+<ul>
+  <li>
+    <p>目前官网中最关键的——<strong>文档</strong>，还没有能够完全翻译完，
+  <a href="https://nim-lang-cn.org/learn.html">学习</a>和<a href="https://nim-lang-cn.org/documentation.html">文档</a>两个模块中的中文文档还在由<a href="https://github.com/gogolxdong">@sheldon</a>紧锣密鼓地翻译中，
+  但是大家都是通过业余时间以非盈利的方式参与进来的，
+  难免工作之余精力优先，
+  所以也欢迎大家加入<a href="https://github.com/nim-lang-cn">我们</a>来贡献自己的力量。</p>
+  </li>
+  <li>
+    <p>我们也欢迎你<strong>把自己的Nim博客推荐给我们</strong>！
+  我们欢迎各种方向，各种优质、高产的Nim博客，
+  我们会在<a href="https://nim-lang-cn.org/learn.html">学习</a>页面的社区资源栏将你的博客挂上，
+  供大家学习。</p>
+  </li>
+</ul>
+
+<hr />
+
+<blockquote>
+  <p>new runtimes完成之日，就是Nim 1.0发布之时！</p>
+</blockquote>
+
+<p><em>特别感谢<a href="https://github.com/gogolxdong">@sheldon</a>大佬的鼎力支持
+和<a href="https://jq.qq.com/?_wv=1027&amp;k=50EQ6eZ">Nim开发集中营</a>各位的帮助。</em></p>
+
+<p>感谢大家的支持和等待，让我们一起创造Nim中文社区的繁荣，推动Nim的发展。</p>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

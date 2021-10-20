@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.13.0 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.13.0 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Once again we are proud to announce the latest release of the Nim compiler and related tools. This release comes just 3 months after the last release! A new version of Nimble which depends on this release, has also been released. See this forum thread for more information about the Nimble release. This release of Nim includes over 116 bug fixes, many of which are related to closures. The lambda lifting algorithm in the compiler has been completely rewritten, and some changes have been made to the semantics of closures in Nim as a result. These changes may affect backwards compatibility and are all described in the section below. With this release, we are one step closer to Nim version 1.0. The 1.0 release will be a big milestone for Nim, because after that version is released there will be no more breaking changes made to the language or the standard library. That being said, the next release will likely be Nim 0.14. It will focus on improvements to the GC and concurrency. We will in particular be looking at ways to add multi-core support to async await. Standard library improvements are also on our roadmap but may not make it for Nim 0.14. As always you can download the latest version of Nim from the download page. Happy coding! Changes affecting backwards compatibility macros.newLit for bool now produces false/true symbols which actually work with the bool datatype. When compiling to JS: Node, NodeType and Document are no longer defined. Use the types defined in dom.nim instead. The check x is iterator (used for instance in concepts) was always a weird special case (you could not use x is proc) and was removed from the language. Top level routines cannot have the calling convention closure anymore. The redis module has been moved out of the standard library. It can now be installed via Nimble and is located here: https://github.com/nim-lang/redis math.RunningStat and its associated procs have been moved from the math module to a new stats module. Syntax changes The parser now considers leading whitespace in front of operators to determine if an operator is used in prefix or infix position. This means that finally echo $foo is parsed as people expect, which is as echo($foo). It used to be parsed as (echo) $ (foo). echo $ foo continues to be parsed as (echo) $ (foo). This also means that -1 is always parsed as prefix operator so code like 0..kArraySize div 2 -1 needs to be changed to 0..kArraySize div 2 - 1. This release also adds multi-line comments to Nim. The syntax for them is: #[ comment here ]#. For more details read the section of the manual. Iterator changes Implicit return type inference for iterators has been removed from the language. The following used to work: iterator it = yield 7 This was a strange special case and has been removed. Now you need to write it like so which is consistent with procs: iterator it: auto = yield 7 Closure changes The semantics of closures changed: Capturing variables that are in loops do not produce a new environment. Nim closures behave like JavaScript closures now. The following used to work as the environment creation used to be attached to the loop body: proc outer = var s: seq[proc(): int {.closure.}] = @[] for i in 0 ..&lt; 30: let ii = i s.add(proc(): int = return ii*ii) This behaviour has changed in 0.13.0 and now needs to be written as: proc outer = var s: seq[proc(): int {.closure.}] = @[] for i in 0 ..&lt; 30: (proc () = let ii = i s.add(proc(): int = return ii*ii))() The reason is that environment creations are now only performed once per proc call. This change is subtle and unfortunate, but: Affects almost no code out there. Is easier to implement and we are at a point in Nim’s development process where simple+stable wins over perfect-in-theory+unstable-in-practice. Implies programmers are more in control of where memory is allocated which is beneficial for a systems programming language. Bugfixes The list below has been generated based on the commits in Nim’s git repository. As such it lists only the issues which have been closed via a commit, for a full list see this link on Github. Fixed “Generic arguments cannot be used in templates (raising undeclared identifier)” (#3498) Fixed “multimethods: Error: internal error: cgmeth.genConv” (#3550) Fixed “nimscript - SIGSEGV in except block” (#3546) Fixed “Bool literals in macros do not work.” (#3541) Fixed “Docs: nativesocket.html - 404” (#3582) Fixed ““not nil” return types never trigger an error or warning” (#2285) Fixed “No warning or error is raised even if not nil is specified “ (#3222) Fixed “Incorrect fsmonitor add() filter logic” (#3611) Fixed ““nimble install nimsuggest” failed” (#3622) Fixed “compile time excl cause SIGSEGV” (#3639) Fixed “Unable to echo unsigned ints at compile-time” (#2514) Fixed “Nested closure iterator produces internal error” (#1725) Fixed “C Error on walkDirRec closure” (#3636) Fixed “Error in generated c code” (#3201) Fixed “C Compile-time error with generic proc type.” (#2659) Fixed “ICE dereferencing array pointer” (#2240) Fixed “Lambda lifting crash” (#2007) Fixed “Can’t reference outer variables from a closure in an iterator” (#2604) Fixed “M&amp;S collector breaks with nested for loops.” (#603) Fixed “Regression: bad C codegen” (#3723) Fixed “JS backend - handle bool type in case statement” (#3722) Fixed “linenoise compilation with cpp” (#3720) Fixed “(???,???) duplicate case label” (#3665) Fixed “linenoise compilation with cpp” (#3720) Fixed “Update list of backward incompatibilities for Nim 0.12.0 in the main site” (#3689) Fixed “Can’t compile nimble with latest devel - codegen bug” (#3730)"> -->
+  <meta property="og:description" content="Once again we are proud to announce the latest release of the Nim compiler and related tools. This release comes just 3 months after the last release! A new version of Nimble which depends on this release, has also been released. See this forum thread for more information about the Nimble release. This release of Nim includes over 116 bug fixes, many of which are related to closures. The lambda lifting algorithm in the compiler has been completely rewritten, and some changes have been made to the semantics of closures in Nim as a result. These changes may affect backwards compatibility and are all described in the section below. With this release, we are one step closer to Nim version 1.0. The 1.0 release will be a big milestone for Nim, because after that version is released there will be no more breaking changes made to the language or the standard library. That being said, the next release will likely be Nim 0.14. It will focus on improvements to the GC and concurrency. We will in particular be looking at ways to add multi-core support to async await. Standard library improvements are also on our roadmap but may not make it for Nim 0.14. As always you can download the latest version of Nim from the download page. Happy coding! Changes affecting backwards compatibility macros.newLit for bool now produces false/true symbols which actually work with the bool datatype. When compiling to JS: Node, NodeType and Document are no longer defined. Use the types defined in dom.nim instead. The check x is iterator (used for instance in concepts) was always a weird special case (you could not use x is proc) and was removed from the language. Top level routines cannot have the calling convention closure anymore. The redis module has been moved out of the standard library. It can now be installed via Nimble and is located here: https://github.com/nim-lang/redis math.RunningStat and its associated procs have been moved from the math module to a new stats module. Syntax changes The parser now considers leading whitespace in front of operators to determine if an operator is used in prefix or infix position. This means that finally echo $foo is parsed as people expect, which is as echo($foo). It used to be parsed as (echo) $ (foo). echo $ foo continues to be parsed as (echo) $ (foo). This also means that -1 is always parsed as prefix operator so code like 0..kArraySize div 2 -1 needs to be changed to 0..kArraySize div 2 - 1. This release also adds multi-line comments to Nim. The syntax for them is: #[ comment here ]#. For more details read the section of the manual. Iterator changes Implicit return type inference for iterators has been removed from the language. The following used to work: iterator it = yield 7 This was a strange special case and has been removed. Now you need to write it like so which is consistent with procs: iterator it: auto = yield 7 Closure changes The semantics of closures changed: Capturing variables that are in loops do not produce a new environment. Nim closures behave like JavaScript closures now. The following used to work as the environment creation used to be attached to the loop body: proc outer = var s: seq[proc(): int {.closure.}] = @[] for i in 0 ..&lt; 30: let ii = i s.add(proc(): int = return ii*ii) This behaviour has changed in 0.13.0 and now needs to be written as: proc outer = var s: seq[proc(): int {.closure.}] = @[] for i in 0 ..&lt; 30: (proc () = let ii = i s.add(proc(): int = return ii*ii))() The reason is that environment creations are now only performed once per proc call. This change is subtle and unfortunate, but: Affects almost no code out there. Is easier to implement and we are at a point in Nim’s development process where simple+stable wins over perfect-in-theory+unstable-in-practice. Implies programmers are more in control of where memory is allocated which is beneficial for a systems programming language. Bugfixes The list below has been generated based on the commits in Nim’s git repository. As such it lists only the issues which have been closed via a commit, for a full list see this link on Github. Fixed “Generic arguments cannot be used in templates (raising undeclared identifier)” (#3498) Fixed “multimethods: Error: internal error: cgmeth.genConv” (#3550) Fixed “nimscript - SIGSEGV in except block” (#3546) Fixed “Bool literals in macros do not work.” (#3541) Fixed “Docs: nativesocket.html - 404” (#3582) Fixed ““not nil” return types never trigger an error or warning” (#2285) Fixed “No warning or error is raised even if not nil is specified “ (#3222) Fixed “Incorrect fsmonitor add() filter logic” (#3611) Fixed ““nimble install nimsuggest” failed” (#3622) Fixed “compile time excl cause SIGSEGV” (#3639) Fixed “Unable to echo unsigned ints at compile-time” (#2514) Fixed “Nested closure iterator produces internal error” (#1725) Fixed “C Error on walkDirRec closure” (#3636) Fixed “Error in generated c code” (#3201) Fixed “C Compile-time error with generic proc type.” (#2659) Fixed “ICE dereferencing array pointer” (#2240) Fixed “Lambda lifting crash” (#2007) Fixed “Can’t reference outer variables from a closure in an iterator” (#2604) Fixed “M&amp;S collector breaks with nested for loops.” (#603) Fixed “Regression: bad C codegen” (#3723) Fixed “JS backend - handle bool type in case statement” (#3722) Fixed “linenoise compilation with cpp” (#3720) Fixed “(???,???) duplicate case label” (#3665) Fixed “linenoise compilation with cpp” (#3720) Fixed “Update list of backward incompatibilities for Nim 0.12.0 in the main site” (#3689) Fixed “Can’t compile nimble with latest devel - codegen bug” (#3730)">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.13.0 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.13.0 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              18 January 2016
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Dominik Picheta
+            </span>
+            
+          </h3>
+          <p>Once again we are proud to announce the latest release of the Nim compiler
+and related tools. This release comes just 3 months after the last
+release!</p>
+
+<p>A new version of Nimble which depends on this release, has also been
+released. See <a href="http://forum.nim-lang.org/t/1912">this</a> forum thread for
+more information about the Nimble release.</p>
+
+<p>This release of Nim includes over 116 bug fixes, many of which are related
+to closures. The lambda lifting algorithm in the compiler has been completely
+rewritten, and some changes have been made to the semantics of closures in
+Nim as a result. These changes may affect backwards compatibility and are all
+described in the section below.</p>
+
+<p>With this release, we are one step closer to Nim version 1.0.
+The 1.0 release will be a big milestone for Nim, because after that version
+is released there will be no more breaking changes made to the language
+or the standard library.</p>
+
+<p>That being said, the next release will likely be Nim 0.14. It will focus on
+improvements to the GC and concurrency. We will in particular be looking at
+ways to add multi-core support to async await. Standard library improvements
+are also on our roadmap but may not make it for Nim 0.14.</p>
+
+<p>As always you can download the latest version of Nim from the
+<a href="https://nim-lang-cn.org/install.html">download</a> page.</p>
+
+<p>Happy coding!</p>
+
+<h2 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">macros.newLit</code> for <code class="language-plaintext highlighter-rouge">bool</code> now produces false/true symbols which
+actually work with the bool datatype.</li>
+  <li>When compiling to JS: <code class="language-plaintext highlighter-rouge">Node</code>, <code class="language-plaintext highlighter-rouge">NodeType</code> and <code class="language-plaintext highlighter-rouge">Document</code> are no longer
+defined. Use the types defined in <code class="language-plaintext highlighter-rouge">dom.nim</code> instead.</li>
+  <li>The check <code class="language-plaintext highlighter-rouge">x is iterator</code> (used for instance in concepts) was always a
+weird special case (you could not use <code class="language-plaintext highlighter-rouge">x is proc</code>) and was removed from
+the language.</li>
+  <li>Top level routines cannot have the calling convention <code class="language-plaintext highlighter-rouge">closure</code>
+anymore.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">redis</code> module has been moved out of the standard library. It can
+now be installed via Nimble and is located here:
+https://github.com/nim-lang/redis</li>
+  <li><code class="language-plaintext highlighter-rouge">math.RunningStat</code> and its associated procs have been moved from
+the <code class="language-plaintext highlighter-rouge">math</code> module to a new <code class="language-plaintext highlighter-rouge">stats</code> module.</li>
+</ul>
+
+<h2 id="syntax-changes">Syntax changes</h2>
+
+<p>The parser now considers leading whitespace in front of operators
+to determine if an operator is used in prefix or infix position.
+This means that finally <code class="language-plaintext highlighter-rouge">echo $foo</code> is parsed as people expect,
+which is as <code class="language-plaintext highlighter-rouge">echo($foo)</code>. It used to be parsed as <code class="language-plaintext highlighter-rouge">(echo) $ (foo)</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">echo $ foo</code> continues to be parsed as <code class="language-plaintext highlighter-rouge">(echo) $ (foo)</code>.</p>
+
+<p>This also means that <code class="language-plaintext highlighter-rouge">-1</code> is always parsed as prefix operator so
+code like <code class="language-plaintext highlighter-rouge">0..kArraySize div 2 -1</code> needs to be changed to
+<code class="language-plaintext highlighter-rouge">0..kArraySize div 2 - 1</code>.</p>
+
+<p>This release also adds multi-line comments to Nim. The syntax for them is:
+<code class="language-plaintext highlighter-rouge">#[ comment here ]#</code>. For more details read the section of
+the <a href="docs/manual.html#lexical-analysis-multiline-comments">manual</a>.</p>
+
+<h2 id="iterator-changes">Iterator changes</h2>
+
+<p>Implicit return type inference for iterators has been removed from the language. The following used to work:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">iterator</span> <span class="n">it</span> <span class="o">=</span>
+  <span class="k">yield</span> <span class="mi">7</span>
+</code></pre></div></div>
+
+<p>This was a strange special case and has been removed. Now you need to write it like so which is consistent with procs:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">iterator</span> <span class="n">it</span><span class="p">:</span> <span class="n">auto</span> <span class="o">=</span>
+  <span class="k">yield</span> <span class="mi">7</span>
+</code></pre></div></div>
+
+<h2 id="closure-changes">Closure changes</h2>
+
+<p>The semantics of closures changed: Capturing variables that are in loops do not produce a new environment. Nim closures behave like JavaScript closures now.</p>
+
+<p>The following used to work as the environment creation used to be attached to the loop body:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">proc </span><span class="nf">outer</span> <span class="o">=</span>
+  <span class="k">var</span> <span class="n">s</span><span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="k">proc</span><span class="p">():</span> <span class="kt">int</span> <span class="p">{.</span><span class="n">closure</span><span class="p">.}</span><span class="o">]</span> <span class="o">=</span> <span class="o">@[]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
+    <span class="k">let</span> <span class="n">ii</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="k">proc</span><span class="p">():</span> <span class="kt">int</span> <span class="o">=</span> <span class="k">return</span> <span class="n">ii</span><span class="o">*</span><span class="n">ii</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This behaviour has changed in 0.13.0 and now needs to be written as:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">proc </span><span class="nf">outer</span> <span class="o">=</span>
+  <span class="k">var</span> <span class="n">s</span><span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="k">proc</span><span class="p">():</span> <span class="kt">int</span> <span class="p">{.</span><span class="n">closure</span><span class="p">.}</span><span class="o">]</span> <span class="o">=</span> <span class="o">@[]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">0</span> <span class="p">..</span><span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
+    <span class="p">(</span><span class="k">proc</span> <span class="p">()</span> <span class="o">=</span>
+      <span class="k">let</span> <span class="n">ii</span> <span class="o">=</span> <span class="n">i</span>
+      <span class="n">s</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="k">proc</span><span class="p">():</span> <span class="kt">int</span> <span class="o">=</span> <span class="k">return</span> <span class="n">ii</span><span class="o">*</span><span class="n">ii</span><span class="p">))()</span>
+</code></pre></div></div>
+
+<p>The reason is that environment creations are now only performed once
+per proc call. This change is subtle and unfortunate, but:</p>
+
+<ol>
+  <li>Affects almost no code out there.</li>
+  <li>Is easier to implement and we are at a point in Nim’s development process where simple+stable wins over perfect-in-theory+unstable-in-practice.</li>
+  <li>Implies programmers are more in control of where memory is allocated which is beneficial for a systems programming language.</li>
+</ol>
+
+<h2 id="bugfixes">Bugfixes</h2>
+
+<p>The list below has been generated based on the commits in Nim’s git
+repository. As such it lists only the issues which have been closed
+via a commit, for a full list see
+<a href="https://github.com/nim-lang/Nim/issues?utf8=%E2%9C%93&amp;q=is%3Aissue+closed%3A%222015-10-27+..+2016-01-19%22+">this link on Github</a>.</p>
+
+<ul>
+  <li>Fixed “Generic arguments cannot be used in templates (raising undeclared identifier)”
+(<a href="https://github.com/nim-lang/Nim/issues/3498">#3498</a>)</li>
+  <li>Fixed “multimethods: Error: internal error: cgmeth.genConv”
+(<a href="https://github.com/nim-lang/Nim/issues/3550">#3550</a>)</li>
+  <li>Fixed “nimscript - SIGSEGV in except block”
+(<a href="https://github.com/nim-lang/Nim/issues/3546">#3546</a>)</li>
+  <li>Fixed “Bool literals in macros do not work.”
+(<a href="https://github.com/nim-lang/Nim/issues/3541">#3541</a>)</li>
+  <li>Fixed “Docs: nativesocket.html - 404”
+(<a href="https://github.com/nim-lang/Nim/issues/3582">#3582</a>)</li>
+  <li>Fixed ““not nil” return types never trigger an error or warning”
+(<a href="https://github.com/nim-lang/Nim/issues/2285">#2285</a>)</li>
+  <li>Fixed “No warning or error is raised even if not nil is specified “
+(<a href="https://github.com/nim-lang/Nim/issues/3222">#3222</a>)</li>
+  <li>Fixed “Incorrect fsmonitor add() filter logic”
+(<a href="https://github.com/nim-lang/Nim/issues/3611">#3611</a>)</li>
+  <li>Fixed ““nimble install nimsuggest” failed”
+(<a href="https://github.com/nim-lang/Nim/issues/3622">#3622</a>)</li>
+  <li>Fixed “compile time <code class="language-plaintext highlighter-rouge">excl </code> cause SIGSEGV”
+(<a href="https://github.com/nim-lang/Nim/issues/3639">#3639</a>)</li>
+  <li>Fixed “Unable to echo unsigned ints at compile-time”
+(<a href="https://github.com/nim-lang/Nim/issues/2514">#2514</a>)</li>
+  <li>Fixed “Nested closure iterator produces internal error”
+(<a href="https://github.com/nim-lang/Nim/issues/1725">#1725</a>)</li>
+  <li>Fixed “C Error on walkDirRec closure”
+(<a href="https://github.com/nim-lang/Nim/issues/3636">#3636</a>)</li>
+  <li>Fixed “Error in generated c code”
+(<a href="https://github.com/nim-lang/Nim/issues/3201">#3201</a>)</li>
+  <li>Fixed “C Compile-time error with generic proc type.”
+(<a href="https://github.com/nim-lang/Nim/issues/2659">#2659</a>)</li>
+  <li>Fixed “ICE dereferencing array pointer”
+(<a href="https://github.com/nim-lang/Nim/issues/2240">#2240</a>)</li>
+  <li>Fixed “Lambda lifting crash”
+(<a href="https://github.com/nim-lang/Nim/issues/2007">#2007</a>)</li>
+  <li>Fixed “Can’t reference outer variables from a closure in an iterator”
+(<a href="https://github.com/nim-lang/Nim/issues/2604">#2604</a>)</li>
+  <li>Fixed “M&amp;S collector breaks with nested for loops.”
+(<a href="https://github.com/nim-lang/Nim/issues/603">#603</a>)</li>
+  <li>Fixed “Regression: bad C codegen”
+(<a href="https://github.com/nim-lang/Nim/issues/3723">#3723</a>)</li>
+  <li>Fixed “JS backend - handle bool type in case statement”
+(<a href="https://github.com/nim-lang/Nim/issues/3722">#3722</a>)</li>
+  <li>Fixed “linenoise compilation with cpp”
+(<a href="https://github.com/nim-lang/Nim/issues/3720">#3720</a>)</li>
+  <li>Fixed “(???,???) duplicate case label”
+(<a href="https://github.com/nim-lang/Nim/issues/3665">#3665</a>)</li>
+  <li>Fixed “linenoise compilation with cpp”
+(<a href="https://github.com/nim-lang/Nim/issues/3720">#3720</a>)</li>
+  <li>Fixed “Update list of backward incompatibilities for Nim 0.12.0 in the main site”
+(<a href="https://github.com/nim-lang/Nim/issues/3689">#3689</a>)</li>
+  <li>Fixed “Can’t compile nimble with latest devel - codegen bug”
+(<a href="https://github.com/nim-lang/Nim/issues/3730">#3730</a>)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

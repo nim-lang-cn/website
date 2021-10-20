@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>ORC - Vorsprung durch Algorithmen - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="ORC - Vorsprung durch Algorithmen"> -->
+
+  
+  <!-- <meta name="twitter:description" content="ORC - Algorithmic Advantages"> -->
+  <meta property="og:description" content="ORC - Algorithmic Advantages">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="ORC - Vorsprung durch Algorithmen" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            ORC - Vorsprung durch Algorithmen
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              08 December 2020
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Araq
+            </span>
+            
+          </h3>
+          <p>Version 1.4 ships with the so-called ORC memory management algorithm.
+ORC is the existing ARC algorithm (first shipped in version 1.2) plus a
+cycle collector. That’s also where the name comes from – the “O” stands
+for a cycle and “RC” stands for “reference counting”, which is the
+algorithm’s foundation.</p>
+
+<p>The cycle collector is based on the pretty well known “trial deletion”
+algorithm by Lins and others. I won’t describe here how this algorithm
+works – you can read
+<a href="https://researcher.watson.ibm.com/researcher/files/us-bacon/Bacon01Concurrent.pdf">the paper</a>
+for a good description.</p>
+
+<p>As usual, I couldn’t resist the temptation to improve the algorithm and
+add more optimizations: The Nim compiler analyses the involved types and
+only if it is potentially cyclic, code is produced that calls into the
+cycle collector. This type analysis can be helped out by annotating a
+type as <code class="language-plaintext highlighter-rouge">acyclic</code>. For example, this is how
+a binary tree could be modeled:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span>
+  <span class="n">Node</span> <span class="p">{.</span><span class="n">acyclic</span><span class="p">.}</span> <span class="o">=</span> <span class="k">ref</span> <span class="k">object</span>
+    <span class="n">kids</span><span class="p">:</span> <span class="kt">array</span><span class="o">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">Node</span><span class="o">]</span>
+    <span class="n">data</span><span class="p">:</span> <span class="kt">string</span>
+</code></pre></div></div>
+
+<p>Unfortunately, the overhead of the cycle collector can be measurable in
+practice. This annotation can be crucial in order to get ORC’s
+performance close to ARC’s.</p>
+
+<p>An innovation in ORC’s design is that cyclic root candidates can be
+registered and unregistered in constant time O(1). The consequence is
+that at runtime we exploit the fact that data in Nim is rarely cyclic.</p>
+
+<h2 id="arc">ARC</h2>
+
+<p>ARC is Nim’s pure reference-counting GC, however, many reference count
+operations are optimized away: Thanks to move semantics, the
+construction of a data structure does not involve RC operations. And
+thanks to “cursor inference”, another innovation of Nim’s ARC
+implementation, common data structure traversals do not involve RC
+operations either! The performance of both ARC and ORC is independent of
+the size of the heap.</p>
+
+<h2 id="benchmark">Benchmark</h2>
+
+<p>To put some weight behind my words, I wrote a simple benchmark showing
+off these <em>algorithmic</em> differences. Please note that the benchmark was
+written to stress the differences between ORC and Nim’s other GCs; it’s
+not supposed to model realistic workloads (yet!).</p>
+
+<div class="language-nim highlighter-rouge"><pre class="highlight"><code>
+<table class="line-nums-table"><tbody><tr><td class="blob-line-nums">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</td><td><span class="k">import</span> <span class="Identifier">asynchttpserver</span><span class="Punctuation">,</span> <span class="Identifier">asyncdispatch</span><span class="Punctuation">,</span> <span class="Identifier">strutils</span><span class="Punctuation">,</span> <span class="Identifier">json</span><span class="Punctuation">,</span> <span class="Identifier">tables</span><span class="Punctuation">,</span> <span class="Identifier">streams</span>
+
+<span class="Comment"># about 135 MB of live data:</span>
+<span class="k">var</span> <span class="Identifier">sessions</span><span class="Punctuation">:</span> <span class="Identifier">Table</span><span class="Punctuation">[</span><span class="Identifier">string</span><span class="Punctuation">,</span> <span class="Identifier">JsonNode</span><span class="Punctuation">]</span>
+<span class="k">for</span> <span class="Identifier">i</span> <span class="k">in</span> <span class="mi">0</span> <span class="Operator">..&lt;</span> <span class="mi">10</span><span class="Punctuation">:</span>
+  <span class="Identifier">sessions</span><span class="Punctuation">[</span><span class="Operator">$</span><span class="Identifier">i</span><span class="Punctuation">]</span> <span class="Operator">=</span> <span class="Identifier">parseJson</span><span class="Punctuation">(</span><span class="Identifier">newFileStream</span><span class="Punctuation">(</span><span class="s">&quot;1.json&quot;</span><span class="Punctuation">,</span> <span class="Identifier">fmRead</span><span class="Punctuation">)</span><span class="Punctuation">,</span> <span class="s">&quot;1.json&quot;</span><span class="Punctuation">)</span>
+
+<span class="k">var</span> <span class="Identifier">served</span> <span class="Operator">=</span> <span class="mi">0</span>
+
+<span class="k">var</span> <span class="Identifier">server</span> <span class="Operator">=</span> <span class="Identifier">newAsyncHttpServer</span><span class="Punctuation">(</span><span class="Punctuation">)</span>
+<span class="k">proc</span> <span class="nf">cb</span><span class="Punctuation">(</span><span class="Identifier">req</span><span class="Punctuation">:</span> <span class="Identifier">Request</span><span class="Punctuation">)</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">async</span><span class="Operator">.</span><span class="Punctuation">}</span> <span class="Operator">=</span>
+  <span class="Identifier">inc</span> <span class="Identifier">served</span>
+  <span class="Identifier">await</span> <span class="Identifier">req</span><span class="Operator">.</span><span class="Identifier">respond</span><span class="Punctuation">(</span><span class="Identifier">Http200</span><span class="Punctuation">,</span> <span class="s">&quot;Hello World&quot;</span><span class="Punctuation">)</span>
+  <span class="k">if</span> <span class="Identifier">served</span> <span class="k">mod</span> <span class="mi">10</span> <span class="Operator">==</span> <span class="mi">0</span><span class="Punctuation">:</span>
+    <span class="k">when</span> <span class="k">not</span> <span class="Identifier">defined</span><span class="Punctuation">(</span><span class="Identifier">memForSpeed</span><span class="Punctuation">)</span><span class="Punctuation">:</span>
+      <span class="Identifier">GC_fullCollect</span><span class="Punctuation">(</span><span class="Punctuation">)</span>
+
+<span class="Identifier">waitFor</span> <span class="Identifier">server</span><span class="Operator">.</span><span class="Identifier">serve</span><span class="Punctuation">(</span><span class="Identifier">Port</span><span class="Punctuation">(</span><span class="mi">8080</span><span class="Punctuation">)</span><span class="Punctuation">,</span> <span class="Identifier">cb</span><span class="Punctuation">)</span></td></tr></tbody></table>
+</code></pre>
+</div>
+
+<p>Lines 10-18 are the “Hello World” asynchronous HTTP server example from
+Nim’s standard library.</p>
+
+<p>In lines 4-6, we load about 135MB of JSON data into the global <code class="language-plaintext highlighter-rouge">sessions</code> variable.
+ORC never touches this memory after it has been loaded, even though it remains alive for the
+rest of the program run. The older Nim GCs do have to touch this memory.
+I compare ORC to Nim’s “mark and sweep” GC (M&amp;S) as M&amp;S performs best on
+this benchmark.</p>
+
+<p><code class="language-plaintext highlighter-rouge">GC_fullCollect</code> is called frequently in order to keep the memory
+consumption close to the 135MB of RAM that the program needs in theory.</p>
+
+<p>With the “wrk” benchmarking tool I get these numbers:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric / algorithm</th>
+      <th style="text-align: right">ORC</th>
+      <th style="text-align: right">M&amp;S</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Latency (Avg)</td>
+      <td style="text-align: right">320.49 <em>u</em>s</td>
+      <td style="text-align: right">65.31 ms</td>
+    </tr>
+    <tr>
+      <td>Latency (Max)</td>
+      <td style="text-align: right">6.24 ms</td>
+      <td style="text-align: right">204.79 ms</td>
+    </tr>
+    <tr>
+      <td>Requests/sec</td>
+      <td style="text-align: right">30963.96</td>
+      <td style="text-align: right">282.69</td>
+    </tr>
+    <tr>
+      <td>Transfer/sec</td>
+      <td style="text-align: right">1.48 MB</td>
+      <td style="text-align: right">13.80 KB</td>
+    </tr>
+    <tr>
+      <td>Max memory</td>
+      <td style="text-align: right">137 MiB</td>
+      <td style="text-align: right">153 MiB</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>That’s right, ORC is <strong>over 100 times faster</strong> than the M&amp;S GC. The
+reason is that ORC only touches memory that the mutator touches, too.
+This is a key feature that allows reasoning about performance on modern
+machines. A generational GC could probably offer comparable guarantees.
+In fact, ORC can be seen as a generational and incremental GC with the
+additional guarantee that acyclic structures are freed as soon as they
+become garbage.</p>
+
+<p>Now what happens when the aggressive <code class="language-plaintext highlighter-rouge">GC_fullCollect</code> calls are not
+done? I get these numbers:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric / algorithm</th>
+      <th style="text-align: right">ORC</th>
+      <th style="text-align: right">M&amp;S (memForSpeed)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Latency (Avg)</td>
+      <td style="text-align: right">274.84 <em>u</em>s</td>
+      <td style="text-align: right">1.49 ms</td>
+    </tr>
+    <tr>
+      <td>Latency (Max)</td>
+      <td style="text-align: right">1.10 ms</td>
+      <td style="text-align: right">46.41 ms</td>
+    </tr>
+    <tr>
+      <td>Requests/sec</td>
+      <td style="text-align: right">34948.95</td>
+      <td style="text-align: right">39561.97</td>
+    </tr>
+    <tr>
+      <td>Transfer/sec</td>
+      <td style="text-align: right">1.67 MB</td>
+      <td style="text-align: right">1.89 MB</td>
+    </tr>
+    <tr>
+      <td>Max memory</td>
+      <td style="text-align: right">137 MiB</td>
+      <td style="text-align: right">333 MiB</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>M&amp;S now wins in throughput, but not in latency. However, the memory
+consumption rises to about 330MB; more than twice as much memory as the
+program really requires!</p>
+
+<p>ORC always wins on latency and memory consumption; plays nice with
+destructors, and hence with custom memory management; is independent of
+the heap sizes; tracks stack roots precisely and works cleanly with all
+sanitizers the C/C++ ecosystem offers.</p>
+
+<p>These results are typical for what we see in other programs:
+Latency is reduced, there is little jitter and the memory consumption
+remains close to the required minimum that a program needs.
+Excellent results for embedded development!</p>
+
+<p>Further advancements to the cycle collection algorithm itself are in development;
+it turns out there are lots of ideas that the GC research overlooked.
+Exciting times for Nim!</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>To compile your code with ORC, use <code class="language-plaintext highlighter-rouge">--gc:orc</code> on the command line.</p>
+
+<ul>
+  <li>ORC works out of the box with Valgrind and other C++ sanitizers.
+(Compile with <code class="language-plaintext highlighter-rouge">--gc:orc -g -d:useMalloc</code> for precise Valgrind
+checking.)</li>
+  <li>ORC uses 2x less memory than classical GCs.</li>
+  <li>ORC can be orders of magnitudes faster in throughput when memory
+consumption is important. It is comparable in throughput when memory
+consumption is not as important.</li>
+  <li>ORC uses no CPU specific tricks; it works without hacks even on
+limited targets like Webassembly.</li>
+  <li>ORC offers sub-millisecond latencies. It is well suited for (hard)
+realtime systems. There is no “stop the world” phase.</li>
+  <li>ORC is oblivious to the size of the heap or the used stack space.</li>
+</ul>
+
+<hr />
+
+<p>If you like this article and how we evolve Nim, please consider a
+donation. You can donate via:</p>
+
+<ul>
+  <li><a href="https://opencollective.com/nim">Open Collective</a></li>
+  <li><a href="https://www.patreon.com/araq">Patreon</a></li>
+  <li><a href="https://www.paypal.com/donate/?cmd=_s-xclick&amp;hosted_button_id=FLWX5V2PMAXAU">PayPal</a></li>
+</ul>
+
+<p>If you are a company, we also offer commercial support. Please get in
+touch with us via <a href="mailto:support@nim-lang.org">support@nim-lang.org</a>. As a commercial backer, you
+can decide what features and bugfixes should be prioritized.</p>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

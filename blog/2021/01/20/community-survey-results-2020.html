@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Nim Community Survey 2020 Results - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Nim Community Survey 2020 Results"> -->
+
+  
+  <!-- <meta name="twitter:description" content="The Nim community survey 2020 has been open for one month, and we have received 769 responses - we think this is a large enough sample to draw conclusions about our users and their habits. Before we go into details, we would like to thank all the people who took the time to respond. We really appreciate the feedback!"> -->
+  <meta property="og:description" content="The Nim community survey 2020 has been open for one month, and we have received 769 responses - we think this is a large enough sample to draw conclusions about our users and their habits. Before we go into details, we would like to thank all the people who took the time to respond. We really appreciate the feedback!">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Nim Community Survey 2020 Results" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Nim Community Survey 2020 Results
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              20 January 2021
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              The Nim Team
+            </span>
+            
+          </h3>
+          <p>The Nim community survey 2020 has been open for one month, and we have received 769 responses - we think this is a large enough sample to draw conclusions about our users and their habits.
+Before we go into details, we would like to thank all the people who took the time to respond.
+We really appreciate the feedback!</p>
+
+<p>The goal of this survey was primarily to determine how our community is using Nim, in order to better understand how we should be improving it.</p>
+
+<h2 id="do-you-use-nim">Do you use Nim?</h2>
+
+<p>Based on the answer to this question, the respondents were divided into two groups that each received a separate set of questions.</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/01.png" alt="Do you use Nim?" style="width:100%" /></p>
+
+<p>Approximately three quarters of the respondents use Nim (31% frequently, 41% occasionally), while the remaining quarter is divided between people who never used Nim (16%) and people who stopped using Nim (11%).</p>
+
+<p>Of those people who <em>don’t</em> use Nim, the most frequent reasons are: “Nim seems immature, not ready for production” (36%), “Nim doesn’t have libraries I need” (33%), “Nim seems too risky for production” (25%), and “Nim doesn’t have enough learning materials” (24%).</p>
+
+<p>For people who stopped using Nim, the most common reasons were (answering a free-form question): lack of libraries (small and not mature ecosystem), incomplete documentation, bad editor support, compiler crashes, coworkers don’t use it, etc.</p>
+
+<h2 id="users">Users</h2>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/02.png" alt="How long have you been using Nim?" style="width:100%" /></p>
+
+<p>We have approximately the same amount (around 40%) of new Nim users (people who started using Nim in the last 6 months) and experienced users (between 6 months and 2 years).
+Nim veterans (more than 2 years of Nim experience) are about 20% of our users.</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/03.png" alt="Where are you from?" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/04.png" alt="What is your occupation?" style="width:100%" /></p>
+
+<p>A typical Nim user would be a software developer from Europe.</p>
+
+<p>Besides Europe (more than half of our users), our users mostly come from North America and Asia.
+Almost half of our users are software developers (47%), and the next largest group are students (17%).</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/05.png" alt="In what age group are you?" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/06.png" alt="How many years of programming experience do you have?" style="width:100%" /></p>
+
+<p>We have users from all age groups and all levels of programming experience, proving that Nim can be used both by beginners and veteran programmers.</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/07.png" alt="What are the technical aspects or features of Nim you like the most?" style="width:100%" /></p>
+
+<p>Things that people like about Nim the most are: performance/speed (86%), ease of use (76%), syntax (73%), and self-contained binaries (63%).</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/08.png" alt="What editor(s) do you use when writing Nim?" style="width:100%" /></p>
+
+<p>It’s no surprise that the most used editor is VS Code, with 62% of Nim users choosing it in the survey.
+In the second place is Vim/Neovim (37% combined), followed by Sublime Text and Emacs (10% each).</p>
+
+<h2 id="nim-versions">Nim versions</h2>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/09.png" alt="Which version(s) of Nim do you use?" style="width:100%" /></p>
+
+<p>We’re glad to see that the large majority of users are using the latest stable version (1.4.x).</p>
+
+<p>We can partially attribute this to the mostly painless upgrade process:</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/10.png" alt="Has upgrading to a new version of the Nim compiler broken your code? How much work did it take to fix it?" style="width:100%" /></p>
+
+<h2 id="using-nim">Using Nim</h2>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/11.png" alt="Roughly, what percentage of the programming work you do is in Nim?" style="width:100%" /></p>
+
+<p>The situation is slightly better than in 2019, but far from what we would like to see.
+We hope that we’ll see even larger improvements in the future.
+The majority of users use Nim only sporadically (25% of time or less).</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/36.png" alt="What types of software are you developing using Nim?" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/41.png" alt="What types of software are you developing using Nim?" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/35.png" alt="What types of software are you developing using Nim?" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/37.png" alt="What types of software are you developing using Nim?" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/42.png" alt="What types of software are you developing using Nim?" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/39.png" alt="What types of software are you developing using Nim?" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/38.png" alt="What types of software are you developing using Nim?" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/40.png" alt="What types of software are you developing using Nim?" style="width:100%" /></p>
+
+<p>Nim is mostly used for writing command-line programs and libraries, followed by automation/scripts, GUI, web services, and data processing.</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/13.png" alt="What platforms are you targeting?" style="width:100%" /></p>
+
+<p>The large majority of Nim users are targeting Linux, followed by Windows and macOS.
+Compared to 2019, we see an increase in JavaScript, Android, and iOS.</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/14.png" alt="Do you use Nim at work?" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/15.png" alt="If you are not using it at work yet, do you plan to in 2021?" style="width:100%" /></p>
+
+<p>About one third of Nim users use it at work, either exclusively (7%) or from time to time (26%).</p>
+
+<p>Of people who don’t use Nim at work, one third can’t use it because their company doesn’t allow it.
+Three quarters of people who are allowed to use Nim at work plan to use it in 2021.</p>
+
+<p>People mention stability, better tooling, more third-party libraries, having to mature, and better documentation as the main areas where Nim should improve to be more accepted in their companies.</p>
+
+<h2 id="learning-nim">Learning Nim</h2>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/17.png" alt="What learning resources, if any, did you use to learn Nim?" style="width:100%" /></p>
+
+<p>Almost all of our users have read <a href="https://nim-lang.org/docs/tut1.html">the official tutorials</a>, and about half of them have read <a href="https://nim-by-example.github.io/getting_started/">“Nim by Example”</a> and/or the <a href="https://book.picheta.me">“Nim in Action”</a> book.
+<a href="http://rosettacode.org/wiki/Category:Nim">Rosetta Code examples</a> are also a popular choice as a learning resource, followed by <a href="https://narimiran.github.io/nim-basics/">“Nim Basics”</a>, <a href="https://xmonader.github.io/nimdays/">“Nim Days”</a> and <a href="https://scripter.co/notes/nim">“Nim Notes”</a>.</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/18.png" alt="What kind of learning materials does Nim need?" style="width:100%" /></p>
+
+<p>If anyone would like to create some more learning materials for Nim (which is very high on the community priority list - see below under the “Nim in 2021 and beyond” section), the most wanted types of learning materials are code examples and written tutorials.</p>
+
+<h2 id="nim-community-and-contributions">Nim community and contributions</h2>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/19.png" alt="Have you made code contributions to the Nim project in the past?" style="width:100%" /></p>
+
+<p>Compared to 2019, we see a 20% increase of people who have already contributed to Nim!
+And there are almost three times as many people who haven’t contributed to Nim so far but plan to do that in the future.
+We’re looking forward to this :)</p>
+
+<p>The most frequent reasons for not contributing (yet) are: lack of time, and lack of skill/experience.</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/19a.png" alt="Did you make any donations to Nim?" style="width:100%" /></p>
+
+<p>In the past we haven’t stressed enough the importance of <a href="https://nim-lang.org/donate.html">community donations</a>, which is reflected in this graph: only 10% of our users have made a donation in the past.
+We are happy to see that two thirds of our users plan to do it in the future, which will help us to have more manpower to fix the most important bugs more promptly and work on some exciting new features.</p>
+
+<h2 id="nim-tools">Nim tools</h2>
+
+<p>We’ve asked you how satisfied you are with the Nim tooling:</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/29.png" alt="What is your experience with the following tools? [nimble]" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/30.png" alt="What is your experience with the following tools? [choosenim]" style="width:100%" /></p>
+
+<p>Most of our users use Nimble package manager and they are very satisfied with it.
+Fewer users picked Choosenim as their way of installing and updating Nim, but those who did are quite satisfied with what it has to offer.</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/34.png" alt="What is your experience with the following tools? [nim doc]" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/33.png" alt="What is your experience with the following tools? [nimpretty]" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/32.png" alt="What is your experience with the following tools? [nimsuggest]" style="width:100%" /></p>
+
+<p>Nim doc is generally liked by those who use it, as is Nimpretty.
+Nimsuggest is liked a bit less than other tools (high CPU and memory consumption), but you’ll be glad to hear that our plans for 2021 include making Nimsuggest more robust, and less CPU and memory hungry.</p>
+
+<h2 id="nim-in-2021-and-beyond">Nim in 2021 and beyond</h2>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/24.png" alt="What should be our priorities in improving Nim, that would bring the largest quality-of-life improvements? [fixing compiler bugs]" style="width:100%" /></p>
+
+<p>According to the votes, fixing compiler bugs should be our first priority: 55% of our users find it very important, with only 18% of votes for “low priority” and “current situation is ok”.
+We will continue to work on it, and we appreciate any community effort on this: we already have several individuals continuously helping us with fixing compiler bugs (thank you!), and we’d benefit from more.</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/22.png" alt="What should be our priorities in improving Nim, that would bring the largest quality-of-life improvements? [improve tooling]" style="width:100%" /></p>
+
+<p>Improving the tooling is very high on the priority list for our users (higher than in 2019), and especially for those users who use Nim professionally.
+We’re happy to announce that, thanks to our partnership with <a href="https://status.im">Status</a>, improving the developer tooling is <a href="https://github.com/nim-lang/RFCs/issues/300">one of the goals for 2021</a>.</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/20.png" alt="What should be our priorities in improving Nim, that would bring the largest quality-of-life improvements? [documentation]" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/26.png" alt="What should be our priorities in improving Nim, that would bring the largest quality-of-life improvements? [more learning materials (tutorials, videos, books, ...)]" style="width:100%" /></p>
+
+<p>Back in 2019 we improved the documentation of the most used standard library modules.
+There is still room for improvement, but we now see that more users (compared to the 2019 survey) think the current situation is ok.
+When it comes to learning materials, where we mostly lean on the community content (for this to improve we need your involvement!), people want to see more written tutorials and code examples.</p>
+
+<p><img src="https://nim-lang-cn.org/assets/news/images/survey2020/23.png" alt="What should be our priorities in improving Nim, that would bring the largest quality-of-life improvements? [fixing stdlib bugs]" style="width:100%" />
+<img src="https://nim-lang-cn.org/assets/news/images/survey2020/21.png" alt="What should be our priorities in improving Nim, that would bring the largest quality-of-life improvements? [larger standard library]" style="width:100%" /></p>
+
+<p>According to respondents, fixing bugs in the existing standard library modules should be higher priority than expanding the standard library.
+One of the reasons that expanding the standard library is less of a priority could be that Nimble now has more than 1500 packages, adding significant functionality that is not included in the standard library.</p>
+
+<p>To summarize, 2021 is the year of stabilization: our priorities will be fixing the compiler and standard library bugs, improving tooling and documentation, and improving and expanding the learning materials.</p>
+
+<h2 id="last-words">Last words</h2>
+
+<p>Thank you to each and every one of you who took the time to answer this survey.
+Your time is precious and we are deeply thankful that you used it to share your feedback.</p>
+
+<p>Please remember that you do not need to wait for a survey in order to give us feedback; of course you’re more than welcome to wait if you wish, but ideally share your feedback with us immediately.
+We can be found in various places - see <a href="https://nim-lang.org/community.html">the community page</a> for links and instructions on how to get in touch.</p>
+
+<p>If you would like to help us in our 2021 plans, consider <a href="https://github.com/nim-lang/Nim">contributing</a> or making a donation.
+You can donate via:</p>
+
+<ul>
+  <li><a href="https://opencollective.com/nim">Open Collective</a></li>
+  <li><a href="https://www.patreon.com/araq">Patreon</a></li>
+  <li><a href="https://www.paypal.com/donate/?cmd=_s-xclick&amp;hosted_button_id=FLWX5V2PMAXAU">PayPal</a></li>
+</ul>
+
+<p>If you are a company, we also offer commercial support. Please get in
+touch with us via <a href="mailto:support@nim-lang.org">support@nim-lang.org</a>. As a commercial backer, you
+can decide what features and bugfixes should be prioritized.</p>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

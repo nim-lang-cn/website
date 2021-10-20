@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.11.0 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.11.0 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="With this release we are one step closer to reaching version 1.0 and by extension the persistence of the Nim specification. As mentioned in the previous release notes, starting with version 1.0, we will not be introducing any more breaking changes to Nim. The language itself is very close to 1.0, the primary area that requires more work is the standard library. Take a look at the download page for binaries (Windows-only) and 0.11.0 snapshots of the source code. The Windows installer now also includes Aporia, Nimble and other useful tools to get you started with Nim. What’s left to be done The 1.0 release is expected by the end of this year. Rumors say it will be in summer 2015. What’s left: Bug fixes, bug fixes, bug fixes, in particular: The remaining bugs of the lambda lifting pass that is responsible to enable closures and closure iterators need to be fixed. concept needs to be refined, a nice name for the feature is not enough. Destructors need to be refined. static[T] needs to be fixed. Finish the implementation of the ‘parallel’ statement. immediate templates and macros will be deprecated as these will soon be completely unnecessary, instead the typed or untyped metatypes can be used. More of the standard library should be moved to Nimble packages and what’s left should use the features we have for concurrency and parallelism. Changes affecting backwards compatibility Parameter names are finally properly gensym‘ed. This can break templates though that used to rely on the fact that they are not. (Bug #1915.) This means this doesn’t compile anymore: template doIt(body: stmt) {.immediate.} = # this used to inject the 'str' parameter: proc res(str: string) = body doIt: echo str # Error: undeclared identifier: 'str' This used to inject the str parameter into the scope of the body. Declare the doIt template as immediate, dirty to get the old behaviour. Tuple field names are not ignored anymore, this caused too many problems in practice so now the behaviour is as it was for version 0.9.6: If field names exist for the tuple type, they are checked. logging.level and logging.handlers are no longer exported. addHandler, getHandlers, setLogFilter and getLogFilter should be used instead. nim idetools has been replaced by a separate tool nimsuggest. arrow like operators are not right associative anymore and are required to end with either -&gt;, ~&gt; or =&gt;, not just &gt;. Examples of operators still considered arrow like: -&gt;, ==&gt;, +=&gt;. On the other hand, the following operators are now considered regular operators again: |&gt;, -+&gt;, etc. Typeless parameters are now only allowed in templates and macros. The old way turned out to be too error-prone. The ‘addr’ and ‘type’ operators are now parsed as unary function application. This means type(x).name is now parsed as (type(x)).name and not as type((x).name). Note that this also affects the AST structure; for immediate macro parameters nkCall('addr', 'x') is produced instead of nkAddr('x'). concept is now a keyword and is used instead of generic. The inc, dec, +=, -= builtins now produce OverflowError exceptions. This means code like the following: var x = low(T) while x &lt;= high(T): echo x inc x Needs to be replaced by something like this: var x = low(T).int while x &lt;= high(T).int: echo x.T inc x Negative indexing for slicing does not work anymore! Instead of a[0.. -1] you can use a[0.. ^1]. This also works with accessing a single element a[^1]. Note that we cannot detect this reliably as it is determined at runtime whether negative indexing is used! a[0.. -1] now produces the empty string/sequence. The compiler now warns about code like foo +=1 which uses inconsistent spacing around binary operators. Later versions of the language will parse these as unary operators instead so that echo $foo finally can do what people expect it to do. system.untyped and system.typed have been introduced as aliases for expr and stmt. The new names capture the semantics much better and most likely expr and stmt will be deprecated in favor of the new names. The split method in module re has changed. It now handles the case of matches having a length of 0, and empty strings being yielded from the iterator. A notable change might be that a pattern being matched at the beginning and end of a string, will result in an empty string being produced at the start and the end of the iterator. The compiler and nimsuggest now count columns starting with 1, not 0 for consistency with the rest of the world. Language Additions For empty case object branches discard can finally be used instead of nil. Automatic dereferencing is now done for the first argument of a routine call if overloading resolution produces no match otherwise. This feature has to be enabled with the experimental pragma. Objects that do not use inheritance nor case can be put into const sections. This means that finally this is possible and produces rather nice code: import tables const foo = {"ah": "finally", "this": "is", "possible.": "nice!"}.toTable() Ordinary parameters can follow after a varargs parameter. This means the following is finally accepted by the compiler: template takesBlock(a, b: int, x: varargs[expr]; blck: stmt) = blck echo a, b takesBlock 1, 2, "some", 0.90, "random stuff": echo "yay" Overloading by ‘var T’ is now finally possible: proc varOrConst(x: var int) = echo "var" proc varOrConst(x: int) = echo "const" var x: int varOrConst(x) # "var" varOrConst(45) # "const" Array and seq indexing can now use the builtin ^ operator to access things from backwards: a[^1] is like Python’s a[-1]. A first version of the specification and implementation of the overloading of the assignment operator has arrived! system.len for strings and sequences now returns 0 for nil. A single underscore can now be used to discard values when unpacking tuples: let (path, _, _) = os.splitFile("path/file.ext") marshal.$$ and marshal.to can be executed at compile-time. Interoperability with C++ improved tremendously; C++’s templates and operators can be wrapped directly. See this for more information. macros.getType can be used to query an AST’s type at compile-time. This enables more powerful macros, for instance currying can now be done with a macro. Library additions reversed proc added to the unicode module. Added multipart param to httpclient’s post and postContent together with a newMultipartData proc. Added %* operator for JSON. The compiler is now available as Nimble package for c2nim. Added ..^ and ..&lt; templates to system so that the rather annoying space between .. &lt; and .. ^ is not necessary anymore. Added system.xlen for strings and sequences to get back the old len operation that doesn’t check for nil for efficiency. Added sexp.nim to parse and generate sexp. Bugfixes Fixed internal compiler error when using char() in an echo call (#1788). Fixed Windows cross-compilation on Linux. Overload resolution now works for types distinguished only by a static[int] param (#1056). Other fixes relating to generic types and static params. Fixed some compiler crashes with unnamed tuples (#1774). Fixed channels.tryRecv blocking (#1816). Fixed generic instantiation errors with typedesc (#419). Fixed generic regression where the compiler no longer detected constant expressions properly (#544). Fixed internal error with generic proc using static[T] in a specific way (#1049). More fixes relating to generics (#1820, #1050, #1859, #1858). Fixed httpclient to properly encode queries. Many fixes to the uri module. Async sockets are now closed on error. Fixes to httpclient’s handling of multipart data. Fixed GC segfaults with asynchronous sockets (#1796). Added more versions to openssl’s DLL version list (076f993). Fixed shallow copy in iterators being broken (#1803). nil can now be inserted into tables with the db_sqlite module (#1866). Fixed “Incorrect assembler generated” (#1907) Fixed “Expression templates that define macros are unusable in some contexts” (#1903) Fixed “a second level generic subclass causes the compiler to crash” (#1919) Fixed “nim 0.10.2 generates invalid AsyncHttpClient C code for MSVC “ (#1901) Fixed “1 shl n produces wrong C code” (#1928) Fixed “Internal error on tuple yield” (#1838) Fixed “ICE with template” (#1915) Fixed “include the tool directory in the installer as it is required by koch” (#1947) Fixed “Can’t compile if file location contains spaces on Windows” (#1955) Fixed “List comprehension macro only supports infix checks as guards” (#1920) Fixed “wrong field names of compatible tuples in generic types” (#1910) Fixed “Macros within templates no longer work as expected” (#1944) Fixed “Compiling for Standalone AVR broken in 0.10.2” (#1964) Fixed “Compiling for Standalone AVR broken in 0.10.2” (#1964) Fixed “Code generation for mitems with tuple elements” (#1833) Fixed “httpclient.HttpMethod should not be an enum” (#1962) Fixed “terminal / eraseScreen() throws an OverflowError” (#1906) Fixed “setControlCHook(nil) disables registered quit procs” (#1546) Fixed “Unexpected idetools behaviour” (#325) Fixed “Unused lifted lambda does not compile” (#1642) Fixed “‘low’ and ‘high’ don’t work with cstring asguments” (#2030) Fixed “Converting to int does not round in JS backend” (#1959) Fixed “Internal error genRecordField 2 when adding region to pointer.” (#2039) Fixed “Macros fail to compile when compiled with –os:standalone” (#2041) Fixed “Reading from {.compileTime.} variables can cause code generation to fail” (#2022) Fixed “Passing overloaded symbols to templates fails inside generic procedures” (#1988) Fixed “Compiling iterator with object assignment in release mode causes “var not init”” (#2023) Fixed “calling a large number of macros doing some computation fails” (#1989) Fixed “Can’t get Koch to install nim under Windows” (#2061) Fixed “Template with two stmt parameters segfaults compiler” (#2057) Fixed “noSideEffect not affected by echo” (#2011) Fixed “Compiling with the cpp backend ignores –passc” (#1601) Fixed “Put untyped procedure parameters behind the experimental pragma” (#1956) Fixed “generic regression” (#2073) Fixed “generic regression” (#2073) Fixed “Regression in template lookup with generics” (#2004) Fixed “GC’s growObj is wrong for edge cases” (#2070) Fixed “Compiler internal error when creating an array out of a typeclass” (#1131) Fixed “GC’s growObj is wrong for edge cases” (#2070) Fixed “Invalid Objective-C code generated when calling class method” (#2068) Fixed “walkDirRec Error” (#2116) Fixed “Typo in code causes compiler SIGSEGV in evalAtCompileTime” (#2113) Fixed “Regression on exportc” (#2118) Fixed “Error message” (#2102) Fixed “hint[path] = off not working in nim.cfg” (#2103) Fixed “compiler crashes when getting a tuple from a sequence of generic tuples” (#2121) Fixed “nim check hangs with when” (#2123) Fixed “static[T] param in nested type resolve/caching issue” (#2125) Fixed “repr should display \0” (#2124) Fixed “‘nim check’ never ends in case of recursive dependency “ (#2051) Fixed “From macros: Error: unhandled exception: sons is not accessible” (#2167) Fixed “fieldPairs doesn’t work inside templates” (#1902) Fixed “fields iterator misbehavior on break statement” (#2134) Fixed “Fix for compiler not building anymore since #c3244ef1ff” (#2193) Fixed “JSON parser fails in cpp output mode” (#2199) Fixed “macros.getType mishandles void return” (#2211) Fixed “Regression involving templates instantiated within generics” (#2215) Fixed ““Error: invalid type” for ‘not nil’ on generic type.” (#2216) Fixed “–threads:on breaks async” (#2074) Fixed “Type mismatch not always caught, can generate bad code for C backend.” (#2169) Fixed “Failed C compilation when storing proc to own type in object” (#2233) Fixed “Unknown line/column number in constant declaration type conversion error” (#2252) Fixed “Adding {.compile.} fails if nimcache already exists.” (#2247) Fixed “Two different type names generated for a single type (C backend)” (#2250) Fixed “Ambiguous call when it should not be” (#2229) Fixed “Make sure we can load root urls” (#2227) Fixed “Failure to slice a string with an int subrange type” (#794) Fixed “documentation error” (#2205) Fixed “Code growth when using const” (#1940) Fixed “Instances of generic types confuse overload resolution” (#2220) Fixed “Compiler error when initializing sdl2’s EventType” (#2316) Fixed “Parallel disjoint checking can’t handle &lt;, items, or arrays” (#2287) Fixed “Strings aren’t copied in parallel loop” (#2286) Fixed “JavaScript compiler crash with tables” (#2298) Fixed “Range checker too restrictive” (#1845) Fixed “Failure to slice a string with an int subrange type” (#794) Fixed “Remind user when compiling in debug mode” (#1868) Fixed “Compiler user guide has jumbled options/commands.” (#1819) Fixed “using method: 1 in a objects constructor fails when compiling” (#1791)"> -->
+  <meta property="og:description" content="With this release we are one step closer to reaching version 1.0 and by extension the persistence of the Nim specification. As mentioned in the previous release notes, starting with version 1.0, we will not be introducing any more breaking changes to Nim. The language itself is very close to 1.0, the primary area that requires more work is the standard library. Take a look at the download page for binaries (Windows-only) and 0.11.0 snapshots of the source code. The Windows installer now also includes Aporia, Nimble and other useful tools to get you started with Nim. What’s left to be done The 1.0 release is expected by the end of this year. Rumors say it will be in summer 2015. What’s left: Bug fixes, bug fixes, bug fixes, in particular: The remaining bugs of the lambda lifting pass that is responsible to enable closures and closure iterators need to be fixed. concept needs to be refined, a nice name for the feature is not enough. Destructors need to be refined. static[T] needs to be fixed. Finish the implementation of the ‘parallel’ statement. immediate templates and macros will be deprecated as these will soon be completely unnecessary, instead the typed or untyped metatypes can be used. More of the standard library should be moved to Nimble packages and what’s left should use the features we have for concurrency and parallelism. Changes affecting backwards compatibility Parameter names are finally properly gensym‘ed. This can break templates though that used to rely on the fact that they are not. (Bug #1915.) This means this doesn’t compile anymore: template doIt(body: stmt) {.immediate.} = # this used to inject the 'str' parameter: proc res(str: string) = body doIt: echo str # Error: undeclared identifier: 'str' This used to inject the str parameter into the scope of the body. Declare the doIt template as immediate, dirty to get the old behaviour. Tuple field names are not ignored anymore, this caused too many problems in practice so now the behaviour is as it was for version 0.9.6: If field names exist for the tuple type, they are checked. logging.level and logging.handlers are no longer exported. addHandler, getHandlers, setLogFilter and getLogFilter should be used instead. nim idetools has been replaced by a separate tool nimsuggest. arrow like operators are not right associative anymore and are required to end with either -&gt;, ~&gt; or =&gt;, not just &gt;. Examples of operators still considered arrow like: -&gt;, ==&gt;, +=&gt;. On the other hand, the following operators are now considered regular operators again: |&gt;, -+&gt;, etc. Typeless parameters are now only allowed in templates and macros. The old way turned out to be too error-prone. The ‘addr’ and ‘type’ operators are now parsed as unary function application. This means type(x).name is now parsed as (type(x)).name and not as type((x).name). Note that this also affects the AST structure; for immediate macro parameters nkCall('addr', 'x') is produced instead of nkAddr('x'). concept is now a keyword and is used instead of generic. The inc, dec, +=, -= builtins now produce OverflowError exceptions. This means code like the following: var x = low(T) while x &lt;= high(T): echo x inc x Needs to be replaced by something like this: var x = low(T).int while x &lt;= high(T).int: echo x.T inc x Negative indexing for slicing does not work anymore! Instead of a[0.. -1] you can use a[0.. ^1]. This also works with accessing a single element a[^1]. Note that we cannot detect this reliably as it is determined at runtime whether negative indexing is used! a[0.. -1] now produces the empty string/sequence. The compiler now warns about code like foo +=1 which uses inconsistent spacing around binary operators. Later versions of the language will parse these as unary operators instead so that echo $foo finally can do what people expect it to do. system.untyped and system.typed have been introduced as aliases for expr and stmt. The new names capture the semantics much better and most likely expr and stmt will be deprecated in favor of the new names. The split method in module re has changed. It now handles the case of matches having a length of 0, and empty strings being yielded from the iterator. A notable change might be that a pattern being matched at the beginning and end of a string, will result in an empty string being produced at the start and the end of the iterator. The compiler and nimsuggest now count columns starting with 1, not 0 for consistency with the rest of the world. Language Additions For empty case object branches discard can finally be used instead of nil. Automatic dereferencing is now done for the first argument of a routine call if overloading resolution produces no match otherwise. This feature has to be enabled with the experimental pragma. Objects that do not use inheritance nor case can be put into const sections. This means that finally this is possible and produces rather nice code: import tables const foo = {"ah": "finally", "this": "is", "possible.": "nice!"}.toTable() Ordinary parameters can follow after a varargs parameter. This means the following is finally accepted by the compiler: template takesBlock(a, b: int, x: varargs[expr]; blck: stmt) = blck echo a, b takesBlock 1, 2, "some", 0.90, "random stuff": echo "yay" Overloading by ‘var T’ is now finally possible: proc varOrConst(x: var int) = echo "var" proc varOrConst(x: int) = echo "const" var x: int varOrConst(x) # "var" varOrConst(45) # "const" Array and seq indexing can now use the builtin ^ operator to access things from backwards: a[^1] is like Python’s a[-1]. A first version of the specification and implementation of the overloading of the assignment operator has arrived! system.len for strings and sequences now returns 0 for nil. A single underscore can now be used to discard values when unpacking tuples: let (path, _, _) = os.splitFile("path/file.ext") marshal.$$ and marshal.to can be executed at compile-time. Interoperability with C++ improved tremendously; C++’s templates and operators can be wrapped directly. See this for more information. macros.getType can be used to query an AST’s type at compile-time. This enables more powerful macros, for instance currying can now be done with a macro. Library additions reversed proc added to the unicode module. Added multipart param to httpclient’s post and postContent together with a newMultipartData proc. Added %* operator for JSON. The compiler is now available as Nimble package for c2nim. Added ..^ and ..&lt; templates to system so that the rather annoying space between .. &lt; and .. ^ is not necessary anymore. Added system.xlen for strings and sequences to get back the old len operation that doesn’t check for nil for efficiency. Added sexp.nim to parse and generate sexp. Bugfixes Fixed internal compiler error when using char() in an echo call (#1788). Fixed Windows cross-compilation on Linux. Overload resolution now works for types distinguished only by a static[int] param (#1056). Other fixes relating to generic types and static params. Fixed some compiler crashes with unnamed tuples (#1774). Fixed channels.tryRecv blocking (#1816). Fixed generic instantiation errors with typedesc (#419). Fixed generic regression where the compiler no longer detected constant expressions properly (#544). Fixed internal error with generic proc using static[T] in a specific way (#1049). More fixes relating to generics (#1820, #1050, #1859, #1858). Fixed httpclient to properly encode queries. Many fixes to the uri module. Async sockets are now closed on error. Fixes to httpclient’s handling of multipart data. Fixed GC segfaults with asynchronous sockets (#1796). Added more versions to openssl’s DLL version list (076f993). Fixed shallow copy in iterators being broken (#1803). nil can now be inserted into tables with the db_sqlite module (#1866). Fixed “Incorrect assembler generated” (#1907) Fixed “Expression templates that define macros are unusable in some contexts” (#1903) Fixed “a second level generic subclass causes the compiler to crash” (#1919) Fixed “nim 0.10.2 generates invalid AsyncHttpClient C code for MSVC “ (#1901) Fixed “1 shl n produces wrong C code” (#1928) Fixed “Internal error on tuple yield” (#1838) Fixed “ICE with template” (#1915) Fixed “include the tool directory in the installer as it is required by koch” (#1947) Fixed “Can’t compile if file location contains spaces on Windows” (#1955) Fixed “List comprehension macro only supports infix checks as guards” (#1920) Fixed “wrong field names of compatible tuples in generic types” (#1910) Fixed “Macros within templates no longer work as expected” (#1944) Fixed “Compiling for Standalone AVR broken in 0.10.2” (#1964) Fixed “Compiling for Standalone AVR broken in 0.10.2” (#1964) Fixed “Code generation for mitems with tuple elements” (#1833) Fixed “httpclient.HttpMethod should not be an enum” (#1962) Fixed “terminal / eraseScreen() throws an OverflowError” (#1906) Fixed “setControlCHook(nil) disables registered quit procs” (#1546) Fixed “Unexpected idetools behaviour” (#325) Fixed “Unused lifted lambda does not compile” (#1642) Fixed “‘low’ and ‘high’ don’t work with cstring asguments” (#2030) Fixed “Converting to int does not round in JS backend” (#1959) Fixed “Internal error genRecordField 2 when adding region to pointer.” (#2039) Fixed “Macros fail to compile when compiled with –os:standalone” (#2041) Fixed “Reading from {.compileTime.} variables can cause code generation to fail” (#2022) Fixed “Passing overloaded symbols to templates fails inside generic procedures” (#1988) Fixed “Compiling iterator with object assignment in release mode causes “var not init”” (#2023) Fixed “calling a large number of macros doing some computation fails” (#1989) Fixed “Can’t get Koch to install nim under Windows” (#2061) Fixed “Template with two stmt parameters segfaults compiler” (#2057) Fixed “noSideEffect not affected by echo” (#2011) Fixed “Compiling with the cpp backend ignores –passc” (#1601) Fixed “Put untyped procedure parameters behind the experimental pragma” (#1956) Fixed “generic regression” (#2073) Fixed “generic regression” (#2073) Fixed “Regression in template lookup with generics” (#2004) Fixed “GC’s growObj is wrong for edge cases” (#2070) Fixed “Compiler internal error when creating an array out of a typeclass” (#1131) Fixed “GC’s growObj is wrong for edge cases” (#2070) Fixed “Invalid Objective-C code generated when calling class method” (#2068) Fixed “walkDirRec Error” (#2116) Fixed “Typo in code causes compiler SIGSEGV in evalAtCompileTime” (#2113) Fixed “Regression on exportc” (#2118) Fixed “Error message” (#2102) Fixed “hint[path] = off not working in nim.cfg” (#2103) Fixed “compiler crashes when getting a tuple from a sequence of generic tuples” (#2121) Fixed “nim check hangs with when” (#2123) Fixed “static[T] param in nested type resolve/caching issue” (#2125) Fixed “repr should display \0” (#2124) Fixed “‘nim check’ never ends in case of recursive dependency “ (#2051) Fixed “From macros: Error: unhandled exception: sons is not accessible” (#2167) Fixed “fieldPairs doesn’t work inside templates” (#1902) Fixed “fields iterator misbehavior on break statement” (#2134) Fixed “Fix for compiler not building anymore since #c3244ef1ff” (#2193) Fixed “JSON parser fails in cpp output mode” (#2199) Fixed “macros.getType mishandles void return” (#2211) Fixed “Regression involving templates instantiated within generics” (#2215) Fixed ““Error: invalid type” for ‘not nil’ on generic type.” (#2216) Fixed “–threads:on breaks async” (#2074) Fixed “Type mismatch not always caught, can generate bad code for C backend.” (#2169) Fixed “Failed C compilation when storing proc to own type in object” (#2233) Fixed “Unknown line/column number in constant declaration type conversion error” (#2252) Fixed “Adding {.compile.} fails if nimcache already exists.” (#2247) Fixed “Two different type names generated for a single type (C backend)” (#2250) Fixed “Ambiguous call when it should not be” (#2229) Fixed “Make sure we can load root urls” (#2227) Fixed “Failure to slice a string with an int subrange type” (#794) Fixed “documentation error” (#2205) Fixed “Code growth when using const” (#1940) Fixed “Instances of generic types confuse overload resolution” (#2220) Fixed “Compiler error when initializing sdl2’s EventType” (#2316) Fixed “Parallel disjoint checking can’t handle &lt;, items, or arrays” (#2287) Fixed “Strings aren’t copied in parallel loop” (#2286) Fixed “JavaScript compiler crash with tables” (#2298) Fixed “Range checker too restrictive” (#1845) Fixed “Failure to slice a string with an int subrange type” (#794) Fixed “Remind user when compiling in debug mode” (#1868) Fixed “Compiler user guide has jumbled options/commands.” (#1819) Fixed “using method: 1 in a objects constructor fails when compiling” (#1791)">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.11.0 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.11.0 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              30 April 2015
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Dominik Picheta
+            </span>
+            
+          </h3>
+          <p>With this release we are one step closer to reaching version 1.0 and by
+extension the persistence of the Nim specification. As mentioned in the
+previous release notes, starting with version 1.0, we will not be introducing
+any more breaking changes to Nim.</p>
+
+<p>The <em>language</em> itself is very close to 1.0, the primary area that requires
+more work is the standard library.</p>
+
+<p>Take a look at the <a href="https://nim-lang-cn.org/install.html">download</a> page for binaries (Windows-only)
+and 0.11.0 snapshots of the source code. The Windows installer now also
+includes <a href="https://github.com/nim-lang/aporia">Aporia</a>,
+<a href="https://github.com/nim-lang/nimble">Nimble</a> and other useful tools to get
+you started with Nim.</p>
+
+<h2 id="whats-left-to-be-done">What’s left to be done</h2>
+
+<p>The 1.0 release is expected by the end of this year. Rumors say it will be in
+summer 2015. What’s left:</p>
+
+<ul>
+  <li>Bug fixes, bug fixes, bug fixes, in particular:
+    <ul>
+      <li>The remaining bugs of the lambda lifting pass that is responsible to enable
+closures and closure iterators need to be fixed.</li>
+      <li><code class="language-plaintext highlighter-rouge">concept</code> needs to be refined, a nice name for the feature is not enough.</li>
+      <li>Destructors need to be refined.</li>
+      <li><code class="language-plaintext highlighter-rouge">static[T]</code> needs to be fixed.</li>
+      <li>Finish the implementation of the ‘parallel’ statement.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">immediate</code> templates and macros will be deprecated as these will soon be
+completely unnecessary, instead the <code class="language-plaintext highlighter-rouge">typed</code> or <code class="language-plaintext highlighter-rouge">untyped</code> metatypes can
+be used.</li>
+  <li>More of the standard library should be moved to Nimble packages and what’s
+left should use the features we have for concurrency and parallelism.</li>
+</ul>
+
+<h2 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h2>
+
+<ul>
+  <li>
+    <p>Parameter names are finally properly <code class="language-plaintext highlighter-rouge">gensym</code>‘ed. This can break
+templates though that used to rely on the fact that they are not.
+(Bug #1915.) This means this doesn’t compile anymore:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="k">template</span> <span class="n">doIt</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="n">stmt</span><span class="p">)</span> <span class="p">{.</span><span class="n">immediate</span><span class="p">.}</span> <span class="o">=</span>
+    <span class="c"># this used to inject the 'str' parameter:</span>
+    <span class="k">proc </span><span class="nf">res</span><span class="p">(</span><span class="n">str</span><span class="p">:</span> <span class="kt">string</span><span class="p">)</span> <span class="o">=</span>
+      <span class="n">body</span>
+
+  <span class="n">doIt</span><span class="p">:</span>
+    <span class="n">echo</span> <span class="n">str</span> <span class="c"># Error: undeclared identifier: 'str'</span>
+</code></pre></div>    </div>
+
+    <p>This used to inject the <code class="language-plaintext highlighter-rouge">str</code> parameter into the scope of the body.
+Declare the <code class="language-plaintext highlighter-rouge">doIt</code> template as <code class="language-plaintext highlighter-rouge">immediate, dirty</code> to get the old
+behaviour.</p>
+  </li>
+  <li>Tuple field names are not ignored anymore, this caused too many problems
+in practice so now the behaviour is as it was for version 0.9.6: If field
+names exist for the tuple type, they are checked.</li>
+  <li><code class="language-plaintext highlighter-rouge">logging.level</code> and <code class="language-plaintext highlighter-rouge">logging.handlers</code> are no longer exported.
+<code class="language-plaintext highlighter-rouge">addHandler</code>, <code class="language-plaintext highlighter-rouge">getHandlers</code>, <code class="language-plaintext highlighter-rouge">setLogFilter</code> and <code class="language-plaintext highlighter-rouge">getLogFilter</code>
+should be used instead.</li>
+  <li><code class="language-plaintext highlighter-rouge">nim idetools</code> has been replaced by a separate
+tool <a href="0.11.0/nimsuggest.html">nimsuggest</a>.</li>
+  <li><em>arrow like</em> operators are not right associative anymore and are required
+to end with either <code class="language-plaintext highlighter-rouge">-&gt;</code>, <code class="language-plaintext highlighter-rouge">~&gt;</code> or
+<code class="language-plaintext highlighter-rouge">=&gt;</code>, not just <code class="language-plaintext highlighter-rouge">&gt;</code>. Examples of operators still considered arrow like:
+<code class="language-plaintext highlighter-rouge">-&gt;</code>, <code class="language-plaintext highlighter-rouge">==&gt;</code>, <code class="language-plaintext highlighter-rouge">+=&gt;</code>. On the other hand, the following operators are now
+considered regular operators again: <code class="language-plaintext highlighter-rouge">|&gt;</code>, <code class="language-plaintext highlighter-rouge">-+&gt;</code>, etc.</li>
+  <li>Typeless parameters are now only allowed in templates and macros. The old
+way turned out to be too error-prone.</li>
+  <li>The ‘addr’ and ‘type’ operators are now parsed as unary function
+application. This means <code class="language-plaintext highlighter-rouge">type(x).name</code> is now parsed as <code class="language-plaintext highlighter-rouge">(type(x)).name</code>
+and not as <code class="language-plaintext highlighter-rouge">type((x).name)</code>. Note that this also affects the AST
+structure; for immediate macro parameters <code class="language-plaintext highlighter-rouge">nkCall('addr', 'x')</code> is
+produced instead of <code class="language-plaintext highlighter-rouge">nkAddr('x')</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">concept</code> is now a keyword and is used instead of <code class="language-plaintext highlighter-rouge">generic</code>.</li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">inc</code>, <code class="language-plaintext highlighter-rouge">dec</code>, <code class="language-plaintext highlighter-rouge">+=</code>, <code class="language-plaintext highlighter-rouge">-=</code> builtins now produce OverflowError
+exceptions. This means code like the following:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">var</span> <span class="n">x</span> <span class="o">=</span> <span class="n">low</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+  <span class="k">while</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="n">echo</span> <span class="n">x</span>
+    <span class="n">inc</span> <span class="n">x</span>
+</code></pre></div>    </div>
+
+    <p>Needs to be replaced by something like this:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">var</span> <span class="n">x</span> <span class="o">=</span> <span class="n">low</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="kt">int</span>
+  <span class="k">while</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="kt">int</span><span class="p">:</span>
+    <span class="n">echo</span> <span class="n">x</span><span class="p">.</span><span class="n">T</span>
+    <span class="n">inc</span> <span class="n">x</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Negative indexing for slicing does not work anymore!</strong> Instead
+of <code class="language-plaintext highlighter-rouge">a[0.. -1]</code> you can
+use <code class="language-plaintext highlighter-rouge">a[0.. ^1]</code>. This also works with accessing a single
+element <code class="language-plaintext highlighter-rouge">a[^1]</code>. Note that we cannot detect this reliably as it is
+determined at <strong>runtime</strong> whether negative indexing is used!
+<code class="language-plaintext highlighter-rouge">a[0.. -1]</code> now produces the empty string/sequence.</li>
+  <li>The compiler now warns about code like <code class="language-plaintext highlighter-rouge">foo +=1</code> which uses inconsistent
+spacing around binary operators. Later versions of the language will parse
+these as unary operators instead so that <code class="language-plaintext highlighter-rouge">echo $foo</code> finally can do what
+people expect it to do.</li>
+  <li><code class="language-plaintext highlighter-rouge">system.untyped</code> and <code class="language-plaintext highlighter-rouge">system.typed</code> have been introduced as aliases
+for <code class="language-plaintext highlighter-rouge">expr</code> and <code class="language-plaintext highlighter-rouge">stmt</code>. The new names capture the semantics much better
+and most likely  <code class="language-plaintext highlighter-rouge">expr</code> and <code class="language-plaintext highlighter-rouge">stmt</code> will be deprecated in favor of the
+new names.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">split</code> method in module <code class="language-plaintext highlighter-rouge">re</code> has changed. It now handles the case
+of matches having a length of 0, and empty strings being yielded from the
+iterator. A notable change might be that a pattern being matched at the
+beginning and end of a string, will result in an empty string being produced
+at the start and the end of the iterator.</li>
+  <li>The compiler and nimsuggest now count columns starting with 1, not 0 for
+consistency with the rest of the world.</li>
+</ul>
+
+<h2 id="language-additions">Language Additions</h2>
+
+<ul>
+  <li>For empty <code class="language-plaintext highlighter-rouge">case object</code> branches <code class="language-plaintext highlighter-rouge">discard</code> can finally be used instead
+of <code class="language-plaintext highlighter-rouge">nil</code>.</li>
+  <li>Automatic dereferencing is now done for the first argument of a routine
+call if overloading resolution produces no match otherwise. This feature
+has to be enabled with
+the <a href="0.11.0/manual.html#pragmas-experimental-pragma">experimental</a> pragma.</li>
+  <li>
+    <p>Objects that do not use inheritance nor <code class="language-plaintext highlighter-rouge">case</code> can be put into <code class="language-plaintext highlighter-rouge">const</code>
+sections. This means that finally this is possible and produces rather
+nice code:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">import</span> <span class="n">tables</span>
+
+  <span class="k">const</span>
+    <span class="n">foo</span> <span class="o">=</span> <span class="p">{</span><span class="s">"ah"</span><span class="p">:</span> <span class="s">"finally"</span><span class="p">,</span> <span class="s">"this"</span><span class="p">:</span> <span class="s">"is"</span><span class="p">,</span> <span class="s">"possible."</span><span class="p">:</span> <span class="s">"nice!"</span><span class="p">}.</span><span class="n">toTable</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ordinary parameters can follow after a varargs parameter. This means the
+following is finally accepted by the compiler:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">template</span> <span class="n">takesBlock</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="kt">int</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">varargs</span><span class="o">[</span><span class="n">expr</span><span class="o">]</span><span class="p">;</span> <span class="n">blck</span><span class="p">:</span> <span class="n">stmt</span><span class="p">)</span> <span class="o">=</span>
+    <span class="n">blck</span>
+    <span class="n">echo</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
+
+  <span class="n">takesBlock</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"some"</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">,</span> <span class="s">"random stuff"</span><span class="p">:</span>
+    <span class="n">echo</span> <span class="s">"yay"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Overloading by ‘var T’ is now finally possible:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">proc </span><span class="nf">varOrConst</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="k">var</span> <span class="kt">int</span><span class="p">)</span> <span class="o">=</span> <span class="n">echo</span> <span class="s">"var"</span>
+  <span class="k">proc </span><span class="nf">varOrConst</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">int</span><span class="p">)</span> <span class="o">=</span> <span class="n">echo</span> <span class="s">"const"</span>
+
+  <span class="k">var</span> <span class="n">x</span><span class="p">:</span> <span class="kt">int</span>
+  <span class="n">varOrConst</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c"># "var"</span>
+  <span class="n">varOrConst</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span> <span class="c"># "const"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Array and seq indexing can now use the builtin <code class="language-plaintext highlighter-rouge">^</code> operator to access
+things from backwards: <code class="language-plaintext highlighter-rouge">a[^1]</code> is like Python’s <code class="language-plaintext highlighter-rouge">a[-1]</code>.</li>
+  <li>A first version of the specification and implementation of the overloading
+of the assignment operator has arrived!</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">system.len</code> for strings and sequences now returns 0 for nil.</p>
+  </li>
+  <li>
+    <p>A single underscore can now be used to discard values when unpacking tuples:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">let</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="err">_, _) = os.splitFile("path/file.ext")</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">marshal.$$</code> and <code class="language-plaintext highlighter-rouge">marshal.to</code> can be executed at compile-time.</li>
+  <li>Interoperability with C++ improved tremendously; C++’s templates and
+operators can be wrapped directly. See
+<a href="0.11.0/nimc.html#additional-features-importcpp-pragma">this</a>
+for more information.</li>
+  <li><code class="language-plaintext highlighter-rouge">macros.getType</code> can be used to query an AST’s type at compile-time. This
+enables more powerful macros, for instance <em>currying</em> can now be done with
+a macro.</li>
+</ul>
+
+<h2 id="library-additions">Library additions</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">reversed</code> proc added to the <code class="language-plaintext highlighter-rouge">unicode</code> module.</li>
+  <li>Added multipart param to httpclient’s <code class="language-plaintext highlighter-rouge">post</code> and <code class="language-plaintext highlighter-rouge">postContent</code> together
+with a <code class="language-plaintext highlighter-rouge">newMultipartData</code> proc.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">%*</code> operator for JSON.</li>
+  <li>The compiler is now available as Nimble package for c2nim.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">..^</code> and <code class="language-plaintext highlighter-rouge">..&lt;</code> templates to system so that the rather annoying
+space between <code class="language-plaintext highlighter-rouge">.. &lt;</code> and <code class="language-plaintext highlighter-rouge">.. ^</code> is not necessary anymore.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.xlen</code> for strings and sequences to get back the old <code class="language-plaintext highlighter-rouge">len</code>
+operation that doesn’t check for <code class="language-plaintext highlighter-rouge">nil</code> for efficiency.</li>
+  <li>Added sexp.nim to parse and generate sexp.</li>
+</ul>
+
+<h2 id="bugfixes">Bugfixes</h2>
+
+<ul>
+  <li>Fixed internal compiler error when using <code class="language-plaintext highlighter-rouge">char()</code> in an echo call
+(<a href="https://github.com/Araq/Nim/issues/1788">#1788</a>).</li>
+  <li>Fixed Windows cross-compilation on Linux.</li>
+  <li>Overload resolution now works for types distinguished only by a
+<code class="language-plaintext highlighter-rouge">static[int]</code> param
+(<a href="https://github.com/Araq/Nim/issues/1056">#1056</a>).</li>
+  <li>Other fixes relating to generic types and static params.</li>
+  <li>Fixed some compiler crashes with unnamed tuples
+(<a href="https://github.com/Araq/Nim/issues/1774">#1774</a>).</li>
+  <li>Fixed <code class="language-plaintext highlighter-rouge">channels.tryRecv</code> blocking
+(<a href="https://github.com/Araq/Nim/issues/1816">#1816</a>).</li>
+  <li>Fixed generic instantiation errors with <code class="language-plaintext highlighter-rouge">typedesc</code>
+(<a href="https://github.com/Araq/Nim/issues/419">#419</a>).</li>
+  <li>Fixed generic regression where the compiler no longer detected constant
+expressions properly (<a href="https://github.com/Araq/Nim/issues/544">#544</a>).</li>
+  <li>Fixed internal error with generic proc using <code class="language-plaintext highlighter-rouge">static[T]</code> in a specific
+way (<a href="https://github.com/Araq/Nim/issues/1049">#1049</a>).</li>
+  <li>More fixes relating to generics (<a href="https://github.com/Araq/Nim/issues/1820">#1820</a>,
+<a href="https://github.com/Araq/Nim/issues/1050">#1050</a>,
+<a href="https://github.com/Araq/Nim/issues/1859">#1859</a>,
+<a href="https://github.com/Araq/Nim/issues/1858">#1858</a>).</li>
+  <li>Fixed httpclient to properly encode queries.</li>
+  <li>Many fixes to the <code class="language-plaintext highlighter-rouge">uri</code> module.</li>
+  <li>Async sockets are now closed on error.</li>
+  <li>Fixes to httpclient’s handling of multipart data.</li>
+  <li>Fixed GC segfaults with asynchronous sockets
+(<a href="https://github.com/Araq/Nim/issues/1796">#1796</a>).</li>
+  <li>Added more versions to openssl’s DLL version list
+(<a href="https://github.com/Araq/Nim/commit/076f993">076f993</a>).</li>
+  <li>Fixed shallow copy in iterators being broken
+(<a href="https://github.com/Araq/Nim/issues/1803">#1803</a>).</li>
+  <li><code class="language-plaintext highlighter-rouge">nil</code> can now be inserted into tables with the <code class="language-plaintext highlighter-rouge">db_sqlite</code> module
+(<a href="https://github.com/Araq/Nim/issues/1866">#1866</a>).</li>
+  <li>Fixed “Incorrect assembler generated”
+(<a href="https://github.com/Araq/Nim/issues/1907">#1907</a>)</li>
+  <li>Fixed “Expression templates that define macros are unusable in some contexts”
+(<a href="https://github.com/Araq/Nim/issues/1903">#1903</a>)</li>
+  <li>Fixed “a second level generic subclass causes the compiler to crash”
+(<a href="https://github.com/Araq/Nim/issues/1919">#1919</a>)</li>
+  <li>Fixed “nim 0.10.2 generates invalid AsyncHttpClient C code for MSVC “
+(<a href="https://github.com/Araq/Nim/issues/1901">#1901</a>)</li>
+  <li>Fixed “1 shl n produces wrong C code”
+(<a href="https://github.com/Araq/Nim/issues/1928">#1928</a>)</li>
+  <li>Fixed “Internal error on tuple yield”
+(<a href="https://github.com/Araq/Nim/issues/1838">#1838</a>)</li>
+  <li>Fixed “ICE with template”
+(<a href="https://github.com/Araq/Nim/issues/1915">#1915</a>)</li>
+  <li>Fixed “include the tool directory in the installer as it is required by koch”
+(<a href="https://github.com/Araq/Nim/issues/1947">#1947</a>)</li>
+  <li>Fixed “Can’t compile if file location contains spaces on Windows”
+(<a href="https://github.com/Araq/Nim/issues/1955">#1955</a>)</li>
+  <li>Fixed “List comprehension macro only supports infix checks as guards”
+(<a href="https://github.com/Araq/Nim/issues/1920">#1920</a>)</li>
+  <li>Fixed “wrong field names of compatible tuples in generic types”
+(<a href="https://github.com/Araq/Nim/issues/1910">#1910</a>)</li>
+  <li>Fixed “Macros within templates no longer work as expected”
+(<a href="https://github.com/Araq/Nim/issues/1944">#1944</a>)</li>
+  <li>Fixed “Compiling for Standalone AVR broken in 0.10.2”
+(<a href="https://github.com/Araq/Nim/issues/1964">#1964</a>)</li>
+  <li>Fixed “Compiling for Standalone AVR broken in 0.10.2”
+(<a href="https://github.com/Araq/Nim/issues/1964">#1964</a>)</li>
+  <li>Fixed “Code generation for mitems with tuple elements”
+(<a href="https://github.com/Araq/Nim/issues/1833">#1833</a>)</li>
+  <li>Fixed “httpclient.HttpMethod should not be an enum”
+(<a href="https://github.com/Araq/Nim/issues/1962">#1962</a>)</li>
+  <li>Fixed “terminal / eraseScreen() throws an OverflowError”
+(<a href="https://github.com/Araq/Nim/issues/1906">#1906</a>)</li>
+  <li>Fixed “setControlCHook(nil) disables registered quit procs”
+(<a href="https://github.com/Araq/Nim/issues/1546">#1546</a>)</li>
+  <li>Fixed “Unexpected idetools behaviour”
+(<a href="https://github.com/Araq/Nim/issues/325">#325</a>)</li>
+  <li>Fixed “Unused lifted lambda does not compile”
+(<a href="https://github.com/Araq/Nim/issues/1642">#1642</a>)</li>
+  <li>Fixed “‘low’ and ‘high’ don’t work with cstring asguments”
+(<a href="https://github.com/Araq/Nim/issues/2030">#2030</a>)</li>
+  <li>Fixed “Converting to int does not round in JS backend”
+(<a href="https://github.com/Araq/Nim/issues/1959">#1959</a>)</li>
+  <li>Fixed “Internal error genRecordField 2 when adding region to pointer.”
+(<a href="https://github.com/Araq/Nim/issues/2039">#2039</a>)</li>
+  <li>Fixed “Macros fail to compile when compiled with –os:standalone”
+(<a href="https://github.com/Araq/Nim/issues/2041">#2041</a>)</li>
+  <li>Fixed “Reading from {.compileTime.} variables can cause code generation to fail”
+(<a href="https://github.com/Araq/Nim/issues/2022">#2022</a>)</li>
+  <li>Fixed “Passing overloaded symbols to templates fails inside generic procedures”
+(<a href="https://github.com/Araq/Nim/issues/1988">#1988</a>)</li>
+  <li>Fixed “Compiling iterator with object assignment in release mode causes “var not init””
+(<a href="https://github.com/Araq/Nim/issues/2023">#2023</a>)</li>
+  <li>Fixed “calling a large number of macros doing some computation fails”
+(<a href="https://github.com/Araq/Nim/issues/1989">#1989</a>)</li>
+  <li>Fixed “Can’t get Koch to install nim under Windows”
+(<a href="https://github.com/Araq/Nim/issues/2061">#2061</a>)</li>
+  <li>Fixed “Template with two stmt parameters segfaults compiler”
+(<a href="https://github.com/Araq/Nim/issues/2057">#2057</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">noSideEffect</code> not affected by <code class="language-plaintext highlighter-rouge">echo</code>”
+(<a href="https://github.com/Araq/Nim/issues/2011">#2011</a>)</li>
+  <li>Fixed “Compiling with the cpp backend ignores –passc”
+(<a href="https://github.com/Araq/Nim/issues/1601">#1601</a>)</li>
+  <li>Fixed “Put untyped procedure parameters behind the experimental pragma”
+(<a href="https://github.com/Araq/Nim/issues/1956">#1956</a>)</li>
+  <li>Fixed “generic regression”
+(<a href="https://github.com/Araq/Nim/issues/2073">#2073</a>)</li>
+  <li>Fixed “generic regression”
+(<a href="https://github.com/Araq/Nim/issues/2073">#2073</a>)</li>
+  <li>Fixed “Regression in template lookup with generics”
+(<a href="https://github.com/Araq/Nim/issues/2004">#2004</a>)</li>
+  <li>Fixed “GC’s growObj is wrong for edge cases”
+(<a href="https://github.com/Araq/Nim/issues/2070">#2070</a>)</li>
+  <li>Fixed “Compiler internal error when creating an array out of a typeclass”
+(<a href="https://github.com/Araq/Nim/issues/1131">#1131</a>)</li>
+  <li>Fixed “GC’s growObj is wrong for edge cases”
+(<a href="https://github.com/Araq/Nim/issues/2070">#2070</a>)</li>
+  <li>Fixed “Invalid Objective-C code generated when calling class method”
+(<a href="https://github.com/Araq/Nim/issues/2068">#2068</a>)</li>
+  <li>Fixed “walkDirRec Error”
+(<a href="https://github.com/Araq/Nim/issues/2116">#2116</a>)</li>
+  <li>Fixed “Typo in code causes compiler SIGSEGV in evalAtCompileTime”
+(<a href="https://github.com/Araq/Nim/issues/2113">#2113</a>)</li>
+  <li>Fixed “Regression on exportc”
+(<a href="https://github.com/Araq/Nim/issues/2118">#2118</a>)</li>
+  <li>Fixed “Error message”
+(<a href="https://github.com/Araq/Nim/issues/2102">#2102</a>)</li>
+  <li>Fixed “hint[path] = off not working in nim.cfg”
+(<a href="https://github.com/Araq/Nim/issues/2103">#2103</a>)</li>
+  <li>Fixed “compiler crashes when getting a tuple from a sequence of generic tuples”
+(<a href="https://github.com/Araq/Nim/issues/2121">#2121</a>)</li>
+  <li>Fixed “nim check hangs with when”
+(<a href="https://github.com/Araq/Nim/issues/2123">#2123</a>)</li>
+  <li>Fixed “static[T] param in nested type resolve/caching issue”
+(<a href="https://github.com/Araq/Nim/issues/2125">#2125</a>)</li>
+  <li>Fixed “repr should display <code class="language-plaintext highlighter-rouge">\0</code>”
+(<a href="https://github.com/Araq/Nim/issues/2124">#2124</a>)</li>
+  <li>Fixed “‘nim check’ never ends in case of recursive dependency “
+(<a href="https://github.com/Araq/Nim/issues/2051">#2051</a>)</li>
+  <li>Fixed “From macros: Error: unhandled exception: sons is not accessible”
+(<a href="https://github.com/Araq/Nim/issues/2167">#2167</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">fieldPairs</code> doesn’t work inside templates”
+(<a href="https://github.com/Araq/Nim/issues/1902">#1902</a>)</li>
+  <li>Fixed “fields iterator misbehavior on break statement”
+(<a href="https://github.com/Araq/Nim/issues/2134">#2134</a>)</li>
+  <li>Fixed “Fix for compiler not building anymore since #c3244ef1ff”
+(<a href="https://github.com/Araq/Nim/issues/2193">#2193</a>)</li>
+  <li>Fixed “JSON parser fails in cpp output mode”
+(<a href="https://github.com/Araq/Nim/issues/2199">#2199</a>)</li>
+  <li>Fixed “macros.getType mishandles void return”
+(<a href="https://github.com/Araq/Nim/issues/2211">#2211</a>)</li>
+  <li>Fixed “Regression involving templates instantiated within generics”
+(<a href="https://github.com/Araq/Nim/issues/2215">#2215</a>)</li>
+  <li>Fixed ““Error: invalid type” for ‘not nil’ on generic type.”
+(<a href="https://github.com/Araq/Nim/issues/2216">#2216</a>)</li>
+  <li>Fixed “–threads:on breaks async”
+(<a href="https://github.com/Araq/Nim/issues/2074">#2074</a>)</li>
+  <li>Fixed “Type mismatch not always caught, can generate bad code for C backend.”
+(<a href="https://github.com/Araq/Nim/issues/2169">#2169</a>)</li>
+  <li>Fixed “Failed C compilation when storing proc to own type in object”
+(<a href="https://github.com/Araq/Nim/issues/2233">#2233</a>)</li>
+  <li>Fixed “Unknown line/column number in constant declaration type conversion error”
+(<a href="https://github.com/Araq/Nim/issues/2252">#2252</a>)</li>
+  <li>Fixed “Adding {.compile.} fails if nimcache already exists.”
+(<a href="https://github.com/Araq/Nim/issues/2247">#2247</a>)</li>
+  <li>Fixed “Two different type names generated for a single type (C backend)”
+(<a href="https://github.com/Araq/Nim/issues/2250">#2250</a>)</li>
+  <li>Fixed “Ambiguous call when it should not be”
+(<a href="https://github.com/Araq/Nim/issues/2229">#2229</a>)</li>
+  <li>Fixed “Make sure we can load root urls”
+(<a href="https://github.com/Araq/Nim/issues/2227">#2227</a>)</li>
+  <li>Fixed “Failure to slice a string with an int subrange type”
+(<a href="https://github.com/Araq/Nim/issues/794">#794</a>)</li>
+  <li>Fixed “documentation error”
+(<a href="https://github.com/Araq/Nim/issues/2205">#2205</a>)</li>
+  <li>Fixed “Code growth when using <code class="language-plaintext highlighter-rouge">const</code>”
+(<a href="https://github.com/Araq/Nim/issues/1940">#1940</a>)</li>
+  <li>Fixed “Instances of generic types confuse overload resolution”
+(<a href="https://github.com/Araq/Nim/issues/2220">#2220</a>)</li>
+  <li>Fixed “Compiler error when initializing sdl2’s EventType”
+(<a href="https://github.com/Araq/Nim/issues/2316">#2316</a>)</li>
+  <li>Fixed “Parallel disjoint checking can’t handle <code class="language-plaintext highlighter-rouge">&lt;</code>, <code class="language-plaintext highlighter-rouge">items</code>, or arrays”
+(<a href="https://github.com/Araq/Nim/issues/2287">#2287</a>)</li>
+  <li>Fixed “Strings aren’t copied in parallel loop”
+(<a href="https://github.com/Araq/Nim/issues/2286">#2286</a>)</li>
+  <li>Fixed “JavaScript compiler crash with tables”
+(<a href="https://github.com/Araq/Nim/issues/2298">#2298</a>)</li>
+  <li>Fixed “Range checker too restrictive”
+(<a href="https://github.com/Araq/Nim/issues/1845">#1845</a>)</li>
+  <li>Fixed “Failure to slice a string with an int subrange type”
+(<a href="https://github.com/Araq/Nim/issues/794">#794</a>)</li>
+  <li>Fixed “Remind user when compiling in debug mode”
+(<a href="https://github.com/Araq/Nim/issues/1868">#1868</a>)</li>
+  <li>Fixed “Compiler user guide has jumbled options/commands.”
+(<a href="https://github.com/Araq/Nim/issues/1819">#1819</a>)</li>
+  <li>Fixed “using <code class="language-plaintext highlighter-rouge">method</code>: 1 in a objects constructor fails when compiling”
+(<a href="https://github.com/Araq/Nim/issues/1791">#1791</a>)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

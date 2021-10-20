@@ -1,0 +1,1420 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>1.4.0版本发布 - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="1.4.0版本发布"> -->
+
+  
+  <!-- <meta name="twitter:description" content="我们非常自豪地宣布，经过六个月的持续开发，Nim 1.4 版本已经发布了！ 除了 1.0 版本之外，这可能是迄今为止最大的 Nim 版本，我们很高兴能够发布它。"> -->
+  <meta property="og:description" content="我们非常自豪地宣布，经过六个月的持续开发，Nim 1.4 版本已经发布了！ 除了 1.0 版本之外，这可能是迄今为止最大的 Nim 版本，我们很高兴能够发布它。">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="1.4.0版本发布" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            1.4.0版本发布
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              16 October 2020
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Nim团队
+            </span>
+            
+          </h3>
+          <p>我们非常自豪地宣布，经过六个月的持续开发，Nim 1.4 版本已经发布了！
+除了 1.0 版本之外，这可能是迄今为止最大的 Nim 版本，我们很高兴能够发布它。</p>
+
+<p>它包含了 900 个新的提交，这些提交还没有被回传到我们之前的版本。
+与 1.2 版本相比，增加了一些新的功能和标准库。
+我们试图将破坏性的改动保持在最小的范围内，但一些错误的修复是无法避免的。 
+我们认为我们的用户将受益于这些改变。</p>
+
+<p>我们建议所有用户升级并使用 1.4 版本。</p>
+
+<p>这个版本还包含了最新版本的 Nim 包管理器 Nimble —— v0.12.0。
+变更日志可以在<a href="https://github.com/nim-lang/nimble/blob/master/changelog.markdown#0120">这里</a>找到。</p>
+
+<h1 id="安装nim-14">安装Nim 1.4</h1>
+
+<h2 id="新用户">新用户</h2>
+
+<p>检查你的操作系统的软件包管理器是否已经发布了1.4或版本。
+或者按照<a href="https://nim-lang-cn.org/install.html">这里</a>所述进行安装。</p>
+
+<h2 id="现有用户">现有用户</h2>
+
+<p>如果你使用 <code class="language-plaintext highlighter-rouge">choosenim</code> 安装了以前的 Nim 版本。
+获取 Nim 1.4 很简单：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>choosenim update self
+<span class="nv">$ </span>choosenim update stable
+</code></pre></div></div>
+
+<p>如果你没有 <code class="language-plaintext highlighter-rouge">choosenim</code>, 你可以按照同上的方法来做：
+<a href="https://nim-lang-cn.org/install.html">安装链接</a>。</p>
+
+<h1 id="v14的贡献者">v1.4的贡献者</h1>
+
+<p>我们的贡献者非常了不起，有
+<a href="https://github.com/nim-lang/Nim/graphs/contributors?from=2020-04-03&amp;to=2020-10-16&amp;type=c">太多</a>
+在此列出。
+非常感谢你们，没有你们，我们不可能完成这个版本。</p>
+
+<h1 id="新功能">新功能</h1>
+
+<h2 id="gc-orc">GC: ORC</h2>
+
+<p>一种名为 ARC 的新的参考计数算法首次随 Nim 1.2 一起发货。
+如果你还没有看过，我们推荐你看一下以下内容
+<a href="https://www.youtube.com/playlist?list=PLxLdEZg8DRwTIEzUpfaIcBqhsj09mLWHx">NimConf 2020（外网）</a> 的 
+<a href="https://www.youtube.com/watch?v=aUJcYTnPWCg">这个视频（外网）</a> 。
+在这里，Araq解释了ARC背后的细节，并展示了一些基准，以说明其好处。</p>
+
+<p>As far as we know, ARC works with the complete standard library except for
+the current implementation of <code class="language-plaintext highlighter-rouge">async</code>, because that introduces cycles that
+ARC doesn’t deal with.
+There are other <code class="language-plaintext highlighter-rouge">async</code> implementations in development that don’t introduce cycles.</p>
+
+<p>ORC is the existing ARC algorithm plus a cycle collector, and <code class="language-plaintext highlighter-rouge">--gc:orc</code> is our
+main new feature for this release!
+We recommend reading
+<a href="https://nim-lang.org/blog/2020/10/15/introduction-to-arc-orc-in-nim.html">this introductory ARC/ORC post</a>
+to get an idea about ARC/ORC’s advantages.</p>
+
+<h3 id="如何使用-arc-和-orc">如何使用 ARC 和 ORC</h3>
+
+<p>If you haven’t used ARC already with Nim 1.2, all you have to do is to pass <code class="language-plaintext highlighter-rouge">--gc:arc</code>
+on the command line:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nim</span> <span class="n">c</span> <span class="o">-</span><span class="n">d</span><span class="p">:</span><span class="n">release</span> <span class="o">--</span><span class="n">gc</span><span class="p">:</span><span class="n">arc</span> <span class="n">myprogram</span><span class="p">.</span><span class="n">nim</span>
+</code></pre></div></div>
+
+<p>For the majority of programs this is all it takes.</p>
+
+<p>If your code uses cyclic data structures, or if you’re not sure if your code
+produces cycles, you need to use <code class="language-plaintext highlighter-rouge">--gc:orc</code> and not <code class="language-plaintext highlighter-rouge">--gc:arc</code>.</p>
+
+<p>If you have an object that looks cyclic, but you <em>know</em> it isn’t, you can help ORC by
+marking it as <code class="language-plaintext highlighter-rouge">{.acyclic.}</code> in the following way:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span>
+  <span class="n">Node</span> <span class="p">{.</span><span class="n">acyclic</span><span class="p">.}</span> <span class="o">=</span> <span class="k">ref</span> <span class="k">object</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">Node</span>
+    <span class="n">data</span><span class="p">:</span> <span class="kt">string</span>
+</code></pre></div></div>
+
+<p>To read more about <code class="language-plaintext highlighter-rouge">{.acyclic.}</code> pragma, please
+<a href="https://nim-lang.github.io/Nim/manual.html#pragmas-acyclic-pragma">check out the manual</a>.</p>
+
+<h3 id="known-incompatibilities-and-gotchas">Known incompatibilities and gotchas</h3>
+
+<h4 id="深拷贝">深拷贝</h4>
+
+<p>If you use <code class="language-plaintext highlighter-rouge">system.deepCopy</code> in your code, you need to enable it via
+<code class="language-plaintext highlighter-rouge">--deepCopy:on</code> on the command line.
+This is a band-aid and a better solution for this will arrive in the future.</p>
+
+<p>The reason for this opt-in switch is that ARC and ORC do not use the old runtime
+type information (RTTI) that <code class="language-plaintext highlighter-rouge">system.deepCopy</code> is built upon.
+We’ve built ARC and ORC with embedded devices in mind where the overhead of the
+old RTTI has been reported to be unacceptable.</p>
+
+<h4 id="order-of-declarations">Order of declarations</h4>
+
+<p>The second gotcha people might encounter is the strict ordering requirement
+for custom destructors; this affects old code as well, because finalizers are
+mapped to destructors.
+For example:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span>
+  <span class="n">CustomObject</span> <span class="o">=</span> <span class="k">ref</span> <span class="k">object</span>
+    <span class="n">p</span><span class="p">:</span> <span class="k">ptr</span> <span class="kt">int</span>
+
+<span class="k">proc </span><span class="nf">tricky</span><span class="p">()</span> <span class="o">=</span>
+  <span class="c"># would use the default destructor</span>
+  <span class="k">var</span> <span class="n">x</span><span class="p">:</span> <span class="n">CustomObject</span>
+
+<span class="k">proc </span><span class="nf">finalizer</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">CustomObject</span><span class="p">)</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">x</span><span class="p">.</span><span class="n">p</span> <span class="o">!=</span> <span class="k">nil</span><span class="p">:</span>
+    <span class="n">dealloc</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">p</span><span class="p">)</span>
+
+<span class="k">proc </span><span class="nf">newCustomObject</span><span class="p">():</span> <span class="n">CustomObject</span> <span class="o">=</span>
+  <span class="n">new</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">finalizer</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This produces the following error message:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>temp.nim(15, 6) Error: cannot bind another '=destroy' to: CustomObject:ObjectType;
+previous declaration was constructed here implicitly: temp.nim(8, 7)
+</code></pre></div></div>
+
+<p>The reason is that only after the <code class="language-plaintext highlighter-rouge">new(result, finalizer)</code> call the compiler knows
+that it needs to generate a custom destructor for the <code class="language-plaintext highlighter-rouge">CustomObject</code> type,
+but when it compiled <code class="language-plaintext highlighter-rouge">tricky</code> the default destructor was used.</p>
+
+<p>The solution is to move the proc <code class="language-plaintext highlighter-rouge">tricky</code> after the <code class="language-plaintext highlighter-rouge">newCustomObject</code> declaration:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span>
+  <span class="n">CustomObject</span> <span class="o">=</span> <span class="k">ref</span> <span class="k">object</span>
+    <span class="n">p</span><span class="p">:</span> <span class="k">ptr</span> <span class="kt">int</span>
+
+<span class="k">proc </span><span class="nf">finalizer</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">CustomObject</span><span class="p">)</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">x</span><span class="p">.</span><span class="n">p</span> <span class="o">!=</span> <span class="k">nil</span><span class="p">:</span>
+    <span class="n">dealloc</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">p</span><span class="p">)</span>
+
+<span class="k">proc </span><span class="nf">newCustomObject</span><span class="p">():</span> <span class="n">CustomObject</span> <span class="o">=</span>
+  <span class="n">new</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">finalizer</span><span class="p">)</span>
+
+<span class="k">proc </span><span class="nf">tricky</span><span class="p">()</span> <span class="o">=</span>
+  <span class="c"># uses the custom destructor</span>
+  <span class="k">var</span> <span class="n">x</span><span class="p">:</span> <span class="n">CustomObject</span>
+</code></pre></div></div>
+
+<p>This is a current limitation that will be improved in future versions of the compiler.</p>
+
+<h2 id="stricter-functions">Strict(er) functions</h2>
+
+<p>This is an experimental feature available via <code class="language-plaintext highlighter-rouge">{.experimental: "strictFuncs".}</code> pragma in
+your code or via the <code class="language-plaintext highlighter-rouge">--experimental:strictFuncs</code> switch.</p>
+
+<p>It introduces a stricter definition of a “side effect”:
+If an object is reachable via a parameter that is not declared as a <code class="language-plaintext highlighter-rouge">var</code> parameter,
+any mutation to that object counts as a side effect.</p>
+
+<p>Here is an example from
+<a href="https://nim-lang.github.io/Nim/manual_experimental.html#strict-funcs">the experimental manual</a>:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{.</span><span class="n">experimental</span><span class="p">:</span> <span class="s">"strictFuncs"</span><span class="p">.}</span>
+
+<span class="k">type</span>
+  <span class="n">Node</span> <span class="o">=</span> <span class="k">ref</span> <span class="k">object</span>
+    <span class="n">le</span><span class="p">,</span> <span class="n">ri</span><span class="p">:</span> <span class="n">Node</span>
+    <span class="n">data</span><span class="p">:</span> <span class="kt">string</span>
+
+<span class="k">func</span> <span class="n">len</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span> <span class="kt">int</span> <span class="o">=</span>
+  <span class="c"># valid: len does not have side effects</span>
+  <span class="k">var</span> <span class="n">it</span> <span class="o">=</span> <span class="n">n</span>
+  <span class="k">while</span> <span class="n">it</span> <span class="o">!=</span> <span class="k">nil</span><span class="p">:</span>
+    <span class="n">inc</span> <span class="n">result</span>
+    <span class="n">it</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">ri</span>
+
+<span class="k">func</span> <span class="n">mut</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="n">Node</span><span class="p">)</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">m</span> <span class="o">=</span> <span class="n">n</span> <span class="c"># is the statement that connected the mutation to the parameter</span>
+  <span class="n">m</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="s">"yeah"</span> <span class="c"># the mutation is here</span>
+  <span class="c"># Error: 'mut' can have side effects</span>
+  <span class="c"># an object reachable from 'n' is potentially mutated</span>
+</code></pre></div></div>
+
+<p>For more details, please see <a href="https://nim-lang.org/blog/2020/09/01/write-tracking.html">Araq’s blog post</a>.</p>
+
+<h1 id="changelog">Changelog</h1>
+
+<h2 id="standard-library-additions-and-changes">Standard library additions and changes</h2>
+
+<ul>
+  <li>Added some enhancements to <code class="language-plaintext highlighter-rouge">std/jsonutils</code> module.
+    <ul>
+      <li>Added a possibility to deserialize JSON arrays directly to <code class="language-plaintext highlighter-rouge">HashSet</code> and
+<code class="language-plaintext highlighter-rouge">OrderedSet</code> types and respectively to serialize those types to JSON arrays
+via <code class="language-plaintext highlighter-rouge">jsonutils.fromJson</code> and <code class="language-plaintext highlighter-rouge">jsonutils.toJson</code> procedures.</li>
+      <li>Added a possibility to deserialize JSON <code class="language-plaintext highlighter-rouge">null</code> objects to Nim option objects
+and respectively to serialize Nim option object to JSON object if <code class="language-plaintext highlighter-rouge">isSome</code>
+or to JSON null object if <code class="language-plaintext highlighter-rouge">isNone</code> via <code class="language-plaintext highlighter-rouge">jsonutils.fromJson</code> and
+<code class="language-plaintext highlighter-rouge">jsonutils.toJson</code> procedures.</li>
+      <li>Added a <code class="language-plaintext highlighter-rouge">Joptions</code> parameter to <code class="language-plaintext highlighter-rouge">jsonutils.fromJson</code> currently
+containing two boolean options <code class="language-plaintext highlighter-rouge">allowExtraKeys</code> and <code class="language-plaintext highlighter-rouge">allowMissingKeys</code>.
+        <ul>
+          <li>If <code class="language-plaintext highlighter-rouge">allowExtraKeys</code> is <code class="language-plaintext highlighter-rouge">true</code> Nim’s object to which the JSON is parsed is
+not required to have a field for every JSON key.</li>
+          <li>If <code class="language-plaintext highlighter-rouge">allowMissingKeys</code> is <code class="language-plaintext highlighter-rouge">true</code> Nim’s object to which JSON is parsed is
+allowed to have fields without corresponding JSON keys.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">bindParams</code>, <code class="language-plaintext highlighter-rouge">bindParam</code> to <code class="language-plaintext highlighter-rouge">db_sqlite</code> for binding parameters into a <code class="language-plaintext highlighter-rouge">SqlPrepared</code> statement.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">tryInsert</code>,<code class="language-plaintext highlighter-rouge">insert</code> procs to <code class="language-plaintext highlighter-rouge">db_*</code> libs which accept primary key column name.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">xmltree.newVerbatimText</code> support create <code class="language-plaintext highlighter-rouge">style</code>’s,<code class="language-plaintext highlighter-rouge">script</code>’s text.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">uri</code> module now implements RFC-2397.</p>
+  </li>
+  <li>
+    <p>Added <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMParser">DOM Parser</a>
+to the <code class="language-plaintext highlighter-rouge">dom</code> module for the JavaScript target.</p>
+  </li>
+  <li>
+    <p>The default hash for <code class="language-plaintext highlighter-rouge">Ordinal</code> has changed to something more bit-scrambling.
+<code class="language-plaintext highlighter-rouge">import hashes; proc hash(x: myInt): Hash = hashIdentity(x)</code> recovers the old
+one in an instantiation context while <code class="language-plaintext highlighter-rouge">-d:nimIntHash1</code> recovers it globally.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">deques.peekFirst</code> and <code class="language-plaintext highlighter-rouge">deques.peekLast</code> now have <code class="language-plaintext highlighter-rouge">var Deque[T] -&gt; var T</code> overloads.</p>
+  </li>
+  <li>
+    <p>File handles created from high-level abstractions in the stdlib will no longer
+be inherited by child processes. In particular, these modules are affected:
+<code class="language-plaintext highlighter-rouge">asyncdispatch</code>, <code class="language-plaintext highlighter-rouge">asyncnet</code>, <code class="language-plaintext highlighter-rouge">system</code>, <code class="language-plaintext highlighter-rouge">nativesockets</code>, <code class="language-plaintext highlighter-rouge">net</code> and <code class="language-plaintext highlighter-rouge">selectors</code>.</p>
+
+    <p>For <code class="language-plaintext highlighter-rouge">asyncdispatch</code>, <code class="language-plaintext highlighter-rouge">asyncnet</code>, <code class="language-plaintext highlighter-rouge">net</code> and <code class="language-plaintext highlighter-rouge">nativesockets</code>, an <code class="language-plaintext highlighter-rouge">inheritable</code>
+flag has been added to all <code class="language-plaintext highlighter-rouge">proc</code>s that create sockets, allowing the user to
+control whether the resulting socket is inheritable. This flag is provided to
+ease the writing of multi-process servers, where sockets inheritance is
+desired.</p>
+
+    <p>For a transition period, define <code class="language-plaintext highlighter-rouge">nimInheritHandles</code> to enable file handle
+inheritance by default. This flag does <strong>not</strong> affect the <code class="language-plaintext highlighter-rouge">selectors</code> module
+due to the differing semantics between operating systems.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">asyncdispatch.setInheritable</code>, <code class="language-plaintext highlighter-rouge">system.setInheritable</code> and
+<code class="language-plaintext highlighter-rouge">nativesockets.setInheritable</code> are also introduced for setting file handle or
+socket inheritance. Not all platforms have these <code class="language-plaintext highlighter-rouge">proc</code>s defined.</p>
+  </li>
+  <li>
+    <p>The file descriptors created for internal bookkeeping by <code class="language-plaintext highlighter-rouge">ioselector_kqueue</code>
+and <code class="language-plaintext highlighter-rouge">ioselector_epoll</code> will no longer be leaked to child processes.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">strutils.formatFloat</code> with <code class="language-plaintext highlighter-rouge">precision = 0</code> has been restored to the version
+1 behaviour that produces a trailing dot, e.g. <code class="language-plaintext highlighter-rouge">formatFloat(3.14159, precision = 0)</code>
+is now <code class="language-plaintext highlighter-rouge">3.</code>, not <code class="language-plaintext highlighter-rouge">3</code>.</li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">commonPrefixLen</code> to <code class="language-plaintext highlighter-rouge">critbits</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">relativePath(rel, abs)</code> and <code class="language-plaintext highlighter-rouge">relativePath(abs, rel)</code> used to silently give wrong results
+(see #13222); instead they now use <code class="language-plaintext highlighter-rouge">getCurrentDir</code> to resolve those cases,
+and this can now throw in edge cases where <code class="language-plaintext highlighter-rouge">getCurrentDir</code> throws.
+<code class="language-plaintext highlighter-rouge">relativePath</code> also now works for js with <code class="language-plaintext highlighter-rouge">-d:nodejs</code>.</p>
+  </li>
+  <li>
+    <p>JavaScript and NimScript standard library changes: <code class="language-plaintext highlighter-rouge">streams.StringStream</code> is
+now supported in JavaScript, with the limitation that any buffer <code class="language-plaintext highlighter-rouge">pointer</code>s
+used must be castable to <code class="language-plaintext highlighter-rouge">ptr string</code>, any incompatible pointer type will not
+work. The <code class="language-plaintext highlighter-rouge">lexbase</code> and <code class="language-plaintext highlighter-rouge">streams</code> modules used to fail to compile on
+NimScript due to a bug, but this has been fixed.</p>
+
+    <p>The following modules now compile on both JS and NimScript: <code class="language-plaintext highlighter-rouge">parsecsv</code>,
+<code class="language-plaintext highlighter-rouge">parsecfg</code>, <code class="language-plaintext highlighter-rouge">parsesql</code>, <code class="language-plaintext highlighter-rouge">xmlparser</code>, <code class="language-plaintext highlighter-rouge">htmlparser</code> and <code class="language-plaintext highlighter-rouge">ropes</code>. Additionally
+supported for JS is <code class="language-plaintext highlighter-rouge">cstrutils.startsWith</code> and <code class="language-plaintext highlighter-rouge">cstrutils.endsWith</code>, for
+NimScript: <code class="language-plaintext highlighter-rouge">json</code>, <code class="language-plaintext highlighter-rouge">parsejson</code>, <code class="language-plaintext highlighter-rouge">strtabs</code> and <code class="language-plaintext highlighter-rouge">unidecode</code>.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">streams.readStr</code> and <code class="language-plaintext highlighter-rouge">streams.peekStr</code> overloads to
+accept an existing string to modify, which avoids memory
+allocations, similar to <code class="language-plaintext highlighter-rouge">streams.readLine</code> (#13857).</p>
+  </li>
+  <li>
+    <p>Added high-level <code class="language-plaintext highlighter-rouge">asyncnet.sendTo</code> and <code class="language-plaintext highlighter-rouge">asyncnet.recvFrom</code> UDP functionality.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">dollars.$</code> now works for unsigned ints with <code class="language-plaintext highlighter-rouge">nim js</code>.</p>
+  </li>
+  <li>
+    <p>Improvements to the <code class="language-plaintext highlighter-rouge">bitops</code> module, including bitslices, non-mutating versions
+of the original masking functions, <code class="language-plaintext highlighter-rouge">mask</code>/<code class="language-plaintext highlighter-rouge">masked</code>, and varargs support for
+<code class="language-plaintext highlighter-rouge">bitand</code>, <code class="language-plaintext highlighter-rouge">bitor</code>, and <code class="language-plaintext highlighter-rouge">bitxor</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">sugar.=&gt;</code> and <code class="language-plaintext highlighter-rouge">sugar.-&gt;</code> changes: Previously <code class="language-plaintext highlighter-rouge">(x, y: int)</code> was transformed
+into <code class="language-plaintext highlighter-rouge">(x: auto, y: int)</code>, it now becomes <code class="language-plaintext highlighter-rouge">(x: int, y: int)</code> for consistency
+with regular proc definitions (although you cannot use semicolons).</p>
+
+    <p>Pragmas and using a name are now allowed on the lefthand side of <code class="language-plaintext highlighter-rouge">=&gt;</code>. Here
+is an example of these changes:</p>
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">sugar</span>
+
+<span class="n">foo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{.</span><span class="n">noSideEffect</span><span class="p">.}</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="c"># is transformed into</span>
+
+<span class="k">proc </span><span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">int</span><span class="p">):</span> <span class="n">auto</span> <span class="p">{.</span><span class="n">noSideEffect</span><span class="p">.}</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>The fields of <code class="language-plaintext highlighter-rouge">times.DateTime</code> are now private, and are accessed with getters and deprecated setters.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">times</code> module now handles the default value for <code class="language-plaintext highlighter-rouge">DateTime</code> more consistently.
+Most procs raise an assertion error when given
+an uninitialized <code class="language-plaintext highlighter-rouge">DateTime</code>, the exceptions are <code class="language-plaintext highlighter-rouge">==</code> and <code class="language-plaintext highlighter-rouge">$</code> (which returns <code class="language-plaintext highlighter-rouge">"Uninitialized DateTime"</code>).
+The proc <code class="language-plaintext highlighter-rouge">times.isInitialized</code> has been added which can be used to check if
+a <code class="language-plaintext highlighter-rouge">DateTime</code> has been initialized.</p>
+  </li>
+  <li>
+    <p>Fix a bug where calling <code class="language-plaintext highlighter-rouge">close</code> on io streams in <code class="language-plaintext highlighter-rouge">osproc.startProcess</code> was a noop and led to
+hangs if a process had both reads from stdin and writes (e.g. to stdout).</p>
+  </li>
+  <li>
+    <p>The callback that is passed to <code class="language-plaintext highlighter-rouge">system.onThreadDestruction</code> must now be <code class="language-plaintext highlighter-rouge">.raises: []</code>.</p>
+  </li>
+  <li>
+    <p>The callback that is assigned to <code class="language-plaintext highlighter-rouge">system.onUnhandledException</code> must now be <code class="language-plaintext highlighter-rouge">.gcsafe</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">osproc.execCmdEx</code> now takes an optional <code class="language-plaintext highlighter-rouge">input</code> for stdin, <code class="language-plaintext highlighter-rouge">workingDir</code> and <code class="language-plaintext highlighter-rouge">env</code>
+parameters.</p>
+  </li>
+  <li>
+    <p>Added a <code class="language-plaintext highlighter-rouge">ssl_config</code> module containing lists of secure ciphers as recommended by
+<a href="https://wiki.mozilla.org/Security/Server_Side_TLS">Mozilla OpSec</a></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">net.newContext</code> now defaults to the list of ciphers targeting
+<a href="https://wiki.mozilla.org/Security/Server_Side_TLS#Intermediate_compatibility_.28recommended.29">“Intermediate compatibility”</a>
+per Mozilla’s recommendation instead of <code class="language-plaintext highlighter-rouge">ALL</code>. This change should protect
+users from the use of weak and insecure ciphers while still provides
+adequate compatibility with the majority of the Internet.</p>
+  </li>
+  <li>
+    <p>A new module <code class="language-plaintext highlighter-rouge">std/jsonutils</code> with hookable <code class="language-plaintext highlighter-rouge">jsonTo,toJson,fromJson</code> operations for json
+serialization/deserialization of custom types was added.</p>
+  </li>
+  <li>
+    <p>A new proc <code class="language-plaintext highlighter-rouge">heapqueue.find[T](heap: HeapQueue[T], x: T): int</code> to get index of element <code class="language-plaintext highlighter-rouge">x</code>
+was added.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">rstgen.rstToLatex</code> a convenience proc for <code class="language-plaintext highlighter-rouge">renderRstToOut</code> and <code class="language-plaintext highlighter-rouge">initRstGenerator</code>.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">os.normalizeExe</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">macros.newLit</code> now preserves named vs unnamed tuples.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">random.gauss</code>, that uses the ratio of uniforms method of sampling from a Gaussian distribution.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">typetraits.elementType</code> to get the element type of an iterable.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">typetraits.$</code> changes: <code class="language-plaintext highlighter-rouge">$(int,)</code> is now <code class="language-plaintext highlighter-rouge">"(int,)"</code> instead of <code class="language-plaintext highlighter-rouge">"(int)"</code>;
+<code class="language-plaintext highlighter-rouge">$tuple[]</code> is now <code class="language-plaintext highlighter-rouge">"tuple[]"</code> instead of <code class="language-plaintext highlighter-rouge">"tuple"</code>;
+<code class="language-plaintext highlighter-rouge">$((int, float), int)</code> is now <code class="language-plaintext highlighter-rouge">"((int, float), int)"</code> instead of <code class="language-plaintext highlighter-rouge">"(tuple of (int, float), int)"</code></p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">macros.extractDocCommentsAndRunnables</code> helper.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">strformat.fmt</code> and <code class="language-plaintext highlighter-rouge">strformat.&amp;</code> support <code class="language-plaintext highlighter-rouge">specifier =</code>. <code class="language-plaintext highlighter-rouge">fmt"{expr=}"</code> now
+expands to <code class="language-plaintext highlighter-rouge">fmt"expr={expr}"</code>.</p>
+  </li>
+  <li>
+    <p>Deprecations: instead of <code class="language-plaintext highlighter-rouge">os.existsDir</code> use <code class="language-plaintext highlighter-rouge">dirExists</code>, instead of <code class="language-plaintext highlighter-rouge">os.existsFile</code> use <code class="language-plaintext highlighter-rouge">fileExists</code>.</p>
+  </li>
+  <li>
+    <p>Added the <code class="language-plaintext highlighter-rouge">jsre</code> module, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">Regular Expressions for the JavaScript target.</a>.</p>
+  </li>
+  <li>
+    <p>Made <code class="language-plaintext highlighter-rouge">maxLines</code> argument <code class="language-plaintext highlighter-rouge">Positive</code> in <code class="language-plaintext highlighter-rouge">logging.newRollingFileLogger</code>,
+because negative values will result in a new file being created for each logged
+line which doesn’t make sense.</p>
+  </li>
+  <li>
+    <p>Changed <code class="language-plaintext highlighter-rouge">log</code> in <code class="language-plaintext highlighter-rouge">logging</code> to use proper log level for JavaScript,
+e.g. <code class="language-plaintext highlighter-rouge">debug</code> uses <code class="language-plaintext highlighter-rouge">console.debug</code>, <code class="language-plaintext highlighter-rouge">info</code> uses <code class="language-plaintext highlighter-rouge">console.info</code>, <code class="language-plaintext highlighter-rouge">warn</code> uses <code class="language-plaintext highlighter-rouge">console.warn</code>, etc.</p>
+  </li>
+  <li>
+    <p>Tables, HashSets, SharedTables and deques don’t require anymore that the passed
+initial size must be a power of two - this is done internally.
+Proc <code class="language-plaintext highlighter-rouge">rightSize</code> for Tables and HashSets is deprecated, as it is not needed anymore.
+<code class="language-plaintext highlighter-rouge">CountTable.inc</code> takes <code class="language-plaintext highlighter-rouge">val: int</code> again not <code class="language-plaintext highlighter-rouge">val: Positive</code>; i.e. it can “count down” again.</p>
+  </li>
+  <li>
+    <p>Removed deprecated symbols from <code class="language-plaintext highlighter-rouge">macros</code> module, some of which were deprecated already in <code class="language-plaintext highlighter-rouge">0.15</code>.</p>
+  </li>
+  <li>
+    <p>Removed <code class="language-plaintext highlighter-rouge">sugar.distinctBase</code>, deprecated since <code class="language-plaintext highlighter-rouge">0.19</code>. Use <code class="language-plaintext highlighter-rouge">typetraits.distinctBase</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">asyncdispatch.PDispatcher.handles</code> is exported so that an external low-level libraries can access it.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">std/with</code>, <code class="language-plaintext highlighter-rouge">sugar.dup</code> now support object field assignment expressions:
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="o">/</span><span class="k">with</span>
+
+<span class="k">type</span> <span class="n">Foo</span> <span class="o">=</span> <span class="k">object</span>
+  <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">int</span>
+
+<span class="k">var</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">foo</span><span class="p">:</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">echo</span> <span class="n">foo</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Proc <code class="language-plaintext highlighter-rouge">math.round</code> is no longer deprecated. The advice to use <code class="language-plaintext highlighter-rouge">strformat</code> instead
+cannot be applied to every use case. The limitations and the (lack of) reliability
+of <code class="language-plaintext highlighter-rouge">round</code> are well documented.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">getprotobyname</code> to <code class="language-plaintext highlighter-rouge">winlean</code>. Added <code class="language-plaintext highlighter-rouge">getProtoByname</code> to <code class="language-plaintext highlighter-rouge">nativesockets</code> which returns a protocol code
+from the database that matches the protocol <code class="language-plaintext highlighter-rouge">name</code>.</p>
+  </li>
+  <li>
+    <p>Added missing attributes and methods to <code class="language-plaintext highlighter-rouge">dom.Navigator</code> like <code class="language-plaintext highlighter-rouge">deviceMemory</code>, <code class="language-plaintext highlighter-rouge">onLine</code>, <code class="language-plaintext highlighter-rouge">vibrate()</code>, etc.</p>
+  </li>
+  <li>Added <code class="language-plaintext highlighter-rouge">strutils.indentation</code> and <code class="language-plaintext highlighter-rouge">strutils.dedent</code> which enable indented string literals:
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">strutils</span>
+<span class="n">echo</span> <span class="n">dedent</span> <span class="s">"""
+  This
+    is
+      cool!
+  """</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">initUri(isIpv6: bool)</code> to <code class="language-plaintext highlighter-rouge">uri</code> module, now <code class="language-plaintext highlighter-rouge">uri</code> supports parsing ipv6 hostname.</p>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">readLines(p: Process)</code> to <code class="language-plaintext highlighter-rouge">osproc</code>.</p>
+  </li>
+  <li>Added the below <code class="language-plaintext highlighter-rouge">toX</code> procs for collections. The usage is similar to procs such as
+<code class="language-plaintext highlighter-rouge">sets.toHashSet</code> and <code class="language-plaintext highlighter-rouge">tables.toTable</code>. Previously, it was necessary to create the
+respective empty collection and add items manually.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">critbits.toCritBitTree</code>, which creates a <code class="language-plaintext highlighter-rouge">CritBitTree</code> from an <code class="language-plaintext highlighter-rouge">openArray</code> of
+ items or an <code class="language-plaintext highlighter-rouge">openArray</code> of pairs.</li>
+      <li><code class="language-plaintext highlighter-rouge">deques.toDeque</code>, which creates a <code class="language-plaintext highlighter-rouge">Deque</code> from an <code class="language-plaintext highlighter-rouge">openArray</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">heapqueue.toHeapQueue</code>, which creates a <code class="language-plaintext highlighter-rouge">HeapQueue</code> from an <code class="language-plaintext highlighter-rouge">openArray</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">intsets.toIntSet</code>, which creates an <code class="language-plaintext highlighter-rouge">IntSet</code> from an <code class="language-plaintext highlighter-rouge">openArray</code>.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Added <code class="language-plaintext highlighter-rouge">progressInterval</code> argument to <code class="language-plaintext highlighter-rouge">asyncftpclient.newAsyncFtpClient</code> to control the interval
+at which progress callbacks are called.</p>
+  </li>
+  <li>Added <code class="language-plaintext highlighter-rouge">os.copyFileToDir</code>.</li>
+</ul>
+
+<h2 id="language-changes">Language changes</h2>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">=destroy</code> hook no longer has to reset its target, as the compiler now automatically inserts
+<code class="language-plaintext highlighter-rouge">wasMoved</code> calls where needed.</li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">=</code> hook is now called <code class="language-plaintext highlighter-rouge">=copy</code> for clarity. The old name <code class="language-plaintext highlighter-rouge">=</code> is still available so there
+is no need to update your code. This change was backported to 1.2 too so you can use the
+more readable <code class="language-plaintext highlighter-rouge">=copy</code> without loss of compatibility.</p>
+  </li>
+  <li>
+    <p>In the newruntime it is now allowed to assign to the discriminator field
+without restrictions as long as the case object doesn’t have a custom destructor.
+The discriminator value doesn’t have to be a constant either. If you have a
+custom destructor for a case object and you do want to freely assign discriminator
+fields, it is recommended to refactor the object into 2 objects like this:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span>
+  <span class="n">MyObj</span> <span class="o">=</span> <span class="k">object</span>
+    <span class="k">case</span> <span class="n">kind</span><span class="p">:</span> <span class="kt">bool</span>
+    <span class="k">of</span> <span class="kp">true</span><span class="p">:</span> <span class="n">y</span><span class="p">:</span> <span class="k">ptr</span> <span class="n">UncheckedArray</span><span class="o">[</span><span class="kt">float</span><span class="o">]</span>
+    <span class="k">of</span> <span class="kp">false</span><span class="p">:</span> <span class="n">z</span><span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="kt">int</span><span class="o">]</span>
+
+<span class="k">proc </span><span class="nf">`=destroy`</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">MyObj</span><span class="p">)</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">x</span><span class="p">.</span><span class="n">kind</span> <span class="ow">and</span> <span class="n">x</span><span class="p">.</span><span class="n">y</span> <span class="o">!=</span> <span class="k">nil</span><span class="p">:</span>
+    <span class="n">deallocShared</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>Refactor into:</p>
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span>
+  <span class="n">MySubObj</span> <span class="o">=</span> <span class="k">object</span>
+    <span class="n">val</span><span class="p">:</span> <span class="k">ptr</span> <span class="n">UncheckedArray</span><span class="o">[</span><span class="kt">float</span><span class="o">]</span>
+  <span class="n">MyObj</span> <span class="o">=</span> <span class="k">object</span>
+    <span class="k">case</span> <span class="n">kind</span><span class="p">:</span> <span class="kt">bool</span>
+    <span class="k">of</span> <span class="kp">true</span><span class="p">:</span> <span class="n">y</span><span class="p">:</span> <span class="n">MySubObj</span>
+    <span class="k">of</span> <span class="kp">false</span><span class="p">:</span> <span class="n">z</span><span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="kt">int</span><span class="o">]</span>
+
+<span class="k">proc </span><span class="nf">`=destroy`</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">MySubObj</span><span class="p">)</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">x</span><span class="p">.</span><span class="n">val</span> <span class="o">!=</span> <span class="k">nil</span><span class="p">:</span>
+    <span class="n">deallocShared</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">val</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getImpl</code> on enum type symbols now returns field syms instead of idents. This helps
+with writing typed macros. The old behavior for backwards compatibility can be restored
+with <code class="language-plaintext highlighter-rouge">--useVersion:1.0</code>.</p>
+  </li>
+  <li>
+    <p>The typed AST for proc headers will now have the arguments be syms instead of idents.
+This helps with writing typed macros. The old behaviour for backwards compatibility can
+be restored with <code class="language-plaintext highlighter-rouge">--useVersion:1.0</code>.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">let</code> statements can now be used without a value if declared with
+<code class="language-plaintext highlighter-rouge">importc</code>/<code class="language-plaintext highlighter-rouge">importcpp</code>/<code class="language-plaintext highlighter-rouge">importjs</code>/<code class="language-plaintext highlighter-rouge">importobjc</code>.</p>
+  </li>
+  <li>
+    <p>The keyword <code class="language-plaintext highlighter-rouge">from</code> is now usable as an operator.</p>
+  </li>
+  <li>Exceptions inheriting from <code class="language-plaintext highlighter-rouge">system.Defect</code> are no longer tracked with
+the <code class="language-plaintext highlighter-rouge">.raises: []</code> exception tracking mechanism. This is more consistent with the
+built-in operations. The following always used to compile (and still does):
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">proc </span><span class="nf">mydiv</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="kt">int</span> <span class="p">{.</span><span class="n">raises</span><span class="p">:</span> <span class="o">[]</span><span class="p">.}</span> <span class="o">=</span>
+  <span class="n">a</span> <span class="ow">div</span> <span class="n">b</span> <span class="c"># can raise an DivByZeroDefect</span>
+</code></pre></div>    </div>
+
+    <p>Now also this compiles:</p>
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">proc </span><span class="nf">mydiv</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="kt">int</span> <span class="p">{.</span><span class="n">raises</span><span class="p">:</span> <span class="o">[]</span><span class="p">.}</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">raise</span> <span class="n">newException</span><span class="p">(</span><span class="n">DivByZeroDefect</span><span class="p">,</span> <span class="s">"division by zero"</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span> <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="ow">div</span> <span class="n">b</span>
+</code></pre></div>    </div>
+
+    <p>The reason for this is that <code class="language-plaintext highlighter-rouge">DivByZeroDefect</code> inherits from <code class="language-plaintext highlighter-rouge">Defect</code> and
+with <code class="language-plaintext highlighter-rouge">--panics:on</code> <code class="language-plaintext highlighter-rouge">Defects</code> become unrecoverable errors.</p>
+  </li>
+  <li>
+    <p>Added the <code class="language-plaintext highlighter-rouge">thiscall</code> calling convention as specified by Microsoft, mostly for hooking purposes.</p>
+  </li>
+  <li>
+    <p>Deprecated the <code class="language-plaintext highlighter-rouge">{.unroll.}</code> pragma, because it was always ignored by the compiler anyway.</p>
+  </li>
+  <li>
+    <p>Removed the deprecated <code class="language-plaintext highlighter-rouge">strutils.isNilOrWhitespace</code>.</p>
+  </li>
+  <li>
+    <p>Removed the deprecated <code class="language-plaintext highlighter-rouge">sharedtables.initSharedTable</code>.</p>
+  </li>
+  <li>
+    <p>Removed the deprecated <code class="language-plaintext highlighter-rouge">asyncdispatch.newAsyncNativeSocket</code>.</p>
+  </li>
+  <li>
+    <p>Removed the deprecated <code class="language-plaintext highlighter-rouge">dom.releaseEvents</code> and <code class="language-plaintext highlighter-rouge">dom.captureEvents</code>.</p>
+  </li>
+  <li>
+    <p>Removed <code class="language-plaintext highlighter-rouge">sharedlists.initSharedList</code>, was deprecated and produces undefined behaviour.</p>
+  </li>
+  <li>
+    <p>There is a new experimental feature called “strictFuncs” which makes the definition of
+<code class="language-plaintext highlighter-rouge">.noSideEffect</code> stricter. <a href="https://nim-lang.org/docs/manual_experimental.html#strict-funcs">See here</a>
+for more information.</p>
+  </li>
+  <li>
+    <p>“for-loop macros” (see <a href="https://nim-lang.org/docs/manual.html#macros-for-loop-macro">the manual</a>) are no longer
+an experimental feature. In other words, you don’t have to write pragma
+<code class="language-plaintext highlighter-rouge">{.experimental: "forLoopMacros".}</code> if you want to use them.</p>
+  </li>
+  <li>
+    <p>Added the <code class="language-plaintext highlighter-rouge">.noalias</code> pragma. It is mapped to C’s <code class="language-plaintext highlighter-rouge">restrict</code> keyword for the increased
+performance this keyword can enable.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">items</code> no longer compiles with enums with holes as its behavior was error prone, see #14004.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">system.deepcopy</code> has to be enabled explicitly for <code class="language-plaintext highlighter-rouge">--gc:arc</code> and <code class="language-plaintext highlighter-rouge">--gc:orc</code> via
+<code class="language-plaintext highlighter-rouge">--deepcopy:on</code>.</p>
+  </li>
+  <li>
+    <p>Added the <code class="language-plaintext highlighter-rouge">std/effecttraits</code> module for introspection of the inferred effects.
+We hope this enables <code class="language-plaintext highlighter-rouge">async</code> macros that are precise about the possible exceptions that
+can be raised.</p>
+  </li>
+  <li>The pragma blocks <code class="language-plaintext highlighter-rouge">{.gcsafe.}: ...</code> and <code class="language-plaintext highlighter-rouge">{.noSideEffect.}: ...</code> can now also be
+written as <code class="language-plaintext highlighter-rouge">{.cast(gcsafe).}: ...</code> and <code class="language-plaintext highlighter-rouge">{.cast(noSideEffect).}: ...</code>. This is the new
+preferred way of writing these, emphasizing their unsafe nature.</li>
+</ul>
+
+<h2 id="compiler-changes">Compiler changes</h2>
+
+<ul>
+  <li>
+    <p>Specific warnings can now be turned into errors via <code class="language-plaintext highlighter-rouge">--warningAsError[X]:on|off</code>.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">define</code> and <code class="language-plaintext highlighter-rouge">undef</code> pragmas have been de-deprecated.</p>
+  </li>
+  <li>New command: <code class="language-plaintext highlighter-rouge">nim r main.nim [args...]</code> which compiles and runs main.nim, and implies <code class="language-plaintext highlighter-rouge">--usenimcache</code>
+so that the output is saved to $nimcache/main$exeExt, using the same logic as <code class="language-plaintext highlighter-rouge">nim c -r</code> to
+avoid recompilations when sources don’t change.
+Example:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nim r compiler/nim.nim <span class="nt">--help</span> <span class="c"># only compiled the first time</span>
+<span class="nb">echo</span> <span class="s1">'import os; echo getCurrentCompilerExe()'</span> | nim r - <span class="c"># this works too</span>
+nim r compiler/nim.nim <span class="nt">--fullhelp</span> <span class="c"># no recompilation</span>
+nim r <span class="nt">--nimcache</span>:/tmp main <span class="c"># binary saved to /tmp/main</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">--hint:processing</code> is now supported and means <code class="language-plaintext highlighter-rouge">--hint:processing:on</code>
+(likewise with other hints and warnings), which is consistent with all other bool flags.
+(since 1.3.3).</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">nim doc -r main</code> and <code class="language-plaintext highlighter-rouge">nim rst2html -r main</code> now call <code class="language-plaintext highlighter-rouge">openDefaultBrowser</code>.</p>
+  </li>
+  <li>
+    <p>Added the new hint <code class="language-plaintext highlighter-rouge">--hint:msgOrigin</code> will show where a compiler msg (hint|warning|error)
+was generated; this helps in particular when it’s non obvious where it came from
+either because multiple locations generate the same message, or because the
+message involves runtime formatting.</p>
+  </li>
+  <li>
+    <p>Added the new flag <code class="language-plaintext highlighter-rouge">--backend:js|c|cpp|objc</code> (or -b:js etc), to change the backend; can be
+used with any command (e.g. nim r, doc, check etc); safe to re-assign.</p>
+  </li>
+  <li>
+    <p>Added the new flag <code class="language-plaintext highlighter-rouge">--doccmd:cmd</code> to pass additional flags for runnableExamples,
+e.g.: <code class="language-plaintext highlighter-rouge">--doccmd:-d:foo --threads</code>
+use <code class="language-plaintext highlighter-rouge">--doccmd:skip</code> to skip runnableExamples and rst test snippets.</p>
+  </li>
+  <li>
+    <p>Added the new flag <code class="language-plaintext highlighter-rouge">--usenimcache</code> to output binary files to nimcache.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">runnableExamples "-b:cpp -r:off": code</code> is now supported, allowing to override
+how an example is compiled and run, for example to change the backend.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">nim doc</code> now outputs under <code class="language-plaintext highlighter-rouge">$projectPath/htmldocs</code> when <code class="language-plaintext highlighter-rouge">--outdir</code> is unspecified
+(with or without <code class="language-plaintext highlighter-rouge">--project</code>); passing <code class="language-plaintext highlighter-rouge">--project</code> now automatically generates
+an index and enables search.
+See <a href="https://nim-lang.org/docs/docgen.html">docgen</a> for details.</p>
+  </li>
+  <li>
+    <p>Removed the <code class="language-plaintext highlighter-rouge">--oldNewlines</code> switch.</p>
+  </li>
+  <li>
+    <p>Removed the <code class="language-plaintext highlighter-rouge">--laxStrings</code> switch for mutating the internal zero terminator on strings.</p>
+  </li>
+  <li>
+    <p>Removed the <code class="language-plaintext highlighter-rouge">--oldast</code> switch.</p>
+  </li>
+  <li>
+    <p>Removed the <code class="language-plaintext highlighter-rouge">--oldgensym</code> switch.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">$getType(untyped)</code> is now “untyped” instead of “expr”, <code class="language-plaintext highlighter-rouge">$getType(typed)</code> is
+now “typed” instead of “stmt”.</p>
+  </li>
+  <li>Sink inference is now disabled per default and has to enabled explicitly via
+<code class="language-plaintext highlighter-rouge">--sinkInference:on</code>. <em>Note</em>: For the standard library sink inference remains
+enabled. This change is most relevant for the <code class="language-plaintext highlighter-rouge">--gc:arc</code>, <code class="language-plaintext highlighter-rouge">--gc:orc</code> memory
+management modes.</li>
+</ul>
+
+<h2 id="tool-changes">Tool changes</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nimsuggest</code> now returns both the forward declaration and the
+implementation location upon a <code class="language-plaintext highlighter-rouge">def</code> query. Previously the behavior was
+to return the forward declaration only.</li>
+</ul>
+
+<h2 id="bugfixes">Bugfixes</h2>
+
+<ul>
+  <li>Fixed “repr() not available for uint{,8,16,32,64} under –gc:arc”
+(<a href="https://github.com/nim-lang/Nim/issues/13872">#13872</a>)</li>
+  <li>Fixed “Critical: 1 completed Future, multiple await: Only 1 await will be awakened (the last one)”
+(<a href="https://github.com/nim-lang/Nim/issues/13889">#13889</a>)</li>
+  <li>Fixed “crash on openarray interator with argument in stmtListExpr”
+(<a href="https://github.com/nim-lang/Nim/issues/13739">#13739</a>)</li>
+  <li>Fixed “Some compilers on Windows don’t work”
+(<a href="https://github.com/nim-lang/Nim/issues/13910">#13910</a>)</li>
+  <li>Fixed “httpclient hangs if it recieves an HTTP 204 (No Content)”
+(<a href="https://github.com/nim-lang/Nim/issues/13894">#13894</a>)</li>
+  <li>Fixed ““distinct uint64” type corruption on 32-bit, when using {.borrow.} operators”
+(<a href="https://github.com/nim-lang/Nim/issues/13902">#13902</a>)</li>
+  <li>Fixed “Regression: impossible to use typed pragmas with proc types”
+(<a href="https://github.com/nim-lang/Nim/issues/13909">#13909</a>)</li>
+  <li>Fixed “openssl wrapper corrupts stack on OpenSSL 1.1.1f + Android”
+(<a href="https://github.com/nim-lang/Nim/issues/13903">#13903</a>)</li>
+  <li>Fixed “C compile error with –gc:arc on version 1.2.0 “unknown type name ‘TGenericSeq’”
+(<a href="https://github.com/nim-lang/Nim/issues/13863">#13863</a>)</li>
+  <li>Fixed “var return type for proc doesn’t work at c++ backend”
+(<a href="https://github.com/nim-lang/Nim/issues/13848">#13848</a>)</li>
+  <li>Fixed “TimeFormat() should raise an error but craches at compilation time”
+(<a href="https://github.com/nim-lang/Nim/issues/12864">#12864</a>)</li>
+  <li>Fixed “gc:arc cannot fully support threadpool with FlowVar”
+(<a href="https://github.com/nim-lang/Nim/issues/13781">#13781</a>)</li>
+  <li>Fixed “simple ‘var openarray[char]’ assignment crash when the openarray source is a local string and using gc:arc”
+(<a href="https://github.com/nim-lang/Nim/issues/14003">#14003</a>)</li>
+  <li>Fixed “Cant use expressions with <code class="language-plaintext highlighter-rouge">when</code> in <code class="language-plaintext highlighter-rouge">type</code> sections.”
+(<a href="https://github.com/nim-lang/Nim/issues/14007">#14007</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">for a in MyEnum</code> gives incorrect results with enum with holes”
+(<a href="https://github.com/nim-lang/Nim/issues/14001">#14001</a>)</li>
+  <li>Fixed “Trivial crash”
+(<a href="https://github.com/nim-lang/Nim/issues/12741">#12741</a>)</li>
+  <li>Fixed “Enum with holes cannot be used as Table index”
+(<a href="https://github.com/nim-lang/Nim/issues/12834">#12834</a>)</li>
+  <li>Fixed “spawn proc that uses typedesc crashes the compiler”
+(<a href="https://github.com/nim-lang/Nim/issues/14014">#14014</a>)</li>
+  <li>Fixed “Docs Search <code class="language-plaintext highlighter-rouge">Results</code> box styling is not Dark Mode Friendly”
+(<a href="https://github.com/nim-lang/Nim/issues/13972">#13972</a>)</li>
+  <li>Fixed “–gc:arc -d:useSysAssert undeclared identifier <code class="language-plaintext highlighter-rouge">cstderr</code> with newSeq”
+(<a href="https://github.com/nim-lang/Nim/issues/14038">#14038</a>)</li>
+  <li>Fixed “issues in the manual”
+(<a href="https://github.com/nim-lang/Nim/issues/12486">#12486</a>)</li>
+  <li>Fixed “Annoying warning: inherit from a more precise exception type like ValueError, IOError or OSError [InheritFromException]”
+(<a href="https://github.com/nim-lang/Nim/issues/14052">#14052</a>)</li>
+  <li>Fixed “relativePath(“foo”, “/”) and relativePath(“/”, “foo”) is wrong”
+(<a href="https://github.com/nim-lang/Nim/issues/13222">#13222</a>)</li>
+  <li>Fixed “[regression] <code class="language-plaintext highlighter-rouge">parseEnum</code> does not work anymore for enums with holes”
+(<a href="https://github.com/nim-lang/Nim/issues/14030">#14030</a>)</li>
+  <li>Fixed “Exception types in the stdlib should inherit from <code class="language-plaintext highlighter-rouge">CatchableError</code> or <code class="language-plaintext highlighter-rouge">Defect</code>, not <code class="language-plaintext highlighter-rouge">Exception</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/10288">#10288</a>)</li>
+  <li>Fixed “Make debugSend and debugRecv procs public in smtp.nim”
+(<a href="https://github.com/nim-lang/Nim/issues/12189">#12189</a>)</li>
+  <li>Fixed “xmltree need add raw text, when add style element”
+(<a href="https://github.com/nim-lang/Nim/issues/14064">#14064</a>)</li>
+  <li>Fixed “raises requirement does not propagate to derived methods”
+(<a href="https://github.com/nim-lang/Nim/issues/8481">#8481</a>)</li>
+  <li>Fixed “tests/stdlib/tgetaddrinfo.nim fails on NetBSD”
+(<a href="https://github.com/nim-lang/Nim/issues/14091">#14091</a>)</li>
+  <li>Fixed “tests/niminaction/Chapter8/sdl/sdl_test.nim fails on NetBSD”
+(<a href="https://github.com/nim-lang/Nim/issues/14088">#14088</a>)</li>
+  <li>Fixed “Incorrect escape sequence for example in jsffi library documentation”
+(<a href="https://github.com/nim-lang/Nim/issues/14110">#14110</a>)</li>
+  <li>Fixed “HCR: Can not link exported const, in external library”
+(<a href="https://github.com/nim-lang/Nim/issues/13915">#13915</a>)</li>
+  <li>Fixed “Cannot import std/unidecode”
+(<a href="https://github.com/nim-lang/Nim/issues/14112">#14112</a>)</li>
+  <li>Fixed “macOS: dsymutil should not be called on static libraries”
+(<a href="https://github.com/nim-lang/Nim/issues/14132">#14132</a>)</li>
+  <li>Fixed “nim jsondoc -o:doc.json filename.nim fails when sequences without a type are used”
+(<a href="https://github.com/nim-lang/Nim/issues/14066">#14066</a>)</li>
+  <li>Fixed “algorithm.sortedByIt template corrupts tuple input under –gc:arc”
+(<a href="https://github.com/nim-lang/Nim/issues/14079">#14079</a>)</li>
+  <li>Fixed “Invalid C code with lvalue conversion”
+(<a href="https://github.com/nim-lang/Nim/issues/14160">#14160</a>)</li>
+  <li>Fixed “strformat: doc example fails”
+(<a href="https://github.com/nim-lang/Nim/issues/14054">#14054</a>)</li>
+  <li>Fixed “Nim doc fail to run for nim 1.2.0 (nim 1.0.4 is ok)”
+(<a href="https://github.com/nim-lang/Nim/issues/13986">#13986</a>)</li>
+  <li>Fixed “Exception when converting csize to clong”
+(<a href="https://github.com/nim-lang/Nim/issues/13698">#13698</a>)</li>
+  <li>Fixed “[Documentation] overloading using named arguments works but is not documented”
+(<a href="https://github.com/nim-lang/Nim/issues/11932">#11932</a>)</li>
+  <li>Fixed “import os + use of existsDir/dirExists/existsFile/fileExists/findExe in config.nims causes “ambiguous call’ error”
+(<a href="https://github.com/nim-lang/Nim/issues/14142">#14142</a>)</li>
+  <li>Fixed “import os + use of existsDir/dirExists/existsFile/fileExists/findExe in config.nims causes “ambiguous call’ error”
+(<a href="https://github.com/nim-lang/Nim/issues/14142">#14142</a>)</li>
+  <li>Fixed “runnableExamples doc gen crashes compiler with <code class="language-plaintext highlighter-rouge">except Exception as e</code> syntax”
+(<a href="https://github.com/nim-lang/Nim/issues/14177">#14177</a>)</li>
+  <li>Fixed “[ARC] Segfault with cyclic references (?)”
+(<a href="https://github.com/nim-lang/Nim/issues/14159">#14159</a>)</li>
+  <li>Fixed “Semcheck regression when accessing a static parameter in proc”
+(<a href="https://github.com/nim-lang/Nim/issues/14136">#14136</a>)</li>
+  <li>Fixed “iterator walkDir doesn’t work with -d:useWinAnsi”
+(<a href="https://github.com/nim-lang/Nim/issues/14201">#14201</a>)</li>
+  <li>Fixed “cas is wrong for tcc”
+(<a href="https://github.com/nim-lang/Nim/issues/14151">#14151</a>)</li>
+  <li>Fixed “proc execCmdEx doesn’t work with -d:useWinAnsi”
+(<a href="https://github.com/nim-lang/Nim/issues/14203">#14203</a>)</li>
+  <li>Fixed “Use -d:nimEmulateOverflowChecks by default?”
+(<a href="https://github.com/nim-lang/Nim/issues/14209">#14209</a>)</li>
+  <li>Fixed “Old sequences with destructor objects bug”
+(<a href="https://github.com/nim-lang/Nim/issues/14217">#14217</a>)</li>
+  <li>Fixed “[ARC] ICE when changing the discriminant of a return value”
+(<a href="https://github.com/nim-lang/Nim/issues/14244">#14244</a>)</li>
+  <li>Fixed “[ARC] ICE with static objects”
+(<a href="https://github.com/nim-lang/Nim/issues/14236">#14236</a>)</li>
+  <li>Fixed “[ARC] “internal error: environment misses: a” in a finalizer”
+(<a href="https://github.com/nim-lang/Nim/issues/14243">#14243</a>)</li>
+  <li>Fixed “[ARC] compile failure using repr with object containing <code class="language-plaintext highlighter-rouge">ref seq[string]</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/14270">#14270</a>)</li>
+  <li>Fixed “[ARC] implicit move on last use happening on non-last use”
+(<a href="https://github.com/nim-lang/Nim/issues/14269">#14269</a>)</li>
+  <li>Fixed “[ARC] Compiler crash with a recursive non-ref object variant”
+(<a href="https://github.com/nim-lang/Nim/issues/14294">#14294</a>)</li>
+  <li>Fixed “htmlparser.parseHtml behaves differently using –gc:arc or –gc:orc”
+(<a href="https://github.com/nim-lang/Nim/issues/13946">#13946</a>)</li>
+  <li>Fixed “Invalid return value of openProcess is NULL rather than INVALID_HANDLE_VALUE(-1) in windows”
+(<a href="https://github.com/nim-lang/Nim/issues/14289">#14289</a>)</li>
+  <li>Fixed “ARC codegen bug with inline iterators”
+(<a href="https://github.com/nim-lang/Nim/issues/14219">#14219</a>)</li>
+  <li>Fixed “Building koch on OpenBSD fails unless the Nim directory is in <code class="language-plaintext highlighter-rouge">$PATH</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/13758">#13758</a>)</li>
+  <li>Fixed “[gc:arc] case object assignment SIGSEGV: destroy not called for primitive type “
+(<a href="https://github.com/nim-lang/Nim/issues/14312">#14312</a>)</li>
+  <li>Fixed “Crash when using thread and –gc:arc “
+(<a href="https://github.com/nim-lang/Nim/issues/13881">#13881</a>)</li>
+  <li>Fixed “Getting “Warning: Cannot prove that ‘result’ is initialized” for an importcpp’d proc with <code class="language-plaintext highlighter-rouge">var T</code> return type”
+(<a href="https://github.com/nim-lang/Nim/issues/14314">#14314</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">nim cpp -r --gc:arc</code> segfaults on caught AssertionError”
+(<a href="https://github.com/nim-lang/Nim/issues/13071">#13071</a>)</li>
+  <li>Fixed “tests/async/tasyncawait.nim is recently very flaky”
+(<a href="https://github.com/nim-lang/Nim/issues/14320">#14320</a>)</li>
+  <li>Fixed “Documentation nonexistent quitprocs module”
+(<a href="https://github.com/nim-lang/Nim/issues/14331">#14331</a>)</li>
+  <li>Fixed “SIGSEV encountered when creating threads in a loop w/ –gc:arc”
+(<a href="https://github.com/nim-lang/Nim/issues/13935">#13935</a>)</li>
+  <li>Fixed “nim-gdb is missing from all released packages”
+(<a href="https://github.com/nim-lang/Nim/issues/13104">#13104</a>)</li>
+  <li>Fixed “sysAssert error with gc:arc on 3 line program”
+(<a href="https://github.com/nim-lang/Nim/issues/13862">#13862</a>)</li>
+  <li>Fixed “compiler error with inline async proc and pragma”
+(<a href="https://github.com/nim-lang/Nim/issues/13998">#13998</a>)</li>
+  <li>Fixed “[ARC] Compiler crash when adding to a seq[ref Object]”
+(<a href="https://github.com/nim-lang/Nim/issues/14333">#14333</a>)</li>
+  <li>Fixed “nimvm: sysFatal: unhandled exception: ‘sons’ is not accessible using discriminant ‘kind’ of type ‘TNode’ [FieldError]”
+(<a href="https://github.com/nim-lang/Nim/issues/14340">#14340</a>)</li>
+  <li>Fixed “[Regression] karax events are not firing “
+(<a href="https://github.com/nim-lang/Nim/issues/14350">#14350</a>)</li>
+  <li>Fixed “odbcsql module has some wrong integer types”
+(<a href="https://github.com/nim-lang/Nim/issues/9771">#9771</a>)</li>
+  <li>Fixed “db_sqlite needs sqlPrepared”
+(<a href="https://github.com/nim-lang/Nim/issues/13559">#13559</a>)</li>
+  <li>Fixed “[Regression] <code class="language-plaintext highlighter-rouge">createThread</code> is not GC-safe”
+(<a href="https://github.com/nim-lang/Nim/issues/14370">#14370</a>)</li>
+  <li>Fixed “Broken example on hot code reloading”
+(<a href="https://github.com/nim-lang/Nim/issues/14380">#14380</a>)</li>
+  <li>Fixed “runnableExamples block with <code class="language-plaintext highlighter-rouge">except</code> on specified error fails with <code class="language-plaintext highlighter-rouge">nim doc</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/12746">#12746</a>)</li>
+  <li>Fixed “compiler as a library: findNimStdLibCompileTime fails to find system.nim”
+(<a href="https://github.com/nim-lang/Nim/issues/12293">#12293</a>)</li>
+  <li>Fixed “5 bugs with importcpp exceptions”
+(<a href="https://github.com/nim-lang/Nim/issues/14369">#14369</a>)</li>
+  <li>Fixed “Docs shouldn’t collapse pragmas inside runnableExamples/code blocks”
+(<a href="https://github.com/nim-lang/Nim/issues/14174">#14174</a>)</li>
+  <li>Fixed “Bad codegen/emit for hashes.hiXorLo in some contexts.”
+(<a href="https://github.com/nim-lang/Nim/issues/14394">#14394</a>)</li>
+  <li>Fixed “Boehm GC does not scan thread-local storage”
+(<a href="https://github.com/nim-lang/Nim/issues/14364">#14364</a>)</li>
+  <li>Fixed “RVO not exception safe”
+(<a href="https://github.com/nim-lang/Nim/issues/14126">#14126</a>)</li>
+  <li>Fixed “runnableExamples that are only compiled”
+(<a href="https://github.com/nim-lang/Nim/issues/10731">#10731</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">foldr</code> raises IndexError when called on sequence”
+(<a href="https://github.com/nim-lang/Nim/issues/14404">#14404</a>)</li>
+  <li>Fixed “moveFile does not overwrite destination file”
+(<a href="https://github.com/nim-lang/Nim/issues/14057">#14057</a>)</li>
+  <li>Fixed “doc2 outputs in current work dir”
+(<a href="https://github.com/nim-lang/Nim/issues/6583">#6583</a>)</li>
+  <li>Fixed “[docgen] proc doc comments silently omitted after 1st runnableExamples”
+(<a href="https://github.com/nim-lang/Nim/issues/9227">#9227</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">nim doc --project</code> shows ‘@@/’ instead of ‘../’ for relative paths to submodules”
+(<a href="https://github.com/nim-lang/Nim/issues/14448">#14448</a>)</li>
+  <li>Fixed “re, nre have wrong <code class="language-plaintext highlighter-rouge">start</code> semantics”
+(<a href="https://github.com/nim-lang/Nim/issues/14284">#14284</a>)</li>
+  <li>Fixed “runnableExamples should preserve source code doc comments, strings, and (maybe) formatting”
+(<a href="https://github.com/nim-lang/Nim/issues/8871">#8871</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">nim doc ..</code> fails when runnableExamples uses <code class="language-plaintext highlighter-rouge">$</code>  [devel] [regression]”
+(<a href="https://github.com/nim-lang/Nim/issues/14485">#14485</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">items</code> is 20%~30% slower than iteration via an index”
+(<a href="https://github.com/nim-lang/Nim/issues/14421">#14421</a>)</li>
+  <li>Fixed “ARC: unreliable setLen “
+(<a href="https://github.com/nim-lang/Nim/issues/14495">#14495</a>)</li>
+  <li>Fixed “lent is unsafe: after #14447 you can modify variables with “items” loop for sequences”
+(<a href="https://github.com/nim-lang/Nim/issues/14498">#14498</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">var op = fn()</code> wrongly gives warning <code class="language-plaintext highlighter-rouge">ObservableStores</code> with <code class="language-plaintext highlighter-rouge">object of RootObj</code> type”
+(<a href="https://github.com/nim-lang/Nim/issues/14514">#14514</a>)</li>
+  <li>Fixed “Compiler assertion”
+(<a href="https://github.com/nim-lang/Nim/issues/14562">#14562</a>)</li>
+  <li>Fixed “Can’t get <code class="language-plaintext highlighter-rouge">ord</code> of a value of a Range type in the JS backend “
+(<a href="https://github.com/nim-lang/Nim/issues/14570">#14570</a>)</li>
+  <li>Fixed “js: can’t take addr of param (including implicitly via <code class="language-plaintext highlighter-rouge">lent</code>)”
+(<a href="https://github.com/nim-lang/Nim/issues/14576">#14576</a>)</li>
+  <li>Fixed “{.noinit.} ignored in for loop -&gt; bad codegen for non-movable types”
+(<a href="https://github.com/nim-lang/Nim/issues/14118">#14118</a>)</li>
+  <li>Fixed “generic destructor gives: <code class="language-plaintext highlighter-rouge">Error: unresolved generic parameter</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/14315">#14315</a>)</li>
+  <li>Fixed “Memory leak with arc gc”
+(<a href="https://github.com/nim-lang/Nim/issues/14568">#14568</a>)</li>
+  <li>Fixed “escape analysis broken with <code class="language-plaintext highlighter-rouge">lent</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/14557">#14557</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">wrapWords</code> seems to ignore linebreaks when wrapping, leaving breaks in the wrong place”
+(<a href="https://github.com/nim-lang/Nim/issues/14579">#14579</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">lent</code> gives wrong results with -d:release”
+(<a href="https://github.com/nim-lang/Nim/issues/14578">#14578</a>)</li>
+  <li>Fixed “Nested await expressions regression: <code class="language-plaintext highlighter-rouge">await a(await expandValue())</code> doesnt compile”
+(<a href="https://github.com/nim-lang/Nim/issues/14279">#14279</a>)</li>
+  <li>Fixed “windows CI docs fails with strange errors”
+(<a href="https://github.com/nim-lang/Nim/issues/14545">#14545</a>)</li>
+  <li>Fixed “[CI] tests/async/tioselectors.nim flaky test for freebsd + OSX CI”
+(<a href="https://github.com/nim-lang/Nim/issues/13166">#13166</a>)</li>
+  <li>Fixed “seq.setLen sometimes doesn’t zero memory”
+(<a href="https://github.com/nim-lang/Nim/issues/14655">#14655</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">nim dump</code> is roughly 100x slower in 1.3 versus 1.2”
+(<a href="https://github.com/nim-lang/Nim/issues/14179">#14179</a>)</li>
+  <li>Fixed “Regression: devel docgen cannot generate document for method”
+(<a href="https://github.com/nim-lang/Nim/issues/14691">#14691</a>)</li>
+  <li>Fixed “recently flaky tests/async/t7758.nim”
+(<a href="https://github.com/nim-lang/Nim/issues/14685">#14685</a>)</li>
+  <li>Fixed “Bind no longer working in generic procs.”
+(<a href="https://github.com/nim-lang/Nim/issues/11811">#11811</a>)</li>
+  <li>Fixed “The pegs module doesn’t work with generics!”
+(<a href="https://github.com/nim-lang/Nim/issues/14718">#14718</a>)</li>
+  <li>Fixed “Defer is not properly working for asynchronous procedures.”
+(<a href="https://github.com/nim-lang/Nim/issues/13899">#13899</a>)</li>
+  <li>Fixed “Add an ARC test with threads in a loop”
+(<a href="https://github.com/nim-lang/Nim/issues/14690">#14690</a>)</li>
+  <li>Fixed “[goto exceptions] {.noReturn.} pragma is not detected in a case expression”
+(<a href="https://github.com/nim-lang/Nim/issues/14458">#14458</a>)</li>
+  <li>Fixed “[exceptions:goto] C compiler error with dynlib pragma calling a proc”
+(<a href="https://github.com/nim-lang/Nim/issues/14240">#14240</a>)</li>
+  <li>Fixed “Cannot borrow var float64 in infix assignment”
+(<a href="https://github.com/nim-lang/Nim/issues/14440">#14440</a>)</li>
+  <li>Fixed “lib/pure/memfiles.nim: compilation error with –taintMode:on”
+(<a href="https://github.com/nim-lang/Nim/issues/14760">#14760</a>)</li>
+  <li>Fixed “newWideCString allocates a multiple of the memory needed”
+(<a href="https://github.com/nim-lang/Nim/issues/14750">#14750</a>)</li>
+  <li>Fixed “Nim source archive install: ‘install.sh’ fails with error: cp: cannot stat ‘bin/nim-gdb’: No such file or directory”
+(<a href="https://github.com/nim-lang/Nim/issues/14748">#14748</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">nim cpp -r tests/exception/t9657</code> hangs”
+(<a href="https://github.com/nim-lang/Nim/issues/10343">#10343</a>)</li>
+  <li>Fixed “Detect tool fails on FreeBSD”
+(<a href="https://github.com/nim-lang/Nim/issues/14715">#14715</a>)</li>
+  <li>Fixed “compiler crash: <code class="language-plaintext highlighter-rouge">findUnresolvedStatic</code> “
+(<a href="https://github.com/nim-lang/Nim/issues/14802">#14802</a>)</li>
+  <li>Fixed “seq namespace (?) regression”
+(<a href="https://github.com/nim-lang/Nim/issues/4796">#4796</a>)</li>
+  <li>Fixed “Possible out of bounds string access in std/colors parseColor and isColor”
+(<a href="https://github.com/nim-lang/Nim/issues/14839">#14839</a>)</li>
+  <li>Fixed “compile error on latest devel with orc and ssl”
+(<a href="https://github.com/nim-lang/Nim/issues/14647">#14647</a>)</li>
+  <li>Fixed “[minor] <code class="language-plaintext highlighter-rouge">$</code> wrong for type tuple”
+(<a href="https://github.com/nim-lang/Nim/issues/13432">#13432</a>)</li>
+  <li>Fixed “Documentation missing on devel asyncftpclient”
+(<a href="https://github.com/nim-lang/Nim/issues/14846">#14846</a>)</li>
+  <li>Fixed “nimpretty is confused with a trailing comma in enum definition”
+(<a href="https://github.com/nim-lang/Nim/issues/14401">#14401</a>)</li>
+  <li>Fixed “Output arguments get ignored when compiling with –app:staticlib”
+(<a href="https://github.com/nim-lang/Nim/issues/12745">#12745</a>)</li>
+  <li>Fixed “[ARC] destructive move destroys the object too early”
+(<a href="https://github.com/nim-lang/Nim/issues/14396">#14396</a>)</li>
+  <li>Fixed “highlite.getNextToken() crashes if the buffer string is “echo “"””
+(<a href="https://github.com/nim-lang/Nim/issues/14830">#14830</a>)</li>
+  <li>Fixed “Memory corruption with –gc:arc with a seq of objects with an empty body.”
+(<a href="https://github.com/nim-lang/Nim/issues/14472">#14472</a>)</li>
+  <li>Fixed “Stropped identifiers don’t work as field names in tuple literals”
+(<a href="https://github.com/nim-lang/Nim/issues/14911">#14911</a>)</li>
+  <li>Fixed “Please revert my commit”
+(<a href="https://github.com/nim-lang/Nim/issues/14930">#14930</a>)</li>
+  <li>Fixed “[ARC] C compiler error with inline iterators and imports”
+(<a href="https://github.com/nim-lang/Nim/issues/14864">#14864</a>)</li>
+  <li>Fixed “AsyncHttpClient segfaults with gc:orc, possibly memory corruption”
+(<a href="https://github.com/nim-lang/Nim/issues/14402">#14402</a>)</li>
+  <li>Fixed “[ARC] Template with a block evaluating to a GC’d value results in a compiler crash”
+(<a href="https://github.com/nim-lang/Nim/issues/14899">#14899</a>)</li>
+  <li>Fixed “[ARC] Weird issue with if expressions and templates”
+(<a href="https://github.com/nim-lang/Nim/issues/14900">#14900</a>)</li>
+  <li>Fixed “xmlparser does not compile on devel”
+(<a href="https://github.com/nim-lang/Nim/issues/14805">#14805</a>)</li>
+  <li>Fixed “returning lent T from a var T param gives codegen errors or SIGSEGV”
+(<a href="https://github.com/nim-lang/Nim/issues/14878">#14878</a>)</li>
+  <li>Fixed “[ARC] Weird issue with if expressions and templates”
+(<a href="https://github.com/nim-lang/Nim/issues/14900">#14900</a>)</li>
+  <li>Fixed “threads:on + gc:orc + unittest = C compiler errors”
+(<a href="https://github.com/nim-lang/Nim/issues/14865">#14865</a>)</li>
+  <li>Fixed “mitems, mpairs doesn’t work at compile time anymore”
+(<a href="https://github.com/nim-lang/Nim/issues/12129">#12129</a>)</li>
+  <li>Fixed “strange result from executing code in const expression”
+(<a href="https://github.com/nim-lang/Nim/issues/10465">#10465</a>)</li>
+  <li>Fixed “Same warning printed 3 times”
+(<a href="https://github.com/nim-lang/Nim/issues/11009">#11009</a>)</li>
+  <li>Fixed “type alias for generic typeclass doesn’t work”
+(<a href="https://github.com/nim-lang/Nim/issues/4668">#4668</a>)</li>
+  <li>Fixed “exceptions:goto Bug devel codegen lvalue NIM_FALSE=NIM_FALSE”
+(<a href="https://github.com/nim-lang/Nim/issues/14925">#14925</a>)</li>
+  <li>Fixed “the –useVersion:1.0 no longer works in devel”
+(<a href="https://github.com/nim-lang/Nim/issues/14912">#14912</a>)</li>
+  <li>Fixed “template declaration of iterator doesn’t compile”
+(<a href="https://github.com/nim-lang/Nim/issues/4722">#4722</a>)</li>
+  <li>Fixed “Compiler crash on type inheritance with static generic parameter and equality check”
+(<a href="https://github.com/nim-lang/Nim/issues/12571">#12571</a>)</li>
+  <li>Fixed “Nim crashes while handling a cast in async circumstances.”
+(<a href="https://github.com/nim-lang/Nim/issues/13815">#13815</a>)</li>
+  <li>Fixed “[ARC] Internal compiler error when calling an iterator from an inline proc “
+(<a href="https://github.com/nim-lang/Nim/issues/14383">#14383</a>)</li>
+  <li>Fixed ““Cannot instantiate” error when template uses generic type”
+(<a href="https://github.com/nim-lang/Nim/issues/5926">#5926</a>)</li>
+  <li>Fixed “Different raises behaviour for newTerminal between Linux and Windows”
+(<a href="https://github.com/nim-lang/Nim/issues/12759">#12759</a>)</li>
+  <li>Fixed “Expand on a type (that defines a proc type) in error message “
+(<a href="https://github.com/nim-lang/Nim/issues/6608">#6608</a>)</li>
+  <li>Fixed “unittest require quits program with an exit code of 0”
+(<a href="https://github.com/nim-lang/Nim/issues/14475">#14475</a>)</li>
+  <li>Fixed “Range type: Generics vs concrete type, semcheck difference.”
+(<a href="https://github.com/nim-lang/Nim/issues/8426">#8426</a>)</li>
+  <li>Fixed “[Macro] Type mismatch when parameter name is the same as a field”
+(<a href="https://github.com/nim-lang/Nim/issues/13253">#13253</a>)</li>
+  <li>Fixed “Generic instantiation failure when converting a sequence of circular generic types to strings”
+(<a href="https://github.com/nim-lang/Nim/issues/10396">#10396</a>)</li>
+  <li>Fixed “initOptParser ignores argument after value option with empty value.”
+(<a href="https://github.com/nim-lang/Nim/issues/13086">#13086</a>)</li>
+  <li>Fixed “[ARC] proc with both explicit and implicit return results in a C compiler error”
+(<a href="https://github.com/nim-lang/Nim/issues/14985">#14985</a>)</li>
+  <li>Fixed “Alias type forgets implicit generic params depending on order”
+(<a href="https://github.com/nim-lang/Nim/issues/14990">#14990</a>)</li>
+  <li>Fixed “[ARC] sequtils.insert has different behaviour between ARC/refc”
+(<a href="https://github.com/nim-lang/Nim/issues/14994">#14994</a>)</li>
+  <li>Fixed “The documentation for “hot code reloading” references a non-existent npm package”
+(<a href="https://github.com/nim-lang/Nim/issues/13621">#13621</a>)</li>
+  <li>Fixed “existsDir deprecated but breaking <code class="language-plaintext highlighter-rouge">dir</code> undeclared”
+(<a href="https://github.com/nim-lang/Nim/issues/15006">#15006</a>)</li>
+  <li>Fixed “uri.decodeUrl crashes on incorrectly formatted input”
+(<a href="https://github.com/nim-lang/Nim/issues/14082">#14082</a>)</li>
+  <li>Fixed “testament incorrectly reports time for tests, leading to wrong conclusions”
+(<a href="https://github.com/nim-lang/Nim/issues/14822">#14822</a>)</li>
+  <li>Fixed “Calling peekChar with Stream returned from osproc.outputStream generate runtime error”
+(<a href="https://github.com/nim-lang/Nim/issues/14906">#14906</a>)</li>
+  <li>Fixed “localPassC pragma should come <em>after</em> other flags”
+(<a href="https://github.com/nim-lang/Nim/issues/14194">#14194</a>)</li>
+  <li>Fixed ““Could not load” dynamic library at runtime because of hidden dependency”
+(<a href="https://github.com/nim-lang/Nim/issues/2408">#2408</a>)</li>
+  <li>Fixed “–gc:arc generate invalid code for {.global.} (<code class="language-plaintext highlighter-rouge">«nimErr_» in NIM_UNLIKELY</code>)”
+(<a href="https://github.com/nim-lang/Nim/issues/14480">#14480</a>)</li>
+  <li>Fixed “Using <code class="language-plaintext highlighter-rouge">^</code> from stdlib/math along with converters gives a match for types that aren’t SomeNumber”
+(<a href="https://github.com/nim-lang/Nim/issues/15033">#15033</a>)</li>
+  <li>Fixed “[ARC] Weird exception behaviour from doAssertRaises”
+(<a href="https://github.com/nim-lang/Nim/issues/15026">#15026</a>)</li>
+  <li>Fixed “[ARC] Compiler crash declaring a finalizer proc directly in ‘new’”
+(<a href="https://github.com/nim-lang/Nim/issues/15044">#15044</a>)</li>
+  <li>Fixed “[ARC] C compiler error when creating a var of a const seq”
+(<a href="https://github.com/nim-lang/Nim/issues/15036">#15036</a>)</li>
+  <li>Fixed “code with named arguments in proc of winim/com can not been compiled”
+(<a href="https://github.com/nim-lang/Nim/issues/15056">#15056</a>)</li>
+  <li>Fixed “javascript backend produces javascript code with syntax error in object syntax”
+(<a href="https://github.com/nim-lang/Nim/issues/14534">#14534</a>)</li>
+  <li>Fixed “–gc:arc should be ignored in JS mode.”
+(<a href="https://github.com/nim-lang/Nim/issues/14684">#14684</a>)</li>
+  <li>Fixed “arc: C compilation error with imported global code using a closure iterator”
+(<a href="https://github.com/nim-lang/Nim/issues/12990">#12990</a>)</li>
+  <li>Fixed “[ARC] Crash when modifying a string with mitems iterator”
+(<a href="https://github.com/nim-lang/Nim/issues/15052">#15052</a>)</li>
+  <li>Fixed “[ARC] SIGSEGV when calling a closure as a tuple field in a seq”
+(<a href="https://github.com/nim-lang/Nim/issues/15038">#15038</a>)</li>
+  <li>Fixed “pass varargs[seq[T]] to iterator give empty seq “
+(<a href="https://github.com/nim-lang/Nim/issues/12576">#12576</a>)</li>
+  <li>Fixed “Compiler crashes when using string as object variant selector with else branch”
+(<a href="https://github.com/nim-lang/Nim/issues/14189">#14189</a>)</li>
+  <li>Fixed “JS compiler error related to implicit return and return var type”
+(<a href="https://github.com/nim-lang/Nim/issues/11354">#11354</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">nkRecWhen</code> causes internalAssert in semConstructFields”
+(<a href="https://github.com/nim-lang/Nim/issues/14698">#14698</a>)</li>
+  <li>Fixed “Memory leaks with async (closure iterators?) under ORC”
+(<a href="https://github.com/nim-lang/Nim/issues/15076">#15076</a>)</li>
+  <li>Fixed “strutil.insertSep() fails on negative numbers”
+(<a href="https://github.com/nim-lang/Nim/issues/11352">#11352</a>)</li>
+  <li>Fixed “Constructing a uint64 range on a 32-bit machine leads to incorrect codegen”
+(<a href="https://github.com/nim-lang/Nim/issues/14616">#14616</a>)</li>
+  <li>Fixed “heapqueue pushpop() proc doesn’t compile”
+(<a href="https://github.com/nim-lang/Nim/issues/14139">#14139</a>)</li>
+  <li>Fixed “[ARC] SIGSEGV when trying to swap in a literal/const string”
+(<a href="https://github.com/nim-lang/Nim/issues/15112">#15112</a>)</li>
+  <li>Fixed “Defer and –gc:arc”
+(<a href="https://github.com/nim-lang/Nim/issues/15071">#15071</a>)</li>
+  <li>Fixed “internal error: compiler/semobjconstr.nim(324, 20) example”
+(<a href="https://github.com/nim-lang/Nim/issues/15111">#15111</a>)</li>
+  <li>Fixed “[ARC] Sequence “disappears” with a table inside of a table with an object variant”
+(<a href="https://github.com/nim-lang/Nim/issues/15122">#15122</a>)</li>
+  <li>Fixed “[ARC] SIGSEGV with tuple assignment caused by cursor inference”
+(<a href="https://github.com/nim-lang/Nim/issues/15130">#15130</a>)</li>
+  <li>Fixed “Issue with –gc:arc at compile time”
+(<a href="https://github.com/nim-lang/Nim/issues/15129">#15129</a>)</li>
+  <li>Fixed “Writing an empty string to an AsyncFile raises an IndexDefect”
+(<a href="https://github.com/nim-lang/Nim/issues/15148">#15148</a>)</li>
+  <li>Fixed “Compiler is confused about call convention of function with nested closure”
+(<a href="https://github.com/nim-lang/Nim/issues/5688">#5688</a>)</li>
+  <li>Fixed “Nil check on each field fails in generic function”
+(<a href="https://github.com/nim-lang/Nim/issues/15101">#15101</a>)</li>
+  <li>Fixed “{.nimcall.} convention won’t avoid the creation of closures”
+(<a href="https://github.com/nim-lang/Nim/issues/8473">#8473</a>)</li>
+  <li>Fixed “smtp.nim(161, 40) Error: type mismatch: got &lt;typeof(nil)&gt; but expected ‘SslContext = void’”
+(<a href="https://github.com/nim-lang/Nim/issues/15177">#15177</a>)</li>
+  <li>Fixed “[strscans] scanf doesn’t match a single character with $+ if it’s the end of the string”
+(<a href="https://github.com/nim-lang/Nim/issues/15064">#15064</a>)</li>
+  <li>Fixed “Crash and incorrect return values when using readPasswordFromStdin on Windows.”
+(<a href="https://github.com/nim-lang/Nim/issues/15207">#15207</a>)</li>
+  <li>Fixed “Possible capture error with fieldPairs and genericParams”
+(<a href="https://github.com/nim-lang/Nim/issues/15221">#15221</a>)</li>
+  <li>Fixed “The StmtList processing of template parameters can lead to unexpected errors”
+(<a href="https://github.com/nim-lang/Nim/issues/5691">#5691</a>)</li>
+  <li>Fixed “[ARC] C compiler error when passing a var openArray to a sink openArray”
+(<a href="https://github.com/nim-lang/Nim/issues/15035">#15035</a>)</li>
+  <li>Fixed “Inconsistent unsigned -&gt; signed RangeDefect usage across integer sizes”
+(<a href="https://github.com/nim-lang/Nim/issues/15210">#15210</a>)</li>
+  <li>Fixed “toHex results in RangeDefect exception when used with large uint64”
+(<a href="https://github.com/nim-lang/Nim/issues/15257">#15257</a>)</li>
+  <li>Fixed “Arc sink arg crash”
+(<a href="https://github.com/nim-lang/Nim/issues/15238">#15238</a>)</li>
+  <li>Fixed “SQL escape in db_mysql is not enough”
+(<a href="https://github.com/nim-lang/Nim/issues/15219">#15219</a>)</li>
+  <li>Fixed “Mixing ‘return’ with expressions is allowed in 1.2”
+(<a href="https://github.com/nim-lang/Nim/issues/15280">#15280</a>)</li>
+  <li>Fixed “os.getFileInfo() causes ICE with –gc:arc on Windows”
+(<a href="https://github.com/nim-lang/Nim/issues/15286">#15286</a>)</li>
+  <li>Fixed “[ARC] Sequence “disappears” with a table inside of a table with an object variant”
+(<a href="https://github.com/nim-lang/Nim/issues/15122">#15122</a>)</li>
+  <li>Fixed “Documentation regression jsre module missing”
+(<a href="https://github.com/nim-lang/Nim/issues/15183">#15183</a>)</li>
+  <li>Fixed “CountTable.smallest/largest() on empty table either asserts or gives bogus answer”
+(<a href="https://github.com/nim-lang/Nim/issues/15021">#15021</a>)</li>
+  <li>Fixed “[Regression] Parser regression”
+(<a href="https://github.com/nim-lang/Nim/issues/15305">#15305</a>)</li>
+  <li>Fixed “[ARC] SIGSEGV with tuple unpacking caused by cursor inference”
+(<a href="https://github.com/nim-lang/Nim/issues/15147">#15147</a>)</li>
+  <li>Fixed “LwIP/FreeRTOS compile error - missing SIGPIPE and more “
+(<a href="https://github.com/nim-lang/Nim/issues/15302">#15302</a>)</li>
+  <li>Fixed “Memory leaks with async (closure iterators?) under ORC”
+(<a href="https://github.com/nim-lang/Nim/issues/15076">#15076</a>)</li>
+  <li>Fixed “Bug compiling with –gc:arg or –gc:orc”
+(<a href="https://github.com/nim-lang/Nim/issues/15325">#15325</a>)</li>
+  <li>Fixed “memory corruption in tmarshall.nim”
+(<a href="https://github.com/nim-lang/Nim/issues/9754">#9754</a>)</li>
+  <li>Fixed “typed macros break generic proc definitions”
+(<a href="https://github.com/nim-lang/Nim/issues/15326">#15326</a>)</li>
+  <li>Fixed “nim doc2 ignores –docSeeSrcUrl parameter”
+(<a href="https://github.com/nim-lang/Nim/issues/6071">#6071</a>)</li>
+  <li>Fixed “The decodeData Iterator from cgi module crash”
+(<a href="https://github.com/nim-lang/Nim/issues/15369">#15369</a>)</li>
+  <li>Fixed “|| iterator generates invalid code when compiling with –debugger:native”
+(<a href="https://github.com/nim-lang/Nim/issues/9710">#9710</a>)</li>
+  <li>Fixed “Wrong number of variables”
+(<a href="https://github.com/nim-lang/Nim/issues/15360">#15360</a>)</li>
+  <li>Fixed “Coercions with distinct types should traverse pointer modifiers transparently.”
+(<a href="https://github.com/nim-lang/Nim/issues/7165">#7165</a>)</li>
+  <li>Fixed “Error with distinct generic TableRef”
+(<a href="https://github.com/nim-lang/Nim/issues/6060">#6060</a>)</li>
+  <li>Fixed “Support images in nim docgen”
+(<a href="https://github.com/nim-lang/Nim/issues/6430">#6430</a>)</li>
+  <li>Fixed “Regression. Double sem check for procs.”
+(<a href="https://github.com/nim-lang/Nim/issues/15389">#15389</a>)</li>
+  <li>Fixed “uri.nim url with literal ipv6 address is printed wrong, and cannot parsed again”
+(<a href="https://github.com/nim-lang/Nim/issues/15333">#15333</a>)</li>
+  <li>Fixed “[ARC] Object variant gets corrupted with cursor inference”
+(<a href="https://github.com/nim-lang/Nim/issues/15361">#15361</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">nim doc ..</code> compiler crash (regression 0.19.6 =&gt; 1.0)”
+(<a href="https://github.com/nim-lang/Nim/issues/14474">#14474</a>)</li>
+  <li>Fixed “cannot borrow result; what it borrows from is potentially mutated”
+(<a href="https://github.com/nim-lang/Nim/issues/15403">#15403</a>)</li>
+  <li>Fixed “memory corruption for seq.add(seq) with gc:arc and d:useMalloc “
+(<a href="https://github.com/nim-lang/Nim/issues/14983">#14983</a>)</li>
+  <li>Fixed “DocGen HTML output appears improperly when encountering text immediately after/before inline monospace; in some cases won’t compile”
+(<a href="https://github.com/nim-lang/Nim/issues/11537">#11537</a>)</li>
+  <li>Fixed “Deepcopy in arc crashes”
+(<a href="https://github.com/nim-lang/Nim/issues/15405">#15405</a>)</li>
+  <li>Fixed “pop pragma takes invalid input”
+(<a href="https://github.com/nim-lang/Nim/issues/15430">#15430</a>)</li>
+  <li>Fixed “tests/stdlib/tgetprotobyname fails on NetBSD”
+(<a href="https://github.com/nim-lang/Nim/issues/15452">#15452</a>)</li>
+  <li>Fixed “defer doesnt work with block, break and await”
+(<a href="https://github.com/nim-lang/Nim/issues/15243">#15243</a>)</li>
+  <li>Fixed “tests/stdlib/tssl failing on NetBSD”
+(<a href="https://github.com/nim-lang/Nim/issues/15493">#15493</a>)</li>
+  <li>Fixed “strictFuncs doesn’t seem to catch simple ref mutation”
+(<a href="https://github.com/nim-lang/Nim/issues/15508">#15508</a>)</li>
+  <li>Fixed “Sizeof of case object is incorrect. Showstopper”
+(<a href="https://github.com/nim-lang/Nim/issues/15516">#15516</a>)</li>
+  <li>Fixed “[ARC] Internal error when trying to use a parallel for loop”
+(<a href="https://github.com/nim-lang/Nim/issues/15512">#15512</a>)</li>
+  <li>Fixed “[ARC] Type-bound assign op is not being generated”
+(<a href="https://github.com/nim-lang/Nim/issues/15510">#15510</a>)</li>
+  <li>Fixed “[ARC] Crash when adding openArray proc argument to a local seq”
+(<a href="https://github.com/nim-lang/Nim/issues/15511">#15511</a>)</li>
+  <li>Fixed “VM: const case object gets some fields zeroed out at runtime”
+(<a href="https://github.com/nim-lang/Nim/issues/13081">#13081</a>)</li>
+  <li>Fixed “regression(1.2.6 =&gt; devel): VM: const case object field access gives: ‘sons’ is not accessible”
+(<a href="https://github.com/nim-lang/Nim/issues/15532">#15532</a>)</li>
+  <li>Fixed “Csources: huge size increase (x2.3) in 0.20”
+(<a href="https://github.com/nim-lang/Nim/issues/12027">#12027</a>)</li>
+  <li>Fixed “Out of date error message for GC options”
+(<a href="https://github.com/nim-lang/Nim/issues/15547">#15547</a>)</li>
+  <li>Fixed “dbQuote additional escape regression”
+(<a href="https://github.com/nim-lang/Nim/issues/15560">#15560</a>)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

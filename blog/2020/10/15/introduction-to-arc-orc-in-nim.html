@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Introduction to ARC/ORC in Nim - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Introduction to ARC/ORC in Nim"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Nim is advancing towards more efficient memory management models. Let's talk about ARC/ORC and see how they will change the way memory works in Nim."> -->
+  <meta property="og:description" content="Nim is advancing towards more efficient memory management models. Let's talk about ARC/ORC and see how they will change the way memory works in Nim.">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Introduction to ARC/ORC in Nim" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Introduction to ARC/ORC in Nim
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              15 October 2020
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Danil Yarantsev (Yardanico)
+            </span>
+            
+          </h3>
+          <div class="sidebarblock">
+  <div class="content">
+    <div class="title">Guest post</div>
+    <div class="paragraph">
+      This is a guest post by Danil Yarantsev (Yardanico). If you would like to publish articles as a guest author on nim-lang.org then get in touch with us via
+      <a href="https://twitter.com/nim_lang">Twitter</a> or <a href="https://nim-lang.org/community.html">otherwise</a>.
+    </div>
+  </div>
+</div>
+
+<h2 id="intro">Intro</h2>
+<p>Let’s start with some history: Nim has traditionally been a garbage collected (GC) language.
+Most of the standard library relies on the GC to work.
+Of course, you can disable the GC and do manual memory management, but then you
+lose access to most of the stdlib (which is <a href="https://nim-lang.org/docs/lib.html">quite big by the way</a>).</p>
+
+<p>The default GC in Nim has been <code class="language-plaintext highlighter-rouge">refc</code> (deferred reference counting with a mark &amp; sweep phase for cycle collection)
+for a long time, with other options available, such as <code class="language-plaintext highlighter-rouge">markAndSweep</code>, <code class="language-plaintext highlighter-rouge">boehm</code>, and <code class="language-plaintext highlighter-rouge">go</code>.</p>
+
+<p>But over the last few years there were new ideas for Nim, related to destructors, owned refs (newruntime), and similar:</p>
+<ul>
+  <li><a href="https://nim-lang.org/araq/destructors.html">https://nim-lang.org/araq/destructors.html</a></li>
+  <li><a href="https://nim-lang.org/araq/ownedrefs.html">https://nim-lang.org/araq/ownedrefs.html</a></li>
+</ul>
+
+<p>Some of these different ideas have emerged into ARC.</p>
+
+<h2 id="what-is-arc">What is ARC?</h2>
+<p>At its core ARC is a memory management model based on Automatic Reference Counting
+with destructors and move semantics. Some people mistake Nim’s ARC for Swift’s ARC, but
+there is one big difference: ARC in Nim doesn’t use atomic RC.</p>
+
+<p>Reference counting is one of the most popular algorithms for freeing unused
+resources of the program. The <strong>reference count</strong> for any managed (controlled by the runtime)
+reference is how many times that reference is used elsewhere.
+When that count becomes zero, the reference and all of its underlying data is destroyed.</p>
+
+<p>The main difference between ARC and Nim GCs is that ARC is fully <strong>deterministic</strong> -
+the compiler automatically <strong>injects</strong> destructors when it deems that some variable
+(a string, sequence, reference, or something else) is no longer needed.
+In this sense, it’s similar to C++ with its destructors (RAII).
+To illustrate, we can use Nim’s <code class="language-plaintext highlighter-rouge">expandArc</code> introspection (will be available in Nim 1.4).</p>
+
+<p>Let’s consider some simple code:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">proc </span><span class="nf">main</span> <span class="o">=</span> 
+  <span class="k">let</span> <span class="n">mystr</span> <span class="o">=</span> <span class="n">stdin</span><span class="p">.</span><span class="n">readLine</span><span class="p">()</span>
+
+  <span class="k">case</span> <span class="n">mystr</span>
+  <span class="k">of</span> <span class="s">"hello"</span><span class="p">:</span>
+    <span class="n">echo</span> <span class="s">"Nice to meet you!"</span>
+  <span class="k">of</span> <span class="s">"bye"</span><span class="p">:</span>
+    <span class="n">echo</span> <span class="s">"Goodbye!"</span>
+    <span class="n">quit</span><span class="p">()</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">discard</span>
+
+<span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>And then use Nim’s ARC IR on the <code class="language-plaintext highlighter-rouge">main</code> procedure by running <code class="language-plaintext highlighter-rouge">nim c --gc:arc --expandArc:main example.nim</code>.</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">mystr</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">mystr</span> <span class="o">=</span> <span class="n">readLine</span><span class="p">(</span><span class="n">stdin</span><span class="p">)</span>
+  <span class="k">case</span> <span class="n">mystr</span>
+  <span class="k">of</span> <span class="s">"hello"</span><span class="p">:</span>
+    <span class="n">echo</span> <span class="o">[</span><span class="s">"Nice to meet you too!"</span><span class="o">]</span>
+  <span class="k">of</span> <span class="s">"bye"</span><span class="p">:</span>
+    <span class="n">echo</span> <span class="o">[</span><span class="s">"Goodbye!"</span><span class="o">]</span>
+    <span class="n">quit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">discard</span>
+<span class="k">finally</span><span class="p">:</span>
+  <span class="p">`</span><span class="o">=</span><span class="n">destroy</span><span class="p">`(</span><span class="n">mystr</span><span class="p">)</span>
+</code></pre></div></div>
+<p>What we see here is really interesting - the Nim compiler has wrapped the body
+of the <code class="language-plaintext highlighter-rouge">main</code> proc in a <code class="language-plaintext highlighter-rouge">try: finally</code> statement (the code in <code class="language-plaintext highlighter-rouge">finally</code> runs even when an exception
+is raised in the <code class="language-plaintext highlighter-rouge">try</code> block) and inserted a <code class="language-plaintext highlighter-rouge">=destroy</code> call to our <code class="language-plaintext highlighter-rouge">mystr</code>
+(which is initialised at runtime) so that it’s destroyed when it is no longer needed (when its lifetime ends).</p>
+
+<p>This shows one of the main ARC features: <strong>scope-based memory management</strong>.
+A scope is a separate region of code in the program.
+Scope-based MM means that the compiler will automatically insert destructor calls
+for any variables which need a destructor after the scope ends.
+Many Nim constructs introduce new scopes: procs, funcs, converters,
+methods, <code class="language-plaintext highlighter-rouge">block</code> statements and expressions, <code class="language-plaintext highlighter-rouge">for</code> and <code class="language-plaintext highlighter-rouge">while</code> loops, etc.</p>
+
+<p>ARC also has so-called <strong>hooks</strong> - special procedures that can be defined
+for types to override the default compiler behaviour when destroying/moving/copying
+the variable. These are particularly useful when you want to make
+custom semantics for your types, deal with low-level operations involving pointers, or do FFI.</p>
+
+<p>The main advantages of ARC compared to Nim’s current <code class="language-plaintext highlighter-rouge">refc</code> GC are
+(including the ones I talked about above):</p>
+
+<ul>
+  <li>
+    <p><strong>Scope-based memory management</strong> (destructors are injected after the scope) -
+generally reduces RAM usage of the programs and improves performance.</p>
+  </li>
+  <li>
+    <p><strong>Move semantics</strong> - the ability of the compiler to statically analyse
+the program and convert memory copies into moves where possible.</p>
+  </li>
+  <li>
+    <p><strong>Shared heap</strong> - different threads have access to the same memory and
+you don’t need to copy variables to pass them between threads - you can instead move them.
+See also <a href="https://github.com/nim-lang/RFCs/issues/244">an RFC about isolating and sending data between threads</a>)</p>
+  </li>
+  <li>
+    <p><strong>Easier FFI</strong> (<code class="language-plaintext highlighter-rouge">refc</code> requires each foreign thread to set up the GC
+manually, which is not the case with ARC). This also means that ARC is a much better
+choice for creating Nim libraries to be used from other languages (.dll, .so, <a href="https://github.com/yglukhov/nimpy">Python extensions</a>, etc).</p>
+  </li>
+  <li>
+    <p>Suitable for <a href="https://en.wikipedia.org/wiki/Real-time_computing"><strong>hard realtime</strong></a> programming.</p>
+  </li>
+  <li>
+    <p><strong>Copy elision</strong> (cursor inference) reduces copies to simple cursors (aliases) in many cases.</p>
+  </li>
+</ul>
+
+<p>Generally, ARC is an amazing step for programs to become faster, use less memory, and have predictable behaviour.</p>
+
+<p>To enable ARC for your program, all you have to do is compile with
+the <code class="language-plaintext highlighter-rouge">--gc:arc</code> switch, or add it to your project’s config file (<code class="language-plaintext highlighter-rouge">.nims</code> or <code class="language-plaintext highlighter-rouge">.cfg</code>).</p>
+
+<h2 id="problem-with-cycles">Problem with cycles</h2>
+
+<p>But wait! Haven’t we forgotten something? ARC is <strong>reference counting</strong>,
+and as we all know, RC doesn’t deal with <em>cycles</em> by itself.
+In short, a cycle is when some variables depend on each other in a way that can resemble a cycle.
+Let’s consider a simple example: we have 3 objects (A, B, C), and each of them references the other, better shown with a diagram:</p>
+
+<p style="text-align: center;">
+  <img width="256" height="256" src="https://nim-lang-cn.org/assets/news/images/yardanico-arc/cycle.svg" />
+</p>
+
+<p>To find and collect that cycle we need to have a <strong>cycle collector</strong> - a special part
+of the runtime which finds and removes cycles that are no longer needed in the program.</p>
+
+<p>In Nim cycle collection has been done by the mark &amp; sweep phase of the <code class="language-plaintext highlighter-rouge">refc</code> GC,
+but it’s better to use ARC as the foundation to make something better. That brings us to:</p>
+
+<h2 id="orc---nims-cycle-collector">ORC - Nim’s cycle collector</h2>
+<p>ORC is Nim’s all-new cycle collector based on ARC.
+It can be considered a full-blown GC since it includes a local tracing phase
+(contrary to most other tracing GCs which do global tracing).
+ORC is what you should use when working with Nim’s async because it contains cycles
+that need to be dealt with.</p>
+
+<p>ORC retains most of ARC’s advantages
+except <strong>determinism</strong> (partially) - by default ORC has an adaptive threshold
+for collecting cycles, and <strong>hard realtime</strong> (partially), for the same reason.
+To enable ORC you need to compile your program with <code class="language-plaintext highlighter-rouge">--gc:orc</code>,
+but ORC will probably become Nim’s default GC in the future.</p>
+
+<h2 id="im-excited-how-do-i-test-them-out">I’m excited! How do I test them out?</h2>
+
+<p>ARC is available in Nim 1.2.x releases, but due to some fixed bugs it’s better to
+wait for the <strong>Nim 1.4</strong> release (it should be out soon) which will
+have ARC and ORC available for wide testing.
+But if you’re eager to try them out, there’s a <a href="https://github.com/nim-lang/nightlies/releases/tag/2020-10-07-version-1-4-3b901d1e361f49d48fb64d115e42c04a4a37100c">1.4 release candidate</a> available.</p>
+
+<p>That’s all! Thank you for reading the article - I hope you enjoyed it and will enjoy the amazing possibilities that ARC/ORC bring to Nim :)</p>
+
+<p>Sources / further information:</p>
+<ul>
+  <li><a href="https://forum.nim-lang.org/t/5734">Introducing –gc:arc</a></li>
+  <li><a href="https://forum.nim-lang.org/t/6549">Update on –gc:arc</a></li>
+  <li><a href="https://forum.nim-lang.org/t/6483">New garbage collector –gc:orc is a joy to use.</a></li>
+  <li><a href="https://nim-lang.org/docs/destructors.html">Nim destructors and move semantics</a></li>
+  <li><a href="https://www.youtube.com/watch?v=yA32Wxl59wo">FOSDEM 2020 - Move semantics for Nim</a></li>
+  <li><a href="https://www.youtube.com/watch?v=aUJcYTnPWCg">NimConf 2020 - Nim ARC/ORC</a></li>
+  <li><a href="https://nim-lang.org/community.html">Nim community</a></li>
+  <li><a href="https://github.com/nim-lang/RFCs/issues/177">RFC: Unify Nim’s GC/memory management options</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

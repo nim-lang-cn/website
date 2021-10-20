@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>实战Nim入门系列（一）——下载安装Nim环境 - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="实战Nim入门系列（一）——下载安装Nim环境"> -->
+
+  
+  <!-- <meta name="twitter:description" content="这是当前版本 (v1.0) 的系列教程，希望能帮助大家快速上手。"> -->
+  <meta property="og:description" content="这是当前版本 (v1.0) 的系列教程，希望能帮助大家快速上手。">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="实战Nim入门系列（一）——下载安装Nim环境" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            实战Nim入门系列（一）——下载安装Nim环境
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              11 September 2019
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              ch4o5
+            </span>
+            
+          </h3>
+          <p>这是当前版本 <em>(v1.0)</em> 的系列教程，希望能帮助大家快速上手。</p>
+
+<hr />
+
+<h2 id="目录">目录</h2>
+
+<p><a href="#Windows">Windows下的下载安装</a></p>
+
+<p>​      <a href="#一、64位环境常规安装">一、 64位环境常规安装</a></p>
+
+<p>​      <a href="#二、32位使用choosenim安装">二、32位使用choosenim安装</a></p>
+
+<p>​      <a href="#三、常规安装步骤">三、常规安装步骤</a></p>
+
+<p><a href="#Unix">类Unix环境下的下载安装</a></p>
+
+<p>​		<a href="一、使用choosenim进行安装">一、使用choosenim进行安装</a></p>
+
+<p>​		<a href="#二、常规方式安装">二、常规方式安装</a></p>
+
+<p>​		<a href="#三、脚本一键安装">三、脚本一键安装</a></p>
+
+<p><a href="#MacOS">MacOS系统下的下载安装</a></p>
+
+<p><a href="#从源码编译">从源码编译</a></p>
+
+<h2 id="windows">Windows</h2>
+
+<h3 id="一64位环境常规安装">一、64位环境常规安装</h3>
+
+<ol>
+  <li>
+    <p>访问<a href="https://nim-lang-cn.org">Nim中文社区</a>中的<a href="https://nim-lang-cn.org/install_windows.html">在Windows下安装Nim</a>页面</p>
+  </li>
+  <li>
+    <p>点击 <strong>下载x86版本的zip包</strong> 下载最新版本的Nim</p>
+  </li>
+  <li>
+    <p>将下载好的压缩包放在你想要的位置，并解压</p>
+  </li>
+  <li>
+    <p>运行目录下的 <code class="language-plaintext highlighter-rouge">finish.exe</code></p>
+
+    <p><em>点击无响应的话，可以参考我发在中文社区的 <a href="https://nim-lang-cn.org/blog/2019/08/25/v0202-windows-cannot-install.html">这篇文章</a></em></p>
+  </li>
+  <li>
+    <p>之后按照 <code class="language-plaintext highlighter-rouge">finish.exe</code> 的提示，逐步进行</p>
+  </li>
+  <li>
+    <p>完成后按 <code class="language-plaintext highlighter-rouge">win</code> + <code class="language-plaintext highlighter-rouge">r</code> ，输入 <code class="language-plaintext highlighter-rouge">cmd</code> 并回车</p>
+
+    <p>在新打开的命令行窗口中，输入 <code class="language-plaintext highlighter-rouge">nim -v</code></p>
+  </li>
+</ol>
+
+<p>如果显示<code class="language-plaintext highlighter-rouge"> nim 不是内部或外部命令</code>balabala的，说明没有正确安装，请跳转到<a href="#三、常规安装步骤">第三章节</a></p>
+
+<h3 id="二32位使用choosenim安装">二、32位使用choosenim安装</h3>
+
+<p><code class="language-plaintext highlighter-rouge">choosenim</code>是一个<code class="language-plaintext highlighter-rouge">nim</code>的版本管理器，类似于<code class="language-plaintext highlighter-rouge">nvm</code>之于<code class="language-plaintext highlighter-rouge">node</code></p>
+
+<p>使用<code class="language-plaintext highlighter-rouge">choosenim</code>之后，你可以方便的切换<code class="language-plaintext highlighter-rouge">nim</code>版本和更新<code class="language-plaintext highlighter-rouge">nim</code></p>
+
+<p><em>在Windows下的<code class="language-plaintext highlighter-rouge">choosenim</code>只支持<strong>32位</strong>的下载，</em></p>
+
+<p><em>你可以在64位系统下进行安装，但是这样的话你的nim版本只能也使用32位的，否则会报错</em></p>
+
+<ol>
+  <li>
+    <p>安装 <code class="language-plaintext highlighter-rouge">choosenim</code></p>
+
+    <ol>
+      <li>访问<a href="https://github.com/dom96/choosenim/releases">这个页面</a>下载最新版本<code class="language-plaintext highlighter-rouge">choosenim</code>的<code class="language-plaintext highlighter-rouge">.exe</code>格式文件</li>
+      <li>下载完成后直接双击运行</li>
+      <li>跟随屏幕指引进行操作即可</li>
+    </ol>
+  </li>
+  <li>
+    <p>安装最新稳定版本的<code class="language-plaintext highlighter-rouge">nim</code></p>
+
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">choosenim</span><span class="w"> </span><span class="nx">update</span><span class="w"> </span><span class="nx">stable</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="三常规安装步骤">三、常规安装步骤</h3>
+
+<p>本安装步骤为Windows系统通用安装步骤，但是较为复杂，建议有一定的基础的使用者尝试，或者作为<code class="language-plaintext highlighter-rouge">finish.exe</code>无法正确安装的替代方案。</p>
+
+<ol>
+  <li>在<a href="https://nim-lang-cn.org">Nim中文社区</a>中的<a href="https://nim-lang-cn.org/install_windows.html">在Windows下安装Nim</a>页面，下载你的系统对应版本的压缩包</li>
+  <li>在解压完成后<strong>配置环境变量</strong>，添加以下两个目录：
+    <ol>
+      <li>你刚才解压出来的文件夹里的<code class="language-plaintext highlighter-rouge">bin/</code>目录</li>
+      <li><code class="language-plaintext highlighter-rouge">%USERPROFILE%\.nimble\bin</code> （<code class="language-plaintext highlighter-rouge">%USERPROFILE%</code>指的是你的HOME目录，Win7以下是<code class="language-plaintext highlighter-rouge">我的文档</code>，也可能叫做<code class="language-plaintext highlighter-rouge">Administrator</code>之类的用户名）</li>
+    </ol>
+  </li>
+  <li>
+    <p>下载安装C编译器<code class="language-plaintext highlighter-rouge">MingW</code></p>
+
+    <ul>
+      <li>32位Nim - <a href="https://nim-lang.org/download/mingw32-6.3.0.7z">mingw32-6.3.0.7z</a></li>
+      <li>64位Nim - <a href="https://nim-lang.org/download/mingw64-6.3.0.7z">mingw64-6.3.0.7z</a></li>
+    </ul>
+  </li>
+  <li>
+    <p>补全必要的依赖DLL</p>
+
+    <ul>
+      <li>PCRE</li>
+      <li>OpenSSL</li>
+    </ul>
+
+    <ol>
+      <li>
+        <p>下载地址：<a href="https://nim-lang.org/download/dlls.zip">https://nim-lang.org/download/dlls.zip</a></p>
+      </li>
+      <li>
+        <p>下载之后解压在<code class="language-plaintext highlighter-rouge">nim.exe</code>的同级目录中</p>
+
+        <p><em>通常是<code class="language-plaintext highlighter-rouge">bin/</code>目录下</em></p>
+      </li>
+    </ol>
+  </li>
+  <li>在终端中运行<code class="language-plaintext highlighter-rouge">nim -v</code></li>
+</ol>
+
+<p>如果本安装方式依然无法让<code class="language-plaintext highlighter-rouge">nim -v</code>在你的电脑中正确运行，你可以来<a href="https://jq.qq.com/?_wv=1027&amp;k=5mGEIrV">Nim开发集中营</a>QQ群中提问，我们很乐意帮助你！</p>
+
+<h2 id="unix">Unix</h2>
+
+<p>类Unix环境下，墙裂推荐使用<code class="language-plaintext highlighter-rouge">choosenim</code>进行版本控制，高效方便，省电低碳，省下时间做大事~</p>
+
+<h3 id="一使用choosenim进行安装">一、使用choosenim进行安装</h3>
+
+<p>使用<code class="language-plaintext highlighter-rouge">choosenim</code>安装Nim最新的稳定版本， 只需要在你的终端中运行下方的命令，然后根据屏幕上的说明操作即可：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://nim-lang.org/choosenim/init.sh <span class="nt">-sSf</span> | sh
+</code></pre></div></div>
+
+<p><em>注：可能需要root权限</em></p>
+
+<h3 id="二常规方式安装">二、常规方式安装</h3>
+
+<p>再次说明，Linux环境中建议优先选择使用<code class="language-plaintext highlighter-rouge">choosenim</code>进行安装，此安装方式没有使用<code class="language-plaintext highlighter-rouge">choosenim</code>方式灵活和方便。</p>
+
+<p>和楼上的Windows常规方法安装类似，只不过由于c编译器都已经系统自带了，所以省了一步</p>
+
+<ol>
+  <li>
+    <p>在<a href="https://nim-lang-cn.org">Nim中文社区</a>中的<a href="https://nim-lang-cn.org/install_unix.html">在Unix下安装Nim</a>页面，下载你的系统对应版本的预构建二进制文件压缩包</p>
+  </li>
+  <li>
+    <p>手动配置<code class="language-plaintext highlighter-rouge">PATH</code>环境变量</p>
+
+    <p>编译器和工具的二进制文件都位于<code class="language-plaintext highlighter-rouge">bin</code>目录中。 要使用Nim进行开发，需要在你的 <a href="https://zh.wikipedia.org/wiki/PATH_(变量)"><code class="language-plaintext highlighter-rouge">PATH</code>环境变量</a> 中添加以下两个目录：</p>
+
+    <ul>
+      <li>你解压的文件夹下的<code class="language-plaintext highlighter-rouge">bin</code>目录下</li>
+      <li><code class="language-plaintext highlighter-rouge">~\.nimble\bin</code> (<code class="language-plaintext highlighter-rouge">~</code>指的是你的HOME目录)</li>
+    </ul>
+  </li>
+  <li>
+    <p>运行<code class="language-plaintext highlighter-rouge">nim -v</code>测试安装结果</p>
+  </li>
+</ol>
+
+<h3 id="三脚本一键安装">三、脚本一键安装</h3>
+
+<p>从@Sheldon那里抄来的：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/nim-lang/Nim.git
+<span class="nb">cd </span>Nim
+sh build_all.sh
+<span class="nb">cat</span> <span class="o">&lt;&lt;</span> <span class="no">EOF</span><span class="sh"> &gt;&gt; ~/.bashrc
+export NIM=/root/Nim/bin
+export NIMBLE_DIR=/root/.nimble
+export PATH=</span><span class="nv">$PATH</span><span class="sh">:</span><span class="nv">$NIM</span><span class="sh">:</span><span class="nv">$NIMBLE</span><span class="sh">
+</span><span class="no">EOF
+</span><span class="nb">source</span> ~/.bashrc
+</code></pre></div></div>
+
+<h2 id="macos">MacOS</h2>
+
+<p>原谅我穷。。并没有Mac。。</p>
+
+<p>不过你可以去<a href="https://nim-lang-cn.org/install_unix.html">中文社区</a>看看关于Mac安装的部分。</p>
+
+<h2 id="从源码编译">从源码编译</h2>
+
+<p>很惊讶你竟然选择了这么 Cooooooooool 的安装方式！！</p>
+
+<p>我觉得你这么极客的人也不需要我带着你弄了，你还是去<a href="https://nim-lang-cn.org/install.html">中文社区</a>看看吧~</p>
+
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 1.6.0 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 1.6.0 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Nim version 1.6 is now officially released!"> -->
+  <meta property="og:description" content="Nim version 1.6 is now officially released!">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 1.6.0 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 1.6.0 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              19 October 2021
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              The Nim Team
+            </span>
+            
+          </h3>
+          <p>Nim version 1.6 is now officially released!</p>
+
+<p>A year in the making, 1.6 is the latest stable release and by far the largest yet.
+We’re proud of what we — the core team and dedicated volunteers — have accomplished
+with this milestone:</p>
+<ul>
+  <li>1667 PRs merged (1760 commits)</li>
+  <li>893 issues closed</li>
+  <li>15 new stdlib modules</li>
+  <li>new features in more than 40 stdlib modules, including major improvements to 10 commonly used modules</li>
+  <li>documentation and minor improvements to 170 modules, including 312 new runnable examples</li>
+  <li>280 new nimble packages</li>
+</ul>
+
+<p>Nim made its first entry in TIOBE index in 2017 at position 129,
+last year it entered the top-100, and for 2 months the top-50 (<a href="https://forum.nim-lang.org/t/8297">link</a>).
+We hope this release will reinforce this trend, building on Nim’s core strengths:
+a practical, compiled systems programming language offering C++-like performance
+and portability, Python-like syntax, Lisp-like flexibility, strong C, C++, JS,
+Python interop, and best-in-class metaprogramming.</p>
+
+<p>This release includes improvements in the following areas:</p>
+<ul>
+  <li>new language features (<code class="language-plaintext highlighter-rouge">iterable[T]</code>, user-defined literals, private imports, strict effects,
+dot-like operators, block arguments with optional parameters)</li>
+  <li>new compiler features (<code class="language-plaintext highlighter-rouge">nim --eval:cmd</code>, custom nimscript extensions, customizable compiler messages)</li>
+  <li>major improvements to <code class="language-plaintext highlighter-rouge">--gc:arc</code> and <code class="language-plaintext highlighter-rouge">--gc:orc</code></li>
+  <li>correctness and performance of integer and float parsing and rendering in all backends</li>
+  <li>significant improvements in error messages, showing useful context</li>
+  <li>documentation generation logic and documentation, in particular <code class="language-plaintext highlighter-rouge">runnableExamples</code> now works in more contexts</li>
+  <li>JS, VM and nimscript backend are more consistent with the C backend, allowing more
+modules to work with those backends, including the imports from <code class="language-plaintext highlighter-rouge">std/prelude</code>;
+the test suite now standardizes on testing stdlib modules on each major backend (C, JS, VM)</li>
+  <li>support for Apple silicon/M1, 32-bit RISC-V, armv8l, CROSSOS, improved support for NodeJS backend</li>
+  <li>major improvements to the following modules: <code class="language-plaintext highlighter-rouge">system</code>, <code class="language-plaintext highlighter-rouge">math</code>, <code class="language-plaintext highlighter-rouge">random</code>, <code class="language-plaintext highlighter-rouge">json</code>, <code class="language-plaintext highlighter-rouge">jsonutils</code>, <code class="language-plaintext highlighter-rouge">os</code>,
+<code class="language-plaintext highlighter-rouge">typetraits</code>, <code class="language-plaintext highlighter-rouge">wrapnils</code>, <code class="language-plaintext highlighter-rouge">lists</code>, <code class="language-plaintext highlighter-rouge">hashes</code> including performance improvements</li>
+  <li>deprecated a number of error prone or redundant features</li>
+</ul>
+
+<h2 id="why-use-nim">Why use Nim?</h2>
+
+<ul>
+  <li>One language to rule them all: from <a href="https://nim-lang.org/docs/nims.html">shell scripting</a> to
+<a href="https://github.com/nim-lang/nimforum">web frontend and backend</a>,
+<a href="https://github.com/SciNim">scientific computing</a>,
+<a href="https://github.com/mratsim/Arraymancer">deep learning</a>,
+<a href="https://github.com/status-im">blockchain client</a>,
+<a href="https://github.com/ftsf/nico">gamedev</a>,
+<a href="https://github.com/EmbeddedNim">embedded</a>, see also some
+<a href="https://github.com/nim-lang/Nim/wiki/Organizations-using-Nim">companies using Nim</a>.</li>
+  <li>Concise, readable and convenient: <code class="language-plaintext highlighter-rouge">echo "hello world"</code> is a 1-liner.</li>
+  <li>Small binaries: <code class="language-plaintext highlighter-rouge">echo "hello world"</code> generates a 73K binary (or 5K with further options),
+optimized for embedded devices (Go: 2MB, Rust: 377K, C++: 56K) [1].</li>
+  <li>Fast compile times: a full compiler rebuild takes ~12s (Rust: 15min, gcc: 30min+, clang: 1hr+, Go: 90s) [2].</li>
+  <li>Native performance: see <a href="https://web-frameworks-benchmark.netlify.app/result">Web Frameworks Benchmark</a>,
+<a href="https://nim-lang.org/blog/2020/06/30/ray-tracing-in-nim.html">ray tracing</a>,
+<a href="https://github.com/PlummersSoftwareLLC/Primes">primes</a>.</li>
+  <li>No need for makefiles, cmake, configure or other build scripts, thanks to compile-time
+function evaluation (CTFE) and dependency tracking [3].</li>
+  <li>Target any platform with a C compiler:
+<a href="https://github.com/pragmagic/godot-nim#made-with-godot-nim">Android and iOS</a>,
+<a href="https://github.com/elcritch/nesper">embedded systems</a>,
+<a href="https://forum.nim-lang.org/t/7731">micro-controllers</a>,
+<a href="https://forum.nim-lang.org/t/4779">WASM</a>, Nintendo Switch,
+<a href="https://forum.nim-lang.org/t/8375">Game Boy Advance</a>.</li>
+  <li>Zero-overhead interop lets you reuse code in C, C++ (including templates,
+<a href="https://clonkk.github.io/nim-cppstl/cppstl.html">C++ STL</a>), JS, Objective-C,
+Python (via <a href="https://github.com/yglukhov/nimpy">nimpy</a>).</li>
+  <li>Built-in <a href="https://nim-lang.github.io/Nim/system.html">documentation generator</a>
+that understands Nim code and runnable examples that stay in sync.</li>
+</ul>
+
+<p>Last but not least, macros let you manipulate/generate code at compile time instead
+of relying on code generators, enabling writing DSLs and language extensions in user code.
+Typical examples include implementing Python-like
+<a href="https://nim-lang.github.io/Nim/strformat.html">f-strings</a>,
+<a href="https://nim-lang.github.io/Nim/wrapnils.html">optional chaining</a>,
+<a href="https://github.com/c-blake/cligen">command line generators</a>,
+React-like <a href="https://github.com/karaxnim/karax">Single Page Apps</a>,
+<a href="https://github.com/PMunch/protobuf-nim">protobuf serialization and binding generators</a>.</p>
+
+<h1 id="installing-nim-16">Installing Nim 1.6</h1>
+
+<p>We recommend everyone to upgrade to 1.6:</p>
+
+<h2 id="new-users">New users</h2>
+
+<p>Check out if your package manager already ships version 1.6 or
+install it as described <a href="https://nim-lang.org/install.html">here</a>.</p>
+
+<p>Note: earlier this year researchers spotted 
+<a href="https://thehackernews.com/2021/03/researchers-spotted-malware-written-in.html">malware</a> 
+written in Nim programming language which 
+supposedly led to antivirus vendors falsely tagging <strong>all</strong> software written in Nim
+as a potential threat, including the Nim compiler, nimble (Nim’s package manager) and so on (core Nim 
+tooling is written entirely in Nim). This has been an ongoing issue ever since - 
+if you have any issues related to this, please report the Nim compiler and associated 
+tooling as false detection to the respective antivirus vendors.</p>
+
+<h2 id="existing-users">Existing users</h2>
+
+<p>If you have installed a previous version of Nim using <code class="language-plaintext highlighter-rouge">choosenim</code>,
+getting Nim 1.6 is as easy as:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>choosenim update self
+choosenim update stable
+</code></pre></div></div>
+
+<p>If you don’t have <code class="language-plaintext highlighter-rouge">choosenim</code>, you can follow the same
+<a href="https://nim-lang.org/install.html">install link</a> as above.</p>
+
+<h2 id="building-from-source">Building from source</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/nim-lang/Nim
+<span class="nb">cd </span>Nim
+sh build_all.sh
+</code></pre></div></div>
+<p>The last command can be re-run after pulling new commits.
+Note that the <code class="language-plaintext highlighter-rouge">csources</code> repo used was changed to <code class="language-plaintext highlighter-rouge">csources_v1</code>, the new setup
+is designed to be forward and backward compatible.</p>
+
+<h2 id="building-from-a-ci-setup">Building from a CI setup</h2>
+
+<p>We now have bash APIs to (re-)build Nim from source which hide implementation details,
+for example: <code class="language-plaintext highlighter-rouge">. ci/funs.sh &amp;&amp; nimBuildCsourcesIfNeeded</code>.
+This can be useful for CI when alternatives (using nightly builds or a Docker image) are not suitable;
+in fact all the existing CI pipelines have been refactored to use this, see
+<a href="https://github.com/nim-lang/Nim/pull/17815">#17815</a>.</p>
+
+<h1 id="contributors-to-nim-16">Contributors to Nim 1.6</h1>
+
+<p>Many thanks to our recurring and new
+<a href="https://github.com/nim-lang/Nim/graphs/contributors?from=2020-10-16&amp;to=2021-09-25&amp;type=c">contributors</a>.
+Nim is a community driven collaborative effort that welcomes all contributions, big or small.</p>
+
+<h1 id="backward-compatibility-and-preview-flags">Backward compatibility and preview flags</h1>
+
+<p>Starting with this release, we’ve introduced preview flags of the form <code class="language-plaintext highlighter-rouge">-d:nimPreviewX</code>
+(e.g. <code class="language-plaintext highlighter-rouge">-d:nimPreviewFloatRoundtrip</code>), which allow users to opt-in to new stdlib/compiler behavior
+that will likely become the default in the next or a future release.
+These staging flags aim to minimize backward compatibility issues.</p>
+
+<p>We also introduced opt-out flags of the form <code class="language-plaintext highlighter-rouge">-d:nimLegacyX</code>,  e.g. <code class="language-plaintext highlighter-rouge">-d:nimLegacyCopyFile</code>,
+for cases where the default was changed to the new behavior.
+For a transition period, these flags can be used to get the old behavior.</p>
+
+<p>Here’s the list of these flags introduced in this release, refer to the text below for explanations:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-d:nimLegacyCopyFile</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-d:nimLegacyJsRound</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-d:nimLegacyMacrosCollapseSymChoice</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-d:nimLegacyParseQueryStrict</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-d:nimLegacyRandomInitRand</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-d:nimLegacyReprWithNewline</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-d:nimLegacySigpipeHandler</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-d:nimLegacyTypeMismatch</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-d:nimPreviewDotLikeOps</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-d:nimPreviewFloatRoundtrip</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-d:nimPreviewHashRef</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-d:nimPreviewJsonutilsHoleyEnum</code></li>
+</ul>
+
+<h1 id="major-new-features">Major new features</h1>
+
+<p>With so many new features, pinpointing the most salient ones is a subjective exercise,
+but here are a select few:</p>
+
+<h2 id="iterablet"><code class="language-plaintext highlighter-rouge">iterable[T]</code></h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">iterable[T]</code> type class was added to match called iterators,
+which solves a number of long-standing issues related to iterators.
+Example:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">iterator</span> <span class="n">iota</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="kt">int</span><span class="p">):</span> <span class="kt">int</span> <span class="o">=</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mf">0</span><span class="p">..</span><span class="o">&lt;</span><span class="n">n</span><span class="p">:</span> <span class="k">yield</span> <span class="n">i</span>
+
+<span class="c"># previously, you'd need `untyped`, which caused other problems such as lack</span>
+<span class="c"># of type inference, overloading issues, and MCS.</span>
+<span class="k">template</span> <span class="n">sumOld</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">untyped</span><span class="p">):</span> <span class="n">untyped</span> <span class="o">=</span> <span class="c"># no type inference possible</span>
+  <span class="k">var</span> <span class="n">result</span><span class="p">:</span> <span class="n">typeof</span><span class="p">(</span><span class="k">block</span><span class="p">:(</span><span class="k">for</span> <span class="n">ai</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span> <span class="n">ai</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">ai</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span> <span class="n">result</span> <span class="o">+=</span> <span class="n">ai</span>
+  <span class="n">result</span>
+
+<span class="n">assert</span> <span class="n">sumOld</span><span class="p">(</span><span class="n">iota</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="c"># now, you can write:</span>
+<span class="k">template</span> <span class="n">sum</span><span class="o">[</span><span class="n">T</span><span class="o">]</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">iterable</span><span class="o">[</span><span class="n">T</span><span class="o">]</span><span class="p">):</span> <span class="n">T</span> <span class="o">=</span>
+  <span class="c"># `template sum(a: iterable): auto =` would also be possible</span>
+  <span class="k">var</span> <span class="n">result</span><span class="p">:</span> <span class="n">T</span>
+  <span class="k">for</span> <span class="n">ai</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span> <span class="n">result</span> <span class="o">+=</span> <span class="n">ai</span>
+  <span class="n">result</span>
+
+<span class="n">assert</span> <span class="n">sum</span><span class="p">(</span><span class="n">iota</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="c"># or `iota(3).sum`</span>
+</code></pre></div></div>
+
+<p>In particular iterable arguments can now be used with the method call syntax. For example:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="o">/[</span><span class="n">sequtils</span><span class="p">,</span> <span class="n">os</span><span class="o">]</span>
+<span class="n">echo</span> <span class="n">walkFiles</span><span class="p">(</span><span class="s">"*"</span><span class="p">).</span><span class="n">toSeq</span> <span class="c"># now works</span>
+</code></pre></div></div>
+<p>See PR <a href="https://github.com/nim-lang/Nim/pull/17196">#17196</a> for additional details.</p>
+
+<h2 id="strict-effects">Strict effects</h2>
+
+<p>The effect system was refined and there is a new <code class="language-plaintext highlighter-rouge">.effectsOf</code> annotation that does
+explicitly what was previously done implicitly. See the
+<a href="https://nim-lang.github.io/Nim/manual.html#effect-system-effectsof-annotation">manual</a>
+for more details.
+To write code that is portable with older Nim versions, use this idiom:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">when</span> <span class="n">defined</span><span class="p">(</span><span class="n">nimHasEffectsOf</span><span class="p">):</span>
+  <span class="p">{.</span><span class="n">experimental</span><span class="p">:</span> <span class="s">"strictEffects"</span><span class="p">.}</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="p">{.</span><span class="n">pragma</span><span class="p">:</span> <span class="n">effectsOf</span><span class="p">.}</span>
+
+<span class="k">proc </span><span class="nf">mysort</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="kt">seq</span><span class="p">;</span> <span class="n">cmp</span><span class="p">:</span> <span class="k">proc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">T</span><span class="p">):</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{.</span><span class="n">effectsOf</span><span class="p">:</span> <span class="n">cmp</span><span class="p">.}</span>
+</code></pre></div></div>
+
+<p>To enable the new effect system, compile with <code class="language-plaintext highlighter-rouge">--experimental:strictEffects</code>.
+See also <a href="https://github.com/nim-lang/Nim/pull/18777">#18777</a> and RFC
+<a href="https://github.com/nim-lang/RFCs/issues/408">#408</a>.</p>
+
+<h2 id="private-imports-and-private-field-access">Private imports and private field access</h2>
+
+<p>A new import syntax <code class="language-plaintext highlighter-rouge">import foo {.all.}</code> now allows importing all symbols
+(public or private) from <code class="language-plaintext highlighter-rouge">foo</code>.
+This can be useful for testing purposes or for more flexibility in project organization.</p>
+
+<p>Example:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">from</span> <span class="n">system</span> <span class="p">{.</span><span class="n">all</span><span class="p">.}</span> <span class="k">as</span> <span class="n">system2</span> <span class="k">import</span> <span class="k">nil</span>
+<span class="n">echo</span> <span class="n">system2</span><span class="p">.</span><span class="n">ThisIsSystem</span> <span class="c"># ThisIsSystem is private in `system`</span>
+<span class="k">import</span> <span class="n">os</span> <span class="p">{.</span><span class="n">all</span><span class="p">.}</span> <span class="c"># weirdTarget is private in `os`</span>
+<span class="n">echo</span> <span class="n">weirdTarget</span> <span class="c"># or `os.weirdTarget`</span>
+</code></pre></div></div>
+
+<p>Added a new module <code class="language-plaintext highlighter-rouge">std/importutils</code>, and an API <code class="language-plaintext highlighter-rouge">privateAccess</code>, which allows access
+to private fields for an object type in the current scope.</p>
+
+<p>Example:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">times</span>
+<span class="k">from</span> <span class="n">std</span><span class="o">/</span><span class="n">importutils</span> <span class="k">import</span> <span class="n">privateAccess</span>
+<span class="k">block</span><span class="p">:</span>
+  <span class="k">let</span> <span class="n">t</span> <span class="o">=</span> <span class="n">now</span><span class="p">()</span>
+  <span class="c"># echo t.monthdayZero # Error: undeclared field: 'monthdayZero' for type times.DateTime</span>
+  <span class="n">privateAccess</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="c"># enables private access in this scope</span>
+  <span class="n">echo</span> <span class="n">t</span><span class="p">.</span><span class="n">monthdayZero</span> <span class="c"># ok</span>
+</code></pre></div></div>
+
+<p>See PR <a href="https://github.com/nim-lang/Nim/pull/17706">#17706</a> for additional details.</p>
+
+<h2 id="nim---evalcmd"><code class="language-plaintext highlighter-rouge">nim --eval:cmd</code></h2>
+
+<p>Added <code class="language-plaintext highlighter-rouge">nim --eval:cmd</code> to evaluate a command directly, e.g.: <code class="language-plaintext highlighter-rouge">nim --eval:"echo 1"</code>.
+It defaults to <code class="language-plaintext highlighter-rouge">e</code> (nimscript) but can also work with other commands, e.g.:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> | nim r <span class="nt">--eval</span>:<span class="s1">'import strutils; for a in stdin.lines: echo a.toUpper'</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># use as a calculator:</span>
+nim <span class="nt">--eval</span>:<span class="s1">'echo 3.1 / (1.2+7)'</span>
+<span class="c"># explore a module's APIs, including private symbols:</span>
+nim <span class="nt">--eval</span>:<span class="s1">'import os {.all.}; echo weirdTarget'</span>
+<span class="c"># use a custom backend:</span>
+nim r <span class="nt">-b</span>:js <span class="nt">--eval</span>:<span class="s2">"import std/jsbigints; echo 2'big ** 64'big"</span>
+</code></pre></div></div>
+
+<p>See PR <a href="https://github.com/nim-lang/Nim/pull/15687">#15687</a> for more details.</p>
+
+<h2 id="round-trip-float-to-string">Round-trip float to string</h2>
+
+<p><code class="language-plaintext highlighter-rouge">system.addFloat</code> and <code class="language-plaintext highlighter-rouge">system.$</code> now can produce string representations of
+floating point numbers that are minimal in size and possess round-trip and correct
+rounding guarantees (via the
+<a href="https://raw.githubusercontent.com/jk-jeon/dragonbox/master/other_files/Dragonbox.pdf">Dragonbox</a> algorithm).
+This currently has to be enabled via <code class="language-plaintext highlighter-rouge">-d:nimPreviewFloatRoundtrip</code>.
+It is expected that this behavior becomes the new default in upcoming versions,
+as with other <code class="language-plaintext highlighter-rouge">nimPreviewX</code> define flags.</p>
+
+<p>Example:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">from</span> <span class="n">math</span> <span class="k">import</span> <span class="n">round</span>
+<span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="mf">9.779999999999999</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">assert</span> <span class="n">a</span> <span class="o">==</span> <span class="mf">9.78</span>
+<span class="n">echo</span> <span class="n">a</span> <span class="c"># with `-d:nimPreviewFloatRoundtrip`: 9.78, like in python3 (instead of  9.779999999999999)</span>
+</code></pre></div></div>
+
+<h2 id="new-stdjsbigints-module">New <code class="language-plaintext highlighter-rouge">std/jsbigints</code> module</h2>
+
+<p>Provides arbitrary precision integers for the JS target. See PR
+<a href="https://github.com/nim-lang/Nim/pull/16409">#16409</a>.
+Example:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="o">/</span><span class="n">jsbigints</span>
+<span class="n">assert</span> <span class="mi">2</span><span class="sc">'big ** 65'</span><span class="n">big</span> <span class="o">==</span> <span class="mi">36893488147419103232</span><span class="sc">'big</span><span class="err">
+</span><span class="sc">echo 0xdeadbeef'</span><span class="n">big</span> <span class="ow">shl</span> <span class="mi">4</span><span class="sc">'big # 59774856944n</span><span class="err">
+</span></code></pre></div></div>
+
+<h2 id="new-stdsysrand-module">New <code class="language-plaintext highlighter-rouge">std/sysrand</code> module</h2>
+<p>Cryptographically secure pseudorandom number generator,
+allows generating random numbers from a secure source provided by the operating system.
+Example:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="o">/</span><span class="n">sysrand</span>
+<span class="n">assert</span> <span class="n">urandom</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span> <span class="o">!=</span> <span class="n">urandom</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span> <span class="c"># unlikely to fail in practice</span>
+</code></pre></div></div>
+<p>See PR <a href="https://github.com/nim-lang/Nim/pull/16459">#16459</a>.</p>
+
+<h2 id="new-module-stdtempfiles">New module: <code class="language-plaintext highlighter-rouge">std/tempfiles</code></h2>
+
+<p>Allows creating temporary files and directories, see PR
+<a href="https://github.com/nim-lang/Nim/pull/17361">#17361</a> and followups.</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="o">/</span><span class="n">tempfiles</span>
+<span class="k">let</span> <span class="n">tmpPath</span> <span class="o">=</span> <span class="n">genTempPath</span><span class="p">(</span><span class="s">"prefix"</span><span class="p">,</span> <span class="s">"suffix.log"</span><span class="p">,</span> <span class="s">"/tmp/"</span><span class="p">)</span>
+<span class="c"># tmpPath looks like: /tmp/prefixpmW1P2KLsuffix.log</span>
+
+<span class="k">let</span> <span class="n">dir</span> <span class="o">=</span> <span class="n">createTempDir</span><span class="p">(</span><span class="s">"tmpprefix_"</span><span class="p">,</span> <span class="s">"_end"</span><span class="p">)</span>
+<span class="c"># created dir looks like: getTempDir() / "tmpprefix_YEl9VuVj_end"</span>
+
+<span class="k">let</span> <span class="p">(</span><span class="n">cfile</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="o">=</span> <span class="n">createTempFile</span><span class="p">(</span><span class="s">"tmpprefix_"</span><span class="p">,</span> <span class="s">"_end.tmp"</span><span class="p">)</span>
+<span class="c"># path looks like: getTempDir() / "tmpprefix_FDCIRZA0_end.tmp"</span>
+<span class="n">cfile</span><span class="p">.</span><span class="n">write</span> <span class="s">"foo"</span>
+<span class="n">cfile</span><span class="p">.</span><span class="n">setFilePos</span> <span class="mi">0</span>
+<span class="n">assert</span> <span class="n">readAll</span><span class="p">(</span><span class="n">cfile</span><span class="p">)</span> <span class="o">==</span> <span class="s">"foo"</span>
+<span class="n">close</span> <span class="n">cfile</span>
+<span class="n">assert</span> <span class="n">readFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="s">"foo"</span>
+</code></pre></div></div>
+
+<h2 id="user-defined-literals">User-defined literals</h2>
+
+<p>Custom numeric literals (e.g. <code class="language-plaintext highlighter-rouge">-128'bignum</code>) are now supported.
+Additionally, the unary minus in <code class="language-plaintext highlighter-rouge">-1</code> is now part of the integer literal, i.e.
+it is now parsed as a single token.
+This implies that edge cases like <code class="language-plaintext highlighter-rouge">-128'i8</code> finally work correctly.
+Example:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="p">`</span><span class="sc">'big`*(num: cstring): JsBigInt {.importjs: "BigInt(#)".}</span><span class="err">
+</span><span class="sc">assert 0xffffffffffffffff'</span><span class="n">big</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="sc">'big shl 64'</span><span class="n">big</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="sc">'big</span><span class="err">
+</span></code></pre></div></div>
+
+<h2 id="dot-like-operators">Dot-like operators</h2>
+
+<p>With <code class="language-plaintext highlighter-rouge">-d:nimPreviewDotLikeOps</code>, dot-like operators (operators starting with <code class="language-plaintext highlighter-rouge">.</code>,
+but not with <code class="language-plaintext highlighter-rouge">..</code>) now have the same precedence as <code class="language-plaintext highlighter-rouge">.</code>, so that <code class="language-plaintext highlighter-rouge">a.?b.c</code> is now
+parsed as <code class="language-plaintext highlighter-rouge">(a.?b).c</code> instead of <code class="language-plaintext highlighter-rouge">a.?(b.c)</code>.
+A warning is generated when a dot-like operator is used without <code class="language-plaintext highlighter-rouge">-d:nimPreviewDotLikeOps</code>.</p>
+
+<p>An important use case is to enable dynamic fields without affecting the
+built-in <code class="language-plaintext highlighter-rouge">.</code> operator, e.g. for <code class="language-plaintext highlighter-rouge">std/jsffi</code>, <code class="language-plaintext highlighter-rouge">std/json</code>, <code class="language-plaintext highlighter-rouge">pkg/nimpy</code>. Example:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="o">/</span><span class="n">json</span>
+<span class="k">template</span> <span class="p">`.</span><span class="o">?</span><span class="p">`(</span><span class="n">a</span><span class="p">:</span> <span class="n">JsonNode</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">untyped</span><span class="p">{</span><span class="n">ident</span><span class="p">}):</span> <span class="n">JsonNode</span> <span class="o">=</span>
+  <span class="n">a</span><span class="o">[</span><span class="n">astToStr</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">]</span>
+<span class="k">let</span> <span class="n">j</span> <span class="o">=</span> <span class="o">%*</span><span class="p">{</span><span class="s">"a1"</span><span class="p">:</span> <span class="p">{</span><span class="s">"a2"</span><span class="p">:</span> <span class="mi">10</span><span class="p">}}</span>
+<span class="n">assert</span> <span class="n">j</span><span class="p">.</span><span class="o">?</span><span class="n">a1</span><span class="p">.</span><span class="o">?</span><span class="n">a2</span><span class="p">.</span><span class="n">getInt</span> <span class="o">==</span> <span class="mi">10</span>
+</code></pre></div></div>
+
+<h2 id="block-arguments-now-support-optional-parameters">Block arguments now support optional parameters</h2>
+
+<p>This solves a major pain point for routines accepting block parameters,
+see PR <a href="https://github.com/nim-lang/Nim/pull/18631">#18631</a> for details:</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="n">fn</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span> <span class="o">=</span> <span class="k">discard</span>
+<span class="n">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="c"># already works</span>
+  <span class="n">bar</span>
+<span class="n">fn</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span> <span class="c"># now works</span>
+  <span class="n">bar</span>
+</code></pre></div></div>
+
+<p>Likewise with multiple block arguments via <code class="language-plaintext highlighter-rouge">do</code>:</p>
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="n">fn</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">body1</span><span class="p">,</span> <span class="n">body2</span><span class="p">)</span> <span class="o">=</span> <span class="k">discard</span>
+<span class="n">fn</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span> <span class="c"># now works</span>
+  <span class="n">bar1</span>
+<span class="k">do</span><span class="p">:</span>
+  <span class="n">bar2</span>
+</code></pre></div></div>
+
+<h2 id="other-features">Other features</h2>
+
+<p>For full changelog, see <a href="https://github.com/nim-lang/Nim/blob/version-1-6/changelogs/changelog_1_6_0.md">here</a>.</p>
+
+<h1 id="footnotes">Footnotes</h1>
+
+<p>Tested on a 2.3 GHz 8-Core Intel Core i9, 2019 macOS 11.5 with 64GB RAM.</p>
+<ul>
+  <li>[1] command used: <code class="language-plaintext highlighter-rouge">nim c -d:danger</code>.
+The binary size can be further reduced to 49K with stripping <code class="language-plaintext highlighter-rouge">--passL:-s</code>
+and link-time optimization (<code class="language-plaintext highlighter-rouge">--passC:-flto</code>).
+Statically linking against <code class="language-plaintext highlighter-rouge">musl</code> brings it down to 5K, see
+<a href="https://irclogs.nim-lang.org/07-07-2020.html#12:31:34">link</a>.</li>
+  <li>[2] commands used:
+    <ul>
+      <li>for Nim: <code class="language-plaintext highlighter-rouge">nim c --forceBuild compiler/nim</code></li>
+      <li>for Rust: <code class="language-plaintext highlighter-rouge">./x.py build</code>, <a href="https://www.reddit.com/r/rust/comments/76jq7h/long_time_to_compile_rustc/">details</a></li>
+      <li>for GCC: see <a href="https://unix.stackexchange.com/questions/421822/how-long-does-it-take-to-compile-gcc-7-3-0">1</a>
+<a href="https://solarianprogrammer.com/2016/10/07/building-gcc-ubuntu-linux/">2</a></li>
+      <li>for Clang: <a href="https://quuxplusone.github.io/blog/2018/04/16/building-llvm-from-source/">details</a></li>
+      <li>for Go: <code class="language-plaintext highlighter-rouge">./make.bash</code></li>
+    </ul>
+  </li>
+  <li>[3] a separate nimscript file can be used if needed to execute code at compile time
+before compiling the main program but it’s in the same language</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

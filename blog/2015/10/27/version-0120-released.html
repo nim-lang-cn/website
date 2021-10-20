@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.12.0 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.12.0 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="The Nim community of developers is proud to announce the new version of the Nim compiler. This has been a long time coming as the last release has been made over 5 months ago! This release includes some changes which affect backwards compatibility, one major change is that now the hash table [] operators now raise a KeyError exception when the key does not exist. Some of the more exciting new features include: the ability to unpack tuples in any assignment context, the introduction of NimScript, and improvements to the type inference of lambdas. There are of course many many many bug fixes included with this release. We are getting closer and closer to a 1.0 release and are hoping that only a few 0.x releases will be necessary before we are happy to release version 1.0. As always you can download the latest version of Nim from the download page. For a more detailed list of changes look below. Some of the upcoming breaking changes are also documented in this forum thread. Changes affecting backwards compatibility The regular expression modules, re and nre now depend on version 8.36 of PCRE. If you have an older version you may see a message similar to could not import: pcre_free_study output when you start your program. See this issue for more information. tables.[], strtabs.[], critbits.[] now raise the KeyError exception when the key does not exist! Use the new getOrDefault instead to get the old behaviour. Compile all your code with -d:nimTableGet to get a listing of where your code uses []! The rawsockets module has been renamed to nativesockets to avoid confusion with TCP/IP raw sockets, so newNativeSocket should be used instead of newRawSocket. The miliseconds property of times.TimeInterval is now milliseconds. Code accessing that property is deprecated and code using miliseconds during object initialization or as a named parameter of initInterval() will need to be updated. std.logging functions no longer do formatting and semantically treat their arguments just like echo does. Affected functions: log, debug, info, warn, error, fatal. Custom subtypes of Logger also need to be adjusted accordingly. Floating point numbers can now look like 2d (float64) and 2f (float32) which means imports like import scene/2d/sprite do not work anymore. Instead quotes have to be used: import "scene/2d/sprite". The former code never was valid Nim. The Windows API wrapper (windows.nim) is now not part of the official distribution anymore. Instead use the oldwinapi Nimble package. There is now a clear distinction between --os:standalone and --gc:none. So if you use --os:standalone ensure you also use --gc:none. --os:standalone without --gc:none is now a version that doesn’t depend on any OS but includes the GC. However this version is currently untested! All procedures which construct a Socket/AsyncSocket now need to specify the socket domain, type and protocol. The param name typ: SockType (in newSocket/newAsyncSocket procs) was also renamed to sockType. The param af in the connect procs was removed. This affects asyncnet, asyncdispatch, net, and rawsockets. varargs[typed] and varargs[untyped] have been refined and now work as expected. However varargs[untyped] is not an alias anymore for varargs[expr]. So if your code breaks for varargs[untyped], use varargs[expr] instead. The same applies to varargs[typed] vs varargs[stmt]. sequtils.delete doesn’t take confusing default arguments anymore. system.free was an error-prone alias to system.dealloc and has been removed. macros.high never worked and the manual says high cannot be overloaded, so we removed it with no deprecation cycle. To use the parallel statement you now have to use the --experimental mode. Toplevel procs of calling convention closure never worked reliably and are now deprecated and will be removed from the language. Instead you have to insert type conversions like (proc (a, b: int) {.closure.})(myToplevelProc) if necessary. The modules libffi, sdl, windows, zipfiles, libzip, zlib, zzip, dialogs, expat, graphics, libcurl, sphinx have been moved out of the stdlib and are Nimble packages now. The constant fights between 32 and 64 bit DLLs on Windows have been put to an end: The standard distribution now ships with 32 and 64 bit versions of all the DLLs the standard library needs. This means that the following DLLs are now split into 32 and 64 versions: pcre.dll: Split into pcre32.dll and pcre64.dll. pdcurses.dll: Split into pdcurses32.dll and pdcurses64.dll. sqlite3.dll: Split into sqlite3_32.dll and sqlite3_64.dll. ssleay32.dll: Split into ssleay32.dll and ssleay64.dll. libeay32.dll: Split into libeay32.dll and libeay64.dll. Compile with -d:nimOldDLLs to make the stdlib use the old DLL names. Nim VM now treats objects as nkObjConstr nodes, and not nkPar nodes as it was previously. Macros that generate nkPar nodes when object is expected are likely to break. Macros that expect nkPar nodes to which objects are passed are likely to break as well. Base methods now need to be annotated with the base pragma. This makes multi methods less error-prone to use with the effect system. Nim’s parser directive #! is now #? in order to produce no conflicts with Unix’s #!. An implicit return type for an iterator is now deprecated. Use auto if you want more type inference. The type auto is now a “multi-bind” metatype, so the following compiles: proc f(x, y: auto): auto = result = $x &amp; y echo f(0, "abc") The ftpclient module is now deprecated in favour of the asyncftpclient module. In sequtils.nim renamed repeat function to cycle (concatenating a sequence by itself the given times), and also introduced repeat, which repeats an element the given times. The function map is moved to sequtils.nim. The inplace map version is renamed to apply. The template mapIt now doesn’t require the result’s type parameter. Also the inplace mapIt is renamed to apply. The compiler is now stricter with what is allowed as a case object discriminator. The following code used to compile but was not supported completely and so now fails: type DataType* {.pure.} = enum Char = 1, Int8 = 2, Int16 = 3, Int32 = 4, Int64 = 5, Float32 = 6, Float64 = 7 DataSeq* = object case kind* : DataType of DataType.Char: charSeq* : seq[char] of DataType.Int8: int8Seq* : seq[int8] of DataType.Int16: int16Seq* : seq[int16] of DataType.Int32: int32Seq* : seq[int32] of DataType.Int64: int64Seq* : seq[int64] of DataType.Float32: float32Seq* : seq[float32] of DataType.Float64: float64Seq* : seq[float64] length* : int Library Additions The nre module has been added, providing a better interface to PCRE than re. The expandSymlink proc has been added to the os module. The tailDir proc has been added to the os module. Define nimPinToCpu to make the threadpool use explicit thread affinities. This can speed up or slow down the thread pool; it’s up to you to benchmark it. strutils.formatFloat and formatBiggestFloat do not depend on the C locale anymore and now take an optional decimalSep = '.' parameter. Added unicode.lastRune, unicode.graphemeLen. Compiler Additions The compiler now supports a new configuration system based on NimScript. The compiler finally considers symbol binding rules in templates and generics for overloaded [], []=, {}, {}= operators (issue #2599). The compiler now supports a bitsize pragma for constructing bitfields. Added a new --reportConceptFailures switch for better debugging of concept related type mismatches. This can also be used to debug system.compiles failures. Language Additions system.unsafeAddr can be used to access the address of a let variable or parameter for C interoperability. Since technically this makes parameters and let variables mutable, it is considered even more unsafe than the ordinary addr builtin. Added macros.getImpl that can be used to access the implementation of a routine or a constant. This allows for example for user-defined inlining of function calls. Tuple unpacking finally works in a non-var/let context: (x, y) = f() is allowed. Note that this doesn’t declare x and y variables, for this let (x, y) = f() still needs to be used. when nimvm can now be used for compiletime versions of some code sections. Click here for details. Usage of the type NimNode in a proc now implicitly annotates the proc with .compileTime. This means generics work much better for NimNode. Bugfixes Fixed “Compiler internal error on iterator it(T: typedesc[Base]) called with it(Child), where Child = object of Base” (#2662) Fixed “repr() misses base object field in 2nd level derived object” (#2749) Fixed “nimsuggest doesn’t work more than once on the non-main file” (#2694) Fixed “JS Codegen. Passing arguments by var in certain cases leads to invalid JS.” (#2798) Fixed ““check” proc in unittest.nim prevents the propagation of changes to var parameters.” (#964) Fixed “Excessive letters in integer literals are not an error” (#2523) Fixed “Unicode dashes as “lisp’ish” alternative to hump and snake notation” (#2811) Fixed “Bad error message when trying to construct an object incorrectly” (#2584) Fixed “Determination of GC safety of globals is broken “ (#2854) Fixed “v2 gc crashes compiler” (#2687) Fixed “Compile error using object in const array” (#2774) Fixed “httpclient async requests with method httpPOST isn’t sending Content-Length header” (#2884) Fixed “Streams module not working with JS backend” (#2148) Fixed “Sign of certain short constants is wrong” (#1179) Fixed “Symlinks to directories reported as symlinks to files” (#1985) Fixed “64-bit literals broken on x86” (#2909) Fixed “import broken for certain names” (#2904) Fixed “Invalid UTF-8 strings in JavaScript” (#2917) Fixed “[JS][Codegen] Initialising object doesn’t create unmentioned fields.” (#2617) Fixed “Table returned from proc computed at compile time is missing keys:” (#2297) Fixed “Clarify copyright status for some files” (#2949) Fixed “math.nim: trigonometry: radians to degrees conversion” (#2881) Fixed “xoring unsigned integers yields RangeError in certain conditions” (#2979) Fixed “Directly checking equality between procs” (#2985) Fixed “Compiler crashed, but there have to be meaningful error message” (#2974) Fixed “repr is broken” (#2992) Fixed “Ipv6 devel - add IPv6 support for asyncsockets, make AF_INET6 a default” (#2976) Fixed “Compilation broken on windows” (#2996) Fixed “‘u64 literal conversion compiler error” (#2731) Fixed “Importing ‘impure’ libraries while using threads causes segfaults” (#2672) Fixed “Uncatched exception in async procedure on raise statement” (#3014) Fixed “nim doc2 fails in Mac OS X due to system.nim (possibly related to #1898)” (#3005) Fixed “IndexError when rebuilding Nim on iteration 2” (#3018) Fixed “Assigning large const set to variable looses some information” (#2880) Fixed “Inconsistent generics behavior” (#3022) Fixed “Compiler breaks on float64 division” (#3028) Fixed “Confusing error message comparing string to nil “ (#2935) Fixed “convert 64bit number to float on 32bit” (#1463) Fixed “Type redefinition and construction will break nim check” (#3032) Fixed “XmlParser fails on very large XML files without new lines” (#2429) Fixed “Error parsing arguments with whitespaces” (#2874) Fixed “Crash when missing one arg and used a named arg” (#2993) Fixed “Wrong number of arguments in assert will break nim check” (#3044) Fixed “Wrong const definition will break nim check” (#3041) Fixed “Wrong set declaration will break nim check” (#3040) Fixed “Compiler segfault (type section)” (#2540) Fixed “Segmentation fault when compiling this code” (#3038) Fixed “Kill nim i” (#2633) Fixed “Nim check will break on wrong array declaration” (#3048) Fixed “boolVal seems to be broken” (#3046) Fixed “Nim check crashes on wrong set/array declaration inside ref object” (#3062) Fixed “Nim check crashes on incorrect generic arg definition” (#3051) Fixed “Nim check crashes on iterating nonexistent var” (#3053) Fixed “Nim check crashes on wrong param set declaration + iteration” (#3054) Fixed “Wrong sharing of static_t instantations” (#3112) Fixed “Automatically generated proc conflicts with user-defined proc when .exportc.’ed” (#3134) Fixed “getTypeInfo call crashes nim” (#3099) Fixed “Array ptr dereference” (#2963) Fixed “Internal error when repr-ing a type directly” (#3079) Fixed “unknown type name ‘TNimType’ after importing typeinfo module” (#2841) Fixed “Can export a template twice and from inside a block” (#1738) Fixed “C Codegen: C Types are defined after their usage in certain cases” (#2823) Fixed “s.high refers to the current seq instead of the old one” (#1832) Fixed “Error while unmarshaling null values” (#3149) Fixed “Inference of static[T] in sequences” (#3144) Fixed “Argument named “closure” to proc inside template interfere with closure pragma” (#3171) Fixed “Internal error with aliasing inside template” (#3158) Fixed “Cardinality of sets prints unexpected value” (#3135) Fixed “Nim crashes on const assignment from function returning var ref object” (#3103) Fixed “repr cstring” (#3080) Fixed “Nim check crashes on wrong enum declaration” (#3052) Fixed “Compiler assertion when evaluating template with static[T]” (#1858) Fixed “Erroneous overflow in iterators when compiler built with overflowChecks enabled” (#3140) Fixed “Unicode dashes as “lisp’ish” alternative to hump and snake notation” (#2811) Fixed “Calling discardable proc from a defer is an error.” (#3185) Fixed “Defer statement at the end of a block produces ICE” (#3186) Fixed “Call to createU fails to compile” (#3193) Fixed “VM crash when accessing array’s element” (#3192) Fixed “Unexpected proc invoked when different modules add procs to a type from a 3rd module” (#2664) Fixed “Nim crashes on conditional declaration inside a template” (#2670) Fixed “Iterator names conflict within different scopes” (#2752) Fixed “VM: Cannot assign int value to ref variable” (#1329) Fixed “Incorrect code generated for tagged unions with enums not starting at zero” (#3096) Fixed “Compile time procs using forward declarations are silently ignored” (#3066) Fixed “re binding error in generic” (#1965) Fixed “os.getCreationTime is incorrect/impossible on Posix systems” (#1058) Fixed “Improve error message for osproc.startProcess when command does not exist” (#2183) Fixed “gctest segfaults with –gc:markandsweep on x86_64” (#2305) Fixed “Coroutine changes break compilation on unsupported architectures” (#3245) Fixed “Bugfix: Windows 32bit TinyCC support issue fixed” (#3237) Fixed “db_mysql getValue() followed by exec() causing error” (#3220) Fixed “xmltree.newEntity creates xnCData instead of xnEntity” (#3282) Fixed “Methods and modules don’t work together” (#2590) Fixed “String slicing not working in the vm” (#3300) Fixed “internal error: evalOp(mTypeOf)” (#3230) Fixed “#! source code prefix collides with Unix Shebang” (#2559) Fixed “wrong codegen for constant object” (#3195) Fixed “Doc comments inside procs with implicit returns don’t work” (#1528)"> -->
+  <meta property="og:description" content="The Nim community of developers is proud to announce the new version of the Nim compiler. This has been a long time coming as the last release has been made over 5 months ago! This release includes some changes which affect backwards compatibility, one major change is that now the hash table [] operators now raise a KeyError exception when the key does not exist. Some of the more exciting new features include: the ability to unpack tuples in any assignment context, the introduction of NimScript, and improvements to the type inference of lambdas. There are of course many many many bug fixes included with this release. We are getting closer and closer to a 1.0 release and are hoping that only a few 0.x releases will be necessary before we are happy to release version 1.0. As always you can download the latest version of Nim from the download page. For a more detailed list of changes look below. Some of the upcoming breaking changes are also documented in this forum thread. Changes affecting backwards compatibility The regular expression modules, re and nre now depend on version 8.36 of PCRE. If you have an older version you may see a message similar to could not import: pcre_free_study output when you start your program. See this issue for more information. tables.[], strtabs.[], critbits.[] now raise the KeyError exception when the key does not exist! Use the new getOrDefault instead to get the old behaviour. Compile all your code with -d:nimTableGet to get a listing of where your code uses []! The rawsockets module has been renamed to nativesockets to avoid confusion with TCP/IP raw sockets, so newNativeSocket should be used instead of newRawSocket. The miliseconds property of times.TimeInterval is now milliseconds. Code accessing that property is deprecated and code using miliseconds during object initialization or as a named parameter of initInterval() will need to be updated. std.logging functions no longer do formatting and semantically treat their arguments just like echo does. Affected functions: log, debug, info, warn, error, fatal. Custom subtypes of Logger also need to be adjusted accordingly. Floating point numbers can now look like 2d (float64) and 2f (float32) which means imports like import scene/2d/sprite do not work anymore. Instead quotes have to be used: import "scene/2d/sprite". The former code never was valid Nim. The Windows API wrapper (windows.nim) is now not part of the official distribution anymore. Instead use the oldwinapi Nimble package. There is now a clear distinction between --os:standalone and --gc:none. So if you use --os:standalone ensure you also use --gc:none. --os:standalone without --gc:none is now a version that doesn’t depend on any OS but includes the GC. However this version is currently untested! All procedures which construct a Socket/AsyncSocket now need to specify the socket domain, type and protocol. The param name typ: SockType (in newSocket/newAsyncSocket procs) was also renamed to sockType. The param af in the connect procs was removed. This affects asyncnet, asyncdispatch, net, and rawsockets. varargs[typed] and varargs[untyped] have been refined and now work as expected. However varargs[untyped] is not an alias anymore for varargs[expr]. So if your code breaks for varargs[untyped], use varargs[expr] instead. The same applies to varargs[typed] vs varargs[stmt]. sequtils.delete doesn’t take confusing default arguments anymore. system.free was an error-prone alias to system.dealloc and has been removed. macros.high never worked and the manual says high cannot be overloaded, so we removed it with no deprecation cycle. To use the parallel statement you now have to use the --experimental mode. Toplevel procs of calling convention closure never worked reliably and are now deprecated and will be removed from the language. Instead you have to insert type conversions like (proc (a, b: int) {.closure.})(myToplevelProc) if necessary. The modules libffi, sdl, windows, zipfiles, libzip, zlib, zzip, dialogs, expat, graphics, libcurl, sphinx have been moved out of the stdlib and are Nimble packages now. The constant fights between 32 and 64 bit DLLs on Windows have been put to an end: The standard distribution now ships with 32 and 64 bit versions of all the DLLs the standard library needs. This means that the following DLLs are now split into 32 and 64 versions: pcre.dll: Split into pcre32.dll and pcre64.dll. pdcurses.dll: Split into pdcurses32.dll and pdcurses64.dll. sqlite3.dll: Split into sqlite3_32.dll and sqlite3_64.dll. ssleay32.dll: Split into ssleay32.dll and ssleay64.dll. libeay32.dll: Split into libeay32.dll and libeay64.dll. Compile with -d:nimOldDLLs to make the stdlib use the old DLL names. Nim VM now treats objects as nkObjConstr nodes, and not nkPar nodes as it was previously. Macros that generate nkPar nodes when object is expected are likely to break. Macros that expect nkPar nodes to which objects are passed are likely to break as well. Base methods now need to be annotated with the base pragma. This makes multi methods less error-prone to use with the effect system. Nim’s parser directive #! is now #? in order to produce no conflicts with Unix’s #!. An implicit return type for an iterator is now deprecated. Use auto if you want more type inference. The type auto is now a “multi-bind” metatype, so the following compiles: proc f(x, y: auto): auto = result = $x &amp; y echo f(0, "abc") The ftpclient module is now deprecated in favour of the asyncftpclient module. In sequtils.nim renamed repeat function to cycle (concatenating a sequence by itself the given times), and also introduced repeat, which repeats an element the given times. The function map is moved to sequtils.nim. The inplace map version is renamed to apply. The template mapIt now doesn’t require the result’s type parameter. Also the inplace mapIt is renamed to apply. The compiler is now stricter with what is allowed as a case object discriminator. The following code used to compile but was not supported completely and so now fails: type DataType* {.pure.} = enum Char = 1, Int8 = 2, Int16 = 3, Int32 = 4, Int64 = 5, Float32 = 6, Float64 = 7 DataSeq* = object case kind* : DataType of DataType.Char: charSeq* : seq[char] of DataType.Int8: int8Seq* : seq[int8] of DataType.Int16: int16Seq* : seq[int16] of DataType.Int32: int32Seq* : seq[int32] of DataType.Int64: int64Seq* : seq[int64] of DataType.Float32: float32Seq* : seq[float32] of DataType.Float64: float64Seq* : seq[float64] length* : int Library Additions The nre module has been added, providing a better interface to PCRE than re. The expandSymlink proc has been added to the os module. The tailDir proc has been added to the os module. Define nimPinToCpu to make the threadpool use explicit thread affinities. This can speed up or slow down the thread pool; it’s up to you to benchmark it. strutils.formatFloat and formatBiggestFloat do not depend on the C locale anymore and now take an optional decimalSep = '.' parameter. Added unicode.lastRune, unicode.graphemeLen. Compiler Additions The compiler now supports a new configuration system based on NimScript. The compiler finally considers symbol binding rules in templates and generics for overloaded [], []=, {}, {}= operators (issue #2599). The compiler now supports a bitsize pragma for constructing bitfields. Added a new --reportConceptFailures switch for better debugging of concept related type mismatches. This can also be used to debug system.compiles failures. Language Additions system.unsafeAddr can be used to access the address of a let variable or parameter for C interoperability. Since technically this makes parameters and let variables mutable, it is considered even more unsafe than the ordinary addr builtin. Added macros.getImpl that can be used to access the implementation of a routine or a constant. This allows for example for user-defined inlining of function calls. Tuple unpacking finally works in a non-var/let context: (x, y) = f() is allowed. Note that this doesn’t declare x and y variables, for this let (x, y) = f() still needs to be used. when nimvm can now be used for compiletime versions of some code sections. Click here for details. Usage of the type NimNode in a proc now implicitly annotates the proc with .compileTime. This means generics work much better for NimNode. Bugfixes Fixed “Compiler internal error on iterator it(T: typedesc[Base]) called with it(Child), where Child = object of Base” (#2662) Fixed “repr() misses base object field in 2nd level derived object” (#2749) Fixed “nimsuggest doesn’t work more than once on the non-main file” (#2694) Fixed “JS Codegen. Passing arguments by var in certain cases leads to invalid JS.” (#2798) Fixed ““check” proc in unittest.nim prevents the propagation of changes to var parameters.” (#964) Fixed “Excessive letters in integer literals are not an error” (#2523) Fixed “Unicode dashes as “lisp’ish” alternative to hump and snake notation” (#2811) Fixed “Bad error message when trying to construct an object incorrectly” (#2584) Fixed “Determination of GC safety of globals is broken “ (#2854) Fixed “v2 gc crashes compiler” (#2687) Fixed “Compile error using object in const array” (#2774) Fixed “httpclient async requests with method httpPOST isn’t sending Content-Length header” (#2884) Fixed “Streams module not working with JS backend” (#2148) Fixed “Sign of certain short constants is wrong” (#1179) Fixed “Symlinks to directories reported as symlinks to files” (#1985) Fixed “64-bit literals broken on x86” (#2909) Fixed “import broken for certain names” (#2904) Fixed “Invalid UTF-8 strings in JavaScript” (#2917) Fixed “[JS][Codegen] Initialising object doesn’t create unmentioned fields.” (#2617) Fixed “Table returned from proc computed at compile time is missing keys:” (#2297) Fixed “Clarify copyright status for some files” (#2949) Fixed “math.nim: trigonometry: radians to degrees conversion” (#2881) Fixed “xoring unsigned integers yields RangeError in certain conditions” (#2979) Fixed “Directly checking equality between procs” (#2985) Fixed “Compiler crashed, but there have to be meaningful error message” (#2974) Fixed “repr is broken” (#2992) Fixed “Ipv6 devel - add IPv6 support for asyncsockets, make AF_INET6 a default” (#2976) Fixed “Compilation broken on windows” (#2996) Fixed “‘u64 literal conversion compiler error” (#2731) Fixed “Importing ‘impure’ libraries while using threads causes segfaults” (#2672) Fixed “Uncatched exception in async procedure on raise statement” (#3014) Fixed “nim doc2 fails in Mac OS X due to system.nim (possibly related to #1898)” (#3005) Fixed “IndexError when rebuilding Nim on iteration 2” (#3018) Fixed “Assigning large const set to variable looses some information” (#2880) Fixed “Inconsistent generics behavior” (#3022) Fixed “Compiler breaks on float64 division” (#3028) Fixed “Confusing error message comparing string to nil “ (#2935) Fixed “convert 64bit number to float on 32bit” (#1463) Fixed “Type redefinition and construction will break nim check” (#3032) Fixed “XmlParser fails on very large XML files without new lines” (#2429) Fixed “Error parsing arguments with whitespaces” (#2874) Fixed “Crash when missing one arg and used a named arg” (#2993) Fixed “Wrong number of arguments in assert will break nim check” (#3044) Fixed “Wrong const definition will break nim check” (#3041) Fixed “Wrong set declaration will break nim check” (#3040) Fixed “Compiler segfault (type section)” (#2540) Fixed “Segmentation fault when compiling this code” (#3038) Fixed “Kill nim i” (#2633) Fixed “Nim check will break on wrong array declaration” (#3048) Fixed “boolVal seems to be broken” (#3046) Fixed “Nim check crashes on wrong set/array declaration inside ref object” (#3062) Fixed “Nim check crashes on incorrect generic arg definition” (#3051) Fixed “Nim check crashes on iterating nonexistent var” (#3053) Fixed “Nim check crashes on wrong param set declaration + iteration” (#3054) Fixed “Wrong sharing of static_t instantations” (#3112) Fixed “Automatically generated proc conflicts with user-defined proc when .exportc.’ed” (#3134) Fixed “getTypeInfo call crashes nim” (#3099) Fixed “Array ptr dereference” (#2963) Fixed “Internal error when repr-ing a type directly” (#3079) Fixed “unknown type name ‘TNimType’ after importing typeinfo module” (#2841) Fixed “Can export a template twice and from inside a block” (#1738) Fixed “C Codegen: C Types are defined after their usage in certain cases” (#2823) Fixed “s.high refers to the current seq instead of the old one” (#1832) Fixed “Error while unmarshaling null values” (#3149) Fixed “Inference of static[T] in sequences” (#3144) Fixed “Argument named “closure” to proc inside template interfere with closure pragma” (#3171) Fixed “Internal error with aliasing inside template” (#3158) Fixed “Cardinality of sets prints unexpected value” (#3135) Fixed “Nim crashes on const assignment from function returning var ref object” (#3103) Fixed “repr cstring” (#3080) Fixed “Nim check crashes on wrong enum declaration” (#3052) Fixed “Compiler assertion when evaluating template with static[T]” (#1858) Fixed “Erroneous overflow in iterators when compiler built with overflowChecks enabled” (#3140) Fixed “Unicode dashes as “lisp’ish” alternative to hump and snake notation” (#2811) Fixed “Calling discardable proc from a defer is an error.” (#3185) Fixed “Defer statement at the end of a block produces ICE” (#3186) Fixed “Call to createU fails to compile” (#3193) Fixed “VM crash when accessing array’s element” (#3192) Fixed “Unexpected proc invoked when different modules add procs to a type from a 3rd module” (#2664) Fixed “Nim crashes on conditional declaration inside a template” (#2670) Fixed “Iterator names conflict within different scopes” (#2752) Fixed “VM: Cannot assign int value to ref variable” (#1329) Fixed “Incorrect code generated for tagged unions with enums not starting at zero” (#3096) Fixed “Compile time procs using forward declarations are silently ignored” (#3066) Fixed “re binding error in generic” (#1965) Fixed “os.getCreationTime is incorrect/impossible on Posix systems” (#1058) Fixed “Improve error message for osproc.startProcess when command does not exist” (#2183) Fixed “gctest segfaults with –gc:markandsweep on x86_64” (#2305) Fixed “Coroutine changes break compilation on unsupported architectures” (#3245) Fixed “Bugfix: Windows 32bit TinyCC support issue fixed” (#3237) Fixed “db_mysql getValue() followed by exec() causing error” (#3220) Fixed “xmltree.newEntity creates xnCData instead of xnEntity” (#3282) Fixed “Methods and modules don’t work together” (#2590) Fixed “String slicing not working in the vm” (#3300) Fixed “internal error: evalOp(mTypeOf)” (#3230) Fixed “#! source code prefix collides with Unix Shebang” (#2559) Fixed “wrong codegen for constant object” (#3195) Fixed “Doc comments inside procs with implicit returns don’t work” (#1528)">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.12.0 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.12.0 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              27 October 2015
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Dominik Picheta
+            </span>
+            
+          </h3>
+          <p>The Nim community of developers is proud to announce the new version of the
+Nim compiler. This has been a long time coming as the last release has been
+made over 5 months ago!</p>
+
+<p>This release includes some changes which affect backwards compatibility,
+one major change is that now the hash table <code class="language-plaintext highlighter-rouge">[]</code> operators now raise a
+<code class="language-plaintext highlighter-rouge">KeyError</code> exception when the key does not exist.</p>
+
+<p>Some of the more exciting new features include: the ability to unpack tuples
+in any assignment context, the introduction of
+<a href="https://nim-lang-cn.org/docs/nims.html">NimScript</a>,
+and improvements to the type inference of lambdas.</p>
+
+<p>There are of course many many many bug fixes included with this release.
+We are getting closer and closer to a 1.0 release and are hoping that only
+a few 0.x releases will be necessary before we are happy to release version 1.0.</p>
+
+<p>As always you can download the latest version of Nim from the
+<a href="https://nim-lang-cn.org/install.html">download</a> page.</p>
+
+<p>For a more detailed list of changes look below. Some of the upcoming breaking
+changes are also documented in this forum
+<a href="http://forum.nim-lang.org/t/1708">thread</a>.</p>
+
+<h2 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h2>
+<ul>
+  <li>The regular expression modules, <code class="language-plaintext highlighter-rouge">re</code> and <code class="language-plaintext highlighter-rouge">nre</code> now depend on version
+8.36 of PCRE. If you have an older version you may see a message similar
+to <code class="language-plaintext highlighter-rouge">could not import: pcre_free_study</code> output when you start your
+program. See <a href="https://github.com/docopt/docopt.nim/issues/13">this issue</a>
+for more information.</li>
+  <li><code class="language-plaintext highlighter-rouge">tables.[]</code>, <code class="language-plaintext highlighter-rouge">strtabs.[]</code>, <code class="language-plaintext highlighter-rouge">critbits.[]</code> <strong>now raise</strong>
+the <code class="language-plaintext highlighter-rouge">KeyError</code> <strong>exception when the key does not exist</strong>! Use the
+new <code class="language-plaintext highlighter-rouge">getOrDefault</code> instead to get the old behaviour. Compile all your
+code with <code class="language-plaintext highlighter-rouge">-d:nimTableGet</code> to get a listing of where your code
+uses <code class="language-plaintext highlighter-rouge">[]</code>!</li>
+  <li>The <code class="language-plaintext highlighter-rouge">rawsockets</code> module has been renamed to <code class="language-plaintext highlighter-rouge">nativesockets</code> to avoid
+confusion with TCP/IP raw sockets, so <code class="language-plaintext highlighter-rouge">newNativeSocket</code> should be used
+instead of <code class="language-plaintext highlighter-rouge">newRawSocket</code>.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">miliseconds</code> property of <code class="language-plaintext highlighter-rouge">times.TimeInterval</code> is now <code class="language-plaintext highlighter-rouge">milliseconds</code>.
+Code accessing that property is deprecated and code using <code class="language-plaintext highlighter-rouge">miliseconds</code>
+during object initialization or as a named parameter of <code class="language-plaintext highlighter-rouge">initInterval()</code>
+will need to be updated.</li>
+  <li><code class="language-plaintext highlighter-rouge">std.logging</code> functions no longer do formatting and semantically treat
+their arguments just like <code class="language-plaintext highlighter-rouge">echo</code> does. Affected functions: <code class="language-plaintext highlighter-rouge">log</code>,
+<code class="language-plaintext highlighter-rouge">debug</code>, <code class="language-plaintext highlighter-rouge">info</code>, <code class="language-plaintext highlighter-rouge">warn</code>, <code class="language-plaintext highlighter-rouge">error</code>, <code class="language-plaintext highlighter-rouge">fatal</code>. Custom subtypes of
+<code class="language-plaintext highlighter-rouge">Logger</code> also need to be adjusted accordingly.</li>
+  <li>Floating point numbers can now look like <code class="language-plaintext highlighter-rouge">2d</code> (float64)
+and <code class="language-plaintext highlighter-rouge">2f</code> (float32) which means imports like <code class="language-plaintext highlighter-rouge">import scene/2d/sprite</code>
+do not work anymore. Instead quotes have to be
+used: <code class="language-plaintext highlighter-rouge">import "scene/2d/sprite"</code>. The former code never was valid Nim.</li>
+  <li>The Windows API wrapper (<code class="language-plaintext highlighter-rouge">windows.nim</code>) is now not part of the official
+distribution anymore. Instead use the <code class="language-plaintext highlighter-rouge">oldwinapi</code> Nimble package.</li>
+  <li>There is now a clear distinction between <code class="language-plaintext highlighter-rouge">--os:standalone</code>
+and <code class="language-plaintext highlighter-rouge">--gc:none</code>. So if you use <code class="language-plaintext highlighter-rouge">--os:standalone</code> ensure you also use
+<code class="language-plaintext highlighter-rouge">--gc:none</code>. <code class="language-plaintext highlighter-rouge">--os:standalone</code> without <code class="language-plaintext highlighter-rouge">--gc:none</code> is now a version
+that doesn’t depend on any OS but includes the GC. However this version
+is currently untested!</li>
+  <li>All procedures which construct a <code class="language-plaintext highlighter-rouge">Socket</code>/<code class="language-plaintext highlighter-rouge">AsyncSocket</code> now need to
+specify the socket domain, type and protocol. The param name
+<code class="language-plaintext highlighter-rouge">typ: SockType</code> (in <code class="language-plaintext highlighter-rouge">newSocket</code>/<code class="language-plaintext highlighter-rouge">newAsyncSocket</code> procs) was also
+renamed to <code class="language-plaintext highlighter-rouge">sockType</code>. The param <code class="language-plaintext highlighter-rouge">af</code> in the <code class="language-plaintext highlighter-rouge">connect</code> procs was
+removed. This affects <code class="language-plaintext highlighter-rouge">asyncnet</code>, <code class="language-plaintext highlighter-rouge">asyncdispatch</code>, <code class="language-plaintext highlighter-rouge">net</code>, and
+<code class="language-plaintext highlighter-rouge">rawsockets</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">varargs[typed]</code> and <code class="language-plaintext highlighter-rouge">varargs[untyped]</code> have been refined and now work
+as expected. However <code class="language-plaintext highlighter-rouge">varargs[untyped]</code> is not an alias anymore for
+<code class="language-plaintext highlighter-rouge">varargs[expr]</code>. So if your code breaks for <code class="language-plaintext highlighter-rouge">varargs[untyped]</code>, use
+<code class="language-plaintext highlighter-rouge">varargs[expr]</code> instead. The same applies to <code class="language-plaintext highlighter-rouge">varargs[typed]</code> vs
+<code class="language-plaintext highlighter-rouge">varargs[stmt]</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">sequtils.delete</code> doesn’t take confusing default arguments anymore.</li>
+  <li><code class="language-plaintext highlighter-rouge">system.free</code> was an error-prone alias to <code class="language-plaintext highlighter-rouge">system.dealloc</code> and has
+been removed.</li>
+  <li><code class="language-plaintext highlighter-rouge">macros.high</code> never worked and the manual says <code class="language-plaintext highlighter-rouge">high</code> cannot be
+overloaded, so we removed it with no deprecation cycle.</li>
+  <li>To use the <code class="language-plaintext highlighter-rouge">parallel</code> statement you now have to
+use the <code class="language-plaintext highlighter-rouge">--experimental</code> mode.</li>
+  <li>Toplevel procs of calling convention <code class="language-plaintext highlighter-rouge">closure</code> never worked reliably
+and are now deprecated and will be removed from the language. Instead you
+have to insert type conversions
+like <code class="language-plaintext highlighter-rouge">(proc (a, b: int) {.closure.})(myToplevelProc)</code> if necessary.</li>
+  <li>The modules <code class="language-plaintext highlighter-rouge">libffi</code>, <code class="language-plaintext highlighter-rouge">sdl</code>, <code class="language-plaintext highlighter-rouge">windows</code>, <code class="language-plaintext highlighter-rouge">zipfiles</code>, <code class="language-plaintext highlighter-rouge">libzip</code>,
+<code class="language-plaintext highlighter-rouge">zlib</code>, <code class="language-plaintext highlighter-rouge">zzip</code>, <code class="language-plaintext highlighter-rouge">dialogs</code>, <code class="language-plaintext highlighter-rouge">expat</code>, <code class="language-plaintext highlighter-rouge">graphics</code>, <code class="language-plaintext highlighter-rouge">libcurl</code>,
+<code class="language-plaintext highlighter-rouge">sphinx</code> have been moved out of the stdlib and are Nimble packages now.</li>
+  <li>
+    <p>The constant fights between 32 and 64 bit DLLs on Windows have been put to
+an end: The standard distribution now ships with 32 and 64 bit versions
+of all the DLLs the standard library needs. This means that the following
+DLLs are now split into 32 and 64 versions:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">pcre.dll</code>: Split into <code class="language-plaintext highlighter-rouge">pcre32.dll</code> and <code class="language-plaintext highlighter-rouge">pcre64.dll</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">pdcurses.dll</code>: Split into <code class="language-plaintext highlighter-rouge">pdcurses32.dll</code> and <code class="language-plaintext highlighter-rouge">pdcurses64.dll</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">sqlite3.dll</code>: Split into <code class="language-plaintext highlighter-rouge">sqlite3_32.dll</code> and <code class="language-plaintext highlighter-rouge">sqlite3_64.dll</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">ssleay32.dll</code>: Split into <code class="language-plaintext highlighter-rouge">ssleay32.dll</code> and <code class="language-plaintext highlighter-rouge">ssleay64.dll</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">libeay32.dll</code>: Split into <code class="language-plaintext highlighter-rouge">libeay32.dll</code> and <code class="language-plaintext highlighter-rouge">libeay64.dll</code>.</li>
+    </ul>
+
+    <p>Compile with <code class="language-plaintext highlighter-rouge">-d:nimOldDLLs</code> to make the stdlib use the old DLL names.</p>
+  </li>
+  <li>Nim VM now treats objects as <code class="language-plaintext highlighter-rouge">nkObjConstr</code> nodes, and not <code class="language-plaintext highlighter-rouge">nkPar</code> nodes
+as it was previously. Macros that generate <code class="language-plaintext highlighter-rouge">nkPar</code> nodes when object is
+expected are likely to break. Macros that expect <code class="language-plaintext highlighter-rouge">nkPar</code> nodes to which
+objects are passed are likely to break as well.</li>
+  <li>Base methods now need to be annotated with the <code class="language-plaintext highlighter-rouge">base</code> pragma. This makes
+multi methods less error-prone to use with the effect system.</li>
+  <li>Nim’s parser directive <code class="language-plaintext highlighter-rouge">#!</code> is now <code class="language-plaintext highlighter-rouge">#?</code> in order to produce no conflicts
+with Unix’s <code class="language-plaintext highlighter-rouge">#!</code>.</li>
+  <li>An implicit return type for an iterator is now deprecated. Use <code class="language-plaintext highlighter-rouge">auto</code> if
+you want more type inference.</li>
+  <li>
+    <p>The type <code class="language-plaintext highlighter-rouge">auto</code> is now a “multi-bind” metatype, so the following compiles:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">proc </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">auto</span><span class="p">):</span> <span class="n">auto</span> <span class="o">=</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="o">$</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span>
+
+  <span class="n">echo</span> <span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">"abc"</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>The <code class="language-plaintext highlighter-rouge">ftpclient</code> module is now deprecated in favour of the
+<code class="language-plaintext highlighter-rouge">asyncftpclient</code> module.</li>
+  <li>In sequtils.nim renamed <code class="language-plaintext highlighter-rouge">repeat</code> function to <code class="language-plaintext highlighter-rouge">cycle</code> (concatenating
+a sequence by itself the given times), and also introduced <code class="language-plaintext highlighter-rouge">repeat</code>,
+which repeats an element the given times.</li>
+  <li>The function <code class="language-plaintext highlighter-rouge">map</code> is moved to sequtils.nim. The inplace <code class="language-plaintext highlighter-rouge">map</code> version
+is renamed to <code class="language-plaintext highlighter-rouge">apply</code>.</li>
+  <li>The template <code class="language-plaintext highlighter-rouge">mapIt</code> now doesn’t require the result’s type parameter.
+Also the inplace <code class="language-plaintext highlighter-rouge">mapIt</code> is renamed to <code class="language-plaintext highlighter-rouge">apply</code>.</li>
+  <li>
+    <p>The compiler is now stricter with what is allowed as a case object
+discriminator. The following code used to compile but was not supported
+completely and so now fails:</p>
+
+    <div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">type</span>
+      <span class="n">DataType</span><span class="o">*</span> <span class="p">{.</span><span class="n">pure</span><span class="p">.}</span> <span class="o">=</span> <span class="k">enum</span>
+          <span class="n">Char</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="n">Int8</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="n">Int16</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+          <span class="n">Int32</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="n">Int64</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+          <span class="n">Float32</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+          <span class="n">Float64</span> <span class="o">=</span> <span class="mi">7</span>
+
+      <span class="n">DataSeq</span><span class="o">*</span> <span class="o">=</span> <span class="k">object</span>
+          <span class="k">case</span> <span class="n">kind</span><span class="o">*</span> <span class="p">:</span> <span class="n">DataType</span>
+          <span class="k">of</span> <span class="n">DataType</span><span class="p">.</span><span class="n">Char</span><span class="p">:</span> <span class="n">charSeq</span><span class="o">*</span> <span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="kt">char</span><span class="o">]</span>
+          <span class="k">of</span> <span class="n">DataType</span><span class="p">.</span><span class="n">Int8</span><span class="p">:</span> <span class="n">int8Seq</span><span class="o">*</span> <span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="kt">int8</span><span class="o">]</span>
+          <span class="k">of</span> <span class="n">DataType</span><span class="p">.</span><span class="n">Int16</span><span class="p">:</span> <span class="n">int16Seq</span><span class="o">*</span> <span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="kt">int16</span><span class="o">]</span>
+          <span class="k">of</span> <span class="n">DataType</span><span class="p">.</span><span class="n">Int32</span><span class="p">:</span> <span class="n">int32Seq</span><span class="o">*</span> <span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="kt">int32</span><span class="o">]</span>
+          <span class="k">of</span> <span class="n">DataType</span><span class="p">.</span><span class="n">Int64</span><span class="p">:</span> <span class="n">int64Seq</span><span class="o">*</span> <span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="kt">int64</span><span class="o">]</span>
+          <span class="k">of</span> <span class="n">DataType</span><span class="p">.</span><span class="n">Float32</span><span class="p">:</span> <span class="n">float32Seq</span><span class="o">*</span> <span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="kt">float32</span><span class="o">]</span>
+          <span class="k">of</span> <span class="n">DataType</span><span class="p">.</span><span class="n">Float64</span><span class="p">:</span> <span class="n">float64Seq</span><span class="o">*</span> <span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="kt">float64</span><span class="o">]</span>
+
+          <span class="n">length</span><span class="o">*</span> <span class="p">:</span> <span class="kt">int</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="library-additions">Library Additions</h2>
+
+<ul>
+  <li>The nre module has been added, providing a better interface to PCRE than re.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">expandSymlink</code> proc has been added to the <code class="language-plaintext highlighter-rouge">os</code> module.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">tailDir</code> proc has been added to the <code class="language-plaintext highlighter-rouge">os</code> module.</li>
+  <li>Define <code class="language-plaintext highlighter-rouge">nimPinToCpu</code> to make the <code class="language-plaintext highlighter-rouge">threadpool</code> use explicit thread
+affinities. This can speed up or slow down the thread pool; it’s up to you
+to benchmark it.</li>
+  <li><code class="language-plaintext highlighter-rouge">strutils.formatFloat</code> and <code class="language-plaintext highlighter-rouge">formatBiggestFloat</code> do not depend on the C
+locale anymore and now take an optional <code class="language-plaintext highlighter-rouge">decimalSep = '.'</code> parameter.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">unicode.lastRune</code>, <code class="language-plaintext highlighter-rouge">unicode.graphemeLen</code>.</li>
+</ul>
+
+<h2 id="compiler-additions">Compiler Additions</h2>
+
+<ul>
+  <li>The compiler now supports a new configuration system based on
+<a href="docs/nims.html">NimScript</a>.</li>
+  <li>The compiler finally considers symbol binding rules in templates and
+generics for overloaded <code class="language-plaintext highlighter-rouge">[]</code>, <code class="language-plaintext highlighter-rouge">[]=</code>, <code class="language-plaintext highlighter-rouge">{}</code>, <code class="language-plaintext highlighter-rouge">{}=</code> operators
+(issue <a href="https://github.com/nim-lang/Nim/issues/2599">#2599</a>).</li>
+  <li>The compiler now supports a <a href="docs/manual.html#pragmas-bitsize-pragma">bitsize pragma</a>
+for constructing bitfields.</li>
+  <li>Added a new <code class="language-plaintext highlighter-rouge">--reportConceptFailures</code> switch for better debugging of
+concept related type mismatches. This can also be used to debug
+<code class="language-plaintext highlighter-rouge">system.compiles</code> failures.</li>
+</ul>
+
+<h2 id="language-additions">Language Additions</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">system.unsafeAddr</code> can be used to access the address of a <code class="language-plaintext highlighter-rouge">let</code>
+variable or parameter for C interoperability. Since technically this
+makes parameters and <code class="language-plaintext highlighter-rouge">let</code> variables mutable, it is considered even more
+unsafe than the ordinary <code class="language-plaintext highlighter-rouge">addr</code> builtin.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">macros.getImpl</code> that can be used to access the implementation of
+a routine or a constant. This allows for example for user-defined inlining
+of function calls.</li>
+  <li>Tuple unpacking finally works in a non-var/let context: <code class="language-plaintext highlighter-rouge">(x, y) = f()</code>
+is allowed. Note that this doesn’t declare <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> variables, for
+this <code class="language-plaintext highlighter-rouge">let (x, y) = f()</code> still needs to be used.</li>
+  <li><code class="language-plaintext highlighter-rouge">when nimvm</code> can now be used for compiletime versions of some code
+sections. Click <a href="docs/manual.html#when-nimvm-statement">here</a> for details.</li>
+  <li>Usage of the type <code class="language-plaintext highlighter-rouge">NimNode</code> in a proc now implicitly annotates the proc
+with <code class="language-plaintext highlighter-rouge">.compileTime</code>. This means generics work much better for <code class="language-plaintext highlighter-rouge">NimNode</code>.</li>
+</ul>
+
+<h2 id="bugfixes">Bugfixes</h2>
+<ul>
+  <li>Fixed “Compiler internal error on iterator it(T: typedesc[Base]) called with it(Child), where Child = object of Base”
+(<a href="https://github.com/Araq/Nim/issues/2662">#2662</a>)</li>
+  <li>Fixed “repr() misses base object field in 2nd level derived object”
+(<a href="https://github.com/Araq/Nim/issues/2749">#2749</a>)</li>
+  <li>Fixed “nimsuggest doesn’t work more than once on the non-main file”
+(<a href="https://github.com/Araq/Nim/issues/2694">#2694</a>)</li>
+  <li>Fixed “JS Codegen. Passing arguments by var in certain cases leads to invalid JS.”
+(<a href="https://github.com/Araq/Nim/issues/2798">#2798</a>)</li>
+  <li>Fixed ““check” proc in unittest.nim prevents the propagation of changes to var parameters.”
+(<a href="https://github.com/Araq/Nim/issues/964">#964</a>)</li>
+  <li>Fixed “Excessive letters in integer literals are not an error”
+(<a href="https://github.com/Araq/Nim/issues/2523">#2523</a>)</li>
+  <li>Fixed “Unicode dashes as “lisp’ish” alternative to hump and snake notation”
+(<a href="https://github.com/Araq/Nim/issues/2811">#2811</a>)</li>
+  <li>Fixed “Bad error message when trying to construct an object incorrectly”
+(<a href="https://github.com/Araq/Nim/issues/2584">#2584</a>)</li>
+  <li>Fixed “Determination of GC safety of globals is broken “
+(<a href="https://github.com/Araq/Nim/issues/2854">#2854</a>)</li>
+  <li>Fixed “v2 gc crashes compiler”
+(<a href="https://github.com/Araq/Nim/issues/2687">#2687</a>)</li>
+  <li>Fixed “Compile error using object in const array”
+(<a href="https://github.com/Araq/Nim/issues/2774">#2774</a>)</li>
+  <li>Fixed “httpclient async requests with method httpPOST isn’t sending Content-Length header”
+(<a href="https://github.com/Araq/Nim/issues/2884">#2884</a>)</li>
+  <li>Fixed “Streams module not working with JS backend”
+(<a href="https://github.com/Araq/Nim/issues/2148">#2148</a>)</li>
+  <li>Fixed “Sign of certain short constants is wrong”
+(<a href="https://github.com/Araq/Nim/issues/1179">#1179</a>)</li>
+  <li>Fixed “Symlinks to directories reported as symlinks to files”
+(<a href="https://github.com/Araq/Nim/issues/1985">#1985</a>)</li>
+  <li>Fixed “64-bit literals broken on x86”
+(<a href="https://github.com/Araq/Nim/issues/2909">#2909</a>)</li>
+  <li>Fixed “import broken for certain names”
+(<a href="https://github.com/Araq/Nim/issues/2904">#2904</a>)</li>
+  <li>Fixed “Invalid UTF-8 strings in JavaScript”
+(<a href="https://github.com/Araq/Nim/issues/2917">#2917</a>)</li>
+  <li>
+    <p>Fixed “[JS][Codegen] Initialising object doesn’t create unmentioned fields.”</p>
+
+    <p>(<a href="https://github.com/Araq/Nim/issues/2617">#2617</a>)</p>
+  </li>
+  <li>Fixed “Table returned from proc computed at compile time is missing keys:”
+(<a href="https://github.com/Araq/Nim/issues/2297">#2297</a>)</li>
+  <li>Fixed “Clarify copyright status for some files”
+(<a href="https://github.com/Araq/Nim/issues/2949">#2949</a>)</li>
+  <li>Fixed “math.nim: trigonometry: radians to degrees conversion”
+(<a href="https://github.com/Araq/Nim/issues/2881">#2881</a>)</li>
+  <li>Fixed “xoring unsigned integers yields RangeError in certain conditions”
+(<a href="https://github.com/Araq/Nim/issues/2979">#2979</a>)</li>
+  <li>Fixed “Directly checking equality between procs”
+(<a href="https://github.com/Araq/Nim/issues/2985">#2985</a>)</li>
+  <li>Fixed “Compiler crashed, but there have to be meaningful error message”
+(<a href="https://github.com/Araq/Nim/issues/2974">#2974</a>)</li>
+  <li>Fixed “repr is broken”
+(<a href="https://github.com/Araq/Nim/issues/2992">#2992</a>)</li>
+  <li>Fixed “Ipv6 devel - add IPv6 support for asyncsockets, make AF_INET6 a default”
+(<a href="https://github.com/Araq/Nim/issues/2976">#2976</a>)</li>
+  <li>Fixed “Compilation broken on windows”
+(<a href="https://github.com/Araq/Nim/issues/2996">#2996</a>)</li>
+  <li>Fixed “‘u64 literal conversion compiler error”
+(<a href="https://github.com/Araq/Nim/issues/2731">#2731</a>)</li>
+  <li>Fixed “Importing ‘impure’ libraries while using threads causes segfaults”
+(<a href="https://github.com/Araq/Nim/issues/2672">#2672</a>)</li>
+  <li>Fixed “Uncatched exception in async procedure on raise statement”
+(<a href="https://github.com/Araq/Nim/issues/3014">#3014</a>)</li>
+  <li>Fixed “nim doc2 fails in Mac OS X due to system.nim (possibly related to #1898)”
+(<a href="https://github.com/Araq/Nim/issues/3005">#3005</a>)</li>
+  <li>Fixed “IndexError when rebuilding Nim on iteration 2”
+(<a href="https://github.com/Araq/Nim/issues/3018">#3018</a>)</li>
+  <li>Fixed “Assigning large const set to variable looses some information”
+(<a href="https://github.com/Araq/Nim/issues/2880">#2880</a>)</li>
+  <li>Fixed “Inconsistent generics behavior”
+(<a href="https://github.com/Araq/Nim/issues/3022">#3022</a>)</li>
+  <li>Fixed “Compiler breaks on float64 division”
+(<a href="https://github.com/Araq/Nim/issues/3028">#3028</a>)</li>
+  <li>Fixed “Confusing error message comparing string to nil “
+(<a href="https://github.com/Araq/Nim/issues/2935">#2935</a>)</li>
+  <li>Fixed “convert 64bit number to float on 32bit”
+(<a href="https://github.com/Araq/Nim/issues/1463">#1463</a>)</li>
+  <li>Fixed “Type redefinition and construction will break nim check”
+(<a href="https://github.com/Araq/Nim/issues/3032">#3032</a>)</li>
+  <li>Fixed “XmlParser fails on very large XML files without new lines”
+(<a href="https://github.com/Araq/Nim/issues/2429">#2429</a>)</li>
+  <li>Fixed “Error parsing arguments with whitespaces”
+(<a href="https://github.com/Araq/Nim/issues/2874">#2874</a>)</li>
+  <li>Fixed “Crash when missing one arg and used a named arg”
+(<a href="https://github.com/Araq/Nim/issues/2993">#2993</a>)</li>
+  <li>Fixed “Wrong number of arguments in assert will break nim check”
+(<a href="https://github.com/Araq/Nim/issues/3044">#3044</a>)</li>
+  <li>Fixed “Wrong const definition will break nim check”
+(<a href="https://github.com/Araq/Nim/issues/3041">#3041</a>)</li>
+  <li>Fixed “Wrong set declaration will break nim check”
+(<a href="https://github.com/Araq/Nim/issues/3040">#3040</a>)</li>
+  <li>Fixed “Compiler segfault (type section)”
+(<a href="https://github.com/Araq/Nim/issues/2540">#2540</a>)</li>
+  <li>Fixed “Segmentation fault when compiling this code”
+(<a href="https://github.com/Araq/Nim/issues/3038">#3038</a>)</li>
+  <li>Fixed “Kill nim i”
+(<a href="https://github.com/Araq/Nim/issues/2633">#2633</a>)</li>
+  <li>Fixed “Nim check will break on wrong array declaration”
+(<a href="https://github.com/Araq/Nim/issues/3048">#3048</a>)</li>
+  <li>Fixed “boolVal seems to be broken”
+(<a href="https://github.com/Araq/Nim/issues/3046">#3046</a>)</li>
+  <li>Fixed “Nim check crashes on wrong set/array declaration inside ref object”
+(<a href="https://github.com/Araq/Nim/issues/3062">#3062</a>)</li>
+  <li>Fixed “Nim check crashes on incorrect generic arg definition”
+(<a href="https://github.com/Araq/Nim/issues/3051">#3051</a>)</li>
+  <li>Fixed “Nim check crashes on iterating nonexistent var”
+(<a href="https://github.com/Araq/Nim/issues/3053">#3053</a>)</li>
+  <li>Fixed “Nim check crashes on wrong param set declaration + iteration”
+(<a href="https://github.com/Araq/Nim/issues/3054">#3054</a>)</li>
+  <li>Fixed “Wrong sharing of static_t instantations”
+(<a href="https://github.com/Araq/Nim/issues/3112">#3112</a>)</li>
+  <li>Fixed “Automatically generated proc conflicts with user-defined proc when .exportc.’ed”
+(<a href="https://github.com/Araq/Nim/issues/3134">#3134</a>)</li>
+  <li>Fixed “getTypeInfo call crashes nim”
+(<a href="https://github.com/Araq/Nim/issues/3099">#3099</a>)</li>
+  <li>Fixed “Array ptr dereference”
+(<a href="https://github.com/Araq/Nim/issues/2963">#2963</a>)</li>
+  <li>Fixed “Internal error when <code class="language-plaintext highlighter-rouge">repr</code>-ing a type directly”
+(<a href="https://github.com/Araq/Nim/issues/3079">#3079</a>)</li>
+  <li>Fixed “unknown type name ‘TNimType’ after importing typeinfo module”
+(<a href="https://github.com/Araq/Nim/issues/2841">#2841</a>)</li>
+  <li>Fixed “Can export a template twice and from inside a block”
+(<a href="https://github.com/Araq/Nim/issues/1738">#1738</a>)</li>
+  <li>Fixed “C Codegen: C Types are defined after their usage in certain cases”
+(<a href="https://github.com/Araq/Nim/issues/2823">#2823</a>)</li>
+  <li>Fixed “s.high refers to the current seq instead of the old one”
+(<a href="https://github.com/Araq/Nim/issues/1832">#1832</a>)</li>
+  <li>Fixed “Error while unmarshaling null values”
+(<a href="https://github.com/Araq/Nim/issues/3149">#3149</a>)</li>
+  <li>Fixed “Inference of <code class="language-plaintext highlighter-rouge">static[T]</code> in sequences”
+(<a href="https://github.com/Araq/Nim/issues/3144">#3144</a>)</li>
+  <li>Fixed “Argument named “closure” to proc inside template interfere with closure pragma”
+(<a href="https://github.com/Araq/Nim/issues/3171">#3171</a>)</li>
+  <li>Fixed “Internal error with aliasing inside template”
+(<a href="https://github.com/Araq/Nim/issues/3158">#3158</a>)</li>
+  <li>Fixed “Cardinality of sets prints unexpected value”
+(<a href="https://github.com/Araq/Nim/issues/3135">#3135</a>)</li>
+  <li>Fixed “Nim crashes on const assignment from function returning var ref object”
+(<a href="https://github.com/Araq/Nim/issues/3103">#3103</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">repr</code> cstring”
+(<a href="https://github.com/Araq/Nim/issues/3080">#3080</a>)</li>
+  <li>Fixed “Nim check crashes on wrong enum declaration”
+(<a href="https://github.com/Araq/Nim/issues/3052">#3052</a>)</li>
+  <li>Fixed “Compiler assertion when evaluating template with static[T]”
+(<a href="https://github.com/Araq/Nim/issues/1858">#1858</a>)</li>
+  <li>Fixed “Erroneous overflow in iterators when compiler built with overflowChecks enabled”
+(<a href="https://github.com/Araq/Nim/issues/3140">#3140</a>)</li>
+  <li>Fixed “Unicode dashes as “lisp’ish” alternative to hump and snake notation”
+(<a href="https://github.com/Araq/Nim/issues/2811">#2811</a>)</li>
+  <li>Fixed “Calling discardable proc from a defer is an error.”
+(<a href="https://github.com/Araq/Nim/issues/3185">#3185</a>)</li>
+  <li>Fixed “Defer statement at the end of a block produces ICE”
+(<a href="https://github.com/Araq/Nim/issues/3186">#3186</a>)</li>
+  <li>Fixed “Call to <code class="language-plaintext highlighter-rouge">createU</code> fails to compile”
+(<a href="https://github.com/Araq/Nim/issues/3193">#3193</a>)</li>
+  <li>Fixed “VM crash when accessing array’s element”
+(<a href="https://github.com/Araq/Nim/issues/3192">#3192</a>)</li>
+  <li>Fixed “Unexpected proc invoked when different modules add procs to a type from a 3rd module”
+(<a href="https://github.com/Araq/Nim/issues/2664">#2664</a>)</li>
+  <li>Fixed “Nim crashes on conditional declaration inside a template”
+(<a href="https://github.com/Araq/Nim/issues/2670">#2670</a>)</li>
+  <li>Fixed “Iterator names conflict within different scopes”
+(<a href="https://github.com/Araq/Nim/issues/2752">#2752</a>)</li>
+  <li>Fixed “VM: Cannot assign int value to ref variable”
+(<a href="https://github.com/Araq/Nim/issues/1329">#1329</a>)</li>
+  <li>Fixed “Incorrect code generated for tagged unions with enums not starting at zero”
+(<a href="https://github.com/Araq/Nim/issues/3096">#3096</a>)</li>
+  <li>Fixed “Compile time procs using forward declarations are silently ignored”
+(<a href="https://github.com/Araq/Nim/issues/3066">#3066</a>)</li>
+  <li>Fixed “re binding error in generic”
+(<a href="https://github.com/Araq/Nim/issues/1965">#1965</a>)</li>
+  <li>Fixed “os.getCreationTime is incorrect/impossible on Posix systems”
+(<a href="https://github.com/Araq/Nim/issues/1058">#1058</a>)</li>
+  <li>Fixed “Improve error message for osproc.startProcess when command does not exist”
+(<a href="https://github.com/Araq/Nim/issues/2183">#2183</a>)</li>
+  <li>Fixed “gctest segfaults with –gc:markandsweep on x86_64”
+(<a href="https://github.com/Araq/Nim/issues/2305">#2305</a>)</li>
+  <li>Fixed “Coroutine changes break compilation on unsupported architectures”
+(<a href="https://github.com/Araq/Nim/issues/3245">#3245</a>)</li>
+  <li>Fixed “Bugfix: Windows 32bit  TinyCC support issue fixed”
+(<a href="https://github.com/Araq/Nim/issues/3237">#3237</a>)</li>
+  <li>Fixed “db_mysql getValue() followed by exec() causing error”
+(<a href="https://github.com/Araq/Nim/issues/3220">#3220</a>)</li>
+  <li>Fixed “xmltree.newEntity creates xnCData instead of xnEntity”
+(<a href="https://github.com/Araq/Nim/issues/3282">#3282</a>)</li>
+  <li>Fixed “Methods and modules don’t work together”
+(<a href="https://github.com/Araq/Nim/issues/2590">#2590</a>)</li>
+  <li>Fixed “String slicing not working in the vm”
+(<a href="https://github.com/Araq/Nim/issues/3300">#3300</a>)</li>
+  <li>Fixed “internal error: evalOp(mTypeOf)”
+(<a href="https://github.com/Araq/Nim/issues/3230">#3230</a>)</li>
+  <li>Fixed “#! source code prefix collides with Unix Shebang”
+(<a href="https://github.com/Araq/Nim/issues/2559">#2559</a>)</li>
+  <li>Fixed “wrong codegen for constant object”
+(<a href="https://github.com/Araq/Nim/issues/3195">#3195</a>)</li>
+  <li>Fixed “Doc comments inside procs with implicit returns don’t work”
+(<a href="https://github.com/Araq/Nim/issues/1528">#1528</a>)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

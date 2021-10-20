@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.9.0 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.9.0 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Summary Unsigned integers have been added. The integer type promotion rules changed. The template and macro system evolved. Closures have been implemented. Term rewriting macros have been implemented. First steps to unify expressions and statements have been taken. Symbol lookup rules in generics have become stricter to catch more errors. Bugfixes Fixed a bug where the compiler would “optimize away” valid constant parts of a string concatenation. Fixed a bug concerning implicit type conversions in case statements. Fixed a serious code generation bug that caused algorithm.sort to produce segmentation faults. Fixed ambiguity in recvLine which meant that receiving \r\L was indistinguishable from disconnections. Many more bugfixes, too many to list them all. Library Additions Added the (already existing) module htmlgen to the documentation. Added the (already existing) module cookies to the documentation. Added system.shallow that can be used to speed up string and sequence assignments. Added system.eval that can execute an anonymous block of code at compile time as if was a macro. Added system.staticExec and system.gorge for compile-time execution of external programs. Added system.staticRead as a synonym for system.slurp. Added macros.emit that can emit an arbitrary computed string as nimrod code during compilation. Added strutils.parseEnum. Added json.% constructor operator. The stdlib can now be avoided to a point where C code generation for 16bit micro controllers is feasible. Added module oids. Added module endians. Added a new OpenGL wrapper that supports OpenGL up to version 4.2. Added a wrapper for libsvm. Added a wrapper for mongodb. Added terminal.isatty. Added an overload for system.items that can be used to iterate over the values of an enum. Added system.TInteger and system.TNumber type classes matching any of the corresponding types available in Nimrod. Added system.clamp to limit a value within an interval [a, b]. Added strutils.continuesWith. Added system.getStackTrace. Added system.|| for parallel for loop support. The GC supports (soft) realtime systems via GC_setMaxPause and GC_step procs. The sockets module now supports ssl through the OpenSSL library, recvLine is now much more efficient thanks to the newly implemented sockets buffering. The httpclient module now supports ssl/tls. Added times.format as well as many other utility functions for managing time. Added system.@ for converting an openarray to a seq (it used to only support fixed length arrays). Added system.compiles which can be used to check whether a type supports some operation. Added strutils.format, subexes.format which use the new varargs type. Added module fsmonitor. Changes affecting backwards compatibility On Windows filenames and paths are supposed to be in UTF-8. The system, os, osproc and memfiles modules use the wide string versions of the WinAPI. Use the -d:useWinAnsi switch to revert back to the old behaviour which uses the Ansi string versions. static, do, interface and mixin are now keywords. Templates now participate in overloading resolution which can break code that uses templates in subtle ways. Use the new immediate pragma for templates to get a template of old behaviour. There is now a proper distinction in the type system between expr and PNimrodNode which unfortunately breaks the old macro system. pegs.@ has been renamed to pegs.!* and pegs.@@ has been renamed to pegs.!*\ as @ operators now have different precedence. The type proc (without any params or return type) is now considered a type class matching all proc types. Use proc () to get the old meaning denoting a proc expecing no arguments and returning no value. Deprecated system.GC_setStrategy. re.findAll and pegs.findAll don’t return captures anymore but matching substrings. RTTI and thus the marshall module don’t contain the proper field names of tuples anymore. This had to be changed as the old behaviour never produced consistent results. Deprecated the ssl module. Deprecated nimrod pretty as it never worked good enough and has some inherent problems. The integer promotion rules changed; the compiler is now less picky in some situations and more picky in other situations: In particular implicit conversions from int to int32 are now forbidden. system.byte is now an alias for uint8; it used to be an alias to int8. bind expressions in templates are not properly supported anymore. Use the declarative bind statement instead. The default calling convention for a procedural type is now closure, for procs it remains nimcall (which is compatible to closure). Activate the warning ImplicitClosure to make the compiler list the occurrences of proc types which are affected. The Nimrod type system now distinguishes openarray from varargs. Templates are now hygienic. Use the dirty pragma to get the old behaviour. Objects that have no ancestor are now implicitly final. Use the inheritable pragma to introduce new object roots apart from TObject. Macros now receive parameters like templates do; use the callsite builtin to gain access to the invocation AST. Symbol lookup rules in generics have become stricter to catch more errors. Compiler Additions Win64 is now an officially supported target. The Nimrod compiler works on BSD again, but has some issues as os.getAppFilename and os.getAppDir cannot work reliably on BSD. The compiler can detect and evaluate calls that can be evaluated at compile time for optimization purposes with the --implicitStatic command line option or pragma. The compiler now generates marker procs that the GC can use instead of RTTI. This speeds up the GC quite a bit. The compiler now includes a new advanced documentation generator via the doc2 command. This new generator uses all of the semantic passes of the compiler and can thus generate documentation for symbols hiding in macros. The compiler now supports the dynlib pragma for variables. The compiler now supports bycopy and byref pragmas that affect how objects/tuples are passed. The embedded profiler became a stack trace profiler and has been documented. Language Additions Added explicit static sections for enforced compile time evaluation. Added an alternative notation for lambdas with do. addr is now treated like a prefix operator syntactically. Added global pragma that can be used to introduce new global variables from within procs. when expressions are now allowed just like if expressions. The precedence for operators starting with @ is different now allowing for sigil-like operators. Stand-alone finally and except blocks are now supported. Macros and templates can now be invoked as pragmas. The apostrophe in type suffixes for numerical literals is now optional. Unsigned integer types have been added. The integer promotion rules changed. Nimrod now tracks proper intervals for range over some built-in operators. In parameter lists a semicolon instead of a comma can be used to improve readability: proc divmod(a, b: int; resA, resB: var int). A semicolon can now be used to have multiple simple statements on a single line: inc i; inc j. bind supports overloaded symbols and operators. A distinct type can now borrow from generic procs. Added the pragmas gensym, inject and dirty for hygiene in templates. Comments can be continued with a backslash continuation character so that comment pieces don’t have to align on the same column. Enums can be annotated with pure so that their field names do not pollute the current scope. A proc body can consist of an expression that has a type. This is rewritten to result = expression then. Term rewriting macros (see trmacros) have been implemented but are still in alpha."> -->
+  <meta property="og:description" content="Summary Unsigned integers have been added. The integer type promotion rules changed. The template and macro system evolved. Closures have been implemented. Term rewriting macros have been implemented. First steps to unify expressions and statements have been taken. Symbol lookup rules in generics have become stricter to catch more errors. Bugfixes Fixed a bug where the compiler would “optimize away” valid constant parts of a string concatenation. Fixed a bug concerning implicit type conversions in case statements. Fixed a serious code generation bug that caused algorithm.sort to produce segmentation faults. Fixed ambiguity in recvLine which meant that receiving \r\L was indistinguishable from disconnections. Many more bugfixes, too many to list them all. Library Additions Added the (already existing) module htmlgen to the documentation. Added the (already existing) module cookies to the documentation. Added system.shallow that can be used to speed up string and sequence assignments. Added system.eval that can execute an anonymous block of code at compile time as if was a macro. Added system.staticExec and system.gorge for compile-time execution of external programs. Added system.staticRead as a synonym for system.slurp. Added macros.emit that can emit an arbitrary computed string as nimrod code during compilation. Added strutils.parseEnum. Added json.% constructor operator. The stdlib can now be avoided to a point where C code generation for 16bit micro controllers is feasible. Added module oids. Added module endians. Added a new OpenGL wrapper that supports OpenGL up to version 4.2. Added a wrapper for libsvm. Added a wrapper for mongodb. Added terminal.isatty. Added an overload for system.items that can be used to iterate over the values of an enum. Added system.TInteger and system.TNumber type classes matching any of the corresponding types available in Nimrod. Added system.clamp to limit a value within an interval [a, b]. Added strutils.continuesWith. Added system.getStackTrace. Added system.|| for parallel for loop support. The GC supports (soft) realtime systems via GC_setMaxPause and GC_step procs. The sockets module now supports ssl through the OpenSSL library, recvLine is now much more efficient thanks to the newly implemented sockets buffering. The httpclient module now supports ssl/tls. Added times.format as well as many other utility functions for managing time. Added system.@ for converting an openarray to a seq (it used to only support fixed length arrays). Added system.compiles which can be used to check whether a type supports some operation. Added strutils.format, subexes.format which use the new varargs type. Added module fsmonitor. Changes affecting backwards compatibility On Windows filenames and paths are supposed to be in UTF-8. The system, os, osproc and memfiles modules use the wide string versions of the WinAPI. Use the -d:useWinAnsi switch to revert back to the old behaviour which uses the Ansi string versions. static, do, interface and mixin are now keywords. Templates now participate in overloading resolution which can break code that uses templates in subtle ways. Use the new immediate pragma for templates to get a template of old behaviour. There is now a proper distinction in the type system between expr and PNimrodNode which unfortunately breaks the old macro system. pegs.@ has been renamed to pegs.!* and pegs.@@ has been renamed to pegs.!*\ as @ operators now have different precedence. The type proc (without any params or return type) is now considered a type class matching all proc types. Use proc () to get the old meaning denoting a proc expecing no arguments and returning no value. Deprecated system.GC_setStrategy. re.findAll and pegs.findAll don’t return captures anymore but matching substrings. RTTI and thus the marshall module don’t contain the proper field names of tuples anymore. This had to be changed as the old behaviour never produced consistent results. Deprecated the ssl module. Deprecated nimrod pretty as it never worked good enough and has some inherent problems. The integer promotion rules changed; the compiler is now less picky in some situations and more picky in other situations: In particular implicit conversions from int to int32 are now forbidden. system.byte is now an alias for uint8; it used to be an alias to int8. bind expressions in templates are not properly supported anymore. Use the declarative bind statement instead. The default calling convention for a procedural type is now closure, for procs it remains nimcall (which is compatible to closure). Activate the warning ImplicitClosure to make the compiler list the occurrences of proc types which are affected. The Nimrod type system now distinguishes openarray from varargs. Templates are now hygienic. Use the dirty pragma to get the old behaviour. Objects that have no ancestor are now implicitly final. Use the inheritable pragma to introduce new object roots apart from TObject. Macros now receive parameters like templates do; use the callsite builtin to gain access to the invocation AST. Symbol lookup rules in generics have become stricter to catch more errors. Compiler Additions Win64 is now an officially supported target. The Nimrod compiler works on BSD again, but has some issues as os.getAppFilename and os.getAppDir cannot work reliably on BSD. The compiler can detect and evaluate calls that can be evaluated at compile time for optimization purposes with the --implicitStatic command line option or pragma. The compiler now generates marker procs that the GC can use instead of RTTI. This speeds up the GC quite a bit. The compiler now includes a new advanced documentation generator via the doc2 command. This new generator uses all of the semantic passes of the compiler and can thus generate documentation for symbols hiding in macros. The compiler now supports the dynlib pragma for variables. The compiler now supports bycopy and byref pragmas that affect how objects/tuples are passed. The embedded profiler became a stack trace profiler and has been documented. Language Additions Added explicit static sections for enforced compile time evaluation. Added an alternative notation for lambdas with do. addr is now treated like a prefix operator syntactically. Added global pragma that can be used to introduce new global variables from within procs. when expressions are now allowed just like if expressions. The precedence for operators starting with @ is different now allowing for sigil-like operators. Stand-alone finally and except blocks are now supported. Macros and templates can now be invoked as pragmas. The apostrophe in type suffixes for numerical literals is now optional. Unsigned integer types have been added. The integer promotion rules changed. Nimrod now tracks proper intervals for range over some built-in operators. In parameter lists a semicolon instead of a comma can be used to improve readability: proc divmod(a, b: int; resA, resB: var int). A semicolon can now be used to have multiple simple statements on a single line: inc i; inc j. bind supports overloaded symbols and operators. A distinct type can now borrow from generic procs. Added the pragmas gensym, inject and dirty for hygiene in templates. Comments can be continued with a backslash continuation character so that comment pieces don’t have to align on the same column. Enums can be annotated with pure so that their field names do not pollute the current scope. A proc body can consist of an expression that has a type. This is rewritten to result = expression then. Term rewriting macros (see trmacros) have been implemented but are still in alpha.">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.9.0 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.9.0 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              23 September 2012
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Andreas Rumpf
+            </span>
+            
+          </h3>
+          <h2 id="summary">Summary</h2>
+<ul>
+  <li>Unsigned integers have been added.</li>
+  <li>The integer type promotion rules changed.</li>
+  <li>The template and macro system evolved.</li>
+  <li>Closures have been implemented.</li>
+  <li>Term rewriting macros have been implemented.</li>
+  <li>First steps to unify expressions and statements have been taken.</li>
+  <li>Symbol lookup rules in generics have become stricter to catch more errors.</li>
+</ul>
+
+<h2 id="bugfixes">Bugfixes</h2>
+
+<ul>
+  <li>Fixed a bug where the compiler would “optimize away” valid constant parts of
+a string concatenation.</li>
+  <li>Fixed a bug concerning implicit type conversions in <code class="language-plaintext highlighter-rouge">case</code> statements.</li>
+  <li>Fixed a serious code generation bug that caused <code class="language-plaintext highlighter-rouge">algorithm.sort</code> to
+produce segmentation faults.</li>
+  <li>Fixed ambiguity in recvLine which meant that receiving <code class="language-plaintext highlighter-rouge">\r\L</code> was
+indistinguishable from disconnections.</li>
+  <li>Many more bugfixes, too many to list them all.</li>
+</ul>
+
+<h2 id="library-additions">Library Additions</h2>
+
+<ul>
+  <li>Added the (already existing) module <code class="language-plaintext highlighter-rouge">htmlgen</code> to the documentation.</li>
+  <li>Added the (already existing) module <code class="language-plaintext highlighter-rouge">cookies</code> to the documentation.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.shallow</code> that can be used to speed up string and sequence
+assignments.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.eval</code> that can execute an anonymous block of code at
+compile time as if was a macro.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.staticExec</code> and <code class="language-plaintext highlighter-rouge">system.gorge</code> for compile-time execution
+of external programs.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.staticRead</code> as a synonym for <code class="language-plaintext highlighter-rouge">system.slurp</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">macros.emit</code> that can emit an arbitrary computed string as nimrod
+code during compilation.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">strutils.parseEnum</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">json.%</code> constructor operator.</li>
+  <li>The stdlib can now be avoided to a point where C code generation for 16bit
+micro controllers is feasible.</li>
+  <li>Added module <code class="language-plaintext highlighter-rouge">oids</code>.</li>
+  <li>Added module <code class="language-plaintext highlighter-rouge">endians</code>.</li>
+  <li>Added a new OpenGL wrapper that supports OpenGL up to version 4.2.</li>
+  <li>Added a wrapper for <code class="language-plaintext highlighter-rouge">libsvm</code>.</li>
+  <li>Added a wrapper for <code class="language-plaintext highlighter-rouge">mongodb</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">terminal.isatty</code>.</li>
+  <li>Added an overload for <code class="language-plaintext highlighter-rouge">system.items</code> that can be used to iterate over the
+values of an enum.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.TInteger</code> and <code class="language-plaintext highlighter-rouge">system.TNumber</code> type classes matching
+any of the corresponding types available in Nimrod.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.clamp</code> to limit a value within an interval <code class="language-plaintext highlighter-rouge">[a, b]</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">strutils.continuesWith</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.getStackTrace</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.||</code> for parallel <code class="language-plaintext highlighter-rouge">for</code> loop support.</li>
+  <li>The GC supports (soft) realtime systems via <code class="language-plaintext highlighter-rouge">GC_setMaxPause</code>
+and <code class="language-plaintext highlighter-rouge">GC_step</code> procs.</li>
+  <li>The sockets module now supports ssl through the OpenSSL library, <code class="language-plaintext highlighter-rouge">recvLine</code>
+is now much more efficient thanks to the newly implemented sockets buffering.</li>
+  <li>The httpclient module now supports ssl/tls.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">times.format</code> as well as many other utility functions
+for managing time.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.@</code> for converting an <code class="language-plaintext highlighter-rouge">openarray</code> to a <code class="language-plaintext highlighter-rouge">seq</code> (it used to
+only support fixed length arrays).</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.compiles</code> which can be used to check whether a type supports
+some operation.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">strutils.format</code>, <code class="language-plaintext highlighter-rouge">subexes.format</code> which use the
+new <code class="language-plaintext highlighter-rouge">varargs</code> type.</li>
+  <li>Added module <code class="language-plaintext highlighter-rouge">fsmonitor</code>.</li>
+</ul>
+
+<h2 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h2>
+
+<ul>
+  <li>On Windows filenames and paths are supposed to be in UTF-8.
+The <code class="language-plaintext highlighter-rouge">system</code>, <code class="language-plaintext highlighter-rouge">os</code>, <code class="language-plaintext highlighter-rouge">osproc</code> and <code class="language-plaintext highlighter-rouge">memfiles</code> modules use the wide
+string versions of the WinAPI. Use the <code class="language-plaintext highlighter-rouge">-d:useWinAnsi</code> switch to revert
+back to the old behaviour which uses the Ansi string versions.</li>
+  <li><code class="language-plaintext highlighter-rouge">static</code>, <code class="language-plaintext highlighter-rouge">do</code>, <code class="language-plaintext highlighter-rouge">interface</code> and <code class="language-plaintext highlighter-rouge">mixin</code> are now keywords.</li>
+  <li>Templates now participate in overloading resolution which can break code that
+uses templates in subtle ways. Use the new <code class="language-plaintext highlighter-rouge">immediate</code> pragma for templates
+to get a template of old behaviour.</li>
+  <li>There is now a proper distinction in the type system between <code class="language-plaintext highlighter-rouge">expr</code> and
+<code class="language-plaintext highlighter-rouge">PNimrodNode</code> which unfortunately breaks the old macro system.</li>
+  <li><code class="language-plaintext highlighter-rouge">pegs.@</code> has been renamed to <code class="language-plaintext highlighter-rouge">pegs.!*</code> and <code class="language-plaintext highlighter-rouge">pegs.@@</code> has been renamed
+to <code class="language-plaintext highlighter-rouge">pegs.!*\</code> as <code class="language-plaintext highlighter-rouge">@</code> operators now have different precedence.</li>
+  <li>The type <code class="language-plaintext highlighter-rouge">proc</code> (without any params or return type) is now considered a
+type class matching all proc types. Use <code class="language-plaintext highlighter-rouge">proc ()</code> to get the old meaning
+denoting a proc expecing no arguments and returning no value.</li>
+  <li>Deprecated <code class="language-plaintext highlighter-rouge">system.GC_setStrategy</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">re.findAll</code> and <code class="language-plaintext highlighter-rouge">pegs.findAll</code> don’t return <em>captures</em> anymore but
+matching <em>substrings</em>.</li>
+  <li>RTTI and thus the <code class="language-plaintext highlighter-rouge">marshall</code> module don’t contain the proper field names
+of tuples anymore. This had to be changed as the old behaviour never
+produced consistent results.</li>
+  <li>Deprecated the <code class="language-plaintext highlighter-rouge">ssl</code> module.</li>
+  <li>Deprecated <code class="language-plaintext highlighter-rouge">nimrod pretty</code> as it never worked good enough and has some
+inherent problems.</li>
+  <li>The integer promotion rules changed; the compiler is now less picky in some
+situations and more picky in other situations: In particular implicit
+conversions from <code class="language-plaintext highlighter-rouge">int</code> to <code class="language-plaintext highlighter-rouge">int32</code> are now forbidden.</li>
+  <li><code class="language-plaintext highlighter-rouge">system.byte</code> is now an alias for <code class="language-plaintext highlighter-rouge">uint8</code>; it used to be an alias
+to <code class="language-plaintext highlighter-rouge">int8</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">bind</code> expressions in templates are not properly supported anymore. Use
+the declarative <code class="language-plaintext highlighter-rouge">bind</code> statement instead.</li>
+  <li>The default calling convention for a procedural <strong>type</strong> is now <code class="language-plaintext highlighter-rouge">closure</code>,
+for procs it remains <code class="language-plaintext highlighter-rouge">nimcall</code> (which is compatible to <code class="language-plaintext highlighter-rouge">closure</code>).
+Activate the warning <code class="language-plaintext highlighter-rouge">ImplicitClosure</code> to make the compiler list the
+occurrences of proc types which are affected.</li>
+  <li>The Nimrod type system now distinguishes <code class="language-plaintext highlighter-rouge">openarray</code> from <code class="language-plaintext highlighter-rouge">varargs</code>.</li>
+  <li>Templates are now <code class="language-plaintext highlighter-rouge">hygienic</code>. Use the <code class="language-plaintext highlighter-rouge">dirty</code> pragma to get the old
+behaviour.</li>
+  <li>Objects that have no ancestor are now implicitly <code class="language-plaintext highlighter-rouge">final</code>. Use
+the <code class="language-plaintext highlighter-rouge">inheritable</code> pragma to introduce new object roots apart
+from <code class="language-plaintext highlighter-rouge">TObject</code>.</li>
+  <li>Macros now receive parameters like templates do; use the <code class="language-plaintext highlighter-rouge">callsite</code> builtin
+to gain access to the invocation AST.</li>
+  <li>Symbol lookup rules in generics have become stricter to catch more errors.</li>
+</ul>
+
+<h2 id="compiler-additions">Compiler Additions</h2>
+
+<ul>
+  <li>Win64 is now an officially supported target.</li>
+  <li>The Nimrod compiler works on BSD again, but has some issues
+as <code class="language-plaintext highlighter-rouge">os.getAppFilename</code> and <code class="language-plaintext highlighter-rouge">os.getAppDir</code> cannot work reliably on BSD.</li>
+  <li>The compiler can detect and evaluate calls that can be evaluated at compile
+time for optimization purposes with the <code class="language-plaintext highlighter-rouge">--implicitStatic</code> command line
+option or pragma.</li>
+  <li>The compiler now generates marker procs that the GC can use instead of RTTI.
+This speeds up the GC quite a bit.</li>
+  <li>The compiler now includes a new advanced documentation generator
+via the <code class="language-plaintext highlighter-rouge">doc2</code> command. This new generator uses all of the semantic passes
+of the compiler and can thus generate documentation for symbols hiding in
+macros.</li>
+  <li>The compiler now supports the <code class="language-plaintext highlighter-rouge">dynlib</code> pragma for variables.</li>
+  <li>The compiler now supports <code class="language-plaintext highlighter-rouge">bycopy</code> and <code class="language-plaintext highlighter-rouge">byref</code> pragmas that affect how
+objects/tuples are passed.</li>
+  <li>The embedded profiler became a stack trace profiler and has been documented.</li>
+</ul>
+
+<h2 id="language-additions">Language Additions</h2>
+
+<ul>
+  <li>Added explicit <code class="language-plaintext highlighter-rouge">static</code> sections for enforced compile time evaluation.</li>
+  <li>Added an alternative notation for lambdas with <code class="language-plaintext highlighter-rouge">do</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">addr</code> is now treated like a prefix operator syntactically.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">global</code> pragma that can be used to introduce new global variables
+from within procs.</li>
+  <li><code class="language-plaintext highlighter-rouge">when</code> expressions are now allowed just like <code class="language-plaintext highlighter-rouge">if</code> expressions.</li>
+  <li>The precedence for operators starting with <code class="language-plaintext highlighter-rouge">@</code> is different now
+allowing for <em>sigil-like</em> operators.</li>
+  <li>Stand-alone <code class="language-plaintext highlighter-rouge">finally</code> and <code class="language-plaintext highlighter-rouge">except</code> blocks are now supported.</li>
+  <li>Macros and templates can now be invoked as pragmas.</li>
+  <li>The apostrophe in type suffixes for numerical literals is now optional.</li>
+  <li>Unsigned integer types have been added.</li>
+  <li>The integer promotion rules changed.</li>
+  <li>Nimrod now tracks proper intervals for <code class="language-plaintext highlighter-rouge">range</code> over some built-in operators.</li>
+  <li>In parameter lists a semicolon instead of a comma can be used to improve
+readability: <code class="language-plaintext highlighter-rouge">proc divmod(a, b: int; resA, resB: var int)</code>.</li>
+  <li>A semicolon can now be used to have multiple simple statements on a single
+line: <code class="language-plaintext highlighter-rouge">inc i; inc j</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">bind</code> supports overloaded symbols and operators.</li>
+  <li>A <code class="language-plaintext highlighter-rouge">distinct</code> type can now borrow from generic procs.</li>
+  <li>Added the pragmas <code class="language-plaintext highlighter-rouge">gensym</code>, <code class="language-plaintext highlighter-rouge">inject</code> and <code class="language-plaintext highlighter-rouge">dirty</code> for hygiene
+in templates.</li>
+  <li>Comments can be continued with a backslash continuation character so that
+comment pieces don’t have to align on the same column.</li>
+  <li>Enums can be annotated with <code class="language-plaintext highlighter-rouge">pure</code> so that their field names do not pollute
+the current scope.</li>
+  <li>A proc body can consist of an expression that has a type. This is rewritten
+to <code class="language-plaintext highlighter-rouge">result = expression</code> then.</li>
+  <li>Term rewriting macros (see
+<a href="https://nim-lang.org/docs/manual.html#term-rewriting-macros">trmacros</a>)
+have been implemented but are still in alpha.</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

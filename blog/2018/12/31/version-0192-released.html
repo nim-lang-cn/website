@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.19.2 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.19.2 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="The Nim team is happy to announce that the latest release of Nim, version 0.19.2, is now available. Nim is a systems programming language that focuses on performance, portability and expressiveness. This is mostly a bugfix release of version 0.19.0. It adds RISC-V support and there are no breaking changes. The most important bugfixes are: spawn can handle the empty seqs/strings that are internally represented as nil. The most pressing bugs of the documentation generator have been fixed. async streaming of the httpclient has been fixed. Installing 0.19.2 If you have installed a previous version of Nim using choosenim, getting Nim 0.19.2 is as easy as: $ choosenim update stable If you don’t have it already, you can get choosenim by following these instructions or you can install Nim by following the instructions on our install page. Compiler changes Added support for the RISC-V 64 bit architecture named riscv64 (e.g. HiFive) Bugfixes Fixed “Nim 0.19.0 docs have incorrect Source/Edit links” (#9083) Fixed “Json: compilation fails with aliased type” (#9111) Fixed “https://nim-lang.org/docs/nre.html gives 404 error” (#9119) Fixed “Leaving \\ at the end of a path in copyDir removes every file’s first char” (#9126) Fixed “nim doc SIGSEGV: Illegal storage access.” (#9140) Fixed “[doc] List of broken links in the doc site” (#9109) Fixed “Fix incorrect examples in nre docs” (#9053) Fixed “Clean up root of repo and release archives” (#4934) Fixed “Concept/converter/generics-related compiler crash” (#7351) Fixed “converter + concept causes compiler to quit without error” (#6249) Fixed “Error: internal error” (#6533) Fixed “Methods break static[T] (internal error: nesting too deep)” (#5479) Fixed “Memory error when checking if a variable is a string in concept” (#7092) Fixed “Internal error when using array of procs” (#5015) Fixed “[Regression] Compiler crash on proc with static, used to compile in nim 0.16” (#5868) Fixed “fixes/8099” (#8451) Fixed “distinct generic typeclass not treated as distinct” (#4435) Fixed “multiple dynlib pragmas with function calls conflict with each other causing link time error” (#9222) Fixed “\0 in comment replaced with 0 in docs” (#8841) Fixed “Async readAll in httpclient produces garbled output.” (#8994) Fixed “runnableExamples should be run by nim doc even if symbol is not public” (#9216) Fixed “[regression] project config.nims not being read anymore” (#9264) Fixed “Using iterator within another iterator fails” (#3819) Fixed “nim js -o:dirname main.nim writes nothing, and no error shown” (#9154) Fixed “devel docs in nim-lang.github.io Source links point to master instead of devel” (#9295) Fixed “Regular Expressions: replacing empty patterns only works correctly in nre” (#9306) Fixed “counting the empty substring in a string results in infinite loop” (#8919) Fixed “[nimpretty] raw strings are transformed into normal strings” (#9236) Fixed “[nimpretty] proc is transfered to incorrect code” (#8626) Fixed “[nimpretty] Additional new line is added with each format” (#9144) Fixed ““%NIM%/config/nim.cfg” is not being read” (#9244) Fixed “Illegal capture on async proc (except when the argument is seq)” (#2361) Fixed “Jsondoc0 doesn’t output module comments.” (#9364) Fixed “NimPretty has troubles with source code filter” (#9384) Fixed “tfragment_gc test is flaky on OSX” (#9421) Fixed “ansi color code templates fail to bind symbols” (#9394) Fixed “SIGSEGV when converting lines to closure iterator, most likely caused by defer” (#5321) Fixed “Compiler crash when creating a variant type” (#6220) Fixed “old changelogs should be kept instead of erased” (#9376) Fixed “Crash when closing an unopened file on debian 8.” (#9456) Fixed “nimpretty joins regular and doc comment” (#9400) Fixed “nimpretty changes indentation level of trailing comment” (#9398) Fixed “Some bugs with nimpretty” (#8078) Fixed “nimpretty not idempotent: keeps adding newlines below block comment” (#9483) Fixed “nimpretty shouldn’t format differently whether there’s a top-level newline” (#9484) Fixed “nimpretty shouldn’t change file modif time if no changes =&gt; use os.updateFile” (#9499) Fixed “nimpretty adds a space before type, ptr, ref, object in wrong places” (#9504) Fixed “nimpretty badly indents block comment” (#9500) Fixed “nimpretty wrongly adds empty newlines inside proc signature” (#9506) Fixed “Duplicate definition in cpp codegen” (#6986) Fixed “nim doc strutils.nim fails on 32 bit compiler with AssertionError on a RunnableExample” (#9525) Fixed “using Selectors, Error: undeclared field: ‘OSErrorCode’” (#7667) Fixed “strutils.multiReplace() crashes if search string is “”” (#9557) Fixed “Type which followed by a function and generated by a template will not shown in docs generated by nim doc” (#9235) Fixed “Module docs: 2 suggestions…” (#5525) Fixed “Missing docstrings are replaced with other text” (#9169) Fixed “templates expand doc comments as documentation of other procedures” (#9432) Fixed “Path in error message has ..\..\..\..\..\ prefix since 0.19.0” (#9556) Fixed “Nim/compiler/pathutils.nim(226, 12) canon"/foo/../bar" == "/bar" [AssertionError]” (#9507) Fixed “[Regression] Borrow stringify operator no longer works as expected” (#9322) Fixed “[NimScript] Error: arguments can only be given if the ‘–run’ option is selected” (#9246) Fixed “nim check: internal error: (filename: "vmgen.nim", line: 1119, column: 19)” (#9609) Fixed “optInd missing indent specification in grammar.txt” (#9608) Fixed “nimpretty should hardcode indentation amount to 2 spaces” (#9502) Fixed “Nimpretty adds instead of removes incorrect spacing inside backticks” (#9673) Fixed “Compiler segfault (stack overflow) compiling code on 0.19.0 that works on 0.18.0” (#9694)"> -->
+  <meta property="og:description" content="The Nim team is happy to announce that the latest release of Nim, version 0.19.2, is now available. Nim is a systems programming language that focuses on performance, portability and expressiveness. This is mostly a bugfix release of version 0.19.0. It adds RISC-V support and there are no breaking changes. The most important bugfixes are: spawn can handle the empty seqs/strings that are internally represented as nil. The most pressing bugs of the documentation generator have been fixed. async streaming of the httpclient has been fixed. Installing 0.19.2 If you have installed a previous version of Nim using choosenim, getting Nim 0.19.2 is as easy as: $ choosenim update stable If you don’t have it already, you can get choosenim by following these instructions or you can install Nim by following the instructions on our install page. Compiler changes Added support for the RISC-V 64 bit architecture named riscv64 (e.g. HiFive) Bugfixes Fixed “Nim 0.19.0 docs have incorrect Source/Edit links” (#9083) Fixed “Json: compilation fails with aliased type” (#9111) Fixed “https://nim-lang.org/docs/nre.html gives 404 error” (#9119) Fixed “Leaving \\ at the end of a path in copyDir removes every file’s first char” (#9126) Fixed “nim doc SIGSEGV: Illegal storage access.” (#9140) Fixed “[doc] List of broken links in the doc site” (#9109) Fixed “Fix incorrect examples in nre docs” (#9053) Fixed “Clean up root of repo and release archives” (#4934) Fixed “Concept/converter/generics-related compiler crash” (#7351) Fixed “converter + concept causes compiler to quit without error” (#6249) Fixed “Error: internal error” (#6533) Fixed “Methods break static[T] (internal error: nesting too deep)” (#5479) Fixed “Memory error when checking if a variable is a string in concept” (#7092) Fixed “Internal error when using array of procs” (#5015) Fixed “[Regression] Compiler crash on proc with static, used to compile in nim 0.16” (#5868) Fixed “fixes/8099” (#8451) Fixed “distinct generic typeclass not treated as distinct” (#4435) Fixed “multiple dynlib pragmas with function calls conflict with each other causing link time error” (#9222) Fixed “\0 in comment replaced with 0 in docs” (#8841) Fixed “Async readAll in httpclient produces garbled output.” (#8994) Fixed “runnableExamples should be run by nim doc even if symbol is not public” (#9216) Fixed “[regression] project config.nims not being read anymore” (#9264) Fixed “Using iterator within another iterator fails” (#3819) Fixed “nim js -o:dirname main.nim writes nothing, and no error shown” (#9154) Fixed “devel docs in nim-lang.github.io Source links point to master instead of devel” (#9295) Fixed “Regular Expressions: replacing empty patterns only works correctly in nre” (#9306) Fixed “counting the empty substring in a string results in infinite loop” (#8919) Fixed “[nimpretty] raw strings are transformed into normal strings” (#9236) Fixed “[nimpretty] proc is transfered to incorrect code” (#8626) Fixed “[nimpretty] Additional new line is added with each format” (#9144) Fixed ““%NIM%/config/nim.cfg” is not being read” (#9244) Fixed “Illegal capture on async proc (except when the argument is seq)” (#2361) Fixed “Jsondoc0 doesn’t output module comments.” (#9364) Fixed “NimPretty has troubles with source code filter” (#9384) Fixed “tfragment_gc test is flaky on OSX” (#9421) Fixed “ansi color code templates fail to bind symbols” (#9394) Fixed “SIGSEGV when converting lines to closure iterator, most likely caused by defer” (#5321) Fixed “Compiler crash when creating a variant type” (#6220) Fixed “old changelogs should be kept instead of erased” (#9376) Fixed “Crash when closing an unopened file on debian 8.” (#9456) Fixed “nimpretty joins regular and doc comment” (#9400) Fixed “nimpretty changes indentation level of trailing comment” (#9398) Fixed “Some bugs with nimpretty” (#8078) Fixed “nimpretty not idempotent: keeps adding newlines below block comment” (#9483) Fixed “nimpretty shouldn’t format differently whether there’s a top-level newline” (#9484) Fixed “nimpretty shouldn’t change file modif time if no changes =&gt; use os.updateFile” (#9499) Fixed “nimpretty adds a space before type, ptr, ref, object in wrong places” (#9504) Fixed “nimpretty badly indents block comment” (#9500) Fixed “nimpretty wrongly adds empty newlines inside proc signature” (#9506) Fixed “Duplicate definition in cpp codegen” (#6986) Fixed “nim doc strutils.nim fails on 32 bit compiler with AssertionError on a RunnableExample” (#9525) Fixed “using Selectors, Error: undeclared field: ‘OSErrorCode’” (#7667) Fixed “strutils.multiReplace() crashes if search string is “”” (#9557) Fixed “Type which followed by a function and generated by a template will not shown in docs generated by nim doc” (#9235) Fixed “Module docs: 2 suggestions…” (#5525) Fixed “Missing docstrings are replaced with other text” (#9169) Fixed “templates expand doc comments as documentation of other procedures” (#9432) Fixed “Path in error message has ..\..\..\..\..\ prefix since 0.19.0” (#9556) Fixed “Nim/compiler/pathutils.nim(226, 12) canon"/foo/../bar" == "/bar" [AssertionError]” (#9507) Fixed “[Regression] Borrow stringify operator no longer works as expected” (#9322) Fixed “[NimScript] Error: arguments can only be given if the ‘–run’ option is selected” (#9246) Fixed “nim check: internal error: (filename: "vmgen.nim", line: 1119, column: 19)” (#9609) Fixed “optInd missing indent specification in grammar.txt” (#9608) Fixed “nimpretty should hardcode indentation amount to 2 spaces” (#9502) Fixed “Nimpretty adds instead of removes incorrect spacing inside backticks” (#9673) Fixed “Compiler segfault (stack overflow) compiling code on 0.19.0 that works on 0.18.0” (#9694)">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.19.2 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.19.2 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              31 December 2018
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              The Nim Team
+            </span>
+            
+          </h3>
+          <p>The Nim team is happy to announce that the latest release of Nim,
+version 0.19.2, is now available. Nim is a systems programming language that
+focuses on performance, portability and expressiveness.</p>
+
+<p>This is mostly a bugfix release of version 0.19.0.
+It adds RISC-V support and there are no breaking changes.
+The most important bugfixes are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">spawn</code> can handle the empty seqs/strings that are internally
+represented as <code class="language-plaintext highlighter-rouge">nil</code>.</li>
+  <li>The most pressing bugs of the documentation generator have been fixed.</li>
+  <li>async streaming of the httpclient has been fixed.</li>
+</ul>
+
+<h2 id="installing-0192">Installing 0.19.2</h2>
+
+<p>If you have installed a previous version of Nim using <code class="language-plaintext highlighter-rouge">choosenim</code>,
+getting Nim 0.19.2 is as easy as:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>choosenim update stable
+</code></pre></div></div>
+
+<p>If you don’t have it already, you can get <code class="language-plaintext highlighter-rouge">choosenim</code> by following
+<a href="https://github.com/dom96/choosenim">these instructions</a> or you can install
+Nim by following the instructions on our
+<a href="https://nim-lang.org/install.html">install</a> page.</p>
+
+<h3 id="compiler-changes">Compiler changes</h3>
+
+<ul>
+  <li>Added support for the RISC-V 64 bit architecture named riscv64
+(e.g. <a href="https://www.sifive.com/boards/hifive-unleashed">HiFive</a>)</li>
+</ul>
+
+<h3 id="bugfixes">Bugfixes</h3>
+
+<ul>
+  <li>Fixed “Nim 0.19.0 docs have incorrect Source/Edit links”
+(<a href="https://github.com/nim-lang/Nim/issues/9083">#9083</a>)</li>
+  <li>Fixed “Json: compilation fails with aliased type”
+(<a href="https://github.com/nim-lang/Nim/issues/9111">#9111</a>)</li>
+  <li>Fixed “https://nim-lang.org/docs/nre.html gives 404 error”
+(<a href="https://github.com/nim-lang/Nim/issues/9119">#9119</a>)</li>
+  <li>Fixed “Leaving <code class="language-plaintext highlighter-rouge">\\</code> at the end of a path in <code class="language-plaintext highlighter-rouge">copyDir</code> removes every file’s first char”
+(<a href="https://github.com/nim-lang/Nim/issues/9126">#9126</a>)</li>
+  <li>Fixed “nim doc SIGSEGV: Illegal storage access.”
+(<a href="https://github.com/nim-lang/Nim/issues/9140">#9140</a>)</li>
+  <li>Fixed “[doc] List of broken links in the doc site”
+(<a href="https://github.com/nim-lang/Nim/issues/9109">#9109</a>)</li>
+  <li>Fixed “Fix incorrect examples in nre docs”
+(<a href="https://github.com/nim-lang/Nim/issues/9053">#9053</a>)</li>
+  <li>Fixed “Clean up root of repo and release archives”
+(<a href="https://github.com/nim-lang/Nim/issues/4934">#4934</a>)</li>
+  <li>Fixed “Concept/converter/generics-related compiler crash”
+(<a href="https://github.com/nim-lang/Nim/issues/7351">#7351</a>)</li>
+  <li>Fixed “converter + concept causes compiler to quit without error”
+(<a href="https://github.com/nim-lang/Nim/issues/6249">#6249</a>)</li>
+  <li>Fixed “Error: internal error”
+(<a href="https://github.com/nim-lang/Nim/issues/6533">#6533</a>)</li>
+  <li>Fixed “Methods break static[T] (internal error: nesting too deep)”
+(<a href="https://github.com/nim-lang/Nim/issues/5479">#5479</a>)</li>
+  <li>Fixed “Memory error when checking if a variable is a string in concept”
+(<a href="https://github.com/nim-lang/Nim/issues/7092">#7092</a>)</li>
+  <li>Fixed “Internal error when using array of procs”
+(<a href="https://github.com/nim-lang/Nim/issues/5015">#5015</a>)</li>
+  <li>Fixed “[Regression] Compiler crash on proc with static, used to compile in nim 0.16”
+(<a href="https://github.com/nim-lang/Nim/issues/5868">#5868</a>)</li>
+  <li>Fixed “fixes/8099”
+(<a href="https://github.com/nim-lang/Nim/issues/8451">#8451</a>)</li>
+  <li>Fixed “distinct generic typeclass not treated as distinct”
+(<a href="https://github.com/nim-lang/Nim/issues/4435">#4435</a>)</li>
+  <li>Fixed “multiple dynlib pragmas with function calls conflict with each other causing link time error”
+(<a href="https://github.com/nim-lang/Nim/issues/9222">#9222</a>)</li>
+  <li>Fixed “\0 in comment replaced with 0 in docs”
+(<a href="https://github.com/nim-lang/Nim/issues/8841">#8841</a>)</li>
+  <li>Fixed “Async readAll in httpclient produces garbled output.”
+(<a href="https://github.com/nim-lang/Nim/issues/8994">#8994</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">runnableExamples</code> should be run by <code class="language-plaintext highlighter-rouge">nim doc</code> even if symbol is not public”
+(<a href="https://github.com/nim-lang/Nim/issues/9216">#9216</a>)</li>
+  <li>Fixed “[regression] project <code class="language-plaintext highlighter-rouge">config.nims</code> not being read anymore”
+(<a href="https://github.com/nim-lang/Nim/issues/9264">#9264</a>)</li>
+  <li>Fixed “Using iterator within another iterator fails”
+(<a href="https://github.com/nim-lang/Nim/issues/3819">#3819</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">nim js -o:dirname main.nim</code> writes nothing, and no error shown”
+(<a href="https://github.com/nim-lang/Nim/issues/9154">#9154</a>)</li>
+  <li>Fixed “devel docs in nim-lang.github.io <code class="language-plaintext highlighter-rouge">Source</code> links point to master instead of devel”
+(<a href="https://github.com/nim-lang/Nim/issues/9295">#9295</a>)</li>
+  <li>Fixed “Regular Expressions: replacing empty patterns only works correctly in nre”
+(<a href="https://github.com/nim-lang/Nim/issues/9306">#9306</a>)</li>
+  <li>Fixed “counting the empty substring in a string results in infinite loop”
+(<a href="https://github.com/nim-lang/Nim/issues/8919">#8919</a>)</li>
+  <li>Fixed “[nimpretty] raw strings are transformed into normal strings”
+(<a href="https://github.com/nim-lang/Nim/issues/9236">#9236</a>)</li>
+  <li>Fixed “[nimpretty] proc is transfered to incorrect code”
+(<a href="https://github.com/nim-lang/Nim/issues/8626">#8626</a>)</li>
+  <li>Fixed “[nimpretty] Additional new line is added with each format”
+(<a href="https://github.com/nim-lang/Nim/issues/9144">#9144</a>)</li>
+  <li>Fixed ““%NIM%/config/nim.cfg” is not being read”
+(<a href="https://github.com/nim-lang/Nim/issues/9244">#9244</a>)</li>
+  <li>Fixed “Illegal capture on async proc (except when the argument is <code class="language-plaintext highlighter-rouge">seq</code>)”
+(<a href="https://github.com/nim-lang/Nim/issues/2361">#2361</a>)</li>
+  <li>Fixed “Jsondoc0 doesn’t output module comments.”
+(<a href="https://github.com/nim-lang/Nim/issues/9364">#9364</a>)</li>
+  <li>Fixed “NimPretty has troubles with source code filter”
+(<a href="https://github.com/nim-lang/Nim/issues/9384">#9384</a>)</li>
+  <li>
+    <p>Fixed “tfragment_gc test is flaky on OSX”
+(<a href="https://github.com/nim-lang/Nim/issues/9421">#9421</a>)</p>
+  </li>
+  <li>Fixed “ansi color code templates fail to bind symbols”
+(<a href="https://github.com/nim-lang/Nim/issues/9394">#9394</a>)</li>
+  <li>Fixed “SIGSEGV when converting <code class="language-plaintext highlighter-rouge">lines</code> to closure iterator, most likely caused by defer”
+(<a href="https://github.com/nim-lang/Nim/issues/5321">#5321</a>)</li>
+  <li>Fixed “Compiler crash when creating a variant type”
+(<a href="https://github.com/nim-lang/Nim/issues/6220">#6220</a>)</li>
+  <li>
+    <p>Fixed “old changelogs should be kept instead of erased”
+(<a href="https://github.com/nim-lang/Nim/issues/9376">#9376</a>)</p>
+  </li>
+  <li>Fixed “Crash when closing an unopened file on debian 8.”
+(<a href="https://github.com/nim-lang/Nim/issues/9456">#9456</a>)</li>
+  <li>Fixed “nimpretty joins regular and doc comment”
+(<a href="https://github.com/nim-lang/Nim/issues/9400">#9400</a>)</li>
+  <li>Fixed “nimpretty changes indentation level of trailing comment”
+(<a href="https://github.com/nim-lang/Nim/issues/9398">#9398</a>)</li>
+  <li>Fixed “Some bugs with nimpretty”
+(<a href="https://github.com/nim-lang/Nim/issues/8078">#8078</a>)</li>
+  <li>Fixed “nimpretty not idempotent: keeps adding newlines below block comment”
+(<a href="https://github.com/nim-lang/Nim/issues/9483">#9483</a>)</li>
+  <li>Fixed “nimpretty shouldn’t format differently whether there’s a top-level newline”
+(<a href="https://github.com/nim-lang/Nim/issues/9484">#9484</a>)</li>
+  <li>Fixed “nimpretty shouldn’t change file modif time if no changes =&gt; use os.updateFile”
+(<a href="https://github.com/nim-lang/Nim/issues/9499">#9499</a>)</li>
+  <li>Fixed “nimpretty adds a space before type, ptr, ref, object in wrong places”
+(<a href="https://github.com/nim-lang/Nim/issues/9504">#9504</a>)</li>
+  <li>Fixed “nimpretty badly indents block comment”
+(<a href="https://github.com/nim-lang/Nim/issues/9500">#9500</a>)</li>
+  <li>Fixed “nimpretty wrongly adds empty newlines inside proc signature”
+(<a href="https://github.com/nim-lang/Nim/issues/9506">#9506</a>)</li>
+  <li>Fixed “Duplicate definition in cpp codegen”
+(<a href="https://github.com/nim-lang/Nim/issues/6986">#6986</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">nim doc strutils.nim</code> fails on 32 bit compiler with AssertionError on a RunnableExample”
+(<a href="https://github.com/nim-lang/Nim/issues/9525">#9525</a>)</li>
+  <li>
+    <p>Fixed “using Selectors, Error: undeclared field: ‘OSErrorCode’”
+(<a href="https://github.com/nim-lang/Nim/issues/7667">#7667</a>)</p>
+  </li>
+  <li>Fixed “strutils.multiReplace() crashes if search string is “””
+(<a href="https://github.com/nim-lang/Nim/issues/9557">#9557</a>)</li>
+  <li>Fixed “Type which followed by a function and generated by a template will not shown in docs generated by <code class="language-plaintext highlighter-rouge">nim doc</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/9235">#9235</a>)</li>
+  <li>Fixed “Module docs: 2 suggestions…”
+(<a href="https://github.com/nim-lang/Nim/issues/5525">#5525</a>)</li>
+  <li>Fixed “Missing docstrings are replaced with other text”
+(<a href="https://github.com/nim-lang/Nim/issues/9169">#9169</a>)</li>
+  <li>Fixed “templates expand doc comments as documentation of other procedures”
+(<a href="https://github.com/nim-lang/Nim/issues/9432">#9432</a>)</li>
+  <li>Fixed “Path in error message has <code class="language-plaintext highlighter-rouge">..\..\..\..\..\</code>  prefix since 0.19.0”
+(<a href="https://github.com/nim-lang/Nim/issues/9556">#9556</a>)</li>
+  <li>
+    <p>Fixed “Nim/compiler/pathutils.nim(226, 12) <code class="language-plaintext highlighter-rouge">canon"/foo/../bar" == "/bar"</code>  [AssertionError]” (<a href="https://github.com/nim-lang/Nim/issues/9507">#9507</a>)</p>
+  </li>
+  <li>Fixed “[Regression] Borrow stringify operator no longer works as expected”
+(<a href="https://github.com/nim-lang/Nim/issues/9322">#9322</a>)</li>
+  <li>Fixed “[NimScript] Error: arguments can only be given if the ‘–run’ option is selected”
+(<a href="https://github.com/nim-lang/Nim/issues/9246">#9246</a>)</li>
+  <li>Fixed “nim check: <code class="language-plaintext highlighter-rouge">internal error: (filename: "vmgen.nim", line: 1119, column: 19)</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/9609">#9609</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">optInd</code> missing indent specification in grammar.txt”
+(<a href="https://github.com/nim-lang/Nim/issues/9608">#9608</a>)</li>
+  <li>Fixed “nimpretty should hardcode indentation amount to 2 spaces”
+(<a href="https://github.com/nim-lang/Nim/issues/9502">#9502</a>)</li>
+  <li>Fixed “Nimpretty adds instead of removes incorrect spacing inside backticks”
+(<a href="https://github.com/nim-lang/Nim/issues/9673">#9673</a>)</li>
+  <li>Fixed “Compiler segfault (stack overflow) compiling code on 0.19.0 that works on 0.18.0”
+(<a href="https://github.com/nim-lang/Nim/issues/9694">#9694</a>)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

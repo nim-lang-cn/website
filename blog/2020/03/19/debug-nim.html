@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Nim的Debug尝试 - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Nim的Debug尝试"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Debug Nim with GDB"> -->
+  <meta property="og:description" content="Debug Nim with GDB">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Nim的Debug尝试" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Nim的Debug尝试
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              19 March 2020
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              路中鸟（Nim开发集中营）
+            </span>
+            
+          </h3>
+          <h2 id="安装">安装</h2>
+<ol>
+  <li>前提有安装nim和mingw等</li>
+  <li>nim新版本已加入nim-gdb工具方便调试, 没有可以下载放nim/bin下</li>
+  <li>下载安装python3</li>
+  <li>修改 nim/config/nim.cfg 里 大概214行   gcc.options.debug = “-g3 -O0 -gdwarf-3”  解决调试溢出问题</li>
+</ol>
+
+<h2 id="使用方法">使用方法</h2>
+
+<p>首先我们写个dtest.nim</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>proc foo(x: int): int =
+  let y = x + 2
+  return y * 10
+proc bar(x: int): int =
+  if x == 3: return foo(x)
+  return x * 100
+proc main =
+  var a = 1
+  let str = "foobar"
+  var seq1 = @[0, 1, 2, 3, 4]
+  a = bar(1)
+  a = bar(2)
+  a = bar(3)
+main()
+</code></pre></div></div>
+<p>然后终端运行 调试参数<code class="language-plaintext highlighter-rouge">--debugger:native</code>编译nim文件<br />
+<code class="language-plaintext highlighter-rouge">nim c --debugger:native dtest.nim</code><br />
+编译完使用nim-gdb来调试程序<br />
+<code class="language-plaintext highlighter-rouge">nim-gdb dtest</code></p>
+
+<p>使用break或b 来设置断点 <strong><em>(输入函数名再按tab键 可以自动完成完整函数名)</em></strong><br />
+<img src="https://oscimg.oschina.net/oscnet/up-b14462d526c8cadb948aae21accbaee5241.png" alt="b" title="b" /><br />
+用run或r 来运行, 就会停在第8行断点<img src="https://oscimg.oschina.net/oscnet/up-9c96929745e141fb229bfa9492ede27a9bb.png" alt="" /><br />
+list或l 来查看行数周围的代码列表<br />
+<img src="https://oscimg.oschina.net/oscnet/up-12d62ded6b00f3068b55b9e79c86d172d0c.png" alt="" /><br />
+next或n 来运行下一行, print或r 查看变量<br />
+<img src="https://oscimg.oschina.net/oscnet/up-bf30cbf0bba97076fec3925c682e4ed03eb.png" alt="" /><br />
+step或s 进入函数地址, continue或c运行到断点或结束, finish或fin 运行到跳出当前模块或断点<img src="https://oscimg.oschina.net/oscnet/up-5a15b6c17545a7f9bd14f9488ff7b5d0ac9.png" alt="" /><br />
+backtrace或bt 查看模块运行步骤, 从下往上<img src="https://oscimg.oschina.net/oscnet/up-49d7c4c7a488eb885fbe17db0e832410a79.png" alt="" /><br />
+info break和delete或d 查看和删除断点<img src="https://oscimg.oschina.net/oscnet/up-42e400bc1b206a206266230610e70aec9df.png" alt="" /><br />
+info locals查看当前模块变量<img src="https://oscimg.oschina.net/oscnet/up-1ac718609f7b60c93fb2d1cb0dd2b6de3b4.png" alt="" /><br />
+watch可以让选择查看的变量改变时 变成断点<img src="https://oscimg.oschina.net/oscnet/up-6cda76553ffdec130c4651ebf5bdbab4e22.png" alt="" /><br />
+until或u 可以跳出循环模块 像while, for等</p>
+
+<ul>
+  <li>具体参考<br />
+<a href="https://internet-of-tomohiro.netlify.com/nim/gdb.en.html" title="Debug Nim with GDB">Debug Nim with GDB</a></li>
+</ul>
+
+<hr />
+<p>原文链接：<a href="">https://my.oschina.net/angluca/blog/3202507</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>注：已经原作者授权，转载请注明出处
+</code></pre></div></div>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

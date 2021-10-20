@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.19.4 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.19.4 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="The Nim team is happy to announce that the latest release of Nim, version 0.19.4, is now available. Nim is a systems programming language that focuses on performance, portability and expressiveness. This is mostly a bugfix release of version 0.19.2. There are no breaking changes. The most important bugfixes are: The mark&amp;sweep GC had a serious performance regression that has been fixed. The produced tarballs now support koch tests. Json escaping has been fixed. The documentation for async procs was missing, fixed. Installing 0.19.4 If you have installed a previous version of Nim using choosenim, getting Nim 0.19.4 is as easy as: $ choosenim update stable If you don’t have it already, you can get choosenim by following these instructions or you can install Nim by following the instructions on our install page. Bugfixes Fixed “Latest HEAD segfaults when compiling Aporia” (#9889) Fixed “smtp module doesn’t support threads.” (#9728) Fixed “toInt doesn’t raise an exception” (#2764) Fixed “allow import inside block: makes N runnableExamples run N x faster, minimizes scope pollution” (#9300) Fixed “regression: CI failing Error: unhandled exception: cannot open: /Users/travis/.cache/nim/docgen_sample_d/runnableExamples/docgen_sample_examples.nim [IOError]” (#10188) Fixed “Discrepancy in Documentation About ‘f128 Type-Suffix” (#10213) Fixed “Performance regression with –gc:markandsweep” (#10271) Fixed “cannot call template/macros with varargs[typed] to varargs[untyped]” (#10075) Fixed “–embedsrc does not work on macos” (#10263) Fixed “terminal.nim colored output is not GCSAFE.” (#8294) Fixed “Path in error message has ..\..\..\..\..\ prefix since 0.19.0” (#9556) Fixed ““contributing” is listed as a module on theindex” (#10287) Fixed “[Regression] converter to string leads fail to compile on 0.19” (#9149) Fixed “oids counter starts at zero; spec says it should be random” (#2796)"> -->
+  <meta property="og:description" content="The Nim team is happy to announce that the latest release of Nim, version 0.19.4, is now available. Nim is a systems programming language that focuses on performance, portability and expressiveness. This is mostly a bugfix release of version 0.19.2. There are no breaking changes. The most important bugfixes are: The mark&amp;sweep GC had a serious performance regression that has been fixed. The produced tarballs now support koch tests. Json escaping has been fixed. The documentation for async procs was missing, fixed. Installing 0.19.4 If you have installed a previous version of Nim using choosenim, getting Nim 0.19.4 is as easy as: $ choosenim update stable If you don’t have it already, you can get choosenim by following these instructions or you can install Nim by following the instructions on our install page. Bugfixes Fixed “Latest HEAD segfaults when compiling Aporia” (#9889) Fixed “smtp module doesn’t support threads.” (#9728) Fixed “toInt doesn’t raise an exception” (#2764) Fixed “allow import inside block: makes N runnableExamples run N x faster, minimizes scope pollution” (#9300) Fixed “regression: CI failing Error: unhandled exception: cannot open: /Users/travis/.cache/nim/docgen_sample_d/runnableExamples/docgen_sample_examples.nim [IOError]” (#10188) Fixed “Discrepancy in Documentation About ‘f128 Type-Suffix” (#10213) Fixed “Performance regression with –gc:markandsweep” (#10271) Fixed “cannot call template/macros with varargs[typed] to varargs[untyped]” (#10075) Fixed “–embedsrc does not work on macos” (#10263) Fixed “terminal.nim colored output is not GCSAFE.” (#8294) Fixed “Path in error message has ..\..\..\..\..\ prefix since 0.19.0” (#9556) Fixed ““contributing” is listed as a module on theindex” (#10287) Fixed “[Regression] converter to string leads fail to compile on 0.19” (#9149) Fixed “oids counter starts at zero; spec says it should be random” (#2796)">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.19.4 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.19.4 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              01 February 2019
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              The Nim Team
+            </span>
+            
+          </h3>
+          <p>The Nim team is happy to announce that the latest release of Nim,
+version 0.19.4, is now available. Nim is a systems programming language that
+focuses on performance, portability and expressiveness.</p>
+
+<p>This is mostly a bugfix release of version 0.19.2.
+There are no breaking changes.
+The most important bugfixes are:</p>
+
+<ul>
+  <li>The mark&amp;sweep GC had a serious performance regression that has been fixed.</li>
+  <li>The produced tarballs now support <code class="language-plaintext highlighter-rouge">koch tests</code>.</li>
+  <li>Json escaping has been fixed.</li>
+  <li>The documentation for <code class="language-plaintext highlighter-rouge">async</code> procs was missing, fixed.</li>
+</ul>
+
+<h2 id="installing-0194">Installing 0.19.4</h2>
+
+<p>If you have installed a previous version of Nim using <code class="language-plaintext highlighter-rouge">choosenim</code>,
+getting Nim 0.19.4 is as easy as:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>choosenim update stable
+</code></pre></div></div>
+
+<p>If you don’t have it already, you can get <code class="language-plaintext highlighter-rouge">choosenim</code> by following
+<a href="https://github.com/dom96/choosenim">these instructions</a> or you can install
+Nim by following the instructions on our
+<a href="https://nim-lang.org/install.html">install</a> page.</p>
+
+<h3 id="bugfixes">Bugfixes</h3>
+
+<ul>
+  <li>Fixed “Latest HEAD segfaults when compiling Aporia”
+(<a href="https://github.com/nim-lang/Nim/issues/9889">#9889</a>)</li>
+  <li>Fixed “smtp module doesn’t support threads.”
+(<a href="https://github.com/nim-lang/Nim/issues/9728">#9728</a>)</li>
+  <li>Fixed “toInt doesn’t raise an exception”
+(<a href="https://github.com/nim-lang/Nim/issues/2764">#2764</a>)</li>
+  <li>Fixed “allow <code class="language-plaintext highlighter-rouge">import</code> inside <code class="language-plaintext highlighter-rouge">block</code>: makes N runnableExamples run N x faster, minimizes scope pollution”
+(<a href="https://github.com/nim-lang/Nim/issues/9300">#9300</a>)</li>
+  <li>Fixed “regression: CI failing <code class="language-plaintext highlighter-rouge">Error: unhandled exception: cannot open: /Users/travis/.cache/nim/docgen_sample_d/runnableExamples/docgen_sample_examples.nim [IOError]</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/10188">#10188</a>)</li>
+  <li>Fixed “Discrepancy in Documentation About ‘f128 Type-Suffix”
+(<a href="https://github.com/nim-lang/Nim/issues/10213">#10213</a>)</li>
+  <li>Fixed “Performance regression with –gc:markandsweep”
+(<a href="https://github.com/nim-lang/Nim/issues/10271">#10271</a>)</li>
+  <li>Fixed “cannot call template/macros with varargs[typed] to varargs[untyped]”
+(<a href="https://github.com/nim-lang/Nim/issues/10075">#10075</a>)</li>
+  <li>Fixed “–embedsrc does not work on macos”
+(<a href="https://github.com/nim-lang/Nim/issues/10263">#10263</a>)</li>
+  <li>Fixed “terminal.nim colored output is not GCSAFE.”
+(<a href="https://github.com/nim-lang/Nim/issues/8294">#8294</a>)</li>
+  <li>Fixed “Path in error message has <code class="language-plaintext highlighter-rouge">..\..\..\..\..\</code>  prefix since 0.19.0”
+(<a href="https://github.com/nim-lang/Nim/issues/9556">#9556</a>)</li>
+  <li>Fixed ““contributing” is listed as a module on theindex”
+(<a href="https://github.com/nim-lang/Nim/issues/10287">#10287</a>)</li>
+  <li>Fixed “[Regression] converter to string leads fail to compile  on 0.19”
+(<a href="https://github.com/nim-lang/Nim/issues/9149">#9149</a>)</li>
+  <li>Fixed “oids counter starts at zero; spec says it should be random”
+(<a href="https://github.com/nim-lang/Nim/issues/2796">#2796</a>)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

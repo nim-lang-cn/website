@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>浅谈Nim Web开发 - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="浅谈Nim Web开发"> -->
+
+  
+  <!-- <meta name="twitter:description" content="浅谈Nim Web开发"> -->
+  <meta property="og:description" content="浅谈Nim Web开发">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="浅谈Nim Web开发" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            浅谈Nim Web开发
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              31 August 2019
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              sheldon
+            </span>
+            
+          </h3>
+          <p>浅谈Nim Web开发</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Nim is a statically typed compiled systems programming language. 
+It combines successful concepts from mature languages like Python,Ada and Modula.
+
+Nim是一种静态类型编译的系统编程语言。
+它结合了来自成熟语言（如Python、Ada和Modula）的成功概念。
+</code></pre></div></div>
+
+<p>Nim中文网站：<a href="https://nim-lang-cn.org/">https://nim-lang-cn.org/</a></p>
+
+<p>下载页：<a href="https://nim-lang-cn.org/install.html">https://nim-lang-cn.org/install.html</a></p>
+
+<h2 id="目录">目录</h2>
+
+<ol>
+  <li>
+    <p><a href="#背景">背景</a></p>
+  </li>
+  <li>
+    <p><a href="#技术点">技术点</a></p>
+
+    <p>2.1 <a href="#立即模式">立即模式</a></p>
+
+    <p>2.2 <a href="#使用Javascript模块">使用Javascript模块</a></p>
+
+    <p>2.3 <a href="#karax的虚拟DOM实现">Karax的虚拟DOM实现</a></p>
+
+    <p>2.4 <a href="#web后端">Web后端</a></p>
+  </li>
+</ol>
+
+<h2 id="背景">背景</h2>
+<p>2015年接触到Nim的时候被它既有高级抽象又能编译成C的特性吸引，
+当时正感到Go操作底层硬件的无力，
+不能满足软硬兼施，
+从云端做到底层嵌入式的技术发展需求。
+有了学习Go语言的经验，
+拿到Nim源码先从标准库开始看，
+到了<code class="language-plaintext highlighter-rouge">dom.nim</code>，
+发现Nim可以做Web前端，
+这样想做的领域就统一了。
+直到Karax的诞生，
+Web开发的场景被全面覆盖，
+在有一些预见之后，我们开始了对Karax的尝试。</p>
+
+<p>重写的项目来自于一个layui和ThinkPHP框架的上线产品，
+前端开发使用Karax，
+后端使用Jester做Web服务，
+用Websocket做长连接API通信。</p>
+
+<p>没有Karax的文档，
+仅从example和源码中一点点理解buildHtml和虚拟DOM的实现，
+Karax和它的代码一样轻量，机制、组件、生态需要从零构建，
+让我坚持下来的是相信它会带来不一样的Web开发体验，
+而且这些体验和经验对于Nim GUI在三端的统一至关重要。</p>
+
+<h2 id="技术点">技术点</h2>
+<p>本系列将从理论和实践上分别展开，
+对解决问题过程中使用的方法一一讲解，
+旨在希望能够让大家理解和学会使用Karax。</p>
+
+<ul>
+  <li>理论上的重点在立即模式、渲染机制、虚拟DOM与DOM的映射，
+这部分将主要根据Karax中的源码进行梳理；</li>
+  <li>实践上的重点在Javascript原生模块导入；</li>
+  <li>机制上，实现登录、退出、路由、页面加载数据、页面间传值、工作流、必选字段；</li>
+  <li>组件上，实现表格的翻页，动态设置每页显示数量，全选和单选的逻辑关系，即时响应搜索，日历。</li>
+</ul>
+
+<h3 id="立即模式">立即模式</h3>
+<p>立即模式（immediate mode）是GUI的概念，
+和立即模式相对的是保留模式（retained mode）,
+关于两个模式比较形象的解释：
+<a href="https://blog.csdn.net/cvper/article/details/86568245">https://blog.csdn.net/cvper/article/details/86568245</a></p>
+
+<p>这意味着浏览器渲染的每一帧变化，和你看到的桌面软件、视频、游戏的连续变化等，从操作系统的层面看没有什么不同。在立即模式下虚拟DOM节点成为无状态的(stateless)节点，使用diff算法更新，这与React的diff算法一致。Web前端是GUI的一种表现形式，可以借助Nim的特性和立即模式思想的指导下扩展到GUI开发，加深对计算机底层的理解。对这方面感兴趣的同学，可以研究下<a href="https://github.com/yglukhov/nimx">https://github.com/yglukhov/nimx</a></p>
+
+<h3 id="使用javascript模块">使用Javascript模块</h3>
+
+<p>可以把这些模块写成pure的组件，我们采用简单的方式直接使用Echarts的函数，这涉及到FFI，Nim使用importc和importcpp与其后端语言交互。根据不同的Javascript模块类型，导入浏览器全局变量和方法。文档和源码看起，这里主要描述如何通过Javascript模块源码将需要使用的函数导入Karax。如根据Echarts的源码：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nb">global</span><span class="p">,</span> <span class="nx">factory</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">exports</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">module</span> <span class="o">!==</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">){</span>
+        <span class="nx">factory</span><span class="p">(</span><span class="nx">exports</span><span class="p">)</span> 
+    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">define</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">function</span><span class="dl">'</span> <span class="o">&amp;&amp;</span> <span class="nx">define</span><span class="p">.</span><span class="nx">amd</span> <span class="p">){</span>
+        <span class="nx">define</span><span class="p">([</span><span class="dl">'</span><span class="s1">exports</span><span class="dl">'</span><span class="p">],</span> <span class="nx">factory</span><span class="p">);</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="nx">factory</span><span class="p">((</span><span class="nb">global</span><span class="p">.</span><span class="nx">echarts</span> <span class="o">=</span> <span class="p">{}));</span>
+    <span class="p">}</span>
+<span class="p">}(</span><span class="k">this</span><span class="p">,</span> <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">exports</span><span class="p">)</span> <span class="p">{</span> <span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+<span class="c1">//...</span>
+<span class="kd">var</span> <span class="nx">echartsProto</span> <span class="o">=</span> <span class="nx">ECharts</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+<span class="c1">//...</span>
+<span class="nx">echartsProto</span><span class="p">.</span><span class="nx">setOption</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">option</span><span class="p">,</span> <span class="nx">notMerge</span><span class="p">,</span> <span class="nx">lazyUpdate</span><span class="p">)</span> <span class="p">{...}</span>
+<span class="c1">//...</span>
+<span class="kd">function</span> <span class="nx">init</span><span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="nx">theme$$1</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span> <span class="p">{...}</span>
+<span class="c1">//...</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="nx">init</span><span class="p">;</span>
+<span class="c1">//...</span>
+<span class="p">})));</span>
+</code></pre></div></div>
+<p>得出</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span>
+      <span class="n">EChart</span><span class="o">*</span> <span class="o">=</span> <span class="k">ref</span> <span class="k">object</span>
+<span class="k">proc </span><span class="nf">setOption</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">EChart</span><span class="p">;</span> <span class="n">option</span><span class="p">:</span> <span class="n">JsonNode</span><span class="p">)</span> <span class="p">{.</span><span class="n">importcpp</span><span class="p">.}</span>
+<span class="k">proc </span><span class="nf">echartsInit</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="n">Element</span><span class="p">):</span> <span class="n">EChart</span> <span class="p">{.</span><span class="n">importc</span><span class="p">:</span> <span class="s">"echarts.init"</span><span class="p">.}</span>
+</code></pre></div></div>
+
+<p>项目中使用的另一个Javascript模块是<code class="language-plaintext highlighter-rouge">cryptojs</code>，用于加密从浏览器向后端传输的敏感信息。</p>
+
+<p>从<code class="language-plaintext highlighter-rouge">crypotojs/components/md5.js</code>中：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nb">Math</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">C</span> <span class="o">=</span> <span class="nx">CryptoJS</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">C_algo</span> <span class="o">=</span> <span class="nx">C</span><span class="p">.</span><span class="nx">algo</span><span class="p">;</span>
+    <span class="c1">//...</span>
+    <span class="kd">var</span> <span class="nx">MD5</span> <span class="o">=</span> <span class="nx">C_algo</span><span class="p">.</span><span class="nx">MD5</span> <span class="o">=</span> <span class="nx">Hasher</span><span class="p">.</span><span class="nx">extend</span><span class="p">({...})</span>
+</code></pre></div></div>
+
+<p>和<code class="language-plaintext highlighter-rouge">core.js</code>中：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">WordArray</span> <span class="o">=</span> <span class="nx">C_lib</span><span class="p">.</span><span class="nx">WordArray</span> <span class="o">=</span> <span class="nx">Base</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="c1">//...</span>
+    <span class="na">toString</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">encoder</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="p">(</span><span class="nx">encoder</span> <span class="o">||</span> <span class="nx">Hex</span><span class="p">).</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+            <span class="p">},</span>
+</code></pre></div></div>
+
+<p>得到：</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">CryptoJS</span><span class="o">*</span><span class="p">{.</span><span class="n">importc</span><span class="p">.}:</span> <span class="n">JsObject</span>
+<span class="k">proc </span><span class="nf">MD5</span><span class="o">*</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">JsObject</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">cstring</span><span class="p">):</span> <span class="n">JsObject</span> <span class="p">{.</span><span class="n">importcpp</span><span class="p">:</span> <span class="s">"#.MD5(#)"</span><span class="p">.}</span>
+<span class="k">proc </span><span class="nf">toString</span><span class="o">*</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">JsObject</span><span class="p">):</span> <span class="n">cstring</span> <span class="p">{.</span><span class="n">importcpp</span><span class="p">:</span> <span class="s">"#.toString()"</span><span class="p">.}</span>
+</code></pre></div></div>
+<p>Javascript对象在Nim中用JsObject表示，可以使用.操作符访问其字段和函数，函数需要导入为Nim过程；</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#Nim文件中组成链式表达式</span>
+<span class="k">var</span> <span class="n">hash</span> <span class="o">=</span> <span class="n">CryptoJS</span><span class="p">.</span><span class="n">MD5</span><span class="p">(</span><span class="n">password</span><span class="p">).</span><span class="n">toString</span><span class="p">()</span>
+
+</code></pre></div></div>
+<p>Nim编译成的Javascript符合ECMAScript3规范，新规范不被支持。
+Karax将所有Nim代码编译成一个js文件，通过
+<code class="language-plaintext highlighter-rouge">&lt;script src="xxx.js"&gt;&lt;/script&gt;</code>，引入到index.html中。</p>
+
+<h3 id="karax的虚拟dom实现">karax的虚拟DOM实现</h3>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Karax虚拟DOM的实现入口，另一个setRenderer是没有RouterData的重载方法</span>
+<span class="k">var</span>
+  <span class="n">kxi</span><span class="o">*</span><span class="p">:</span> <span class="n">KaraxInstance</span>
+  <span class="p">...</span>
+<span class="k">proc </span><span class="nf">setRenderer</span><span class="o">*</span><span class="p">(</span><span class="n">renderer</span><span class="p">:</span> <span class="k">proc</span> <span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">RouterData</span><span class="p">):</span> <span class="n">VNode</span><span class="p">,</span>
+                  <span class="n">root</span><span class="p">:</span> <span class="n">cstring</span> <span class="o">=</span> <span class="s">"ROOT"</span><span class="p">,</span>
+                  <span class="n">clientPostRenderCallback</span><span class="p">:</span>
+                    <span class="k">proc</span> <span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">RouterData</span><span class="p">)</span> <span class="o">=</span> <span class="k">nil</span><span class="p">):</span> <span class="n">KaraxInstance</span> <span class="p">{.</span>
+                    <span class="n">discardable</span><span class="p">.}</span> <span class="o">=</span> 
+<span class="p">...</span>
+  <span class="n">kxi</span> <span class="o">=</span> <span class="n">result</span>
+  <span class="n">window</span><span class="p">.</span><span class="n">onload</span> <span class="o">=</span> <span class="n">init</span>
+  <span class="n">onhashChange</span> <span class="o">=</span> <span class="k">proc</span><span class="p">()</span> <span class="o">=</span> <span class="n">redraw</span><span class="p">()</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<p>该过程从<code class="language-plaintext highlighter-rouge">renderer</code>返回的<code class="language-plaintext highlighter-rouge">VNode</code>创建一个虚拟DOM树，
+与id为<code class="language-plaintext highlighter-rouge">ROOT</code>的DOM节点相对应，
+并提供一个渲染后的回调过程，
+用于例如Echarts节点先渲染再填充的场景，
+过程返回<code class="language-plaintext highlighter-rouge">KaraxInstance</code>，
+它是Karax虚拟DOM与浏览器DOM之间的桥梁，
+用全局变量<code class="language-plaintext highlighter-rouge">kxi</code>导出，
+设置浏览器<code class="language-plaintext highlighter-rouge">window</code>对象加载时的方法为<code class="language-plaintext highlighter-rouge">init</code>,
+并设置哈希改变的回调为<code class="language-plaintext highlighter-rouge">redraw()</code>。</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">proc </span><span class="nf">reqFrame</span><span class="p">(</span><span class="n">callback</span><span class="p">:</span> <span class="k">proc</span><span class="p">()):</span> <span class="kt">int</span> <span class="p">{.</span><span class="n">importc</span><span class="p">:</span> <span class="s">"window.requestAnimationFrame"</span><span class="p">.}</span>
+
+<span class="k">proc </span><span class="nf">redraw</span><span class="o">*</span><span class="p">(</span><span class="n">kxi</span><span class="p">:</span> <span class="n">KaraxInstance</span> <span class="o">=</span> <span class="n">kxi</span><span class="p">)</span> <span class="o">=</span>
+  <span class="c"># we buffer redraw requests:</span>
+  <span class="k">when</span> <span class="kp">false</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">drawTimeout</span> <span class="o">!=</span> <span class="k">nil</span><span class="p">:</span>
+      <span class="n">clearTimeout</span><span class="p">(</span><span class="n">drawTimeout</span><span class="p">)</span>
+    <span class="n">drawTimeout</span> <span class="o">=</span> <span class="n">setTimeout</span><span class="p">(</span><span class="n">dodraw</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="kp">true</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">kxi</span><span class="p">.</span><span class="n">renderId</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">kxi</span><span class="p">.</span><span class="n">renderId</span> <span class="o">=</span> <span class="n">reqFrame</span><span class="p">(</span><span class="k">proc</span> <span class="p">()</span> <span class="o">=</span> <span class="n">kxi</span><span class="p">.</span><span class="n">dodraw</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">dodraw</span><span class="p">(</span><span class="n">kxi</span><span class="p">)</span>
+
+<span class="k">proc </span><span class="nf">init</span><span class="p">(</span><span class="n">ev</span><span class="p">:</span> <span class="n">Event</span><span class="p">)</span> <span class="o">=</span>
+  <span class="n">kxi</span><span class="p">.</span><span class="n">renderId</span> <span class="o">=</span> <span class="n">reqFrame</span><span class="p">(</span><span class="k">proc</span> <span class="p">()</span> <span class="o">=</span> <span class="n">kxi</span><span class="p">.</span><span class="n">dodraw</span><span class="p">)</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">init</code>将<code class="language-plaintext highlighter-rouge">kxi.renderId</code>设置为浏览器window对象请求一次动画帧返回的句柄，
+并设置请求动画帧的回调为<code class="language-plaintext highlighter-rouge">dodraw</code>。 如果<code class="language-plaintext highlighter-rouge">kxi.renderId</code>为零， <code class="language-plaintext highlighter-rouge">redraw</code>初始化<code class="language-plaintext highlighter-rouge">kxi.renderId</code>，否则执行<code class="language-plaintext highlighter-rouge">dodraw</code>。</p>
+
+<div class="language-nim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">proc </span><span class="nf">dodraw</span><span class="p">(</span><span class="n">kxi</span><span class="p">:</span> <span class="n">KaraxInstance</span><span class="p">)</span> <span class="o">=</span>
+  <span class="k">if</span> <span class="n">kxi</span><span class="p">.</span><span class="n">renderer</span><span class="p">.</span><span class="n">isNil</span><span class="p">:</span> <span class="k">return</span>
+  <span class="k">let</span> <span class="n">rdata</span> <span class="o">=</span> <span class="n">RouterData</span><span class="p">(</span><span class="n">hashPart</span><span class="p">:</span> <span class="n">hashPart</span><span class="p">)</span>
+  <span class="k">let</span> <span class="n">newtree</span> <span class="o">=</span> <span class="n">kxi</span><span class="p">.</span><span class="n">renderer</span><span class="p">(</span><span class="n">rdata</span><span class="p">)</span>
+  <span class="n">inc</span> <span class="n">kxi</span><span class="p">.</span><span class="n">runCount</span>
+  <span class="n">newtree</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">kxi</span><span class="p">.</span><span class="n">rootId</span>
+  <span class="n">kxi</span><span class="p">.</span><span class="n">toFocus</span> <span class="o">=</span> <span class="k">nil</span>
+  <span class="k">if</span> <span class="n">kxi</span><span class="p">.</span><span class="n">currentTree</span> <span class="o">==</span> <span class="k">nil</span><span class="p">:</span>
+    <span class="k">let</span> <span class="n">asdom</span> <span class="o">=</span> <span class="n">toDom</span><span class="p">(</span><span class="n">newtree</span><span class="p">,</span> <span class="n">useAttachedNode</span> <span class="o">=</span> <span class="kp">true</span><span class="p">,</span> <span class="n">kxi</span><span class="p">)</span>
+    <span class="n">replaceById</span><span class="p">(</span><span class="n">kxi</span><span class="p">.</span><span class="n">rootId</span><span class="p">,</span> <span class="n">asdom</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">doAssert</span> <span class="n">same</span><span class="p">(</span><span class="n">kxi</span><span class="p">.</span><span class="n">currentTree</span><span class="p">,</span> <span class="n">document</span><span class="p">.</span><span class="n">getElementById</span><span class="p">(</span><span class="n">kxi</span><span class="p">.</span><span class="n">rootId</span><span class="p">))</span>
+    <span class="k">let</span> <span class="n">olddom</span> <span class="o">=</span> <span class="n">document</span><span class="p">.</span><span class="n">getElementById</span><span class="p">(</span><span class="n">kxi</span><span class="p">.</span><span class="n">rootId</span><span class="p">)</span>
+    <span class="n">diff</span><span class="p">(</span><span class="n">newtree</span><span class="p">,</span> <span class="n">kxi</span><span class="p">.</span><span class="n">currentTree</span><span class="p">,</span> <span class="k">nil</span><span class="p">,</span> <span class="n">olddom</span><span class="p">,</span> <span class="n">kxi</span><span class="p">)</span>
+    <span class="p">...</span>
+</code></pre></div></div>
+<p>如果当前虚拟DOM树还没有创建，
+则将新树转换为DOM树替换原<code class="language-plaintext highlighter-rouge">kxi.rootId</code>的内容；
+如果已经存在，
+先断言当前虚拟DOM树与浏览器DOM树是相同的，
+否则发起异常，
+然后获取<code class="language-plaintext highlighter-rouge">kxi.rootId</code>的DOM节点作为旧DOM树与新的虚拟DOM树进行diff算法，
+得到补丁集，
+根据等价、相似、不同三种结果，
+对节点进行相应更新。</p>
+
+<h3 id="web后端">web后端</h3>
+
+<p>Nim的Web后端可以使用<code class="language-plaintext highlighter-rouge">Jester</code>框架，
+支持多线程异步，
+涉及到websocket的，
+可以使用<a href="https://github.com/niv/websocket.nim">niv/websocket.nim</a>，
+部署方面https要求websocket使用<code class="language-plaintext highlighter-rouge">wss</code>，具体将在后面讲解。</p>
+
+<p>这里简单介绍了 <em>如何使用Javascript模块的类型</em>和<em>库函数</em>、<em>立即模式</em>，
+根据源码讲解了<em>Karax虚拟DOM的实现机制</em>等理论知识，
+后面将讲解这些特性在应用中的实践。</p>
+
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

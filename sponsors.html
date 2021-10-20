@@ -1,0 +1,1921 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>捐赠者 - Nim中文社区</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="捐赠者"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。"> -->
+  <meta property="og:description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="捐赠者" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content sponsors">
+      <h1 class="text-centered page-title main-heading">现任赞助商</h1>
+<h3 class="text-centered page-subtitle">
+  本节列出了非常友好的公司和个人，
+  他们每月贡献一定的资金来帮助维持Nim的发展。
+  有关更多详细信息，请查看<a href="/donate.html">捐赠</a>页面。
+
+  <p><small>最后更新时间: 2019-07-04</small></p>
+</h3>
+
+<section class="background-faded call-to-action">
+  <section class="content text-centered">
+    <h2>顶级赞助商</h2>
+    <div class="pure-g center">
+
+      <div class="pure-u-2-3">
+        
+          
+            <div class="sponsor-container">
+              <a href="https://status.im">
+                <img src="/assets/bountysource/status.png"/>
+                <span class="green tag">+$19000/月</span>
+                <br/>
+                <p class="title">Status</p>
+              </a>
+            </div>
+          
+        
+          
+            <div class="sponsor-container">
+              <a href="http://www.xored.com">
+                <img src="/assets/bountysource/xored.svg"/>
+                <span class="green tag">+$250/月</span>
+                <br/>
+                <p class="title">Xored Software, Inc.</p>
+              </a>
+            </div>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </div>
+  </section>
+</section>
+
+<div class="site-content slim content" style="margin-top: 50px;">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th class="name">捐赠者</th>
+        <th>本月</th>
+        <th>总计</th>
+        <th>最大贡献</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+      
+    
+      
+    
+      
+        <tr>
+          
+            <td><img src="https://cloudinary-a.akamaihd.net/bountysource/image/gravatar/d_noaoqqwxegvmulwus0un.png,c_pad,w_400,h_400,b_white/2969bb7ed867ad934f35b1016d268ae1" alt="Varriount"></td>
+          
+          
+          <td>Varriount</td>
+          
+          <td>$100</td>
+          <td>$7424</td>
+          <td>Nov 18, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Adrian Veith</td>
+          
+          <td>$25</td>
+          <td>$975</td>
+          <td>Apr 20, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Digital Ocean</td>
+          
+          <td>$40</td>
+          <td>$960</td>
+          <td>Jan 11, 2017</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>FedericoCeratto</td>
+          
+          <td>$25</td>
+          <td>$950</td>
+          <td>Apr 7, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td class="name"><a href="http://www.opendragon.com">opendragon</a></td>
+          
+          <td>$25</td>
+          <td>$700</td>
+          <td>Jan 18, 2017</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>cpunion</td>
+          
+          <td>$25</td>
+          <td>$550</td>
+          <td>Sep 9, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Oskari Timperi</td>
+          
+          <td>$10</td>
+          <td>$370</td>
+          <td>Jun 8, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Zicheng Huang</td>
+          
+          <td>$5</td>
+          <td>$370</td>
+          <td>Jun 5, 2017</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td class="name"><a href="http://code0.xyz/">enthus1ast</a></td>
+          
+          <td>$10</td>
+          <td>$330</td>
+          <td>Oct 28, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Sloane Simmons</td>
+          
+          <td>$10</td>
+          <td>$280</td>
+          <td>Mar 5, 2017</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Rudi Angela</td>
+          
+          <td>$10</td>
+          <td>$220</td>
+          <td>Sep 16, 2017</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Ali Anwar</td>
+          
+          <td>$23</td>
+          <td>$184</td>
+          <td>Jan 5, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>pandada8</td>
+          
+          <td>$5</td>
+          <td>$175</td>
+          <td>Aug 12, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Alex Boisvert</td>
+          
+          <td>$10</td>
+          <td>$160</td>
+          <td>Mar 1, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>syrol</td>
+          
+          <td>$5</td>
+          <td>$155</td>
+          <td>Dec 12, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td class="name"><a href="https://www.btbytes.com/">btbytes</a></td>
+          
+          <td>$5</td>
+          <td>$140</td>
+          <td>Apr 6, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>hhashimoto</td>
+          
+          <td>$5</td>
+          <td>$140</td>
+          <td>Mar 16, 2017</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Geksan</td>
+          
+          <td>$5</td>
+          <td>$135</td>
+          <td>Oct 10, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Aldrog</td>
+          
+          <td>$5</td>
+          <td>$135</td>
+          <td>Feb 11, 2017</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td class="name"><a href="http://5am.works">Sam647254</a></td>
+          
+          <td>$10</td>
+          <td>$130</td>
+          <td>Feb 26, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Claudio Canepa</td>
+          
+          <td>$5</td>
+          <td>$110</td>
+          <td>Aug 10, 2017</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>brentp</td>
+          
+          <td>$15</td>
+          <td>$105</td>
+          <td>Dec 22, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>ivanflorentin</td>
+          
+          <td>$5</td>
+          <td>$100</td>
+          <td>May 3, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Raymond Imber</td>
+          
+          <td>$25</td>
+          <td>$100</td>
+          <td>Apr 24, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td class="name"><a href="http://www.twitter.com/pabloteleco">kingoodie</a></td>
+          
+          <td>$5</td>
+          <td>$90</td>
+          <td>Jan 9, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Andreas Strømberg</td>
+          
+          <td>$10</td>
+          <td>$80</td>
+          <td>Jan 6, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Aleksey Leonov</td>
+          
+          <td>$5</td>
+          <td>$64</td>
+          <td>Mar 16, 2017</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Ervin Bosenbacher</td>
+          
+          <td>$10</td>
+          <td>$50</td>
+          <td>Jan 6, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Andrei Dyldin</td>
+          
+          <td>$25</td>
+          <td>$50</td>
+          <td>Jul 3, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Ferdinand</td>
+          
+          <td>$5</td>
+          <td>$40</td>
+          <td>Nov 2, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Mitsuru Kanenobu</td>
+          
+          <td>$10</td>
+          <td>$40</td>
+          <td>May 17, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Svend Knudsen</td>
+          
+          <td>$1</td>
+          <td>$39</td>
+          <td>Apr 11, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>feng1st</td>
+          
+          <td>$5</td>
+          <td>$35</td>
+          <td>Dec 7, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>campbellr</td>
+          
+          <td>$1</td>
+          <td>$34</td>
+          <td>Sep 4, 2016</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>demianfe</td>
+          
+          <td>$5</td>
+          <td>$30</td>
+          <td>Jan 10, 2019</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Oldham-Made Ltd</td>
+          
+          <td>$10</td>
+          <td>$30</td>
+          <td>Jun 27, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Dimitri Roche</td>
+          
+          <td>$10</td>
+          <td>$30</td>
+          <td>Mar 22, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Kenan Sulayman</td>
+          
+          <td>$10</td>
+          <td>$30</td>
+          <td>Jun 12, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Sean Casey</td>
+          
+          <td>$6</td>
+          <td>$24</td>
+          <td>May 4, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Jean François Lemieux</td>
+          
+          <td>$3</td>
+          <td>$21</td>
+          <td>Jan 18, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>jedrzejnowak</td>
+          
+          <td>$1</td>
+          <td>$14</td>
+          <td>May 23, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Philipp Rukin</td>
+          
+          <td>$2</td>
+          <td>$14</td>
+          <td>Jan 16, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>moigagoo</td>
+          
+          <td>$7</td>
+          <td>$14</td>
+          <td>Jul 18, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Trent Telfer</td>
+          
+          <td>$1</td>
+          <td>$12</td>
+          <td>Jul 5, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Mark Sibly</td>
+          
+          <td>$5</td>
+          <td>$10</td>
+          <td>May 9, 2019</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>Philip Rideout</td>
+          
+          <td>$5</td>
+          <td>$10</td>
+          <td>Jul 24, 2018</td>
+        </tr>
+      
+    
+      
+        <tr>
+          
+            <td></td>
+          
+          
+          <td>rauny-brandao</td>
+          
+          <td>$5</td>
+          <td>$5</td>
+          <td>Jun 14, 2019</td>
+        </tr>
+      
+    
+    </tbody>
+  </table>
+
+  <h1 class="text-centered page-title">过去的赞助商</h1>
+  <h3 class="text-centered page-subtitle">
+    本节列出了过去为Nim发展提供了经济贡献的公司和个人。
+  </h3>
+  <table>
+    <thead>
+      <tr>
+        <th class="name">捐赠人</th>
+        <th>合计</th>
+        <th>最大贡献人</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+          <tr>
+            <td>Second Spectrum</td>
+            <td>$6500</td>
+            <td>May 5, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>zacharycarter</td>
+            <td>$2400</td>
+            <td>Feb 26, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>skunkiferous</td>
+            <td>$1120</td>
+            <td>Oct 2, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>bogen</td>
+            <td>$1010</td>
+            <td>Jul 23, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Yuriy Glukhov</td>
+            <td>$1000</td>
+            <td>Apr 6, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>endragor</td>
+            <td>$775</td>
+            <td>Apr 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>cooldome</td>
+            <td>$600</td>
+            <td>Apr 11, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>flyx</td>
+            <td>$595</td>
+            <td>Apr 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>jcosborn</td>
+            <td>$525</td>
+            <td>Nov 21, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>euantorano</td>
+            <td>$500</td>
+            <td>Jun 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>TechAspirer</td>
+            <td>$425</td>
+            <td>Nov 17, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>mikra</td>
+            <td>$400</td>
+            <td>Apr 28, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>shkolnick-kun</td>
+            <td>$375</td>
+            <td>Jul 6, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Chris Heller</td>
+            <td>$350</td>
+            <td>May 19, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Rowbyte Inc</td>
+            <td>$300</td>
+            <td>May 19, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>linkmonitor</td>
+            <td>$280</td>
+            <td>Jan 28, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Luke Parker</td>
+            <td>$225</td>
+            <td>Mar 11, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>Chris Heller</td>
+            <td>$190</td>
+            <td>Sep 7, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>niebaopeng</td>
+            <td>$180</td>
+            <td>Jun 1, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>moigagoo</td>
+            <td>$170</td>
+            <td>May 13, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>xxlabaza</td>
+            <td>$170</td>
+            <td>Jun 17, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>pyloor </td>
+            <td>$165</td>
+            <td>May 16, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Yuriy Glukhov</td>
+            <td>$165</td>
+            <td>Jan 13, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>abeaumont</td>
+            <td>$160</td>
+            <td>Aug 12, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>WilRubin</td>
+            <td>$150</td>
+            <td>Aug 11, 2015</td>
+          </tr>
+      
+          <tr>
+            <td>teroz</td>
+            <td>$150</td>
+            <td>Apr 8, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>devted</td>
+            <td>$150</td>
+            <td>Oct 19, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>stdev</td>
+            <td>$150</td>
+            <td>Apr 25, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>Jennifer Becker</td>
+            <td>$140</td>
+            <td>Nov 9, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>GULPF</td>
+            <td>$130</td>
+            <td>Sep 12, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>RyanMarcus</td>
+            <td>$120</td>
+            <td>Jul 19, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>zolern</td>
+            <td>$110</td>
+            <td>Apr 15, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>avsej</td>
+            <td>$110</td>
+            <td>Jun 10, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>rustomax</td>
+            <td>$110</td>
+            <td>Jan 7, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>Benny Luypaert</td>
+            <td>$100</td>
+            <td>Apr 10, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>barcharcraz</td>
+            <td>$100</td>
+            <td>Jun 2, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>PhilipWitte</td>
+            <td>$100</td>
+            <td>Aug 5, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>shomodj</td>
+            <td>$100</td>
+            <td>May 22, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>amscotti</td>
+            <td>$100</td>
+            <td>Jan 13, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>Eddy Lazzarin</td>
+            <td>$100</td>
+            <td>Sep 20, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>Jonathan Arnett</td>
+            <td>$90</td>
+            <td>May 20, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>jrenner</td>
+            <td>$90</td>
+            <td>Apr 27, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>Handojo Goenadi</td>
+            <td>$85</td>
+            <td>Apr 19, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>olanod</td>
+            <td>$85</td>
+            <td>Aug 1, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>D-L</td>
+            <td>$80</td>
+            <td>Apr 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Boxifier</td>
+            <td>$75</td>
+            <td>Apr 12, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>iolloyd</td>
+            <td>$75</td>
+            <td>Apr 29, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>swalf</td>
+            <td>$75</td>
+            <td>May 9, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>lenzenmi</td>
+            <td>$70</td>
+            <td>Jul 28, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Christian Bagley</td>
+            <td>$70</td>
+            <td>Nov 3, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>mancifbier</td>
+            <td>$70</td>
+            <td>Nov 23, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>Kevin Golding</td>
+            <td>$70</td>
+            <td>Jan 10, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>tekknolagi</td>
+            <td>$55</td>
+            <td>Feb 15, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>rb01</td>
+            <td>$50</td>
+            <td>May 4, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>zachaysan</td>
+            <td>$50</td>
+            <td>Jun 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>kunev</td>
+            <td>$50</td>
+            <td>Dec 26, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>iboB</td>
+            <td>$50</td>
+            <td>Jan 28, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>Rodrigo-O</td>
+            <td>$50</td>
+            <td>May 28, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>hackspanner</td>
+            <td>$50</td>
+            <td>May 26, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>kritoke</td>
+            <td>$50</td>
+            <td>Apr 30, 2019</td>
+          </tr>
+      
+          <tr>
+            <td>TedSinger</td>
+            <td>$45</td>
+            <td>Apr 9, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>johnnovak</td>
+            <td>$45</td>
+            <td>Apr 30, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Matthew Baulch</td>
+            <td>$40</td>
+            <td>Jun 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Johan</td>
+            <td>$40</td>
+            <td>May 29, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>Sergiy Epatov</td>
+            <td>$40</td>
+            <td>Nov 16, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>Matthew Newton</td>
+            <td>$35</td>
+            <td>Apr 20, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>martinbbjerregaard</td>
+            <td>$35</td>
+            <td>Jun 9, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>fsmoreir</td>
+            <td>$35</td>
+            <td>Feb 14, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>opqx</td>
+            <td>$35</td>
+            <td>Feb 23, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>Ray Imber</td>
+            <td>$35</td>
+            <td>Feb 1, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>misolietavec</td>
+            <td>$35</td>
+            <td>Jul 1, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>Michael D. Sklaroff</td>
+            <td>$33</td>
+            <td>Apr 27, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>RationalG</td>
+            <td>$30</td>
+            <td>Jun 17, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>benbve</td>
+            <td>$30</td>
+            <td>Jul 12, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>multikatt</td>
+            <td>$30</td>
+            <td>Nov 2, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>zefciu</td>
+            <td>$30</td>
+            <td>Dec 29, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Mike Seidle</td>
+            <td>$30</td>
+            <td>Apr 21, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>unclechu</td>
+            <td>$30</td>
+            <td>Nov 3, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>Zhang Zongren</td>
+            <td>$27</td>
+            <td>Sep 11, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>soapify.ch</td>
+            <td>$26</td>
+            <td>Jul 30, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>Sven Braune</td>
+            <td>$26</td>
+            <td>Jan 30, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>Landon Bass</td>
+            <td>$25</td>
+            <td>Jun 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>jimrichards</td>
+            <td>$25</td>
+            <td>Jun 8, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>jjzazuet</td>
+            <td>$25</td>
+            <td>Jul 10, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>nicck</td>
+            <td>$25</td>
+            <td>Aug 9, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Rocket Wristbands</td>
+            <td>$25</td>
+            <td>Mar 20, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>georgelippert</td>
+            <td>$25</td>
+            <td>Jul 19, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>stonean</td>
+            <td>$25</td>
+            <td>Jun 22, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>citycide</td>
+            <td>$25</td>
+            <td>Aug 20, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>Hardesty-Ingraham</td>
+            <td>$22</td>
+            <td>Jun 29, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>vindarel </td>
+            <td>$21</td>
+            <td>Oct 18, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>kteza1</td>
+            <td>$20</td>
+            <td>Jun 10, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Badoo</td>
+            <td>$20</td>
+            <td>Jul 30, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>tomkeus</td>
+            <td>$20</td>
+            <td>Sep 4, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>csoriano89</td>
+            <td>$20</td>
+            <td>Sep 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>juanjux</td>
+            <td>$20</td>
+            <td>Oct 29, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>zagfai</td>
+            <td>$20</td>
+            <td>Nov 3, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Eric Raible</td>
+            <td>$20</td>
+            <td>Dec 23, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>cnygaard</td>
+            <td>$20</td>
+            <td>Jan 17, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>hellcoderz</td>
+            <td>$20</td>
+            <td>Jan 24, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>ricardorego</td>
+            <td>$20</td>
+            <td>Jun 17, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>OldhamMade</td>
+            <td>$20</td>
+            <td>Apr 11, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>Jonathan Kienzle</td>
+            <td>$19</td>
+            <td>Mar 3, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>mirek</td>
+            <td>$15</td>
+            <td>Apr 9, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>rickc</td>
+            <td>$15</td>
+            <td>Jul 31, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>TechPriest</td>
+            <td>$15</td>
+            <td>Mar 18, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>Buy Youtube Views</td>
+            <td>$15</td>
+            <td>May 28, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>Luís Figueiredo</td>
+            <td>$15</td>
+            <td>Oct 28, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>jpkx1984</td>
+            <td>$13</td>
+            <td>Jul 11, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Andrei Skorokhod</td>
+            <td>$13</td>
+            <td>Sep 25, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>vlkrav</td>
+            <td>$12</td>
+            <td>Aug 9, 2015</td>
+          </tr>
+      
+          <tr>
+            <td>tebanep</td>
+            <td>$12</td>
+            <td>Aug 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Nymf Music Production</td>
+            <td>$12</td>
+            <td>May 29, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>benanas</td>
+            <td>$11</td>
+            <td>Feb 19, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>McSpiros</td>
+            <td>$10</td>
+            <td>Apr 6, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Brandon Hunter</td>
+            <td>$10</td>
+            <td>Apr 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>funny-falcon</td>
+            <td>$10</td>
+            <td>Apr 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>(unknown)</td>
+            <td>$10</td>
+            <td>Apr 16, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Angluca</td>
+            <td>$10</td>
+            <td>May 3, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>calind</td>
+            <td>$10</td>
+            <td>Jun 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>goldenreign</td>
+            <td>$10</td>
+            <td>Jun 10, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Blumenversand</td>
+            <td>$10</td>
+            <td>Jul 21, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>cinnabardk</td>
+            <td>$10</td>
+            <td>Aug 6, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>reddec</td>
+            <td>$10</td>
+            <td>Aug 31, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>cupen</td>
+            <td>$10</td>
+            <td>Nov 21, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>yay</td>
+            <td>$10</td>
+            <td>Jan 25, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>Jimmie Houchin</td>
+            <td>$10</td>
+            <td>Feb 22, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>pnuzhdin</td>
+            <td>$10</td>
+            <td>Jun 13, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>ruslux</td>
+            <td>$10</td>
+            <td>Jul 20, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>KTakahiro1729</td>
+            <td>$10</td>
+            <td>Aug 24, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>yuttie</td>
+            <td>$8</td>
+            <td>Jun 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Rameez Nooruddin</td>
+            <td>$6</td>
+            <td>Aug 8, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>niv</td>
+            <td>$5</td>
+            <td>Apr 6, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>goniz</td>
+            <td>$5</td>
+            <td>Apr 7, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>genunix</td>
+            <td>$5</td>
+            <td>Apr 12, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>CynepHy6</td>
+            <td>$5</td>
+            <td>Apr 14, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>stevenyhw</td>
+            <td>$5</td>
+            <td>May 20, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>Sanjay Singh</td>
+            <td>$5</td>
+            <td>Jun 6, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>hron</td>
+            <td>$5</td>
+            <td>Jun 11, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>laszlowaty</td>
+            <td>$5</td>
+            <td>Jun 17, 2016</td>
+          </tr>
+      
+          <tr>
+            <td>mpachecofaulk55</td>
+            <td>$5</td>
+            <td>Feb 11, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>Dan Beste</td>
+            <td>$5</td>
+            <td>Oct 26, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>mcintyrechris</td>
+            <td>$5</td>
+            <td>Jun 10, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>imbsky</td>
+            <td>$5</td>
+            <td>Oct 15, 2018</td>
+          </tr>
+      
+          <tr>
+            <td>Ryuko Posting</td>
+            <td>$5</td>
+            <td>Jan 11, 2019</td>
+          </tr>
+      
+          <tr>
+            <td>Kobi Lurie</td>
+            <td>$3</td>
+            <td>Nov 5, 2017</td>
+          </tr>
+      
+          <tr>
+            <td>邬 博宇</td>
+            <td>$1</td>
+            <td>Jun 27, 2017</td>
+          </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

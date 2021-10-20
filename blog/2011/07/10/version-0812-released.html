@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Version 0.8.12 released - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Version 0.8.12 released"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Bugfixes Bugfix: httpclient correct passes the path starting with /. Bugfixes for the htmlparser module. Bugfix: pegs.find did not respect start parameter. Bugfix: dialogs.ChooseFilesToOpen did not work if only one file is selected. Bugfix: niminst: nimrod is not default dir for every project. Bugfix: Multiple yield statements in iterators did not cause local vars to be copied. Bugfix: The compiler does not emit very inaccurate floating point literals anymore. Bugfix: Subclasses are taken into account for try except matching. Bugfix: Generics and macros are more stable. There are still known bugs left though. Bugfix: Generated type information for tuples was sometimes wrong, causing random crashes. Lots of other bugfixes: Too many to list them all. Changes affecting backwards compatibility Operators starting with ^ are now right-associative and have the highest priority. Deprecated os.getApplicationFilename: Use os.getAppFilename instead. Deprecated os.getApplicationDir: Use os.getAppDir instead. Deprecated system.copy: Use substr or string slicing instead. Changed and documented how generalized string literals work: The syntax module.re"abc" is now supported. Changed the behaviour of strutils.%, ropes.% if both notations $# and $i are involved. The pegs and re modules distinguish between replace and replacef operations. The pointer dereference operation p^ is deprecated and might become ^p in later versions or be dropped entirely since it is rarely used. Use the new notation p[] in the rare cases where you need to dereference a pointer explicitly. system.readFile does not return nil anymore but raises an EIO exception instead. Unsound co-/contravariance for procvars has been removed. Language Additions Source code filters are now documented. Added the linearScanEnd, unroll, shallow pragmas. Added emit pragma for direct code generator control. Case statement branches support constant sets for programming convenience. Tuple unpacking is not enforced in for loops anymore. The compiler now supports array, sequence and string slicing. A field in an enum may be given an explicit string representation. This yields more maintainable code than using a constant array[TMyEnum, string] mapping. Indices in array literals may be explicitly given, enhancing readability: [enumValueA: "a", enumValueB: "b"]. Added thread support via the threads core module and the --threads:on command line switch. The built-in iterators system.fields and system.fieldPairs can be used to iterate over any field of a tuple. With this mechanism operations like == and hash are lifted to tuples. The slice .. is now a first-class operator, allowing code like: x in 1000..100_000. Compiler Additions The compiler supports IDEs via the new group of idetools command line options. The interactive mode (REPL) has been improved and documented for the first time. The compiler now might use hashing for string case statements depending on the number of string literals in the case statement. Library Additions Added lists module which contains generic linked lists. Added sets module which contains generic hash sets. Added tables module which contains generic hash tables. Added queues module which contains generic sequence based queues. Added intsets module which contains a specialized int set data type. Added scgi module. Added smtp module. Added encodings module. Added re.findAll, pegs.findAll. Added os.findExe. Added parseutils.parseUntil and parseutils.parseWhile. Added strutils.align, strutils.tokenize, strutils.wordWrap. Pegs support a captured search loop operator {@}. Pegs support new built-ins: \letter, \upper, \lower, \title, \white. Pegs support the new built-in \skip operation. Pegs support the $ and ^ anchors. Additional operations were added to the complex module. Added strutils.formatFloat, strutils.formatBiggestFloat. Added unary &lt; for nice looking excluding upper bounds in ranges. Added math.floor. Added system.reset and a version of system.open that returns a TFile and raises an exception in case of an error. Added a wrapper for redis. Added a wrapper for 0mq via the zmq module. Added a wrapper for sphinx. Added system.newStringOfCap. Added system.raiseHook and system.outOfMemHook. Added system.writeFile. Added system.shallowCopy. system.echo is guaranteed to be thread-safe. Added prelude include file for scripting convenience. Added typeinfo core module for access to runtime type information. Added marshal module for JSON serialization."> -->
+  <meta property="og:description" content="Bugfixes Bugfix: httpclient correct passes the path starting with /. Bugfixes for the htmlparser module. Bugfix: pegs.find did not respect start parameter. Bugfix: dialogs.ChooseFilesToOpen did not work if only one file is selected. Bugfix: niminst: nimrod is not default dir for every project. Bugfix: Multiple yield statements in iterators did not cause local vars to be copied. Bugfix: The compiler does not emit very inaccurate floating point literals anymore. Bugfix: Subclasses are taken into account for try except matching. Bugfix: Generics and macros are more stable. There are still known bugs left though. Bugfix: Generated type information for tuples was sometimes wrong, causing random crashes. Lots of other bugfixes: Too many to list them all. Changes affecting backwards compatibility Operators starting with ^ are now right-associative and have the highest priority. Deprecated os.getApplicationFilename: Use os.getAppFilename instead. Deprecated os.getApplicationDir: Use os.getAppDir instead. Deprecated system.copy: Use substr or string slicing instead. Changed and documented how generalized string literals work: The syntax module.re"abc" is now supported. Changed the behaviour of strutils.%, ropes.% if both notations $# and $i are involved. The pegs and re modules distinguish between replace and replacef operations. The pointer dereference operation p^ is deprecated and might become ^p in later versions or be dropped entirely since it is rarely used. Use the new notation p[] in the rare cases where you need to dereference a pointer explicitly. system.readFile does not return nil anymore but raises an EIO exception instead. Unsound co-/contravariance for procvars has been removed. Language Additions Source code filters are now documented. Added the linearScanEnd, unroll, shallow pragmas. Added emit pragma for direct code generator control. Case statement branches support constant sets for programming convenience. Tuple unpacking is not enforced in for loops anymore. The compiler now supports array, sequence and string slicing. A field in an enum may be given an explicit string representation. This yields more maintainable code than using a constant array[TMyEnum, string] mapping. Indices in array literals may be explicitly given, enhancing readability: [enumValueA: "a", enumValueB: "b"]. Added thread support via the threads core module and the --threads:on command line switch. The built-in iterators system.fields and system.fieldPairs can be used to iterate over any field of a tuple. With this mechanism operations like == and hash are lifted to tuples. The slice .. is now a first-class operator, allowing code like: x in 1000..100_000. Compiler Additions The compiler supports IDEs via the new group of idetools command line options. The interactive mode (REPL) has been improved and documented for the first time. The compiler now might use hashing for string case statements depending on the number of string literals in the case statement. Library Additions Added lists module which contains generic linked lists. Added sets module which contains generic hash sets. Added tables module which contains generic hash tables. Added queues module which contains generic sequence based queues. Added intsets module which contains a specialized int set data type. Added scgi module. Added smtp module. Added encodings module. Added re.findAll, pegs.findAll. Added os.findExe. Added parseutils.parseUntil and parseutils.parseWhile. Added strutils.align, strutils.tokenize, strutils.wordWrap. Pegs support a captured search loop operator {@}. Pegs support new built-ins: \letter, \upper, \lower, \title, \white. Pegs support the new built-in \skip operation. Pegs support the $ and ^ anchors. Additional operations were added to the complex module. Added strutils.formatFloat, strutils.formatBiggestFloat. Added unary &lt; for nice looking excluding upper bounds in ranges. Added math.floor. Added system.reset and a version of system.open that returns a TFile and raises an exception in case of an error. Added a wrapper for redis. Added a wrapper for 0mq via the zmq module. Added a wrapper for sphinx. Added system.newStringOfCap. Added system.raiseHook and system.outOfMemHook. Added system.writeFile. Added system.shallowCopy. system.echo is guaranteed to be thread-safe. Added prelude include file for scripting convenience. Added typeinfo core module for access to runtime type information. Added marshal module for JSON serialization.">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Version 0.8.12 released" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Version 0.8.12 released
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              10 July 2011
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Andreas Rumpf
+            </span>
+            
+          </h3>
+          <h2 id="bugfixes">Bugfixes</h2>
+<ul>
+  <li>Bugfix: <code class="language-plaintext highlighter-rouge">httpclient</code> correct passes the path starting with <code class="language-plaintext highlighter-rouge">/</code>.</li>
+  <li>Bugfixes for the <code class="language-plaintext highlighter-rouge">htmlparser</code> module.</li>
+  <li>Bugfix: <code class="language-plaintext highlighter-rouge">pegs.find</code> did not respect <code class="language-plaintext highlighter-rouge">start</code> parameter.</li>
+  <li>Bugfix: <code class="language-plaintext highlighter-rouge">dialogs.ChooseFilesToOpen</code> did not work if only one file is
+selected.</li>
+  <li>Bugfix: niminst: <code class="language-plaintext highlighter-rouge">nimrod</code> is not default dir for <em>every</em> project.</li>
+  <li>Bugfix: Multiple yield statements in iterators did not cause local vars to be
+copied.</li>
+  <li>Bugfix: The compiler does not emit very inaccurate floating point literals
+anymore.</li>
+  <li>Bugfix: Subclasses are taken into account for <code class="language-plaintext highlighter-rouge">try except</code> matching.</li>
+  <li>Bugfix: Generics and macros are more stable. There are still known bugs left
+though.</li>
+  <li>Bugfix: Generated type information for tuples was sometimes wrong, causing
+random crashes.</li>
+  <li>Lots of other bugfixes: Too many to list them all.</li>
+</ul>
+
+<h2 id="changes-affecting-backwards-compatibility">Changes affecting backwards compatibility</h2>
+
+<ul>
+  <li>Operators starting with <code class="language-plaintext highlighter-rouge">^</code> are now right-associative and have the highest
+priority.</li>
+  <li>Deprecated <code class="language-plaintext highlighter-rouge">os.getApplicationFilename</code>: Use <code class="language-plaintext highlighter-rouge">os.getAppFilename</code> instead.</li>
+  <li>Deprecated <code class="language-plaintext highlighter-rouge">os.getApplicationDir</code>: Use <code class="language-plaintext highlighter-rouge">os.getAppDir</code> instead.</li>
+  <li>Deprecated <code class="language-plaintext highlighter-rouge">system.copy</code>: Use <code class="language-plaintext highlighter-rouge">substr</code> or string slicing instead.</li>
+  <li>Changed and documented how generalized string literals work: The syntax
+<code class="language-plaintext highlighter-rouge">module.re"abc"</code> is now supported.</li>
+  <li>Changed the behaviour of <code class="language-plaintext highlighter-rouge">strutils.%</code>, <code class="language-plaintext highlighter-rouge">ropes.%</code>
+if both notations <code class="language-plaintext highlighter-rouge">$#</code> and <code class="language-plaintext highlighter-rouge">$i</code> are involved.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">pegs</code> and <code class="language-plaintext highlighter-rouge">re</code> modules distinguish between <code class="language-plaintext highlighter-rouge">replace</code>
+and <code class="language-plaintext highlighter-rouge">replacef</code> operations.</li>
+  <li>The pointer dereference operation <code class="language-plaintext highlighter-rouge">p^</code> is deprecated and might become
+<code class="language-plaintext highlighter-rouge">^p</code> in later versions or be dropped entirely since it is rarely used.
+Use the new notation <code class="language-plaintext highlighter-rouge">p[]</code> in the rare cases where you need to
+dereference a pointer explicitly.</li>
+  <li><code class="language-plaintext highlighter-rouge">system.readFile</code> does not return <code class="language-plaintext highlighter-rouge">nil</code> anymore but raises an <code class="language-plaintext highlighter-rouge">EIO</code>
+exception instead.</li>
+  <li>Unsound co-/contravariance for procvars has been removed.</li>
+</ul>
+
+<h2 id="language-additions">Language Additions</h2>
+
+<ul>
+  <li>Source code filters are now documented.</li>
+  <li>Added the <code class="language-plaintext highlighter-rouge">linearScanEnd</code>, <code class="language-plaintext highlighter-rouge">unroll</code>, <code class="language-plaintext highlighter-rouge">shallow</code> pragmas.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">emit</code> pragma for direct code generator control.</li>
+  <li>Case statement branches support constant sets for programming convenience.</li>
+  <li>Tuple unpacking is not enforced in <code class="language-plaintext highlighter-rouge">for</code> loops anymore.</li>
+  <li>The compiler now supports array, sequence and string slicing.</li>
+  <li>A field in an <code class="language-plaintext highlighter-rouge">enum</code> may be given an explicit string representation.
+This yields more maintainable code than using a constant
+<code class="language-plaintext highlighter-rouge">array[TMyEnum, string]</code> mapping.</li>
+  <li>Indices in array literals may be explicitly given, enhancing readability:
+<code class="language-plaintext highlighter-rouge">[enumValueA: "a", enumValueB: "b"]</code>.</li>
+  <li>Added thread support via the <code class="language-plaintext highlighter-rouge">threads</code> core module and
+the <code class="language-plaintext highlighter-rouge">--threads:on</code> command line switch.</li>
+  <li>The built-in iterators <code class="language-plaintext highlighter-rouge">system.fields</code> and <code class="language-plaintext highlighter-rouge">system.fieldPairs</code> can be
+used to iterate over any field of a tuple. With this mechanism operations
+like <code class="language-plaintext highlighter-rouge">==</code> and <code class="language-plaintext highlighter-rouge">hash</code> are lifted to tuples.</li>
+  <li>The slice <code class="language-plaintext highlighter-rouge">..</code> is now a first-class operator, allowing code like:
+<code class="language-plaintext highlighter-rouge">x in 1000..100_000</code>.</li>
+</ul>
+
+<h2 id="compiler-additions">Compiler Additions</h2>
+
+<ul>
+  <li>The compiler supports IDEs via the new group of <code class="language-plaintext highlighter-rouge">idetools</code> command line
+options.</li>
+  <li>The <em>interactive mode</em> (REPL) has been improved and documented for the
+first time.</li>
+  <li>The compiler now might use hashing for string case statements depending
+on the number of string literals in the case statement.</li>
+</ul>
+
+<h2 id="library-additions">Library Additions</h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">lists</code> module which contains generic linked lists.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">sets</code> module which contains generic hash sets.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">tables</code> module which contains generic hash tables.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">queues</code> module which contains generic sequence based queues.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">intsets</code> module which contains a specialized int set data type.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">scgi</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">smtp</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">encodings</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">re.findAll</code>, <code class="language-plaintext highlighter-rouge">pegs.findAll</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">os.findExe</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">parseutils.parseUntil</code> and <code class="language-plaintext highlighter-rouge">parseutils.parseWhile</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">strutils.align</code>, <code class="language-plaintext highlighter-rouge">strutils.tokenize</code>, <code class="language-plaintext highlighter-rouge">strutils.wordWrap</code>.</li>
+  <li>Pegs support a <em>captured search loop operator</em> <code class="language-plaintext highlighter-rouge">{@}</code>.</li>
+  <li>Pegs support new built-ins: <code class="language-plaintext highlighter-rouge">\letter</code>, <code class="language-plaintext highlighter-rouge">\upper</code>, <code class="language-plaintext highlighter-rouge">\lower</code>,
+<code class="language-plaintext highlighter-rouge">\title</code>, <code class="language-plaintext highlighter-rouge">\white</code>.</li>
+  <li>Pegs support the new built-in <code class="language-plaintext highlighter-rouge">\skip</code> operation.</li>
+  <li>Pegs support the <code class="language-plaintext highlighter-rouge">$</code> and <code class="language-plaintext highlighter-rouge">^</code> anchors.</li>
+  <li>Additional operations were added to the <code class="language-plaintext highlighter-rouge">complex</code> module.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">strutils.formatFloat</code>,  <code class="language-plaintext highlighter-rouge">strutils.formatBiggestFloat</code>.</li>
+  <li>Added unary <code class="language-plaintext highlighter-rouge">&lt;</code> for nice looking excluding upper bounds in ranges.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">math.floor</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.reset</code> and a version of <code class="language-plaintext highlighter-rouge">system.open</code> that
+returns a <code class="language-plaintext highlighter-rouge">TFile</code> and raises an exception in case of an error.</li>
+  <li>Added a wrapper for <code class="language-plaintext highlighter-rouge">redis</code>.</li>
+  <li>Added a wrapper for <code class="language-plaintext highlighter-rouge">0mq</code> via the <code class="language-plaintext highlighter-rouge">zmq</code> module.</li>
+  <li>Added a wrapper for <code class="language-plaintext highlighter-rouge">sphinx</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.newStringOfCap</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.raiseHook</code> and <code class="language-plaintext highlighter-rouge">system.outOfMemHook</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.writeFile</code>.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">system.shallowCopy</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">system.echo</code> is guaranteed to be thread-safe.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">prelude</code> include file for scripting convenience.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">typeinfo</code> core module for access to runtime type information.</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">marshal</code> module for JSON serialization.</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

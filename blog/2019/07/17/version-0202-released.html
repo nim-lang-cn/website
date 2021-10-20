@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>0.20.2现已发布 - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="0.20.2现已发布"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Nim团队很荣幸为大家带来0.20.2版本，这是我们为1.0版本准备的第二个RC版本。 请点击之前的版本发布日志 以查看更多关于0.20版本的信息，以及我们关于1.0及之后版本的计划。 此版本主要包含了对0.20.0（1.0 RC1）版本的BUG修复。 唯一的新功能是我们添加了名为toOpenArray的切片操作符， 现对JavaScript后端可用。 这次更新距离上一个版本的发布尽管只差了一个月， 但它却包含了超过200次的新commit，修复了超过70个被提出来的issues， 并且带来了很多应该能让Nim更加稳定的改进。 代码风格检查 在0.20.0版本发布后，我们改进了我们的代码样式检查器， 现在可以通过在启动Nim时加上--styleCheck:error标识， 这意味着可以对编译器和标准库进行代码风格检查了， 如果使用了不同的代码风格（比如：fooBar和foo_bar），那么这些代码将不会被编译。 Nimpretty 我们对于这个版本的关注点还有一个，那就是我们的nimpretty工具： 这是一个Nim的源码美化器， 用来把代码格式化得符合官方风格(NEP-1)。 我们进行了超过30个提交，以改善nimpretty体验，让它更有能力应对现实场景。 新的runtime 新的runtime进展很顺利，但它还没有达到预想的状态， 所以他在1.0版本中将作为一个可选的特性。 下一个重要的里程碑是使新的运行时与async一起工作。 只有完成这一点，我们才会真正地进行推广，让大家优先考虑它。 安装0.20.2版本 你之前如果已经使用choosenim来安装了旧版本的Nim， 那么更新到0.20.2版本将会非常的简单： $ choosenim update stable 如果你之前并没有使用它，你可以通过 这篇介绍来获取choosenim。 当然你也可以直接根据我们的安装页面， 单独安装Nim。 （译者注：在Windows下的choosenim只支持32位的下载， 你可以在64位系统下进行安装，但是这样的话你的nim版本只能也使用32位的，否则会报错） 不向后兼容的更新 All strutils.rfind procs now take start and last like strutils.find with the same data slice/index meaning. This is backwards compatible for calls not changing the rfind start parameter from its default. (#11487) In the unlikely case that you were using rfind X, start=N, or rfind X, N, then you need to change that to rfind X, last=N or rfind X, 0, N. (This should minimize gotchas porting code from other languages like Python or C++.) On Windows stderr/stdout/stdin are not opened as binary files anymore. Use the switch -d:nimBinaryStdFiles for a transition period. 影响标准库的更新 Mac OS X / BSD: TSa_Family is now the uint8 type, so type conversions like x.sin_family = uint16 toInt(nativesockets.AF_INET) need to be changed into x.sin_family = TSa_Family toInt(nativesockets.AF_INET). 库的新增 用于JS的toOpenArray 现已可用。 库的更新 Fix async IO operations stalling even after socket is closed. (#11232) More informative error message for streams.openFileStream. (#11438) 编译器更新 Better error message for IndexError for empty containers. (#11476) Fix regression in semfold for old right shift. (#11477) Fix for passing tuples as static params to macros. (#11423) Bug修复 Fixed “nimpretty goes crazy with this snippet” (#10295) Fixed “nimpretty doesn’t trim all whitespace on the right side of an export marker” (#10177) Fixed “nimpretty gives invalid indentation to array elements” (#9505) Fixed “nimpretty doesn’t indent correctly if preceding line ends with ;, { etc” (#10159) Fixed “Nimpretty wrong indentation for doc comments” (#10156) Fixed “HttpClient Documentation needs Proxy example” (#11281) Fixed “nimpretty aligns comment annoyingly” (#9399) Fixed “ENDB missing from Docs and TheIndex, remove ENDB from –fullhelp” (#11431) Fixed “Nimrod on Documentation generator” (#11460) Fixed “nimpretty (de)indents code where it shouldn’t” (#11468) Fixed “nimpretty adds spaces where it shouldn’t” (#11470) Fixed “nimpretty formats enums differently based on commas” (#11467) Fixed “strutils.rfind start parameter is unecessarily unusual” (#11430) Fixed “TinyC is not documented” (#11495) Fixed “c2nim missing from 0.20.0” (#11434) Fixed “nimsuggest doesn’t work unless compiled with -d:danger” (#11482) Fixed “random.initRand crashes in Nim 0.20.0 JS backend” (#11450) Fixed “0.20.0 fails to bootstrap when passing “–verbosity:2” (or 3) to koch” (#11436) Fixed “Destructors lifting doesn’t work with inheritance” (#11517) Fixed “std/sums missing from TheIndex” (#11543) Fixed “sequtils module: link is broken” (#11546) Fixed “Case Statement Macros do not work in functions above exported functions.” (#11556) Fixed “newruntime: internal error when initializing a proc variable” (#11533) Fixed “newruntime: error when modifying a sequence” (#11524) Fixed “fmod and other math module functions are missing in js mode” (#4630) Fixed “Object variants and new runtime” (#11563) Fixed “newruntime exceptions” (#11577) Fixed “nimpretty is not aware that the next line is a part of the same context” (#11469) Fixed “Distinct procs fail to compile” (#11600) Fixed “[SharedTables] Error: undeclared identifier: ‘defaultInitialSize’” (#11588) Fixed “newSeqOfCap is not working in newruntime” (#11098) Fixed “nimpretty destroys source with a source code filter” (#11532) Fixed “Unexpected behaviour when constructing with result” (#11525) Fixed “Regression in 0.20.0: Nested proc using outer scope variable fails to compile” (#11523) Fixed “os:standalone Error: redefinition of ‘nimToCStringConv’ “ (#11445) Fixed “No ambiguity error on field overloaded by field=” (#11514) Fixed “object variants and new runtime part 2” (#11611) Fixed “seq Error: unhandled exception: value out of range: 32772 “ (#11606) Fixed “Compiled binary includes full path to internal nim files” (#11572) Fixed “Newruntime: top-level string variable is empty after an array assignment” (#11614) Fixed “Newruntime: raise ObjContructor() doesn’t compile” (#11628) Fixed “Owned ref can be copied and causes double-free” (#11617) Fixed “When compiling to JS (in -d:release) output contains toolchain path on dev’s machine” (#11545) Fixed “wrong unicode string output” (#11618) Fixed “unittest “generic instantiation too nested” error” (#11515) Fixed “Last read of a var parameter generates sink instead of assignment” (#11633) Fixed “const table with proc type does not compile anymore” (#11479) Fixed “Can’t use offsetOf on object that ends with an UncheckedArray” (#11320) Fixed “Newruntime/regression: Bad codegen for inline methods” (#11636) Fixed “String or sequences inside a loop are not cleared in each iteration” (#11510) Fixed “Nim -v doesn’t acknowledge new danger flag” (#11484) Fixed “SIGSEGV while compiling when trying to instantiate a case type, that uses an enum with non-zero start” (#11585) Fixed “Compile-time usage of parts of strutils fails when using -d:useNimRtl” (#8405) Fixed “regression(0.20): finally block executed twice in VM” (#11610) Fixed “exportc symbol not exported, leading to link error” (#11651) Fixed “Render bug: opearator priority can be wrong for second argument” (#11662) Fixed “Nim &amp; C disagree on type size” (#6860) Fixed “Spawn passes refs across threads” (#7057) Fixed “BUG: “varargs[string, $]” calls $ n^2 times instead of n times (n=len(varargs))” (#8316) Fixed “Problem with the same name for module and exported type” (#3333) Fixed “–gc:go does not work anymore” (#11447) Fixed “Error: inconsistent typing for reintroduced symbol” (#11494) Fixed “Auto generated destructors for tuples/objects fail with “non-trivial” error…” (#11671) Fixed “Regression: parameter default value + typedesc parameter causes compiler crash” (#11660) Fixed “newruntime: undetected dangling ref” (#11350) Fixed “Newruntime: setLen() not working on sequences of owned refs” (#11530) Fixed “Incorrect overflow/underflow error in case statements” (#11551) Fixed “cgen preprocessor directive placed after struct declaration” (#11691) Fixed “continue in an except Exception as e block crashes the compiler.” (#11683) Fixed “nimsuggest, nim check segfault when using bindSym and doAssert” (#10901) Fixed “Nimpretty issue, multiline string of x length only causes output grow every time.” (#11700) Fixed “Array indexed by distinct int doesnt work with iterators” (#11715)"> -->
+  <meta property="og:description" content="Nim团队很荣幸为大家带来0.20.2版本，这是我们为1.0版本准备的第二个RC版本。 请点击之前的版本发布日志 以查看更多关于0.20版本的信息，以及我们关于1.0及之后版本的计划。 此版本主要包含了对0.20.0（1.0 RC1）版本的BUG修复。 唯一的新功能是我们添加了名为toOpenArray的切片操作符， 现对JavaScript后端可用。 这次更新距离上一个版本的发布尽管只差了一个月， 但它却包含了超过200次的新commit，修复了超过70个被提出来的issues， 并且带来了很多应该能让Nim更加稳定的改进。 代码风格检查 在0.20.0版本发布后，我们改进了我们的代码样式检查器， 现在可以通过在启动Nim时加上--styleCheck:error标识， 这意味着可以对编译器和标准库进行代码风格检查了， 如果使用了不同的代码风格（比如：fooBar和foo_bar），那么这些代码将不会被编译。 Nimpretty 我们对于这个版本的关注点还有一个，那就是我们的nimpretty工具： 这是一个Nim的源码美化器， 用来把代码格式化得符合官方风格(NEP-1)。 我们进行了超过30个提交，以改善nimpretty体验，让它更有能力应对现实场景。 新的runtime 新的runtime进展很顺利，但它还没有达到预想的状态， 所以他在1.0版本中将作为一个可选的特性。 下一个重要的里程碑是使新的运行时与async一起工作。 只有完成这一点，我们才会真正地进行推广，让大家优先考虑它。 安装0.20.2版本 你之前如果已经使用choosenim来安装了旧版本的Nim， 那么更新到0.20.2版本将会非常的简单： $ choosenim update stable 如果你之前并没有使用它，你可以通过 这篇介绍来获取choosenim。 当然你也可以直接根据我们的安装页面， 单独安装Nim。 （译者注：在Windows下的choosenim只支持32位的下载， 你可以在64位系统下进行安装，但是这样的话你的nim版本只能也使用32位的，否则会报错） 不向后兼容的更新 All strutils.rfind procs now take start and last like strutils.find with the same data slice/index meaning. This is backwards compatible for calls not changing the rfind start parameter from its default. (#11487) In the unlikely case that you were using rfind X, start=N, or rfind X, N, then you need to change that to rfind X, last=N or rfind X, 0, N. (This should minimize gotchas porting code from other languages like Python or C++.) On Windows stderr/stdout/stdin are not opened as binary files anymore. Use the switch -d:nimBinaryStdFiles for a transition period. 影响标准库的更新 Mac OS X / BSD: TSa_Family is now the uint8 type, so type conversions like x.sin_family = uint16 toInt(nativesockets.AF_INET) need to be changed into x.sin_family = TSa_Family toInt(nativesockets.AF_INET). 库的新增 用于JS的toOpenArray 现已可用。 库的更新 Fix async IO operations stalling even after socket is closed. (#11232) More informative error message for streams.openFileStream. (#11438) 编译器更新 Better error message for IndexError for empty containers. (#11476) Fix regression in semfold for old right shift. (#11477) Fix for passing tuples as static params to macros. (#11423) Bug修复 Fixed “nimpretty goes crazy with this snippet” (#10295) Fixed “nimpretty doesn’t trim all whitespace on the right side of an export marker” (#10177) Fixed “nimpretty gives invalid indentation to array elements” (#9505) Fixed “nimpretty doesn’t indent correctly if preceding line ends with ;, { etc” (#10159) Fixed “Nimpretty wrong indentation for doc comments” (#10156) Fixed “HttpClient Documentation needs Proxy example” (#11281) Fixed “nimpretty aligns comment annoyingly” (#9399) Fixed “ENDB missing from Docs and TheIndex, remove ENDB from –fullhelp” (#11431) Fixed “Nimrod on Documentation generator” (#11460) Fixed “nimpretty (de)indents code where it shouldn’t” (#11468) Fixed “nimpretty adds spaces where it shouldn’t” (#11470) Fixed “nimpretty formats enums differently based on commas” (#11467) Fixed “strutils.rfind start parameter is unecessarily unusual” (#11430) Fixed “TinyC is not documented” (#11495) Fixed “c2nim missing from 0.20.0” (#11434) Fixed “nimsuggest doesn’t work unless compiled with -d:danger” (#11482) Fixed “random.initRand crashes in Nim 0.20.0 JS backend” (#11450) Fixed “0.20.0 fails to bootstrap when passing “–verbosity:2” (or 3) to koch” (#11436) Fixed “Destructors lifting doesn’t work with inheritance” (#11517) Fixed “std/sums missing from TheIndex” (#11543) Fixed “sequtils module: link is broken” (#11546) Fixed “Case Statement Macros do not work in functions above exported functions.” (#11556) Fixed “newruntime: internal error when initializing a proc variable” (#11533) Fixed “newruntime: error when modifying a sequence” (#11524) Fixed “fmod and other math module functions are missing in js mode” (#4630) Fixed “Object variants and new runtime” (#11563) Fixed “newruntime exceptions” (#11577) Fixed “nimpretty is not aware that the next line is a part of the same context” (#11469) Fixed “Distinct procs fail to compile” (#11600) Fixed “[SharedTables] Error: undeclared identifier: ‘defaultInitialSize’” (#11588) Fixed “newSeqOfCap is not working in newruntime” (#11098) Fixed “nimpretty destroys source with a source code filter” (#11532) Fixed “Unexpected behaviour when constructing with result” (#11525) Fixed “Regression in 0.20.0: Nested proc using outer scope variable fails to compile” (#11523) Fixed “os:standalone Error: redefinition of ‘nimToCStringConv’ “ (#11445) Fixed “No ambiguity error on field overloaded by field=” (#11514) Fixed “object variants and new runtime part 2” (#11611) Fixed “seq Error: unhandled exception: value out of range: 32772 “ (#11606) Fixed “Compiled binary includes full path to internal nim files” (#11572) Fixed “Newruntime: top-level string variable is empty after an array assignment” (#11614) Fixed “Newruntime: raise ObjContructor() doesn’t compile” (#11628) Fixed “Owned ref can be copied and causes double-free” (#11617) Fixed “When compiling to JS (in -d:release) output contains toolchain path on dev’s machine” (#11545) Fixed “wrong unicode string output” (#11618) Fixed “unittest “generic instantiation too nested” error” (#11515) Fixed “Last read of a var parameter generates sink instead of assignment” (#11633) Fixed “const table with proc type does not compile anymore” (#11479) Fixed “Can’t use offsetOf on object that ends with an UncheckedArray” (#11320) Fixed “Newruntime/regression: Bad codegen for inline methods” (#11636) Fixed “String or sequences inside a loop are not cleared in each iteration” (#11510) Fixed “Nim -v doesn’t acknowledge new danger flag” (#11484) Fixed “SIGSEGV while compiling when trying to instantiate a case type, that uses an enum with non-zero start” (#11585) Fixed “Compile-time usage of parts of strutils fails when using -d:useNimRtl” (#8405) Fixed “regression(0.20): finally block executed twice in VM” (#11610) Fixed “exportc symbol not exported, leading to link error” (#11651) Fixed “Render bug: opearator priority can be wrong for second argument” (#11662) Fixed “Nim &amp; C disagree on type size” (#6860) Fixed “Spawn passes refs across threads” (#7057) Fixed “BUG: “varargs[string, $]” calls $ n^2 times instead of n times (n=len(varargs))” (#8316) Fixed “Problem with the same name for module and exported type” (#3333) Fixed “–gc:go does not work anymore” (#11447) Fixed “Error: inconsistent typing for reintroduced symbol” (#11494) Fixed “Auto generated destructors for tuples/objects fail with “non-trivial” error…” (#11671) Fixed “Regression: parameter default value + typedesc parameter causes compiler crash” (#11660) Fixed “newruntime: undetected dangling ref” (#11350) Fixed “Newruntime: setLen() not working on sequences of owned refs” (#11530) Fixed “Incorrect overflow/underflow error in case statements” (#11551) Fixed “cgen preprocessor directive placed after struct declaration” (#11691) Fixed “continue in an except Exception as e block crashes the compiler.” (#11683) Fixed “nimsuggest, nim check segfault when using bindSym and doAssert” (#10901) Fixed “Nimpretty issue, multiline string of x length only causes output grow every time.” (#11700) Fixed “Array indexed by distinct int doesnt work with iterators” (#11715)">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="0.20.2现已发布" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            0.20.2现已发布
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              17 July 2019
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Nim团队
+            </span>
+            
+          </h3>
+          <p>Nim团队很荣幸为大家带来0.20.2版本，这是我们为1.0版本准备的第二个RC版本。</p>
+
+<p>请点击<a href="https://nim-lang.org/blog/2019/06/06/version-0200-released.html">之前的版本发布日志</a>
+以查看更多关于0.20版本的信息，以及我们关于1.0及之后版本的计划。
+此版本主要包含了对0.20.0（1.0 RC1）版本的BUG修复。</p>
+
+<p>唯一的新功能是我们添加了名为<code class="language-plaintext highlighter-rouge">toOpenArray</code>的切片操作符，
+现对JavaScript后端可用。</p>
+
+<p>这次更新距离上一个版本的发布尽管只差了一个月，
+但它却包含了超过200次的新commit，修复了超过70个被提出来的issues，
+并且带来了很多应该能让Nim更加稳定的改进。</p>
+
+<h3 id="代码风格检查">代码风格检查</h3>
+
+<p>在0.20.0版本发布后，我们改进了我们的代码样式检查器，
+现在可以通过在启动Nim时加上<code class="language-plaintext highlighter-rouge">--styleCheck:error</code>标识，
+这意味着可以对编译器和标准库进行代码风格检查了，
+如果使用了不同的代码风格（比如：<code class="language-plaintext highlighter-rouge">fooBar</code>和<code class="language-plaintext highlighter-rouge">foo_bar</code>），那么这些代码将不会被编译。</p>
+
+<h3 id="nimpretty">Nimpretty</h3>
+
+<p>我们对于这个版本的关注点还有一个，那就是我们的<code class="language-plaintext highlighter-rouge">nimpretty</code>工具：
+这是一个Nim的源码美化器，
+用来把代码格式化得符合官方风格(<a href="https://nim-lang.org/docs/nep1.html">NEP-1</a>)。
+我们进行了超过30个提交，以改善<code class="language-plaintext highlighter-rouge">nimpretty</code>体验，让它更有能力应对现实场景。</p>
+
+<h3 id="新的runtime">新的runtime</h3>
+
+<p>新的runtime进展很顺利，但它还没有达到预想的状态，
+所以他在1.0版本中将作为一个可选的特性。
+下一个重要的里程碑是使新的运行时与<code class="language-plaintext highlighter-rouge">async</code>一起工作。
+只有完成这一点，我们才会真正地进行推广，让大家优先考虑它。</p>
+
+<h2 id="安装0202版本">安装0.20.2版本</h2>
+
+<p>你之前如果已经使用<code class="language-plaintext highlighter-rouge">choosenim</code>来安装了旧版本的Nim，
+那么更新到0.20.2版本将会非常的简单：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>choosenim update stable
+</code></pre></div></div>
+
+<p>如果你之前并没有使用它，你可以通过
+<a href="https://github.com/dom96/choosenim">这篇介绍</a>来获取<code class="language-plaintext highlighter-rouge">choosenim</code>。
+当然你也可以直接根据我们的<a href="https://nim-lang-cn.org/install.html">安装</a>页面，
+单独安装Nim。</p>
+
+<p>（译者注：在Windows下的choosenim只支持32位的下载，
+你可以在64位系统下进行安装，但是这样的话你的nim版本只能也使用32位的，否则会报错）</p>
+
+<h2 id="不向后兼容的更新">不向后兼容的更新</h2>
+
+<ul>
+  <li>
+    <p>All <code class="language-plaintext highlighter-rouge">strutils.rfind</code> procs now take <code class="language-plaintext highlighter-rouge">start</code> and <code class="language-plaintext highlighter-rouge">last</code> like <code class="language-plaintext highlighter-rouge">strutils.find</code>
+with the same data slice/index meaning. This is backwards compatible for
+calls <em>not</em> changing the <code class="language-plaintext highlighter-rouge">rfind</code> <code class="language-plaintext highlighter-rouge">start</code> parameter from its default. (#11487)</p>
+
+    <p>In the unlikely case that you were using <code class="language-plaintext highlighter-rouge">rfind X, start=N</code>, or <code class="language-plaintext highlighter-rouge">rfind X, N</code>,
+then you need to change that to <code class="language-plaintext highlighter-rouge">rfind X, last=N</code> or <code class="language-plaintext highlighter-rouge">rfind X, 0, N</code>. (This
+should minimize gotchas porting code from other languages like Python or C++.)</p>
+  </li>
+  <li>
+    <p>On Windows stderr/stdout/stdin are not opened as binary files anymore. Use the switch
+<code class="language-plaintext highlighter-rouge">-d:nimBinaryStdFiles</code> for a transition period.</p>
+  </li>
+</ul>
+
+<h3 id="影响标准库的更新">影响标准库的更新</h3>
+
+<ul>
+  <li>Mac OS X / BSD: TSa_Family is now the <code class="language-plaintext highlighter-rouge">uint8</code> type, so type
+conversions like <code class="language-plaintext highlighter-rouge">x.sin_family = uint16 toInt(nativesockets.AF_INET)</code>
+need to be changed into <code class="language-plaintext highlighter-rouge">x.sin_family = TSa_Family toInt(nativesockets.AF_INET)</code>.</li>
+</ul>
+
+<h2 id="库的新增">库的新增</h2>
+
+<ul>
+  <li>用于JS的<code class="language-plaintext highlighter-rouge">toOpenArray</code> 现已可用。</li>
+</ul>
+
+<h2 id="库的更新">库的更新</h2>
+
+<ul>
+  <li>
+    <p>Fix async IO operations stalling even after socket is closed. (#11232)</p>
+  </li>
+  <li>
+    <p>More informative error message for <code class="language-plaintext highlighter-rouge">streams.openFileStream</code>. (#11438)</p>
+  </li>
+</ul>
+
+<h2 id="编译器更新">编译器更新</h2>
+
+<ul>
+  <li>
+    <p>Better error message for IndexError for empty containers. (#11476)</p>
+  </li>
+  <li>
+    <p>Fix regression in semfold for old right shift. (#11477)</p>
+  </li>
+  <li>
+    <p>Fix for passing tuples as static params to macros. (#11423)</p>
+  </li>
+</ul>
+
+<h2 id="bug修复">Bug修复</h2>
+
+<ul>
+  <li>Fixed “nimpretty goes crazy with this snippet”
+(<a href="https://github.com/nim-lang/Nim/issues/10295">#10295</a>)</li>
+  <li>Fixed “nimpretty doesn’t trim all whitespace on the right side of an export marker”
+(<a href="https://github.com/nim-lang/Nim/issues/10177">#10177</a>)</li>
+  <li>Fixed “nimpretty gives invalid indentation to array elements”
+(<a href="https://github.com/nim-lang/Nim/issues/9505">#9505</a>)</li>
+  <li>Fixed “nimpretty doesn’t indent correctly if preceding line ends with <code class="language-plaintext highlighter-rouge">;</code>, <code class="language-plaintext highlighter-rouge">{</code> etc”
+(<a href="https://github.com/nim-lang/Nim/issues/10159">#10159</a>)</li>
+  <li>Fixed “Nimpretty wrong indentation for doc comments”
+(<a href="https://github.com/nim-lang/Nim/issues/10156">#10156</a>)</li>
+  <li>Fixed “HttpClient Documentation needs Proxy example”
+(<a href="https://github.com/nim-lang/Nim/issues/11281">#11281</a>)</li>
+  <li>Fixed “nimpretty aligns comment annoyingly”
+(<a href="https://github.com/nim-lang/Nim/issues/9399">#9399</a>)</li>
+  <li>Fixed “ENDB missing from Docs and TheIndex, remove ENDB from –fullhelp”
+(<a href="https://github.com/nim-lang/Nim/issues/11431">#11431</a>)</li>
+  <li>Fixed “Nimrod on Documentation generator”
+(<a href="https://github.com/nim-lang/Nim/issues/11460">#11460</a>)</li>
+  <li>Fixed “nimpretty (de)indents code where it shouldn’t”
+(<a href="https://github.com/nim-lang/Nim/issues/11468">#11468</a>)</li>
+  <li>Fixed “nimpretty adds spaces where it shouldn’t”
+(<a href="https://github.com/nim-lang/Nim/issues/11470">#11470</a>)</li>
+  <li>Fixed “nimpretty formats enums differently based on commas”
+(<a href="https://github.com/nim-lang/Nim/issues/11467">#11467</a>)</li>
+  <li>Fixed “strutils.rfind start parameter is unecessarily unusual”
+(<a href="https://github.com/nim-lang/Nim/issues/11430">#11430</a>)</li>
+  <li>Fixed “TinyC is not documented”
+(<a href="https://github.com/nim-lang/Nim/issues/11495">#11495</a>)</li>
+  <li>Fixed “c2nim missing from 0.20.0”
+(<a href="https://github.com/nim-lang/Nim/issues/11434">#11434</a>)</li>
+  <li>Fixed “nimsuggest doesn’t work unless compiled with -d:danger”
+(<a href="https://github.com/nim-lang/Nim/issues/11482">#11482</a>)</li>
+  <li>Fixed “random.initRand crashes in Nim 0.20.0 JS backend”
+(<a href="https://github.com/nim-lang/Nim/issues/11450">#11450</a>)</li>
+  <li>Fixed “0.20.0 fails to bootstrap when passing “–verbosity:2” (or 3) to koch”
+(<a href="https://github.com/nim-lang/Nim/issues/11436">#11436</a>)</li>
+  <li>Fixed “Destructors lifting doesn’t work with inheritance”
+(<a href="https://github.com/nim-lang/Nim/issues/11517">#11517</a>)</li>
+  <li>Fixed “std/sums missing from TheIndex”
+(<a href="https://github.com/nim-lang/Nim/issues/11543">#11543</a>)</li>
+  <li>Fixed “sequtils module: link is broken”
+(<a href="https://github.com/nim-lang/Nim/issues/11546">#11546</a>)</li>
+  <li>Fixed “Case Statement Macros do not work in functions above exported functions.”
+(<a href="https://github.com/nim-lang/Nim/issues/11556">#11556</a>)</li>
+  <li>Fixed “newruntime: internal error when initializing a proc variable”
+(<a href="https://github.com/nim-lang/Nim/issues/11533">#11533</a>)</li>
+  <li>Fixed “newruntime: error when modifying a sequence”
+(<a href="https://github.com/nim-lang/Nim/issues/11524">#11524</a>)</li>
+  <li>Fixed “fmod and other math module functions are missing in js mode”
+(<a href="https://github.com/nim-lang/Nim/issues/4630">#4630</a>)</li>
+  <li>Fixed “Object variants and new runtime”
+(<a href="https://github.com/nim-lang/Nim/issues/11563">#11563</a>)</li>
+  <li>Fixed “newruntime exceptions”
+(<a href="https://github.com/nim-lang/Nim/issues/11577">#11577</a>)</li>
+  <li>Fixed “nimpretty is not aware that the next line is a part of the same context”
+(<a href="https://github.com/nim-lang/Nim/issues/11469">#11469</a>)</li>
+  <li>Fixed “Distinct procs fail to compile”
+(<a href="https://github.com/nim-lang/Nim/issues/11600">#11600</a>)</li>
+  <li>Fixed “[SharedTables] Error: undeclared identifier: ‘defaultInitialSize’”
+(<a href="https://github.com/nim-lang/Nim/issues/11588">#11588</a>)</li>
+  <li>Fixed “newSeqOfCap is not working in newruntime”
+(<a href="https://github.com/nim-lang/Nim/issues/11098">#11098</a>)</li>
+  <li>Fixed “nimpretty destroys source with a source code filter”
+(<a href="https://github.com/nim-lang/Nim/issues/11532">#11532</a>)</li>
+  <li>Fixed “Unexpected behaviour when constructing with <code class="language-plaintext highlighter-rouge">result</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/11525">#11525</a>)</li>
+  <li>Fixed “Regression in 0.20.0: Nested proc using outer scope variable fails to compile”
+(<a href="https://github.com/nim-lang/Nim/issues/11523">#11523</a>)</li>
+  <li>Fixed “os:standalone Error: redefinition of ‘nimToCStringConv’ “
+(<a href="https://github.com/nim-lang/Nim/issues/11445">#11445</a>)</li>
+  <li>Fixed “No ambiguity error on field overloaded by <code class="language-plaintext highlighter-rouge">field=</code>”
+(<a href="https://github.com/nim-lang/Nim/issues/11514">#11514</a>)</li>
+  <li>Fixed “object variants and new runtime part 2”
+(<a href="https://github.com/nim-lang/Nim/issues/11611">#11611</a>)</li>
+  <li>Fixed “seq Error: unhandled exception: value out of range: 32772 “
+(<a href="https://github.com/nim-lang/Nim/issues/11606">#11606</a>)</li>
+  <li>Fixed “Compiled binary includes full path to internal nim files”
+(<a href="https://github.com/nim-lang/Nim/issues/11572">#11572</a>)</li>
+  <li>Fixed “Newruntime: top-level string variable is empty after an array assignment”
+(<a href="https://github.com/nim-lang/Nim/issues/11614">#11614</a>)</li>
+  <li>Fixed “Newruntime: raise ObjContructor() doesn’t compile”
+(<a href="https://github.com/nim-lang/Nim/issues/11628">#11628</a>)</li>
+  <li>Fixed “Owned ref can be copied and causes double-free”
+(<a href="https://github.com/nim-lang/Nim/issues/11617">#11617</a>)</li>
+  <li>Fixed “When compiling to JS (in <code class="language-plaintext highlighter-rouge">-d:release</code>) output contains toolchain path on dev’s machine”
+(<a href="https://github.com/nim-lang/Nim/issues/11545">#11545</a>)</li>
+  <li>Fixed “wrong unicode string output”
+(<a href="https://github.com/nim-lang/Nim/issues/11618">#11618</a>)</li>
+  <li>Fixed “unittest “generic instantiation too nested” error”
+(<a href="https://github.com/nim-lang/Nim/issues/11515">#11515</a>)</li>
+  <li>Fixed “Last read of a var parameter generates sink instead of assignment”
+(<a href="https://github.com/nim-lang/Nim/issues/11633">#11633</a>)</li>
+  <li>Fixed “const table with proc type does not compile anymore”
+(<a href="https://github.com/nim-lang/Nim/issues/11479">#11479</a>)</li>
+  <li>Fixed “Can’t use offsetOf on object that ends with an UncheckedArray”
+(<a href="https://github.com/nim-lang/Nim/issues/11320">#11320</a>)</li>
+  <li>Fixed “Newruntime/regression: Bad codegen for inline methods”
+(<a href="https://github.com/nim-lang/Nim/issues/11636">#11636</a>)</li>
+  <li>Fixed “String or sequences inside a loop are not cleared in each iteration”
+(<a href="https://github.com/nim-lang/Nim/issues/11510">#11510</a>)</li>
+  <li>Fixed “Nim -v doesn’t acknowledge new danger flag”
+(<a href="https://github.com/nim-lang/Nim/issues/11484">#11484</a>)</li>
+  <li>Fixed “SIGSEGV while compiling when trying to instantiate a case type, that uses an enum with non-zero start”
+(<a href="https://github.com/nim-lang/Nim/issues/11585">#11585</a>)</li>
+  <li>Fixed “Compile-time usage of parts of strutils fails when using -d:useNimRtl”
+(<a href="https://github.com/nim-lang/Nim/issues/8405">#8405</a>)</li>
+  <li>Fixed “regression(0.20): <code class="language-plaintext highlighter-rouge">finally</code> block executed twice in VM”
+(<a href="https://github.com/nim-lang/Nim/issues/11610">#11610</a>)</li>
+  <li>Fixed “exportc symbol not exported, leading to link error”
+(<a href="https://github.com/nim-lang/Nim/issues/11651">#11651</a>)</li>
+  <li>Fixed “Render bug: opearator priority can be wrong for second argument”
+(<a href="https://github.com/nim-lang/Nim/issues/11662">#11662</a>)</li>
+  <li>Fixed “Nim &amp; C disagree on type size”
+(<a href="https://github.com/nim-lang/Nim/issues/6860">#6860</a>)</li>
+  <li>Fixed “Spawn passes refs across threads”
+(<a href="https://github.com/nim-lang/Nim/issues/7057">#7057</a>)</li>
+  <li>Fixed “BUG: “varargs[string, <code class="language-plaintext highlighter-rouge">$</code>]”  calls <code class="language-plaintext highlighter-rouge">$</code> n^2 times instead of n times (n=len(varargs))”
+(<a href="https://github.com/nim-lang/Nim/issues/8316">#8316</a>)</li>
+  <li>Fixed “Problem with the same name for module and exported type”
+(<a href="https://github.com/nim-lang/Nim/issues/3333">#3333</a>)</li>
+  <li>Fixed “–gc:go does not work anymore”
+(<a href="https://github.com/nim-lang/Nim/issues/11447">#11447</a>)</li>
+  <li>Fixed “Error: inconsistent typing for reintroduced symbol”
+(<a href="https://github.com/nim-lang/Nim/issues/11494">#11494</a>)</li>
+  <li>Fixed “Auto generated destructors  for tuples/objects fail with “non-trivial” error…”
+(<a href="https://github.com/nim-lang/Nim/issues/11671">#11671</a>)</li>
+  <li>Fixed “Regression: parameter default value + typedesc parameter causes compiler crash”
+(<a href="https://github.com/nim-lang/Nim/issues/11660">#11660</a>)</li>
+  <li>Fixed “newruntime: undetected dangling ref”
+(<a href="https://github.com/nim-lang/Nim/issues/11350">#11350</a>)</li>
+  <li>Fixed “Newruntime: setLen() not working on sequences of owned refs”
+(<a href="https://github.com/nim-lang/Nim/issues/11530">#11530</a>)</li>
+  <li>Fixed “Incorrect overflow/underflow error in case statements”
+(<a href="https://github.com/nim-lang/Nim/issues/11551">#11551</a>)</li>
+  <li>Fixed “cgen preprocessor directive placed after struct declaration”
+(<a href="https://github.com/nim-lang/Nim/issues/11691">#11691</a>)</li>
+  <li>Fixed “<code class="language-plaintext highlighter-rouge">continue</code> in an <code class="language-plaintext highlighter-rouge">except Exception as e</code> block crashes the compiler.”
+(<a href="https://github.com/nim-lang/Nim/issues/11683">#11683</a>)</li>
+  <li>Fixed “nimsuggest, nim check segfault when using bindSym and doAssert”
+(<a href="https://github.com/nim-lang/Nim/issues/10901">#10901</a>)</li>
+  <li>Fixed “Nimpretty issue, multiline string of x length only causes output grow every time.”
+(<a href="https://github.com/nim-lang/Nim/issues/11700">#11700</a>)</li>
+  <li>Fixed “Array indexed by distinct int doesnt work with iterators”
+(<a href="https://github.com/nim-lang/Nim/issues/11715">#11715</a>)</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

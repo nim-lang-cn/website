@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Nim语言之父对于1.0版本的个人感言 - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Nim语言之父对于1.0版本的个人感言"> -->
+
+  
+  <!-- <meta name="twitter:description" content="功夫不负有心人，我们终于做到了！万众瞩目的1.0版本来了。"> -->
+  <meta property="og:description" content="功夫不负有心人，我们终于做到了！万众瞩目的1.0版本来了。">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Nim语言之父对于1.0版本的个人感言" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Nim语言之父对于1.0版本的个人感言
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              23 September 2019
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Andreas
+            </span>
+            
+          </h3>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>功夫不负有心人，我们终于做到了！
+万众瞩目的 1.0 版本来了。
+</code></pre></div></div>
+
+<p>当我开始 <code class="language-plaintext highlighter-rouge">Nim</code> 开发时，
+我想的是一个编译成 <code class="language-plaintext highlighter-rouge">C</code> 的不超过2万行代码的简单语言。
+核心指导方针是 <code class="language-plaintext highlighter-rouge">Nim</code> 是 <strong>具有宏系统</strong> 、
+用以   <strong>扩展</strong> 微核心缺少的所有特性的 <strong>轻量</strong> 语言。</p>
+
+<p>当前的编译器加上它使用的标准库，
+不完全统计有大概14万行代码，
+支持了几乎所有的操作系统和CPU架构，
+可以编译成 <code class="language-plaintext highlighter-rouge">C++</code> 和 <code class="language-plaintext highlighter-rouge">JavaScript</code>，
+并且 <code class="language-plaintext highlighter-rouge">Nim</code> 的元编程能力是数一数二的。
+语言不再轻量，
+也证明了元编程无法取代所有现代语言需要的构建环节。</p>
+
+<p>例如，
+当 <code class="language-plaintext highlighter-rouge">Nim</code> 用 <em>宏系统</em> 实现 <code class="language-plaintext highlighter-rouge">async</code> 时，
+宏系统需要能够将代码编译成状态机。
+这些状态机需要 <code class="language-plaintext highlighter-rouge">goto</code> 和获取环境变量的方式。
+所以Nim的内核需要增加 <em>“闭包迭代器”</em> 来实现。</p>
+
+<p>此外，
+我们还没有真正了解如何 <em>利用宏系统提供在类型系统层面的可扩展性</em>，
+所以Nim的内核需要泛型和泛型约束。</p>
+
+<h2 id="关于开发进展">关于开发进展</h2>
+
+<p>之前说过，
+我对语言开发进展表示满意，
+版本 <em>1.0</em> 意味着我们现在有不同的开发进展：
+之前的Nim被太多 <em>“最少的惊喜原则”</em> 推动，
+导致每个人可以说 <em>“额，我认为这本来应该工作…”</em>，
+然后随后实现的时候，还带来了很多特殊情况。
+这些特殊情况可能失控并让系统 <em>更难</em> 理解，最终产生了新的……<em>“惊喜”</em>。
+从 <em>1.0</em> 版本开始我们遵循 <strong>“规范优先”</strong> 的开发：
+先写RFC，之后讨论，再写规范，再实现，再在实现的过程中观察 <em>规范</em> 所带来的反馈。</p>
+
+<p>对，我知道规范/手册有一些疏漏和bug，但这种现状正在改善。
+新的 <em>“析构器”</em> 语言特性也是遵循 <em>规范先行</em> 的思想开发的，
+哪怕规范本身还有瑕疵，效果也能好很多，并且能产生更高质量的结果。</p>
+
+<h2 id="nim-的未来"><code class="language-plaintext highlighter-rouge">Nim</code> 的未来</h2>
+
+<p>我们想把重心放在Nim的工具上，
+包括 <code class="language-plaintext highlighter-rouge">Nimsuggest</code> (一个跨编辑器的 <code class="language-plaintext highlighter-rouge">Nim</code> 代码补全引擎)，
+<code class="language-plaintext highlighter-rouge">Nimble</code> （ <code class="language-plaintext highlighter-rouge">Nim</code> 的包管理器)，
+和 <code class="language-plaintext highlighter-rouge">Nimpretty</code>（ <code class="language-plaintext highlighter-rouge">Nim</code> 的源代码格式化工具）。
+从我个人的角度，我认为 <em>“增量编译”(IC)</em> 会是 <code class="language-plaintext highlighter-rouge">Nim</code> 编译器下一个大的里程碑。
+<em>IC</em> 将会进一步压缩 <code class="language-plaintext highlighter-rouge">Nim</code> 已经很快的编译时间，
+加快对宏扩展和其他构造结果的缓存。</p>
+
+<p>关于 <code class="language-plaintext highlighter-rouge">concepts</code> 和 <code class="language-plaintext highlighter-rouge">owned</code>: 
+有人说，这两个特性必须和 <em>1.0</em> 版本一起发布，
+因为它们改变了 <code class="language-plaintext highlighter-rouge">Nim</code> 在实际开发过程中的编写方式。
+但，恕不敢苟同，即使没有 <code class="language-plaintext highlighter-rouge">concept</code> ，语言仍然可以很好地运作，
+而且尽管现有的 <code class="language-plaintext highlighter-rouge">concepts</code> 语法和语义亟待改善，但也是能用的。
+现在还不清楚我们是否最终会在 <code class="language-plaintext highlighter-rouge">Nim</code> 中使用 <code class="language-plaintext highlighter-rouge">owned</code> ，我也有其他的想法来改进nim的内存管理。</p>
+
+<p>不过这都不重要。<em>v1</em> 版本的宗旨是交付我们有的，不是我们想要的。
+前途是光明的，<em>1.0</em> 版本只是一个开始。</p>
+
+<blockquote>
+  <p>就像一场婚姻，婚礼只是开始。</p>
+</blockquote>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

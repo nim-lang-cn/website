@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>V1.0.6 发布！ - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="V1.0.6 发布！"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Nim 团队很高兴为大家带来 1.0.6 版本发布的消息！这是我们在 Nim 1.0.0 之后带来的第三个补丁。 想了解更多关于 1.0.0 版本的信息，可以查阅 v1.0 发布说明. 本次的版本发布于前一个版本发布两个月之后， 包含了将近 60 次提交， 新修复了 15 个已知的错误、一些其他的 bug 修复、和文档优化， 这些都让我们的 1.0 发行版变得更好。 没有安全性相关的问题，但我们正努力保证每两个月发布一个新 1.0.x 版本的稳定周期。 提个醒：如果你还没有参加我们的 Nim 社区调研或者Nim 中文社区调研，就赶紧来参加吧！我们非常希望能听到您的意见！ 安装 1.0.6 如果你已经使用 choosenim 安装了之前版本的 Nim ，升级到 1.0.6 版本会非常简单： $ choosenim update stable 如果没有的话，你可以通过 这些教程来安装 choosenim， 当然你也可以根据网站 安装页 的说明直接安装 Nim 。 更新日志 Bug 修复 修复的 issues 修复了”当使用 –styleCheck:error 命令造成的 Nim 标准库样式的问题” (#12687) 修复了”new (ref MyObject) 无法在编译时工作的问题” (#12488) 修复了”当访问虚拟机 (VM) 中错误的变量字段时，不会触发相应错误消息的问题” (#11727) 修复了”使用没有初始化的 table 造成 orderedTable.del 函数崩溃的问题” (#12798) 修复了”负数 * 0 导致的常量折叠 (Semfold) 的问题” (#12783) 修复了”nimsuggest use command 不能返回 symbol 所有实例的问题” (#12832) 修复了”allPathsAsgnResult 中的代码生成 (codegen) ICE 的问题” (#12827) 修复了”for 循环中，同时出现 Static[T] 和 语法错误造成编译器崩溃的问题” (#12148) 修复了”在 templates 和 tables 中出现未使用导入库的警告 (Incorrect unused import warning)” (#12885) 修复”回归问题 (Regression) (1.0.4): 未声明的标识符: ‘readLines’ 和另一个回归问题” (#13013) 修复了”nim doc 错误地处理导出局部符号 (export localSymbol) 的问题” (#13100) 修复了”语法 (grammar) 中未定义的符号的问题” (#10665) 修复了”所有发行版本都缺少 nimp-gdb 工具的问题” (#13104) 修复了”[JS] 后端未定义 Move 标识符的问题” (#9674) 修复”Error: usage of ‘isNil’ is a user-defined error 的提示信息” (#11440) 其他错误修复 使 addQuoted 在 nimscript 上工作 (#12717) 修复了在 db_mysql getRow() 函数中，当列 (column) 为空导致的错误 修复了在构造之前，对象 (object) 被错误清零的问题 (#12814) 添加了 cstrutils (#12858): 修复了热代码重载 (hotcodereloading) 造成的”csuCmpIgnoreStyle”错误 更好的 clang_cl 支持 (#12896) 修复了影响 nimBetterRun 正确性的命令行错误 (#12933) 修复了无法同时使用 sugar.collect 和 for 循环宏的错误 –out 和 –outdir 支持路径替换 (#12796) 修复了 nim.cfg 中错误符号导致的崩溃 (#13073) 允许 buildIndex 使用 -o 选项 (#13037) 删除了错位 (misplaced) 的分隔符 (#13085): 因为错位 (misplaced) 的分隔符不断破坏 Nim 在 Haiku 操作系统上的编译，所以被- 删除了。 修复 asyncftpclient 的错误 (#13096) 修复 ftp store 函数读取本地文件的错误 (#13108) 修复全局 (global) 范围内 varargs 的 rtti sizeof 的问题 (#13125) 当关键字被设置为零时，可以正确地从 CountTable 中删除关键字 修复了 distros.nim 中的回归问题 (regression) 修复了在 IRC 上报告的 times.nim 模块中出现的重要问题 c_fflush() the rawrite() 缓冲 (buffer) 文档改进 修复了”Nim 可用工具 (Tools available with Nim)”中缺少”Documentation, Testament”的问题 (#12251) 手册 (Manual) 更新: 自定义异常 (#12847) times/getClockStr(): 修复文档中的错误 修复了”lib/pure/parseutils.nim”代码块中的错误并改进了文档"> -->
+  <meta property="og:description" content="Nim 团队很高兴为大家带来 1.0.6 版本发布的消息！这是我们在 Nim 1.0.0 之后带来的第三个补丁。 想了解更多关于 1.0.0 版本的信息，可以查阅 v1.0 发布说明. 本次的版本发布于前一个版本发布两个月之后， 包含了将近 60 次提交， 新修复了 15 个已知的错误、一些其他的 bug 修复、和文档优化， 这些都让我们的 1.0 发行版变得更好。 没有安全性相关的问题，但我们正努力保证每两个月发布一个新 1.0.x 版本的稳定周期。 提个醒：如果你还没有参加我们的 Nim 社区调研或者Nim 中文社区调研，就赶紧来参加吧！我们非常希望能听到您的意见！ 安装 1.0.6 如果你已经使用 choosenim 安装了之前版本的 Nim ，升级到 1.0.6 版本会非常简单： $ choosenim update stable 如果没有的话，你可以通过 这些教程来安装 choosenim， 当然你也可以根据网站 安装页 的说明直接安装 Nim 。 更新日志 Bug 修复 修复的 issues 修复了”当使用 –styleCheck:error 命令造成的 Nim 标准库样式的问题” (#12687) 修复了”new (ref MyObject) 无法在编译时工作的问题” (#12488) 修复了”当访问虚拟机 (VM) 中错误的变量字段时，不会触发相应错误消息的问题” (#11727) 修复了”使用没有初始化的 table 造成 orderedTable.del 函数崩溃的问题” (#12798) 修复了”负数 * 0 导致的常量折叠 (Semfold) 的问题” (#12783) 修复了”nimsuggest use command 不能返回 symbol 所有实例的问题” (#12832) 修复了”allPathsAsgnResult 中的代码生成 (codegen) ICE 的问题” (#12827) 修复了”for 循环中，同时出现 Static[T] 和 语法错误造成编译器崩溃的问题” (#12148) 修复了”在 templates 和 tables 中出现未使用导入库的警告 (Incorrect unused import warning)” (#12885) 修复”回归问题 (Regression) (1.0.4): 未声明的标识符: ‘readLines’ 和另一个回归问题” (#13013) 修复了”nim doc 错误地处理导出局部符号 (export localSymbol) 的问题” (#13100) 修复了”语法 (grammar) 中未定义的符号的问题” (#10665) 修复了”所有发行版本都缺少 nimp-gdb 工具的问题” (#13104) 修复了”[JS] 后端未定义 Move 标识符的问题” (#9674) 修复”Error: usage of ‘isNil’ is a user-defined error 的提示信息” (#11440) 其他错误修复 使 addQuoted 在 nimscript 上工作 (#12717) 修复了在 db_mysql getRow() 函数中，当列 (column) 为空导致的错误 修复了在构造之前，对象 (object) 被错误清零的问题 (#12814) 添加了 cstrutils (#12858): 修复了热代码重载 (hotcodereloading) 造成的”csuCmpIgnoreStyle”错误 更好的 clang_cl 支持 (#12896) 修复了影响 nimBetterRun 正确性的命令行错误 (#12933) 修复了无法同时使用 sugar.collect 和 for 循环宏的错误 –out 和 –outdir 支持路径替换 (#12796) 修复了 nim.cfg 中错误符号导致的崩溃 (#13073) 允许 buildIndex 使用 -o 选项 (#13037) 删除了错位 (misplaced) 的分隔符 (#13085): 因为错位 (misplaced) 的分隔符不断破坏 Nim 在 Haiku 操作系统上的编译，所以被- 删除了。 修复 asyncftpclient 的错误 (#13096) 修复 ftp store 函数读取本地文件的错误 (#13108) 修复全局 (global) 范围内 varargs 的 rtti sizeof 的问题 (#13125) 当关键字被设置为零时，可以正确地从 CountTable 中删除关键字 修复了 distros.nim 中的回归问题 (regression) 修复了在 IRC 上报告的 times.nim 模块中出现的重要问题 c_fflush() the rawrite() 缓冲 (buffer) 文档改进 修复了”Nim 可用工具 (Tools available with Nim)”中缺少”Documentation, Testament”的问题 (#12251) 手册 (Manual) 更新: 自定义异常 (#12847) times/getClockStr(): 修复文档中的错误 修复了”lib/pure/parseutils.nim”代码块中的错误并改进了文档">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="V1.0.6 发布！" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            V1.0.6 发布！
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              24 January 2020
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Nim 团队
+            </span>
+            
+          </h3>
+          <p>Nim 团队很高兴为大家带来 1.0.6 版本发布的消息！这是我们在 Nim 1.0.0 之后带来的第三个补丁。</p>
+
+<p>想了解更多关于 1.0.0 版本的信息，可以查阅
+<a href="https://nim-lang-cn.org/blog/2019/09/23/version-100-released.html">v1.0 发布说明</a>.</p>
+
+<p>本次的版本发布于前一个版本发布两个月之后，
+包含了将近 <a href="https://github.com/nim-lang/Nim/compare/v1.0.4...v1.0.6">60 次提交</a>，
+新修复了 15 个已知的错误、一些其他的 bug 修复、和文档优化，
+这些都让我们的 1.0 发行版变得更好。</p>
+
+<p>没有安全性相关的问题，但我们正努力保证每两个月发布一个新 1.0.x 版本的稳定周期。</p>
+
+<div class="sidebarblock">
+  <div class="content">
+    <div class="paragraph">
+      提个醒：如果你还没有参加我们的 
+      <a href="https://nim-lang.org/blog/2019/12/20/community-survey-2019.html">Nim 社区调研</a>或者<a href="https://nim-lang-cn.org/blog/2019/12/24/china-community-survey-2019.html">Nim 中文社区调研</a>，就赶紧来参加吧！我们非常希望能听到您的意见！
+    </div>
+  </div>
+</div>
+
+<h2 id="安装-106">安装 1.0.6</h2>
+
+<p>如果你已经使用 <code class="language-plaintext highlighter-rouge">choosenim</code> 安装了之前版本的 Nim ，升级到 1.0.6 版本会非常简单：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>choosenim update stable
+</code></pre></div></div>
+
+<p>如果没有的话，你可以通过
+<a href="https://github.com/dom96/choosenim">这些教程</a>来安装 <code class="language-plaintext highlighter-rouge">choosenim</code>，
+当然你也可以根据网站 <a href="https://nim-lang-cn.org/install.html">安装页</a> 的说明直接安装 Nim 。</p>
+
+<h2 id="更新日志">更新日志</h2>
+
+<h3 id="bug-修复">Bug 修复</h3>
+
+<h4 id="修复的-issues">修复的 issues</h4>
+
+<ul>
+  <li>修复了”当使用 –styleCheck:error 命令造成的 Nim 标准库样式的问题”
+(<a href="https://github.com/nim-lang/Nim/issues/12687">#12687</a>)</li>
+  <li>修复了”new (ref MyObject) 无法在编译时工作的问题”
+(<a href="https://github.com/nim-lang/Nim/issues/12488">#12488</a>)</li>
+  <li>修复了”当访问虚拟机 (VM) 中错误的变量字段时，不会触发相应错误消息的问题”
+(<a href="https://github.com/nim-lang/Nim/issues/11727">#11727</a>)</li>
+  <li>修复了”使用没有初始化的 table 造成 orderedTable.del 函数崩溃的问题”
+(<a href="https://github.com/nim-lang/Nim/issues/12798">#12798</a>)</li>
+  <li>修复了”负数 * 0 导致的常量折叠 (Semfold) 的问题”
+(<a href="https://github.com/nim-lang/Nim/issues/12783">#12783</a>)</li>
+  <li>修复了”nimsuggest use command 不能返回 symbol 所有实例的问题”
+(<a href="https://github.com/nim-lang/Nim/issues/12832">#12832</a>)</li>
+  <li>修复了”allPathsAsgnResult 中的代码生成 (codegen) ICE 的问题”
+(<a href="https://github.com/nim-lang/Nim/issues/12827">#12827</a>)</li>
+  <li>修复了”for 循环中，同时出现 Static[T] 和 语法错误造成编译器崩溃的问题”
+(<a href="https://github.com/nim-lang/Nim/issues/12148">#12148</a>)</li>
+  <li>修复了”在 templates 和 tables 中出现未使用导入库的警告 (Incorrect unused import warning)”
+(<a href="https://github.com/nim-lang/Nim/issues/12885">#12885</a>)</li>
+  <li>修复”回归问题 (Regression) (1.0.4): 未声明的标识符: ‘readLines’ 和另一个回归问题”
+(<a href="https://github.com/nim-lang/Nim/issues/13013">#13013</a>)</li>
+  <li>修复了”<code class="language-plaintext highlighter-rouge">nim doc</code> 错误地处理导出局部符号 (<code class="language-plaintext highlighter-rouge">export localSymbol</code>) 的问题” 
+(<a href="https://github.com/nim-lang/Nim/issues/13100">#13100</a>)</li>
+  <li>修复了”语法 (grammar) 中未定义的符号的问题”
+(<a href="https://github.com/nim-lang/Nim/issues/10665">#10665</a>)</li>
+  <li>修复了”所有发行版本都缺少 nimp-gdb 工具的问题”
+(<a href="https://github.com/nim-lang/Nim/issues/13104">#13104</a>)</li>
+  <li>修复了”[JS] 后端未定义 Move 标识符的问题”
+(<a href="https://github.com/nim-lang/Nim/issues/9674">#9674</a>)</li>
+  <li>修复”Error: usage of ‘isNil’ is a user-defined error 的提示信息”
+(<a href="https://github.com/nim-lang/Nim/issues/11440">#11440</a>)</li>
+</ul>
+
+<h4 id="其他错误修复">其他错误修复</h4>
+
+<ul>
+  <li>使 addQuoted 在 nimscript 上工作  (#12717)</li>
+  <li>修复了在 db_mysql getRow() 函数中，当列 (column) 为空导致的错误</li>
+  <li>修复了在构造之前，对象 (object) 被错误清零的问题 (#12814)</li>
+  <li>添加了 cstrutils (#12858): 修复了热代码重载 (hotcodereloading) 造成的”csuCmpIgnoreStyle”错误</li>
+  <li>更好的 clang_cl 支持 (#12896)</li>
+  <li>修复了影响 nimBetterRun 正确性的命令行错误 (#12933)</li>
+  <li>修复了无法同时使用 sugar.collect 和 for 循环宏的错误</li>
+  <li>–out 和 –outdir 支持路径替换 (#12796)</li>
+  <li>修复了 nim.cfg 中错误符号导致的崩溃 (#13073)</li>
+  <li>允许 <code class="language-plaintext highlighter-rouge">buildIndex</code> 使用 <code class="language-plaintext highlighter-rouge">-o</code> 选项 (#13037)</li>
+  <li>删除了错位 (misplaced) 的分隔符 (#13085): 因为错位 (misplaced) 的分隔符不断破坏 Nim 在 Haiku 操作系统上的编译，所以被- 删除了。</li>
+  <li>修复 asyncftpclient 的错误 (#13096)</li>
+  <li>修复 ftp store 函数读取本地文件的错误 (#13108)</li>
+  <li>修复全局 (global) 范围内 varargs 的 rtti sizeof 的问题 (#13125)</li>
+  <li>当关键字被设置为零时，可以正确地从 CountTable 中删除关键字</li>
+  <li>修复了 distros.nim 中的回归问题 (regression)</li>
+  <li>修复了在 IRC 上报告的 times.nim 模块中出现的重要问题</li>
+  <li>c_fflush() the rawrite() 缓冲 (buffer)</li>
+</ul>
+
+<h4 id="文档改进">文档改进</h4>
+
+<ul>
+  <li>修复了”Nim 可用工具 (Tools available with Nim)”中缺少”Documentation, Testament”的问题
+(<a href="https://github.com/nim-lang/Nim/issues/12251">#12251</a>)</li>
+  <li>手册 (Manual) 更新: 自定义异常 (#12847)</li>
+  <li>times/getClockStr(): 修复文档中的错误</li>
+  <li>修复了”lib/pure/parseutils.nim”代码块中的错误并改进了文档</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

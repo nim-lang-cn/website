@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>常见问题 - Nim中文社区</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="常见问题"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。"> -->
+  <meta property="og:description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="常见问题" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content faq slim content">
+      <h1 class="text-centered page-title main-heading">常见问题</h1>
+
+<h1 id="常规问题">常规问题</h1>
+
+<h2 id="为什么不用其他编程语言而用nim">为什么不用其他编程语言而用Nim？</h2>
+
+<p>Nim是一种极少见的 <em>可编程</em> 静态类型的，
+并结合了C的速度和内存效率、凝练的语法、内存安全性和其他多种目标的语言。</p>
+
+<h2 id="nim稳定吗">Nim稳定吗？</h2>
+
+<p>编译器和标准库正在积极开发中，并有一套测试用例来持续确保稳定性。
+每三到六个月会定期发布一次稳定版，让稳定性要求高的系统可以得到保证。</p>
+
+<p>很少出现不向后兼容的更新，
+但每次出现我们都做了详细的<a href="/blog/2018/03/01/version-0180-released.html">文档记录</a>，
+让你可以轻松地进行管理。
+编译器也会对已弃用的功能进行高亮显示，
+以便为更新提供足够的提示和转换时间。</p>
+
+<h2 id="安全性和内存安全性如何">安全性和内存安全性如何？</h2>
+
+<p>Nim通过不执行指针运算、
+可选<a href="/docs/manual.html#pragmas-compilation-option-pragmas">检查</a>、
+跟踪和非跟踪引用
+以及可选的非可空类型来保证内存安全性。
+它通过koch工具和污点分析对Valgrind提供支持。</p>
+
+<h2 id="nim遵循怎样的许可">Nim遵循怎样的许可？</h2>
+
+<p>Nim编译器和库是MIT许可的。
+这意味着你可以为你使用Nim开发的程序选取任何许可。</p>
+
+<h2 id="有对jvm和clr的后端支持吗">有对JVM和CLR的后端支持吗？</h2>
+
+<p>我们最近并没有计划对JVM/CLR提供支持。
+但是由于这些VM支持FFI到C，
+因此应该可以创建原生Nim桥接，
+通过Nim强大的元编程功能，可以显式生成所有粘水代码。</p>
+
+<ul>
+  <li>Visual Studio Code:
+    <ul>
+      <li>Extension written in Nim <a href="https://marketplace.visualstudio.com/items?itemName=nimsaem.nimvscode">https://marketplace.visualstudio.com/items?itemName=nimsaem.nimvscode</a></li>
+      <li>Original Extension written in TypeScript <a href="https://marketplace.visualstudio.com/items?itemName=kosz78.nim">https://marketplace.visualstudio.com/items?itemName=kosz78.nim</a></li>
+    </ul>
+  </li>
+  <li>VSCodium/OpenVSX: <a href="https://open-vsx.org/extension/nimsaem/nimvscode">https://open-vsx.org/extension/nimsaem/nimvscode</a></li>
+  <li>Emacs: <a href="https://github.com/nim-lang/nim-mode">https://github.com/nim-lang/nim-mode</a></li>
+  <li>Vim: <a href="https://github.com/zah/nimrod.vim">https://github.com/zah/nimrod.vim/</a></li>
+  <li>QtCreator (4.1+): 通过一个实验性插件进行支持。</li>
+  <li>Scite: 支持</li>
+  <li>Gedit: The <a href="https://github.com/nim-lang/Aporia/blob/master/share/gtksourceview-2.0/language-specs/nim.lang">Aporia .lang file</a>.</li>
+  <li>jEdit: <a href="https://github.com/exhu/nimrod-misc/tree/master/jedit">https://github.com/exhu/nimrod-misc/tree/master/jedit</a></li>
+  <li>TextMate: <a href="https://github.com/textmate/nim.tmbundle">https://github.com/textmate/nim.tmbundle</a></li>
+  <li>Sublime Text: <a href="https://github.com/Varriount/NimLime">https://github.com/Varriount/NimLime</a></li>
+  <li>LiClipse: <a href="http://www.liclipse.com/">http://www.liclipse.com/</a> (基于Eclipse的插件)</li>
+  <li>Howl: 支持</li>
+  <li>Notepad++: <a href="https://github.com/jangko/nppnim/releases">https://github.com/jangko/nppnim/releases</a></li>
+  <li>Micro: 支持</li>
+  <li>Atom: <a href="https://atom.io/packages/nim">https://atom.io/packages/nim</a></li>
+  <li>JetBrains IDEs: <a href="https://plugins.jetbrains.com/plugin/15128-nim">https://plugins.jetbrains.com/plugin/15128-nim</a></li>
+  <li>Kakoune: Included</li>
+  <li>For editors with LSP (Language Server Protocol) support (requires a separate syntax/indenting plugin): <a href="https://github.com/PMunch/nimlsp">https://github.com/PMunch/nimlsp</a></li>
+</ul>
+
+<h2 id="语言设计主要受哪些其他语言的影响">语言设计主要受哪些其他语言的影响？</h2>
+
+<p>Nim大量借用了（按照受影响的顺序）：Modula 3, Delphi,
+Ada, C++, Python, Lisp, Oberon.</p>
+
+<h2 id="为啥起名叫proc">为啥起名叫<code class="language-plaintext highlighter-rouge">proc</code>?</h2>
+
+<p><em>过程</em>曾经是常用术语，而不是作为没有别的用的数学的<em>函数</em>实体。
+而且在Nim中<code class="language-plaintext highlighter-rouge">func</code>确实是<code class="language-plaintext highlighter-rouge">proc {.noSideEffect.}</code>的语法糖。
+还因为Nim提供了一个<code class="language-plaintext highlighter-rouge">iterator</code>和一个<code class="language-plaintext highlighter-rouge">method</code>关键字，而<code class="language-plaintext highlighter-rouge">def</code>代表<code class="language-plaintext highlighter-rouge">define</code>，
+所以叫它<code class="language-plaintext highlighter-rouge">def</code>也就不可能了。</p>
+
+<h1 id="编译的常见问题">编译的常见问题</h1>
+
+<h2 id="哪个选项编译的可执行文件最快">哪个选项编译的可执行文件最快？</h2>
+
+<p>对于标准的配置文件，<code class="language-plaintext highlighter-rouge">-d:danger</code> 通过禁用 <strong>所有</strong> 运行时安全检查（包括边界检查、流程检查、空值检查等等），以尽最快速度构建二进制文件。
+更多的情况下用<code class="language-plaintext highlighter-rouge">-d:release</code>就已经足以应付。
+当然如果你的编译器支持，你也可以开启链接时优化来更快地构建一个可执行文件: 在 Nim 1.4 以上版本使用 <code class="language-plaintext highlighter-rouge">--passc:-flto</code> 或者 <code class="language-plaintext highlighter-rouge">-d:lto</code></p>
+
+<h2 id="哪个选项可以构建出最小的可执行文件">哪个选项可以构建出最小的可执行文件？</h2>
+
+<p>对于标配的文件, <code class="language-plaintext highlighter-rouge">-d:danger -d:strip --opt:size</code> 就能得到你想要的。
+当然如果你的编译器支持，你也可以和上一个问题中描述的相同方式，开启链接时优化来构建一个更快的可执行文件</p>
+
+<h2 id="如何使用与默认编译器不同的c编译器">如何使用与默认编译器不同的C编译器？</h2>
+
+<p>打开并编辑<code class="language-plaintext highlighter-rouge">config/nim.cfg</code>文件。
+将<code class="language-plaintext highlighter-rouge">cc</code>变量的值对照下方表格进行修改：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>缩写</th>
+      <th>C/C++ 编译器</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gcc</code></td>
+      <td>GNU C编译器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">clang</code></td>
+      <td>Clang编译器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">vcc</code></td>
+      <td>微软Visual C++</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">icc</code></td>
+      <td>Intel C编译器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">llvm_gcc</code></td>
+      <td>LLVM-GCC编译器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ucc</code></td>
+      <td>通用UNIX C编译器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tcc</code></td>
+      <td>微型 C 编译器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">bcc</code></td>
+      <td>Borland C 编译器</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">envcc</code></td>
+      <td>你环境中的默认 C 编译器</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>其他的C编译器我们不进行官方支持，但是它可能也能用，大概吧。</p>
+
+<p>如果你的C编译器不在上述列表中，
+尝试使用 <em>环境中的默认 C 编译器</em> （<code class="language-plaintext highlighter-rouge">envcc</code>） 。
+如果C编译器需要不同的命令行参数，可以尝试使用 <code class="language-plaintext highlighter-rouge">--passc</code> 和 <code class="language-plaintext highlighter-rouge">--passl</code> 进行切换。</p>
+
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

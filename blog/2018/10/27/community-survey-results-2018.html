@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>Nim Community Survey 2018 Results - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="Nim Community Survey 2018 Results"> -->
+
+  
+  <!-- <meta name="twitter:description" content="We have recently closed the 2018 Nim Community Survey. I am happy to say that we have received exactly 771 responses, huge thanks to all the people that took the time to respond. We’re incredibly thankful for this very valuable feedback. For the results of the previous year’s survey, take a look at the 2017 results analysis. Our survey ran from the 23rd of June 2018 until the 31st of July 2018. The goal of this survey was primarily to determine how our community is using Nim, in order to better understand how we should be improving it. In particular, we wanted to know what people feel is missing from Nim in the lead up to version 1.0. We have also asked our respondents about how well the Nim tools worked, the challenges of adopting Nim, the resources that they used to learn Nim and more. This article goes through some of the highlights in the results for the survey and discusses them in the context of the previous year’s results. The aim is to understand our users and to figure out priorities for Nim’s future. This time around I have decided to publish the Google Survey results page, for some this may be more interesting than reading the highlights. It’s available here: https://i.imgur.com/g7slQ8w.png. Changes since the last survey The questions in this survey were largely the same as last year’s, but there were some key changes. In particular, the following questions were added: How do you learn about the new functionality added to Nim? Should Nim 1.0 have been released already? The following questions were removed: Which direction should Nim’s GC/memory management take? What domain do you work in currently? What domain do you use Nim in? The following questions were modified: “How did you install Nim?” was changed to “How did you most recently install Nim?” What improvements are needed before Nim v1.0 can be released? This question was streamlined into a single long form question. The “What critical libraries are missing in the Nim ecosystem?” and “What development tools, if any, can make you more productive when working with Nim?” questions were merged into “What features, tools, or libraries would you like Nim to have?” We wanted to gain deeper knowledge of our contributor’s experiences, so a brand new section titled “Contributor questions” was introduced. Do you use Nim? Like last year the respondents were split up into three groups: Current users of Nim Ex-Nim users Those that never used Nim This enabled each group to be targeted with specific questions. For example, ex-Nim users were asked why they’ve stopped using Nim. This year the proportion of responses from current Nim users has grown from 43% to 47%. This is a slight increase in the proportion of Nim users answering the survey, but it’s important to note that the absolute number went up by over 100 users from last year. How could we help make Nim more accepted at your company? This was a free-form question so there were many different answers, but a few answers were very common. By far the most common request was “version 1.0.” Other honourable mentions include “more documentation”, “more stability” and “Free balloons”. These mostly align well with the general wishes of our community so you will see similar answers in later questions as well. What editor(s) do you use when writing Nim? Visual Studio Code continues its dominance and has become even more dominant since the last survey. 51% of respondents selected Visual Studio Code, whereas only 35.5% selected it last year. What is your experience with the following tools? This questions gives a good idea about how popular Nim tools are and whether using them is enjoyable. The most popular tool, as one might expect, is Nimble. The Nimble package manager also boasts a high like rating, with over 75% of respondents answering either “Like” or “Extreme Like” for Nimble. The most unpopular tool is nimpretty, with 75% of respondents answering that they haven’t used it. The most disliked tool is nimsuggest, although it is only disliked by 6% of the respondents. How did you most recently install Nim? Choosenim takes the crown as the most popular installation method, but only just barely. Other installation methods are also very popular. Top reasons why programmers stopped using Nim The reasons given vary widely which makes their analysis challenging. In order to make it easier to see the reasons at a high level, I went through and grouped them into generic categories. This offers some good insight into why programmers have stopped using Nim. The number one reason is Nim’s relative lack of maturity, many respondents have quoted this as the reason why they have stopped using Nim. In most cases the respondents simply want 1.0 to be released. Together with maturity, multiple respondents also mentioned a general lack of libraries and Nim’s small ecosystem. These respondents were all counted under the “Maturity” category. The “Missing library” category mostly counts respondents who mentioned a specific library that was missing. This category could have easily been merged into the “Maturity” category but wasn’t for greater detail. The second reason, categorised as “Not sufficiently better than other languages”, was mostly the respondent specifying that they are happy with another language, or that their project is more suited to another language. Stability was the third reason. For this category, the respondents mostly talked about the stability of Nim as a whole. In many cases this meant tools such as IDEs not working properly rather than the compiler being buggy, although the latter was prevalent as well. Top reasons why programmers are not using Nim This is similar to the previous section, but it focuses on respondents who do not use Nim. As previously these vary widely so they have been put into categories. Note that this is based on the long-form question which was asked in addition to the multiple choice question. It seems that the number one reason why respondents are not using Nim is because they do not see the value in it. Many of the respondents didn’t see a reason why learning Nim was worthwhile. This is reflected in the number 1 category: “Not sufficiently better than other languages”. Lack of time is of course a big factor too and in many cases it ties in with respondents not seeing value in learning Nim. Nim’s relative immaturity was another strong theme among the responses. An interesting number of respondents specified that they simply didn’t have a project, or couldn’t come up with a project to write in Nim. It may be worth exposing newcomers to some project ideas to alleviate this. Do you feel well informed in the direction that the Nim project is heading? This question was asked last year to gauge how well we are informing users about where the Nim project is heading. In comparison to last year, the proportion of respondents answering “Yes” has increased to 25.8% from 23.5%. This is positive but we should do better, while it is an increase it is relatively minor. We should look into further ways to inform our community of our roadmap and other plans for the future. Should Nim 1.0 have been released already? This is a new question, it’s aim is to gauge the feeling in the community around whether a stable 1.0 release of Nim should have been made already. Right now, the results are fairly even and thus it’s hard to know what to take away from them. What improvements are needed before Nim v1.0 can be released? The chart above shows the general trends of what respondents felt was needed for Nim v1.0 to be released. It was surprising to see so many respondents mentioning destructors, it seems that many people are excited about this feature and want it to be included in v1.0 of Nim. The top three improvements though were, in order, “Better Docs”, “Stabilization” and finally “Better Stdlib”. For the first one, respondents generally asked for more polished documentation but a significant portion of them also asked for video tutorials. Many felt that video tutorials were a good way to learn a programming language, we have already created some live streams where we coded Nim projects but it is obvious that we need to do more. In particular, we should: Create more video tutorial material Ensure that our video tutorials are accessible to all and easy to find Improve the general written documentation, both in its presentation but also in the amount of content available For the second one, respondents generally asked for a more reliable experience with all language features. A reduction of compiler crashes and surprising behaviour was among the top wishes. Finally for the “Better Stdlib” responses, many of them asked for a cleanup of the standard library. In particular the removal of deprecated functions but also the migration of some modules to a separate repository available via the Nimble package manager. Last words Thank you to each and every one of you who took the time to answer this survey. Your time is precious and we are deeply thankful that you used it to share your feedback. Please remember that you do not need to wait for a survey in order to give us feedback, of course you’re more than welcome to wait if you wish, but ideally share your feedback with us immediately. We can be found in various different places, see the community page for links and instructions on how to get in touch: https://nim-lang.org/community.html. If there are any questions about this survey I’m more than happy to answer them. Feel free to reach out to me on the community channels linked above. Thanks for reading, and have a good day!"> -->
+  <meta property="og:description" content="We have recently closed the 2018 Nim Community Survey. I am happy to say that we have received exactly 771 responses, huge thanks to all the people that took the time to respond. We’re incredibly thankful for this very valuable feedback. For the results of the previous year’s survey, take a look at the 2017 results analysis. Our survey ran from the 23rd of June 2018 until the 31st of July 2018. The goal of this survey was primarily to determine how our community is using Nim, in order to better understand how we should be improving it. In particular, we wanted to know what people feel is missing from Nim in the lead up to version 1.0. We have also asked our respondents about how well the Nim tools worked, the challenges of adopting Nim, the resources that they used to learn Nim and more. This article goes through some of the highlights in the results for the survey and discusses them in the context of the previous year’s results. The aim is to understand our users and to figure out priorities for Nim’s future. This time around I have decided to publish the Google Survey results page, for some this may be more interesting than reading the highlights. It’s available here: https://i.imgur.com/g7slQ8w.png. Changes since the last survey The questions in this survey were largely the same as last year’s, but there were some key changes. In particular, the following questions were added: How do you learn about the new functionality added to Nim? Should Nim 1.0 have been released already? The following questions were removed: Which direction should Nim’s GC/memory management take? What domain do you work in currently? What domain do you use Nim in? The following questions were modified: “How did you install Nim?” was changed to “How did you most recently install Nim?” What improvements are needed before Nim v1.0 can be released? This question was streamlined into a single long form question. The “What critical libraries are missing in the Nim ecosystem?” and “What development tools, if any, can make you more productive when working with Nim?” questions were merged into “What features, tools, or libraries would you like Nim to have?” We wanted to gain deeper knowledge of our contributor’s experiences, so a brand new section titled “Contributor questions” was introduced. Do you use Nim? Like last year the respondents were split up into three groups: Current users of Nim Ex-Nim users Those that never used Nim This enabled each group to be targeted with specific questions. For example, ex-Nim users were asked why they’ve stopped using Nim. This year the proportion of responses from current Nim users has grown from 43% to 47%. This is a slight increase in the proportion of Nim users answering the survey, but it’s important to note that the absolute number went up by over 100 users from last year. How could we help make Nim more accepted at your company? This was a free-form question so there were many different answers, but a few answers were very common. By far the most common request was “version 1.0.” Other honourable mentions include “more documentation”, “more stability” and “Free balloons”. These mostly align well with the general wishes of our community so you will see similar answers in later questions as well. What editor(s) do you use when writing Nim? Visual Studio Code continues its dominance and has become even more dominant since the last survey. 51% of respondents selected Visual Studio Code, whereas only 35.5% selected it last year. What is your experience with the following tools? This questions gives a good idea about how popular Nim tools are and whether using them is enjoyable. The most popular tool, as one might expect, is Nimble. The Nimble package manager also boasts a high like rating, with over 75% of respondents answering either “Like” or “Extreme Like” for Nimble. The most unpopular tool is nimpretty, with 75% of respondents answering that they haven’t used it. The most disliked tool is nimsuggest, although it is only disliked by 6% of the respondents. How did you most recently install Nim? Choosenim takes the crown as the most popular installation method, but only just barely. Other installation methods are also very popular. Top reasons why programmers stopped using Nim The reasons given vary widely which makes their analysis challenging. In order to make it easier to see the reasons at a high level, I went through and grouped them into generic categories. This offers some good insight into why programmers have stopped using Nim. The number one reason is Nim’s relative lack of maturity, many respondents have quoted this as the reason why they have stopped using Nim. In most cases the respondents simply want 1.0 to be released. Together with maturity, multiple respondents also mentioned a general lack of libraries and Nim’s small ecosystem. These respondents were all counted under the “Maturity” category. The “Missing library” category mostly counts respondents who mentioned a specific library that was missing. This category could have easily been merged into the “Maturity” category but wasn’t for greater detail. The second reason, categorised as “Not sufficiently better than other languages”, was mostly the respondent specifying that they are happy with another language, or that their project is more suited to another language. Stability was the third reason. For this category, the respondents mostly talked about the stability of Nim as a whole. In many cases this meant tools such as IDEs not working properly rather than the compiler being buggy, although the latter was prevalent as well. Top reasons why programmers are not using Nim This is similar to the previous section, but it focuses on respondents who do not use Nim. As previously these vary widely so they have been put into categories. Note that this is based on the long-form question which was asked in addition to the multiple choice question. It seems that the number one reason why respondents are not using Nim is because they do not see the value in it. Many of the respondents didn’t see a reason why learning Nim was worthwhile. This is reflected in the number 1 category: “Not sufficiently better than other languages”. Lack of time is of course a big factor too and in many cases it ties in with respondents not seeing value in learning Nim. Nim’s relative immaturity was another strong theme among the responses. An interesting number of respondents specified that they simply didn’t have a project, or couldn’t come up with a project to write in Nim. It may be worth exposing newcomers to some project ideas to alleviate this. Do you feel well informed in the direction that the Nim project is heading? This question was asked last year to gauge how well we are informing users about where the Nim project is heading. In comparison to last year, the proportion of respondents answering “Yes” has increased to 25.8% from 23.5%. This is positive but we should do better, while it is an increase it is relatively minor. We should look into further ways to inform our community of our roadmap and other plans for the future. Should Nim 1.0 have been released already? This is a new question, it’s aim is to gauge the feeling in the community around whether a stable 1.0 release of Nim should have been made already. Right now, the results are fairly even and thus it’s hard to know what to take away from them. What improvements are needed before Nim v1.0 can be released? The chart above shows the general trends of what respondents felt was needed for Nim v1.0 to be released. It was surprising to see so many respondents mentioning destructors, it seems that many people are excited about this feature and want it to be included in v1.0 of Nim. The top three improvements though were, in order, “Better Docs”, “Stabilization” and finally “Better Stdlib”. For the first one, respondents generally asked for more polished documentation but a significant portion of them also asked for video tutorials. Many felt that video tutorials were a good way to learn a programming language, we have already created some live streams where we coded Nim projects but it is obvious that we need to do more. In particular, we should: Create more video tutorial material Ensure that our video tutorials are accessible to all and easy to find Improve the general written documentation, both in its presentation but also in the amount of content available For the second one, respondents generally asked for a more reliable experience with all language features. A reduction of compiler crashes and surprising behaviour was among the top wishes. Finally for the “Better Stdlib” responses, many of them asked for a cleanup of the standard library. In particular the removal of deprecated functions but also the migration of some modules to a separate repository available via the Nimble package manager. Last words Thank you to each and every one of you who took the time to answer this survey. Your time is precious and we are deeply thankful that you used it to share your feedback. Please remember that you do not need to wait for a survey in order to give us feedback, of course you’re more than welcome to wait if you wish, but ideally share your feedback with us immediately. We can be found in various different places, see the community page for links and instructions on how to get in touch: https://nim-lang.org/community.html. If there are any questions about this survey I’m more than happy to answer them. Feel free to reach out to me on the community channels linked above. Thanks for reading, and have a good day!">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="Nim Community Survey 2018 Results" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            Nim Community Survey 2018 Results
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              27 October 2018
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              Dominik Picheta
+            </span>
+            
+          </h3>
+          <p>We have recently closed the 2018 Nim Community Survey. I am happy to
+say that we have received exactly 771 responses, huge thanks to all the people
+that took the time to respond. We’re incredibly thankful for this very valuable
+feedback.</p>
+
+<p>For the results of the previous year’s survey, take a look at the
+<a href="https://nim-lang.org/blog/2017/10/01/community-survey-results-2017.html">2017 results analysis</a>.</p>
+
+<p>Our survey ran from the 23rd of June 2018 until the 31st of July 2018.
+The goal of this survey was primarily to determine how our community is using
+Nim, in order to better understand how we should be improving it. In particular,
+we wanted to know what people feel is missing from Nim in the lead up to
+version 1.0. We have also asked our respondents about how well the Nim tools
+worked, the challenges of adopting Nim, the resources that they used to learn
+Nim and more.</p>
+
+<p>This article goes through some of the highlights in the results for the survey
+and discusses them in the context of the previous year’s results. The aim is to
+understand our users and to figure out priorities for Nim’s future.</p>
+
+<p>This time around I have decided to publish the Google Survey results
+page, for some this may be more interesting than reading the highlights.
+It’s available here: <a href="https://i.imgur.com/g7slQ8w.png">https://i.imgur.com/g7slQ8w.png</a>.</p>
+
+<h1 id="changes-since-the-last-survey">Changes since the last survey</h1>
+
+<p>The questions in this survey were largely the same as last year’s,
+but there were some key changes. In particular, the following questions were
+added:</p>
+
+<ul>
+  <li>How do you learn about the new functionality added to Nim?</li>
+  <li>Should Nim 1.0 have been released already?</li>
+</ul>
+
+<p>The following questions were removed:</p>
+
+<ul>
+  <li>Which direction should Nim’s GC/memory management take?</li>
+  <li>What domain do you work in currently?</li>
+  <li>What domain do you use Nim in?</li>
+</ul>
+
+<p>The following questions were modified:</p>
+
+<ul>
+  <li>“How did you install Nim?” was changed to “How did you most recently install Nim?”</li>
+  <li>What improvements are needed before Nim v1.0 can be released?
+    <ul>
+      <li>This question was streamlined into a single long form question.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>The “What critical libraries are missing in the Nim ecosystem?” and
+“What development tools, if any, can make you more productive when working with Nim?”
+questions were merged into
+“What features, tools, or libraries would you like Nim to have?”</p>
+
+<p>We wanted to gain deeper knowledge of our contributor’s experiences, so
+a brand new section titled “Contributor questions” was introduced.</p>
+
+<h1 id="do-you-use-nim">Do you use Nim?</h1>
+
+<p><a href="https://nim-lang-cn.org/assets/news/images/survey2018/do_you_use_nim.png">
+  <img src="https://nim-lang-cn.org/assets/news/images/survey2018/do_you_use_nim.png" alt="Do you use Nim?" style="width:100%" />
+</a></p>
+
+<p>Like last year the respondents were split up into three groups:</p>
+
+<ul>
+  <li>Current users of Nim</li>
+  <li>Ex-Nim users</li>
+  <li>Those that never used Nim</li>
+</ul>
+
+<p>This enabled each group to be targeted with specific questions.
+For example, ex-Nim users were asked why they’ve stopped using Nim.</p>
+
+<p>This year the proportion of responses from current Nim users has grown
+from 43% to 47%. This is a slight increase in the proportion of Nim users
+answering the survey, but it’s important to note that the absolute number
+went up by over 100 users from last year.</p>
+
+<h1 id="how-could-we-help-make-nim-more-accepted-at-your-company">How could we help make Nim more accepted at your company?</h1>
+
+<p>This was a free-form question so there were many different answers, but a few
+answers were very common. By far the most common request was “version 1.0.”</p>
+
+<p>Other honourable mentions include “more documentation”, “more stability” and
+“Free balloons”. These mostly align well with the general wishes of our
+community so you will see similar answers in later questions as well.</p>
+
+<h1 id="what-editors-do-you-use-when-writing-nim">What editor(s) do you use when writing Nim?</h1>
+
+<p><a href="https://nim-lang-cn.org/assets/news/images/survey2018/editors_used.png">
+  <img src="https://nim-lang-cn.org/assets/news/images/survey2018/editors_used.png" alt="Editors used by Nim users" style="width:60%" />
+</a></p>
+
+<p>Visual Studio Code continues its dominance and has become even more dominant
+since the last survey. 51% of respondents selected Visual Studio Code, whereas
+only 35.5% selected it last year.</p>
+
+<h1 id="what-is-your-experience-with-the-following-tools">What is your experience with the following tools?</h1>
+
+<p>This questions gives a good idea about how popular Nim tools are and whether
+using them is enjoyable.</p>
+
+<p>The most popular tool, as one might expect, is Nimble. The Nimble package
+manager also boasts a high like rating, with over 75% of respondents answering
+either “Like” or “Extreme Like” for Nimble.</p>
+
+<p>The most unpopular tool is nimpretty, with 75% of respondents answering that
+they haven’t used it.</p>
+
+<p>The most disliked tool is nimsuggest, although it is only disliked by 6% of the
+respondents.</p>
+
+<h1 id="how-did-you-most-recently-install-nim">How did you most recently install Nim?</h1>
+
+<p><a href="https://nim-lang-cn.org/assets/news/images/survey2018/recent_install.png">
+  <img src="https://nim-lang-cn.org/assets/news/images/survey2018/recent_install.png" alt="How did you most recently install Nim?" style="width:60%" />
+</a></p>
+
+<p>Choosenim takes the crown as the most popular installation method, but only just
+barely. Other installation methods are also very popular.</p>
+
+<h1 id="top-reasons-why-programmers-stopped-using-nim">Top reasons why programmers stopped using Nim</h1>
+
+<p>The reasons given vary widely which makes their analysis challenging. In order
+to make it easier to see the reasons at a high level, I went through and grouped
+them into generic categories.</p>
+
+<p><a href="https://nim-lang-cn.org/assets/news/images/survey2018/leave_reasons.png">
+  <img src="https://nim-lang-cn.org/assets/news/images/survey2018/leave_reasons.png" alt="Why did you stop using Nim?" style="width:80%" />
+</a></p>
+
+<p>This offers some good insight into why programmers have stopped using Nim.</p>
+
+<p>The number one reason is Nim’s relative lack of maturity, many
+respondents have quoted this as the
+reason why they have stopped using Nim. In most cases the respondents simply
+want 1.0 to be released. Together with maturity, multiple respondents also
+mentioned a general lack of libraries and Nim’s small ecosystem. These respondents
+were all counted under the “Maturity” category.
+The “Missing library” category mostly counts respondents who
+mentioned a specific library that was missing. This category could
+have easily been merged into the “Maturity” category but wasn’t for greater detail.</p>
+
+<p>The second reason, categorised as “Not sufficiently better than other languages”,
+was mostly the respondent specifying that they are happy with another language,
+or that their project is more suited to another language.</p>
+
+<p>Stability was the third reason. For this category, the respondents mostly
+talked about the stability of Nim as a whole. In many cases this meant tools
+such as IDEs not working properly rather than the compiler being buggy, although
+the latter was prevalent as well.</p>
+
+<h1 id="top-reasons-why-programmers-are-not-using-nim">Top reasons why programmers are not using Nim</h1>
+
+<p>This is similar to the previous section, but it focuses on respondents who
+do not use Nim. As previously these vary widely so they have been put into
+categories.</p>
+
+<p><a href="https://nim-lang-cn.org/assets/news/images/survey2018/not_using_reasons.png">
+  <img src="https://nim-lang-cn.org/assets/news/images/survey2018/not_using_reasons.png" alt="Why aren't you using Nim?" style="width:80%" />
+</a></p>
+
+<p>Note that this is based on the long-form question which was asked in
+addition to the multiple choice question.</p>
+
+<p>It seems that the number one reason why respondents are not using Nim is
+because they do not see the value in it. Many of the respondents didn’t see
+a reason why learning Nim was worthwhile. This is reflected in the number 1
+category: “Not sufficiently better than other languages”.</p>
+
+<p>Lack of time is of course a big factor too and in many cases it ties in
+with respondents not seeing value in learning Nim.</p>
+
+<p>Nim’s relative immaturity was another strong theme among the responses.</p>
+
+<p>An interesting number of respondents specified that they simply didn’t have
+a project, or couldn’t come up with a project to write in Nim. It may be worth
+exposing newcomers to some project ideas to alleviate this.</p>
+
+<h1 id="do-you-feel-well-informed-in-the-direction-that-the-nim-project-is-heading">Do you feel well informed in the direction that the Nim project is heading?</h1>
+
+<p><a href="https://nim-lang-cn.org/assets/news/images/survey2018/nim_future_heading_informed_feeling.png">
+  <img src="https://nim-lang-cn.org/assets/news/images/survey2018/nim_future_heading_informed_feeling.png" alt="Do you feel well informed in the direction that the Nim project is heading?" style="width:60%" />
+</a></p>
+
+<p>This question was asked last year to gauge how well we are informing users
+about where the Nim project is heading. In comparison to last year, the
+proportion of respondents answering “Yes” has increased to 25.8% from 23.5%.
+This is positive but we should do better, while it is an increase it is
+relatively minor. We should look into further ways to inform our community of
+our roadmap and other plans for the future.</p>
+
+<h1 id="should-nim-10-have-been-released-already">Should Nim 1.0 have been released already?</h1>
+
+<p><a href="https://nim-lang-cn.org/assets/news/images/survey2018/release_nim_1_now.png">
+  <img src="https://nim-lang-cn.org/assets/news/images/survey2018/release_nim_1_now.png" alt="Should Nim 1.0 have been released already?" style="width:60%" />
+</a></p>
+
+<p>This is a new question, it’s aim is to gauge the feeling in the community around
+whether a stable 1.0 release of Nim should have been made already.</p>
+
+<p>Right now, the results are fairly even and thus it’s hard to know what to take
+away from them.</p>
+
+<h1 id="what-improvements-are-needed-before-nim-v10-can-be-released">What improvements are needed before Nim v1.0 can be released?</h1>
+
+<p><a href="https://nim-lang-cn.org/assets/news/images/survey2018/needed_for_1.png">
+  <img src="https://nim-lang-cn.org/assets/news/images/survey2018/needed_for_1.png" alt="What improvements are needed before Nim v1.0 can be released??" style="width:80%" />
+</a></p>
+
+<p>The chart above shows the general trends of what respondents felt was needed
+for Nim v1.0 to be released.</p>
+
+<p>It was surprising to see so many respondents mentioning destructors, it
+seems that many people are excited about this feature and want it to be
+included in v1.0 of Nim.</p>
+
+<p>The top three improvements though were, in order, “Better Docs”, “Stabilization”
+and finally “Better Stdlib”.</p>
+
+<p>For the first one, respondents generally asked for
+more polished documentation but a significant portion of them also asked for
+video tutorials. Many felt that video tutorials were a good way to learn a
+programming language, we have already
+<a href="https://nim-lang.org/blog/2017/12/28/nim-in-2017-a-short-recap.html#nim-livestreams">created some live streams</a>
+where we coded
+Nim projects but it is obvious that we need to do more. In particular,
+we should:</p>
+
+<ul>
+  <li>Create more video tutorial material</li>
+  <li>Ensure that our video tutorials are accessible to all and easy to find</li>
+  <li>Improve the general written documentation, both in its presentation but also
+in the amount of content available</li>
+</ul>
+
+<p>For the second one, respondents generally asked for a more reliable experience
+with all language features. A reduction of compiler crashes and surprising
+behaviour was among the top wishes.</p>
+
+<p>Finally for the “Better Stdlib” responses, many of them asked for a cleanup
+of the standard library. In particular the removal of deprecated functions but
+also the migration of some modules to a separate repository available via
+the Nimble package manager.</p>
+
+<h2 id="last-words">Last words</h2>
+
+<p>Thank you to each and every one of you who took the time to answer this survey.
+Your time is precious and we are deeply thankful that you used it to share your
+feedback.</p>
+
+<p>Please remember that you do not need to wait for a survey in order to give us
+feedback, of course you’re more than welcome to wait if you wish, but ideally
+share your feedback with us immediately. We can be found in various different
+places, see the community page for links and instructions on how to get in touch:
+https://nim-lang.org/community.html.</p>
+
+<p>If there are any questions about this survey I’m more than happy to answer them.
+Feel free to reach out to me on the community channels linked above.</p>
+
+<p>Thanks for reading, and have a good day!</p>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

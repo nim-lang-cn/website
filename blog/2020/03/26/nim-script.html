@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>NimScript初体验 - Nim博客</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="NimScript初体验"> -->
+
+  
+  <!-- <meta name="twitter:description" content="这两天刚接触Nim，这里分享一下关于NimScript的心得"> -->
+  <meta property="og:description" content="这两天刚接触Nim，这里分享一下关于NimScript的心得">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="NimScript初体验" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content post-page">
+      <div class="content">
+        <div class="width-reduced">
+          <h1 class="post-title">
+            NimScript初体验
+          </h1>
+          <h3 class="post-meta">
+            <span>
+              <i class="far fa-calendar-alt" aria-hidden="true"></i>
+              26 March 2020
+            </span>
+            
+            <span>
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+              星之轨迹（Nim中文社区）
+            </span>
+            
+          </h3>
+          <!--
+create time: 2020-03-26 18:59:16
+Author: <TODO: 请写上你的名字>
+
+This file is created by Marboo<http://marboo.io> template file $MARBOO_HOME/.media/starts/default.md
+本文件由 Marboo<http://marboo.io> 模板文件 $MARBOO_HOME/.media/starts/default.md 创建
+-->
+
+<p>Nim 是一种静态类型的、编译型、系统编程语言。它结合了其他成熟语言的成功概念。
+它具有接近Python的语法，和接近C语言的运行速度。就在2020年1月24日，它发布了自己的v1.0.6版本。</p>
+
+<p>官方网站：<a href="https://nim-lang.org/">https://nim-lang.org/</a><br />
+中文网站：<a href="https://nim-lang-cn.org/">https://nim-lang-cn.org/</a></p>
+
+<p>Nim语言有一大堆的优点，开发简单、语法丰富、性能优秀。不必像忍受Go语言那样去忍受它固执单一的语法。但是目前来讲，使用该语言也有一定的风险，那就是它不够成熟，周边的库不够丰富，遇到问题可能会难以解决。</p>
+
+<p>这两天刚接触Nim，这里分享一下关于NimScript的心得。</p>
+
+<h2 id="nimscript">NimScript</h2>
+<p>关于如何安装和使用Nim这里略过，只简单介绍下它的脚本用法。以下所有测试，都基于 Nim v1.0.6，运行于MacOS 10.15.4。 Nim的安装目录”/usr/local/Cellar/nim/1.0.6/nim”</p>
+
+<p>Nim虽然是一个静态、编译型的语言，但是它提供了脚本的执行方式，官方称它为”NimScript”。<br />
+Nim脚本的后缀必须为 .nims。</p>
+
+<p>运行方式1: <code class="language-plaintext highlighter-rouge">nim test.nims</code>（有没有感觉跟python很像,<code class="language-plaintext highlighter-rouge">python test.py</code>）<br />
+运行方式2: <code class="language-plaintext highlighter-rouge">./test.nims</code> （前提是赋予test.nims执行权限，并且在脚本首行写上<code class="language-plaintext highlighter-rouge">#!/usr/bin/env nim</code>）</p>
+
+<p>test.nims脚本内容为（首行的<code class="language-plaintext highlighter-rouge">--hits:off</code>，是要求脚本执行的时候不要打印Hint信息，可以省略）</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/env nim --hints:off
+
+
+echo("Hello World!")
+</code></pre></div></div>
+
+<p>这是一个最简单的Nim脚本。在这个脚本里面，可以使用Nim的语法写代码（语法跟Python差不多），然后像执行Python一样去执行这个脚本。执行起来性能却跟C语言差不多，这听起来很完美对不对。</p>
+
+<p>NimScript的官方介绍：<a href="https://nim-lang.org/docs/nimscript.html">https://nim-lang.org/docs/nims.html</a><br />
+NimScript直接支持的函数方法介绍：<a href="https://nim-lang.org/docs/nimscript.html">https://nim-lang.org/docs/nimscript.html</a></p>
+
+<h2 id="遇到的问题">遇到的问题</h2>
+<p>没有什么是完美的，当我尝试写第一个小Nim脚本的时候就遇到了各种问题。</p>
+
+<p>脚本的目的很简单：遍历一个目录下面的所有文件，然后读取里面的文件。
+按照 <a href="https://nim-lang.org/docs/nimscript.html">https://nim-lang.org/docs/nimscript.html</a> 的官方介绍，我很快找到了 <code class="language-plaintext highlighter-rouge">listDirs()</code>函数和<code class="language-plaintext highlighter-rouge">listFiles()</code>函数。<code class="language-plaintext highlighter-rouge">listDirs()</code>只能列出指定目录下的“文件夹”，<code class="language-plaintext highlighter-rouge">listFiles()</code>函数只能列出指定目录下的“文件”。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/env nim
+
+var baseDir = "./"
+for childDirName in listDirs(basedir):
+    for filePath in listFiles(childDirName):
+        echo(filePath)
+        #var f = open(filePath)
+
+</code></pre></div></div>
+<p>打印出这个</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dir2/test2.md
+dir1/test1.md
+</code></pre></div></div>
+
+<p>然后当我想读取文件内容的时候（把最后一行注释打开），编译报错了：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/Cellar/nim/1.0.6/nim/lib/system/io.nim(525, 20) Error: cannot 'importc' variable at compile time; fopen
+</code></pre></div></div>
+<p>研究了一番，最终在官方解释中得到了结论。官方的原话是</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Strictly speaking, NimScript is the subset of Nim that can be evaluated by Nim's builtin virtual machine (VM). 
+NimScript is subject to some limitations caused by the implementation of the VM (virtual machine):
+Nim's FFI (foreign function interface) is not available in NimScript. This means that any stdlib module which relies on importc can not be used in the VM.
+</code></pre></div></div>
+<p>翻译一下就是：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>严格地说，NimScript是通过Nim内建的虚拟机(VM)来执行的，NimScript是Nim的一个子集。由于VM的实现问题，导致了NimScript运行的时候有一些限制，具体如下：
+Nim语言的 FFI（外部函数接口）在NimScript中不能用。这意味着标准库中所有依赖importc的模块都不能在VM中使用。
+</code></pre></div></div>
+
+<p>GG，读写文件的open()函数依赖<code class="language-plaintext highlighter-rouge">importc</code>能力，所以读写文件不能在NimScript中使用。</p>
+
+<h2 id="可以使用的模块">可以使用的模块</h2>
+<p>Nim官方很贴心的列出了其他可以在NimScript中使用的标准库模块，列表如下：</p>
+
+<ul>
+  <li>macros</li>
+  <li>os</li>
+  <li>strutils</li>
+  <li>math</li>
+  <li>distros</li>
+  <li>sugar</li>
+  <li>algorithm</li>
+  <li>base64</li>
+  <li>bitops</li>
+  <li>chains</li>
+  <li>colors</li>
+  <li>complex</li>
+  <li>htmlgen</li>
+  <li>httpcore</li>
+  <li>lenientops</li>
+  <li>mersenne</li>
+  <li>options</li>
+  <li>parseutils</li>
+  <li>punycode</li>
+  <li>random</li>
+  <li>stats</li>
+  <li>strformat</li>
+  <li>strmisc</li>
+  <li>strscans</li>
+  <li>unicode</li>
+  <li>uri</li>
+  <li>std/editdistance</li>
+  <li>std/wordwrap</li>
+  <li>std/sums</li>
+</ul>
+
+<p>文件读写的open()相关函数在io库中，不在上述列表，所以不能用了……<br />
+不过考虑到还是有很多其他标准库可以用的，所以还是能写出一些功能强大的脚本的。虽然不能替代python，不过应该以替代shell脚本吧……</p>
+
+<h2 id="进一步挖掘">进一步挖掘</h2>
+<p>进入Nim的安装目录<code class="language-plaintext highlighter-rouge">/usr/local/Cellar/nim/1.0.6/nim/</code>。<br />
+涉及NimScript的文件主要就是<code class="language-plaintext highlighter-rouge">compiler/scriptconfig.nim</code>，这文件定义了NimScript中直接支持的各个函数接口，包括上面用到的listDirs()和listFiles()。 这些接口底层还是调用标准库来实现。</p>
+
+<p>而Nim的标准库等实现，都存放在lib/目录中。研究分析这些代码，都有助于我们对Nim的理解。</p>
+
+<h2 id="小结">小结</h2>
+<p>NimScript的功能还是有一些限制的，不过Nim自身的语法已经很简洁了，NimScript仅仅是尝鲜，用Nim直接写代码就不会遇到这些功能限制了。 直接用Nim实现列目录的话，只需要用<code class="language-plaintext highlighter-rouge">os.walkDir()</code>即可</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import os
+
+for a in os.walkDir("./"):
+    echo(a[1])
+</code></pre></div></div>
+
+<p>刚接触Nim两天的的新手，不免会有认知上的错误，望指正，也希望Nim越来越完善。</p>
+
+<hr />
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>注：本站首发，已经原作者授权，转载请注明出处
+</code></pre></div></div>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>

@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+  <meta name="charset" content="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://nim-lang-cn.org/assets/img/logo_bw.png" />
+
+  
+  <title>文档 - Nim中文社区</title>
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure.min.css">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/pure-grids-responsive.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet"> -->
+  <link href="https://cdn.bootcss.com/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/highlight/github.css">
+  
+
+  <meta name="keyword" content="nim,nim中文,Nim中文社区,nim中文网,nim语言,nim编程语言">
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet"> -->
+  <link href="https://fonts.font.im/css?family=Inconsolata|Open+Sans|Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://nim-lang-cn.org/assets/css/main.css?t=1634689864454356343">
+
+  <!-- <meta name="twitter:title" content="文档"> -->
+
+  
+  <!-- <meta name="twitter:description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。"> -->
+  <meta property="og:description" content="Nim 语言是一种简洁、快速的编程语言， 可被编译成 C 、 C++ 甚至 JavaScript 。">
+  
+
+  <!-- <meta name="twitter:site" content="@nim_lang"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- <meta name="twitter:image" content="https://nim-lang.org/assets/img/twitter_banner.png">  -->
+
+  <meta property="og:title" content="文档" />
+  <meta property="og:site_name" content="Nim中文社区" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nim-lang-cn.org/assets/img/twitter_banner.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="500" />
+  <meta property="og:image:alt" content="Nim中文" />
+
+  <meta name="copyright" content="Nim中文社区">
+
+  <!-- SEO START -->
+  <!-- baidu -->
+  <meta name="baidu-site-verification" content="D5uE3gaRue" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144592616-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-144592616-1');
+  </script>
+  <!-- bing -->
+  <meta name="msvalidate.01" content="664E5CE055C5DCC50BB1238208911CDF" />
+  <!-- yandex -->
+  <meta name="yandex-verification" content="24900ce4c46b3893" />
+  <!-- SEO END -->
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+  <body class="site">
+    <header>
+  <nav class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <div class="nav-content">
+      <a href="https://nim-lang-cn.org/" class="pure-menu-heading pure-menu-link site-logo-container">
+        <img class="site-logo" src="https://nim-lang-cn.org/assets/img/logo.svg" height="28" alt="Nim">
+      </a>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://tea.nim-lang-cn.org/">早茶</a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/blog.html"
+             class="pure-menu-link ">
+            博客
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/features.html"
+             class="pure-menu-link ">
+            特点
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/install.html"
+             class="pure-menu-link ">
+            下载
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/documentation.html"
+             class="pure-menu-link ">
+            Documentation
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a href="https://nim-lang-cn.org/community.html"
+             class="pure-menu-link ">
+            社区
+          </a>
+        </li>
+        
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://github.com/nim-lang/Nim">源码</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-fade"></div>
+  </nav>
+</header>
+
+    <div class="site-content documentation slim content">
+      <section class="pure-g content">
+  <h1 class="pure-u-1 text-centered page-title main-heading">文档</h1>
+
+  <div>
+    <div class="pure-u-1">
+      <h2>Getting started with Nim</h2>
+    </div>
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://learnxinyminutes.com/docs/nim/">Learn Nim in 5 minutes</a></h3>
+      <p>A 5-minute tour through Nim.</p>
+    </div>
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://narimiran.github.io/nim-basics/">Nim basics tutorial</a></h3>
+      <p>For programming beginners. Covers all the basic topics, enough to make your first programming steps.</p>
+    </div>
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://play.nim-lang.org/">Official Nim Playground</a></h3>
+      <p>Compile and run Nim snippets in your browser.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="pure-u-1">
+      <h2>Official tutorials</h2>
+    </div>
+
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://nim-lang.org/docs/tut1.html">Tutorial, part 1</a></h3>
+      <p>A guide about basic and advanced built-in types, statements, control flow, and procedures.</p>
+    </div>
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://nim-lang.org/docs/tut2.html">Tutorial, part 2</a></h3>
+      <p>How to use Object Oriented Programming in Nim, exceptions, generics, and templates.</p>
+    </div>
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://nim-lang.org/docs/tut3.html">Macro tutorial</a></h3>
+      <p>Learn about meta-programming and macros.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="pure-u-1">
+      <h2>Nim for...</h2>
+    </div>
+
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://github.com/nim-lang/Nim/wiki/Nim-for-C-programmers">... C programmers</a></h3>
+      <p>This is a guide for people with experience in C or a similar language.
+      The guide assumes some intermediate knowledge, for instance of how stacks and heaps works.</p>
+    </div>
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://github.com/nim-lang/Nim/wiki/Nim-for-Python-Programmers">... Python programmers</a></h3>
+      <p>Nim is much more than "compiled Python", and this tutorial will give you an overview
+      of similarities and differences between the two languages.</p>
+    </div>
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://github.com/nim-lang/Nim/wiki/Nim-for-TypeScript-Programmers">... TypeScript/JavaScript programmers</a></h3>
+      <p>Want to use Nim for your frontend needs? Start here.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="pure-u-1">
+      <h2>Documentation</h2>
+    </div>
+
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://nim-lang.org/docs/lib.html">Standard Library</a></h3>
+      <p>Provides a listing and description of all the modules in the standard library.</p>
+    </div>
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://nim-lang.org/docs/manual.html">Language Manual</a></h3>
+      <p>The Nim programming language specification.</p>
+    </div>
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://nim-lang.org/docs/tools.html">Tools Documentation</a></h3>
+      <p>Description of some tools that come with the standard distribution.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="pure-u-1">
+      <h2>Search</h2>
+    </div>
+
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://nim-lang.org/docs/theindex.html">Searchable index</a></h3>
+      <p>All Nim documents and modules in one place. Use Ctrl/Cmd+F.</p>
+    </div>
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://nimble.directory/">Nimble Package Directory</a></h3>
+      <p>Search for available Nimble packages.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="pure-u-1">
+      <h2>Tutorials</h2>
+    </div>
+
+    <div class="row">
+      <div class="pure-u pure-u-md-1-3">
+        <h3><a href="http://howistart.org/posts/nim/1/index.html">How I Start: Nim</a></h3>
+        <p>Write an interpreter for the BrainF#@% programming language in Nim.</p>
+      </div>
+
+      <div class="pure-u pure-u-md-1-3">
+        <h3><a href="https://nim-by-example.github.io/getting_started/">Nim by Example</a></h3>
+        <p>A series of short examples covering the most common topics.</p>
+      </div>
+
+      <div class="pure-u pure-u-md-1-3">
+        <h3><a href="https://xmonader.github.io/nimdays/">Nim Days</a></h3>
+        <p>Building mini applications with Nim.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="pure-u pure-u-md-1-3">
+        <h3>
+          <a href="https://scripter.co/notes/nim">Nim Notes</a>
+        </h3>
+        <p>
+        A collection of Nim snippets with brief notes.
+        </p>
+      </div>
+
+      <div class="pure-u pure-u-md-1-3">
+        <h3>
+          <a href="http://zevv.nl/nim-memory/">Nim memory model</a>
+        </h3>
+        <p>
+        Tutorial explaining essentials of how Nim stores data in memory.
+        </p>
+      </div>
+
+      <div class="pure-u pure-u-md-1-3">
+        <h3>
+          <a href="https://www.youtube.com/playlist?list=PLvwc2YT9MFOlPPexrsY-t7BNTdg2Vsx06">Nim for Beginners</a>
+        </h3>
+        <p>
+        A video series meant to teach Nim programming to people
+        who have never programmed before, or are new to the language.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="pure-u-1">
+      <h2>Blogs</h2>
+    </div>
+
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="http://goran.krampe.se/category/nim/">Goran Krampe</a></h3>
+      <p>OOP in Nim, Arduino and Nim, and more.</p>
+    </div>
+
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://hookrace.net/blog/nim/">HookRace</a></h3>
+      <p>NES emulator in Nim, SDL2 platformer, writing small binaries, etc.</p>
+    </div>
+
+    <div class="pure-u pure-u-md-1-3">
+      <h3><a href="https://peterme.net/">Peter's DevLog</a></h3>
+      <p>Options, File handling, stack vs heap (ref) objects, etc.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="pure-u-1">
+      <h2>Other</h2>
+    </div>
+
+    <div class="row">
+      <div class="pure-u pure-u-md-1-3">
+        <h3><a href="https://nim-lang.org/docs/nimc.html">Compiler User Guide</a></h3>
+        <p>Outlines the commands and command line flags the Nim compiler supports.
+        Explains how the Nim compiler can be configured and describes how to cross-compile,
+        generate DLLs, and more.</p>
+      </div>
+
+      <div class="pure-u pure-u-md-1-3">
+        <h3><a href="https://nim-lang.org/docs/nep1.html">Nim Style Guide</a></h3>
+        <p>The stylistic conventions that Nim's official projects adhere to.</p>
+      </div>
+
+      <div class="pure-u pure-u-md-1-3">
+        <h3><a href="https://github.com/nim-lang/nimble#readme">Nimble Package Manager</a></h3>
+        <p>Explains configuration and usage of Nimble package manager,
+        including creating and publishing your own packages.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="pure-u pure-u-md-1-3">
+        <h3><a href="https://nim-lang.org/docs/nims.html">NimScript</a></h3>
+        <p>Describes the subset of Nim used for configuring Nim and specifying Nimble packages.</p>
+      </div>
+
+      <div class="pure-u pure-u-md-1-3">
+        <h3><a href="https://nim-lang.org/docs/intern.html">Internal Documentation</a></h3>
+        <p>The internal documentation describes how the compiler is implemented.
+        Read this if you want to hack the compiler.</p>
+      </div>
+
+      <div class="pure-u pure-u-md-1-3">
+        <h3><a href="https://nim-lang.org/docs/backends.html">Nim Backend Integration</a></h3>
+        <p>Describes the various backends supported by Nim, including C, C++, Obj C, and JS.
+        It also explains how to interface with libraries written in those languages.</p>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</section>
+
+    </div>
+    <footer>
+  <section class="content">
+    <div class="pure-g">
+      <div class="copyright pure-u-2-3">
+        <p>
+          除非另有说明，本页内容遵从
+          <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a>
+          许可。
+          网站显示的代码遵从MIT许可。
+        </p>
+        <p>
+          本网站在
+          <a href="https://github.com/nim-lang-cn/website">GitHub</a>
+          上可用并且欢迎提供贡献。
+          官方网站由
+          <a href="https://github.com/dom96">Dominik Picheta</a>和
+          <a href="https://github.com/Calinou">Hugo Locurcio</a>设计。
+          Logo由<a href="https://github.com/josephwecker">Joseph Wecker</a>设计。
+        </p>
+        <p>
+          中文翻译由Nim中文社区提供。
+          服务器和域名由<a href="https://blog.doylee.cn/">ch4o5</a>提供。
+          <a href="https://github.com/gogolxdong">sheldon</a>提供了文档翻译和其他翻译支持。
+        </p>
+      </div>
+      <div class="pure-u-1-3 right-center">
+        <script data-cfbadgetype="a" data-cfbadgeskin="dkgray" type="text/javascript">
+          //<![CDATA[
+          try { window.CloudFlare || function () { var a = window.document, b = a.createElement("script"), a = a.getElementsByTagName("script")[0]; window.CloudFlare = []; b.type = "text/javascript"; b.async = !0; b.src = "//ajax.cloudflare.com/cdn-cgi/nexp/cloudflare.js"; a.parentNode.insertBefore(b, a) }(), CloudFlare.push(function (a) { a(["cloudflare/badge"]) }) } catch (e$$5) { try { console.error("CloudFlare badge code could not be loaded. " + e$$5.message) } catch (e$$6) { } };
+          //]]>
+        </script>
+      </div>
+    </div>
+  </section>
+
+</footer>
+<script>
+  (function () {
+    function setTracking(a) {
+      var url = a.href;
+      a.onclick = function () {
+        if (typeof (ga) !== "undefined") {
+          ga('send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function () { document.location = url; }
+          });
+        }
+      };
+    }
+
+    var a = document.getElementsByTagName("a");
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].hostname != location.hostname &&
+        a[i].getAttribute("target") !== "_blank"
+      ) {
+        setTracking(a[i])
+      }
+    }
+  })();
+</script>
+<script>
+  $(function () {
+    $("section a").attr("target", "_blank");
+  });
+</script>
+<script>
+  // 百度统计
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?c81f717a4630758267f3b86f9efa48f0";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  
+  </body>
+</html>
